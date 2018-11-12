@@ -64,6 +64,8 @@ gem 'devise_roles'
 gem 'bootstrap-sass'
 gem 'pundit'
 gem 'rails_layout'
+gem 'jquery-rails'
+#gem 'turbolinks'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

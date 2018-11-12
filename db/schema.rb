@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_12_184626) do
+ActiveRecord::Schema.define(version: 2018_11_12_195948) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "balance"
@@ -31,11 +31,17 @@ ActiveRecord::Schema.define(version: 2018_11_12_184626) do
   end
 
   create_table "currencies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "symbol"
+    t.string "iso_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "subscription_tiers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.integer "cost"
+    t.integer "month_billing_cycle"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -56,7 +62,7 @@ ActiveRecord::Schema.define(version: 2018_11_12_184626) do
     t.string "last_name"
     t.string "password"
     t.string "salt"
-    t.bigint "subscription_tier_id"
+    t.bigint "subscription_tier_id", default: 1
     t.bigint "country_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
