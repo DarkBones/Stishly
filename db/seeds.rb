@@ -6,6 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-#Currency.create([{ name: 'Euro', symbol: 'E', iso_code: 'EUR' }])
-#'Country.create([{ name: 'Ireland', currency_id: 1}])
+#Currency.create([{ name: 'Euro', symbol: 'E', decimal_places: 2, iso_code: 'EUR' }])
+#Country.create([{ name: 'Ireland', currency_id: 1}])
 SubscriptionTier.create([{ name: 'Free', cost: 0, month_billing_cycle: 0 }])
