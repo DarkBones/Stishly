@@ -65,6 +65,7 @@ gem 'bootstrap-sass'
 gem 'pundit'
 gem 'rails_layout'
 gem 'jquery-rails'
+gem "letter_opener", :group => :development
 #gem 'turbolinks'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
