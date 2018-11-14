@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'users/index'
   get 'users/show'
+  get 'app', to: 'app#index'
   devise_for :users, :controllers => { registrations: 'registrations' }
   resources :users
   root 'welcome#index'
