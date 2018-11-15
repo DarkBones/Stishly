@@ -34,7 +34,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable
-  has_many :transactions
+  has_many :transactions, through: :accounts
   has_many :accounts
   belongs_to :country
   belongs_to :subscription_tier
