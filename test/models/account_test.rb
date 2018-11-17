@@ -8,6 +8,8 @@
 #  user_id     :bigint(8)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  name        :string(255)
+#  description :string(255)
 #
 
 require 'test_helper'
