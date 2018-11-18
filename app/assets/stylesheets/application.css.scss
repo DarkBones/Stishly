@@ -42,7 +42,7 @@ form{
 
 #left-menu li{
   //border: 1px solid blue;
-  padding:5px 15px;
+  padding:5px 30px;
 }
 
 #left-menu li.active{
@@ -64,4 +64,24 @@ form{
 
 .clickable:hover{
   cursor: pointer;
+}
+
+.sort-handle{
+  background-color: white;
+  display: inline-block;
+  cursor: move;
+  position: relative;
+  width: 10px;
+  height: 14px;
+  margin-left: -25px;
+  margin-right: 10px;
+  opacity: 0;
+}
+
+.sortable-item:hover .sort-handle{
+  opacity: 0.5;
+}
+
+.sortable-item:hover .sort-handle:hover{
+  opacity: 1;
 }

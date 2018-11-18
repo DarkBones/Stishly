@@ -1,7 +1,9 @@
 document.addEventListener("turbolinks:load", function() {
 
-  $("#accounts_list").sortable({
+  $(".sortable-list").sortable({
     cancel: ".no-sorting",
+    handle: ".sort-handle",
+    delay: 150,
     update: function(e, ui) {
       Rails.ajax({
         url: $(this).data("url"),
