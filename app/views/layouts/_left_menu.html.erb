@@ -1,18 +1,21 @@
 <% if user_signed_in? && @accounts %>
-  <div id="left_menu">
-    <h1>Accounts</h1>
+  <div id="left-menu">
+    <h2>Accounts</h2>
     <ul>
       <% if @accounts.length > 1 %>
-        <li>All accounts</li>
+        <li class="clickable active">
+          All accounts <span class="balance">
+          <%= @currency_symbol %> <%= balance(@total_balance, @cents_amount, "cents") %></span>
+        </li>
       <% end %>
       <% @accounts.each do |a| %>
         <% @balance = 0.to_f %>
         <% if a.balance %>
           <% @balance = a.balance.to_f %>
         <% end %>
-        <li>
-          <%= a.name %> - 
-          <%= @currency_symbol %> <%= balance(@balance, @cents_amount) %>
+        <li class="clickable">
+          <%= a.name %> <span class="balance">
+          <%= @currency_symbol %> <%= balance(@balance, @cents_amount, "cents") %></span>
         </li>
       <% end %>
     </ul>
