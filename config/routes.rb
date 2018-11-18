@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   get 'app', to: 'app#index'
-  post 'app/create_account', to: 'app#create_account'
+  post 'account/create_account', to: 'account#create'
   devise_for :users, :controllers => { registrations: 'registrations' }
   resources :users
   root 'welcome#index'

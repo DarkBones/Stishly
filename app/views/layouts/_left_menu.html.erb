@@ -3,7 +3,7 @@
     <h2>Accounts</h2>
     <ul id="accounts_list" data-url="/account/sort">
       <li class="no-sorting">
-      <%= form_for :account, :url => url_for(:controller => 'app', :action => 'create_account') do |f| %>
+      <%= form_for :account, :url => url_for(:controller => 'account', :action => 'create') do |f| %>
         <%= f.text_field :name_balance %>
       <% end %>
       </li>
