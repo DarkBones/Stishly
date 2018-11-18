@@ -1,7 +1,7 @@
 <% if user_signed_in? && @accounts %>
   <div id="left-menu">
     <h2>Accounts</h2>
-    <ul>
+    <ul id="accounts_list" data-url="/account/sort">
       <li>
       <%= form_for :account, :url => url_for(:controller => 'app', :action => 'create_account') do |f| %>
         <%= f.text_field :name_balance %>
@@ -18,7 +18,7 @@
         <% if a.balance %>
           <% @balance = a.balance.to_f %>
         <% end %>
-        <li class="clickable">
+        <li class="clickable" id="account_<%= a.id %>">
           <%= a.name %> <span class="balance">
           <%= @currency_symbol %> <%= balance(@balance, @cents_amount, "cents") %></span>
         </li>
