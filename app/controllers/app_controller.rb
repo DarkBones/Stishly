@@ -21,9 +21,11 @@ class AppController < ApplicationController
 
       Account.create(:user_id => current_user.id, :name => @name, :balance => @balance)
       redirect_to root_path
-    else
+    elsif @name_balance.length > 0
       Account.create(:user_id => current_user.id, :name => @name_balance, :balance => 0)
       redirect_to root_path
+    else
+      redirect_to root_path, :alert => 'Unexpected input'
     end
 
     @cents_amount = current_user.country.currency.number_to_basic
