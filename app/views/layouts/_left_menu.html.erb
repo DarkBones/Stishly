@@ -2,13 +2,13 @@
   <div id="left-menu">
     <h2>Accounts</h2>
     <ul id="accounts_list" data-url="/account/sort">
-      <li>
+      <li class="no-sorting">
       <%= form_for :account, :url => url_for(:controller => 'app', :action => 'create_account') do |f| %>
         <%= f.text_field :name_balance %>
       <% end %>
       </li>
       <% if @accounts.length > 1 %>
-        <li class="clickable active">
+        <li class="clickable active no-sorting">
           All accounts <span class="balance">
           <%= @currency_symbol %> <%= balance(@total_balance, @cents_amount, "cents") %></span>
         </li>
