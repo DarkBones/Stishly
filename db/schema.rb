@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_15_183734) do
+ActiveRecord::Schema.define(version: 2018_11_18_131732) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "balance"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2018_11_15_183734) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "description"
+    t.integer "position"
     t.index ["currency_id"], name: "index_accounts_on_currency_id"
     t.index ["user_id"], name: "index_accounts_on_user_id"
   end
