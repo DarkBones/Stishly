@@ -4,7 +4,7 @@
     <h2>Accounts</h2>
 
     <!-- Unordered list containing user's accounts -->
-    <ul class="sortable-list" data-url="/account/sort">
+    <ul>
 
       <!-- Form for creating new accounts -->
       <li class="no-sorting">
@@ -22,13 +22,15 @@
       <% end %>
 
       <!-- Display all accounts -->
-      <% @accounts.each do |a| %>
-        <li class="clickable sortable-item" id="account_<%= a.id %>">
-          <div class="sort-handle"></div>
-          <%= a.name %> <span class="balance">
-          <%= @currency_symbol %> <%= balance(a.balance.to_f, @cents_amount, "cents") %></span>
-        </li>
-      <% end %>
+      <div class="sortable-list" data-url="/account/sort">
+        <% @accounts.each do |a| %>
+          <li class="clickable sortable-item" id="account_<%= a.id %>">
+            <div class="sort-handle"></div>
+            <%= a.name %> <span class="balance">
+            <%= @currency_symbol %> <%= balance(a.balance.to_f, @cents_amount, "cents") %></span>
+          </li>
+        <% end %>
+      </div>
 
     </ul>
   </div>
