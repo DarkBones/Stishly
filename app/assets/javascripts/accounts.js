@@ -1,3 +1,8 @@
+function showAccountCreationForm(){
+  var x = document.getElementById("create-account-form");
+  x.style.display = "block";
+}
+
 document.addEventListener("turbolinks:load", function() {
 
   $(".sortable-list").sortable({

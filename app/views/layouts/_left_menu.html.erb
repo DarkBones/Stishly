@@ -1,13 +1,13 @@
 <% if user_signed_in? && @accounts %>
   <div id="left-menu">
 
-    <h2>Accounts</h2>
+    <h2>Accounts <span onclick="showAccountCreationForm()" class="float-right clickable">+</span></h2>
 
     <!-- Unordered list containing user's accounts -->
     <ul>
 
       <!-- Form for creating new accounts -->
-      <li class="no-sorting">
+      <li class="no-sorting" id="create-account-form" style="display:none;">
       <%= form_for :account, :url => url_for(:controller => 'account', :action => 'create') do |f| %>
         <%= f.text_field :name_balance %>
       <% end %>
@@ -16,7 +16,7 @@
       <!-- If more than one account exists, include sum of all accounts -->
       <% if @accounts.length > 1 %>
         <li class="clickable active no-sorting">
-          All accounts <span class="balance">
+          All accounts <span class="balance float-right">
           <%= @currency_symbol %> <%= balance(@total_balance, @cents_amount, "cents") %></span>
         </li>
       <% end %>
@@ -26,7 +26,7 @@
         <% @accounts.each do |a| %>
           <li class="clickable sortable-item" id="account_<%= a.id %>">
             <div class="sort-handle"></div>
-            <%= a.name %> <span class="balance">
+            <%= a.name %> <span class="balance float-right">
             <%= @currency_symbol %> <%= balance(a.balance.to_f, @cents_amount, "cents") %></span>
           </li>
         <% end %>
