@@ -50,7 +50,6 @@ form{
 }
 
 #left-menu span.balance{
-  float: right;
   color: #ddd;
 }
 
@@ -84,4 +83,8 @@ form{
 
 .sortable-item:hover .sort-handle:hover{
   opacity: 1;
+}
+
+.float-right{
+  float: right;
 }
