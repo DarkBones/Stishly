@@ -18,6 +18,6 @@ document.addEventListener("turbolinks:load", function() {
     }
   });
 
-  $(".sortable-list").disableSelection();
+  $("#left-menu").disableSelection();
 
 });
