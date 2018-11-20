@@ -15,19 +15,23 @@
 
       <!-- If more than one account exists, include sum of all accounts -->
       <% if @accounts.length > 1 %>
-        <li class="clickable active no-sorting" onclick="viewAccountTransactions(-1)">
-          All accounts <span class="balance float-right">
-          <%= @currency_symbol %> <%= balance(@total_balance, @cents_amount, "cents") %></span>
+        <li class="active no-sorting">
+          <a class="none-link-style" href="<%= account_path('all') %>">
+            All accounts <span class="balance float-right">
+            <%= @currency_symbol %> <%= balance(@total_balance, @cents_amount, "cents") %></span>
+          </a>
         </li>
       <% end %>
 
       <!-- Display all accounts -->
       <div class="sortable-list" data-url="/account/sort">
         <% @accounts.each do |a| %>
-          <li class="clickable sortable-item" onclick="viewAccountTransactions(<%= a.id %>)" id="account_<%= a.id %>">
+          <li class="sortable-item" id="account_<%= a.id %>">
             <div class="sort-handle"></div>
-            <%= a.name %> <span class="balance float-right">
-            <%= @currency_symbol %> <%= balance(a.balance.to_f, @cents_amount, "cents") %></span>
+            <a class="none-link-style" href="<%= account_path(a.id) %>">
+              <%= a.name %> <span class="balance float-right">
+              <%= @currency_symbol %> <%= balance(a.balance.to_f, @cents_amount, "cents") %></span>
+            </a>
           </li>
         <% end %>
       </div>
