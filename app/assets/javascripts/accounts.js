@@ -17,6 +17,7 @@ document.addEventListener("turbolinks:load", function() {
       });
     }
   });
-  $("#accounts_list").disableSelection();
+
+  $(".sortable-list").disableSelection();
 
 });
