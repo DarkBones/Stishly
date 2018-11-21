@@ -40,6 +40,11 @@ form{
   padding: 0;
 }
 
+#left-menu a{
+  width: 100%;
+  display: block;
+}
+
 #left-menu li{
   //border: 1px solid blue;
   padding:5px 30px;
@@ -89,7 +94,7 @@ form{
   float: right;
 }
 
-a.none-link-style{
+a.no-link-style{
   color: inherit;
   text-decoration: inherit;
 }
