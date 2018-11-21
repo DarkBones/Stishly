@@ -20,4 +20,5 @@ module AccountHelper
     #result += ".<span>#{b_cents}</span>" if cents > 0
     return result.html_safe
   end
+  
 end

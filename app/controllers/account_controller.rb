@@ -1,11 +1,6 @@
 class AccountController < ApplicationController
 
   def show
-    @accounts = Account.where("user_id" => current_user.id).order(:position)
-    @currency_symbol = current_user.country.currency.symbol
-    @cents_amount = current_user.country.currency.number_to_basic
-    @total_balance = Account.where("user_id" => current_user.id ).sum(:balance)
-
     if params[:id] != 'all'
       @transactions = Transaction.where("account_id" => params[:id], "user_id" => current_user.id)
     else
