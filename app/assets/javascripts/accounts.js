@@ -1,23 +1,23 @@
-function showAccountCreationForm(){
-  var x = document.getElementById("create-account-form");
-  x.style.display = "block";
-}
+$(document).on('turbolinks:load', ()=> {
+  makeSortableLists();
+  $('#left-menu').disableSelection();
 
-document.addEventListener("turbolinks:load", function() {
+  $('#create-account-button').on('click', () => {
+    $('#create-account-form').slideDown(100);
+  });
+});
 
-  $(".sortable-list").sortable({
-    cancel: ".no-sorting",
-    handle: ".sort-handle",
+function makeSortableLists(class_name='.sortable-list', handle_name='.sort-handle'){
+  $(class_name).sortable({
+    cancel: '.no-sorting',
+    handle: handle_name,
     delay: 150,
     update: function(e, ui) {
       Rails.ajax({
-        url: $(this).data("url"),
-        type: "PATCH",
+        url: $(this).data('url'),
+        type: 'PATCH',
         data: $(this).sortable('serialize'),
       });
     }
   });
-
-  $("#left-menu").disableSelection();
-
-});
+}
