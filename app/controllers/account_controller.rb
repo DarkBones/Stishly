@@ -10,6 +10,8 @@ class AccountController < ApplicationController
   end
 
   def create
+    Account.create_from_string(params[:account][:name_balance].to_s, current_user.id, current_user.country.currency.number_to_basic)
+=begin
     reg = "^[a-zA-Z0-9\s]+[0-9]*[\.,]*[0-9\.\s]+$"
     @name_balance = params[:account][:name_balance].strip
 
@@ -29,8 +31,9 @@ class AccountController < ApplicationController
     else
       redirect_to root_path, :alert => 'Unexpected input'
     end
+=end
 
-    @cents_amount = current_user.country.currency.number_to_basic
+    #@cents_amount = current_user.country.currency.number_to_basic
   end
 
   def sort
