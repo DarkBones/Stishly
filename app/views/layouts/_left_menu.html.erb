@@ -31,13 +31,11 @@
       <!-- Display all accounts -->
       <div class="sortable-list" data-url="/account/sort">
         <% @accounts.each do |a| %>
-          <a href="<%= account_path(a.id) %>" class="no-link-style sortable-item" id="account_<%= a.id %>">
-            <li class="account-button <%= 'active' if @account_id.to_i == a.id %>">
-              <div class="sort-handle"></div>
-                <%= a.name %> <span class="balance float-right">
-                <%= @currency_symbol %> <%= balance(a.balance.to_f, @cents_amount, "cents") %></span>
-            </li>
-          </a>
+          <li class="account-button sortable-item <%= 'active' if @account_id.to_i == a.id %>" id="account_<%= a.id %>">
+            <div class="sort-handle"></div>
+              <%= a.name %> <span class="balance float-right">
+              <%= @currency_symbol %> <%= balance(a.balance.to_f, @cents_amount, "cents") %></span>
+          </li>
         <% end %>
       </div>
 

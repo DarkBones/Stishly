@@ -1,9 +1,13 @@
 $(document).on('turbolinks:load', ()=> {
   makeSortableLists();
-  $('#left-menu').disableSelection();
+  //$('#left-menu').disableSelection();
 
   $('#create-account-button').on('click', () => {
     $('#create-account-form').slideDown(100);
+  });
+
+  $('.account-button').on('click', (event) => {
+    window.location.href = '/'+event.target.id.replace('_', '/');
   });
 });
 
