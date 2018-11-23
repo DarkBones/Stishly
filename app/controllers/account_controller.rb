@@ -1,5 +1,4 @@
 class AccountController < ApplicationController
-
   def show
     @account_id = params[:id]
     if @account_id != 'all'
