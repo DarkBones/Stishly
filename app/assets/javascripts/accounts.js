@@ -3,7 +3,13 @@ $(document).on('turbolinks:load', ()=> {
   //$('#left-menu').disableSelection();
 
   $('#create-account-button').on('click', () => {
-    $('#create-account-form').slideDown(100);
+    $('#create-account-form').slideToggle(100);
+    $("#account_name_balance").focus();
+  });
+
+  $('#cancel-account').on('click', () => {
+    $('#create-account-form').slideUp(100);
+    $("#account_name_balance").val("");
   });
 
   $('.account-button').on('click', (event) => {
