@@ -10,7 +10,7 @@ class AccountController < ApplicationController
   end
 
   def create
-    Account.create_from_string(params[:account][:name_balance].to_s, current_user.id, current_user.country.currency.number_to_basic)
+    Account.create_from_string(params[:account][:name_balance].to_s, current_user)
     redirect_back(fallback_location: root_path)
   end
 
