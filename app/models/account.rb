@@ -17,11 +17,10 @@ class Account < ApplicationRecord
   has_many :transactions
 
   def self.create_from_string(str, user_id, cents_amount)
-    reg = "^[a-zA-Z0-9\s]+[0-9]*[\.,]*[0-9\.\s]+$"
+    reg = ".+\s+[\.,]*[0-9\.\s]+$"
     @name_balance = str.to_s.strip
 
     if /#{reg}/.match(@name_balance)
-      #@cents_amount = current_user.country.currency.number_to_basic
       @name_balance = @name_balance.split
 
       @name = @name_balance[0..-2].join(' ')
