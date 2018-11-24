@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_20_200800) do
+ActiveRecord::Schema.define(version: 2018_11_24_112409) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "balance"
@@ -42,6 +42,25 @@ ActiveRecord::Schema.define(version: 2018_11_20_200800) do
     t.integer "number_to_basic"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "transaction_id"
+    t.bigint "account_id"
+    t.date "start_date"
+    t.date "end_date"
+    t.string "period"
+    t.integer "period_day"
+    t.integer "period_occurences"
+    t.string "exception_days"
+    t.string "exception_rule"
+    t.date "next_occurrence"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_schedules_on_account_id"
+    t.index ["transaction_id"], name: "index_schedules_on_transaction_id"
+    t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
   create_table "subscription_tiers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

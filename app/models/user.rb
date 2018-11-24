@@ -38,4 +38,5 @@ class User < ApplicationRecord
   has_many :accounts
   belongs_to :country
   belongs_to :subscription_tier
+  has_many :schedules
 end
