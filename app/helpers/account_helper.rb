@@ -5,7 +5,7 @@ module AccountHelper
     b = b.to_f
     b /= cents if cents > 0
     b_main = b.to_i
-    b_cents = ((b - b_main) * cents).round.to_i.to_s
+    b_cents = ((b - b_main) * cents).round.to_i.abs.to_s
 
     while b_cents.length < decimals
       b_cents += "0"
