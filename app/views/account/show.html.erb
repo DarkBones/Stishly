@@ -7,6 +7,10 @@
 
 <ul>
 <% @transactions.each do |t| %>
-  <li><%= t.amount %></li>
+  <a href="<%= transaction_path + '/' + t.id.to_s %>">
+    <li>
+      <%= t.amount %>
+    </li>
+  </a>
 <% end %>
 </ul>

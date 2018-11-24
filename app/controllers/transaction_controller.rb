@@ -1,4 +1,9 @@
 class TransactionController < ApplicationController
+  def show
+    @transaction = Transaction.find(params[:id])
+    @account_id = @transaction.account_id
+  end
+
   def create_quick
     @user_input = params[:transaction][:user_input].to_s
     @account_id = params[:account_id].to_i
