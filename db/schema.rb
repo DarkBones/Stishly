@@ -50,11 +50,11 @@ ActiveRecord::Schema.define(version: 2018_11_24_112409) do
     t.bigint "account_id"
     t.date "start_date"
     t.date "end_date"
-    t.string "period"
-    t.integer "period_day"
-    t.integer "period_occurences"
-    t.string "exception_days"
-    t.string "exception_rule"
+    t.string "period"                       # daily / weekly / monthly / annually / every x friday of month
+    t.integer "period_day"                  # every x'th day / week / month of the week / month / year
+    t.integer "period_occurences"           # every x days / weeks / months / years
+    t.string "exception_days"               # if on x'th day, don't process
+    t.string "exception_rule"               # if exception is met, do this instead
     t.date "next_occurrence"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
