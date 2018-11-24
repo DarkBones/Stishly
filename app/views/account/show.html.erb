@@ -1,6 +1,8 @@
-<%= form_for :transaction, :url => url_for(:controller => 'transaction', :action => 'create_quick') do |f| %>
-  <%= f.text_field :user_input %>
-  <%= hidden_field_tag 'account_id', @account_id %>
+<% if @account_id != 'all' %>
+  <%= form_for :transaction, :url => url_for(:controller => 'transaction', :action => 'create_quick') do |f| %>
+    <%= f.text_field :user_input %>
+    <%= hidden_field_tag 'account_id', @account_id %>
+  <% end %>
 <% end %>
 
 <ul>
