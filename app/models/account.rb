@@ -36,6 +36,10 @@ class Account < ApplicationRecord
       end
     end
 
-    self.create(:user_id => current_user.id, :name => @name, :balance => @balance)
+    @existing_accounts = Account.where('user_id' => current_user.id, 'name' => @name)
+
+    if @existing_accounts.length == 0
+      self.create(:user_id => current_user.id, :name => @name, :balance => @balance)
+    end
   end
 end
