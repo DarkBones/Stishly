@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   get 'app', to: 'app#index'
   get 'account/:id', to: 'account#show'
-  post 'account/create_account', to: 'account#create'
+  post 'account/create_account', to: 'account#create_quick'
   post 'transaction/create_transaction', to: 'transaction#create'
   devise_for :users, :controllers => { registrations: 'registrations' }
   resources :users
