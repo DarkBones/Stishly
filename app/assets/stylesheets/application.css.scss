@@ -3,98 +3,50 @@
  *= require_self
  */
 
+$debug: true;
+$debug-border: 1px solid blue;
+
+$main-width-min: 500px;
+$main-width-max: 1200px;
+$left-menu-width: 300px;
+
 html, body { 
   height: 100%;
   width: 100%;
-  margin: 0; 
-  background-color: #222;
+  margin: 0;
+  body {
+    padding-top: 51px;
+  }
 }
 
-main{
-  min-width: 500px;
-  max-width: 1200px;
-  min-height: 100%;
+main {
+  @if $debug == true {
+    border: $debug-border
+  }
+  height: 100%;
   padding: 0;
-  padding-top: 51px; // accommodate the navbar
-  background-color: #333;
-  color: white;
+  display: flex;
+  min-width: $main-width-min;
+  max-width: $main-width-max;
+  margin: 0 auto;
 }
 
-form{
-  color: black;
+#left-menu {
+  @if $debug == true {
+    border: $debug-border
+  }
+  display: block;
+  width: $left-menu-width;
+  height: 100%;
+  float: left;
 }
 
-#left-menu{
-  //border:1px solid blue;
-  width: 350px;
-
-}
-
-#left-menu h2{
-  font-size: 30px;
-  padding: 0 15px;
-}
-
-#left-menu ul{
-  list-style-type: none;
-  padding: 0;
-}
-
-#left-menu a{
-  //width: 100%;
-  //display: block;
-}
-
-#left-menu li{
-  //border: 1px solid blue;
-  padding:5px 30px;
-}
-
-#left-menu li.active{
-  background-color: #444;
-}
-
-#left-menu span.balance{
-  color: #ddd;
-}
-
-#left-menu span.cents{
-  font-size: 12px;
-}
-
-#left-menu li:hover{
-  background-color: #444;
-}
-
-.clickable:hover{
-  cursor: pointer;
-}
-
-.sort-handle{
-  background-color: white;
-  display: inline-block;
-  cursor: move;
-  position: relative;
-  width: 10px;
-  height: 14px;
-  margin-left: -20px;
-  margin-right: 5px;
-  opacity: 0;
-}
-
-.sortable-item:hover .sort-handle{
-  opacity: 0.5;
-}
-
-.sortable-item:hover .sort-handle:hover{
-  opacity: 1;
-}
-
-.float-right{
-  float: right;
-}
-
-a.no-link-style{
-  color: inherit;
-  text-decoration: inherit;
+#content {
+  @if $debug == true {
+    border: $debug-border
+  }
+  float: left;
+  flex-grow: 100;
+  min-width: 150px;
+  //max-width: 850px;
 }

@@ -13,7 +13,7 @@ $(document).on('turbolinks:load', ()=> {
   });
 
   $('.account-button').on('click', (event) => {
-    window.location.href = '/'+event.target.id.replace('_', '/');
+    window.location.href = '/' + event.target.id.replace('_', '/');
   });
 });
 

@@ -13,9 +13,11 @@
       <%= render 'layouts/navigation' %>
     </header>
     <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= render 'layouts/left_menu' %>
-       <%= yield %>
+      <%= render 'layouts/messages' %>
+      <%= render 'layouts/left_menu' %>
+      <div id="content">
+        <%= yield %>
+      </div>
     </main>
   </body>
 </html>
