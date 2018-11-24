@@ -1,3 +1,7 @@
+<%= form_for :transaction, :url => url_for(:controller => 'transaction', :action => 'create') do |f| %>
+  <%= f.text_field :name_balance %>
+<% end %>
+
 <ul>
 <% @transactions.each do |t| %>
   <li><%= t.amount %></li>

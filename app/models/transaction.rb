@@ -14,4 +14,24 @@
 class Transaction < ApplicationRecord
   belongs_to :account
   has_one :user, through: :account
+
+  def self.create_from_string(str, current_user, account_id, direction)
+    reg = ".+\s+[\.,]*[0-9\.\s]+$"
+    @name_amount = str.to_s.strip
+    @cents_amount = current_user.country.currency.number_to_basic
+
+    if /#{reg}/.match(@name_amount)
+      @name_amount = @name_amount.split
+
+      @name = @name_amount[0..-2].join(' ')
+
+      if @cents_amount > 0
+        @amount = (@name_amount[-1].sub(",", ".").to_f * @cents_amount).to_i
+      else
+        @amount = @name_amount[-1].to_i
+      end
+
+      self.create(:user_id => current_user.id, :description => @name, :amount => @amount, :direction => direction, :account_id => account_id)
+    end
+  end
 end
