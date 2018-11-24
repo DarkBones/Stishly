@@ -1,5 +1,6 @@
-<%= form_for :transaction, :url => url_for(:controller => 'transaction', :action => 'create') do |f| %>
-  <%= f.text_field :name_balance %>
+<%= form_for :transaction, :url => url_for(:controller => 'transaction', :action => 'create_quick') do |f| %>
+  <%= f.text_field :user_input %>
+  <%= hidden_field_tag 'account_id', @account_id %>
 <% end %>
 
 <ul>

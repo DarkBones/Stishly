@@ -16,7 +16,7 @@ class Transaction < ApplicationRecord
   has_one :user, through: :account
 
   def self.create_from_string(str, current_user, account_id, direction)
-    reg = ".+\s+[\.,]*[-0-9\.\s]+$"
+    reg = ".+\s+[\.,]*-?[0-9\.]+$"
     @name_amount = str.to_s.strip
     @cents_amount = current_user.country.currency.number_to_basic
 
@@ -31,7 +31,13 @@ class Transaction < ApplicationRecord
         @amount = @name_amount[-1].to_i
       end
 
+      @amount *= direction
+
       self.create(:user_id => current_user.id, :description => @name, :amount => @amount, :direction => direction, :account_id => account_id)
+      Account.add(account_id, @amount)
+      return 200
+    else
+      return 500
     end
   end
 end

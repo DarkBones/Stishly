@@ -17,7 +17,7 @@ class Account < ApplicationRecord
   has_many :transactions
 
   def self.create_from_string(str, current_user)
-    reg = ".+\s+[\.,]*[-0-9\.\s]+$"
+    reg = ".+\s+[\.,]*-?[0-9\.]+$"
     @name_balance = str.to_s.strip
     @cents_amount = current_user.country.currency.number_to_basic
 
@@ -41,5 +41,12 @@ class Account < ApplicationRecord
     if @existing_accounts.length == 0
       self.create(:user_id => current_user.id, :name => @name, :balance => @balance)
     end
+  end
+
+  def self.add(id, amount)
+    @balance = Account.find_by_id(id).balance
+    @balance += amount
+
+    Account.update(id, :balance => @balance)
   end
 end
