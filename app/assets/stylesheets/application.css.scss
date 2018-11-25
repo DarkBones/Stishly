@@ -3,12 +3,28 @@
  *= require_self
  */
 
-$debug: true;
+$theme: 'dark';
+
+$debug: false;
 $debug-border: 1px solid blue;
 
 $main-width-min: 500px;
 $main-width-max: 1200px;
 $left-menu-width: 300px;
+
+$backgroundColor: #262626;
+$backgroundColorMain: #262626;
+$backgroundColorContent: #333;
+$textColor: #fff;
+$hoverColor: #444;
+
+@if $theme == 'light' {
+  $backgroundColor: #FFF;
+  $backgroundColorMain: #FFF;
+  $backgroundColorContent: #FFF;
+  $textColor: #000;
+  $hoverColor: #fff;
+}
 
 html, body { 
   height: 100%;
@@ -16,6 +32,7 @@ html, body {
   margin: 0;
   body {
     padding-top: 51px;
+    background-color: $backgroundColor;
   }
 }
 
@@ -29,6 +46,51 @@ main {
   min-width: $main-width-min;
   max-width: $main-width-max;
   margin: 0 auto;
+  background-color: $backgroundColorMain;
+  color: $textColor;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+.clickable:hover{
+  cursor: pointer;
+}
+
+.float-right {
+  float: right;
+}
+
+.sort-handle{
+  display: inline-block;
+  cursor: move;
+  position: relative;
+  width: 12px;
+  height: 20px;
+  margin-left: -22px;
+  margin-right: 5px;
+  margin-top: -100px;
+  top: 4px;
+  opacity: 0;
+  @if $theme == 'light' {
+    background-image: image-url("sort-handle-black.png")
+  } @else {
+    background-image: image-url("sort-handle-white.png")
+  }
+}
+
+.sortable-item:hover .sort-handle{
+  opacity: 0.5;
+}
+
+.sortable-item:hover .sort-handle:hover{
+  opacity: 1;
+}
+
+a.no-link-style{
+  color: inherit;
+  text-decoration: inherit;
 }
 
 #left-menu {
@@ -38,7 +100,33 @@ main {
   display: block;
   width: $left-menu-width;
   height: 100%;
-  float: left;
+  h2 {
+    padding: 0 15px;
+  }
+}
+
+#left-menu ul, #content ul {
+  @if $debug == true {
+    border: $debug-border
+  }
+  list-style-type: none;
+  padding: 0;
+}
+
+#left-menu li, #content li {
+  padding: 6px 30px;
+  @if $debug == true {
+    border: $debug-border
+  }
+}
+
+#left-menu li:hover {
+  background-color: $hoverColor;
+}
+
+#left-menu li.active {
+  background-color: $hoverColor;
+  font-weight: bold;
 }
 
 #content {
@@ -48,5 +136,5 @@ main {
   float: left;
   flex-grow: 100;
   min-width: 150px;
-  //max-width: 850px;
+  background-color: $backgroundColorContent;
 }

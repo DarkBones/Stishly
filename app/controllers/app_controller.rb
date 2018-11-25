@@ -1,5 +1,5 @@
 class AppController < ApplicationController
   def index
-    @account_id = 'all'
+    @account_id = 'na'
   end
 end

@@ -1,5 +1,5 @@
 module AccountHelper
-  def balance(b, cents, span_class="")
+  def balance(b, cents, span_class="", id="")
     cents > 0 ? decimals = Math.log10(cents).ceil : decimals = 0
 
     b = b.to_f
@@ -15,6 +15,7 @@ module AccountHelper
     if cents > 0
       result += ".<span"
       result += " class=\"#{span_class}\"" if span_class != ""
+      result += " id=\"#{id}\"" if id != ""
       result += ">#{b_cents}</span>"
     end
     #result += ".<span>#{b_cents}</span>" if cents > 0

@@ -1,3 +1,5 @@
+<h2><%= @account_name %> Transactions</h2>
+
 <% if @account_id != 'all' %>
   <%= form_for :transaction, :url => url_for(:controller => 'transaction', :action => 'create_quick') do |f| %>
     <%= f.text_field :user_input %>
@@ -7,9 +9,12 @@
 
 <ul>
 <% @transactions.each do |t| %>
-  <a href="<%= transaction_path + '/' + t.id.to_s %>">
+  <a href="<%= transaction_path + '/' + t.id.to_s %>" class="no-link-style">
     <li>
-      <%= t.amount %>
+      <%= t.description %>
+      <span class="balance float-right">
+        <%= @currency_symbol %> <%= balance(t.amount.to_f, @cents_amount, "cents") %>
+      </span>
     </li>
   </a>
 <% end %>

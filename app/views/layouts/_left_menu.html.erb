@@ -26,12 +26,10 @@
 
       <!-- If more than one account exists, include sum of all accounts -->
       <% if @accounts.length > 1 %>
-        <a href="<%= account_path('all') %>" class="no-link-style">
-          <li class="account-button no-sorting clickable <%= 'active' if @account_id == 'all' %>" id="account_all">
-            All accounts <span class="balance float-right">
-            <%= @currency_symbol %> <%= balance(@total_balance, @cents_amount, "cents") %></span>
-          </li>
-        </a>
+        <li class="account-button no-sorting clickable <%= 'active' if @account_id == 'all' %>" id="account_all">
+          All accounts <span class="balance float-right" id="account_all">
+          <%= @currency_symbol %> <%= balance(@total_balance, @cents_amount, "cents") %></span>
+        </li>
       <% end %>
 
       <!-- Display all accounts -->
@@ -39,8 +37,8 @@
         <% @accounts.each do |a| %>
           <li class="account-button clickable sortable-item <%= 'active' if @account_id.to_i == a.id %>" id="account_<%= a.id %>">
             <div class="sort-handle"></div>
-              <%= a.name %> <span class="balance float-right">
-              <%= @currency_symbol %> <%= balance(a.balance.to_f, @cents_amount, "cents") %></span>
+              <%= a.name %> <span class="balance float-right" id="account_<%= a.id %>">
+              <%= @currency_symbol %> <%= balance(a.balance.to_f, @cents_amount, "cents", "account_" + a.id.to_s) %></span>
           </li>
         <% end %>
       </div>
