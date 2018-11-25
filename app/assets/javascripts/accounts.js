@@ -15,6 +15,8 @@ $(document).on('turbolinks:load', ()=> {
   $('.account-button').on('click', (event) => {
     window.location.href = '/' + event.target.id.replace('_', '/');
   });
+
+  $('#account_name_balance').attr('maxlength',23);
 });
 
 function makeSortableLists(class_name='.sortable-list', handle_name='.sort-handle'){
