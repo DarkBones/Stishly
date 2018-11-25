@@ -15,6 +15,7 @@ $left-menu-width: 300px;
 $backgroundColor: #262626;
 $backgroundColorMain: #262626;
 $backgroundColorContent: #333;
+$backgroundColorInput: #000;
 $textColor: #fff;
 $hoverColor: #444;
 
@@ -24,6 +25,7 @@ $hoverColor: #444;
   $backgroundColorContent: #FFF;
   $textColor: #000;
   $hoverColor: #fff;
+  $backgroundColorInput: #FFF;
 }
 
 html, body { 
@@ -118,6 +120,7 @@ a.no-link-style{
   @if $debug == true {
     border: $debug-border
   }
+  border-radius: 4px;
 }
 
 #left-menu li:hover {
@@ -137,4 +140,33 @@ a.no-link-style{
   flex-grow: 100;
   min-width: 150px;
   background-color: $backgroundColorContent;
+  padding: 0 15px;
+}
+
+input{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 10px auto;
+  background-color: $backgroundColorInput;
+  border:none;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 7px 7px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+}
+button:hover {
+  background-color:#5cbf2a;
+}
+button:active {
+  position:relative;
+  top:1px;
 }
