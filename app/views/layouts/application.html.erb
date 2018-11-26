@@ -7,6 +7,9 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
     <%= csrf_meta_tags %>
+    <% if user_signed_in? %>
+      <meta name="timezone" content="<%= current_user.timezone %>">
+    <% end %>
   </head>
   <body>
     <header>

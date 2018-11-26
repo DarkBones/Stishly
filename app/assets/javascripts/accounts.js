@@ -1,6 +1,10 @@
 $(document).on('turbolinks:load', ()=> {
   makeSortableLists();
   //$('#left-menu').disableSelection();
+  
+  var $userTimezone = $('meta[name=timezone]').attr('content');
+  const tz = jstz.determine().name();
+  alert(tz);
 
   $('#create-account-button').on('click', () => {
     $('#create-account-form').slideToggle(100);
