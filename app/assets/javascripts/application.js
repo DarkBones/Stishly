@@ -17,3 +17,5 @@
 //= require_tree .
 //= require jquery-ui/widget
 //= require jquery-ui/sortable
+//= require detect_timezone
+//= require jquery.detect_timezone
