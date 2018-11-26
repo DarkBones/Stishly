@@ -35,7 +35,7 @@ class Transaction < ApplicationRecord
 
       @amount *= direction
 
-      self.create(:user_id => current_user.id, :description => @name, :amount => @amount, :direction => direction, :account_id => account_id)
+      self.create(:user_id => current_user.id, :description => @name, :amount => @amount, :direction => direction, :account_id => account_id, :timezone => current_user.timezone)
       Account.add(account_id, @amount)
       return 200
     else
