@@ -7,8 +7,28 @@
   <% end %>
 <% end %>
 
-<ul>
+<% @current_date = '' %>
+<% @date_updated = false %>
+
 <% @transactions.each do |t| %>
+  
+  <% if t.created_at.to_date != @current_date %>
+
+    <% if @current_date != '' %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% @current_date = t.created_at.to_date %>
+    <% @date_updated = true %>
+
+    <% tz = TZInfo::Timezone.get('Europe/London') %>
+    <h3><%= tz.utc_to_local(t.created_at) %></h3>
+    <div class="foldable" id="transactions_<%= @current_date %>">
+      <ul>
+
+  <% end %>
+
   <a href="<%= transaction_path + '/' + t.id.to_s %>" class="no-link-style">
     <li>
       <%= t.description %>
@@ -17,5 +37,7 @@
       </span>
     </li>
   </a>
+
 <% end %>
-</ul>
+  </ul>
+</div>
