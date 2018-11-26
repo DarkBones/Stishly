@@ -8,22 +8,22 @@
 <% end %>
 
 <% @current_date = '' %>
-<% @date_updated = false %>
+<% tz = TZInfo::Timezone.get(current_user.timezone) %>
 
 <% @transactions.each do |t| %>
   
-  <% if t.created_at.to_date != @current_date %>
+  <% t_time = tz.utc_to_local(t.created_at) %>
+  
+  <% if t_time.to_date != @current_date %>
 
     <% if @current_date != '' %>
         </ul>
       </div>
     <% end %>
 
-    <% @current_date = t.created_at.to_date %>
-    <% @date_updated = true %>
+    <% @current_date = t_time.to_date %>
 
-    <% tz = TZInfo::Timezone.get('Europe/London') %>
-    <h3><%= tz.utc_to_local(t.created_at) %></h3>
+    <h3><%= @current_date %></h3>
     <div class="foldable" id="transactions_<%= @current_date %>">
       <ul>
 
