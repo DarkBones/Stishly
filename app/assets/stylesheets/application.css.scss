@@ -76,9 +76,9 @@ h2 {
   top: 4px;
   opacity: 0;
   @if $theme == 'light' {
-    background-image: image-url("sort-handle-black.png")
+    background-image: image-url("sort-handle-black.svg")
   } @else {
-    background-image: image-url("sort-handle-white.png")
+    background-image: image-url("sort-handle-white.svg")
   }
 }
 
