@@ -17,6 +17,8 @@ $(document).on('turbolinks:load', ()=> {
   });
 
   $('#account_name_balance').attr('maxlength',23);
+
+  $('#timezone_input').set_timezone();
 });
 
 function makeSortableLists(class_name='.sortable-list', handle_name='.sort-handle'){
