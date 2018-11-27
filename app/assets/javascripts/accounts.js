@@ -7,6 +7,12 @@ $(document).on('turbolinks:load', ()=> {
     $("#account_name_balance").focus();
   });
 
+  $('#quick-transaction-input').focus();
+
+  $('.timezone-on-focus').on('focusin', () => {
+    $('#timezone_input').set_timezone();
+  });
+
   $('#cancel-account').on('click', () => {
     $('#create-account-form').slideUp(100);
     $("#account_name_balance").val("");
