@@ -9,11 +9,9 @@
 <% end %>
 
 <% @current_date = '' %>
-<% tz = TZInfo::Timezone.get(current_user.timezone) %>
-
 <% @transactions.each do |t| %>
   
-  <% t_time = tz.utc_to_local(t.created_at) %>
+  <% t_time = get_transaction_time(t).to_date %>
   
   <% if t_time.to_date != @current_date %>
 

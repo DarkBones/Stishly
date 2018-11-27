@@ -5,3 +5,6 @@ TRANSACTION<br />
 
 <%= @transaction.description %><br />
 <%= tzTransaction.utc_to_local(@transaction.created_at) %>
+
+<h1>TEST</h1>
+<%= get_transaction_time(@transaction).to_date %>
