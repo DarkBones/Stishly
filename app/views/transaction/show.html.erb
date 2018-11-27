@@ -1,2 +1,7 @@
 TRANSACTION<br />
-<%= @transaction.description %>
+
+<% tzTransaction = TZInfo::Timezone.get(@transaction.timezone) %>
+<% tzUser = TZInfo::Timezone.get(current_user.timezone) %>
+
+<%= @transaction.description %><br />
+<%= tzTransaction.utc_to_local(@transaction.created_at) %>
