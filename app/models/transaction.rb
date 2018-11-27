@@ -15,7 +15,7 @@ class Transaction < ApplicationRecord
   belongs_to :account
   has_one :user, through: :account
 
-  def self.create_from_string(str, current_user, account_id, direction)
+  def self.create_from_string(str, current_user, account_id, direction, timezone)
     # TODO: Store the transaction's timezone
 
     reg = ".+\s+[\.,]*-?[0-9\.]+$"
