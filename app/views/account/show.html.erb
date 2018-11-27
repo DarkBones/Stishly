@@ -4,6 +4,7 @@
   <%= form_for :transaction, :url => url_for(:controller => 'transaction', :action => 'create_quick') do |f| %>
     <%= f.text_field :user_input %>
     <%= hidden_field_tag 'account_id', @account_id %>
+    <%= f.hidden_field :timezone, id: 'timezone_input' %>
   <% end %>
 <% end %>
 
