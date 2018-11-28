@@ -1,5 +1,9 @@
 class AccountController < ApplicationController
   def show
+    @account_transactions = AccountService.new(params, current_user).perform
+    puts @account_transactions
+    puts '///////////////////////////////////.......................'
+
     @account_id = params[:id]
 
     if @account_id != 'all'
@@ -10,12 +14,6 @@ class AccountController < ApplicationController
 
     @currency_symbol = current_user.country.currency.symbol
     @cents_amount = current_user.country.currency.number_to_basic
-
-    if @account_id != 'all'
-      @transactions = Transaction.where("account_id" => params[:id], "user_id" => current_user.id).order(:created_at).reverse_order()
-    else
-      @transactions = Transaction.where("user_id" => current_user.id).order(:created_at).reverse_order()
-    end
   end
 
   def create

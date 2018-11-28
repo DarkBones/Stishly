@@ -9,7 +9,7 @@
 <% end %>
 
 <% @current_date = '' %>
-<% @transactions.each do |t| %>
+<% @account_transactions[:transactions].each do |t| %>
   
   <% t_time = get_transaction_time(t).to_date %>
   
