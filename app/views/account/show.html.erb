@@ -1,6 +1,9 @@
+<% @currency_symbol = current_user.country.currency.symbol %>
+<% @cents_amount = current_user.country.currency.number_to_basic %>
+
 <h2><%= @account_transactions[:account_name] %> Transactions</h2>
 
-<% if @account_id != 'all' %>
+<% if params[:id] != 'all' %>
   <%= form_for :transaction, :url => url_for(:controller => 'transaction', :action => 'create_quick') do |f| %>
     <%= f.text_field :user_input, class: 'timezone-on-focus', id: 'quick-transaction-input' %>
     <%= hidden_field_tag 'account_id', @account_id %>
