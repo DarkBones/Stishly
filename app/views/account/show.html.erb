@@ -1,4 +1,4 @@
-<h2><%= @account_name %> Transactions</h2>
+<h2><%= @account_transactions[:account_name] %> Transactions</h2>
 
 <% if @account_id != 'all' %>
   <%= form_for :transaction, :url => url_for(:controller => 'transaction', :action => 'create_quick') do |f| %>

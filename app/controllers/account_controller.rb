@@ -6,12 +6,6 @@ class AccountController < ApplicationController
 
     @account_id = params[:id]
 
-    if @account_id != 'all'
-      @account_name = Account.find(@account_id).name
-    else
-      @account_name = 'All'
-    end
-
     @currency_symbol = current_user.country.currency.symbol
     @cents_amount = current_user.country.currency.number_to_basic
   end
