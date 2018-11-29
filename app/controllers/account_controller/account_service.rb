@@ -16,7 +16,6 @@ class AccountService
     if id != 'all'
       result = Account.find(id).name
     end
-    return result
   end
 
   def get_transactions(id, current_user)
