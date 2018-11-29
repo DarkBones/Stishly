@@ -16,10 +16,10 @@ class Account < ApplicationRecord
   belongs_to :user
   has_many :transactions
 
-  def self.create_from_string(str, current_user)
+  def self.create_from_string(params, current_user)
     reg = ".+\s+[\.,]*-?[0-9\.]+$"
     
-    name_balance = parse_string(str, current_user.country.currency.number_to_basic)
+    name_balance = parse_string(params[:name_balance], current_user.country.currency.number_to_basic)
 
     create_account(name_balance, current_user)
   end

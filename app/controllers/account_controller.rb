@@ -4,8 +4,12 @@ class AccountController < ApplicationController
   end
 
   def create
-    Account.create_from_string(params[:account][:name_balance].to_s, current_user)
-    redirect_back(fallback_location: root_path)
+    #Account.create_from_string(params[:account][:name_balance].to_s, current_user)
+    if (Account.create_from_string(new_account_params, current_user))
+      redirect_back(fallback_location: root_path)
+    else
+      redirect_to root_path, :alert => 'something went wrong'
+    end
   end
 
   def sort
@@ -14,6 +18,12 @@ class AccountController < ApplicationController
     end
 
     head :ok
+  end
+
+  private
+
+  def new_account_params
+    params.require(:account).permit(:name_balance)
   end
 
 end
