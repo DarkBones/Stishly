@@ -1,12 +1,13 @@
 class AccountService
 
   def initialize(params, current_user)
+    @id = params[:id]
     @account_name = get_account_name(params[:id])
     @transactions = get_transactions(params[:id], current_user)
   end
 
   def perform
-    result = { :account_name => @account_name, :transactions => @transactions }
+    result = { :id => @id, :account_name => @account_name, :transactions => @transactions }
   end
 
   private

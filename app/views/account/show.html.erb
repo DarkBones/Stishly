@@ -1,5 +1,6 @@
 <% @currency_symbol = current_user.country.currency.symbol %>
 <% @cents_amount = current_user.country.currency.number_to_basic %>
+<% @account_id = @account_transactions[:id] %>
 
 <h2><%= @account_transactions[:account_name] %> Transactions</h2>
 
