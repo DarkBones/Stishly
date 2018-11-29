@@ -17,8 +17,10 @@ class Account < ApplicationRecord
   has_many :transactions
 
   def self.create_from_string(params, current_user)
-    reg = ".+\s+[\.,]*-?[0-9\.]+$"
-    
+    if params[:name_balance].length == 0
+      return false
+    end
+
     name_balance = parse_string(params[:name_balance], current_user.country.currency.number_to_basic)
 
     create_account(name_balance, current_user)
