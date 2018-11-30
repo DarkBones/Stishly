@@ -3,7 +3,6 @@ class Transaction
     def initialize(params, current_user)
       puts params
       @transaction_string = params[:transaction][:transaction_string]
-      @direction = -1
       @account_id = params[:account_id]
       @current_user = current_user
       @cents_amount = current_user.country.currency.number_to_basic
@@ -17,12 +16,15 @@ class Transaction
       @transaction_details = parse_string()
 
       transaction = Transaction.new(@transaction_details)
+      transaction.save
+
+      Account.add(@transaction_details[:account_id], @transaction_details[:amount])
     end
 
     private
 
     def parse_string()
-      reg = ".+\s+[\.,]*-?[0-9\.]+$"
+      reg = ".+\s+[\.,]*[\+-]?[0-9\.]+$"
 
       name_amount = @transaction_string.strip
 
@@ -31,13 +33,24 @@ class Transaction
 
         transaction_name = name_amount[0..-2].join(' ')
 
-        if @cents_amount > 0
-          amount = (name_amount[-1].sub(",", ".").to_f * @cents_amount).to_i
+        amount = name_amount[-1]
+        if amount[0] == '+'
+          direction = 1
         else
-          amount = name_amount[-1].to_f.round.to_i
+          direction = -1
         end
 
-        amount *= @direction
+        amount = amount.sub('+', '')
+        amount = amount.sub('-', '')
+        amount = amount.sub(',', '.')
+
+        if @cents_amount > 0
+          amount = (amount.to_f * @cents_amount).to_i
+        else
+          amount = amount.to_f.round.to_i
+        end
+
+        amount *= direction
 
         result = { 
           :user_id => @current_user.id, 
