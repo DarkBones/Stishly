@@ -21,7 +21,7 @@ class Account < ApplicationRecord
   end
 
   def self.create_from_string(params, current_user)
-    return CreateAccountFromString.new(params, current_user).perform
+    return CreateFromString.new(params, current_user).perform
   end
 
   def self.add(id, amount)

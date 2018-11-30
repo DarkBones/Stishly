@@ -1,5 +1,5 @@
 class Account
-  class CreateAccountFromString
+  class CreateFromString
     attr_reader :account_string
 
     def initialize(params, current_user)
