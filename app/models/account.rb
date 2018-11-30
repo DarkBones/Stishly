@@ -16,14 +16,12 @@ class Account < ApplicationRecord
   belongs_to :user
   has_many :transactions
 
+  def self.get_user_accounts(params, current_user)
+    return GetUserAccounts.new(params, current_user).perform
+  end
+
   def self.create_from_string(params, current_user)
-    if params[:name_balance].length == 0
-      return false
-    end
-
-    name_balance = parse_string(params[:name_balance], current_user.country.currency.number_to_basic)
-
-    create_account(name_balance, current_user)
+    return CreateAccountFromString.new(params, current_user).perform
   end
 
   def self.add(id, amount)
@@ -33,35 +31,4 @@ class Account < ApplicationRecord
     Account.update(id, :balance => @balance)
   end
 
-  private
-
-  def self.create_account(params, current_user)
-    existing_accounts = current_user.accounts.where('name' => params[:name])
-
-    if existing_accounts.length == 0
-      account = current_user.accounts.build(params)
-      account.save
-    end
-  end
-
-  def self.parse_string(str, cents_amount)
-    reg = ".+\s+[\.,]*-?[0-9\.]+$"
-    name_balance = str.to_s.strip.split
-
-    account_name = name_balance.join(' ')
-    balance = 0
-
-    if /#{reg}/.match(name_balance.join(' '))
-      account_name = name = name_balance[0..-2].join(' ')
-
-      if cents_amount > 0
-        balance = (name_balance[-1].sub(",", ".").to_f * cents_amount).to_i
-      else
-        balance = @name_balance[-1].to_f.round.to_i
-      end
-    end
-
-    result = {:name => account_name, :balance => balance}
-
-  end
 end

@@ -1,14 +1,15 @@
 class AccountController < ApplicationController
   def show
-    @account_transactions = AccountService.new(params, current_user).perform
+    @account_transactions = Account.get_user_accounts(params, current_user)
   end
 
   def create
     #Account.create_from_string(params[:account][:name_balance].to_s, current_user)
-    if (Account.create_from_string(new_account_params, current_user))
+    result = Account.create_from_string(new_account_params, current_user)
+    if (result === true)
       redirect_back(fallback_location: root_path)
     else
-      redirect_to root_path, :alert => 'something went wrong'
+      redirect_to root_path, :alert => result
     end
   end
 
@@ -23,7 +24,7 @@ class AccountController < ApplicationController
   private
 
   def new_account_params
-    params.require(:account).permit(:name_balance)
+    params.require(:account).permit(:account_string)
   end
 
 end
