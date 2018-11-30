@@ -1,8 +1,9 @@
 class Transaction
   class CreateFromString
     def initialize(params, current_user)
-      @transaction_string = params[:transaction_string]
-      @direction = params[:direction]
+      puts params
+      @transaction_string = params[:transaction][:transaction_string]
+      @direction = -1
       @account_id = params[:account_id]
       @current_user = current_user
       @cents_amount = current_user.country.currency.number_to_basic
@@ -15,7 +16,7 @@ class Transaction
 
       @transaction_details = parse_string()
 
-      return @transaction_details
+      transaction = Transaction.new(@transaction_details)
     end
 
     private

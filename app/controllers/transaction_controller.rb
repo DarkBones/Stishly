@@ -11,7 +11,7 @@ class TransactionController < ApplicationController
     # TODO: Create option for direction in the form
     @direction = -1
 
-    @result = Transaction.create_from_string(@user_input, current_user, @account_id, @direction, params[:timezone])
+    @result = Transaction.create_from_string(params, current_user)
 
     # TODO: Error handling if @result != 200
     redirect_back(fallback_location: root_path)
