@@ -1,48 +1,9 @@
-<% if user_signed_in? %>
-  <% @accounts = Account.where("user_id" => current_user.id).order(:position) %>
-  <% @currency_symbol = current_user.country.currency.symbol %>
-  <% @cents_amount = current_user.country.currency.number_to_basic %>
-  <% @total_balance = Account.where("user_id" => current_user.id ).sum(:balance) %>
-  
-  <div id="left-menu">
+<div id="left-menu">
 
-    <h2>Accounts <span id="create-account-button" class="float-right clickable">+</span></h2>
+  <%= render partial: "left_menu/section", locals: {
+    title: "Accounts <span id=\"create-account-button\" class=\"float-right clickable\">+</span>".html_safe,
+    section_layout: "left_menu/user_accounts",
+    locals: { accounts: user_accounts, active: @account_id }
+  } %>
 
-    <!-- Unordered list containing user's accounts -->
-    <ul>
-
-      <!-- Form for creating new accounts -->
-      <li class="no-sorting" id="create-account-form" style="display:none;">
-        <p>Enter the desired account name, followed by its current balance:</p>
-        <%= form_for :account, :url => url_for(:controller => 'account', :action => 'create') do |f| %>
-          <%= f.text_field :account_string, placeholder: "Current account 45.59" %><br />
-          <button>Create</button>
-          <span class="clickable button float-right" id="cancel-account">
-            Cancel
-          </span>
-        <% end %>
-
-      </li>
-
-      <!-- If more than one account exists, include sum of all accounts -->
-      <% if @accounts.length > 1 %>
-        <li class="account-button no-sorting clickable <%= 'active' if @account_id == 'all' %>" id="account_all">
-          All accounts <span class="balance float-right" id="account_all">
-          <%= @currency_symbol %> <%= balance(@total_balance, @cents_amount, "cents") %></span>
-        </li>
-      <% end %>
-
-      <!-- Display all accounts -->
-      <div class="sortable-list" data-url="/account/sort">
-        <% @accounts.each do |a| %>
-          <li class="account-button clickable sortable-item <%= 'active' if @account_id.to_i == a.id %>" id="account_<%= a.id %>">
-            <div class="sort-handle"></div>
-              <%= a.name %> <span class="balance float-right">
-              <%= @currency_symbol %> <%= balance(a.balance.to_f, @cents_amount, "cents") %></span>
-          </li>
-        <% end %>
-      </div>
-
-    </ul>
-  </div>
-<% end %>
+</div>

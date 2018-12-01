@@ -16,6 +16,10 @@ class Account < ApplicationRecord
   belongs_to :user
   has_many :transactions
 
+  def self.get_accounts(current_user)
+    return GetAccounts.new(current_user).perform
+  end
+
   def self.get_transactions(params, current_user)
     return GetTransactions.new(params, current_user).perform
   end
