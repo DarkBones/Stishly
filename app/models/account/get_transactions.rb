@@ -15,10 +15,13 @@ class Account
     private
 
     def get_account_name()
-      result = @id
       if @id != 'all'
         result = Account.find(@id).name
+      else
+        result = 'All'
       end
+
+      return result
     end
 
     def get_transactions()

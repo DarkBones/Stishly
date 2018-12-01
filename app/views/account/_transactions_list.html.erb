@@ -1,0 +1,13 @@
+<% locals[:transactions].each do |t| %>
+  <%= content_for t.created_at.to_date do %>
+    <a href="<%= transaction_path + '/' + t.id.to_s %>" class="no-link-style">
+      <li>
+        <%= t.description %>
+        <span class="balance float-right">
+          <%= current_user.country.currency.symbol %>
+          <%= balance(t.amount.to_f, current_user.country.currency.number_to_basic, "cents") %>
+        </span>
+      </li>
+    </a>
+  <% end %>
+<% end %>
