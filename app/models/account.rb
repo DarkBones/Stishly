@@ -16,8 +16,8 @@ class Account < ApplicationRecord
   belongs_to :user
   has_many :transactions
 
-  def self.get_user_accounts(params, current_user)
-    return GetUserAccounts.new(params, current_user).perform
+  def self.get_transactions(params, current_user)
+    return GetTransactions.new(params, current_user).perform
   end
 
   def self.create_from_string(params, current_user)
