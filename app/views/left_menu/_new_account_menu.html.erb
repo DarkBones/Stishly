@@ -1,0 +1,11 @@
+<li class="no-sorting" id="create-account-form" style="display:none;">
+  <p>Enter the desired account name, followed by its current balance:</p>
+  <%= form_for :account, :url => url_for(:controller => 'account', :action => 'create') do |f| %>
+    <%= f.text_field :account_string, placeholder: "Current account 45.59" %><br />
+    <button>Create</button>
+    <span class="clickable button float-right" id="cancel-account">
+      Cancel
+    </span>
+  <% end %>
+
+</li>
