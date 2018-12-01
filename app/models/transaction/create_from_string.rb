@@ -4,6 +4,8 @@ class Transaction
       puts params
       @transaction_string = params[:transaction][:transaction_string]
       @account_id = params[:account_id]
+      puts '///////////////////////////'
+      puts params
       @current_user = current_user
       @cents_amount = current_user.country.currency.number_to_basic
     end
@@ -18,7 +20,7 @@ class Transaction
       transaction = Transaction.new(@transaction_details)
       transaction.save
 
-      Account.add(@transaction_details[:account_id], @transaction_details[:amount])
+      Account.add(@account_id, @transaction_details[:amount])
     end
 
     private

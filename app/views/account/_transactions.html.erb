@@ -1,5 +1,13 @@
 <%= render "transactions_list", locals: locals %>
 
+<% if params[:id] != 'all' %>
+  <%= form_for :transaction, :url => url_for(:controller => 'transaction', :action => 'create_quick') do |f| %>
+    <%= f.text_field :transaction_string, class: 'timezone-on-focus', id: 'quick-transaction-input' %>
+    <%= hidden_field_tag 'account_id', params[:id] %>
+    <%= f.hidden_field :timezone, id: 'timezone_input' %>
+  <% end %>
+<% end %>
+
 <% distinct_dates(locals[:transactions]).each do |d| %>
   <div id="<%= d %>">
     <h3><%= d %></h3>
