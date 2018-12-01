@@ -26,6 +26,7 @@
 #  failed_attempts        :integer          default(0), not null
 #  unlock_token           :string(255)
 #  locked_at              :datetime
+#  timezone               :string(255)
 #
 
 require 'test_helper'

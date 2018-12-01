@@ -10,6 +10,7 @@
 #  updated_at  :datetime         not null
 #  name        :string(255)
 #  description :string(255)
+#  position    :integer
 #
 
 require 'test_helper'
