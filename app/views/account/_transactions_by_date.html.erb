@@ -1,0 +1,10 @@
+<%= render "transactions_list", locals: locals %>
+
+<% distinct_dates(locals[:transactions]).each do |d| %>
+  <div id="<%= d %>">
+    <h3><%= d %></h3>
+    <ul>
+      <%= yield d %>
+    </ul>
+  </div>
+<% end %>

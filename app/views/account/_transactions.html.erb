@@ -1,5 +1,3 @@
-<%= render "transactions_list", locals: locals %>
-
 <% if params[:id] != 'all' %>
   <%= form_for :transaction, :url => url_for(:controller => 'transaction', :action => 'create_quick') do |f| %>
     <%= f.text_field :transaction_string, class: 'timezone-on-focus', id: 'quick-transaction-input' %>
@@ -8,11 +6,8 @@
   <% end %>
 <% end %>
 
-<% distinct_dates(locals[:transactions]).each do |d| %>
-  <div id="<%= d %>">
-    <h3><%= d %></h3>
-    <ul>
-      <%= yield d %>
-    </ul>
-  </div>
-<% end %>
+<div id="transactions">
+  <%= render 'transactions_by_date', locals: locals %>
+</div>
+
+<%= will_paginate locals[:transactions] %>

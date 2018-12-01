@@ -2,6 +2,7 @@ class Account
   class GetTransactions
 
     def initialize(params, current_user)
+      @page = params[:page]
       @id = params[:id]
       @current_user = current_user
       @account_name = get_account_name()
@@ -26,9 +27,9 @@ class Account
 
     def get_transactions()
       if @id != 'all'
-        transactions = Transaction.where("account_id" => @id, "user_id" => @current_user.id).order(:created_at).reverse_order()
+        transactions = Transaction.where("account_id" => @id, "user_id" => @current_user.id).order(:created_at).reverse_order().page(@page).per_page(30)
       else
-        transactions = Transaction.where("user_id" => @current_user.id).order(:created_at).reverse_order()
+        transactions = Transaction.where("user_id" => @current_user.id).order(:created_at).reverse_order().page(@page).per_page(30)
       end
     end
 
