@@ -4,8 +4,7 @@ module TransactionHelper
     return tz.utc_to_local(t.created_at)
   end
 
-  def distinct_dates(transactions)
-    dates = []
+  def distinct_dates(transactions, dates=[])
     transactions.each do |t|
       if !(dates.include? t.created_at.to_date)
         dates.push(t.created_at.to_date)
