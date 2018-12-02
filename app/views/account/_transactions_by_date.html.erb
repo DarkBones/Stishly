@@ -2,10 +2,18 @@
 
 <% dates = distinct_dates(locals[:transactions]) %>
 <% dates.each do |d| %>
-  <div id="<%= d %>">
-    <h3><%= d %></h3>
-    <ul>
-      <%= yield d %>
-    </ul>
-  </div>
+  <script type="text/javascript">
+    if ($("#" + "<%= d %>").length > 0) {
+      $("#" + "<%= d %> ul").append("<%= j yield d %>");
+    } else {
+      $("#transactions").append(
+        "<div id=\"<%= d %>\">" +
+        "<h3><%= d %></h3>" +
+        "<ul>" +
+        "<%= j yield d %>" +
+        "</ul>" +
+        "</div>"
+        )
+    }
+  </script>
 <% end %>
