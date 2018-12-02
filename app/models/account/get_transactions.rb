@@ -27,9 +27,9 @@ class Account
 
     def get_transactions()
       if @id != 'all'
-        transactions = Transaction.where("account_id" => @id, "user_id" => @current_user.id).order(:created_at).reverse_order().page(@page).per_page(30)
+        transactions = Transaction.where("account_id" => @id, "user_id" => @current_user.id).order(:created_at).reverse_order().page(@page).per_page(10)
       else
-        transactions = Transaction.where("user_id" => @current_user.id).order(:created_at).reverse_order().page(@page).per_page(30)
+        transactions = Transaction.where("user_id" => @current_user.id).order(:created_at).reverse_order().page(@page).per_page(10)
       end
     end
 
