@@ -76,6 +76,7 @@ gem 'detect_timezone_rails'
 gem 'will_paginate', '>= 3.1'
 
 gem 'countries'
+gem 'country_select', '~> 3.1'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
