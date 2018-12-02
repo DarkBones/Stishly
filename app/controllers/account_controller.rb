@@ -13,7 +13,7 @@ class AccountController < ApplicationController
     end
   end
 
-  def sort
+  def update
     params[:account].each_with_index do |id, index|
       Account.where(id: id).update_all(position: index + 1)
     end
