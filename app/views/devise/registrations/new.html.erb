@@ -15,8 +15,8 @@
       <%= f.email_field :email, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= f.label :country_id %>
-        <%= f.collection_select :country_id, Country.order(:name),:id,:name, include_blank: true %>
+      <%= f.label :country_code %>
+      <%= f.country_select :country_code, class: 'form-control', include_blank: true %>
     </div>
     <div class="form-group">
       <%= f.label :password %>
@@ -26,6 +26,7 @@
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
     </div>
+     <%= f.hidden_field :timezone, id: 'timezone_input' %>
      <%= f.submit 'Sign up', :class => 'button right' %>
   <% end %>
 </div>

@@ -7,9 +7,6 @@
   <%= sort_div %>
   <%= account.name %>
   <span class="balance float-right">
-    <%= current_user.country.currency.symbol %>
-    <%= balance(account.balance.to_f, 
-    current_user.country.currency.number_to_basic, 
-    "cents") %>
+    
   </span>
 </li>

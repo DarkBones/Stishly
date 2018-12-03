@@ -14,7 +14,10 @@
     </header>
     <main role="main">
       <%= render 'layouts/messages' %>
-      <%= render 'layouts/left_menu' %>
+
+      <% if current_user %>
+        <%= render 'layouts/left_menu' %>
+      <% end %>
       <div id="content">
         <%= yield %>
       </div>
