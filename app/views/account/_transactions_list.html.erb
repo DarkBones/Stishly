@@ -4,8 +4,8 @@
       <li>
         <%= t.description %>
         <span class="balance float-right">
-          <%= current_user.country.currency.symbol %>
-          <%= balance(t.amount.to_f, current_user.country.currency.number_to_basic, "cents") %>
+          <%= user_currency.symbol %>
+          <%= balance(t.amount.to_f, user_currency.subunit_to_unit, "cents") %>
         </span>
       </li>
     </a>
