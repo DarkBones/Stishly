@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   
   resource :transaction, only: [:show]
+  resource :user_settings
 
   get 'app', to: 'app#index'
   get 'account/:id', to: 'account#show'
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
   resources :users
   root 'welcome#index'
   get 'transaction/:id', to: 'transaction#show'
+  get 'settings', to: 'settings#index'
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
