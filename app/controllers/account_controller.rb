@@ -1,6 +1,7 @@
 class AccountController < ApplicationController
   def show
     @account_transactions = Account.get_transactions(params, current_user)
+    @account_id = params[:id]
   end
 
   def create
