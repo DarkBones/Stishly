@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_03_191143) do
+ActiveRecord::Schema.define(version: 2018_12_04_194725) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "balance"
@@ -64,6 +64,12 @@ ActiveRecord::Schema.define(version: 2018_12_03_191143) do
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
+  create_table "settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "subscription_tiers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.integer "cost"
@@ -84,6 +90,16 @@ ActiveRecord::Schema.define(version: 2018_12_03_191143) do
     t.datetime "local_datetime"
     t.string "currency"
     t.index ["user_id"], name: "index_transactions_on_user_id"
+  end
+
+  create_table "user_settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "settings_id"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["settings_id"], name: "index_user_settings_on_settings_id"
+    t.index ["user_id"], name: "index_user_settings_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
