@@ -37,6 +37,7 @@ class User < ApplicationRecord
          :confirmable
   has_many :transactions, through: :accounts
   has_many :accounts
+  has_many :user_settings
   belongs_to :subscription_tier
   has_many :schedules
   
