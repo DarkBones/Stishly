@@ -1,4 +1,6 @@
 <h3>User settings</h3>
 <%= form_for settings_url do |f| %>
-  
+  <%= f.select(:currency, all_currencies(Money::Currency.table)) %>
 <% end %>
+
+<%= all_currencies(Money::Currency.table) %>
