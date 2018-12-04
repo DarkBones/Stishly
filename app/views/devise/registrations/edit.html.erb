@@ -8,6 +8,10 @@
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
+      <div class="form-group">
+        <%= f.label :country_code %>
+        <%= f.country_select :country_code, class: 'form-control', include_blank: true %>
+      </div>
     </div>
     <fieldset>
       <p>Leave these fields blank if you don't want to change your password.</p>
