@@ -1,0 +1,2 @@
+class UserSettingController < ApplicationController
+end
