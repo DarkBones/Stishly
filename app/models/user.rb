@@ -41,4 +41,14 @@ class User < ApplicationRecord
   belongs_to :subscription_tier
   has_many :schedules
   
+  def self.get_currency(current_user)
+    user_setting = current_user.user_settings.find_by(settings_id: 1)
+    if !user_setting
+      user_currency = ISO3166::Country[current_user.country_code].currency.iso_code
+    else
+      user_currency = user_setting.value
+    end
+
+    return user_currency
+  end
 end
