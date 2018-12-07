@@ -41,14 +41,35 @@ class User < ApplicationRecord
   belongs_to :subscription_tier
   has_many :schedules
   
+  # Returns the currency (string) of a user
   def self.get_currency(current_user)
-    user_setting = current_user.user_settings.find_by(settings_id: 1)
+    user_setting = current_user.user_settings.find_by(settings_id: Setting.find_by(description: 'currency'))
     if !user_setting
       user_currency = ISO3166::Country[current_user.country_code].currency.iso_code
     else
       user_currency = user_setting.value
     end
-
     return user_currency
+  end
+
+  def self.save_setting(current_user, s)
+
+    user_setting = current_user.user_settings.find_by(settings_id: Setting.find_by(description: s[:name]))
+    if !user_setting
+      puts '//////////////////................/////////////'
+      puts s
+      new_setting = UserSetting.new(user_id: current_user.id, settings_id: Setting.find_by(description: s[:name]).id, value:s[:value])
+      #new_setting = current_user.user_setting.new(user_id: current_user.id, settings_id: Setting.find_by(description: s[:name]), value:s[:value])
+      #new_setting = UserSetting.new({user_id: 20, settings_id: 1, value: 'CAD'})
+      puts new_setting
+      new_setting.save
+    else
+      puts '................/////////////////..............'
+      puts user_setting.value
+      #user_setting.value = s[:value]
+      user_setting.update(value: s[:value])
+      puts user_setting.value
+      #user_setting.save
+    end
   end
 end
