@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_04_194725) do
+ActiveRecord::Schema.define(version: 2018_12_07_174244) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "balance"
@@ -94,11 +94,11 @@ ActiveRecord::Schema.define(version: 2018_12_04_194725) do
 
   create_table "user_settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "settings_id"
+    t.bigint "setting_id"
     t.string "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["settings_id"], name: "index_user_settings_on_settings_id"
+    t.index ["setting_id"], name: "index_user_settings_on_setting_id"
     t.index ["user_id"], name: "index_user_settings_on_user_id"
   end
 
