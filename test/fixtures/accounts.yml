@@ -11,6 +11,7 @@
 #  name        :string(255)
 #  description :string(255)
 #  position    :integer
+#  currency    :string(255)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

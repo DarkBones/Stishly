@@ -6,7 +6,6 @@
 #  first_name             :string(255)
 #  last_name              :string(255)
 #  subscription_tier_id   :bigint(8)        default(1)
-#  country_id             :bigint(8)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  email                  :string(255)      default(""), not null
@@ -27,6 +26,7 @@
 #  unlock_token           :string(255)
 #  locked_at              :datetime
 #  timezone               :string(255)
+#  country_code           :string(255)
 #
 
 class User < ApplicationRecord

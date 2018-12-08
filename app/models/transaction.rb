@@ -12,6 +12,7 @@
 #  account_id     :integer
 #  timezone       :string(255)
 #  local_datetime :datetime
+#  currency       :string(255)
 #
 
 class Transaction < ApplicationRecord

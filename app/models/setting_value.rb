@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: setting_values
+#
+#  id          :bigint(8)        not null, primary key
+#  entity_id   :bigint(8)
+#  setting_id  :bigint(8)
+#  value       :string(255)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  entity_type :string(255)
+#
+
 class SettingValue < ApplicationRecord
   belongs_to :entity, :polymorphic => true
   belongs_to :setting
