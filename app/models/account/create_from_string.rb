@@ -5,7 +5,7 @@ class Account
     def initialize(params, current_user)
       @account_string = params[:account_string]
       @current_user = current_user
-      @cents_amount = current_user.country.currency.number_to_basic
+      @cents_amount = User.get_currency(current_user).subunit_to_unit
 
     end
 

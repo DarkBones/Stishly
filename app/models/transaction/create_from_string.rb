@@ -4,10 +4,8 @@ class Transaction
       puts params
       @transaction_string = params[:transaction][:transaction_string]
       @account_id = params[:account_id]
-      puts '///////////////////////////'
-      puts params
       @current_user = current_user
-      @cents_amount = current_user.country.currency.number_to_basic
+      @cents_amount = User.get_currency(current_user).subunit_to_unit
     end
 
     def perform()
@@ -17,7 +15,7 @@ class Transaction
 
       @transaction_details = parse_string()
 
-      transaction = Transaction.new(@transaction_details)
+      transaction = @current_user.transactions.new(@transaction_details)
       transaction.save
 
       Account.add(@account_id, @transaction_details[:amount])
@@ -59,7 +57,8 @@ class Transaction
           :description => transaction_name, 
           :amount => amount ,
           :account_id => @account_id,
-          :timezone => @current_user.timezone
+          :timezone => @current_user.timezone,
+          :currency => Account.get_currency(@account_id, @current_user).iso_code
         }
 
         return result

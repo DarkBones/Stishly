@@ -35,8 +35,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable
-  has_many :transactions, through: :accounts
   has_many :accounts
+  has_many :transactions, through: :accounts
   has_many :user_settings
   has_many :settings, through: :user_settings
   belongs_to :subscription_tier
@@ -46,9 +46,9 @@ class User < ApplicationRecord
   def self.get_currency(current_user)
     sett = UserSetting.get_setting(current_user, 'currency')
     if !sett
-      return ISO3166::Country[current_user.country_code].currency.iso_code
+      return ISO3166::Country[current_user.country_code].currency
     else
-      return sett.value
+      return Money::Currency.new(sett.value)
     end
   end
 

@@ -25,6 +25,19 @@ class Account < ApplicationRecord
     return GetTransactions.new(params, current_user).perform
   end
 
+  def self.get_currency(id, current_user)
+    if id != 'all'
+      acc_currency = Account.find_by_id(id).currency
+      if acc_currency == nil
+        return User.get_currency(current_user)
+      else
+        return Money::Currency.new(acc_currency)
+      end
+    else
+      return User.get_currency(current_user)
+    end
+  end
+
   def self.create_from_string(params, current_user)
     return CreateFromString.new(params, current_user).perform
   end
