@@ -16,6 +16,9 @@ class UsersController < ApplicationController
     end
   end
 
+  def settings
+  end
+
   private
   def secure_params
     params.require(:user).permit(:role)

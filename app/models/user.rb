@@ -37,7 +37,7 @@ class User < ApplicationRecord
          :confirmable
   has_many :accounts
   has_many :transactions, through: :accounts
-  has_many :user_settings
+  has_many :user_settings, :as => :entity
   has_many :settings, through: :user_settings
   belongs_to :subscription_tier
   has_many :schedules
@@ -64,18 +64,6 @@ class User < ApplicationRecord
       end
     else
       sett.update(value: s[:value])
-    end
-  end
-
-  def self.save_setting_OLD(current_user, s)
-
-    user_setting = current_user.user_settings.find_by(setting_id: Setting.find_by(description: s[:name]))
-    if !user_setting
-      new_setting = current_user.user_settings.new(user_id: current_user.id, setting_id: Setting.find_by(description: s[:name]).id, value:s[:value])
-      new_setting.save
-    else
-      user_setting.update(value: s[:value])
-      puts user_setting.value
     end
   end
 end
