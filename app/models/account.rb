@@ -17,6 +17,8 @@
 class Account < ApplicationRecord
   belongs_to :user
   has_many :transactions
+  has_many :setting_values, :as => :entity
+  has_many :settings, through: :setting_values
 
   def self.get_accounts(current_user)
     return GetAccounts.new(current_user).perform
@@ -27,15 +29,16 @@ class Account < ApplicationRecord
   end
 
   def self.get_currency(id, current_user)
-    if id != 'all'
-      acc_currency = Account.find_by_id(id).currency
-      if acc_currency == nil
-        return User.get_currency(current_user)
-      else
-        return Money::Currency.new(acc_currency)
-      end
+    account = Account.find(id)
+    sett = SettingValue.get_setting(account, 'currency')
+    if !sett
+      sett = SettingValue.get_setting(current_user, 'currency')
+    end
+
+    if !sett
+      return ISO3166::Country[current_user.country_code].currency
     else
-      return User.get_currency(current_user)
+      return Money::Currency.new(sett.value)
     end
   end
 

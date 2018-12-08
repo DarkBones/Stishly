@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   #resource :user_settings, only: [:edit]
   
   post 'settings/edit', to: 'settings#edit', as: :edit_settings
+  get 'settings', to: 'users#settings'
+  post 'account/:id/settings/edit', to: 'account#edit', as: :edit_account_settings
+  get 'account/:id/settings', to: 'account#settings'
 
   get 'app', to: 'app#index'
   get 'account/:id', to: 'account#show'
@@ -20,7 +23,6 @@ Rails.application.routes.draw do
   resources :users
   root 'welcome#index'
   get 'transaction/:id', to: 'transaction#show'
-  get 'settings', to: 'users#settings'
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

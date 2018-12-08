@@ -15,12 +15,27 @@ class SettingValue < ApplicationRecord
   belongs_to :entity, :polymorphic => true
   belongs_to :setting
 
-  def self.get_setting(enity, setting)
-    sett = enity.settings.find_by(description: setting)
+  def self.get_setting(entity, setting)
+    sett = entity.settings.find_by(description: setting)
     if sett
-      return sett.setting_values.first
+      return sett.setting_values.where(entity_id: entity.id).first
     else
       return false
+    end
+  end
+
+  def self.save_setting(entity, s)
+    sett = SettingValue.get_setting(entity, s[:name])
+    if !sett
+      setting = Setting.get_or_create_setting(s[:name])
+      if setting
+        new_setting = entity.setting_values.new()
+        new_setting.setting_id = setting.id
+        new_setting.value = s[:value]
+        new_setting.save
+      end
+    else
+      sett.update(value: s[:value])
     end
   end
 end
