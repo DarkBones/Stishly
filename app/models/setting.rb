@@ -1,5 +1,5 @@
 class Setting < ApplicationRecord
-  has_many :user_settings
+  has_many :setting_values
 
   def self.get_or_create_setting(description)
     sett = Setting.find_by(description: description)

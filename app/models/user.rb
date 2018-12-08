@@ -37,14 +37,14 @@ class User < ApplicationRecord
          :confirmable
   has_many :accounts
   has_many :transactions, through: :accounts
-  has_many :user_settings, :as => :entity
-  has_many :settings, through: :user_settings
+  has_many :setting_values, :as => :entity
+  has_many :settings, through: :setting_values
   belongs_to :subscription_tier
   has_many :schedules
   
   # Returns the currency (string) of a user
   def self.get_currency(current_user)
-    sett = UserSetting.get_setting(current_user, 'currency')
+    sett = SettingValue.get_setting(current_user, 'currency')
     if !sett
       return ISO3166::Country[current_user.country_code].currency
     else
@@ -53,7 +53,7 @@ class User < ApplicationRecord
   end
 
   def self.save_setting(current_user, s)
-    sett = UserSetting.get_setting(current_user, s[:name])
+    sett = SettingValue.get_setting(current_user, s[:name])
     if !sett
       setting = Setting.get_or_create_setting(s[:name])
       if setting
