@@ -29,6 +29,10 @@ class Account < ApplicationRecord
   end
 
   def self.get_currency(id, current_user)
+    if id == 'all'
+      return User.get_currency(current_user)
+    end
+
     account = Account.find(id)
     sett = SettingValue.get_setting(account, 'currency')
     if !sett
@@ -59,6 +63,13 @@ class Account < ApplicationRecord
     @balance += amount
 
     Account.update(id, :balance => @balance)
+  end
+
+  def self.convert_currency(account, new_currency, current_user)
+    old_currency = self.get_currency(account.id, current_user).iso_code
+    new_balance = Concurrency.convert(account.balance, old_currency, new_currency)
+    account.balance = new_balance
+    account.save
   end
 
 end

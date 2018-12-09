@@ -12,7 +12,7 @@ module AccountHelper
     end
 
     result = b_main.to_s
-    if cents > 0
+    if cents > 1
       result += ".<span"
       result += " class=\"#{span_class}\"" if span_class != ""
       result += " id=\"#{id}\"" if id != ""

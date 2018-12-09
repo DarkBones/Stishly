@@ -17,6 +17,7 @@
   <% accounts.each do |a| %>
     <%= render partial: "left_menu/account", locals: {
       account: a,
+      id: a.id,
       sortable: true
     } %>
   <% end %>
