@@ -42,6 +42,14 @@ class Account < ApplicationRecord
     end
   end
 
+  def self.set_default(id, current_user)
+    accounts = Account.where(user_id: current_user.id)
+    accounts.each do |a|
+      a.is_default = a.id.to_i == id.to_i
+      a.save
+    end
+  end
+
   def self.create_from_string(params, current_user)
     return CreateFromString.new(params, current_user).perform
   end

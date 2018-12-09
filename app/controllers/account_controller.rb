@@ -30,7 +30,8 @@ class AccountController < ApplicationController
   end
 
   def set_default
-    
+    Account.set_default(params[:id], current_user)
+    redirect_back(fallback_location: root_path)
   end
 
   def settings
