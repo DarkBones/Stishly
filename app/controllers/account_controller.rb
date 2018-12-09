@@ -32,6 +32,8 @@ class AccountController < ApplicationController
     end
 
     SettingValue.save_setting(account, {name: sett_name, value: sett_value})
+
+    redirect_back(fallback_location: root_path)
   end
 
   def set_default
