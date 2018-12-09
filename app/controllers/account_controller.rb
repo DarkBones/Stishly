@@ -29,6 +29,10 @@ class AccountController < ApplicationController
     SettingValue.save_setting(account, {name: sett_name, value: sett_value})
   end
 
+  def set_default
+    
+  end
+
   def settings
     @account_id = params[:id]
   end
