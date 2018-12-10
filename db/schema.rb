@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_09_141434) do
+ActiveRecord::Schema.define(version: 2018_12_10_094827) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "balance"
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 2018_12_09_141434) do
     t.string "symbol"
     t.string "iso_code"
     t.integer "number_to_basic"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "currency_rates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "from_currency"
+    t.string "to_currency"
+    t.float "rate"
+    t.integer "used_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
