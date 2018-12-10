@@ -82,11 +82,11 @@ h2 {
   }
 }
 
-.sortable-item:hover .sort-handle{
+.sortable:hover .sort-handle{
   opacity: 0.5;
 }
 
-.sortable-item:hover .sort-handle:hover{
+.sortable:hover .sort-handle:hover{
   opacity: 1;
 }
 
