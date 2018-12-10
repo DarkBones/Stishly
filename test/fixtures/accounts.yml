@@ -12,6 +12,7 @@
 #  description :string(255)
 #  position    :integer
 #  currency    :string(255)
+#  is_default  :boolean
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

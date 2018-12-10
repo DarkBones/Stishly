@@ -12,6 +12,7 @@
 #  description :string(255)
 #  position    :integer
 #  currency    :string(255)
+#  is_default  :boolean
 #
 
 class Account < ApplicationRecord
