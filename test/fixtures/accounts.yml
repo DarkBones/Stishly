@@ -21,7 +21,13 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+one: {
+  balance: 100,
+  user_id: 1,
+  name: 'Current account',
+  description: 'My current account at AIB',
+  is_default: true
+}
 # column: value
 #
 two: {}

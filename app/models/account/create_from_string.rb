@@ -16,23 +16,10 @@ class Account
 
       @account_details = parse_string()
 
-      return create_account()
+      return Account.create(@account_details, @current_user)
     end
 
     private 
-
-    def create_account()
-      existing_accounts = @current_user.accounts.where('name' => @account_details[:name])
-
-      if existing_accounts.length == 0
-        account = @current_user.accounts.build(@account_details)
-        account.save
-
-        return account
-      else
-        return 'Account already exists'
-      end
-    end
 
     def parse_string()
       reg = ".+\s+[\.,]*-?[0-9\.]+$"

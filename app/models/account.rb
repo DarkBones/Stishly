@@ -16,7 +16,8 @@
 #
 
 class Account < ApplicationRecord
-  validates :name, presence: true
+  validates :name, :user_id, presence: true
+
 
   belongs_to :user
   has_many :transactions
@@ -74,13 +75,29 @@ class Account < ApplicationRecord
     return CreateFromString.new(params, current_user).perform
   end
 
+  def self.create(params, current_user)
+    existing_accounts = current_user.accounts.where('name' => params[:name])
+
+    default_account = current_user.accounts.where('is_default' => true)
+    if default_account.length > 0
+      params[:is_default] = false
+    else
+      params[:is_default] = true
+    end
+
+    if existing_accounts.length == 0
+      account = current_user.accounts.build(params)
+      account.save
+
+      return account
+    else
+      return 'Account already exists'
+    end
+  end
+
   def self.add(id, amount)
-    puts '-------------------------------------------------------------'
-    puts amount
     @balance = Account.find_by_id(id).balance
-    puts @balance
     @balance += amount
-    puts @balance
 
     Account.update(id, :balance => @balance)
   end
