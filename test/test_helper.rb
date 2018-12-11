@@ -7,4 +7,13 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def format_error(message, expected=nil, actual=nil, result: nil)
+    error = message
+
+    error += "\nexpected:\t#{expected}" if expected != nil
+    error += "\nactual:\t\t#{actual}" if actual != nil
+    error += "\nresult:\t\t#{result}" if result != nil
+
+    return error
+  end
 end

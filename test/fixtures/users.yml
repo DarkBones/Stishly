@@ -35,21 +35,21 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {
+bas: {
   id: 1,
   first_name: 'Bas',
   last_name: 'Donker',
-  email: 'donkerbc@gmail.com',
+  email: 'bassiedoinker@gmail.com',
   country_code: 'IE',
   timezone: 'Europe/London'
 }
 # column: value
 #
-two: {
+sab: {
   id: 2,
   first_name: 'Sab',
   last_name: 'Reknod',
-  email: 'cbreknod@gmail.com',
+  email: 'rekniodeissab@gmail.com',
   country_code: 'IE',
   timezone: 'Europe/London'
 }
