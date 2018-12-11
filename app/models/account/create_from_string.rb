@@ -28,7 +28,7 @@ class Account
         account = @current_user.accounts.build(@account_details)
         account.save
 
-        return true
+        return account
       else
         return 'Account already exists'
       end

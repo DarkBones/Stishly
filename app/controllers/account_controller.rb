@@ -23,15 +23,8 @@ class AccountController < ApplicationController
   end
 
   def edit
-    sett_name = params[:setting_value].keys[0].to_s
-    sett_value = params[:setting_value].values[0].to_s
     account = Account.find(params[:id])
-
-    if sett_name == 'currency'
-      Account.convert_currency(account, sett_value, current_user)
-    end
-
-    SettingValue.save_setting(account, {name: sett_name, value: sett_value})
+    account = Account.change_setting(account, params, current_user)
 
     redirect_back(fallback_location: root_path)
   end

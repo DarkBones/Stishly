@@ -45,13 +45,12 @@ class Transaction
         amount = amount.sub(',', '.')
 
         if @cents_amount > 0
-          amount = (amount.to_f * @cents_amount).to_i
+          amount = (amount.to_f * @cents_amount).round.to_i
         else
           amount = amount.to_f.round.to_i
         end
 
         amount *= direction
-
         result = { 
           :user_id => @current_user.id, 
           :description => transaction_name, 

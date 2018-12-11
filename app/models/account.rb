@@ -16,6 +16,8 @@
 #
 
 class Account < ApplicationRecord
+  validates :name, presence: true
+
   belongs_to :user
   has_many :transactions
   has_many :setting_values, :as => :entity
@@ -47,6 +49,19 @@ class Account < ApplicationRecord
     end
   end
 
+  def self.change_setting(account, params, current_user)
+    sett_name = params[:setting_value].keys[0].to_s
+    sett_value = params[:setting_value].values[0].to_s
+
+    if sett_name == 'currency'
+      Account.convert_currency(account, sett_value, current_user)
+    end
+
+    SettingValue.save_setting(account, {name: sett_name, value: sett_value})
+
+    return account
+  end
+
   def self.set_default(id, current_user)
     accounts = Account.where(user_id: current_user.id)
     accounts.each do |a|
@@ -60,17 +75,34 @@ class Account < ApplicationRecord
   end
 
   def self.add(id, amount)
+    puts '-------------------------------------------------------------'
+    puts amount
     @balance = Account.find_by_id(id).balance
+    puts @balance
     @balance += amount
+    puts @balance
 
     Account.update(id, :balance => @balance)
   end
 
   def self.convert_currency(account, new_currency, current_user)
-    old_currency = self.get_currency(account.id, current_user).iso_code
-    new_balance = Concurrency.convert(account.balance, old_currency, new_currency)
-    account.balance = new_balance
+    old_currency = self.get_currency(account.id, current_user)
+    balance = self.get_float_balance(account, old_currency)
+
+    new_balance = Concurrency.convert(balance, old_currency.iso_code, new_currency)
+    account.balance = self.get_int_balance(new_balance, Money::Currency.new(new_currency))
     account.save
+  end
+
+  def self.get_float_balance(account, currency)
+    balance = account.balance.to_f
+    balance = balance / currency.subunit_to_unit if currency.subunit_to_unit != 0
+    return balance
+  end
+
+  def self.get_int_balance(balance, currency)
+    balance = (balance * currency.subunit_to_unit).round.to_i
+    return balance
   end
 
 end
