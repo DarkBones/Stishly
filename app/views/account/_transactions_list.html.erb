@@ -4,7 +4,6 @@
       <li>
         <%= t.description %>
         <span class="balance float-right">
-          <%= user_currency.symbol %>
           <%= balance(t.amount.to_f, user_currency, "cents") %>
         </span>
       </li>
