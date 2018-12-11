@@ -8,9 +8,8 @@
   <% acc_curency = Account.get_currency(account.id, current_user) %>
   <%= account.name %>
   <span class="balance float-right">
-    <%= acc_curency.symbol %>
     <%= balance(account.balance.to_f, 
-    acc_curency.subunit_to_unit, 
+    acc_curency, 
     "cents") %>
   </span>
 </li>

@@ -1,25 +1,19 @@
 module AccountHelper
-  def balance(b, cents, span_class="", id="")
-    cents > 0 ? decimals = Math.log10(cents).ceil : decimals = 0
+  def balance(b, currency, span_class="", id="")
+      balance = Money.new(b, currency.iso_code).format
+      balance.sub! currency.symbol, currency.symbol + " "
+      balance = balance.split(".")
 
-    b = b.to_f
-    b /= cents if cents > 0
-    b_main = b.to_i
-    b_cents = ((b - b_main) * cents).round.to_i.abs.to_s
+      result = balance[0]
 
-    while b_cents.length < decimals
-      b_cents += "0"
-    end
+      if balance[1]
+        result += ".<span"
+        result += " class=\"#{span_class}\"" if span_class != ""
+        result += " id=\"#{id}\"" if id != ""
+        result += ">#{balance[1]}</span>"
+      end
 
-    result = b_main.to_s
-    if cents > 1
-      result += ".<span"
-      result += " class=\"#{span_class}\"" if span_class != ""
-      result += " id=\"#{id}\"" if id != ""
-      result += ">#{b_cents}</span>"
-    end
-    #result += ".<span>#{b_cents}</span>" if cents > 0
-    return result.html_safe
+      return result.html_safe
   end
   
 end
