@@ -18,7 +18,8 @@
 require 'test_helper'
 
 class AccountTest < ActiveSupport::TestCase
-   test "the truth" do
-     assert true
+   test "Save account without name" do
+     
+     #assert account.save
    end
 end
