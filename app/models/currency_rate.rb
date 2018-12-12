@@ -45,6 +45,6 @@ class CurrencyRate < ApplicationRecord
     amount = amount.to_f / from.subunit_to_unit
     new_amount = amount * rate
 
-    return (new_amount * to.subunit_to_unit).to_i
+    return (new_amount * to.subunit_to_unit).round.to_i
   end
 end

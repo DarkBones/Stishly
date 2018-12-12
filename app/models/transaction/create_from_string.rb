@@ -1,11 +1,19 @@
 class Transaction
   class CreateFromString
     def initialize(params, current_user)
-      puts params
       @transaction_string = params[:transaction][:transaction_string]
       @account_id = params[:account_id]
       @current_user = current_user
-      @cents_amount = User.get_currency(current_user).subunit_to_unit
+
+      #params[:currency] = "JPY"
+
+      if params[:currency]
+        @currency = Money::Currency.new(params[:currency])
+      else
+        @currency = Account.get_currency(@account_id, current_user)
+      end
+
+      @cents_amount = @currency.subunit_to_unit
     end
 
     def perform()
@@ -15,10 +23,7 @@ class Transaction
 
       @transaction_details = parse_string()
 
-      transaction = @current_user.transactions.new(@transaction_details)
-      transaction.save
-
-      Account.add(@account_id, @transaction_details[:amount])
+      Transaction.create(@account_id, @transaction_details, @current_user)
     end
 
     private
@@ -57,7 +62,7 @@ class Transaction
           :amount => amount ,
           :account_id => @account_id,
           :timezone => @current_user.timezone,
-          :currency => Account.get_currency(@account_id, @current_user).iso_code
+          :currency => @currency.iso_code
         }
 
         return result

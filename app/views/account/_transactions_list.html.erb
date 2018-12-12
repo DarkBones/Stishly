@@ -4,7 +4,7 @@
       <li>
         <%= t.description %>
         <span class="balance float-right">
-          <%= balance(t.amount.to_f, user_currency, "cents") %>
+          <%= balance(t.amount.to_f, Money::Currency.new(t.currency), "cents") %>
         </span>
       </li>
     </a>
