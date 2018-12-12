@@ -51,28 +51,15 @@ class Account < ApplicationRecord
   def self.get_currency(id, current_user)
     if id == 'all'
       return User.get_currency(current_user)
-    end
-
-    account = Account.find(id)
-    sett = SettingValue.get_setting(account, 'currency')
-    if !sett
-      sett = SettingValue.get_setting(current_user, 'currency')
-    end
-
-    if !sett
-      return ISO3166::Country[current_user.country_code].currency
     else
-      return Money::Currency.new(sett.value)
+      account = Account.find(id)
+      return Money::Currency.new(account.currency)
     end
   end
 
   def self.change_setting(account, params, current_user)
     sett_name = params[:setting_value].keys[0].to_s
     sett_value = params[:setting_value].values[0].to_s
-
-    if sett_name == 'currency'
-      Account.convert_currency(account, sett_value, current_user)
-    end
 
     SettingValue.save_setting(account, {name: sett_name, value: sett_value})
 
@@ -99,6 +86,10 @@ class Account < ApplicationRecord
       params[:is_default] = false
     else
       params[:is_default] = true
+    end
+
+    if !params[:currency]
+      params[:currency] = User.get_currency(current_user).iso_code
     end
 
     if existing_accounts.length == 0

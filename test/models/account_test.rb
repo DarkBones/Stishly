@@ -69,19 +69,4 @@ class AccountTest < ActiveSupport::TestCase
 
     assert a1.is_a?(ActiveRecord::Base), format_error("Could not create account from string without specifying the balance", result: a1)
   end
-
-  test "Convert currency" do
-    current_user = users(:bas)
-
-    params = {account_string: 'currency conversion 100'}
-    a1 = Account.create_from_string(params, current_user)
-
-    a1 = Account.change_setting(a1, {setting_value: {currency: 'JPY'}}, current_user)
-
-    assert SettingValue.get_setting(a1, 'currency').value == 'JPY', format_error("Unexpected account currency after converting to JPY", 'JPY', a1.currency)
-    assert a1.balance != 10000, format_error("Unexpected account balance", "!10000", a1.balance)
-
-    a1 = Account.change_setting(a1, {setting_value: {currency: 'EUR'}}, current_user)
-    assert a1.balance >= 9800 && a1.balance <= 10200, format_error("Unexpected account balance after converting back to EUR", ">= 9800, <= 10200", a1.balance)
-  end
 end

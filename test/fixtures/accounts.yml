@@ -26,40 +26,46 @@ bas_1: {
   user_id: 1,
   name: 'Current account',
   description: 'My current account at AIB',
-  is_default: true
+  is_default: true,
+  currency: 'EUR'
 }
 
 bas_2: {
   balance: 500,
   user_id: 1,
   name: 'BOI account',
-  is_default: false
+  is_default: false,
+  currency: 'EUR'
 }
 
 bas_3: {
   balance: -400,
   user_id: 1,
   name: 'Test account',
-  is_default: false
+  is_default: false,
+  currency: 'EUR'
 }
 
 bas_4: {
   balance: 0,
   user_id: 1,
   name: 'Test2 account',
-  is_default: false
+  is_default: false,
+  currency: 'EUR'
 }
 
 sab_1: {
   balance: -400,
   user_id: 2,
   name: 'Current account',
-  is_default: true
+  is_default: true,
+  currency: 'EUR'
 }
 
 sab_2: {
   balance: 500,
   user_id: 2,
   name: 'Test account',
-  is_default: false
+  is_default: false,
+  currency: 'EUR'
 }
