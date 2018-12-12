@@ -1,7 +1,9 @@
 class AccountController < ApplicationController
   def show
     @account_transactions = Account.get_transactions(params, current_user)
+    @daily_totals = Account.get_daily_totals(@account_transactions[:transactions], current_user)
     @account_id = params[:id]
+    @account_currency = Account.get_currency(@account_id, current_user)
   end
 
   def create

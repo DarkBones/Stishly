@@ -32,6 +32,18 @@ class Account < ApplicationRecord
     return GetTransactions.new(params, current_user).perform
   end
 
+  def self.get_daily_totals(transactions, current_user)
+    days = {}
+    transactions.each do |t|
+      day = t.created_at.to_date
+      if !days.keys.include? day
+        days[day] = current_user.transactions.where("DATE(transactions.created_at) = DATE(?)", day).sum(:amount)
+      end
+    end
+
+    return days
+  end
+
   def self.get_currency(id, current_user)
     if id == 'all'
       return User.get_currency(current_user)
