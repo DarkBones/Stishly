@@ -1,15 +1,35 @@
 require 'application_system_test_case'
 
 class UsersTest < ApplicationSystemTestCase
+  
+
   test 'visiting the index' do
+    """
+    Goes to the root path without logging in.
+    Expected result: 
+    - See welcome screen
+    - See link to sign up
+    - See link to sign in
+    """
+
     visit root_path
 
     assert_selector 'h1', text: 'Welcome'
     assert_selector '.navbar-nav', text: 'Sign up'
     assert_selector '.navbar-nav', text: 'Sign in'
+
+    take_screenshot
   end
 
   test 'creating user account' do
+    """
+    Creates a user account.
+    Expected result:
+    - Not able to create the account when not filling in the form completely
+    - Able to create the account after filling in the form completely
+    """
+
+    # Form to be filled in
     form_fields = [
       {
         type: 'text',
@@ -34,15 +54,16 @@ class UsersTest < ApplicationSystemTestCase
       {
         type: 'text',
         name: 'Password',
-        value: 'somepassword123'
+        value: 'Somepassword123^'
       },
       {
         type: 'text',
         name: 'Password confirmation',
-        value: 'somepassword123'
+        value: 'Somepassword123^'
       }
     ]
 
+    # Fill in the registration form, ommitting one field each time. On the final run, it will fill in all the details
     for i in 0..form_fields.length do
       visit root_path
 
@@ -68,16 +89,24 @@ class UsersTest < ApplicationSystemTestCase
 
       page.save_screenshot 'tmp/screenshots/test_creating_user_account_' + i.to_s + '.png'
     end
+  end
 
-    #fill_in 'First name', with: 'System'
-    #fill_in 'Last name', with: 'Test'
-    #fill_in 'Email', with: 'system_test@example.com'
-    #select 'Ireland', from: 'user_country_code'
-    #fill_in 'Password', with: 'somepassword123'
-    #fill_in 'Password confirmation', with: 'somepassword123'
+  test 'log in blank user' do
+    """
+    Login as a newly created user
+    Expected result:
+    - See notification that sign in was successfull
+    - See empty list of accounts
+    """
 
-    #find('input[name="commit"]').click
+    user = users(:new)
+    password = "SomePassword123^!"
 
-    #take_screenshot
+    login_user(user, password)
+
+    take_screenshot
+
+    assert_selector '#flash_notice', text: 'Signed in successfully'
+    assert_selector '#left-menu', text: 'Create an account by clicking the + button'
   end
 end

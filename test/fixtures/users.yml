@@ -39,18 +39,31 @@ bas: {
   id: 1,
   first_name: 'Bas',
   last_name: 'Donker',
-  email: 'bassiedoinker@gmail.com',
+  email: 'bassiedoinker@example.com',
   country_code: 'IE',
-  timezone: 'Europe/London'
+  timezone: 'Europe/London',
+  encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
+  confirmed_at: '2018-11-14 19:54:40'
 }
-# column: value
-#
+
 sab: {
   id: 2,
   first_name: 'Sab',
   last_name: 'Reknod',
-  email: 'rekniodeissab@gmail.com',
+  email: 'rekniodeissab@example.com',
   country_code: 'IE',
-  timezone: 'Europe/London'
+  timezone: 'Europe/London',
+  encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
+  confirmed_at: '2018-11-14 19:54:40'
 }
-# column: value
+
+new: {
+  id: 3,
+  first_name: 'New',
+  last_name: 'User',
+  email: 'new_user@example.com',
+  country_code: 'IE',
+  timezone: 'Europe/London',
+  encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
+  confirmed_at: '2018-11-14 19:54:40'
+}

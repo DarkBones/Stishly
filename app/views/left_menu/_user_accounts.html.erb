@@ -2,6 +2,11 @@
 
 <ul class="sortable-list">
   <%= render "left_menu/new_account_menu" %>
+
+  <% if accounts.length == 0 %>
+    <p class="left-menu__instructions">Create an account by clicking the + button</p>
+  <% end %>
+
   <% if accounts.length > 1 %>
     <% all = {id: 0, name: "all", balance: 1000} %>
     <%= render partial: "left_menu/account", locals: {
