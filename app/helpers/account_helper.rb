@@ -1,5 +1,7 @@
 module AccountHelper
   def balance(b, currency, span_class="", id="")
+      Money.locale_backend = :i18n
+      
       balance = Money.new(b, currency.iso_code).format
       balance.sub! currency.symbol, currency.symbol + " "
       balance = balance.split(".")
