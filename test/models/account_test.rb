@@ -22,7 +22,7 @@ class AccountTest < ActiveSupport::TestCase
     current_user = users(:bas)
     accounts = Account.get_accounts(current_user)
 
-    assert accounts[:accounts].length == 4, format_error("Unexpected number of accounts", 4, accounts[:accounts].length)
+    assert accounts[:accounts].length == 5, format_error("Unexpected number of accounts", 5, accounts[:accounts].length)
     assert accounts[:total_balance] == 200, format_error("Unexpected total balance", 200, accounts[:total_balance])
   end
     

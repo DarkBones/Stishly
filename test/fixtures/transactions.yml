@@ -21,8 +21,16 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+
+<% for i in 1..5 %>
+  <% for x in 1..i %>
+    transaction_<%= i %>_<%= x %>: {
+      user_id: 1,
+      description: <%= "transaction " + x.to_s %>,
+      account_id: <%= i %>,
+      amount: <%= x * 100 %>,
+      account_currency_amount: <%= x * 100 %>,
+      currency: "EUR"
+    }
+  <% end %>
+<% end %>

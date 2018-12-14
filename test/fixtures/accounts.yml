@@ -22,6 +22,7 @@
 # below each fixture, per the syntax in the comments below
 #
 bas_1: {
+  id: 1,
   balance: 100,
   user_id: 1,
   name: 'Current account',
@@ -31,6 +32,7 @@ bas_1: {
 }
 
 bas_2: {
+  id: 2,
   balance: 500,
   user_id: 1,
   name: 'BOI account',
@@ -39,6 +41,7 @@ bas_2: {
 }
 
 bas_3: {
+  id: 3,
   balance: -400,
   user_id: 1,
   name: 'Test account',
@@ -47,9 +50,19 @@ bas_3: {
 }
 
 bas_4: {
+  id: 4,
   balance: 0,
   user_id: 1,
   name: 'Test2 account',
+  is_default: false,
+  currency: 'EUR'
+}
+
+bas_5: {
+  id: 5,
+  balance: 0,
+  user_id: 1,
+  name: 'Test3 account',
   is_default: false,
   currency: 'EUR'
 }

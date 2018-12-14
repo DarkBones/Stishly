@@ -9,9 +9,9 @@
     } else {
       $("#transactions").append(
         "<div id=\"<%= d %>\">" +
-        "<h3><%= d_formatted %><span class=\"float-right\">" +
+        "<h3 id=\"day_<%= d %>\"><%= d_formatted %><span class=\"float-right\">" +
         "<%= balance(@daily_totals[d], @account_currency) %>" + "</span></h3>" +
-        "<ul>" +
+        "<ul id=\"transactions_<%= d %>\">" +
         "<%= j yield d %>" +
         "</ul>" +
         "</div>"
