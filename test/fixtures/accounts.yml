@@ -82,3 +82,12 @@ sab_2: {
   is_default: false,
   currency: 'EUR'
 }
+
+transactions_1: {
+  id: 10,
+  balance: 0,
+  user_id: 4,
+  name: 'Test account',
+  is_default: true,
+  currency: 'EUR'
+}

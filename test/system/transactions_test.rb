@@ -27,4 +27,23 @@ class TransactionsTest < ApplicationSystemTestCase
 
     take_screenshot
   end
+
+  test "Create transactions" do
+    """
+    Log in and create a new transactions from string
+    Expected result:
+    - New transactions show in the account view
+    - Account balance is updated
+    """
+
+    login_user(users(:transactions_test), "SomePassword123^!")
+    visit "/account/10"
+
+    fill_in "quick-transaction-input", with: "payday +2060"
+    select "EUR - Euro", from: "transaction[currency]"
+    click_on "Create"
+
+    take_screenshot
+
+  end
 end
