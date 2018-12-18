@@ -98,7 +98,7 @@ class Account < ApplicationRecord
 
       return account
     else
-      return 'Account already exists'
+      return I18n.t('account.failure.already_exists')
     end
   end
 

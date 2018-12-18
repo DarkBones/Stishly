@@ -11,7 +11,7 @@ class Account
 
     def perform()
       if @account_string.length == 0
-        return 'Please enter a valid account name'
+        return I18n.t('account.failure.invalid_name')
       end
 
       @account_details = parse_string()
@@ -22,7 +22,8 @@ class Account
     private 
 
     def parse_string()
-      reg = ".+\s+[\.,]*-?[0-9\.]+$"
+      #reg = ".+\s+[\.,]*-?[0-9\.,]+$"
+      reg = ".+\s+-?[0-9]*[\.,]?[0-9]+$"
 
       name_balance = @account_string.strip.split
       account_name = name_balance.join(' ')

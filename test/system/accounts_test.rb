@@ -16,7 +16,27 @@ class AccountsTest < ApplicationSystemTestCase
 
     take_screenshot
 
-    assert_selector '#flash_alert', text: 'enter a valid account name'
+    assert_selector '#flash_alert', text: I18n.t('account.failure.invalid_name')
+  end
+
+  test "create duplicate account" do
+    """
+    Create an account with the same name twice
+    Expected result:
+    - See error about account already existing
+    """
+
+    login_as_blank
+
+    2.times do
+      page.find("#create-account-button").click
+      fill_in "account_account_string", with: "duplicate account 0.00"
+      click_on "Create"
+    end
+
+    assert_selector '#flash_alert', text: I18n.t('account.failure.already_exists')
+
+    take_screenshot
   end
 
   test "create accounts from string" do
@@ -64,6 +84,18 @@ class AccountsTest < ApplicationSystemTestCase
       {
         string: "3.50",
         result: "3.50\n€ 0.00"
+      },
+      {
+        string: "comma test 3,50",
+        result: "comma test\n€ 3.50"
+      },
+      {
+        string: "many dots test 9.87.65.43.21",
+        result: "many dots test 9.87.65.43.21\n€ 0.00"
+      },
+      {
+        string: "just a bunch of dots ...",
+        result: "just a bunch of dots ...\n€ 0.00"
       }
     ]
 
@@ -81,7 +113,7 @@ class AccountsTest < ApplicationSystemTestCase
       assert_selector '#accounts_list', text: s[:result]
     end
 
-    assert_selector '#accounts_list', text: "all\n€ 209.82"
+    assert_selector '#accounts_list', text: "all\n€ 213.32"
 
     take_screenshot
   end

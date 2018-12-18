@@ -30,4 +30,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  account:
+    confirmations:
+      confirmed: "Account successfully created"
+    failure:
+      invalid_name: "Invalid account name"
+      already_exists: "Account already exists"
