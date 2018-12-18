@@ -43,6 +43,8 @@ class TransactionsTest < ApplicationSystemTestCase
     select "EUR - Euro", from: "transaction[currency]"
     click_on "Create"
 
+    assert_selector "#transactions_#{Time.now.strftime("%Y-%m-%d").to_s}", text: "payday\n€ 2,060.00"
+
     take_screenshot
 
   end
