@@ -22,7 +22,6 @@ class Account
     private 
 
     def parse_string()
-      #reg = ".+\s+[\.,]*-?[0-9\.,]+$"
       reg = ".+\s+-?[0-9]*[\.,]?[0-9]+$"
 
       name_balance = @account_string.strip.split
