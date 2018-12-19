@@ -7,7 +7,6 @@ class AccountController < ApplicationController
   end
 
   def create
-    #Account.create_from_string(params[:account][:name_balance].to_s, current_user)
     result = Account.create_from_string(new_account_params, current_user)
     if (result === true)
       redirect_back(fallback_location: root_path)

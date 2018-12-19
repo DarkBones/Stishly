@@ -1,4 +1,5 @@
 class Account
+  
   class GetTransactions
 
     def initialize(params, current_user)

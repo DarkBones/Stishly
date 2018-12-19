@@ -96,8 +96,7 @@ class AccountsTest < ApplicationSystemTestCase
       {
         string: "just a bunch of dots ...",
         result: "just a bunch of dots ...\n€ 0.00"
-      }
-      ,
+      },
       {
         string: "99.99",
         result: "99.99\n€ 0.00"
