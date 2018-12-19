@@ -32,4 +32,16 @@ class SettingsTest < ApplicationSystemTestCase
     - See new currency in account listing
     - Account balance converted
     """
+
+    # TODO
+
+    #user = users(:bas)
+    #password = "SomePassword123^!"
+
+    #login_user(user, password)
+
+    #visit "account/2"
+
+    #take_screenshot
   end
+end

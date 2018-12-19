@@ -91,3 +91,21 @@ transactions_1: {
   is_default: true,
   currency: 'EUR'
 }
+
+currency_1: {
+  id: 11,
+  balance: 10000,
+  user_id: 5,
+  name: 'To be converted',
+  is_default: true,
+  currency: 'EUR'
+}
+
+currency_2: {
+  id: 12,
+  balance: 10000,
+  user_id: 5,
+  name: 'Not to be converted',
+  is_default: false,
+  currency: 'EUR'
+}

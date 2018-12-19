@@ -69,4 +69,25 @@ class AccountTest < ActiveSupport::TestCase
 
     assert a1.is_a?(ActiveRecord::Base), format_error("Could not create account from string without specifying the balance", result: a1)
   end
+
+  test "Convert currency" do
+    # get the user
+    current_user = users(:currency_test)
+
+    # parameters for changing account's currency setting
+    params = {setting_value: {currency: "JPY"}}
+    account = accounts(:currency_1)
+
+    # change account's currency setting
+    a1 = Account.change_setting(account, params, current_user)
+
+    # assert currency has changed to "JPY"
+    currency = Account.get_currency(a1.id, current_user)
+    assert currency == "JPY", format_error("Unexpected account currency after updating setting", "JPY", currency)
+
+    # assert that the transactions that were made today have been converted to the new currency, and transactions that happened earlier were not updated
+    a1.transactions.each do |t|
+      puts t.created_at
+    end
+  end
 end

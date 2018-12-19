@@ -51,6 +51,11 @@ class Account < ApplicationRecord
 
     SettingValue.save_setting(account, {name: sett_name, value: sett_value})
 
+    if sett_name == 'currency'
+      account.currency = sett_value
+      account.save
+    end
+
     return account
   end
 

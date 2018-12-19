@@ -78,3 +78,14 @@ transactions_test: {
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40'
 }
+
+currency_test: {
+  id: 5,
+  first_name: 'Currency',
+  last_name: 'Test',
+  email: 'currency@test.com',
+  country_code: 'IE',
+  timezone: 'Europe/London',
+  encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
+  confirmed_at: '2018-11-14 19:54:40'
+}
