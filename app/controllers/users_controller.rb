@@ -19,6 +19,12 @@ class UsersController < ApplicationController
   def settings
   end
 
+  def edit
+    user = User.change_setting(current_user, params)
+
+    redirect_back(fallback_location: root_path)
+  end
+
   private
   def secure_params
     params.require(:user).permit(:role)

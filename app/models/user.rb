@@ -54,18 +54,12 @@ class User < ApplicationRecord
     end
   end
 
-  def self.save_setting(current_user, s)
-    sett = SettingValue.get_setting(current_user, s[:name])
-    if !sett
-      setting = Setting.get_or_create_setting(s[:name])
-      if setting
-        new_setting = current_user.user_settings.new()
-        new_setting.setting_id = setting.id
-        new_setting.value = s[:value]
-        new_setting.save
-      end
-    else
-      sett.update(value: s[:value])
-    end
+  def self.change_setting(current_user, params)
+    sett_name = params[:setting_value].keys[0].to_s
+    sett_value = params[:setting_value].values[0].to_s
+
+    SettingValue.save_setting(current_user, {name: sett_name, value: sett_value})
+
+    return current_user
   end
 end
