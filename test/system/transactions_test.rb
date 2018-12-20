@@ -14,7 +14,7 @@ class TransactionsTest < ApplicationSystemTestCase
 
     for i in 1..5
       account = accounts("bas_#{i}")
-      visit "/account/#{account.id}"
+      visit "/account/#{URI.encode(account.name)}"
 
       total = ((i * (i + 1)) / 2)
 
@@ -37,7 +37,7 @@ class TransactionsTest < ApplicationSystemTestCase
     """
 
     login_user(users(:transactions_test), "SomePassword123^!")
-    visit "/account/10"
+    visit "/account/#{URI.encode("Test account")}"
 
     fill_in "quick-transaction-input", with: "payday +2060"
     select "EUR - Euro", from: "transaction[currency]"

@@ -14,7 +14,7 @@ class AccountsTest < ApplicationSystemTestCase
 
     click_on "Create"
 
-    take_screenshot
+    #take_screenshot
 
     assert_selector '#flash_alert', text: I18n.t('account.failure.invalid_name')
   end
@@ -36,7 +36,7 @@ class AccountsTest < ApplicationSystemTestCase
 
     assert_selector '#flash_alert', text: I18n.t('account.failure.already_exists')
 
-    take_screenshot
+    #take_screenshot
   end
 
   test "create accounts from string" do
@@ -118,6 +118,18 @@ class AccountsTest < ApplicationSystemTestCase
     end
 
     assert_selector '#accounts_list', text: "all\n€ 213.32"
+
+    #take_screenshot
+  end
+
+  test "Visit account" do
+    user = users(:bas)
+    password = "SomePassword123^!"
+    login_user(user, password)
+
+    account_name = "Current account"
+
+    visit "/account/" + URI.encode(account_name)
 
     take_screenshot
   end

@@ -25,11 +25,4 @@ class SettingsTest < ApplicationSystemTestCase
     take_screenshot
   end
 
-  test "Change account currency" do
-    """
-    Change the currency account setting
-    Expected result:
-    - See new currency in account listing
-    - Account balance converted
-    """
-  end
+end

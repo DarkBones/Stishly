@@ -1,9 +1,26 @@
 class AccountController < ApplicationController
   def show
+    @account_name = params[:id]
+    @account_id = Account.where(name: @account_name, user_id: current_user.id).take.id
+
+    params[:id] = @account_id
+
     @account_transactions = Account.get_transactions(params, current_user)
-    @daily_totals = Account.get_daily_totals(params[:id], @account_transactions[:transactions], current_user)
-    @account_id = params[:id]
+    @daily_totals = Account.get_daily_totals(@account_id, @account_transactions[:transactions], current_user)
     @account_currency = Account.get_currency(@account_id, current_user)
+  end
+
+  def index
+    @account_name = 'All'
+    @account_id = 'all'
+
+    params[:id] = @account_id
+
+    @account_transactions = Account.get_transactions(params, current_user)
+    @daily_totals = Account.get_daily_totals(@account_id, @account_transactions[:transactions], current_user)
+    @account_currency = Account.get_currency(@account_id, current_user)
+
+    render 'show'
   end
 
   def create

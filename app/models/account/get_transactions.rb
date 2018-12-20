@@ -6,7 +6,6 @@ class Account
       @page = params[:page]
       @id = params[:id]
       @current_user = current_user
-      @account_name = get_account_name()
       @transactions = get_transactions()
     end
 
@@ -15,16 +14,6 @@ class Account
     end
 
     private
-
-    def get_account_name()
-      if @id != 'all'
-        result = Account.find(@id).name
-      else
-        result = 'All'
-      end
-
-      return result
-    end
 
     def get_transactions()
       if @id != 'all'
