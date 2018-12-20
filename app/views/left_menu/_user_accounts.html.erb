@@ -8,7 +8,7 @@
   <% end %>
 
   <% if accounts.length > 1 %>
-    <% all = {id: 0, name: "all", balance: 1000} %>
+    <% all = {id: 0, name: "All", balance: 1000} %>
     <%= render partial: "left_menu/account", locals: {
       account: OpenStruct.new(
         id: 'all',

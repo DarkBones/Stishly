@@ -2,8 +2,9 @@
 <% sortable ? li_class += " sortable" : li_class += " no-sorting" %>
 <% sortable ? sort_div = "<div class=\"sort-handle\"></div>".html_safe : sort_div = "" %>
 <% li_class += " active" if account.id.to_s == @account_id.to_s %>
+<% sortable ? id = account.name : id = "" %>
 
-<li class="<%= li_class %>" id="account_<%= account.name %>">
+<li class="<%= li_class %>" id="account_<%= id %>">
   <%= sort_div %>
   <% acc_curency = Account.get_currency(account.id, current_user) %>
   <%= account.name %>
