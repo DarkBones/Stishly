@@ -117,7 +117,7 @@ class AccountsTest < ApplicationSystemTestCase
       assert_selector '#accounts_list', text: s[:result]
     end
 
-    assert_selector '#accounts_list', text: "all\n€ 213.32"
+    assert_selector '#accounts_list', text: "All\n€ 213.32"
 
     #take_screenshot
   end

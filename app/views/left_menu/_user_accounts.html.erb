@@ -7,18 +7,7 @@
     <p class="left-menu__instructions">Create an account by clicking the + button</p>
   <% end %>
 
-  <% if accounts.length > 1 %>
-    <% all = {id: 0, name: "All", balance: 1000} %>
-    <%= render partial: "left_menu/account", locals: {
-      account: OpenStruct.new(
-        id: 'all',
-        name: 'all',
-        balance: locals[:accounts].total_balance
-        ),
-      sortable: false
-    } %>
-
-  <% end %>
+  
   <% accounts.each do |a| %>
     <%= render partial: "left_menu/account", locals: {
       account: a,

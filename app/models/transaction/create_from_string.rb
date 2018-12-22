@@ -4,13 +4,12 @@ class Transaction
       @transaction_string = params[:transaction][:transaction_string]
       @account_id = params[:account_id]
       @current_user = current_user
-
-      #params[:currency] = "JPY"
-
-      if params[:currency]
-        @currency = Money::Currency.new(params[:currency])
+      @account = Account.find(params[:account_id].to_i)
+      
+      if !params[:transaction][:currency].nil?
+        @currency = Money::Currency.new(params[:transaction][:currency])
       else
-        @currency = Account.get_currency(@account_id, current_user)
+        @currency = Account.get_currency(@account)
       end
 
       @cents_amount = @currency.subunit_to_unit

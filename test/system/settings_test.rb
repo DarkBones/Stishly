@@ -20,7 +20,7 @@ class SettingsTest < ApplicationSystemTestCase
 
     click_on "Save"
 
-    assert_selector '#accounts_list', text: "all\n¥ 257"
+    assert_selector '#accounts_list', text: "All\n¥ 257"
 
     take_screenshot
   end

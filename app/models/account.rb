@@ -35,13 +35,18 @@ class Account < ApplicationRecord
     return GetDailyTotals.new(account_id, transactions, current_user).perform
   end
 
-  def self.get_currency(id, current_user)
-    if id == 'all'
+  def self.get_currency_OLD(id, current_user)
+    if id != '0'
       return User.get_currency(current_user)
     else
       account = Account.find(id)
       return Money::Currency.new(account.currency)
     end
+  end
+
+  def self.get_currency(account)
+
+    return Money::Currency.new(account.currency)
   end
 
   def self.change_setting(account, params, current_user)
