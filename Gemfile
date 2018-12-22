@@ -53,6 +53,8 @@ group :development do
   gem 'binding_of_caller'
 end
 
+gem 'rails_best_practices'
+
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
