@@ -15,11 +15,25 @@ class Account
       end
     end
 
+    def initialize_OLD(current_user)
+      @accounts = current_user.accounts.order(:position).to_a
+
+      if @accounts.length > 1
+        all = current_user.accounts.build
+        all.id = 175
+        all.name = 'FFFF ALL'
+        all.balance = 9999999999
+        all.currency = "EUR"
+
+        5.times do puts "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" end
+        puts all.name
+
+        @accounts.push(all)
+      end
+    end
+
     def perform
-      result = {
-        :accounts => @accounts,
-        :total_balance => @total_balance
-      }
+      result = @accounts
     end
 
   end

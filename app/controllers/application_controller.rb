@@ -6,8 +6,7 @@ class ApplicationController < ActionController::Base
   def user_accounts
     @user_accounts = Account.get_accounts(current_user)
     OpenStruct.new(
-      accounts: @user_accounts[:accounts], 
-      total_balance: @user_accounts[:total_balance]
+      accounts: @user_accounts
       )
   end
 
