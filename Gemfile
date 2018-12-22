@@ -51,9 +51,9 @@ group :development do
   gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'rails_best_practices'
+  gem 'peek'
 end
-
-gem 'rails_best_practices'
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
