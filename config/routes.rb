@@ -8,12 +8,13 @@ Rails.application.routes.draw do
 
   
   resource :transaction, only: [:show]
-  #resource :user_settings, only: [:edit]
+  resource :user_settings, only: [:edit]
+
+  get 'account/:id/settings', to: 'account#settings', as: :account_settings
   
   post 'settings/edit', to: 'users#edit', as: :edit_settings
   get 'settings', to: 'users#settings'
   post 'account/:id/settings/edit', to: 'account#edit', as: :edit_account_settings
-  get 'account/:id/settings', to: 'account#settings', as: :account_settings
   get 'account/:id/set_default', to: 'account#set_default', as: :set_default_account
 
   get 'app', to: 'app#index'

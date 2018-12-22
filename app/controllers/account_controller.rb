@@ -1,7 +1,11 @@
 class AccountController < ApplicationController
   def show
     @account_name = params[:id]
-    @account_id = Account.where(name: @account_name, user_id: current_user.id).take.id
+    @account_id = Account.where(name: @account_name, user_id: current_user.id).take
+    if @account_id
+      @account_id = @account_id.id
+    end
+    @account_id ||= 'all'
 
     params[:id] = @account_id
 

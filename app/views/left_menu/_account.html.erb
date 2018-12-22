@@ -4,7 +4,7 @@
 <% li_class += " active" if account.id.to_s == @account_id.to_s %>
 <% sortable ? id = account.name : id = "" %>
 
-<li class="<%= li_class %>" id="account_<%= id %>">
+<li class="<%= li_class %>" name="account_<%= id %>" id="account_<%= account.id.to_s %>">
   <%= sort_div %>
   <% acc_curency = Account.get_currency(account.id, current_user) %>
   <%= account.name %>
