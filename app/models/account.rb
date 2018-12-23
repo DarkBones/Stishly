@@ -27,10 +27,6 @@ class Account < ApplicationRecord
     return GetAccounts.new(current_user).perform
   end
 
-  def self.get_transactions_OLD(params, current_user)
-    #return GetTransactions.new(params, current_user).perform
-  end
-
   def self.get_transactions(account, page, current_user)
     return GetTransactions.new(account, page, current_user).perform
   end
