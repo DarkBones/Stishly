@@ -32,6 +32,9 @@ class Transaction < ApplicationRecord
       params[:account_currency_amount] = params[:amount]
     end
 
+    tz = TZInfo::Timezone.get(params[:timezone])
+    params[:local_datetime] = tz.utc_to_local(Time.now)
+
     transaction = current_user.transactions.new(params)
     transaction.save
 
