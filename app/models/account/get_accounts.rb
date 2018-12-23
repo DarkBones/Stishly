@@ -7,10 +7,7 @@ class Account
       @accounts = current_user.accounts.order(:position).decorate
 
       if @accounts.length > 1
-        all = Account.new
-        all.id = 0
-        all.name = 'All'
-        all.currency = @user_currency
+        all = Account.create_summary_account(current_user)
         all.balance = sum_accounts
 
         @accounts.insert(0, all)

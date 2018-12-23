@@ -10,4 +10,20 @@ class AccountDecorator < Draper::Decorator
   #     end
   #   end
 
+  def form_id
+    if model.is_real
+      model.id
+    else
+      Account.get_default(User.find(model.user_id)).id
+    end
+  end
+
+  def link
+    if model.is_real
+      URI.encode(model.name)
+    else
+      ""
+    end
+  end
+
 end

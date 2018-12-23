@@ -1,8 +1,6 @@
-<h2><%= @account_name %> Transactions</h2>
-<%= link_to 'Settings', account_settings_path if @account_id != 'all' %>
+<h2><%= @active_account.name %> Transactions</h2>
+<%= link_to 'Settings', account_settings_path if @active_account.is_real %>
 
-<% if params[:id] != 'all' %>
-  <%= render "new_transaction_form" %>
-<% end %>
+<%= render "new_transaction_form" %>
 
-<%= render "transactions", locals: {transactions: @account_transactions[:transactions]} %>
+<%= render "transactions", locals: {transactions: @account_transactions} %>

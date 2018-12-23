@@ -27,21 +27,27 @@ class Account < ApplicationRecord
     return GetAccounts.new(current_user).perform
   end
 
-  def self.get_transactions(params, current_user)
-    return GetTransactions.new(params, current_user).perform
+  def self.get_transactions_OLD(params, current_user)
+    #return GetTransactions.new(params, current_user).perform
+  end
+
+  def self.get_transactions(account, page, current_user)
+    return GetTransactions.new(account, page, current_user).perform
   end
 
   def self.get_daily_totals(account_id, transactions, current_user)
     return GetDailyTotals.new(account_id, transactions, current_user).perform
   end
 
-  def self.get_currency_OLD(id, current_user)
-    if id != '0'
-      return User.get_currency(current_user)
-    else
-      account = Account.find(id)
-      return Money::Currency.new(account.currency)
-    end
+  def self.create_summary_account(current_user)
+    account = Account.new
+    account.id = 0
+    account.is_real = false
+    account.name = 'All'
+    account.user_id = current_user.id
+    account.currency = User.get_currency(current_user).iso_code
+
+    return account
   end
 
   def self.get_currency(account)
@@ -64,6 +70,10 @@ class Account < ApplicationRecord
       a.is_default = a.id.to_i == id.to_i
       a.save
     end
+  end
+
+  def self.get_default(current_user)
+    current_user.accounts.where(is_default: true).take
   end
 
   def self.create_from_string(params, current_user)

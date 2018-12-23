@@ -7,6 +7,8 @@ jQuery ->
     $(window).scroll ->
       $('.pagination').hide()
       url = $('.pagination .next_page').attr('href')
+      if url
+        url = window.location.pathname + "?" + url.split("?")[1]
       if url && $(window).scrollTop() > $(document).height() - $(window).height() - 50
         $('.pagination').text("")
         $.getScript(url)

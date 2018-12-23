@@ -1,21 +1,47 @@
 class AccountController < ApplicationController
   def show
-    @account_name = params[:id]
-    @active_account = Account.where(name: @account_name, user_id: current_user.id).take
+    #@account_name = params[:id]
+    @active_account = current_user.accounts.where(name: params[:id]).take.decorate
 
     if @active_account
       @account_id = @active_account.id
       @account_currency = Account.get_currency(@active_account)
     else
-      @account_id = 'all'
+      @account_id = 0
       @account_currency = User.get_currency(current_user)
     end
 
     params[:id] = @account_id
 
+    @account_transactions = Account.get_transactions(@active_account, params[:page], current_user)
+    @daily_totals = Account.get_daily_totals(@account_id, @account_transactions, current_user)
+    
+  end
+
+  def index_OLD
+    @active_account = Account.create_summary_account(current_user).decorate
+    @account_currency = User.get_currency(current_user)
+
+    @account_id = 0
+    params[:id] = @account_id
+
     @account_transactions = Account.get_transactions(params, current_user)
     @daily_totals = Account.get_daily_totals(@account_id, @account_transactions[:transactions], current_user)
-    
+
+    render 'show'
+  end
+
+  def index
+    @active_account = Account.create_summary_account(current_user).decorate
+    @account_currency = User.get_currency(current_user)
+
+    @account_id = 0
+    params[:id] = @account_id
+
+    @account_transactions = Account.get_transactions(@active_account, params[:page], current_user)
+    @daily_totals = Account.get_daily_totals(@account_id, @account_transactions, current_user)
+
+    render 'show'
   end
 
   def create

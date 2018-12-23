@@ -2,10 +2,9 @@ Rails.application.routes.draw do
 
   resources :account do
     collection do
-      patch :sort
+      patch :update
     end
   end
-
   
   resource :transaction, only: [:show]
   resource :user_settings, only: [:edit]
