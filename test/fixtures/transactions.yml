@@ -30,7 +30,9 @@
       account_id: <%= i %>,
       amount: <%= x * 100 %>,
       account_currency_amount: <%= x * 100 %>,
-      currency: "EUR"
+      currency: "EUR",
+      local_datetime: "<%= Time.now %>",
+      timezone: "Europe/London"
     }
   <% end %>
 <% end %>

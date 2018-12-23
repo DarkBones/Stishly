@@ -1,5 +1,5 @@
 <% locals[:transactions].each do |t| %>
-  <%= content_for t.created_at.to_date do %>
+  <%= content_for t.local_datetime.to_date do %>
     <a href="<%= transaction_path + '/' + t.id.to_s %>" class="no-link-style">
       <li>
         <%= t.description %>
