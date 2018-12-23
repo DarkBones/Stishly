@@ -7,10 +7,11 @@
     <p class="left-menu__instructions">Create an account by clicking the + button</p>
   <% end %>
 
-  
+
   <% accounts.each do |a| %>
     <%= render partial: "left_menu/account", locals: {
       account: a,
+      active_account: locals[:active_account],
       id: a.id,
       sortable: true
     } %>

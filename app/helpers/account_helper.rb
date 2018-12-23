@@ -7,11 +7,11 @@ module AccountHelper
     else
       c += " sortable"
     end
-    
+
     if account
       c += " active" if instance_id == account.id
     end
     return c
   end
-  
+
 end

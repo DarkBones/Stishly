@@ -19,7 +19,7 @@ class Account
       return Account.create(@account_details, @current_user)
     end
 
-    private 
+    private
 
     def parse_string()
       reg = ".+\s+-?[0-9]*[\.,]?[0-9]+$"

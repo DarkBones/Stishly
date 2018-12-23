@@ -10,7 +10,7 @@
       $("#transactions").append(
         "<div id=\"<%= d %>\">" +
         "<h3 id=\"day_<%= d %>\"><%= d_formatted %><span class=\"float-right\">" +
-        "<%= balance(@daily_totals[d], @account_currency) %>" + "</span></h3>" +
+        "<%= balance(locals[:daily_totals][d], locals[:account_currency]) %>" + "</span></h3>" +
         "<ul id=\"transactions_<%= d %>\">" +
         "<%= j yield d %>" +
         "</ul>" +

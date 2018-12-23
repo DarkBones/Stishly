@@ -2,7 +2,7 @@
   <%= render partial: "left_menu/section", locals: {
     title: "Accounts <span id=\"create-account-button\" class=\"float-right clickable\">+</span>".html_safe,
     section_layout: "left_menu/user_accounts",
-    locals: { accounts: user_accounts, active: @account_id }
-  } %> 
+    locals: { accounts: user_accounts, active_account: locals[:active_account] }
+  } %>
 
 </div>

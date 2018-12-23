@@ -5,7 +5,7 @@ class Transaction
       @account_id = params[:account_id]
       @current_user = current_user
       @account = Account.find(params[:account_id].to_i)
-      
+
       if !params[:transaction][:currency].nil?
         @currency = Money::Currency.new(params[:transaction][:currency])
       else
@@ -55,10 +55,10 @@ class Transaction
         end
 
         amount *= direction
-        result = { 
-          :user_id => @current_user.id, 
-          :description => transaction_name, 
-          :amount => amount ,
+        result = {
+          :user_id => @current_user.id,
+          :description => transaction_name,
+          :amount => amount,
           :account_id => @account_id,
           :timezone => @current_user.timezone,
           :currency => @currency.iso_code

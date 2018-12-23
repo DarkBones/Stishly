@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_22_163111) do
+ActiveRecord::Schema.define(version: 2018_12_23_141452) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "balance", default: 0
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2018_12_22_163111) do
     t.boolean "is_default"
     t.boolean "is_real", default: true
     t.index ["currency_id"], name: "index_accounts_on_currency_id"
+    t.index ["name"], name: "index_accounts_on_name"
     t.index ["user_id"], name: "index_accounts_on_user_id"
   end
 
@@ -112,6 +113,7 @@ ActiveRecord::Schema.define(version: 2018_12_22_163111) do
     t.datetime "local_datetime"
     t.string "currency"
     t.integer "account_currency_amount"
+    t.index ["account_id"], name: "index_transactions_on_account_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 

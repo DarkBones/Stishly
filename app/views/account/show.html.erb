@@ -1,6 +1,6 @@
 <h2><%= @active_account.name %> Transactions</h2>
 <%= link_to 'Settings', account_settings_path if @active_account.is_real %>
 
-<%= render "new_transaction_form" %>
+<%= render "new_transaction_form", locals: {active_account: @active_account} %>
 
-<%= render "transactions", locals: {transactions: @account_transactions} %>
+<%= render "transactions", locals: {transactions: @account_transactions, daily_totals: @daily_totals, account_currency: @account_currency} %>

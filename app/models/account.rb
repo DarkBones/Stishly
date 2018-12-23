@@ -107,24 +107,24 @@ class Account < ApplicationRecord
     Account.update(id, :balance => @balance)
   end
 
-  def self.convert_currency(account, new_currency, current_user)
-    old_currency = self.get_currency(account.id, current_user)
-    balance = self.get_float_balance(account, old_currency)
+  #def self.convert_currency(account, new_currency, current_user)
+  #  old_currency = self.get_currency(account.id, current_user)
+  #  balance = self.get_float_balance(account, old_currency)
 
-    new_balance = Concurrency.convert(balance, old_currency.iso_code, new_currency)
-    account.balance = self.get_int_balance(new_balance, Money::Currency.new(new_currency))
-    account.save
-  end
+  #  new_balance = Concurrency.convert(balance, old_currency.iso_code, new_currency)
+  #  account.balance = self.get_int_balance(new_balance, Money::Currency.new(new_currency))
+  #  account.save
+  #end
 
-  def self.get_float_balance(account, currency)
-    balance = account.balance.to_f
-    balance = balance / currency.subunit_to_unit if currency.subunit_to_unit != 0
-    return balance
-  end
+  #def self.get_float_balance(account, currency)
+  #  balance = account.balance.to_f
+  #  balance = balance / currency.subunit_to_unit if currency.subunit_to_unit != 0
+  #  return balance
+  #end
 
-  def self.get_int_balance(balance, currency)
-    balance = (balance * currency.subunit_to_unit).round.to_i
-    return balance
-  end
+  #def self.get_int_balance(balance, currency)
+  #  balance = (balance * currency.subunit_to_unit).round.to_i
+  #  return balance
+  #end
 
 end

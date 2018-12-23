@@ -41,7 +41,7 @@ class CurrencyRate < ApplicationRecord
 
   def self.convert(amount, from, to)
     rate = self.get_rate(from.to_s, to.to_s)
-        
+
     amount = amount.to_f / from.subunit_to_unit
     new_amount = amount * rate
 

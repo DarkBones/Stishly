@@ -5,12 +5,12 @@ Rails.application.routes.draw do
       patch :update
     end
   end
-  
+
   resource :transaction, only: [:show]
   resource :user_settings, only: [:edit]
 
   get 'account/:id/settings', to: 'account#settings', as: :account_settings
-  
+
   post 'settings/edit', to: 'users#edit', as: :edit_settings
   get 'settings', to: 'users#settings'
   post 'account/:id/settings/edit', to: 'account#edit', as: :edit_account_settings
@@ -21,9 +21,9 @@ Rails.application.routes.draw do
   post 'account/create_account', to: 'account#create_quick'
   post 'transaction/create_transaction', to: 'transaction#create_quick'
   devise_for :users, :controllers => { registrations: 'registrations' }
-  resources :users
+  resources :users, :only => [:create, :destroy, :edit]
   root 'welcome#index'
   get 'transaction/:id', to: 'transaction#show'
-  
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

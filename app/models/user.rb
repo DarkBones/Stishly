@@ -43,7 +43,7 @@ class User < ApplicationRecord
   has_many :schedules
 
   validates :country_code, :first_name, :last_name, presence: true
-  
+
   # Returns the currency (string) of a user
   def self.get_currency(current_user)
     sett = SettingValue.get_setting(current_user, 'currency')

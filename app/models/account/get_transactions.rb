@@ -1,7 +1,7 @@
 class Account
-  
+
   class GetTransactions
-    
+
     def initialize(account, page, current_user)
       @account = account
       @page = page
