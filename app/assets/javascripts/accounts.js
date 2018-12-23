@@ -19,10 +19,19 @@ $(document).on('turbolinks:load', ()=> {
   });
 
   $('.account-button').on('click', (event) => {
-    window.location.href = '/' + event.currentTarget.closest('.account-button').getAttribute('name').replace('_', '/');
+    link_name = event.currentTarget.closest('.account-button').getAttribute('name')
+    console.log('/' + link_name.replace('_', '/'));
+    window.location.href = '/' + link_name.replace('_', '/');
   });
 
   $('#account_name_balance').attr('maxlength',23);
+
+  // don't allow dots in input field
+  $('#account_account_string').keyup(function(e){
+    if (e.which == 190){
+      $('#account_account_string').val($('#account_account_string').val().replace(".", ""));
+    }
+  });
 
   $('#timezone_input').set_timezone();
 });

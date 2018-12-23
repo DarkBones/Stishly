@@ -35,4 +35,5 @@ en:
       confirmed: "Account successfully created"
     failure:
       invalid_name: "Invalid account name"
+      invalid_name_dot: "Invalid account name. Dots (.) not allowed"
       already_exists: "Account already exists"

@@ -20,7 +20,7 @@ class AccountDecorator < Draper::Decorator
 
   def link
     if model.is_real
-      URI.encode(model.name)
+      URI.encode(model.name).sub "/", "%2F"
     else
       ""
     end

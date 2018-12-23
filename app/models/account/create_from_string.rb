@@ -14,6 +14,10 @@ class Account
         return I18n.t('account.failure.invalid_name')
       end
 
+      if @account_string.include? "."
+        return I18n.t('account.failure.invalid_name_dot')
+      end
+
       @account_details = parse_string()
 
       return Account.create(@account_details, @current_user)
