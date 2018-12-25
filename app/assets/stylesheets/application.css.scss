@@ -1,0 +1,66 @@
+$primary-color: hsl(77, 33.3%, 50.6%);
+$complimentary-color: hsl(315, 44.8%, 20.6%);
+$default-color: #5C5C5C;
+
+html, body { 
+  min-height: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+header nav.navbar {
+  $navbar-height: 50px;
+  background-color: $default-color;
+  padding: 0 10px;
+  height: $navbar-height;
+  * {
+    display: inline;
+    color: #fff;
+    a.navbar-brand{
+      background-color: black;
+      height: 100%;
+      vertical-align: middle;
+      display: inline-block;
+    }
+    .navbar-menu-toggle {
+      $navbar-button-size: 40px;
+      background-color: $primary-color;
+      width: $navbar-button-size;
+      height: $navbar-button-size;
+      margin-top: ($navbar-height - $navbar-button-size) * 0.5;
+      //margin-top: ($navbar-button-size*0.125);
+      //margin-top: -10px;
+      float: right;
+      ul {
+        float: right;
+        margin-top: $navbar-button-size;
+        background-color: #eee;
+        width: 150px;
+        padding: 0;
+        -webkit-box-shadow: 2px 2px 16px 1px rgba(0,0,0,0.27);
+        -moz-box-shadow: 2px 2px 16px 1px rgba(0,0,0,0.27);
+        box-shadow: 2px 2px 16px 1px rgba(0,0,0,0.27);
+        &.hidden {
+          display: none;
+        }
+        li {
+          display: block;
+          a {
+            color: $default-color;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: block;
+            &:hover{
+              background-color: $primary-color;
+            }
+          }
+        }
+      }
+    }
+
+    .hidden-text {
+      z-index: -50;
+    }
+  }
+}
