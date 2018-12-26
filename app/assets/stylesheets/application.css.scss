@@ -1,12 +1,17 @@
 $primary-color: hsl(77, 33.3%, 50.6%);
 $complimentary-color: hsl(315, 44.8%, 20.6%);
-$default-color: #5C5C5C;
+$default-color: hsl(77, 0%, 20%);
 
 html, body { 
   min-height: 100%;
   width: 100%;
   margin: 0;
   font-family: sans-serif;
+  color: $default-color;
+}
+
+.float-right {
+  float: right;
 }
 
 header nav.navbar {
@@ -16,7 +21,6 @@ header nav.navbar {
   height: $navbar-height;
   * {
     display: inline;
-    color: #fff;
     a.navbar-brand{
       background-color: black;
       height: 100%;
@@ -29,8 +33,6 @@ header nav.navbar {
       width: $navbar-button-size;
       height: $navbar-button-size;
       margin-top: ($navbar-height - $navbar-button-size) * 0.5;
-      //margin-top: ($navbar-button-size*0.125);
-      //margin-top: -10px;
       float: right;
       ul {
         float: right;
@@ -46,6 +48,7 @@ header nav.navbar {
         }
         li {
           display: block;
+          text-align: right;
           a {
             color: $default-color;
             padding: 10px 20px;
@@ -58,9 +61,45 @@ header nav.navbar {
         }
       }
     }
+  }
+}
 
-    .hidden-text {
-      z-index: -50;
+#left-menu {
+  border: 1px solid blue;
+  width: 300px;
+  padding: 0 0;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    li {
+      padding: 7px 10px;
+      &:hover {
+        background-color: $primary-color;
+        cursor: pointer;
+      }
     }
   }
+}
+
+.sort-handle{
+  display: inline-block;
+  cursor: move;
+  position: relative;
+  width: 12px;
+  height: 20px;
+  margin-left: 0;
+  margin-right: 5px;
+  margin-top: -100px;
+  top: 4px;
+  opacity: 0;
+  background-image: image-url("sort-handle-black.svg")
+}
+
+.sortable:hover .sort-handle{
+  opacity: 0.5;
+}
+
+.sortable:hover .sort-handle:hover{
+  opacity: 1;
 }
