@@ -26,7 +26,7 @@ class AccountController < ApplicationController
     end
   end
 
-  def update
+  def sort
     params[:account].each_with_index do |id, index|
       Account.where(id: id).update_all(position: index + 1)
     end
