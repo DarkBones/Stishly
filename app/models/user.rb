@@ -41,6 +41,7 @@ class User < ApplicationRecord
   has_many :settings, through: :setting_values
   belongs_to :subscription_tier
   has_many :schedules
+  has_many :categories
 
   validates :country_code, :first_name, :last_name, presence: true
 

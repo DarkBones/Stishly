@@ -18,6 +18,7 @@
 class Transaction < ApplicationRecord
   belongs_to :account
   has_one :user, through: :account
+  belongs_to :category, optional: true
 
   def self.create_from_string(params, current_user)
     transaction = CreateFromString.new(params, current_user).perform
