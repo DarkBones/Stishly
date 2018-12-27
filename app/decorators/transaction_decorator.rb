@@ -5,7 +5,10 @@ class TransactionDecorator < ApplicationDecorator
     if model.category
       model.category
     else
-      Category.new
+      category = Category.new
+      category.symbol = "uncategorised"
+      category.name = "uncategorised"
+      return category
     end
   end
 

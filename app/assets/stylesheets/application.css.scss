@@ -91,7 +91,31 @@ header nav.navbar {
 
 #content {
   margin-left: 320px;
-  padding: 0 20px;
+  padding: 0 0;
+  #transactions{
+    padding: 0 10px;
+    ul{
+      padding:0;
+      a {
+        text-decoration: none;
+      }
+      li{
+        padding: 5px 20px;
+        list-style: none;
+        img{
+          vertical-align: middle;
+          width: 30px;
+          height: 30px;
+          padding: 0;
+          border-radius: 200px;
+          background-color: lighten($default-color, 60%);
+        }
+        span{
+          margin-top: 5px;
+        }
+      }
+    }
+  }
 }
 
 .clickable {
