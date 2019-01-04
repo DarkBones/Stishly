@@ -8,6 +8,7 @@ class TransactionDecorator < ApplicationDecorator
       category = Category.new
       category.symbol = "uncategorised"
       category.name = "uncategorised"
+      category.color = "6A6C6E";
       return category
     end
   end
