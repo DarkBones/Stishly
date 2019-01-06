@@ -67,10 +67,6 @@ class User < ApplicationRecord
   end
 
   def set_categories
-    #self.categories.create([
-    #  {name: "Repairs"}, 
-    #  {name: "Supplies"}
-    #])
     entertainment = self.categories.create({
       name: "Entertainment",
       symbol: "entertainment"
@@ -88,7 +84,7 @@ class User < ApplicationRecord
 
     household = self.categories.create({
       name: "Household",
-      symbol: "household"
+      symbol: "house"
     })
 
     income = self.categories.create({
@@ -103,7 +99,7 @@ class User < ApplicationRecord
 
     other = self.categories.create({
       name: "Other",
-      symbol: "other"
+      symbol: "others"
     })
 
     shopping = self.categories.create({
@@ -159,12 +155,12 @@ class User < ApplicationRecord
       },
       {
         name: "Sport Events",
-        symbol: "sport_events",
+        symbol: "sport_event",
         parent_id: entertainment.id
       },
       {
         name: "Subscriptions",
-        symbol: "subscriptions",
+        symbol: "subscription",
         parent_id: entertainment.id
       },
       {
@@ -174,7 +170,7 @@ class User < ApplicationRecord
       },
       {
         name: "Video Games",
-        symbol: "video_games",
+        symbol: "video_game",
         parent_id: entertainment.id
       },
       {
@@ -229,7 +225,7 @@ class User < ApplicationRecord
       },
       {
         name: "Sport & Fitness",
-        symbol: "sport_fitness",
+        symbol: "fitness",
         parent_id: health.id
       },
       {
@@ -434,12 +430,12 @@ class User < ApplicationRecord
       },
       {
         name: "Video Games",
-        symbol: "video_games",
+        symbol: "video_game",
         parent_id: shopping.id
       },
       {
         name: "Flights",
-        symbol: "flight",
+        symbol: "flights",
         parent_id: transport.id
       },
       {
@@ -481,7 +477,7 @@ class User < ApplicationRecord
         name: "Rental",
         symbol: "rentals",
         parent_id: vehicle.id
-      },
+      }
     ])
   end
 end
