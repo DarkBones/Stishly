@@ -1,67 +1,174 @@
-/*
- *= require_tree .
- *= require_self
- */
+$primary-color: hsl(156, 100%, 31%);
+$complementary-color: hsl(18, 100%, 45%);
+$default-color: hsl(77, 0%, 20%);
 
-$theme: 'dark';
-
-$debug: false;
-$debug-border: 1px solid blue;
-
-$main-width-min: 500px;
-$main-width-max: 1200px;
+$navbar-height: 50px;
 $left-menu-width: 300px;
 
-$backgroundColor: #262626;
-$backgroundColorMain: #262626;
-$backgroundColorContent: #333;
-$backgroundColorInput: #000;
-$textColor: #fff;
-$hoverColor: #444;
-
-@if $theme == 'light' {
-  $backgroundColor: #FFF;
-  $backgroundColorMain: #FFF;
-  $backgroundColorContent: #FFF;
-  $textColor: #000;
-  $hoverColor: #fff;
-  $backgroundColorInput: #FFF;
-}
-
 html, body { 
-  min-height: 100%;
+  height: 100%;
   width: 100%;
   margin: 0;
-  body {
-    padding-top: 51px;
-    background-color: $backgroundColor;
-  }
-}
-
-main {
-  @if $debug == true {
-    border: $debug-border
-  }
-  min-height: 100%;
-  padding: 0;
-  display: flex;
-  min-width: $main-width-min;
-  max-width: $main-width-max;
-  margin: 0 auto;
-  background-color: $backgroundColorMain;
-  color: $textColor;
-}
-
-h2 {
-  font-size: 30px;
-}
-
-.clickable:hover{
-  cursor: pointer;
+  font-family: sans-serif;
+  color: $default-color;
 }
 
 .float-right {
   float: right;
+}
+
+header nav.navbar {
+  background-color: $default-color;
+  padding: 0 10px;
+  height: $navbar-height;
+  position: fixed;
+  width: calc(100% - 20px);
+  top:0;
+  * {
+    display: inline;
+    a.navbar-brand{
+      background-color: black;
+      height: 100%;
+      vertical-align: middle;
+      display: inline-block;
+    }
+    .navbar-menu-toggle {
+      $navbar-button-size: 40px;
+      background-color: $primary-color;
+      width: $navbar-button-size;
+      height: $navbar-button-size;
+      margin-top: ($navbar-height - $navbar-button-size) * 0.5;
+      float: right;
+      ul {
+        float: right;
+        margin-top: $navbar-button-size;
+        background-color: #eee;
+        width: 150px;
+        padding: 0;
+        &.hidden {
+          display: none;
+        }
+        li {
+          display: block;
+          text-align: right;
+          a {
+            color: $default-color;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: block;
+            &:hover{
+              background-color: $primary-color;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#left-menu {
+  width: $left-menu-width;
+  padding: 0 10px;
+  top: $navbar-height;
+  position: fixed;
+  height: calc(100% - 50px);
+  overflow: scroll;
+  overflow-y: auto;
+  overflow-x: auto;
+  ul {
+    list-style: none;
+    padding: 0;
+    li {
+      padding: 7px 10px;
+      &:hover {
+        background-color: $primary-color;
+      }
+      &.active {
+        background-color: lighten($primary-color, 10%);
+      }
+    }
+  }
+}
+
+#accountmenu {
+  z-index: 500;
+  width: 450px;
+  height: 500px;
+  //border: 1px solid blue;
+  position: fixed;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  margin-top: -250px;
+  margin-left: -255px;
+  padding: 30px;
+  h2 {
+    margin-top: 0;
+  }
+  .accountmenu__name {
+    width: calc(100% - 20px);
+  }
+  .accountmenu__balance {
+    width: calc(100% - 40px - 70px);
+  }
+  select {
+    width:70px;
+    float: right;
+  }
+  .accountmenu__description {
+    width: calc(100% - 20px);
+    height: 100px;
+  }
+}
+
+.box-shadow {
+  -webkit-box-shadow: 2px 2px 16px 1px rgba(0,0,0,0.27);
+  -moz-box-shadow: 2px 2px 16px 1px rgba(0,0,0,0.27);
+  box-shadow: 2px 2px 16px 1px rgba(0,0,0,0.27);
+}
+
+#content {
+  margin-left: 320px;
+  padding-top: $navbar-height;
+  #transactions{
+    padding: 0 20px;
+    ul{
+      padding:0 0;
+      a {
+        text-decoration: none;
+      }
+      li{
+        padding: 5px 20px;
+        list-style: none;
+        img{
+          vertical-align: middle;
+          width: 30px;
+          height: 30px;
+          padding: 0;
+          border-radius: 200px;
+        }
+        span{
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+}
+
+.form-row {
+  width: 100%;
+  margin-top: 25px;
+}
+
+input, textarea, select {
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: 1px solid #DEDEDE;
+  margin-top: 10px;
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 .sort-handle{
@@ -70,16 +177,12 @@ h2 {
   position: relative;
   width: 12px;
   height: 20px;
-  margin-left: -22px;
+  margin-left: 0;
   margin-right: 5px;
   margin-top: -100px;
   top: 4px;
   opacity: 0;
-  @if $theme == 'light' {
-    background-image: image-url("sort-handle-black.svg")
-  } @else {
-    background-image: image-url("sort-handle-white.svg")
-  }
+  background-image: image-url("sort-handle-black.svg")
 }
 
 .sortable:hover .sort-handle{
@@ -90,87 +193,28 @@ h2 {
   opacity: 1;
 }
 
-a.no-link-style{
-  color: inherit;
-  text-decoration: inherit;
+::-webkit-scrollbar-button{
+     display: none;
+     height: 10px;
+     border-radius: 0px;
+     background-color: $primary-color;
 }
-
-#left-menu {
-  @if $debug == true {
-    border: $debug-border
-  }
-  display: block;
-  width: $left-menu-width;
-  height: 100%;
-  h2 {
-    padding: 0 15px;
-  }
+ ::-webkit-scrollbar-button:hover{
+     background-color: lighten($primary-color, 20%);
 }
-
-#left-menu ul, #content ul {
-  @if $debug == true {
-    border: $debug-border
-  }
-  list-style-type: none;
-  padding: 0;
+ ::-webkit-scrollbar-thumb{
+     background-color: darken($complementary-color, 0%);
+     border-radius: 50px;
 }
-
-#left-menu li, #content li {
-  padding: 6px 30px;
-  @if $debug == true {
-    border: $debug-border
-  }
-  border-radius: 4px;
+ ::-webkit-scrollbar-thumb:hover{
+     background-color: lighten($complementary-color, 10%);
 }
-
-#left-menu li:hover {
-  background-color: $hoverColor;
+ ::-webkit-scrollbar-track{
+     background-color: lighten($default-color, 70%);
 }
-
-#left-menu li.active {
-  background-color: $hoverColor;
-  font-weight: bold;
+ ::-webkit-scrollbar-track:hover{
+     background-color: lighten($default-color, 65%);
 }
-
-#content {
-  @if $debug == true {
-    border: $debug-border
-  }
-  float: left;
-  flex-grow: 100;
-  min-width: 150px;
-  background-color: $backgroundColorContent;
-  padding: 0 15px;
-}
-
-input{
-  width: 100%;
-  padding: 12px 20px;
-  margin: 10px auto;
-  background-color: $backgroundColorInput;
-  border:none;
-  border-radius: 4px;
-}
-
-button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 7px 7px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 4px;
-}
-button:hover {
-  background-color:#5cbf2a;
-}
-button:active {
-  position:relative;
-  top:1px;
-}
-
-form select {
-  color: black;
+ ::-webkit-scrollbar{
+     width: 7px;
 }

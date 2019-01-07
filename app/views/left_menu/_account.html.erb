@@ -1,15 +1,10 @@
-<% li_class = "account-button clickable" %>
-<% sortable ? li_class += " sortable" : li_class += " no-sorting" %>
-<% sortable ? sort_div = "<div class=\"sort-handle\"></div>".html_safe : sort_div = "" %>
-<% li_class += " active" if account.id.to_s == @account_id.to_s %>
+<% sortable ? id = account.name : id = "" %>
 
-<li class="<%= li_class %>" id="account_<%= account.id %>">
-  <%= sort_div %>
-  <% acc_curency = Account.get_currency(account.id, current_user) %>
+<li class="<%= li_class(account.id, active_account) %>" name="account_<%= account.link %>" id="account_<%= account.id.to_s %>">
+  <div class="sort-handle"></div>
+  <% acc_curency = Account.get_currency(account) %>
   <%= account.name %>
   <span class="balance float-right">
-    <%= balance(account.balance.to_f, 
-    acc_curency, 
-    "cents") %>
+    <%= balance(account.balance.to_f, acc_curency, "cents") %>
   </span>
 </li>

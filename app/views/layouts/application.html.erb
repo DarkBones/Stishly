@@ -12,11 +12,12 @@
     <header>
       <%= render 'layouts/navigation' %>
     </header>
+    <%= render "card_forms/new_account_form" %>
     <main role="main">
       <%= render 'layouts/messages' %>
 
       <% if current_user %>
-        <%= render 'layouts/left_menu' %>
+        <%= render 'layouts/left_menu', locals: {active_account: @active_account} %>
       <% end %>
       <div id="content">
         <%= yield %>

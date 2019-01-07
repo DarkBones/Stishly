@@ -1,14 +1,6 @@
-<h2><%= @account_transactions[:account_name] %> Transactions</h2>
-<%= link_to 'Settings', account_settings_path if @account_id != 'all' %>
+<h2><%= @active_account.name %> Transactions</h2>
+<%= link_to 'Settings', account_settings_path if @active_account.is_real %>
 
-<% if params[:id] != 'all' %>
-  <%= form_for :transaction, :url => url_for(:controller => 'transaction', :action => 'create_quick') do |f| %>
-    <%= f.text_field :transaction_string, class: 'timezone-on-focus', id: 'quick-transaction-input' %>
-    <%= f.select(:currency, all_currencies(Money::Currency.table), selected: Account.get_currency(@account_id, current_user).iso_code) %>
-    <%= hidden_field_tag 'account_id', params[:id] %>
-    <%= f.hidden_field :timezone, id: 'timezone_input' %>
-    <%= f.submit 'Create' %>
-  <% end %>
-<% end %>
+<%= render "new_transaction_form", locals: {active_account: @active_account} %>
 
-<%= render "transactions", locals: {transactions: @account_transactions[:transactions]} %>
+<%= render "transactions", locals: {transactions: @account_transactions, daily_totals: @daily_totals, account_currency: @account_currency} %>

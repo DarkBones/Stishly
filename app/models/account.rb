@@ -18,7 +18,6 @@
 class Account < ApplicationRecord
   validates :name, :user_id, presence: true
 
-
   belongs_to :user
   has_many :transactions
   has_many :setting_values, :as => :entity
@@ -28,21 +27,28 @@ class Account < ApplicationRecord
     return GetAccounts.new(current_user).perform
   end
 
-  def self.get_transactions(params, current_user)
-    return GetTransactions.new(params, current_user).perform
+  def self.get_transactions(account, page, current_user)
+    return GetTransactions.new(account, page, current_user).perform
   end
 
   def self.get_daily_totals(account_id, transactions, current_user)
     return GetDailyTotals.new(account_id, transactions, current_user).perform
   end
 
-  def self.get_currency(id, current_user)
-    if id == 'all'
-      return User.get_currency(current_user)
-    else
-      account = Account.find(id)
-      return Money::Currency.new(account.currency)
-    end
+  def self.create_summary_account(current_user)
+    account = Account.new
+    account.id = 0
+    account.is_real = false
+    account.name = 'All'
+    account.user_id = current_user.id
+    account.currency = User.get_currency(current_user).iso_code
+
+    return account
+  end
+
+  def self.get_currency(account)
+
+    return Money::Currency.new(account.currency)
   end
 
   def self.change_setting(account, params, current_user)
@@ -65,6 +71,10 @@ class Account < ApplicationRecord
       a.is_default = a.id.to_i == id.to_i
       a.save
     end
+  end
+
+  def self.get_default(current_user)
+    current_user.accounts.where(is_default: true).take
   end
 
   def self.create_from_string(params, current_user)
@@ -102,24 +112,24 @@ class Account < ApplicationRecord
     Account.update(id, :balance => @balance)
   end
 
-  def self.convert_currency(account, new_currency, current_user)
-    old_currency = self.get_currency(account.id, current_user)
-    balance = self.get_float_balance(account, old_currency)
+  #def self.convert_currency(account, new_currency, current_user)
+  #  old_currency = self.get_currency(account.id, current_user)
+  #  balance = self.get_float_balance(account, old_currency)
 
-    new_balance = Concurrency.convert(balance, old_currency.iso_code, new_currency)
-    account.balance = self.get_int_balance(new_balance, Money::Currency.new(new_currency))
-    account.save
-  end
+  #  new_balance = Concurrency.convert(balance, old_currency.iso_code, new_currency)
+  #  account.balance = self.get_int_balance(new_balance, Money::Currency.new(new_currency))
+  #  account.save
+  #end
 
-  def self.get_float_balance(account, currency)
-    balance = account.balance.to_f
-    balance = balance / currency.subunit_to_unit if currency.subunit_to_unit != 0
-    return balance
-  end
+  #def self.get_float_balance(account, currency)
+  #  balance = account.balance.to_f
+  #  balance = balance / currency.subunit_to_unit if currency.subunit_to_unit != 0
+  #  return balance
+  #end
 
-  def self.get_int_balance(balance, currency)
-    balance = (balance * currency.subunit_to_unit).round.to_i
-    return balance
-  end
+  #def self.get_int_balance(balance, currency)
+  #  balance = (balance * currency.subunit_to_unit).round.to_i
+  #  return balance
+  #end
 
 end

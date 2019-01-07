@@ -1,9 +1,20 @@
 class AccountController < ApplicationController
   def show
-    @account_transactions = Account.get_transactions(params, current_user)
-    @daily_totals = Account.get_daily_totals(params[:id], @account_transactions[:transactions], current_user)
-    @account_id = params[:id]
-    @account_currency = Account.get_currency(@account_id, current_user)
+    @active_account = current_user.accounts.where(name: params[:id]).take.decorate
+    @account_currency = Account.get_currency(@active_account)
+
+    @account_transactions = Account.get_transactions(@active_account, params[:page], current_user).decorate
+    @daily_totals = Account.get_daily_totals(@active_account.id, @account_transactions, current_user)
+  end
+
+  def index
+    @active_account = Account.create_summary_account(current_user).decorate
+    @account_currency = User.get_currency(current_user)
+
+    @account_transactions = Account.get_transactions(@active_account, params[:page], current_user).decorate
+    @daily_totals = Account.get_daily_totals(@active_account.id, @account_transactions, current_user)
+
+    render 'show'
   end
 
   def create
@@ -15,7 +26,7 @@ class AccountController < ApplicationController
     end
   end
 
-  def update
+  def sort
     params[:account].each_with_index do |id, index|
       Account.where(id: id).update_all(position: index + 1)
     end

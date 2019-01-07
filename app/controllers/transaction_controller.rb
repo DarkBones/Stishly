@@ -2,6 +2,7 @@ class TransactionController < ApplicationController
   def show
     @transaction = Transaction.find(params[:id])
     @account_id = @transaction.account_id
+    @active_account = @transaction.account
   end
 
   def create_quick

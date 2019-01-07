@@ -49,6 +49,10 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'annotate'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'rails_best_practices'
+  gem 'peek'
 end
 
 group :test do
@@ -80,6 +84,8 @@ gem 'country_select', '~> 3.1'
 gem 'money'
 gem 'currency_select'
 gem 'concurrency'
+
+gem 'draper'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

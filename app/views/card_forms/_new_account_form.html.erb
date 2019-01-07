@@ -1,0 +1,26 @@
+<div id="accountmenu" class="box-shadow">
+  <h2>Create New Account</h2>
+  <%= form_for :account, :url => url_for(:controller => 'account', :action => 'create') do |f| %>
+  <div class="form-row">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, placeholder: "Current account", class: 'accountmenu__name' %>
+  </div>
+
+  <div class="form-row">
+    <%= f.label :balance %><br />
+    <%= f.number_field :balance, placeholder: "1000.00", class: 'accountmenu__balance' %>
+
+    <%= f.select(:currency, all_currencies(Money::Currency.table), selected: User.get_currency(current_user).iso_code, class: 'accountmenu__currency') %><br />
+  </div>
+
+  <div class="form-row">
+    <%= f.label :description %><br />
+    <%= f.text_area :description, class: 'accountmenu__description' %>
+  </div>
+
+  <div class="form-row">
+    <%= f.label :make_default %>
+    <%= f.check_box :make_default %>
+  </div>
+  <% end %>
+</div>

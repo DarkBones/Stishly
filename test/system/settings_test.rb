@@ -20,11 +20,12 @@ class SettingsTest < ApplicationSystemTestCase
 
     click_on "Save"
 
-    assert_selector '#accounts_list', text: "all\n¥ 257"
+    assert_selector '#accounts_list', text: "All\n¥ 257"
 
     take_screenshot
   end
 
+<<<<<<< HEAD
   test "Change account currency" do
     """
     Change the currency account setting
@@ -44,4 +45,6 @@ class SettingsTest < ApplicationSystemTestCase
 
     #take_screenshot
   end
+=======
+>>>>>>> master
 end

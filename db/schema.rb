@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_12_100215) do
+ActiveRecord::Schema.define(version: 2018_12_27_182114) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "balance", default: 0
@@ -23,8 +23,22 @@ ActiveRecord::Schema.define(version: 2018_12_12_100215) do
     t.integer "position"
     t.string "currency"
     t.boolean "is_default"
+    t.boolean "is_real", default: true
     t.index ["currency_id"], name: "index_accounts_on_currency_id"
+    t.index ["name"], name: "index_accounts_on_name"
     t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
+
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "color"
+    t.string "symbol"
+    t.bigint "user_id"
+    t.bigint "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_categories_on_parent_id"
+    t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
   create_table "countries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -111,6 +125,9 @@ ActiveRecord::Schema.define(version: 2018_12_12_100215) do
     t.datetime "local_datetime"
     t.string "currency"
     t.integer "account_currency_amount"
+    t.bigint "category_id"
+    t.index ["account_id"], name: "index_transactions_on_account_id"
+    t.index ["category_id"], name: "index_transactions_on_category_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 

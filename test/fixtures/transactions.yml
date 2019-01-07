@@ -64,6 +64,7 @@ conversion_test_4: {
 
 <% for i in 1..5 %>
   <% for x in 1..i %>
+<<<<<<< HEAD
 transaction_<%= i %>_<%= x %>: {
   user_id: 1,
   description: <%= "transaction " + x.to_s %>,
@@ -72,5 +73,17 @@ transaction_<%= i %>_<%= x %>: {
   account_currency_amount: <%= x * 100 %>,
   currency: "EUR"
 }
+=======
+    transaction_<%= i %>_<%= x %>: {
+      user_id: 1,
+      description: <%= "transaction " + x.to_s %>,
+      account_id: <%= i %>,
+      amount: <%= x * 100 %>,
+      account_currency_amount: <%= x * 100 %>,
+      currency: "EUR",
+      local_datetime: "<%= Time.now %>",
+      timezone: "Europe/London"
+    }
+>>>>>>> master
   <% end %>
 <% end %>

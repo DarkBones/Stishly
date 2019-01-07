@@ -3,7 +3,7 @@ $(document).on('turbolinks:load', ()=> {
   //$('#left-menu').disableSelection();
 
   $('#create-account-button').on('click', () => {
-    $('#create-account-form').slideToggle(100);
+    $('#accountmenu').slideToggle(100);
     $("#account_name_balance").focus();
   });
 
@@ -19,10 +19,19 @@ $(document).on('turbolinks:load', ()=> {
   });
 
   $('.account-button').on('click', (event) => {
-    window.location.href = '/' + event.currentTarget.closest('.account-button').id.replace('_', '/');
+    link_name = event.currentTarget.closest('.account-button').getAttribute('name')
+    console.log('/' + link_name.replace('_', '/'));
+    window.location.href = '/' + link_name.replace('_', '/');
   });
 
   $('#account_name_balance').attr('maxlength',23);
+
+  // don't allow dots in input field
+  $('#account_account_string').keyup(function(e){
+    if (e.which == 190){
+      $('#account_account_string').val($('#account_account_string').val().replace(".", ""));
+    }
+  });
 
   $('#timezone_input').set_timezone();
 });
@@ -34,7 +43,7 @@ function makeSortableLists(class_name='.sortable-list', handle_name='.sort-handl
     delay: 150,
     update: function(e, ui) {
       Rails.ajax({
-        url: $(this).data('url'),
+        url: '/account/sort',
         type: 'PATCH',
         data: $(this).sortable('serialize'),
       });

@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Setting.create([{ description: 'currency' }])
-Setting.create([{ description: 'date_format' }])
-Setting.create([{ description: 'first_day_ot_week' }])
+#Setting.create([{ description: 'currency' }])
+#Setting.create([{ description: 'date_format' }])
+#Setting.create([{ description: 'first_day_ot_week' }])
+
+Category.create([{ name: 'test', color: 'ffffff', symbol:'house', user_id: 20 }])

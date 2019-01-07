@@ -6,8 +6,8 @@ module TransactionHelper
 
   def distinct_dates(transactions, dates=[])
     transactions.each do |t|
-      if !(dates.include? t.created_at.to_date)
-        dates.push(t.created_at.to_date)
+      if !(dates.include? t.local_datetime.to_date)
+        dates.push(t.local_datetime.to_date)
       end
     end
     return dates
