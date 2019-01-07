@@ -24,15 +24,13 @@ header nav.navbar {
   position: fixed;
   width: calc(100% - 20px);
   top:0;
+  vertical-align: middle;
   * {
     display: inline;
-    a.navbar-brand{
-      background-color: black;
-      height: 100%;
-      vertical-align: middle;
-      display: inline-block;
+    .navbar__logo {
+      height: $navbar-height;
     }
-    .navbar-menu-toggle {
+    .navbar__menu-toggle {
       $navbar-button-size: 40px;
       background-color: $primary-color;
       width: $navbar-button-size;
@@ -43,7 +41,7 @@ header nav.navbar {
         float: right;
         margin-top: $navbar-button-size;
         background-color: #eee;
-        width: 150px;
+        width: 130px;
         padding: 0;
         &.hidden {
           display: none;

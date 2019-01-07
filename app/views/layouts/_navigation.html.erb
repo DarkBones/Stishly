@@ -1,15 +1,11 @@
 <%# navigation styled for Bootstrap 3.0 %>
 <nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <%= link_to 'Home', root_path, class: 'navbar-brand' %>
-    </div>
-    <div class="collapse navbar-collapse">
-      <div class="navbar-menu-toggle clickable">
-        <ul class="nav navbar-menu hidden box-shadow">
-          <%= render 'layouts/navigation_links' %>
-        </ul>
-      </div>
+  <%= link_to image_tag("logo.svg", :class => "navbar__logo"), root_path %>
+  <div class="collapse navbar-collapse">
+    <div class="navbar__menu-toggle clickable">
+      <ul class="nav navbar__menu hidden box-shadow">
+        <%= render 'layouts/navigation_links' %>
+      </ul>
     </div>
   </div>
 </nav>

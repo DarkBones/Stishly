@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', ()=> {
-  $('.navbar-menu-toggle').on('click', (event) => {
-    $('.navbar-menu').toggle();
+  $('.navbar__menu-toggle').on('click', (event) => {
+    $('.navbar__menu').toggle();
   });
 });
