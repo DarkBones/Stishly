@@ -18,6 +18,17 @@ class AccountController < ApplicationController
   end
 
   def create
+    result = Account.create_new(params[:account], current_user)
+
+    if result.is_a? String
+      redirect_to root_path, :alert => result
+    else
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
+  def create_OLD
+    puts params
     result = Account.create_from_string(new_account_params, current_user)
     if (result === true)
       redirect_back(fallback_location: root_path)

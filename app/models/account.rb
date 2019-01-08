@@ -81,6 +81,10 @@ class Account < ApplicationRecord
     return CreateFromString.new(params, current_user).perform
   end
 
+  def self.create_new(params, current_user)
+    NewAccount.new(params, current_user).perform
+  end
+
   def self.create(params, current_user)
     existing_accounts = current_user.accounts.where('name' => params[:name])
 

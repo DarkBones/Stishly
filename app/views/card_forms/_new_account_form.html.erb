@@ -11,7 +11,7 @@
   <div class="card-form__form-row">
     <div class="card-form__form-col col-seven">
       <%= f.label :balance %><br />
-      <%= f.number_field :balance, placeholder: "1000.00", class: 'accountmenu__balance' %>
+      <%= f.number_field :balance, placeholder: "1000.00", class: 'accountmenu__balance', step: :any %>
     </div>
     <div class="card-form__form-col col-three">
       <%= f.label :currency %><br />
@@ -28,8 +28,7 @@
 
   <div class="card-form__form-row">
     <div class="card-form__form-col col-ten">
-      <%= f.label :make_default %><br />
-      <%= f.check_box :make_default %>
+      <%= f.submit %>
     </div>
   </div>
   <% end %>
