@@ -18,6 +18,7 @@ html, body {
 }
 
 header nav.navbar {
+  z-index: 1000;
   background-color: $default-color;
   padding: 0 10px;
   height: $navbar-height;
@@ -88,31 +89,6 @@ header nav.navbar {
   }
 }
 
-.card-form_NEW {
-  z-index: 500;
-  width: 450px;
-  position: fixed;
-  top: 100px;
-  *{
-    padding: 0;
-    margin: 0;
-  }
-  //left: 50%;
-  //margin-left: -225px;
-  background-color: white;
-  -webkit-box-shadow: 2px 2px 16px 1px rgba(0,0,0,0.27);
-  -moz-box-shadow: 2px 2px 16px 1px rgba(0,0,0,0.27);
-  box-shadow: 2px 2px 16px 1px rgba(0,0,0,0.27);
-  .card-form__form-row {
-    border: 1px solid blue;
-
-    .card-form__form-col{
-      border: 1px solid green;
-      float:left;
-    }
-  }
-}
-
 .card-form {
   z-index: 500;
   width: 450px;
@@ -130,84 +106,48 @@ header nav.navbar {
     padding: 15px;
     margin-top: 0;
     text-align: center;
+    color: white;
   }
   .card-form__form-row {
-    //border: 1px solid blue;
-    padding: 0 30px;
-    margin-top: 15px;
+    padding: 15px 15px;
+    clear: both;
     .card-form__form-col {
-      margin-right: 10px;
-      height: 50%;
-      //border: 1px solid green;
-      display: inline-block;
-      //float: left;
-      input, textarea {
-        width: 100%;
-      }
+      box-sizing: border-box;
+      padding: 0 15px;
+      float: left;
     }
   }
 }
 
 .col-one {
-  width: calc(10% - 15px);
+  width: 10%;
 }
 .col-two {
-  width: calc(20% - 15px);
+  width: 20%;
 }
 .col-three {
-  width: calc(30% - 15px);
+  width: 30%;
 }
 .col-four {
-  width: calc(40% - 15px);
+  width: 40%;
 }
 .col-five {
-  width: calc(50% - 15px);
+  width: 50%;
 }
 .col-six {
-  width: calc(60% - 15px);
+  width: 60%;
 }
 .col-seven {
-  width: calc(70% - 15px);
+  width: 70%;
 }
 .col-eight {
-  width: calc(80% - 15px);
+  width: 80%;
 }
 .col-nine {
-  width: calc(90% - 15px);
+  width: 90%;
 }
 .col-ten {
   width: 100%;
-}
-
-#accountmenu_OLD {
-  z-index: 500;
-  width: 450px;
-  height: 500px;
-  //border: 1px solid blue;
-  position: fixed;
-  background-color: white;
-  top: 50%;
-  left: 50%;
-  margin-top: -250px;
-  margin-left: -255px;
-  padding: 30px;
-  h2 {
-    margin-top: 0;
-  }
-  .accountmenu__name {
-    width: calc(100% - 20px);
-  }
-  .accountmenu__balance {
-    width: calc(100% - 40px - 70px);
-  }
-  select {
-    width:70px;
-    float: right;
-  }
-  .accountmenu__description {
-    width: calc(100% - 20px);
-    height: 100px;
-  }
 }
 
 .box-shadow {
@@ -246,6 +186,7 @@ header nav.navbar {
 
 input, textarea, select {
   box-sizing: border-box;
+  width: 100%;
   padding: 5px 10px;
   border-radius: 4px;
   border: 1px solid #DEDEDE;

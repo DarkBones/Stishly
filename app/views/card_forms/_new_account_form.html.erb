@@ -9,11 +9,11 @@
   </div>
 
   <div class="card-form__form-row">
-    <div class="card-form__form-col col-eight">
+    <div class="card-form__form-col col-seven">
       <%= f.label :balance %><br />
       <%= f.number_field :balance, placeholder: "1000.00", class: 'accountmenu__balance' %>
     </div>
-    <div class="card-form__form-col col-two">
+    <div class="card-form__form-col col-three">
       <%= f.label :currency %><br />
       <%= f.select(:currency, all_currencies(Money::Currency.table), selected: User.get_currency(current_user).iso_code, class: 'accountmenu__currency') %>
     </div>
