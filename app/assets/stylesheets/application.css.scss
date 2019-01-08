@@ -34,6 +34,8 @@ header nav.navbar {
     .navbar__menu-toggle {
       $navbar-button-size: 40px;
       background-color: $primary-color;
+      background-image: url('gear.svg');
+      border-radius: 100px;
       width: $navbar-button-size;
       height: $navbar-button-size;
       margin-top: ($navbar-height - $navbar-button-size) * 0.5;
