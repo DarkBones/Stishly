@@ -88,7 +88,98 @@ header nav.navbar {
   }
 }
 
-#accountmenu {
+.card-form_NEW {
+  z-index: 500;
+  width: 450px;
+  position: fixed;
+  top: 100px;
+  *{
+    padding: 0;
+    margin: 0;
+  }
+  //left: 50%;
+  //margin-left: -225px;
+  background-color: white;
+  -webkit-box-shadow: 2px 2px 16px 1px rgba(0,0,0,0.27);
+  -moz-box-shadow: 2px 2px 16px 1px rgba(0,0,0,0.27);
+  box-shadow: 2px 2px 16px 1px rgba(0,0,0,0.27);
+  .card-form__form-row {
+    border: 1px solid blue;
+
+    .card-form__form-col{
+      border: 1px solid green;
+      float:left;
+    }
+  }
+}
+
+.card-form {
+  z-index: 500;
+  width: 450px;
+  position: fixed;
+  background-color: white;
+  top: 100px;
+  left: 50%;
+  margin-left: -225px;
+  padding: 0 0 30px 0;
+  -webkit-box-shadow: 2px 2px 16px 1px rgba(0,0,0,0.27);
+  -moz-box-shadow: 2px 2px 16px 1px rgba(0,0,0,0.27);
+  box-shadow: 2px 2px 16px 1px rgba(0,0,0,0.27);
+  .card-form__title {
+    background-color: $primary-color;
+    padding: 15px;
+    margin-top: 0;
+    text-align: center;
+  }
+  .card-form__form-row {
+    //border: 1px solid blue;
+    padding: 0 30px;
+    margin-top: 15px;
+    .card-form__form-col {
+      margin-right: 10px;
+      height: 50%;
+      //border: 1px solid green;
+      display: inline-block;
+      //float: left;
+      input, textarea {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.col-one {
+  width: calc(10% - 15px);
+}
+.col-two {
+  width: calc(20% - 15px);
+}
+.col-three {
+  width: calc(30% - 15px);
+}
+.col-four {
+  width: calc(40% - 15px);
+}
+.col-five {
+  width: calc(50% - 15px);
+}
+.col-six {
+  width: calc(60% - 15px);
+}
+.col-seven {
+  width: calc(70% - 15px);
+}
+.col-eight {
+  width: calc(80% - 15px);
+}
+.col-nine {
+  width: calc(90% - 15px);
+}
+.col-ten {
+  width: 100%;
+}
+
+#accountmenu_OLD {
   z-index: 500;
   width: 450px;
   height: 500px;
@@ -153,12 +244,8 @@ header nav.navbar {
   }
 }
 
-.form-row {
-  width: 100%;
-  margin-top: 25px;
-}
-
 input, textarea, select {
+  box-sizing: border-box;
   padding: 5px 10px;
   border-radius: 4px;
   border: 1px solid #DEDEDE;
