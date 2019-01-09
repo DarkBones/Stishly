@@ -19,7 +19,7 @@ class Account < ApplicationRecord
   validates :name, :user_id, presence: true
 
   belongs_to :user
-  has_many :transactions
+  has_many :transactions, through: :categories
   has_many :setting_values, :as => :entity
   has_many :settings, through: :setting_values
 

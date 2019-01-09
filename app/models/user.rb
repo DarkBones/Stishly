@@ -36,12 +36,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable
   has_many :accounts
-  has_many :transactions, through: :accounts
   has_many :setting_values, :as => :entity
   has_many :settings, through: :setting_values
   belongs_to :subscription_tier
   has_many :schedules
   has_many :categories
+  has_many :transactions, through: :categories
 
   validates :country_code, :first_name, :last_name, presence: true
 

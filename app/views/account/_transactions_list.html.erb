@@ -2,7 +2,9 @@
   <%= content_for t.local_datetime.to_date do %>
     <a href="<%= transaction_path + '/' + t.id.to_s %>" class="no-link-style">
       <li>
-        <%= image_tag 'categories/' + t.category.symbol + '.svg', :style => "background-color: #" + t.category.color + ";" %>
+        <% puts t.category.color %>
+        <% puts '//////////////////////////////' %>
+        <%= image_tag 'categories/' + t.category.symbol + '.svg', :style => "background-color: hsl(" + t.category.color + ");" %>
         <%= t.description %>
         <span class="balance float-right">
           <%= balance(t.amount.to_f, Money::Currency.new(t.currency), "cents") %>
