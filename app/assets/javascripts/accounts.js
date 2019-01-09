@@ -1,6 +1,7 @@
 $(document).on('turbolinks:load', ()=> {
 
   $('#create-account-button').on('click', () => {
+    $('#overlay').fadeToggle(200);
     $('#accountmenu').slideToggle(100);
     $(".accountmenu__name").focus();
   });

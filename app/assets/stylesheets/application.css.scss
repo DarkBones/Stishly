@@ -13,6 +13,16 @@ html, body {
   color: $default-color;
 }
 
+#overlay {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 100;
+  background-color: $default-color;
+  opacity: 0.7;
+}
+
 .float-right {
   float: right;
 }
