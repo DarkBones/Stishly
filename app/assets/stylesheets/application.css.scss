@@ -122,6 +122,26 @@ header nav.navbar {
   }
 }
 
+.alert {
+  z-index: 2000;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  margin-left: -250px;
+  width: 500px;
+  text-align: center;
+  font-weight: bolder;
+  padding: 25px;
+  background-color: #ededed;
+}
+
+.alert-danger{
+  color: #9E1A00;
+}
+.alert-success{
+  color: $primary-color;
+}
+
 .col-one {
   width: 10%;
 }
