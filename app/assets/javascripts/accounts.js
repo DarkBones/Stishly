@@ -1,5 +1,8 @@
 $(document).on('turbolinks:load', ()=> {
 
+  // Disable the submit button
+  $("#accountmenu").find("input[type=submit]").attr("disabled", "disabled");
+
   $('#create-account-button').on('click', () => {
     $('#overlay').fadeToggle(200);
     $('#accountmenu').slideToggle(100);
@@ -16,8 +19,14 @@ $(document).on('turbolinks:load', ()=> {
 
   // don't allow dots in input field
   $('.accountmenu__name').keyup(function(e){
-    if (e.which == 190){
-      $('.accountmenu__name').val($('.accountmenu__name').val().replace(".", ""));
+    name_value = $('.accountmenu__name').val()
+    $('.accountmenu__name').val(name_value.replace(/\./g, ""));
+
+    // Activate submit button if name is provided
+    if (name_value.length > 0){
+      $("#accountmenu").find("input[type=submit]").removeAttr("disabled");
+    } else{
+      $("#accountmenu").find("input[type=submit]").attr("disabled", "disabled");
     }
   });
 });

@@ -27,16 +27,6 @@ class AccountController < ApplicationController
     end
   end
 
-  def create_OLD
-    puts params
-    result = Account.create_from_string(new_account_params, current_user)
-    if (result === true)
-      redirect_back(fallback_location: root_path)
-    else
-      redirect_to root_path, :alert => result
-    end
-  end
-
   def sort
     params[:account].each_with_index do |id, index|
       Account.where(id: id).update_all(position: index + 1)
