@@ -70,4 +70,12 @@ class AccountTest < ActiveSupport::TestCase
     assert account.currency == 'EUR', format_error('Unexpected account currency', 'EUR', account.currency)
     assert account.description == 'Test description', format_error('Unexpected account description', 'Test description', account.description)
   end
+
+  test "Get currency" do
+    current_user = users(:bas)
+    account = current_user.accounts.first
+
+    currency = Account.get_currency(account)
+    assert currency.is_a?(Money::Currency), format_error('Unexpected currency class', 'Money::Currency', currency.class.name)
+  end
 end
