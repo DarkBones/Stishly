@@ -25,7 +25,6 @@ class SettingsTest < ApplicationSystemTestCase
     take_screenshot
   end
 
-<<<<<<< HEAD
   test "Change account currency" do
     """
     Change the currency account setting
@@ -45,6 +44,4 @@ class SettingsTest < ApplicationSystemTestCase
 
     #take_screenshot
   end
-=======
->>>>>>> master
 end

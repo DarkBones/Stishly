@@ -5,6 +5,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   def login_user(user, password)
     visit root_path
+
+    page.find(".navbar__menu-toggle").click
     click_on "Sign in"
 
     fill_in "Email", with: user.email

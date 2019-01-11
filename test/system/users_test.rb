@@ -15,8 +15,11 @@ class UsersTest < ApplicationSystemTestCase
     visit root_path
 
     assert_selector 'h1', text: 'Welcome'
-    assert_selector '.navbar-nav', text: 'Sign up'
-    assert_selector '.navbar-nav', text: 'Sign in'
+
+    page.find(".navbar__menu-toggle").click
+
+    assert_selector '.navbar__menu', text: 'Sign up'
+    assert_selector '.navbar__menu', text: 'Sign in'
 
     take_screenshot
   end
@@ -109,4 +112,5 @@ class UsersTest < ApplicationSystemTestCase
     assert_selector '#flash_notice', text: 'Signed in successfully'
     assert_selector '#left-menu', text: 'Create an account by clicking the + button'
   end
+
 end
