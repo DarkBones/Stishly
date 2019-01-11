@@ -4,8 +4,7 @@ $(document).on('turbolinks:load', ()=> {
   $("#accountmenu").find("input[type=submit]").attr("disabled", "disabled");
 
   $('#create-account-button').on('click', () => {
-    $('#overlay').fadeToggle(200);
-    $('#accountmenu').slideToggle(100);
+    ToggleCardForm('#accountmenu');
     $(".accountmenu__name").focus();
   });
 
