@@ -32,7 +32,10 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "Get currency" do
+    current_user = users(:bas)
+
+    currency = User.get_currency(current_user)
+    assert currency.is_a?(Money::Currency), format_error('Unexpected currency class', 'Money::Currency', currency.class.name)
+  end
 end
