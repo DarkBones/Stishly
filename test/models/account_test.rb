@@ -51,12 +51,23 @@ class AccountTest < ActiveSupport::TestCase
 
   test "Create duplicate account" do
     current_user = users(:bas)
-    params = {account_string: 'from_string account 9.99'}
 
     a1 = Account.create({:name => 'test duplicate'}, current_user)
     a2 = Account.create({:name => 'test duplicate'}, current_user)
 
     assert_not a2.is_a?(ActiveRecord::Base), format_error("Created duplicate account name")
     assert a2 == I18n.t('account.failure.already_exists'), format_error("Unexpected error", I18n.t('account.failure.already_exists'), a2)
+  end
+
+  test "Create new account" do
+    current_user = users(:bas)
+    params = {name: 'New account', balance: 500, currency: 'EUR', description: 'Test description'}
+
+    account = Account.create_new(params, current_user)
+
+    assert account.name == 'New account', format_error("Unexpected account name", 'New account', account.name)
+    assert account.balance == 50000, format_error("Unexpected account balance", 50000, account.balance)
+    assert account.currency == 'EUR', format_error('Unexpected account currency', 'EUR', account.currency)
+    assert account.description == 'Test description', format_error('Unexpected account description', 'Test description', account.description)
   end
 end
