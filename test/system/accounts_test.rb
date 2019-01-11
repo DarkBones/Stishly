@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
 class AccountsTest < ApplicationSystemTestCase
-  test "Account tests" do
+  test "Account creation tests" do
 
     login_as_blank
 
@@ -72,16 +72,6 @@ class AccountsTest < ApplicationSystemTestCase
     click_on "Save Account"
 
     # Check if the new accounts shows up in the left menu
-    #assert_selector '#accounts_list', text: "All\n€ 15,400.50\ntest account one\n€ 0.00\ntest account two\n€ 5,000.00\ntest account three\n€ 10,000.42\ntest account four\n¥ 50,000\ntest account five\n€ 0.08"
-
-    #page.find(".account-button:nth-child(2)").hover
-
-    #element = page.find(".account-button:nth-child(2) .sort-handle")
-    #target = page.find(".account-button:nth-child(6)")
-
-    #element.drag_to target
-
-    #take_screenshot
-    #puts element[:class]
+    assert_selector '#accounts_list', text: "All\n€ 15,400.50\ntest account one\n€ 0.00\ntest account two\n€ 5,000.00\ntest account three\n€ 10,000.42\ntest account four\n¥ 50,000\ntest account five\n€ 0.08"
   end
 end
