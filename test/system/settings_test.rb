@@ -14,34 +14,16 @@ class SettingsTest < ApplicationSystemTestCase
 
     login_user(user, password)
 
+    page.find(".navbar__menu-toggle").click
+
     click_on "Settings"
 
-    select "JPY - Japanese Yen", from: "setting_value_currency"
+    select "JPY", from: "setting_value_currency"
 
     click_on "Save"
 
-    assert_selector '#accounts_list', text: "All\n¥ 257"
+    assert_selector '#accounts_list', text: "All\n¥ 248"
 
     take_screenshot
-  end
-
-  test "Change account currency" do
-    """
-    Change the currency account setting
-    Expected result:
-    - See new currency in account listing
-    - Account balance converted
-    """
-
-    # TODO
-
-    #user = users(:bas)
-    #password = "SomePassword123^!"
-
-    #login_user(user, password)
-
-    #visit "account/2"
-
-    #take_screenshot
   end
 end

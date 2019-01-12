@@ -28,7 +28,9 @@ conversion_test_1: {
   account_id: 11,
   amount: 100,
   account_currency_amount: 100,
-  currency: "EUR"
+  currency: "EUR",
+  local_datetime: "<%= Time.now %>",
+  timezone: "Europe/London"
 }
 
 conversion_test_2: {
@@ -37,7 +39,9 @@ conversion_test_2: {
   account_id: 11,
   amount: 100,
   account_currency_amount: 100,
-  currency: "EUR"
+  currency: "EUR",
+  local_datetime: "<%= Time.now %>",
+  timezone: "Europe/London"
 }
 
 conversion_test_3: {
@@ -48,7 +52,9 @@ conversion_test_3: {
   account_currency_amount: 100,
   currency: "EUR",
   created_at: "2018-01-01 00:00",
-  updated_at: "2018-01-01 00:00"
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= Time.now %>",
+  timezone: "Europe/London"
 }
 
 conversion_test_4: {
@@ -59,7 +65,9 @@ conversion_test_4: {
   account_currency_amount: 100,
   currency: "EUR",
   created_at: "2018-01-01 00:00",
-  updated_at: "2018-01-01 00:00"
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= Time.now %>",
+  timezone: "Europe/London"
 }
 
 <% for i in 1..5 %>

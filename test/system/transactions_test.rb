@@ -25,7 +25,7 @@ class TransactionsTest < ApplicationSystemTestCase
       end
     end
 
-    take_screenshot
+    #take_screenshot
   end
 
   test "Create transactions" do
@@ -40,7 +40,7 @@ class TransactionsTest < ApplicationSystemTestCase
     visit "/account/#{URI.encode("Test account")}"
 
     fill_in "quick-transaction-input", with: "payday +2060"
-    select "EUR - Euro", from: "transaction[currency]"
+    select "EUR", from: "transaction[currency]"
     click_on "Create"
 
     assert_selector "#transactions_#{Time.now.strftime("%Y-%m-%d").to_s}", text: "payday\n€ 2,060.00"
