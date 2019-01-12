@@ -2,8 +2,6 @@
   <%= content_for t.local_datetime.to_date do %>
     <a href="<%= transaction_path + '/' + t.id.to_s %>" class="no-link-style">
       <li>
-        <% puts t.category.color %>
-        <% puts '//////////////////////////////' %>
         <%= image_tag 'categories/' + t.category.symbol + '.svg', :style => "background-color: hsl(" + t.category.color + ");" %>
         <%= t.description %>
         <span class="balance float-right">

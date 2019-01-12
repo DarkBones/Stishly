@@ -74,4 +74,43 @@ class AccountsTest < ApplicationSystemTestCase
     # Check if the new accounts shows up in the left menu
     assert_selector '#accounts_list', text: "All\n€ 15,400.50\ntest account one\n€ 0.00\ntest account two\n€ 5,000.00\ntest account three\n€ 10,000.42\ntest account four\n¥ 50,000\ntest account five\n€ 0.08"
   end
+
+  test "Transaction visible test" do
+
+    current_user = users(:bas)
+
+    login_user(current_user, 'SomePassword123^!')
+
+    for i in 1..5
+        page.find("#account_#{i}").click
+
+        for x in 1..i
+            assert_selector 'li', text: "transaction " + x.to_s + "\n€ #{x}.00"
+        end
+    end
+
+    take_screenshot
+
+  end
+
+  test "Endless page test" do
+    current_user = users(:endless_page)
+
+    login_user(current_user, 'SomePassword123^!')
+
+    page.find("#account_13").click
+
+    sleep 1
+    assert_selector 'li', text: "transaction 1\n€ 1.00"
+    assert_select 'li', {count: 0, text: "transaction 100"}
+
+    5.times do
+        page.execute_script "window.scrollBy(0,10000)"
+        sleep 1
+    end
+
+    assert_selector 'li', text: "transaction 100"
+
+    take_screenshot
+  end
 end

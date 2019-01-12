@@ -465,7 +465,7 @@ class User < ApplicationRecord
       },
       {
         name: "Maintenance",
-        symbol: "vehicle_maintenance",
+        symbol: "maintenance_vehicle",
         parent_id: vehicle.id
       },
       {

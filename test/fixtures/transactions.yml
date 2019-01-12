@@ -76,3 +76,17 @@ transaction_<%= i %>_<%= x %>: {
 }
   <% end %>
 <% end %>
+
+<% for i in 1..100 %>
+endless_page<%= i %>: {
+  user_id: 6,
+  description: <%= "transaction " + i.to_s %>,
+  account_id: 13,
+  amount: <%= i * 100 %>,
+  account_currency_amount: <%= i * 100 %>,
+  currency: 'EUR',
+  local_datetime: "<%= i.minutes.ago %>",
+  timezone: "Europe/London",
+  category_id: <%= i % 83 %>
+}
+<% end %>

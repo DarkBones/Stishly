@@ -109,3 +109,12 @@ currency_2: {
   is_default: false,
   currency: 'EUR'
 }
+
+endless_page: {
+  id: 13,
+  balance: 10000,
+  user_id: 6,
+  name: 'Endless Page',
+  is_default: true,
+  currency: 'EUR'
+}

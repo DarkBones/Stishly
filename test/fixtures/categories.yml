@@ -84,6 +84,6 @@ taxi76: { id: 76, name: 'Taxi', color: '288, 100%, 50%', symbol: 'taxi', user_id
 fuel77: { id: 77, name: 'Fuel', color: '324, 100%, 50%', symbol: 'fuel', user_id: 1, parent_id: 10}
 vehicle_insurance78: { id: 78, name: 'Insurance', color: '324, 100%, 50%', symbol: 'vehicle_insurance', user_id: 1, parent_id: 10}
 lease79: { id: 79, name: 'Lease', color: '324, 100%, 50%', symbol: 'lease', user_id: 1, parent_id: 10}
-vehicle_maintenance80: { id: 80, name: 'Maintenance', color: '324, 100%, 50%', symbol: 'vehicle_maintenance', user_id: 1, parent_id: 10}
+vehicle_maintenance80: { id: 80, name: 'Maintenance', color: '324, 100%, 50%', symbol: 'maintenance_vehicle', user_id: 1, parent_id: 10}
 parking81: { id: 81, name: 'Parking', color: '324, 100%, 50%', symbol: 'parking', user_id: 1, parent_id: 10}
 rentals82: { id: 82, name: 'Rental', color: '324, 100%, 50%', symbol: 'rentals', user_id: 1, parent_id: 10}
