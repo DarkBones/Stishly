@@ -17,4 +17,8 @@ class TransactionController < ApplicationController
     # TODO: Error handling if @result != 200
     redirect_back(fallback_location: root_path)
   end
+
+  def create
+
+  end
 end

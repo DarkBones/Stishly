@@ -1,7 +1,53 @@
-<%= form_for :transaction, :url => url_for(:controller => 'transaction', :action => 'create_quick') do |f| %>
-  <%= f.text_field :transaction_string, class: 'timezone-on-focus', id: 'quick-transaction-input' %>
-  <%= f.select(:currency, all_currencies(Money::Currency.table), selected: Account.get_currency(locals[:active_account]).iso_code) %>
-  <%= hidden_field_tag 'account_id', locals[:active_account].form_id %>
-  <%= f.hidden_field :timezone, id: 'timezone_input' %>
-  <%= f.submit 'Create' %>
-<% end %>
+<div id="transactionmenu" class="card-form">
+  <h2 class="card-form__title">Create New Transaction<span class="card-form__close"></span></h2>
+
+  <%= form_for :transaction, :url => url_for(:controller => 'transaction', :action => 'create') do |f| %>
+    <div class="card-form__form-row">
+      <div class="card-form__form-col col-ten">
+        <%= f.label :name %><br />
+        <%= f.text_field :name, class: 'accountmenu__description' %>
+      </div>
+    </div>
+
+    <div class="card-form__form-row">
+      <div class="card-form__form-col col-ten">
+        <%= f.label :type %><br />
+        <%= f.select(:type, ["Expence", "Income", "Transfer"]) %>
+      </div>
+    </div>
+
+    <div class="card-form__form-row">
+      <div class="card-form__form-col col-seven">
+        <%= f.label :account %><br />
+        <%= f.select(:account, user_accounts_array) %>
+      </div>
+      <div class="card-form__form-col col-three">
+        <%= f.label :currency %><br />
+        <%= f.select(:currency, all_currencies(Money::Currency.table), selected: User.get_currency(current_user).iso_code, class: 'accountmenu__currency') %>
+      </div>
+    </div>
+
+    <div class="card-form__form-row">
+      <div class="card-form__form-col col-ten">
+        <%= f.label :category %><br />
+        <%= render partial: "shared/custom_dropdown", locals: {
+          selected: "help",
+          options: Category.get_user_categories(current_user, true),
+        } %>
+      </div>
+    </div>
+
+    <div class="card-form__form-row">
+      <div class="card-form__form-col col-ten">
+        <%= f.label :transactions %><br />
+        <%= f.text_area :transactions, class: 'accountmenu__description' %>
+      </div>
+    </div>
+
+    <div class="card-form__form-row">
+      <div class="card-form__form-col col-ten">
+        <%= f.submit %>
+      </div>
+    </div>
+  <% end %>
+</div>
