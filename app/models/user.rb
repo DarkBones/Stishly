@@ -41,7 +41,7 @@ class User < ApplicationRecord
   belongs_to :subscription_tier
   has_many :schedules
   has_many :categories
-  has_many :transactions, through: :categories
+  has_many :transactions, through: :accounts
 
   validates :country_code, :first_name, :last_name, presence: true
 

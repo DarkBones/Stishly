@@ -12,12 +12,14 @@ class Account
       days = {}
       @transactions.each do |t|
         day = t.local_datetime.to_date
+
         if !days.keys.include? day
           if @account_id == 0
             days[day] = @current_user.transactions.where("DATE(transactions.local_datetime) = DATE(?)", day).sum(:account_currency_amount)
 
           else
             days[day] = @current_user.transactions.where("DATE(transactions.local_datetime) = DATE(?) AND account_id = ?", day, @account_id).sum(:account_currency_amount)
+
           end
         end
       end
