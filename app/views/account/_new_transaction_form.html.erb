@@ -30,10 +30,11 @@
     <div class="card-form__form-row">
       <div class="card-form__form-col col-ten">
         <%= f.label :category %><br />
-        <%= render partial: "shared/custom_dropdown", locals: {
-          selected: "help",
-          options: Category.get_user_categories(current_user, true),
+        <%= render partial: "shared/custom_dropdown_categories", locals: {
+          selected: Category.get_user_categories(current_user, true, true).first,
+          options: Category.get_user_categories(current_user, true, true),
         } %>
+        <%= f.text_field :category %>
       </div>
     </div>
 

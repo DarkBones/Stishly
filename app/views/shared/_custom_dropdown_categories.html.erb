@@ -1,0 +1,22 @@
+<div class="dropdown clickable">
+  <div class="dropdown__selected">
+    <%= image_tag 'categories/' + selected[:category].symbol + '.svg', :style => "background-color: hsl(" + selected[:category].color + ");" %>
+    <%= selected[:category].name %>
+  </div>
+  <div class="dropdown__options">
+    <input id="search-categories" placeholder="Search"></input>
+    <% current_level = -1 %>
+    <% options.each do |option| %>
+      <% if option[:level] > current_level %>
+        <% current_level = option[:level] %>
+        <ul>
+      <% elsif option[:level] < current_level %>
+        <% (current_level - option[:level]).times do %>
+          </ul>
+        <% end %>
+        <% current_level = option[:level] %>
+      <% end %>
+      <li class="category_<%= option[:category].id %>"><%= image_tag 'categories/' + option[:category].symbol + '.svg', :style => "background-color: hsl(" + option[:category].color + ");" %><%= option[:category].name %></li>
+    <% end %>
+  </div>
+</div>
