@@ -34,7 +34,7 @@
           selected: Category.get_user_categories(current_user, true, true).first,
           options: Category.get_user_categories(current_user, true, true),
         } %>
-        <%= f.text_field :category, value: Category.get_user_categories(current_user, true, true).first[:category].id %>
+        <%= f.hidden_field :category, value: Category.get_user_categories(current_user, true, true).first[:category].id %>
       </div>
     </div>
 
