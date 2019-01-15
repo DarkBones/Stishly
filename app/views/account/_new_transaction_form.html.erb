@@ -39,9 +39,23 @@
     </div>
 
     <div class="card-form__form-row">
+      <div class = "card-form__form-col col-ten">
+        <%= f.label :multiple_transactions %>
+        <%= f.check_box(:multiple_transactions) %>
+      </div>
+    </div>
+
+    <div class="card-form__form-row transactions_menu_multiple">
       <div class="card-form__form-col col-ten">
         <%= f.label :transactions %><br />
-        <%= f.text_area :transactions, class: 'accountmenu__description' %>
+        <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: 'accountmenu__description' %>
+      </div>
+    </div>
+
+    <div class="card-form__form-row transactions_menu_single">
+      <div class="card-form__form-col col-ten">
+        <%= f.label :amount %><br />
+        <%= f.number_field :amount, placeholder: "99.87", class: 'accountmenu__balance', step: :any %>
       </div>
     </div>
 

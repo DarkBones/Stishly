@@ -274,6 +274,10 @@ input, textarea, select, .dropdown {
   font-size: 14px;
 }
 
+textarea {
+  height: 200px;
+}
+
 .clickable {
   cursor: pointer;
 }
