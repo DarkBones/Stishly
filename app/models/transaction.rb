@@ -44,7 +44,7 @@ class Transaction < ApplicationRecord
     Account.add(account_id, params[:amount])
   end
 
-  def self.create(params, current_user)
+  def self.create_OLD2(params, current_user)
     t = self.new
     t.description = params[:transaction][:description]
     t.account_id = current_user.accounts.where(name: params[:transaction][:account]).take.id
@@ -52,10 +52,26 @@ class Transaction < ApplicationRecord
     t.user_id = current_user.id
     t.category_id = params[:transaction][:category_id]
 
+    amount = 0
     if params[:transaction][:amount]
-      t.amount = params[:transaction][:amount]
+      amount = params[:transaction][:amount]
+    end
+
+    t.timezone = params[:transaction][:timezone]
+
+    tz = TZInfo::Timezone.get(params[:transaction][:timezone])
+    t.local_datetime = tz.utc_to_local(Time.now)
+
+    currency = Money::Currency.new(params[:transaction][:currency])
+
+    if currency.subunit_to_unit > 0
+      amount *= currency.subunit_to_unit
     end
 
     t.save
+  end
+
+  def self.create(params, current_user)
+    CreateFromForm.new(params, current_user).perform
   end
 end
