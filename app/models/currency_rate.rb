@@ -17,8 +17,16 @@ class CurrencyRate < ApplicationRecord
     if currency_rate
       rate = currency_rate.rate
     else
-      rate = Concurrency.conversion_rate(from, to)
-      self.update_rate(from, to, rate)
+      begin
+        rate = Concurrency.conversion_rate(from, to)
+        self.update_rate(from, to, rate)
+      rescue
+        rate = self.where(from_currency: from, to_currency: to).take()
+        if !rate
+          rate = 0
+        end
+      end
+      
     end
     return rate
   end

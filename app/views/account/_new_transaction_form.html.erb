@@ -4,15 +4,15 @@
   <%= form_for :transaction, :url => url_for(:controller => 'transaction', :action => 'create') do |f| %>
     <div class="card-form__form-row">
       <div class="card-form__form-col col-ten">
-        <%= f.label :name %><br />
-        <%= f.text_field :name, class: 'accountmenu__description' %>
+        <%= f.label :description %><br />
+        <%= f.text_field :description, class: 'accountmenu__description' %>
       </div>
     </div>
 
     <div class="card-form__form-row">
       <div class="card-form__form-col col-ten">
         <%= f.label :type %><br />
-        <%= f.select(:type, ["Expence", "Income", "Transfer"]) %>
+        <%= f.select(:type, ["Expense", "Income", "Transfer"]) %>
       </div>
     </div>
 
@@ -34,7 +34,7 @@
           selected: Category.get_user_categories(current_user, true, true).first,
           options: Category.get_user_categories(current_user, true, true),
         } %>
-        <%= f.hidden_field :category, value: Category.get_user_categories(current_user, true, true).first[:category].id %>
+        <%= f.hidden_field :category_id, value: Category.get_user_categories(current_user, true, true).first[:category].id %>
       </div>
     </div>
 

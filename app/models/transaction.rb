@@ -24,8 +24,10 @@ class Transaction < ApplicationRecord
     transaction = CreateFromString.new(params, current_user).perform
   end
 
-  def self.create(account_id, params, current_user)
+  def self.create_OLD(account_id, params, current_user)
     account_currency = Account.get_currency(Account.find(account_id))
+
+    puts params
 
     if account_currency.iso_code != params[:currency]
       params[:account_currency_amount] = CurrencyRate.convert(params[:amount], Money::Currency.new(params[:currency]), account_currency)
@@ -40,5 +42,20 @@ class Transaction < ApplicationRecord
     transaction.save
 
     Account.add(account_id, params[:amount])
+  end
+
+  def self.create(params, current_user)
+    t = self.new
+    t.description = params[:transaction][:description]
+    t.account_id = current_user.accounts.where(name: params[:transaction][:account]).take.id
+    t.currency = params[:transaction][:currency]
+    t.user_id = current_user.id
+    t.category_id = params[:transaction][:category_id]
+
+    if params[:transaction][:amount]
+      t.amount = params[:transaction][:amount]
+    end
+
+    t.save
   end
 end
