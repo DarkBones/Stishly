@@ -13,13 +13,13 @@ class Transaction
     def perform
       if @type == 'expense' || @type == 'income'
         @account_name = @params[:account]
-        @account_id = @current_user.accounts.where(name: @account_name).take
+        @account_id = @current_user.accounts.where(name: @account_name).take.id
       else
         @from_account_name = params[:from_account]
         @to_account_name = params[:to_account]
 
-        @from_account_id = @current_user.accounts.where(name: @from_account_name).take
-        @to_account_id = @current_user.accounts.where(name: @to_account_name).take
+        @from_account_id = @current_user.accounts.where(name: @from_account_name).take.id
+        @to_account_id = @current_user.accounts.where(name: @to_account_name).take.id
       end
 
       @direction = 1
@@ -32,10 +32,12 @@ class Transaction
       tz = TZInfo::Timezone.get(@params[:timezone])
       @local_datetime = tz.utc_to_local(Time.now)
 
-      if @params[:multiple_transactions]
+      if @params[:multiple_transactions] == true
         # TODO: Parse multiple transactions
       else
         @amount = @params[:amount]
+
+        puts '//////////////////////'
 
         if Account.find(@account_id).currency != @params[:currency]
           @account_currency_amount = CurrencyRate.convert(@amount, @currency, Money::Currency.new(Account.find(@account_id).currency))
@@ -51,10 +53,12 @@ class Transaction
         t.direction = @direction
         t.description = @description
         t.account_id = @account_id
+        t.currency = @params[:currency]
         t.timezone = @params[:timezone]
         t.local_datetime = @local_datetime
         t.account_currency_amount = @account_currency_amount
         t.category_id = @category_id
+        puts t
         t.save
       end
     end
