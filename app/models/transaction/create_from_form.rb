@@ -1,4 +1,125 @@
 class Transaction
+	class CreateFromForm
+		def initialize(params, current_user)
+			@current_user = current_user
+			@params = params[:transaction]
+		end
+		
+		def perform
+			details = get_details
+			
+			Account.create_transaction(details, @current_user)
+		end
+		
+private
+
+		def get_details
+			tz = TZInfo::Timezone.get(@params[:timezone])
+			details = {
+				accounts: get_accounts,
+				currency: Money::Currency.new(@params[:currency]),
+				local_datetime: tz.utc_to_local(Time.now),
+				transactions: get_transactions(currency)
+			}
+			
+			return details
+		end
+
+		def get_accounts
+			type = @params[:type].downcase
+			if type == 'expense' || type == 'income'
+				account_name = @params[:account]
+				account = @current_user.accounts.where(name: account_name).take
+				
+				result = {
+					account: account
+				}
+				
+				return result
+			else
+				from_account_name = @params[:from_account]
+				to_account_name = @params[:to_account]
+				
+				from_account = @current_user.accounts.where(name: from_account_name).take
+				to_account = @current_user.accounts.where(name: to_account_name).take
+				
+				result = {
+					from_account: from_account,
+					to_account:	to_account
+				}
+				
+				return result
+			end
+		end
+		
+		def get_direction
+			type = @params[:type].downcase
+			
+			type == 'expense' ? return -1 : return 1
+		end
+		
+		def get_transactions(currency)
+			
+			if @params[:multiple_transactions] == true
+				transactions = parse_multiple_transactions(currency, get_direction)
+			else
+				return {
+					description: @params[:description],
+					user_id: @current_user.id,
+					amount: convert_amount(params[:amount], currency, get_direction),
+					currency: currency.iso_code
+				}
+			end
+			
+		end
+		
+		def parse_multiple_transactions(currency, direction)
+			transactions = []
+			
+			reg = ".+\s+[\.,]*[0-9\.]+$"
+			
+			transaction_text = @params[:transactions]
+			transaction_list = transaction_text.split("\n")
+			
+			transaction_list.each do |t_name_amount|
+				if /#{reg}/.match(t_name_amount)
+					name_amount = t_name_amount.split
+					
+					transaction_name = name_amount[0..-2].join(' ')
+					
+					amount = name_amount[-1]
+					
+					amount = amount.sub(',', '.')
+					
+					amount = convert_amount(amount, currency, direction)
+					
+					transaction = {
+						description: transaction_name,
+						user_id: @current_user.id,
+						amount: amount,
+						currency: currency.iso_code
+					}
+					
+					transactions.push(transaction)
+				end
+			end
+			
+			return transactions
+		end
+		
+		def convert_amount(amount, currency, direction)
+			if currency.subunit_to_unit > 0
+				amount = (amount.to_f * currency.subunit_to_unit).round.to_i
+			end
+			
+			return amount * direction
+		end
+		
+	end
+end
+
+=begin
+class Transaction
   class CreateFromForm
     def initialize(params, current_user)
       @current_user = current_user
@@ -73,3 +194,4 @@ class Transaction
 
   end
 end
+=end
