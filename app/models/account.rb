@@ -24,7 +24,28 @@ class Account < ApplicationRecord
   has_many :settings, through: :setting_values
   
   def self.create_transaction(details, current_user)
-    
+    puts details
+    puts '//////////////////////////////'
+
+    if details[:transactions].length > 1
+      t = Transaction.new
+      t.description = details[:description]
+      t.amount = details[:transactions][:total_amount]
+      t.user_id = details[:user_id]
+      if details[:type] == 'transfer'
+
+      else
+        t.account_id = details[:accounts][:account].id
+      end
+
+      t.timezone = details[:timezone]
+      t.local_datetime = details[:local_datetime]
+      t.currency = details[:currency].iso_code
+
+      t.save
+    else
+
+    end
   end
 
   def self.get_accounts(current_user)

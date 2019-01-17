@@ -15,11 +15,17 @@ private
 
 		def get_details
 			tz = TZInfo::Timezone.get(@params[:timezone])
+      currency = Money::Currency.new(@params[:currency])
 			details = {
+        type: @params[:type].downcase,
+        description: @params[:description],
+        user_id: @current_user.id,
 				accounts: get_accounts,
-				currency: Money::Currency.new(@params[:currency]),
+				currency: currency,
+        timezone: @params[:timezone],
 				local_datetime: tz.utc_to_local(Time.now),
-				transactions: get_transactions(currency)
+				transactions: get_transactions(currency),
+        category_id: @params[:category_id]
 			}
 			
 			return details
@@ -55,19 +61,27 @@ private
 		def get_direction
 			type = @params[:type].downcase
 			
-			type == 'expense' ? return -1 : return 1
+			type == 'expense' ? direction = -1 : direction = 1
+
+      return direction
 		end
 		
 		def get_transactions(currency)
-			
-			if @params[:multiple_transactions] == true
-				transactions = parse_multiple_transactions(currency, get_direction)
+			puts @params[:multiple_transactions].class.name
+      puts 'MMMMMMMMMMMMM'
+			if @params[:multiple_transactions] == '1'
+        puts 'mmmmmmmmmmmmmmm'
+				return parse_multiple_transactions(currency, get_direction)
 			else
+        amount = convert_amount(@params[:amount], currency, get_direction)
 				return {
-					description: @params[:description],
-					user_id: @current_user.id,
-					amount: convert_amount(params[:amount], currency, get_direction),
-					currency: currency.iso_code
+					transactions: [{
+            description: @params[:description],
+            user_id: @current_user.id,
+            amount: amount,
+            currency: currency.iso_code
+          }],
+          total_amount: amount
 				}
 			end
 			
@@ -75,6 +89,8 @@ private
 		
 		def parse_multiple_transactions(currency, direction)
 			transactions = []
+
+      total_amount = 0
 			
 			reg = ".+\s+[\.,]*[0-9\.]+$"
 			
@@ -82,6 +98,7 @@ private
 			transaction_list = transaction_text.split("\n")
 			
 			transaction_list.each do |t_name_amount|
+        t_name_amount.strip!
 				if /#{reg}/.match(t_name_amount)
 					name_amount = t_name_amount.split
 					
@@ -92,6 +109,7 @@ private
 					amount = amount.sub(',', '.')
 					
 					amount = convert_amount(amount, currency, direction)
+          total_amount += amount
 					
 					transaction = {
 						description: transaction_name,
@@ -104,7 +122,10 @@ private
 				end
 			end
 			
-			return transactions
+			return {
+        transactions: transactions,
+        total_amount: total_amount
+      }
 		end
 		
 		def convert_amount(amount, currency, direction)
