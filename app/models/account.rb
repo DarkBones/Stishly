@@ -22,6 +22,10 @@ class Account < ApplicationRecord
   has_many :transactions
   has_many :setting_values, :as => :entity
   has_many :settings, through: :setting_values
+  
+  def self.create_transaction(details, current_user)
+    
+  end
 
   def self.get_accounts(current_user)
     return GetAccounts.new(current_user).perform
