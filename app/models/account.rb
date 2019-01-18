@@ -23,28 +23,109 @@ class Account < ApplicationRecord
   has_many :setting_values, :as => :entity
   has_many :settings, through: :setting_values
   
-  def self.create_transaction(details, current_user)
-    puts details
+  def self.create_transaction(details, current_user, self_called = false)
+    require 'yaml'
+    puts details.to_yaml
     puts '//////////////////////////////'
-
+    
     if details[:transactions].length > 1
+      parent_t = Transaction.new
+      parent_t.description = details[:description]
+      if !self_called
+        parent_t.amount = details[:transactions][:total_amount]
+      else
+        parent_t.amount = details[:transactions][:total_amount] * -1
+      end
+      
+      parent_t.user_id = details[:user_id]
+      if details[:type] == 'transfer'
+        if !self_called
+          parent_t.account_id = details[:accounts][:to_account].id
+        else
+          parent_t.account_id = details[:accounts][:from_account].id
+        end
+      else
+        parent_t.account_id = details[:accounts][:account].id
+      end
+
+      parent_t.timezone = details[:timezone]
+      parent_t.local_datetime = details[:local_datetime]
+      parent_t.currency = details[:currency].iso_code
+      
+      #if !self_called
+      #  parent_t.account_currency_amount = details[:transactions][:account_currency_total_amount]
+      #else
+      #  parent_t.account_currency_amount = details[:transactions][:account_currency_total_amount] * -1
+      #end
+      
+      if details[:type] == 'transfer'
+        if !self_called
+          parent_t.account_currency_amount = details[:transactions][:account_currency_total_amount][:account_currency_amount_from]
+          self.add(details[:accounts][:to_account].id, details[:transactions][:account_currency_total_amount][:account_currency_amount_from])
+          self.create_transaction(details, current_user, true)
+        else
+          parent_t.account_currency_amount = details[:transactions][:account_currency_total_amount][:account_currency_amount_to] * -1
+          self.add(details[:accounts][:from_account].id, details[:transactions][:account_currency_total_amount][:account_currency_amount_to] * -1)
+        end
+      else
+        parent_t.account_currency_amount = details[:transactions][:account_currency_total_amount][:account_currency_amount]
+        self.add(details[:accounts][:account].id, details[:transactions][:account_currency_total_amount][:account_currency_amount])
+      end
+
+      parent_t = parent_t.save
+      
+      details[:transactions][:transactions].each do |t|
+        sub_t = Transaction.new
+        
+        sub_t.description = t[:description]
+        sub_t.user_id = t[:user_id]
+        
+        if details[:type] == 'transfer'
+          if !self_called
+            sub_t.amount = t[:amount] * -1
+            sub_t.account_currency_amount = t[:account_currency_amounts][:account_currency_amount_from] * -1
+            sub_t.account_id = details[:accounts][:from_account].id
+          else
+            sub_t.amount = t[:amount]
+            sub_t.account_currency_amount = t[:account_currency_amounts][:account_currency_amount_to]
+            sub_t.account_id = details[:accounts][:to_account].id
+          end
+        else
+          sub_t.amount = t[:amount]
+          sub_t.account_currency_amount = t[:account_currency_amounts][:account_currency_amount]
+          sub_t.account_id = details[:accounts][:account].id
+        end
+        
+        sub_t.timezone = details[:timezone]
+        sub_t.local_datetime = details[:local_datetime]
+        sub_t.currency = details[:currency].iso_code
+        #sub_t.parent_id = parent_t.id
+        
+        sub_t.save
+      end
+      
+    else
       t = Transaction.new
       t.description = details[:description]
       t.amount = details[:transactions][:total_amount]
       t.user_id = details[:user_id]
+      
       if details[:type] == 'transfer'
-
+        if !self_called
+          t.account_id = details[:accounts][:from_account].id
+        else
+          t.account_id = details[:accounts][:to_account].id
+        end
       else
         t.account_id = details[:accounts][:account].id
       end
-
+      
       t.timezone = details[:timezone]
       t.local_datetime = details[:local_datetime]
       t.currency = details[:currency].iso_code
-
-      t.save
-    else
-
+      
+      #if !self_called
+        #t.account_currency_amount = details[:transactions][:]
     end
   end
 
