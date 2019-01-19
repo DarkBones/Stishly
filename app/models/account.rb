@@ -27,8 +27,9 @@ class Account < ApplicationRecord
     require 'yaml'
     puts details.to_yaml
     puts '//////////////////////////////'
+    puts details[:transactions][:transactions].length
     
-    if details[:transactions].length > 1
+    if details[:multiple_transactions] == 1
       parent_t = Transaction.new
       parent_t.description = details[:description]
       if !self_called

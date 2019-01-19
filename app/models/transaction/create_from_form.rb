@@ -26,7 +26,8 @@ private
         timezone: @params[:timezone],
         local_datetime: tz.utc_to_local(Time.now),
         transactions: get_transactions(currency, accounts),
-        category_id: @params[:category_id]
+        category_id: @params[:category_id],
+        multiple_transactions: @params[:multiple_transactions].to_i
       }
       
       return details
