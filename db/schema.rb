@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_27_182114) do
+ActiveRecord::Schema.define(version: 2019_01_20_145619) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "balance", default: 0
@@ -126,8 +126,11 @@ ActiveRecord::Schema.define(version: 2018_12_27_182114) do
     t.string "currency"
     t.integer "account_currency_amount"
     t.bigint "category_id"
+    t.bigint "parent_id"
+    t.boolean "exclude_from_all", default: false
     t.index ["account_id"], name: "index_transactions_on_account_id"
     t.index ["category_id"], name: "index_transactions_on_category_id"
+    t.index ["parent_id"], name: "index_transactions_on_parent_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 

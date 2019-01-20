@@ -8,17 +8,10 @@ class Transaction
 
     def perform
       base_transactions = get_base_transactions
-      require 'yaml'
-      
 
       transactions = process_base_transactions(base_transactions)
 
-      puts ''
-      puts transactions
-      puts transactions.class.name
-      puts transactions.to_yaml
-
-      Account.create_from_list(transactions)
+      Transaction.create_from_list(transactions)
     end
 
 private
@@ -35,19 +28,37 @@ private
         account = @current_user.accounts.where(name: @params[:account]).take
       end
 
+      parent_id = nil
+      parent_id_from = nil
+      parent_id_to = nil
+      if @params[:multiple_transactions] == '1'
+        base_transactions.each do |t|
+          if t[:is_child] == false
+            if type == 'transfer'
+              parent_id_from = Transaction.create_transaction(transaction_object(t, from_account)).id
+              parent_id_to = Transaction.create_transaction(transaction_object(t, to_account, true)).id
+            else
+              parent_id = Transaction.create_transaction(transaction_object(t, account)).id
+            end
+          end
+        end
+      end
+
       base_transactions.each do |t|
-        if type == 'transfer'
-          transactions.push(transaction_object(t, from_account))
-          transactions.push(transaction_object(t, to_account, true))
-        else
-          transactions.push(transaction_object(t, account))
+        if (t[:is_child] == true && @params[:multiple_transactions] == '1') || (@params[:multiple_transactions] == '0')
+          if type == 'transfer'
+            transactions.push(transaction_object(t, from_account, false, parent_id_from))
+            transactions.push(transaction_object(t, to_account, true, parent_id_to))
+          else
+            transactions.push(transaction_object(t, account, false, parent_id))
+          end
         end
       end
 
       return transactions
     end
 
-    def transaction_object(base_transaction, account, reverse_direction = false)
+    def transaction_object(base_transaction, account, reverse_direction = false, parent_id = nil)
       direction = 1
       type = get_type
 
@@ -56,6 +67,12 @@ private
       end
 
       direction *= -1 if reverse_direction
+
+      if type == 'transfer'
+        exclude_from_all = 1
+      else
+        exclude_from_all = 0
+      end
 
       transaction = {
         user_id: @current_user.id,
@@ -67,7 +84,9 @@ private
         currency: @params[:currency],
         account_currency_amount: convert_transaction_amount(get_account_currency_amount(base_transaction[:amount], account)) * direction,
         category_id: @params[:category_id].to_i,
-        is_child: base_transaction[:is_child]
+        is_child: base_transaction[:is_child],
+        exclude_from_all: exclude_from_all,
+        parent_id: parent_id
       }
 
       return transaction
@@ -100,9 +119,6 @@ private
     end
 
     def get_base_transactions
-      require 'yaml'
-      puts @params.to_yaml
-
       transactions = []
 
       if @params[:multiple_transactions] == '1'
@@ -170,34 +186,6 @@ private
       amount = amount.sub(',', '.')
       amount = amount.to_f
       return amount
-    end
-  
-    def get_transactions_OLD(parent_id = nil, transactions = [], description = nil, type = nil, accounts = nil, currency = nil, category_id = nil, multiple_transactions = nil)
-      require 'yaml'
-      puts @params.to_yaml
-
-      description ||= @params[:description]
-      type ||= @params[:type].downcase
-
-      if accounts == nil
-        if type == 'transfer'
-          accounts = []
-          accounts.push(@current_user.accounts.where(name: params[:from_account]).take)
-          accounts.push(@current_user.accounts.where(name: params[:to_account]).take)
-        else
-          accounts = [@current_user.accounts.where(name: params[:account]).take]
-        end
-      end
-
-      currency ||= Money::Currency.new(@params[:currency])
-      category_id ||= @params[:category_id]
-      multiple_transactions ||= @params[:multiple_transactions].to_i
-
-      if multiple_transactions == 1
-
-      else
-        amount = @params[:amount].to_f
-      end
     end
 
   end

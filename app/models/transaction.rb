@@ -20,6 +20,36 @@ class Transaction < ApplicationRecord
   has_one :user, through: :account
   belongs_to :category, optional: true
 
+  def self.create_from_list(transactions)
+    require 'yaml'
+    puts transactions.to_yaml
+    transactions.each do |transaction|
+      t = self.create_transaction(transaction)
+    end
+  end
+
+  def self.create_transaction(transaction)
+    t = Transaction.new
+    t.user_id = transaction[:user_id]
+    t.amount = transaction[:amount]
+    t.description = transaction[:description]
+    t.account_id = transaction[:account_id]
+    t.timezone = transaction[:timezone]
+    t.local_datetime = transaction[:local_datetime]
+    t.currency = transaction[:currency]
+    t.account_currency_amount = transaction[:account_currency_amount]
+    t.category_id = transaction[:category_id]
+    t.exclude_from_all = transaction[:exclude_from_all]
+    t.parent_id = transaction[:parent_id]
+    t.save
+
+    if transaction[:is_child] == false
+      Account.add(transaction[:account_id], transaction[:account_currency_amount])
+    end
+
+    return t
+  end
+
   def self.create_from_string(params, current_user)
     transaction = CreateFromString.new(params, current_user).perform
   end

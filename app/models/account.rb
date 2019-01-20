@@ -22,27 +22,6 @@ class Account < ApplicationRecord
   has_many :transactions
   has_many :setting_values, :as => :entity
   has_many :settings, through: :setting_values
-  
-  def self.create_from_list(transactions)
-    transactions.each do |transaction|
-      t = Transaction.new
-      t.user_id = transaction[:user_id]
-      t.amount = transaction[:amount]
-      t.description = transaction[:description]
-      t.account_id = transaction[:account_id]
-      t.timezone = transaction[:timezone]
-      t.local_datetime = transaction[:local_datetime]
-      t.currency = transaction[:currency]
-      t.account_currency_amount = transaction[:account_currency_amount]
-      t.category_id = transaction[:category_id]
-
-      t = t.save
-
-      if transaction[:is_child] == false
-        self.add(transaction[:account_id], transaction[:account_currency_amount])
-      end
-    end
-  end
 
   def self.get_accounts(current_user)
     return GetAccounts.new(current_user).perform
