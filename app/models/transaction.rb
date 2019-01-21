@@ -19,6 +19,8 @@ class Transaction < ApplicationRecord
   belongs_to :account
   has_one :user, through: :account
   belongs_to :category, optional: true
+  has_one :parent, :class_name => 'Transaction'
+  has_many :children, :class_name => 'Transaction', :foreign_key => 'parent_id'
 
   def self.create_from_list(transactions)
     require 'yaml'

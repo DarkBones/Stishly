@@ -21,7 +21,7 @@ class CurrencyRate < ApplicationRecord
         rate = Concurrency.conversion_rate(from, to)
         self.update_rate(from, to, rate)
       rescue
-        rate = self.where(from_currency: from, to_currency: to).take()
+        rate = self.where(from_currency: from, to_currency: to).take().rate
         if !rate
           rate = 0
         end

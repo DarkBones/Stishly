@@ -82,7 +82,7 @@ private
         timezone: @params[:timezone],
         local_datetime: get_local_datetime(Time.now),
         currency: @params[:currency],
-        account_currency_amount: convert_transaction_amount(get_account_currency_amount(base_transaction[:amount], account)) * direction,
+        account_currency_amount: get_account_currency_amount(convert_transaction_amount(base_transaction[:amount]), account) * direction,
         category_id: @params[:category_id].to_i,
         is_child: base_transaction[:is_child],
         exclude_from_all: exclude_from_all,
