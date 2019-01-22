@@ -1,7 +1,0 @@
-<%= form_for :transaction, :url => url_for(:controller => 'transaction', :action => 'create_quick') do |f| %>
-  <%= f.text_field :transaction_string, class: 'timezone-on-focus', id: 'quick-transaction-input' %>
-  <%= f.select(:currency, all_currencies(Money::Currency.table), selected: Account.get_currency(locals[:active_account]).iso_code) %>
-  <%= hidden_field_tag 'account_id', locals[:active_account].form_id %>
-  <%= f.hidden_field :timezone, id: 'timezone_input' %>
-  <%= f.submit 'Create' %>
-<% end %>

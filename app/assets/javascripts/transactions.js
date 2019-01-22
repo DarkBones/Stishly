@@ -1,7 +1,8 @@
 $(document).on('turbolinks:load', ()=> {
-  $('#quick-transaction-input').focus();
-
-  $('#transactionmenu').show();
+  $('#create-transaction-button').on('click', () => {
+    ToggleCardForm('#transactionmenu');
+    //$(".accountmenu__name").focus();
+  });
 
   if ($('#transaction_type').val().toLowerCase() == 'transfer') {
     $('.transactions_menu_multiple_accounts').show();
