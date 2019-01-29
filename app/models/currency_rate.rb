@@ -13,7 +13,7 @@
 
 class CurrencyRate < ApplicationRecord
   def self.get_rate(from, to)
-    currency_rate = self.where(from_currency: from, to_currency: to, updated_at: 1.hours.ago..Time.now).take
+    currency_rate = self.where(from_currency: from, to_currency: to, updated_at: 1.days.ago..Time.now).take
     if currency_rate
       rate = currency_rate.rate
     else
@@ -23,7 +23,7 @@ class CurrencyRate < ApplicationRecord
       rescue
         rate = self.where(from_currency: from, to_currency: to).take().rate
         if !rate
-          rate = 0
+          rate = GetCurrencyRate.new('EUR').perform
         end
       end
       
