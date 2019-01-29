@@ -18,9 +18,10 @@ class Account
 
     def get_transactions
       if @account.is_real
-        transactions = @account.transactions.order(:local_datetime).reverse_order().page(@page).per_page(30)
+        transactions = @account.transactions.where(parent_id: nil).order(:local_datetime).reverse_order().page(@page).per_page(30)
       else
-        transactions = Transaction.where(user_id: @current_user.id).order(:local_datetime).reverse_order().page(@page).per_page(30)
+        #transactions = Transaction.where(user_id: @current_user.id).order(:local_datetime).reverse_order().page(@page).per_page(30)
+        transactions = @current_user.transactions.where(parent_id: nil).order(:local_datetime).reverse_order().page(@page).per_page(30)
       end
     end
 
