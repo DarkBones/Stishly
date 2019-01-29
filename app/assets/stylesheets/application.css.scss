@@ -1,6 +1,6 @@
 $primary-color: hsl(156, 100%, 31%);
 $complementary-color: hsl(18, 100%, 45%);
-$default-color: hsl(77, 0%, 20%);
+$default-color: hsl(0, 0%, 7.5%);
 
 $navbar-height: 50px;
 $left-menu-width: 300px;
@@ -10,7 +10,8 @@ html, body {
   width: 100%;
   margin: 0;
   font-family: sans-serif;
-  color: $default-color;
+  color: white;
+  background-color: $default-color;
 }
 
 #overlay {
@@ -26,10 +27,13 @@ html, body {
 .float-right {
   float: right;
 }
+.float-left {
+  float: left;
+}
 
 header nav.navbar {
   z-index: 1000;
-  background-color: $default-color;
+  background-color: lighten($default-color, 10%);
   padding: 0 10px;
   height: $navbar-height;
   position: fixed;
@@ -102,6 +106,7 @@ header nav.navbar {
 }
 
 .card-form {
+  color: $default-color;
   display: none;
   z-index: 500;
   width: 450px;
@@ -246,9 +251,21 @@ header nav.navbar {
       a {
         text-decoration: none;
       }
+      .show-child-transactions {
+        display: inline-block;
+        position: relative;
+        width: 20px;
+        height: 20px;
+        margin-left: -10px;
+        margin-top: 10px;
+        background-color: blue;
+      }
       li{
         padding: 5px 20px;
         list-style: none;
+        &:hover {
+          background-color: $primary-color;
+        }
         img{
           vertical-align: middle;
           width: 30px;
@@ -260,6 +277,9 @@ header nav.navbar {
           margin-top: 5px;
         }
       }
+    }
+    .child_transactions {
+      display: none;
     }
   }
 }
@@ -280,6 +300,10 @@ textarea {
 
 .clickable {
   cursor: pointer;
+}
+
+.invisible {
+  opacity: 0;
 }
 
 .sort-handle{

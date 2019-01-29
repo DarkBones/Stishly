@@ -2,6 +2,10 @@
   <% child_transactions = t.children %>
 
   <%= content_for t.local_datetime.to_date do %>
+    <% if child_transactions.length > 0 %>
+      <span class="show-child-transactions float-left clickable"></span>
+    <% end %>
+    
     <a href="<%= transaction_path + '/' + t.id.to_s %>" class="no-link-style">
       <li>
         <%= image_tag 'categories/' + t.category.symbol + '.svg', :style => "background-color: hsl(" + t.category.color + ");" %>

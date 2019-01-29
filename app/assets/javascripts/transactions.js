@@ -39,4 +39,8 @@ $(document).on('turbolinks:load', ()=> {
       $('.transactions_menu_single_account').show();
     }
   });
+
+  $('.show-child-transactions').on('click', (event) => {
+    $(event.currentTarget).nextAll('.child_transactions:first').slideToggle(100);
+  });
 });
