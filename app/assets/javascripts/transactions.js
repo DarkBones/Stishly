@@ -42,5 +42,13 @@ $(document).on('turbolinks:load', ()=> {
 
   $('.show-child-transactions').on('click', (event) => {
     $(event.currentTarget).nextAll('.child_transactions:first').slideToggle(100);
+
+    if ($(event.currentTarget).find('img').hasClass('rotated')) {
+      $(event.currentTarget).find('img').removeClass('rotated');
+      $(event.currentTarget).find('img').addClass('rotated-back');
+    } else {
+      $(event.currentTarget).find('img').removeClass('rotated-back');
+      $(event.currentTarget).find('img').addClass('rotated');
+    }
   });
 });
