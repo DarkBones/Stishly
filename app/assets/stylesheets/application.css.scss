@@ -244,6 +244,7 @@ header nav.navbar {
 #content {
   margin-left: 320px;
   padding-top: $navbar-height;
+  border-left: 1px solid lighten($default-color, 10%);
   #transactions{
     padding: 0 20px;
     ul{
@@ -258,9 +259,9 @@ header nav.navbar {
         height: 10px;
         margin-left: -10px;
         margin-top: 10px;
-        //background-color: blue;
-        //background-image: url('sort-handle-black.svg');
-        //background-repeat: no-repeat;
+      }
+      .child_transactions{
+        margin-left: 50px;
       }
       li{
         padding: 5px 20px;
@@ -362,4 +363,11 @@ textarea {
 }
  ::-webkit-scrollbar{
      width: 7px;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  color: lighten($default-color, 10%);
+  background-color: lighten($default-color, 10%);
 }
