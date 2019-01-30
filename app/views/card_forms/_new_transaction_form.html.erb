@@ -74,9 +74,13 @@
     </div>
 
     <div class="card-form__form-row">
-      <div class = "card-form__form-col col-ten">
+      <div class = "card-form__form-col col-five">
         <%= f.label :date %>
-        <%= f.text_field :datetime, class: 'datepicker' %>
+        <%= f.text_field :date, class: 'datepicker' %>
+      </div>
+      <div class = "card-form__form-col col-five">
+        <%= f.label :time %>
+        <%= f.text_field :time, type: 'time', value:'now' %>
       </div>
     </div>
 

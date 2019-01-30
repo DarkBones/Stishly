@@ -289,6 +289,10 @@ header nav.navbar {
   }
 }
 
+.datepicker {
+  color: $default-color;
+}
+
 input, textarea, select, .dropdown {
   box-sizing: border-box;
   width: 100%;
