@@ -42,6 +42,7 @@ class User < ApplicationRecord
   has_many :schedules
   has_many :categories
   has_many :transactions, through: :accounts
+  has_many :account_histories, through: :accounts
 
   validates :country_code, :first_name, :last_name, presence: true
 
