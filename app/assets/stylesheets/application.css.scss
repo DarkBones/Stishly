@@ -127,7 +127,7 @@ header nav.navbar {
     color: white;
     .card-form__close {
       background-color: $complementary-color;
-      background-image: url('cross.svg');
+      background-image: url('cross_white.svg');
       width: 30px;
       height: 30px;
       position: absolute;
@@ -254,11 +254,11 @@ header nav.navbar {
       .show-child-transactions {
         display: inline-block;
         position: relative;
-        width: 20px;
-        height: 20px;
+        width: 10px;
+        height: 10px;
         margin-left: -10px;
         margin-top: 10px;
-        background-color: blue;
+        //background-color: blue;
         //background-image: url('sort-handle-black.svg');
         //background-repeat: no-repeat;
       }
