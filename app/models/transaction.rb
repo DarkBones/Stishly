@@ -22,15 +22,13 @@ class Transaction < ApplicationRecord
   has_one :parent, :class_name => 'Transaction'
   has_many :children, :class_name => 'Transaction', :foreign_key => 'parent_id'
 
-  def self.create_from_list(transactions)
-    require 'yaml'
-    puts transactions.to_yaml
+  def self.create_from_list(current_user, transactions)
     transactions.each do |transaction|
-      t = self.create_transaction(transaction)
+      t = self.create_transaction(current_user, transaction)
     end
   end
 
-  def self.create_transaction(transaction)
+  def self.create_transaction(current_user, transaction)
     t = Transaction.new
     t.user_id = transaction[:user_id]
     t.amount = transaction[:amount]
@@ -46,7 +44,8 @@ class Transaction < ApplicationRecord
     t.save
 
     if transaction[:is_child] == false
-      Account.add(transaction[:account_id], transaction[:account_currency_amount])
+      Account.add(current_user, transaction[:account_id], transaction[:account_currency_amount])
+      Account.record_history(current_user, transaction[:account_id], transaction[:local_datetime])
     end
 
     return t
@@ -73,7 +72,7 @@ class Transaction < ApplicationRecord
     transaction = current_user.transactions.new(params)
     transaction.save
 
-    Account.add(account_id, params[:amount])
+    Account.add(current_user, account_id, params[:amount])
   end
 
   def self.create_OLD2(params, current_user)

@@ -110,11 +110,25 @@ class Account < ApplicationRecord
     end
   end
 
-  def self.add(id, amount)
-    @balance = Account.find_by_id(id).balance
-    @balance += amount
+  def self.add(current_user, id, amount)
+    account = current_user.accounts.find_by_id(id)
 
-    Account.update(id, :balance => @balance)
+    balance = account.balance
+    balance += amount
+
+    Account.update(id, :balance => balance)
+  end
+
+  def self.record_history(current_user, id, local_datetime)
+    account = current_user.accounts.find_by_id(id)
+
+    balance = account.balance
+
+    histories = account.account_histories.new
+    histories.account_id = account.id
+    histories.balance = account.balance
+    histories.local_datetime = local_datetime
+    histories.save
   end
 
   #def self.convert_currency(account, new_currency, current_user)

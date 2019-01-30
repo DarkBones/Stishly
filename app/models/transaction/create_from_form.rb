@@ -11,7 +11,7 @@ class Transaction
 
       transactions = process_base_transactions(base_transactions)
 
-      Transaction.create_from_list(transactions)
+      Transaction.create_from_list(@current_user, transactions)
     end
 
 private
@@ -35,10 +35,10 @@ private
         base_transactions.each do |t|
           if t[:is_child] == false
             if type == 'transfer'
-              parent_id_from = Transaction.create_transaction(transaction_object(t, from_account)).id
-              parent_id_to = Transaction.create_transaction(transaction_object(t, to_account, true)).id
+              parent_id_from = Transaction.create_transaction(@current_user, transaction_object(t, from_account)).id
+              parent_id_to = Transaction.create_transaction(@current_user, transaction_object(t, to_account, true)).id
             else
-              parent_id = Transaction.create_transaction(transaction_object(t, account)).id
+              parent_id = Transaction.create_transaction(@current_user, transaction_object(t, account)).id
             end
           end
         end
