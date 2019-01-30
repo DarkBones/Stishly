@@ -1,10 +1,12 @@
 $(document).on('turbolinks:load', ()=> {
-  
-  $('.datepicker').datepicker({
+
+  /*$('.datepicker').datepicker({
     todayBtn: "linked",
     multidate: false,
     autoclose: true,
     todayHighlight: true
-  });
+  });*/
+
+  $('.datepicker').datetimepicker();
 
 });

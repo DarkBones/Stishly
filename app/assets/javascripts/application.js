@@ -20,3 +20,5 @@
 //= require detect_timezone
 //= require jquery.detect_timezone
 //= require bootstrap-datepicker
+//= require moment
+//= require bootstrap-datetimepicker

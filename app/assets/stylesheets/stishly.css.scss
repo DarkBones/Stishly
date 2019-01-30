@@ -1,4 +1,6 @@
-@import "bootstrap";
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'bootstrap-datetimepicker';
 
 $primary-color: hsl(156, 100%, 31%);
 $complementary-color: hsl(18, 100%, 45%);
