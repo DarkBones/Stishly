@@ -1,4 +1,5 @@
 $(document).on('turbolinks:load', ()=> {
+
   $('#create-transaction-button').on('click', () => {
     ToggleCardForm('#transactionmenu');
     //$(".accountmenu__name").focus();
