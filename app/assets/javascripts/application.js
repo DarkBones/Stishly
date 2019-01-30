@@ -19,3 +19,4 @@
 //= require jquery-ui/sortable
 //= require detect_timezone
 //= require jquery.detect_timezone
+//= require bootstrap-datepicker
