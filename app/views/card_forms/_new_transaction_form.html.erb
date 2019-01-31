@@ -19,14 +19,14 @@
     <div class="card-form__form-row transactions_menu_single_account">
       <div class="card-form__form-col col-ten">
         <%= f.label :account %><br />
-        <%= f.select(:account, user_accounts_array) %>
+        <%= f.select(:account, user_accounts_array, selected: params[:id]) %>
       </div>
     </div>
 
     <div class="card-form__form-row transactions_menu_multiple_accounts">
       <div class="card-form__form-col col-five">
         <%= f.label :from_account %><br />
-        <%= f.select(:from_account, user_accounts_array) %>
+        <%= f.select(:from_account, user_accounts_array, selected: params[:id]) %>
       </div>
       <div class="card-form__form-col col-five">
         <%= f.label :to_account %><br />
