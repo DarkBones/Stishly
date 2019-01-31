@@ -48,6 +48,20 @@ class User < ApplicationRecord
 
   after_create :initialize_user_data
 
+  def self.set_current_user(current_user)
+    @current_user = current_user
+  end
+
+  def self.get_dateformat
+    user_setting = SettingValue.get_setting(@current_user, "date_format")
+
+    if user_setting
+      return user_setting.value
+    else
+      country_setting = Country.get_dateformat(@current_user.country_code)
+    end
+  end
+
   # Returns the currency (string) of a user
   def self.get_currency(current_user)
     sett = SettingValue.get_setting(current_user, 'currency')

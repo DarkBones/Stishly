@@ -5,7 +5,7 @@ $(document).on('turbolinks:load', ()=> {
     multidate: false,
     autoclose: true,
     todayHighlight: true,
-    format: "dd/mm/yyyy"
+    format: "<%= User.get_dateformat %>"
   });
 
   var d = new Date(),
