@@ -20,6 +20,6 @@ class TransactionController < ApplicationController
 
   def create
     Transaction.create(params, current_user)
-    #redirect_back(fallback_location: root_path)
+    redirect_back(fallback_location: root_path)
   end
 end
