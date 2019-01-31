@@ -81,7 +81,7 @@ private
         account_id: account.id,
         timezone: @params[:timezone],
         #local_datetime: get_local_datetime(Time.now),
-        local_datetime: DateTime.parse(@params[:datetime]),
+        local_datetime: parse_datetime,
         currency: @params[:currency],
         account_currency_amount: get_account_currency_amount(convert_transaction_amount(base_transaction[:amount]), account) * direction,
         category_id: @params[:category_id].to_i,
@@ -91,6 +91,20 @@ private
       }
 
       return transaction
+    end
+
+    def parse_datetime
+      date_arr = @params[:date].split('-')
+      
+      day = date_arr[0]
+      month = date_arr[1]
+      year = date_arr[2]
+
+      time_arr = @params[:time].split(':')
+      hours = time_arr[0]
+      minutes = time_arr[1]
+
+      return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + "00"
     end
 
     def get_account_currency_amount(amount, account)
