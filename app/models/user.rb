@@ -58,11 +58,11 @@ class User < ApplicationRecord
     yesterday = tz.utc_to_local(Time.now).to_date - 1.day
 
     if d == today
-      return "Today"
+      return I18n.t('dates.today')
     end
 
     if d == yesterday
-      return "Yesterday"
+      return I18n.t('dates.yesterday')
     end
 
     date_format = self.get_dateformat
