@@ -52,6 +52,37 @@ class User < ApplicationRecord
     @current_user = current_user
   end
 
+  def self.format_date(d)
+    tz = TZInfo::Timezone.get(@current_user.timezone)
+    today = tz.utc_to_local(Time.now).to_date
+    yesterday = tz.utc_to_local(Time.now).to_date - 1.day
+
+    if d == today
+      return "Today"
+    end
+
+    if d == yesterday
+      return "Yesterday"
+    end
+
+    date_format = self.get_dateformat
+
+    month_no_padding = d.month.to_s
+    day_no_padding = d.day.to_s
+
+    date_format.sub! "dd", "%d"
+    date_format.sub! "d", "%-d" if !date_format.include? "%d"
+    date_format.sub! "mmmm", "%B"
+    date_format.sub! "mmm", "%b"
+    date_format.sub! "mm", "%m"
+    date_format.sub! "m", "%-m" if !date_format.include? "%m"
+    date_format.sub! "yyyy", "%Y"
+    date_format.sub! "yy", "%y"
+
+    #return d.strftime("%d %b %Y")
+    return d.strftime(date_format)
+  end
+
   def self.get_dateformat
     user_setting = SettingValue.get_setting(@current_user, "date_format")
 
