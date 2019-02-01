@@ -1,5 +1,11 @@
 $(document).on('turbolinks:load', ()=> {
 
+  var currency_changed = false;
+
+  $('#transaction_currency').change(function() {
+    currency_changed = true;
+  });
+
   $('#create-transaction-button').on('click', () => {
     ToggleCardForm('#transactionmenu');
     //$(".accountmenu__name").focus();

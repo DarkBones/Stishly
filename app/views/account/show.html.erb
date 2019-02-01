@@ -1,4 +1,8 @@
+<%= render "card_forms/new_transaction_form", locals: {active_account: @active_account} %>
+
 <h2><%= @active_account.name %> Transactions</h2>
+
+<%= render "account_tab_menu" %>
 
 <button id="create-transaction-button">New Transaction</button>
 

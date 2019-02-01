@@ -98,10 +98,10 @@ header nav.navbar {
     li {
       padding: 7px 10px;
       &:hover {
-        background-color: $primary-color;
+        background-color: lighten($default-color, 25%);
       }
       &.active {
-        background-color: lighten($primary-color, 10%);
+        background-color: lighten($default-color, 20%);
       }
     }
   }
@@ -376,4 +376,27 @@ hr {
   height: 1px;
   color: lighten($default-color, 10%);
   background-color: lighten($default-color, 10%);
+}
+
+.account_tab_menu {
+  width: 100%;
+  border-bottom: 3px solid lighten($default-color, 20%);
+  list-style: none;
+  padding: 0;
+
+  li {
+    display: inline-block;
+    width: 150px;
+    padding: 10px 0;
+    text-align: center;
+    border-radius: 20px 20px 0 0;
+    color: white;
+    &.active {
+      background-color: lighten($default-color, 20%);
+    }
+    &:hover {
+      background-color: lighten($default-color, 25%);
+    }
+  }
+
 }
