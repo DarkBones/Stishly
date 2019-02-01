@@ -2,7 +2,7 @@
 
 <h2><%= @active_account.name %> Transactions</h2>
 
-<%= render "account_tab_menu" %>
+<%= render "account_tab_menu", locals: {active_tab: "Transactions"} %>
 
 <button id="create-transaction-button">New Transaction</button>
 

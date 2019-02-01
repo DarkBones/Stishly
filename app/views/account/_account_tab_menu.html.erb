@@ -1,5 +1,6 @@
 <ul class="account_tab_menu">
-  <li class="active"><a href="#">Transactions</a></li>
-  <li><%= link_to 'Settings', account_settings_path if @active_account.is_real %></li>
-  <li><a href="#">Overview</a></li>
+  <li class="<%= 'active' if locals[:active_tab] == 'Transactions' %>"><%= link_to 'Transactions', account_path if @active_account.is_real %></li>
+  <li class="<%= 'active' if locals[:active_tab] == 'Transactions' %>"><%= link_to 'Transactions', root_path + "account" if !@active_account.is_real %></li>
+  <li class="<%= 'active' if locals[:active_tab] == 'Settings' %>"><%= link_to 'Settings', account_settings_path if @active_account.is_real %></li>
+  <li class="<%= 'active' if locals[:active_tab] == 'Overview' %>"><a href="#">Overview</a></li>
 </ul>

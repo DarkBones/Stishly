@@ -1,4 +1,7 @@
-<h3>Account settings</h3>
+<h2><%= @active_account.name %> Settings</h2>
+
+<%= render "account_tab_menu", locals: {active_tab: "Settings"} %>
+
 <%= form_for :setting_value, :url => edit_account_settings_path do |f| %>
   <%= f.select(:currency, all_currencies(Money::Currency.table), selected: Account.get_currency(@active_account).iso_code) %>
 
