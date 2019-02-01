@@ -18,12 +18,14 @@ private
         {
           balance: 100000,
           name: "Current account",
-          currency: user_currency
+          currency: user_currency,
+          is_default: 1
         },
         {
           balance: 50000,
           name: "Savings account",
-          currency: user_currency
+          currency: user_currency,
+          is_default: 0
         }
       ])
 
