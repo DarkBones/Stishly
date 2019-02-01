@@ -40,16 +40,16 @@ $(document).on('turbolinks:load', ()=> {
       $('.transactions_menu_single_account').show();
     }
   });
+});
 
-  $('.show-child-transactions').on('click', (event) => {
-    $(event.currentTarget).nextAll('.child_transactions:first').slideToggle(100);
+$(document).on('click', '.show-child-transactions', (event) => {
+  $(event.currentTarget).nextAll('.child_transactions:first').slideToggle(100);
 
-    if ($(event.currentTarget).find('img').hasClass('rotated')) {
-      $(event.currentTarget).find('img').removeClass('rotated');
-      $(event.currentTarget).find('img').addClass('rotated-back');
-    } else {
-      $(event.currentTarget).find('img').removeClass('rotated-back');
-      $(event.currentTarget).find('img').addClass('rotated');
-    }
-  });
+  if ($(event.currentTarget).find('img').hasClass('rotated')) {
+    $(event.currentTarget).find('img').removeClass('rotated');
+    $(event.currentTarget).find('img').addClass('rotated-back');
+  } else {
+    $(event.currentTarget).find('img').removeClass('rotated-back');
+    $(event.currentTarget).find('img').addClass('rotated');
+  }
 });
