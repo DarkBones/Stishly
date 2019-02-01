@@ -49,6 +49,7 @@ class AccountController < ApplicationController
 
   def settings
     @account_id = params[:id]
+    @active_account = current_user.accounts.where(name: params[:id]).take.decorate
   end
 
   private

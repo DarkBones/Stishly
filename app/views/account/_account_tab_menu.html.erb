@@ -1,5 +1,5 @@
 <ul class="account_tab_menu">
   <li class="active"><a href="#">Transactions</a></li>
-  <li><a href="#">Settings</a></li>
+  <li><%= link_to 'Settings', account_settings_path if @active_account.is_real %></li>
   <li><a href="#">Overview</a></li>
 </ul>
