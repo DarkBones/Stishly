@@ -47,8 +47,11 @@ class Account < ApplicationRecord
     return account
   end
 
-  def self.get_currency(account)
+  def self.format_currency(amount, currency_iso)
+    return Money.new(amount, currency_iso).format
+  end
 
+  def self.get_currency(account)
     return Money::Currency.new(account.currency)
   end
 
@@ -87,6 +90,8 @@ class Account < ApplicationRecord
   end
 
   def self.create(params, current_user)
+    user_currency = User.get_currency(current_user)
+
     existing_accounts = current_user.accounts.where('name' => params[:name])
 
     default_account = current_user.accounts.where('is_default' => true)
@@ -97,7 +102,7 @@ class Account < ApplicationRecord
     end
 
     if !params[:currency]
-      params[:currency] = User.get_currency(current_user).iso_code
+      params[:currency] = user_currency.iso_code
     end
 
     params[:position] = current_user.accounts.order(:position).first.position - 1

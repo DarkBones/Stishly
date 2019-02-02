@@ -34,4 +34,10 @@ class AccountDecorator < Draper::Decorator
     end
   end
 
+  def balance_float
+    currency = Money::Currency.new(model.currency)
+
+    model.balance.to_f / currency.subunit_to_unit
+  end
+
 end

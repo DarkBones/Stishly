@@ -3,10 +3,9 @@ module ApplicationHelper
     Money.locale_backend = :i18n
 
     balance = Money.new(b, currency.iso_code).format
-    balance.sub! currency.symbol, currency.symbol + " "
     balance = balance.split(".")
 
-    result = balance[0]
+    result = balance[0...-1][0]
 
     if balance[1]
       result += ".<span"

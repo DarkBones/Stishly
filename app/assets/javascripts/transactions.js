@@ -4,7 +4,7 @@ function set_currency(account_name, currency_changed, $currency_field) {
     $.ajax({
       type: "GET",
       dataType: "json",
-      url: "/accounts/" + account_name + '/details',
+      url: "/api/accounts/" + account_name + '/details',
       success: function(data){
         currency = data.currency;
         $currency_field.val(currency);

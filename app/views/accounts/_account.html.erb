@@ -9,7 +9,7 @@
   <div class="sort-handle"></div>
   <% acc_curency = Account.get_currency(@account) %>
   <%= @account.short_name %>
-  <span class="balance float-right">
+  <span class="balance float-right" balance="<%= account.balance %>" currency="<%= account.currency %>">
     <%= balance(@account.balance.to_f, acc_curency, "cents") %>
   </span>
 </li>
