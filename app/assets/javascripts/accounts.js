@@ -8,12 +8,6 @@ $(document).on('turbolinks:load', ()=> {
     $(".accountmenu__name").focus();
   });
 
-  $('.account-button').on('click', (event) => {
-    link_name = event.currentTarget.closest('.account-button').getAttribute('name')
-    console.log('/' + link_name.replace('_', '/'));
-    window.location.href = '/' + link_name.replace('_', '/');
-  });
-
   $('.accountmenu__name').attr('maxlength',50);
 
   // don't allow dots in input field
@@ -30,3 +24,8 @@ $(document).on('turbolinks:load', ()=> {
   });
 });
 
+$(document).on('click', '.account-button', (event) => {
+  link_name = event.currentTarget.closest('.account-button').getAttribute('name')
+  console.log('/' + link_name.replace('_', '/'));
+  window.location.href = '/' + link_name.replace('_', '/');
+});

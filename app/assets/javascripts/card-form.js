@@ -10,3 +10,8 @@ function ToggleCardForm (formId) {
   $('#overlay').fadeToggle(200);
   $(formId).slideToggle(100);
 }
+
+function ClearValues (formId) {
+  $(formId).find("input[type=text], textarea").val("");
+  //$(formId).hide();
+}

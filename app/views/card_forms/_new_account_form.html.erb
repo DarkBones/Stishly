@@ -1,7 +1,7 @@
 <div id="accountmenu" class="card-form">
   <h2 class="card-form__title">Create New Account<span class="card-form__close"></span></h2>
 
-  <%= form_with(model: Account.new, url: '/account') do |f| %>
+  <%= form_with(model: Account.new) do |f| %>
     <div class="card-form__form-row">
       <div class="card-form__form-col col-ten">
         <%= f.label :name %><br />

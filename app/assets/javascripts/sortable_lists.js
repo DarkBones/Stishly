@@ -9,7 +9,7 @@ function makeSortableLists(class_name='.sortable-list', handle_name='.sort-handl
     delay: 150,
     update: function(e, ui) {
       Rails.ajax({
-        url: '/account/sort',
+        url: '/accounts/sort',
         type: 'PATCH',
         data: $(this).sortable('serialize'),
       });

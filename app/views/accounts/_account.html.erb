@@ -1,0 +1,19 @@
+<% @account = account if account.is_a? AccountDecorator %>
+
+<% li_c = "account-button clickable" %>
+<% li_c += " sortable" if account.is_real %>
+<% li_c += " no-sorting" if !account.is_real %>
+
+
+<li class="<%= li_c %>" name="accounts_<%= account.link %>" id="account_<%= account.id.to_s %>">
+  <div class="sort-handle"></div>
+  <% acc_curency = Account.get_currency(@account) %>
+  <%= @account.short_name %>
+  <span class="balance float-right">
+    <%= balance(@account.balance.to_f, acc_curency, "cents") %>
+  </span>
+</li>
+
+<% if !account.is_real %>
+  <span id="user_accounts_list"></span>
+<% end %>
