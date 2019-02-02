@@ -1,6 +1,6 @@
 <% sortable ? id = account.name : id = "" %>
 
-<li class="<%= li_class(account.id, active_account) %>" name="account_<%= account.link %>" id="account_<%= account.id.to_s %>">
+<li class="<%= li_class(account.id, active_account) %>" name="accounts_<%= account.link %>" id="account_<%= account.id.to_s %>">
   <div class="sort-handle"></div>
   <% acc_curency = Account.get_currency(account) %>
   <%= account.short_name %>

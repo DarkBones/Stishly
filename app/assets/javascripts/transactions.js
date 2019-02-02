@@ -1,10 +1,10 @@
 function set_currency(account_name, currency_changed, $currency_field) {
   if(!currency_changed) {
-    var currency = 'crap';
+    var currency;
     $.ajax({
       type: "GET",
       dataType: "json",
-      url: "/account/" + account_name + '/details',
+      url: "/accounts/" + account_name + '/details',
       success: function(data){
         currency = data.currency;
         $currency_field.val(currency);

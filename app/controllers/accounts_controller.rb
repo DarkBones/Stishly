@@ -1,4 +1,4 @@
-class AccountController < ApplicationController
+class AccountsController < ApplicationController
   def show
     @active_account = current_user.accounts.where(name: params[:id]).take.decorate
     @account_currency = Account.get_currency(@active_account)
@@ -26,9 +26,9 @@ class AccountController < ApplicationController
     result = Account.create_new(params[:account], current_user)
 
     if result.is_a? String
-      redirect_to root_path, :alert => result
+      #redirect_to root_path, :alert => result
     else
-      redirect_back(fallback_location: root_path)
+      #redirect_back(fallback_location: root_path)
     end
   end
 

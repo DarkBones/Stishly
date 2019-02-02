@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :account do
+  resources :accounts do
     collection do
       patch :sort
     end
@@ -9,17 +9,17 @@ Rails.application.routes.draw do
   resource :transaction, only: [:show]
   resource :user_settings, only: [:edit]
 
-  get 'account/:id/settings', to: 'account#settings', as: :account_settings
+  get 'accounts/:id/settings', to: 'accounts#settings', as: :account_settings
 
   post 'settings/edit', to: 'users#edit', as: :edit_settings
   get 'settings', to: 'users#settings'
-  post 'account/:id/settings/edit', to: 'account#edit', as: :edit_account_settings
-  get 'account/:id/set_default', to: 'account#set_default', as: :set_default_account
-  get 'account/:id/details', to: 'account#details', as: :account_details
+  post 'accounts/:id/settings/edit', to: 'accounts#edit', as: :edit_account_settings
+  get 'accounts/:id/set_default', to: 'accounts#set_default', as: :set_default_account
+  get 'accounts/:id/details', to: 'accounts#details', as: :account_details
 
   get 'app', to: 'app#index'
-  get 'account/:id', to: 'account#show'
-  post 'account/create_account', to: 'account#create_quick'
+  get 'accounts/:id', to: 'accounts#show'
+  post 'accounts/create_account', to: 'accounts#create_quick'
   post 'transaction/create_transaction', to: 'transaction#create'
   devise_for :users, :controllers => { registrations: 'registrations' }
   resources :users, :only => [:create, :destroy, :edit]
