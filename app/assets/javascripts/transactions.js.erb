@@ -68,6 +68,10 @@ $(document).on('turbolinks:load', ()=> {
     set_currency($(this).val(), currency_changed, $('#transaction_currency'));
   });
 
+  $('#transaction_from_account').change(function() {
+    set_currency($(this).val(), currency_changed, $('#transaction_currency'));
+  });
+
 });
 
 $(document).on('click', '.show-child-transactions', (event) => {
