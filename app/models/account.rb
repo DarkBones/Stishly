@@ -24,18 +24,6 @@ class Account < ApplicationRecord
   has_many :settings, through: :setting_values
   has_many :account_histories
 
-  def self.get_accounts_with_currencies(current_user)
-    accounts = GetAccounts.new(current_user).perform
-
-    accounts_currencies = {}
-
-    accounts.each do |a|
-      accounts_currencies[a.name] = a.currency
-    end
-
-    return accounts_currencies
-  end
-
   def self.get_accounts(current_user)
     return GetAccounts.new(current_user).perform
   end

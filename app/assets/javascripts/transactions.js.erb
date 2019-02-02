@@ -1,6 +1,22 @@
+function set_currency(account_name, currency_changed, $currency_field) {
+  if(!currency_changed) {
+    var currency = 'crap';
+    $.ajax({
+      type: "GET",
+      dataType: "json",
+      url: "/account/" + account_name + '/details',
+      success: function(data){
+        currency = data.currency;
+        $currency_field.val(currency);
+      }
+    });
+  }
+}
+
 $(document).on('turbolinks:load', ()=> {
 
   var currency_changed = false;
+  set_currency($('#transaction_account').val(), currency_changed, $('#transaction_currency'));
 
   $('#transaction_currency').change(function() {
     currency_changed = true;
@@ -8,7 +24,7 @@ $(document).on('turbolinks:load', ()=> {
 
   $('#create-transaction-button').on('click', () => {
     ToggleCardForm('#transactionmenu');
-    //$(".accountmenu__name").focus();
+    $(".accountmenu__name").focus();
   });
 
   if ($('#transaction_type').val().toLowerCase() == 'transfer') {
@@ -46,6 +62,11 @@ $(document).on('turbolinks:load', ()=> {
       $('.transactions_menu_single_account').show();
     }
   });
+
+  $('#transaction_account').change(function() {
+    set_currency($(this).val(), currency_changed, $('#transaction_currency'));
+  });
+
 });
 
 $(document).on('click', '.show-child-transactions', (event) => {

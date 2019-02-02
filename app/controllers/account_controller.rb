@@ -5,6 +5,12 @@ class AccountController < ApplicationController
 
     @account_transactions = Account.get_transactions(@active_account, params[:page], current_user).decorate
     @daily_totals = Account.get_daily_totals(@active_account.id, @account_transactions, current_user)
+
+    respond_to do |format|
+      format.html { 'html test' }
+      format.js
+      format.json { 'wtf json' }
+    end
   end
 
   def index
@@ -15,6 +21,11 @@ class AccountController < ApplicationController
     @daily_totals = Account.get_daily_totals(@active_account.id, @account_transactions, current_user)
 
     render 'show'
+  end
+
+  def details
+    @account = current_user.accounts.where(name: params[:id]).take.decorate
+    render json: @account
   end
 
   def create

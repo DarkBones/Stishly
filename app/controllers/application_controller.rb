@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_current_user
-  before_action :get_accounts_currencies
 
   helper_method :user_accounts, :user_accounts_array, :user_categories_array
 
