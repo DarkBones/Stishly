@@ -17,6 +17,7 @@ $(document).on('turbolinks:load', ()=> {
 
   var currency_changed = false;
   set_currency($('#transaction_account').val(), currency_changed, $('#transaction_currency'));
+  set_currency($('#transaction_from_account').val(), currency_changed, $('#transaction_currency'));
 
   $('#transaction_currency').change(function() {
     currency_changed = true;
