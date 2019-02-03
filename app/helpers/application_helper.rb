@@ -5,7 +5,11 @@ module ApplicationHelper
     balance = Money.new(b, currency.iso_code).format
     balance = balance.split(".")
 
-    result = balance[0...-1][0]
+    if balance.length > 1
+      result = balance[0...-1][0]
+    else
+      result = balance[0]
+    end
 
     if balance[1]
       result += ".<span"
