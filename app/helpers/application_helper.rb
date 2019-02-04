@@ -3,6 +3,9 @@ module ApplicationHelper
     Money.locale_backend = :i18n
 
     balance = Money.new(b, currency.iso_code).format
+
+    return balance
+=begin
     balance = balance.split(".")
 
     if balance.length > 1
@@ -19,5 +22,6 @@ module ApplicationHelper
     end
 
     return result.html_safe
+=end
   end
 end
