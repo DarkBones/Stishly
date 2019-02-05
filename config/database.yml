@@ -47,9 +47,15 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+
+#production:
+#  <<: *default
+#  database: money_manager_production
+#  username: money_manager
+#  password: <%= ENV['MONEY_MANAGER_DATABASE_PASSWORD'] %>
+#  url: <%= ENV['DATABASE_URL'] %>
 production:
-  <<: *default
-  database: money_manager_production
-  username: money_manager
+  database: money_manager
+  adapter: postgresql
+  host: <%= ENV['DATABASE_URL'] %>
   password: <%= ENV['MONEY_MANAGER_DATABASE_PASSWORD'] %>
-  url: <%= ENV['DATABASE_URL'] %>
