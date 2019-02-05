@@ -55,7 +55,9 @@ test:
 #  password: <%= ENV['MONEY_MANAGER_DATABASE_PASSWORD'] %>
 #  url: <%= ENV['DATABASE_URL'] %>
 production:
-  database: money_manager
-  adapter: postgresql
-  host: <%= ENV['DATABASE_URL'] %>
-  password: <%= ENV['MONEY_MANAGER_DATABASE_PASSWORD'] %>
+ adapter: mysql2
+ encoding: utf8
+ database: money_manager
+ pool: 5
+ username: root
+ password:
