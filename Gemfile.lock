@@ -187,6 +187,7 @@ GEM
       concurrent-ruby (>= 0.9.0)
       concurrent-ruby-ext (>= 0.9.0)
       railties (>= 4.0.0)
+    pg (1.1.4)
     public_suffix (3.0.3)
     puma (3.12.0)
     pundit (2.0.0)
@@ -212,6 +213,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.4)
       loofah (~> 2.2, >= 2.2.2)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
     rails_best_practices (1.19.4)
       activesupport
       code_analyzer (>= 0.4.8)
@@ -221,6 +225,8 @@ GEM
       require_all (~> 2.0)
       ruby-progressbar
     rails_layout (1.0.42)
+    rails_serve_static_assets (0.0.5)
+    rails_stdout_logging (0.0.5)
     railties (5.2.1)
       actionpack (= 5.2.1)
       activesupport (= 5.2.1)
@@ -329,9 +335,11 @@ DEPENDENCIES
   money
   mysql2 (>= 0.4.4, < 0.6.0)
   peek
+  pg
   puma (~> 3.11)
   pundit
   rails (~> 5.2.1)
+  rails_12factor
   rails_best_practices
   rails_layout
   sass-rails (~> 5.0)
