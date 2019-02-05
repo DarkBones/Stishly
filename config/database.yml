@@ -52,3 +52,4 @@ production:
   database: money_manager_production
   username: money_manager
   password: <%= ENV['MONEY_MANAGER_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
