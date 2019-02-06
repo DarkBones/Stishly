@@ -26,7 +26,11 @@ $.ajax({
       success: function(result){
         $('#accounts_list li').first().find('span').attr('balance', total_amount);
         $('#accounts_list li').first().find('span').text(result);
-      } 
+      },
+      error: function(data){
+        console.log('ERROR1');
+        console.log(data);
+      }
     });
   },
   error: function(data){
