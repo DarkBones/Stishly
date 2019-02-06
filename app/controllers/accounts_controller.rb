@@ -48,6 +48,9 @@ class AccountsController < ApplicationController
   def create
     @account = Account.create_new(params[:account], current_user)
 
+    puts 'NEW ACCOUNT CREATION'
+    puts params
+
     respond_to do |format|
       if @account.is_a? String
         format.html { render :new }
