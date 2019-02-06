@@ -46,23 +46,7 @@ class AccountsController < ApplicationController
   end
 
   def create
-    @account = Account.create_new(params[:account], current_user)
-
-    puts 'NEW ACCOUNT CREATION'
-    puts params
-
-    respond_to do |format|
-      if @account.is_a? String
-        format.html { render :new }
-        format.json { render json: @account, status: :unprocessable_entity }
-        format.js
-      else
-        @account = @account.decorate
-        format.html { redirect_to @account }
-        format.json { render :show, status: :created, location: @account }
-        format.js {}
-      end
-    end
+    
   end
 
   def sort
