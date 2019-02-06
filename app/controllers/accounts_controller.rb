@@ -46,7 +46,13 @@ class AccountsController < ApplicationController
   end
 
   def create
-    
+    result = Account.create_new(params[:account], current_user)
+
+    if result.is_a? String
+      redirect_to root_path, :alert => result
+    else
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def sort
