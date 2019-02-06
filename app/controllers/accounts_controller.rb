@@ -46,12 +46,19 @@ class AccountsController < ApplicationController
   end
 
   def create
-    result = Account.create_new(params[:account], current_user)
+    @account = Account.create_new(params[:account], current_user)
 
-    if result.is_a? String
-      redirect_to root_path, :alert => result
-    else
-      redirect_back(fallback_location: root_path)
+    respond_to do |format|
+      if @account.is_a? String
+        format.html { render :new }
+        format.json { render json: @account, status: :unprocessable_entity }
+        format.js
+      else
+        @account = @account.decorate
+        format.html { redirect_to @account }
+        format.json { render :show, status: :created, location: @account }
+        format.js {}
+      end
     end
   end
 
