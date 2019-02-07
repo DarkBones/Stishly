@@ -92,21 +92,19 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-=begin
-  config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: 'guarded-beach-17639.herokuapp.com',
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: Rails.application.secrets.email_provider_username,
-    password: Rails.application.secrets.email_provider_password
-  }
-=end
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'guarded-beach-17639.herokuapp.com' }
+  config.action_mailer.smtp_settings = {
+    user_name: Rails.application.credentials.sendgrid[:username],
+    password: Rails.application.credentials.sendgrid[:password],
+    :domain => Rails.application.credentials.domain,
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
+  config.action_mailer.default_url_options = { :host => Rails.application.credentials.domain }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
-  #config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
 end
