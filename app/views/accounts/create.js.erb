@@ -8,16 +8,12 @@ var total_amount = parseInt($('#accounts_list li').first().find('span').attr('ba
 
 //$('#accounts_list li').first().find('span').attr('balance', total_amount)
 
-console.log('list elements:');
-console.log($("#accounts_list li").length);
-
 // Update the total amount
 $.ajax({
   type: "GET",
   dataType: "text",
   url: "/api/convert_currency/" + '<%= @account.balance %>' + '/' + '<%= @account.currency %>' + '/' + '<%= User.get_currency(current_user) %>',
   success: function(data){
-    console.log('+++ ' + data);
     total_amount += parseInt(data)
     $.ajax({
       type: "GET",
