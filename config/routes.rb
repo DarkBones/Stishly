@@ -15,10 +15,12 @@ Rails.application.routes.draw do
   get 'settings', to: 'users#settings'
   post 'accounts/:id/settings/edit', to: 'accounts#edit', as: :edit_account_settings
   get 'accounts/:id/set_default', to: 'accounts#set_default', as: :set_default_account
-  get 'api/accounts/:id/details', to: 'accounts#details', as: :account_details
-  get 'api/accounts/details', to: 'accounts#all_details', as: :account_all_details
+
+  get 'api/accounts/:id/details', to: 'api#account_details', as: :account_details
+  get 'api/accounts/details', to: 'api#all_accounts_details', as: :account_all_details
   get 'api/format_currency/:amount/:currency', to: 'accounts#format_currency'
   get 'api/convert_currency/:amount/:from/:to', to: 'accounts#convert_currency'
+  #get 'api/account_currency/:from_currency/:to_currency/:amount/'
 
   get 'app', to: 'app#index'
   get 'accounts/:id', to: 'accounts#show'

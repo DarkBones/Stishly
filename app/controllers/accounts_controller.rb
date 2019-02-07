@@ -46,9 +46,6 @@ class AccountsController < ApplicationController
   end
 
   def create
-    puts 'CREATE ACCOUNT'
-    puts params
-    
     @account = Account.create_new(params[:account], current_user)
 
     respond_to do |format|
