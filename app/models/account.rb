@@ -105,7 +105,13 @@ class Account < ApplicationRecord
       params[:currency] = user_currency.iso_code
     end
 
-    params[:position] = current_user.accounts.order(:position).first.position - 1
+    position = current_user.accounts.order(:position).first.position
+
+    if position != nil
+      params[:position] = position - 1
+    else
+      params[:position] = 0
+    end
 
     if existing_accounts.length == 0
       account = current_user.accounts.build(params)
