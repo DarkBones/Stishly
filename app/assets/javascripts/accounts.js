@@ -22,6 +22,9 @@ $(document).on('turbolinks:load', ()=> {
       $("#accountmenu").find("input[type=submit]").attr("disabled", "disabled");
     }
   });
+
+  display_summary_account();
+
 });
 
 $(document).on('click', '.account-button', (event) => {
@@ -29,3 +32,15 @@ $(document).on('click', '.account-button', (event) => {
   console.log('/' + link_name.replace('_', '/'));
   window.location.href = '/' + link_name.replace('_', '/');
 });
+
+$(document).ajaxComplete(function() {
+  display_summary_account();
+});
+
+function display_summary_account() {
+  if ($("#accounts_list li").length < 3) {
+    $("#accounts_list li").first().hide();
+  } else{
+    $("#accounts_list li").first().show();
+  }
+}

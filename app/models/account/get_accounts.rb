@@ -6,14 +6,12 @@ class Account
       @user_currency = User.get_currency(@current_user)
       @accounts = current_user.accounts.order(:position).decorate
 
-      if @accounts.length > 1
-        all = Account.create_summary_account(current_user)
-        all.balance = sum_accounts
+      all = Account.create_summary_account(current_user)
+      all.balance = sum_accounts
 
-        @accounts.insert(0, all)
+      @accounts.insert(0, all)
 
-        @accounts = AccountDecorator.decorate_collection(@accounts)
-      end
+      @accounts = AccountDecorator.decorate_collection(@accounts)
     end
 
     def sum_accounts
