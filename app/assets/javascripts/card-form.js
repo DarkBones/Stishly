@@ -12,6 +12,6 @@ function ToggleCardForm (formId) {
 }
 
 function ClearValues (formId) {
-  $(formId).find("input[type=text], textarea").val("");
+  $(formId).find("input, textarea").val("");
   //$(formId).hide();
 }

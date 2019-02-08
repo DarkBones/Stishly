@@ -35,6 +35,10 @@ html, body {
   float: left;
 }
 
+.cents {
+  font-size: 85%;
+}
+
 header nav.navbar {
   z-index: 1000;
   background-color: lighten($default-color, 10%);

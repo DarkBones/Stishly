@@ -43,4 +43,10 @@ function display_summary_account() {
   } else{
     $("#accounts_list li").first().show();
   }
+
+  if ($("#accounts_list li").length > 1) {
+    $("#accounts_list p").hide();
+  } else{
+    $("#accounts_list p").show();
+  }
 }
