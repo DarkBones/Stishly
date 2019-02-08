@@ -6,23 +6,14 @@ $('#account_' + <%= @account.id %>).hide().fadeIn(1000);
 
 var total_amount = parseInt($('#accounts_list li').first().find('span').attr('balance'));
 
-//$('#accounts_list li').first().find('span').attr('balance', total_amount)
-
 // Update the total amount
 $.ajax({
   type: "GET",
-  dataType: "text",
-  url: "/api/convert_currency/" + '<%= @account.balance %>' + '/' + '<%= @account.currency %>' + '/' + '<%= User.get_currency(current_user) %>',
-  success: function(data){
-    total_amount += parseInt(data)
-    $.ajax({
-      type: "GET",
-      dataType: "text",
-      url: "/api/format_currency/" + (total_amount).toString() + '/' + '<%= User.get_currency(current_user) %>',
-      success: function(result){
-        $('#accounts_list li').first().find('span').attr('balance', total_amount);
-        $('#accounts_list li').first().find('span').text(result);
-      }
-    });
-  },
+  dataType: "json",
+  url: "/api/account_display_balance/" + (total_amount).toString() + '/' + '<%= @account.currency %>' + '/' + '<%= User.get_currency(current_user) %>' + '/' + '<%= @account.balance %>',
+  success: function(data) {
+    total_amount = parseInt(data.balance)
+    $('#accounts_list li').first().find('span').attr('balance', total_amount);
+    $('#accounts_list li').first().find('span').html(data.html);
+  }
 });

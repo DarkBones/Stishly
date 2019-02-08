@@ -18,8 +18,9 @@ Rails.application.routes.draw do
 
   get 'api/accounts/:id/details', to: 'api#account_details', as: :account_details
   get 'api/accounts/details', to: 'api#all_accounts_details', as: :account_all_details
-  get 'api/format_currency/:amount/:currency', to: 'accounts#format_currency'
-  get 'api/convert_currency/:amount/:from/:to', to: 'accounts#convert_currency'
+  get 'api/format_currency/:amount/:currency', to: 'api#format_currency'
+  get 'api/convert_currency/:amount/:from/:to', to: 'api#convert_currency'
+  get 'api/account_display_balance/:amount/:from/:to/:add', to: 'api#account_display_balance'
   #get 'api/account_currency/:from_currency/:to_currency/:amount/'
 
   get 'app', to: 'app#index'

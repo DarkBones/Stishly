@@ -36,6 +36,41 @@ class Account < ApplicationRecord
     return GetDailyTotals.new(account_id, transactions, current_user).perform
   end
 
+  def self.get_display_balance_html(params)
+    Money.locale_backend = :i18n
+
+    amount = params[:amount].to_i
+    add = params[:add].to_i
+    if params[:from] != params[:to]
+      add = CurrencyRate.convert(add, Money::Currency.new(params[:from]), Money::Currency.new(params[:to]))
+    end
+    amount += add
+
+    balance = Money.new(amount, params[:to]).format
+
+    balance = balance.split('.')
+
+    if balance.length > 1
+      result = balance[0...-1][0]
+    else
+      result = balance[0]
+    end
+
+    if balance[1]
+      result += '.<span class="cents">'
+      result += balance[1]
+      result += '</span>'
+    end
+
+    output = {
+      html: result,
+      balance: amount,
+      add:add
+    }
+
+    return output
+  end
+
   def self.create_summary_account(current_user)
     account = Account.new
     account.id = 0
@@ -105,7 +140,11 @@ class Account < ApplicationRecord
       params[:currency] = user_currency.iso_code
     end
 
-    position = current_user.accounts.order(:position).first.position
+    if current_user.accounts.order(:position).first
+      position = current_user.accounts.order(:position).first.position
+    else
+      position = 1
+    end
 
     if position != nil
       params[:position] = position - 1

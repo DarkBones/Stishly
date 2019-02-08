@@ -26,4 +26,8 @@ class ApiController < ApplicationController
     render json: CurrencyRate.convert(params[:amount], Money::Currency.new(params[:from]), Money::Currency.new(params[:to]))
   end
 
+  def account_display_balance
+    render json: Account.get_display_balance_html(params)
+  end
+
 end
