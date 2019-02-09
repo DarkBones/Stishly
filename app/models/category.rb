@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  belongs_to :user, counter_cache: true
+  belongs_to :user#, counter_cache: true
   has_many :transactions
   has_one :parent, :class_name => 'Category'
   has_many :children, :class_name => 'Category', :foreign_key => 'parent_id'

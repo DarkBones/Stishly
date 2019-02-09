@@ -18,7 +18,7 @@
 class Account < ApplicationRecord
   validates :name, :user_id, presence: true
 
-  belongs_to :user, counter_cache: true
+  belongs_to :user#, counter_cache: true
   has_many :transactions
   has_many :setting_values, :as => :entity
   has_many :settings, through: :setting_values
