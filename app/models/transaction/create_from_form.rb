@@ -103,8 +103,9 @@ private
       time_arr = @params[:time].split(':')
       hours = time_arr[0]
       minutes = time_arr[1]
+      seconds = Time.now.strftime('%S')
 
-      return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + "00"
+      return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds
     end
 
     def get_account_currency_amount(amount, account)
