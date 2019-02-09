@@ -1,5 +1,5 @@
 class AccountHistory < ApplicationRecord
-  belongs_to :account
+  belongs_to :account, counter_cache: true
 
   def self.historic_balance(account, datetime)
     history = account.account_histories.order(:local_datetime).reverse_order().where("local_datetime < ?", datetime).take()

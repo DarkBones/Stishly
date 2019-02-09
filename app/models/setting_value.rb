@@ -12,8 +12,8 @@
 #
 
 class SettingValue < ApplicationRecord
-  belongs_to :entity, :polymorphic => true
-  belongs_to :setting
+  belongs_to :entity, :polymorphic => true, counter_cache: true
+  belongs_to :setting, counter_cache: true
 
   def self.get_setting(entity, setting)
     sett = entity.settings.find_by(description: setting)

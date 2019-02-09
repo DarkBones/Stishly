@@ -38,7 +38,7 @@ class User < ApplicationRecord
   has_many :accounts
   has_many :setting_values, :as => :entity
   has_many :settings, through: :setting_values
-  belongs_to :subscription_tier
+  belongs_to :subscription_tier, counter_cache: true
   has_many :schedules
   has_many :categories
   has_many :transactions, through: :accounts

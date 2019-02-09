@@ -16,9 +16,9 @@
 #
 
 class Transaction < ApplicationRecord
-  belongs_to :account
+  belongs_to :account, counter_cache: true
   has_one :user, through: :account
-  belongs_to :category, optional: true
+  belongs_to :category, optional: true, counter_cache: true
   has_one :parent, :class_name => 'Transaction'
   has_many :children, :class_name => 'Transaction', :foreign_key => 'parent_id'
 
