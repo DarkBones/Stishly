@@ -50,7 +50,7 @@ class AccountsController < ApplicationController
 
     respond_to do |format|
       if @account.is_a? String
-        format.html { render :new }
+        format.html { render action: "new" }
         format.json { render json: @account, status: :unprocessable_entity }
         format.js
       else
