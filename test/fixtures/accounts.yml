@@ -28,7 +28,8 @@ bas_1: {
   name: 'Current account',
   description: 'My current account at AIB',
   is_default: true,
-  currency: 'EUR'
+  currency: 'EUR',
+  is_real: 1
 }
 
 bas_2: {
@@ -37,7 +38,8 @@ bas_2: {
   user_id: 1,
   name: 'BOI account',
   is_default: false,
-  currency: 'EUR'
+  currency: 'EUR',
+  is_real: 1
 }
 
 bas_3: {
@@ -46,7 +48,8 @@ bas_3: {
   user_id: 1,
   name: 'Test account',
   is_default: false,
-  currency: 'EUR'
+  currency: 'EUR',
+  is_real: 1
 }
 
 bas_4: {
@@ -55,7 +58,8 @@ bas_4: {
   user_id: 1,
   name: 'Test2 account',
   is_default: false,
-  currency: 'EUR'
+  currency: 'EUR',
+  is_real: 1
 }
 
 bas_5: {
@@ -64,7 +68,8 @@ bas_5: {
   user_id: 1,
   name: 'Test3 account',
   is_default: false,
-  currency: 'EUR'
+  currency: 'EUR',
+  is_real: 1
 }
 
 sab_1: {
@@ -72,7 +77,8 @@ sab_1: {
   user_id: 2,
   name: 'Current account',
   is_default: true,
-  currency: 'EUR'
+  currency: 'EUR',
+  is_real: 1
 }
 
 sab_2: {
@@ -80,7 +86,8 @@ sab_2: {
   user_id: 2,
   name: 'Test account',
   is_default: false,
-  currency: 'EUR'
+  currency: 'EUR',
+  is_real: 1
 }
 
 transactions_1: {
@@ -89,7 +96,8 @@ transactions_1: {
   user_id: 4,
   name: 'Test account',
   is_default: true,
-  currency: 'EUR'
+  currency: 'EUR',
+  is_real: 1
 }
 
 currency_1: {
@@ -98,7 +106,8 @@ currency_1: {
   user_id: 5,
   name: 'To be converted',
   is_default: true,
-  currency: 'EUR'
+  currency: 'EUR',
+  is_real: 1
 }
 
 currency_2: {
@@ -107,7 +116,8 @@ currency_2: {
   user_id: 5,
   name: 'Not to be converted',
   is_default: false,
-  currency: 'EUR'
+  currency: 'EUR',
+  is_real: 1
 }
 
 endless_page: {
@@ -116,5 +126,26 @@ endless_page: {
   user_id: 6,
   name: 'Endless Page',
   is_default: true,
-  currency: 'EUR'
+  currency: 'EUR',
+  is_real: 1
+}
+
+destroy_1: {
+  id: 14,
+  balance: 10000,
+  user_id: 7,
+  name: 'Destroy this account',
+  is_default: true,
+  currency: 'EUR',
+  is_real: 1
+}
+
+destroy_2: {
+  id: 15,
+  balance: 10000,
+  user_id: 7,
+  name: 'Destroy this account too',
+  is_default: true,
+  currency: 'EUR',
+  is_real: 1
 }

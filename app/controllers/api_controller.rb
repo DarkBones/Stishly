@@ -1,16 +1,20 @@
 class ApiController < ApplicationController
   def account_details
-    @account = current_user.accounts.where(name: params[:id]).take.decorate
-    render json: {
-      id: @account.id,
-      balance: @account.balance,
-      balance_float: @account.balance_float,
-      created_at: @account.created_at,
-      updated_at: @account.updated_at,
-      name: @account.name,
-      description: @account.description,
-      currency: @account.currency
-    }
+    @account = current_user.accounts.where(name: params[:id]).take
+
+    if @account
+      @account = @account.decorate if @account
+      render json: {
+        id: @account.id,
+        balance: @account.balance,
+        balance_float: @account.balance_float,
+        created_at: @account.created_at,
+        updated_at: @account.updated_at,
+        name: @account.name,
+        description: @account.description,
+        currency: @account.currency
+      }
+    end
   end
 
   def all_accounts_details

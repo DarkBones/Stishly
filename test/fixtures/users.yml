@@ -100,3 +100,14 @@ endless_page: {
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40'
 }
+
+destroy: {
+  id: 7,
+  first_name: 'Destroy',
+  last_name: 'Me',
+  email: 'destroy@me.com',
+  country_code: 'IE',
+  timezone: 'Europe/London',
+  encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
+  confirmed_at: '2018-11-14 19:54:40'
+}

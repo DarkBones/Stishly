@@ -30,6 +30,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  homepage:
+    welcome_h1: "Welcome"
   account:
     confirmations:
       confirmed: "Account successfully created"
@@ -37,6 +39,10 @@ en:
       invalid_name: "Invalid account name"
       invalid_name_dot: "Invalid account name. Dots (.) not allowed"
       already_exists: "Account already exists"
+    instructions:
+      create: "Create an account by clicking the + button"
   dates:
     today: "Today"
     yesterday: "Yesterday"
+  errors:
+    form: "Please fix the below errors"

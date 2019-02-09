@@ -17,7 +17,7 @@ module DeviseHelper
 
     html = <<-HTML
     <div id="error_explanation">
-      <h2>Please fix the below errors</h2>
+      <h2>#{I18n.t('errors.form')}</h2>
       <ul>#{messages}</ul>
     </div>
     HTML

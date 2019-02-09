@@ -98,3 +98,31 @@ endless_page<%= i %>: {
   category_id: <%= i % 83 %>
 }
 <% end %>
+
+destroy_1: {
+  user_id: 7,
+  description: "Destroy this transaction",
+  account_id: 14,
+  amount: 100,
+  account_currency_amount: 100,
+  currency: "EUR",
+  created_at: "2018-01-01 00:00",
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= Time.now %>",
+  timezone: "Europe/London",
+  category_id: 83
+}
+
+destroy_2: {
+  user_id: 7,
+  description: "Destroy this transaction",
+  account_id: 14,
+  amount: 100,
+  account_currency_amount: 100,
+  currency: "EUR",
+  created_at: "2018-01-01 00:00",
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= Time.now %>",
+  timezone: "Europe/London",
+  category_id: 83
+}

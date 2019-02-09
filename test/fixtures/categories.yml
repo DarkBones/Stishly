@@ -87,3 +87,5 @@ lease79: { id: 79, name: 'Lease', color: '324, 100%, 50%', symbol: 'lease', user
 vehicle_maintenance80: { id: 80, name: 'Maintenance', color: '324, 100%, 50%', symbol: 'maintenance_vehicle', user_id: 1, parent_id: 10}
 parking81: { id: 81, name: 'Parking', color: '324, 100%, 50%', symbol: 'parking', user_id: 1, parent_id: 10}
 rentals82: { id: 82, name: 'Rental', color: '324, 100%, 50%', symbol: 'rentals', user_id: 1, parent_id: 10}
+
+destroy: { id: 83, name: 'Destroy', color: '144, 100%, 50%', symbol: 'salary', user_id: 7, parent_id: }
