@@ -4,19 +4,22 @@
 <% dates.each do |d| %>
   <% d_formatted = User.format_date(d) %>
   <script type="text/javascript">
-    if ($("#" + "<%= d %>").length > 0) {
-      $("#" + "<%= d %> ul.parent_transactions").append("<%= j yield d %>");
-    } else {
-      $("#transactions_list").append(
-        "<div id=\"<%= d %>\">" +
-        "<h3 id=\"day_<%= d %>\"><%= d_formatted %><span class=\"float-right\">" +
-        "<%= balance(@daily_totals[d], 
-        @account_currency) %>" + "</span></h3>" +
-        "<ul id=\"transactions_<%= d %>\" class=\"parent_transactions\">" +
-        "<%= j yield d %>" +
-        "</ul>" +
-        "</div>"
-        )
+    if ($('#transactions_list').hasClass('populated') == false) {
+      if ($("#" + "<%= d %>").length > 0) {
+        $("#" + "<%= d %> ul.parent_transactions").append("<%= j yield d %>");
+      } else {
+        $("#transactions_list").append(
+          "<div id=\"<%= d %>\">" +
+          "<h3 id=\"day_<%= d %>\"><%= d_formatted %><span class=\"float-right\">" +
+          "<%= balance(@daily_totals[d], 
+          @account_currency) %>" + "</span></h3>" +
+          "<ul id=\"transactions_<%= d %>\" class=\"parent_transactions\">" +
+          "<%= j yield d %>" +
+          "</ul>" +
+          "</div>"
+          )
+      }
+      $('#transactions_list').addClass('populated');
     }
   </script>
 <% end %>
