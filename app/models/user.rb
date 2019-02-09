@@ -35,12 +35,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable
-  has_many :accounts
+  has_many :accounts, dependent: :destroy
   has_many :setting_values, :as => :entity
   has_many :settings, through: :setting_values
   belongs_to :subscription_tier
-  has_many :schedules
-  has_many :categories
+  has_many :schedules, dependent: :destroy
+  has_many :categories, dependent: :destroy
   has_many :transactions, through: :accounts
   has_many :account_histories, through: :accounts
 

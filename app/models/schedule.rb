@@ -19,5 +19,6 @@
 #
 
 class Schedule < ApplicationRecord
-  belongs_to :transactions, optional: true#, counter_cache: true
+  belongs_to :transactions, optional: true
+  belongs_to :user
 end

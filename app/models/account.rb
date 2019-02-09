@@ -18,11 +18,11 @@
 class Account < ApplicationRecord
   validates :name, :user_id, presence: true
 
-  belongs_to :user#, counter_cache: true
-  has_many :transactions
+  belongs_to :user
+  has_many :transactions, dependent: :destroy
   has_many :setting_values, :as => :entity
   has_many :settings, through: :setting_values
-  has_many :account_histories
+  has_many :account_histories, dependent: :destroy
 
   def self.get_accounts(current_user)
     return GetAccounts.new(current_user).perform
