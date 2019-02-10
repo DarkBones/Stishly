@@ -12,6 +12,16 @@ function ToggleCardForm (formId) {
 }
 
 function ClearValues (formId) {
+  if (formId == '#accountmenu') {
+      $.ajax({
+      type: "GET",
+      dataType: "text",
+      url: "/api/user_currency",
+      success: function(data) {
+        $(formId).find("select#account_currency").val(data);
+      }
+    });
+  }
+
   $(formId).find("input, textarea").val("");
-  //$(formId).hide();
 }

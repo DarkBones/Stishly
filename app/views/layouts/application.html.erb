@@ -18,6 +18,7 @@
 
       <% if current_user %>
         <%= render "card_forms/new_account_form" %>
+        <%= render "card_forms/new_transaction_form", locals: {active_account: @active_account} %>
         <%= render 'layouts/left_menu', locals: {active_account: @active_account} %>
       <% end %>
       <div id="content">

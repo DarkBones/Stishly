@@ -9,7 +9,11 @@ class Category < ApplicationRecord
     if as_array
       main_categories = current_user.categories.where(:parent_id => nil)
 
+      uncat = self.get_uncategorised
+
       array = []
+      array.push({level: 0, category: uncat})
+
       main_categories.each do |main|
 
         if use_levels
@@ -38,6 +42,15 @@ class Category < ApplicationRecord
   end
 
   private
+
+  def self.get_uncategorised
+    cat = Category.new
+    cat.id = 0
+    cat.name = 'Uncategorised'
+    cat.color = '0, 0%, 50%'
+    cat.symbol = 'uncategorised'
+    return cat
+  end
 
   def self.get_child_categories(category, children_array = [], level = 0)
     children = category.children

@@ -12,15 +12,31 @@ $(document).on('turbolinks:load', ()=> {
 function hideTimeout(id) {
   $parent = $(id).parent().closest('div');
   setTimeout( function() {
-    $parent.fadeOut(200);
-  }, 4000);
+    $parent.fadeOut(2000);
+  }, 1000);
 
   /*setTimeout( function() {
     $parent.remove();
   }, 5000);*/
 }
 
+function remove_notice(id) {
+  $(id).parent().closest('div').remove();
+}
+
+function remove_active_notices() {
+  if ($('#flash_notice').length) {
+    remove_notice('#flash_notice');
+  }
+
+  if ($('#flash_alert').length) {
+    remove_notice('#flash_alert');
+  }
+}
+
 function trigger_notice (text, is_error) {
+  remove_active_notices();
+  
   var classes = "alert alert-dismissible";
   var id = "flash_";
 

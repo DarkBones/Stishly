@@ -34,4 +34,8 @@ class ApiController < ApplicationController
     render json: Account.get_display_balance_html(params)
   end
 
+  def get_user_currency
+    render json: User.get_currency(current_user).iso_code
+  end
+
 end

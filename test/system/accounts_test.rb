@@ -5,6 +5,8 @@ class AccountsTest < ApplicationSystemTestCase
 
     login_as_blank
 
+    page.driver.browser.navigate.refresh
+
     # Open the new account menu
     page.find("#create-account-button").click
     # Find and store the submit button
@@ -38,7 +40,11 @@ class AccountsTest < ApplicationSystemTestCase
     # Save the account
     click_on "Create Account"
     # Check if the duplicate account error shows
-    assert_selector '#flash_alert', text: I18n.t('account.failure.already_exists')
+
+    #@selenium.wait_for_element
+    assert_selector '#accountmenu', text: "Create New Account"
+
+    page.find(".card-form__close").click
 
     # Open the new account menu
     page.find("#create-account-button").click
@@ -61,6 +67,8 @@ class AccountsTest < ApplicationSystemTestCase
     # Save the account
     click_on "Create Account"
 
+    #puts page.driver.browser.manage.logs.get(:browser)
+
     # Open the new account menu
     page.find("#create-account-button").click
     # Find and store the submit button
@@ -72,10 +80,9 @@ class AccountsTest < ApplicationSystemTestCase
     click_on "Create Account"
 
     # Check if the new accounts shows up in the left menu
-    assert_selector '#accounts_list', text: "All\n€15,400.50\ntest account one\n€0.00\ntest account two\n€5,000.00\ntest account three\n€10,000.42\ntest account four\n¥50,000\ntest account five\n€0.08"
+    assert_selector '#accounts_list', text: "All\n€15,400.50\ntest account five\n€0.08\ntest account four\n¥50,000\ntest account three\n€10,000.42\ntest account two\n€5,000.00\ntest account one\n€0.00"
   end
 
-=begin
   test "Transaction visible test" do
 
     current_user = users(:bas)
@@ -114,5 +121,5 @@ class AccountsTest < ApplicationSystemTestCase
 
     take_screenshot
   end
-=end
+  
 end
