@@ -149,3 +149,23 @@ destroy_2: {
   currency: 'EUR',
   is_real: 1
 }
+
+transactions_2: {
+  id: 16,
+  balance: 1000000,
+  user_id: 8,
+  name: 'Current Account',
+  is_default: true,
+  currency: 'EUR',
+  is_real: 1
+}
+
+transactions_3: {
+  id: 17,
+  balance: 0,
+  user_id: 8,
+  name: 'Savings Account',
+  is_default: true,
+  currency: 'EUR',
+  is_real: 1
+}
