@@ -131,7 +131,6 @@ class UsersTest < ApplicationSystemTestCase
     assert_selector '#flash_notice', text: I18n.t('devise.sessions.signed_in')
 
     page.find(".navbar__menu-toggle").click
-
     click_on "Sign out"
 
     assert_selector '#flash_notice', text: I18n.t('devise.sessions.signed_out')
