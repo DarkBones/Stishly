@@ -1,6 +1,7 @@
 require "application_system_test_case"
 
 class TransactionsTest < ApplicationSystemTestCase
+
   test "open and close transactions menu" do
     """
     Log in and click on 'new transaction'
@@ -30,8 +31,7 @@ class TransactionsTest < ApplicationSystemTestCase
     # check if menu is hidden
     assert_selector '#transactionmenu', visible: :hidden
 
-    page.find(".navbar__menu-toggle").click
-    click_on "Sign out"
+    logout
   end
 
   test "create single expense transaction in same currency" do
@@ -48,11 +48,13 @@ class TransactionsTest < ApplicationSystemTestCase
 
     click_on "Save Transaction"
 
-    assert_selector '#transactions_list', text: "Today\n€-100.01\nsingle expense euro\n€-100.01"
-    assert_selector '#accounts_list', text: "All\n€9,899.99\nCurrent Account\n€9,899.99"
+    assert_selector '#transactions_list', text: "Today\n€-100.01"
+    assert_selector '#transactions_list', text: "single expense euro\n€-100.01"
 
-    page.find(".navbar__menu-toggle").click
-    click_on "Sign out"
+    assert_selector '#accounts_list', text: "All\n€9,899.99"
+    assert_selector '#accounts_list', text: "Current Account\n€9,899.99"
+
+    logout
   end
 
   test "create multiple expense transactions in same currency" do
@@ -70,13 +72,26 @@ class TransactionsTest < ApplicationSystemTestCase
 
     click_on "Save Transaction"
 
+    assert_selector '.child_transactions', visible: :hidden
     page.find('.show-child-transactions').click
+    assert_selector '.child_transactions', visible: :visible
 
-    assert_selector '#transactions_list', text: "Today\n€-10.05\nmultiple expense euro\n€-10.05\none\n€-1.00\ntwo\n€-2.00\nthree\n€-3.00\nfour\n€-4.00\npoint 05\n€-0.05"
-    assert_selector '#accounts_list', text: "All\n€9,989.95\nCurrent Account\n€9,989.95"
+    assert_selector '#transactions_list', text: "Today\n€-10.05"
+    assert_selector '#transactions_list', text: "multiple expense euro\n€-10.05"
 
-    page.find(".navbar__menu-toggle").click
-    click_on "Sign out"
+    assert_selector '.child_transactions', text: "one\n€-1.00"
+    assert_selector '.child_transactions', text: "two\n€-2.00"
+    assert_selector '.child_transactions', text: "three\n€-3.00"
+    assert_selector '.child_transactions', text: "four\n€-4.00"
+    assert_selector '.child_transactions', text: "point 05\n€-0.05"
+
+    page.find('.show-child-transactions').click
+    assert_selector '.child_transactions', visible: :hidden
+
+    assert_selector '#accounts_list', text: "All\n€9,989.95"
+    assert_selector '#accounts_list', text: "Current Account\n€9,989.95"
+
+    logout
   end
 
   test "create single income transaction in same currency" do
@@ -92,11 +107,13 @@ class TransactionsTest < ApplicationSystemTestCase
 
     click_on "Save Transaction"
 
-    assert_selector '#transactions_list', text: "Today\n€100.01\nsingle income euro\n€100.01"
-    assert_selector '#accounts_list', text: "All\n€10,100.01\nCurrent Account\n€10,100.01"
+    assert_selector '#transactions_list', text: "Today\n€100.01"
+    assert_selector '#transactions_list', text: "single income euro\n€100.01"
 
-    page.find(".navbar__menu-toggle").click
-    click_on "Sign out"
+    assert_selector '#accounts_list', text: "All\n€10,100.01"
+    assert_selector '#accounts_list', text: "Current Account\n€10,100.01"
+
+    logout
   end
 
   test "create multiple income transactions in same currency" do
@@ -115,13 +132,23 @@ class TransactionsTest < ApplicationSystemTestCase
 
     click_on "Save Transaction"
 
+    assert_selector '.child_transactions', visible: :hidden
     page.find('.show-child-transactions').click
+    assert_selector '.child_transactions', visible: :visible
 
-    assert_selector '#transactions_list', text: "Today\n€10.05\nmultiple expense euro\n€10.05\none\n€1.00\ntwo\n€2.00\nthree\n€3.00\nfour\n€4.00\npoint 05\n€0.05"
-    assert_selector '#accounts_list', text: "All\n€10,010.05\nCurrent Account\n€10,010.05"
+    assert_selector '#transactions_list', text: "Today\n€10.05"
+    assert_selector '#transactions_list', text: "multiple expense euro\n€10.05"
+    assert_selector '#transactions_list', text: "one\n€1.00"
+    assert_selector '#transactions_list', text: "two\n€2.00"
+    assert_selector '#transactions_list', text: "three\n€3.00"
+    assert_selector '#transactions_list', text: "four\n€4.00"
+    assert_selector '#transactions_list', text: "point 05\n€0.05"
+    
 
-    page.find(".navbar__menu-toggle").click
-    click_on "Sign out"
+    assert_selector '#accounts_list', text: "All\n€10,010.05"
+    assert_selector '#accounts_list', text: "Current Account\n€10,010.05"
+
+    logout
   end
 
   test "create single transfer transaction in same currency" do
@@ -138,11 +165,23 @@ class TransactionsTest < ApplicationSystemTestCase
 
     click_on "Save Transaction"
 		
-    assert_selector '#transactions_list', text: "Today\n€0.00\nsingle transfer euro\n€-5,000.00\nsingle transfer euro\n€5,000.00"
-    assert_selector '#accounts_list', text: "All\n€10,000.00\nCurrent Account\n€5,000.00\nSavings Account\n€5,000.00"
+    assert_selector '#transactions_list', text: "Today\n€0.00"
+    assert_selector '#transactions_list', text: "single transfer euro\n€-5,000.00"
+    assert_selector '#transactions_list', text: "single transfer euro\n€5,000.00"
 
-    page.find(".navbar__menu-toggle").click
-    click_on "Sign out"
+    page.find("#account_16").click
+    assert_selector '#transactions_list', text: "Today\n€-5,000.00"
+    assert_selector '#transactions_list', text: "single transfer euro\n€-5,000.00"
+
+    page.find("#account_17").click
+    assert_selector '#transactions_list', text: "Today\n€5,000.00"
+    assert_selector '#transactions_list', text: "single transfer euro\n€5,000.00"
+
+    assert_selector '#accounts_list', text: "All\n€10,000.00"
+    assert_selector '#accounts_list', text: "Current Account\n€5,000.00"
+    assert_selector '#accounts_list', text: "Savings Account\n€5,000.00"
+
+    logout
   end
 
   test "create multiple transfer transactions in same currency" do
@@ -160,14 +199,29 @@ class TransactionsTest < ApplicationSystemTestCase
 		
 		click_on "Save Transaction"
 
+    page.find_all('.show-child-transactions')[1].click
     page.find_all('.show-child-transactions')[0].click
 
-		assert_selector '#transactions_list', text: "Today\n€0.00\nmultiple transfer euro\n€-10.05\none\n€-1.00\ntwo\n€-2.00\nthree\n€-3.00\nfour\n€-4.00\npoint 05\n€-0.05\nmultiple transfer euro\n€10.05"
-    assert_selector '#accounts_list', text: "All\n€10,000.00\nCurrent Account\n€9,989.95\nSavings Account\n€10.05"
-    
+		assert_selector '#transactions_list', text: "Today\n€0.00"
+    assert_selector '#transactions_list', text: "multiple transfer euro\n€-10.05"
+    assert_selector '#transactions_list', text: "one\n€-1.00"
+    assert_selector '#transactions_list', text: "two\n€-2.00"
+    assert_selector '#transactions_list', text: "three\n€-3.00"
+    assert_selector '#transactions_list', text: "four\n€-4.00"
+    assert_selector '#transactions_list', text: "point 05\n€-0.05"
 
-    page.find(".navbar__menu-toggle").click
-    click_on "Sign out"
+    assert_selector '#transactions_list', text: "multiple transfer euro\n€10.05"
+    assert_selector '#transactions_list', text: "one\n€1.00"
+    assert_selector '#transactions_list', text: "two\n€2.00"
+    assert_selector '#transactions_list', text: "three\n€3.00"
+    assert_selector '#transactions_list', text: "four\n€4.00"
+    assert_selector '#transactions_list', text: "point 05\n€0.05"
+
+    assert_selector '#accounts_list', text: "All\n€10,000.00"
+    assert_selector '#accounts_list', text: "Current Account\n€9,989.95"
+    assert_selector '#accounts_list', text: "Savings Account\n€10.05"
+
+    logout
   end
 
   test "create single expense transaction in different currency" do
@@ -184,11 +238,13 @@ class TransactionsTest < ApplicationSystemTestCase
 		
 		click_on "Save Transaction"
 		
-		assert_selector '#transactions_list', text: "Today\n€-0.80\nsingle expense jpy\n¥-100"
-		assert_selector '#accounts_list', text: "All\n€9,999.20\nCurrent Account\n€9,999.20"
+		assert_selector '#transactions_list', text: "Today\n€-0.80"
+    assert_selector '#transactions_list', text: "single expense jpy\n¥-100"
 
-    page.find(".navbar__menu-toggle").click
-    click_on "Sign out"
+		assert_selector '#accounts_list', text: "All\n€9,999.20"
+    assert_selector '#accounts_list', text: "Current Account\n€9,999.20"
+
+    logout
   end
 
   test "create multiple expense transactions in different currency" do
@@ -205,11 +261,13 @@ class TransactionsTest < ApplicationSystemTestCase
 
     click_on "Save Transaction"
 		
-		assert_selector '#transactions_list', text: "Today\n€-8.00\nmultiple expense jpy\n¥-1,000"
-		assert_selector '#accounts_list', text: "All\n€9,992.00\nCurrent Account\n€9,992.00"
+		assert_selector '#transactions_list', text: "Today\n€-8.00"
+    assert_selector '#transactions_list', text: "multiple expense jpy\n¥-1,000"
 
-    page.find(".navbar__menu-toggle").click
-    click_on "Sign out"
+		assert_selector '#accounts_list', text: "All\n€9,992.00"
+    assert_selector '#accounts_list', text: "Current Account\n€9,992.00"
+
+    logout
   end
 
   test "create single income transaction in different currency" do
@@ -226,11 +284,13 @@ class TransactionsTest < ApplicationSystemTestCase
 
     click_on "Save Transaction"
 		
-    assert_selector '#transactions_list', text: "Today\n€800.00\nsingle income jpy\n¥100,000"
-    assert_selector '#accounts_list', text: "All\n€10,800.00\nCurrent Account\n€10,800.00\nSavings Account\n€0.00"
+    assert_selector '#transactions_list', text: "Today\n€800.00"
+    assert_selector '#transactions_list', text: "single income jpy\n¥100,000"
 
-    page.find(".navbar__menu-toggle").click
-    click_on "Sign out"
+    assert_selector '#accounts_list', text: "All\n€10,800.00"
+    assert_selector '#accounts_list', text: "Current Account\n€10,800.00"
+
+    logout
   end
 
   test "create multiple income transactions in different currency" do
@@ -247,12 +307,22 @@ class TransactionsTest < ApplicationSystemTestCase
 		fill_in "Transactions", with: "one 1000\ntwo 2000\nthree 3000\nfour 4000\n"
 		
 		click_on "Save Transaction"
-		
-		assert_selector '#transactions_list', text: "Today\n€80.00\nmultiple income jpy\n¥10,000"
-		assert_selector '#accounts_list', text: "All\n€10,080.00\nCurrent Account\n€10,080.00\nSavings Account\n€0.00"
 
-    page.find(".navbar__menu-toggle").click
-    click_on "Sign out"
+    assert_selector '.child_transactions', visible: :hidden
+    page.find('.show-child-transactions').click
+    assert_selector '.child_transactions', visible: :visible
+		
+		assert_selector '#transactions_list', text: "Today\n€80.00"
+    assert_selector '#transactions_list', text: "multiple income jpy\n¥10,000"
+    assert_selector '#transactions_list', text: "one\n¥1,000"
+    assert_selector '#transactions_list', text: "two\n¥2,000"
+    assert_selector '#transactions_list', text: "three\n¥3,000"
+    assert_selector '#transactions_list', text: "four\n¥4,000"
+
+		assert_selector '#accounts_list', text: "All\n€10,080.00"
+    assert_selector '#accounts_list', text: "Current Account\n€10,080.00"
+
+    logout
   end
 
   test "create single transfer transaction in different currency" do
@@ -270,11 +340,15 @@ class TransactionsTest < ApplicationSystemTestCase
 
     click_on "Save Transaction"
 		
-    assert_selector '#transactions_list', text: "Today\n€0.00\nsingle transfer jpy\n¥-100,000\nsingle transfer jpy\n¥100,000"
-    assert_selector '#accounts_list', text: "All\n€10,000.00\nCurrent Account\n€9,200.00\nSavings Account\n€800.00"
+    assert_selector '#transactions_list', text: "Today\n€0.00"
+    assert_selector '#transactions_list', text: "single transfer jpy\n¥-100,000"
+    assert_selector '#transactions_list', text: "single transfer jpy\n¥100,000"
 
-    page.find(".navbar__menu-toggle").click
-    click_on "Sign out"
+    assert_selector '#accounts_list', text: "All\n€10,000.00"
+    assert_selector '#accounts_list', text: "Current Account\n€9,200.00"
+    assert_selector '#accounts_list', text: "Savings Account\n€800.00"
+
+    logout
   end
 
   test "create multiple transfer transactions in different currency" do
@@ -293,11 +367,15 @@ class TransactionsTest < ApplicationSystemTestCase
 		
 		click_on "Save Transaction"
 		
-		assert_selector '#transactions_list', text: "Today\n€0.00\nmultiple transfer jpy\n¥-10,000\nmultiple transfer jpy\n¥10,000"
-		assert_selector '#accounts_list', text: "All\n€10,000.00\nCurrent Account\n€9,920.00\nSavings Account\n€80.00"
+		assert_selector '#transactions_list', text: "Today\n€0.00"
+    assert_selector '#transactions_list', text: "multiple transfer jpy\n¥-10,000"
+    assert_selector '#transactions_list', text: "multiple transfer jpy\n¥10,000"
 
-    page.find(".navbar__menu-toggle").click
-    click_on "Sign out"
+		assert_selector '#accounts_list', text: "All\n€10,000.00"
+    assert_selector '#accounts_list', text: "Current Account\n€9,920.00"
+    assert_selector '#accounts_list', text: "Savings Account\n€80.00"
+
+    logout
   end
 	
 	test "transaction currency resetting" do
@@ -316,8 +394,7 @@ class TransactionsTest < ApplicationSystemTestCase
 		click_on "New Transaction"
 		#expect(page).to have_select('Currency', selected: 'EUR')
 		
-		page.find(".navbar__menu-toggle").click
-    click_on "Sign out"
+		logout
 	end
 
 end

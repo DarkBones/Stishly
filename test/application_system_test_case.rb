@@ -21,4 +21,9 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
     login_user(user, password)
   end
+
+  def logout
+    page.find(".navbar__menu-toggle").click
+    click_on "Sign out"
+  end
 end
