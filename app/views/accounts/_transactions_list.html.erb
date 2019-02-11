@@ -15,7 +15,7 @@
         <span class="balance float-right">
           <%= balance(t.account_currency_amount.to_f, Money::Currency.new(@active_account.currency), "cents") %>
         </span>
-        
+        <br />
         <span>
           <%= t.transfer_message %>
         </span>
@@ -34,6 +34,7 @@
             <span class="balance float-right">
               <%= balance(ct.account_currency_amount.to_f, Money::Currency.new(@active_account.currency), "cents") %>
             </span>
+            <br />
             <span>
               <%= ct.conversion_message %>
             </span>
