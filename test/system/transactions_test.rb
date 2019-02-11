@@ -246,7 +246,8 @@ class TransactionsTest < ApplicationSystemTestCase
 		click_on "Save Transaction"
 		
 		assert_selector '#transactions_list', text: "Today\n€-0.80"
-    assert_selector '#transactions_list', text: "single expense jpy\n¥-100"
+    assert_selector '#transactions_list', text: "single expense jpy\n€-0.80"
+    assert_selector '#transactions_list', text: "~¥-100"
 
 		assert_selector '#accounts_list', text: "All\n€9,999.20"
     assert_selector '#accounts_list', text: "Current Account\n€9,999.20"
@@ -269,7 +270,8 @@ class TransactionsTest < ApplicationSystemTestCase
     click_on "Save Transaction"
 		
 		assert_selector '#transactions_list', text: "Today\n€-8.00"
-    assert_selector '#transactions_list', text: "multiple expense jpy\n¥-1,000"
+    assert_selector '#transactions_list', text: "multiple expense jpy\n€-8.00"
+    assert_selector '#transactions_list', text: "~¥-1,000"
 
 		assert_selector '#accounts_list', text: "All\n€9,992.00"
     assert_selector '#accounts_list', text: "Current Account\n€9,992.00"
@@ -292,7 +294,8 @@ class TransactionsTest < ApplicationSystemTestCase
     click_on "Save Transaction"
 		
     assert_selector '#transactions_list', text: "Today\n€800.00"
-    assert_selector '#transactions_list', text: "single income jpy\n¥100,000"
+    assert_selector '#transactions_list', text: "single income jpy\n€800.00"
+    assert_selector '#transactions_list', text: "~¥100,000"
 
     assert_selector '#accounts_list', text: "All\n€10,800.00"
     assert_selector '#accounts_list', text: "Current Account\n€10,800.00"
@@ -320,11 +323,17 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector '.child_transactions', visible: :visible
 		
 		assert_selector '#transactions_list', text: "Today\n€80.00"
-    assert_selector '#transactions_list', text: "multiple income jpy\n¥10,000"
-    assert_selector '#transactions_list', text: "one\n¥1,000"
-    assert_selector '#transactions_list', text: "two\n¥2,000"
-    assert_selector '#transactions_list', text: "three\n¥3,000"
-    assert_selector '#transactions_list', text: "four\n¥4,000"
+    assert_selector '#transactions_list', text: "multiple income jpy\n€80.00"
+    assert_selector '#transactions_list', text: "one\n€8.00"
+    assert_selector '#transactions_list', text: "two\n€16.00"
+    assert_selector '#transactions_list', text: "three\n€24.00"
+    assert_selector '#transactions_list', text: "four\n€32.00"
+
+    assert_selector '#transactions_list', text: "~¥10,000"
+    assert_selector '#transactions_list', text: "~¥1,000"
+    assert_selector '#transactions_list', text: "~¥2,000"
+    assert_selector '#transactions_list', text: "~¥3,000"
+    assert_selector '#transactions_list', text: "~¥4,000"
 
 		assert_selector '#accounts_list', text: "All\n€10,080.00"
     assert_selector '#accounts_list', text: "Current Account\n€10,080.00"
@@ -348,8 +357,11 @@ class TransactionsTest < ApplicationSystemTestCase
     click_on "Save Transaction"
 		
     assert_selector '#transactions_list', text: "Today\n€0.00"
-    assert_selector '#transactions_list', text: "single transfer jpy\n¥-100,000"
-    assert_selector '#transactions_list', text: "single transfer jpy\n¥100,000"
+    assert_selector '#transactions_list', text: "single transfer jpy\n€-800.00"
+    assert_selector '#transactions_list', text: "single transfer jpy\n€800.00"
+
+    assert_selector '#transactions_list', text: "~¥-100,000"
+    assert_selector '#transactions_list', text: "~¥100,000"
 
     assert_selector '#transactions_list', text: "Transferred from Current Account"
     assert_selector '#transactions_list', text: "Transferred to Savings Account"
@@ -378,8 +390,11 @@ class TransactionsTest < ApplicationSystemTestCase
 		click_on "Save Transaction"
 		
 		assert_selector '#transactions_list', text: "Today\n€0.00"
-    assert_selector '#transactions_list', text: "multiple transfer jpy\n¥-10,000"
-    assert_selector '#transactions_list', text: "multiple transfer jpy\n¥10,000"
+    assert_selector '#transactions_list', text: "multiple transfer jpy\n€-80.00"
+    assert_selector '#transactions_list', text: "multiple transfer jpy\n€80.00"
+
+    assert_selector '#transactions_list', text: "~¥-10,000"
+    assert_selector '#transactions_list', text: "~¥10,000"
 
     assert_selector '#transactions_list', text: "Transferred from Current Account"
     assert_selector '#transactions_list', text: "Transferred to Savings Account"

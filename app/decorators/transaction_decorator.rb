@@ -27,6 +27,14 @@ class TransactionDecorator < ApplicationDecorator
     return ""
   end
 
+  def conversion_message
+    if model.amount != model.account_currency_amount
+      return "~" + Money.new(model.amount, model.currency).format
+    else
+      return ""
+    end
+  end
+
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
   #

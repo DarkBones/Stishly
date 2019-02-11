@@ -13,22 +13,29 @@
         <%= image_tag 'categories/' + t.category.symbol + '.svg', :style => "background-color: hsl(" + t.category.color + ");" %>
         <%= t.description %>
         <span class="balance float-right">
-          <%= balance(t.amount.to_f, Money::Currency.new(t.currency), "cents") %>
+          <%= balance(t.account_currency_amount.to_f, Money::Currency.new(@active_account.currency), "cents") %>
         </span>
         
         <span>
           <%= t.transfer_message %>
+        </span>
+
+        <span>
+          <%= t.conversion_message %>
         </span>
       </li>
     </a>
 
     <% if child_transactions.length > 0 %>
       <ul class="child_transactions">
-        <% child_transactions.each do |ct| %>
+        <% child_transactions.decorate.each do |ct| %>
           <li>
             <%= ct.description %>
             <span class="balance float-right">
-              <%= balance(ct.amount.to_f, Money::Currency.new(ct.currency), "cents") %>
+              <%= balance(ct.account_currency_amount.to_f, Money::Currency.new(@active_account.currency), "cents") %>
+            </span>
+            <span>
+              <%= ct.conversion_message %>
             </span>
           </li>
         <% end %>
