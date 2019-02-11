@@ -22,8 +22,8 @@ private
       transactions = []
 
       if type == 'transfer'
-        from_account = @current_user.accounts.where(name: @params[:from_account]).take
-        to_account = @current_user.accounts.where(name: @params[:to_account]).take
+        @from_account = @current_user.accounts.where(name: @params[:from_account]).take
+        @to_account = @current_user.accounts.where(name: @params[:to_account]).take
       else
         account = @current_user.accounts.where(name: @params[:account]).take
       end
@@ -35,8 +35,8 @@ private
         base_transactions.each do |t|
           if t[:is_child] == false
             if type == 'transfer'
-              parent_id_from = Transaction.create_transaction(@current_user, transaction_object(t, from_account)).id
-              parent_id_to = Transaction.create_transaction(@current_user, transaction_object(t, to_account, true)).id
+              parent_id_from = Transaction.create_transaction(@current_user, transaction_object(t, @from_account)).id
+              parent_id_to = Transaction.create_transaction(@current_user, transaction_object(t, @to_account, true)).id
             else
               parent_id = Transaction.create_transaction(@current_user, transaction_object(t, account)).id
             end
@@ -47,8 +47,8 @@ private
       base_transactions.each do |t|
         if (t[:is_child] == true && @params[:multiple_transactions] == '1') || (@params[:multiple_transactions] == '0')
           if type == 'transfer'
-            transactions.push(transaction_object(t, from_account, false, parent_id_from))
-            transactions.push(transaction_object(t, to_account, true, parent_id_to))
+            transactions.push(transaction_object(t, @from_account, false, parent_id_from))
+            transactions.push(transaction_object(t, @to_account, true, parent_id_to))
           else
             transactions.push(transaction_object(t, account, false, parent_id))
           end
@@ -60,6 +60,7 @@ private
 
     def transaction_object(base_transaction, account, reverse_direction = false, parent_id = nil)
       direction = 1
+      transfer_account = nil
       type = get_type
 
       if type != 'income'
@@ -68,18 +69,29 @@ private
 
       direction *= -1 if reverse_direction
 
+      converted_amount = convert_transaction_amount(base_transaction[:amount]) * direction
+
+      converted_amount >= 0 ? real_direction = 1 : real_direction = -1
+
       if type == 'transfer'
         exclude_from_all = 1
+        if real_direction == 1
+          transfer_account = @from_account.id
+        else
+          transfer_account = @to_account.id
+        end
       else
         exclude_from_all = 0
       end
 
       transaction = {
         user_id: @current_user.id,
-        amount: convert_transaction_amount(base_transaction[:amount]) * direction,
+        amount: converted_amount,
         description: base_transaction[:description],
         account_id: account.id,
         timezone: @params[:timezone],
+        direction: real_direction,
+        transfer_account: transfer_account,
         #local_datetime: get_local_datetime(Time.now),
         local_datetime: parse_datetime,
         currency: @params[:currency],

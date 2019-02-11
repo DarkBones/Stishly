@@ -32,6 +32,7 @@ class Transaction < ApplicationRecord
     t = Transaction.new
     t.user_id = transaction[:user_id]
     t.amount = transaction[:amount]
+    t.direction = transaction[:direction]
     t.description = transaction[:description]
     t.account_id = transaction[:account_id]
     t.timezone = transaction[:timezone]
@@ -41,6 +42,7 @@ class Transaction < ApplicationRecord
     t.category_id = transaction[:category_id]
     t.exclude_from_all = transaction[:exclude_from_all]
     t.parent_id = transaction[:parent_id]
+    t.transfer_account_id = transaction[:transfer_account]
     t.save
 
     if transaction[:is_child] == false

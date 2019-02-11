@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_06_112939) do
+ActiveRecord::Schema.define(version: 2019_02_11_203409) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -141,9 +141,11 @@ ActiveRecord::Schema.define(version: 2019_02_06_112939) do
     t.bigint "parent_id"
     t.boolean "exclude_from_all", default: false
     t.datetime "local_datetime"
+    t.bigint "transfer_account_id"
     t.index ["account_id"], name: "index_transactions_on_account_id"
     t.index ["category_id"], name: "index_transactions_on_category_id"
     t.index ["parent_id"], name: "index_transactions_on_parent_id"
+    t.index ["transfer_account_id"], name: "index_transactions_on_transfer_account_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 

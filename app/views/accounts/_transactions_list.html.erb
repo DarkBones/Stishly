@@ -15,6 +15,10 @@
         <span class="balance float-right">
           <%= balance(t.amount.to_f, Money::Currency.new(t.currency), "cents") %>
         </span>
+        
+        <span>
+          <%= t.transfer_message %>
+        </span>
       </li>
     </a>
 
