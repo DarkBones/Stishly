@@ -136,8 +136,7 @@ class TransactionsTest < ApplicationSystemTestCase
     fill_in "Amount", with: "5000"
 
     click_on "Save Transaction"
-
-    take_screenshot
+		
     assert_selector '#transactions_list', text: "Today\n€0.00\nsingle transfer euro\n€-5,000.00\nsingle transfer euro\n€5,000.00"
     assert_selector '#accounts_list', text: "All\n€10,000.00\nCurrent Account\n€5,000.00\nSavings Account\n€5,000.00"
 
@@ -150,6 +149,17 @@ class TransactionsTest < ApplicationSystemTestCase
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
 
+    # fill in the details
+    fill_in "Description", with: "multiple transfer euro"
+    select "Transfer", from: "Type"
+    select "Savings Account", from: "To account"
+		page.check('transaction_multiple_transactions')
+    fill_in "Transactions", with: "one 1\ntwo 2\nthree 3\nfour 4\npoint 05 .05"
+		
+		click_on "Save Transaction"
+		
+		assert_selector '#transactions_list', text: "Today\n€0.00\nmultiple transfer euro\n€10.05\none\n€1.00\ntwo\n€2.00\nthree\n€3.00\nfour\n€4.00\npoint 05\n€0.05\nmultiple transfer euro\n€10.05\none\n€1.00\ntwo\n€2.00\nthree\n€3.00\nfour\n€4.00\npoint 05\n€0.05"
+    assert_selector '#accounts_list', text: "All\n€10,010.05\nCurrent Account\n€9,989.50\nSavings Account\n€10.50"
     
 
     page.find(".navbar__menu-toggle").click
@@ -161,7 +171,16 @@ class TransactionsTest < ApplicationSystemTestCase
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
 
-    
+    # fill in the details
+    fill_in "Description", with: "single expense jpy"
+    select "Income", from: "Type"
+		select "JPY", from: "Currency"
+    fill_in "Amount", with: "1000"
+		
+		click_on "Save Transaction"
+		
+		assert_selector '#transactions_list', text: "Today\n€0.80\nsingle expense jpy\n¥100"
+		assert_selector '#accounts_list', text: "All\n€9,999.20\nCurrent Account\n€9,999.20"
 
     page.find(".navbar__menu-toggle").click
     click_on "Sign out"
@@ -172,7 +191,16 @@ class TransactionsTest < ApplicationSystemTestCase
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
 
-    
+    # fill in the details
+    fill_in "Description", with: "multiple expense jpy"
+		select "JPY", from: "Currency"
+    page.check('transaction_multiple_transactions')
+    fill_in "Transactions", with: "one 100\ntwo 200\nthree 300\nfour 400\n"
+
+    click_on "Save Transaction"
+		
+		assert_selector '#transactions_list', text: "Today\n€8.00\nmultiple expense jpy\n¥1000"
+		assert_selector '#accounts_list', text: "All\n€9,992.00\nCurrent Account\n€9,992.00"
 
     page.find(".navbar__menu-toggle").click
     click_on "Sign out"
@@ -183,7 +211,16 @@ class TransactionsTest < ApplicationSystemTestCase
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
 
-    
+    # fill in the details
+    fill_in "Description", with: "single income jpy"
+    select "Income", from: "Type"
+		select "JPY", from: "Currency"
+    fill_in "Amount", with: "100000"
+
+    click_on "Save Transaction"
+		
+    assert_selector '#transactions_list', text: "Today\n€800.00\nsingle income jpy\n¥-100,000"
+    assert_selector '#accounts_list', text: "All\n€10,800.00\nCurrent Account\n€10,800.00\nSavings Account\n€0.00"
 
     page.find(".navbar__menu-toggle").click
     click_on "Sign out"
@@ -194,7 +231,17 @@ class TransactionsTest < ApplicationSystemTestCase
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
 
-    
+    # fill in the details
+		fill_in "Description", with: "multiple income jpy"
+		select "Income", from: "Type"
+		select "JPY", from: "Currency"
+		page.check('transaction_multiple_transactions')
+		fill_in "Transactions", with: "one 1000\ntwo 2000\nthree 3000\nfour 4000\n"
+		
+		click_on "Save Transaction"
+		
+		assert_selector '#transactions_list', text: "Today\n€80.00\nmultiple income jpy\n¥10,000"
+		assert_selector '#accounts_list', text: "All\n€10,080.00\nCurrent Account\n€10,080.00\nSavings Account\n€0.00"
 
     page.find(".navbar__menu-toggle").click
     click_on "Sign out"
@@ -205,7 +252,17 @@ class TransactionsTest < ApplicationSystemTestCase
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
 
-    
+    # fill in the details
+    fill_in "Description", with: "single transfer jpy"
+    select "Transfer", from: "Type"
+    select "Savings Account", from: "To account"
+		select "JPY", from: "Currency"
+    fill_in "Amount", with: "100000"
+
+    click_on "Save Transaction"
+		
+    assert_selector '#transactions_list', text: "Today\n€0.00\nsingle transfer jpy\n¥-100,000\nsingle transfer jpy\n¥100,000"
+    assert_selector '#accounts_list', text: "All\n€10,000.00\nCurrent Account\n€9,200.00\nSavings Account\n€800.00"
 
     page.find(".navbar__menu-toggle").click
     click_on "Sign out"
@@ -216,7 +273,18 @@ class TransactionsTest < ApplicationSystemTestCase
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
 
-    
+    # fill in the details
+		fill_in "Description", with: "multiple transfer jpy"
+		select "Transfer", from: "Type"
+		select "Savings Account", from: "To account"
+		select "JPY", from: "Currency"
+		page.check('transaction_multiple_transactions')
+		fill_in "Transactions", with: "one 1000\ntwo 2000\nthree 3000\nfour 4000\n"
+		
+		click_on "Save Transaction"
+		
+		assert_selector '#transactions_list', text: "Today\n€80.00\nmultiple transfer jpy\n¥10,000\nmultiple transfer jpy\n¥10,000"
+		assert_selector '#accounts_list', text: "All\n€10,000.00\nCurrent Account\n€9,920.00\nSavings Account\n€80.00"
 
     page.find(".navbar__menu-toggle").click
     click_on "Sign out"
