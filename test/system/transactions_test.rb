@@ -148,6 +148,7 @@ class TransactionsTest < ApplicationSystemTestCase
     # login as transactions user
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
+		click_on "New Transaction"
 
     # fill in the details
     fill_in "Description", with: "multiple transfer euro"
@@ -170,6 +171,7 @@ class TransactionsTest < ApplicationSystemTestCase
     # login as transactions user
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
+		click_on "New Transaction"
 
     # fill in the details
     fill_in "Description", with: "single expense jpy"
@@ -190,6 +192,7 @@ class TransactionsTest < ApplicationSystemTestCase
     # login as transactions user
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
+		click_on "New Transaction"
 
     # fill in the details
     fill_in "Description", with: "multiple expense jpy"
@@ -210,6 +213,7 @@ class TransactionsTest < ApplicationSystemTestCase
     # login as transactions user
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
+		click_on "New Transaction"
 
     # fill in the details
     fill_in "Description", with: "single income jpy"
@@ -230,6 +234,7 @@ class TransactionsTest < ApplicationSystemTestCase
     # login as transactions user
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
+		click_on "New Transaction"
 
     # fill in the details
 		fill_in "Description", with: "multiple income jpy"
@@ -251,6 +256,7 @@ class TransactionsTest < ApplicationSystemTestCase
     # login as transactions user
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
+		click_on "New Transaction"
 
     # fill in the details
     fill_in "Description", with: "single transfer jpy"
@@ -272,6 +278,7 @@ class TransactionsTest < ApplicationSystemTestCase
     # login as transactions user
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
+		click_on "New Transaction"
 
     # fill in the details
 		fill_in "Description", with: "multiple transfer jpy"
@@ -289,5 +296,25 @@ class TransactionsTest < ApplicationSystemTestCase
     page.find(".navbar__menu-toggle").click
     click_on "Sign out"
   end
+	
+	test "transaction currency resetting" do
+		# login as transactions user
+		login_user(users(:transactions), 'SomePassword123^!')
+		page.find("#account_0").click
+		click_on "New Transaction"
+		
+		# fill in the details
+		fill_in "Description", with: "JPY"
+		select "JPY", from: "Currency"
+		fill_in "Amount", with: "1000"
+		
+		click_on "Save Transaction"
+		
+		click_on "New Transaction"
+		expect(page).to have_select('Currency', selected: 'EUR')
+		
+		page.find(".navbar__menu-toggle").click
+    click_on "Sign out"
+	end
 
 end
