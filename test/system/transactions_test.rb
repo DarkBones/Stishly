@@ -166,8 +166,12 @@ class TransactionsTest < ApplicationSystemTestCase
     click_on "Save Transaction"
 		
     assert_selector '#transactions_list', text: "Today\n€0.00"
+
     assert_selector '#transactions_list', text: "single transfer euro\n€-5,000.00"
     assert_selector '#transactions_list', text: "single transfer euro\n€5,000.00"
+
+    assert_selector '#transactions_list', text: "Transferred from Current Account"
+    assert_selector '#transactions_list', text: "Transferred to Savings Account"
 
     page.find("#account_16").click
     assert_selector '#transactions_list', text: "Today\n€-5,000.00"
@@ -216,6 +220,9 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector '#transactions_list', text: "three\n€3.00"
     assert_selector '#transactions_list', text: "four\n€4.00"
     assert_selector '#transactions_list', text: "point 05\n€0.05"
+
+    assert_selector '#transactions_list', text: "Transferred from Current Account"
+    assert_selector '#transactions_list', text: "Transferred to Savings Account"
 
     assert_selector '#accounts_list', text: "All\n€10,000.00"
     assert_selector '#accounts_list', text: "Current Account\n€9,989.95"
@@ -344,6 +351,9 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector '#transactions_list', text: "single transfer jpy\n¥-100,000"
     assert_selector '#transactions_list', text: "single transfer jpy\n¥100,000"
 
+    assert_selector '#transactions_list', text: "Transferred from Current Account"
+    assert_selector '#transactions_list', text: "Transferred to Savings Account"
+
     assert_selector '#accounts_list', text: "All\n€10,000.00"
     assert_selector '#accounts_list', text: "Current Account\n€9,200.00"
     assert_selector '#accounts_list', text: "Savings Account\n€800.00"
@@ -370,6 +380,9 @@ class TransactionsTest < ApplicationSystemTestCase
 		assert_selector '#transactions_list', text: "Today\n€0.00"
     assert_selector '#transactions_list', text: "multiple transfer jpy\n¥-10,000"
     assert_selector '#transactions_list', text: "multiple transfer jpy\n¥10,000"
+
+    assert_selector '#transactions_list', text: "Transferred from Current Account"
+    assert_selector '#transactions_list', text: "Transferred to Savings Account"
 
 		assert_selector '#accounts_list', text: "All\n€10,000.00"
     assert_selector '#accounts_list', text: "Current Account\n€9,920.00"
