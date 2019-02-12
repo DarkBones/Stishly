@@ -93,7 +93,7 @@ endless_page<%= i %>: {
   amount: <%= i * 100 %>,
   account_currency_amount: <%= i * 100 %>,
   currency: 'EUR',
-  local_datetime: "<%= i.minutes.ago %>",
+  local_datetime: "<%= i.hours.ago %>",
   timezone: "Europe/London",
   category_id: <%= i % 83 %>
 }
