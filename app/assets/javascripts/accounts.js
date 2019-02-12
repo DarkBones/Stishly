@@ -29,7 +29,6 @@ $(document).on('turbolinks:load', ()=> {
 
 $(document).on('click', '.account-button', (event) => {
   link_name = event.currentTarget.closest('.account-button').getAttribute('name')
-  console.log('/' + link_name.replace('_', '/'));
   window.location.href = '/' + link_name.replace('_', '/');
 });
 

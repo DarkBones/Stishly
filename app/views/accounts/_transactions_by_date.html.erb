@@ -11,15 +11,19 @@
         $("#transactions_list").append(
           "<div id=\"<%= d %>\">" +
           "<h3 id=\"day_<%= d %>\"><%= d_formatted %><span class=\"float-right\">" +
-          "<%= balance(@daily_totals[d], 
-          @account_currency) %>" + "</span></h3>" +
+          "<%= balance(@daily_totals[d], @account_currency) %>" + "</span></h3>" +
           "<ul id=\"transactions_<%= d %>\" class=\"parent_transactions\">" +
           "<%= j yield d %>" +
           "</ul>" +
           "</div>"
-          )
+          );
       }
-      $('#transactions_list').addClass('populated');
+      //$('#transactions_list').addClass('populated');
+      //$('.pagination').hide()
     }
   </script>
 <% end %>
+
+<script type="text/javascript">
+  $('#transactions_list').addClass('populated');
+</script>

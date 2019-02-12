@@ -5,7 +5,7 @@ class Country < ApplicationRecord
     if country
       return country.date_format
     else
-      return false
+      return "dd mmm yyyy"
     end
   end
 
