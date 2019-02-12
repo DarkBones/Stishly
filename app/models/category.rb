@@ -5,43 +5,28 @@ class Category < ApplicationRecord
   has_many :children, :class_name => 'Category', :foreign_key => 'parent_id'
 
   def self.get_user_categories(current_user, as_array=false, use_levels=false)
-    
     if as_array
-      main_categories = current_user.categories.where(:parent_id => nil)
+      tree = Hash.new { |h,k| h[k] = { :name => nil, :children => [ ] } }
 
-      uncat = self.get_uncategorised
+      tree[0][:id] = 0
+      tree[0][:name] = "Uncategorised"
+      tree[0][:color] = "0, 0%, 50%"
+      tree[0][:symbol] = "uncategorised"
+      tree[nil][:children].push(tree[0])
 
-      array = []
-      array.push({level: 0, category: uncat})
-
-      main_categories.each do |main|
-
-        if use_levels
-          array.push({level: 0, category: main})
-        else
-          array.push(main)
-        end
-
-        children = get_child_categories(main)
-
-        children.each do |child|
-          if use_levels
-            array.push({level: child[:level], category: child[:category]})
-          else
-            array.push(child[:category])
-          end
-        end
-
+      current_user.categories.order(:name).each do |cat|
+        tree[cat.id][:id] = cat.id
+        tree[cat.id][:name] = cat[:name]
+        tree[cat.id][:color] = cat[:color]
+        tree[cat.id][:symbol] = cat[:symbol]
+        tree[cat.parent_id][:children].push(tree[cat.id])
       end
-
-      return array
+      
+      return tree[nil][:children]
     else
       return current_user.categories
     end
-
   end
-
-  private
 
   def self.get_uncategorised
     cat = Category.new
@@ -52,15 +37,4 @@ class Category < ApplicationRecord
     return cat
   end
 
-  def self.get_child_categories(category, children_array = [], level = 0)
-    children = category.children
-
-    level += 1
-
-    children.each do |child|
-      children_array.push({level: level, category: child})
-      children_array = get_child_categories(child, children_array, level)
-    end
-    children_array
-  end
 end

@@ -45,10 +45,12 @@
       <div class="card-form__form-col col-ten">
         <%= f.label :category %><br />
         <%= render partial: "shared/custom_dropdown_categories", locals: {
-          selected: Category.get_user_categories(current_user, true, true).first,
+          selected: Category.get_user_categories(current_user, true, true)[0],
           options: Category.get_user_categories(current_user, true, true),
         } %>
-        <%= f.hidden_field :category_id, value: Category.get_user_categories(current_user, true, true).first[:category].id %>
+        
+        <% categories = Category.get_user_categories(current_user, true, true) %>
+        <%= f.text_field :category_id, value: categories[0][:id] %>
       </div>
     </div>
 
