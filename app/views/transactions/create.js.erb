@@ -1,0 +1,44 @@
+ClearValues('#transactionmenu');
+ToggleCardForm('#transactionmenu');
+
+<% @transactions.each do |t| %>
+  console.log("<%= t.category.name %>");
+<% end %>
+
+var days = []
+$('#transactions_list div').each(function(index){
+  if (typeof $(this).attr('id') !== "undefined"){
+    console.log( index + ": " + $( this ).attr('id') );
+    days.push($(this).attr('id'));
+  }
+});
+var earliestDay = DayStrToNum(days[0]);
+var lastDay = DayStrToNum(days[days.length-1]);
+
+var t_date
+<% @transactions.each do |t| %>
+  // find what day to put the transaction in
+  t_date = "<%= t.local_datetime.to_s.split[0] %>";
+  t_time = "<%= t.local_datetime.to_s.split[1] %>";
+  console.log(t_date);
+  console.log(t_time);
+
+  var $dayUl = $('#' + t_date + " ul");
+
+  if ( $dayUl.length ){
+    $dayUl.prepend("<li><%= t.local_datetime %></li>")
+  } else {
+    if ( DayStrToNum(t_date) > earliestDay ){
+      $('#transactions_list').prepend("<div id=\"" + t_date + "\"><h3 id=\"day_" + t_date + "\">HELLO</h3></div>");
+    } else if ( DayStrToNum(t_date) < lastDay ){
+      for (var i = 0; i < days.length; i++) {
+
+      }
+    }
+  }
+<% end %>
+
+function DayStrToNum(str) {
+  var num = str.replace(/-/g, "")
+  return parseInt(num)
+}

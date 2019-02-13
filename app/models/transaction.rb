@@ -23,9 +23,12 @@ class Transaction < ApplicationRecord
   has_many :children, :class_name => 'Transaction', :foreign_key => 'parent_id'
 
   def self.create_from_list(current_user, transactions)
+    result = []
     transactions.each do |transaction|
       t = self.create_transaction(current_user, transaction)
+      result.push(t.decorate)
     end
+    return result
   end
 
   def self.create_transaction(current_user, transaction)

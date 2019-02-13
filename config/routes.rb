@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   get 'app', to: 'app#index'
   get 'accounts/:id', to: 'accounts#show'
   post 'accounts/create_account', to: 'accounts#create_quick'
-  post 'transactions/create_transaction', to: 'transactions#create'
+  post 'transactions', to: 'transactions#create'
   devise_for :users, :controllers => { registrations: 'registrations' }
   resources :users, :only => [:create, :destroy, :edit]
   root 'welcome#index'
