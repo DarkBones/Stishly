@@ -420,7 +420,9 @@ class TransactionsTest < ApplicationSystemTestCase
 		click_on "Save Transaction"
 		
 		click_on "New Transaction"
-		#expect(page).to have_select('Currency', selected: 'EUR')
+		
+        puts find_field('Currency').find('option[selected]').text
+        puts '////////////////////////////////////'
 		
 		logout
 	end
