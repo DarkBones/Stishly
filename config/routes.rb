@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :transaction, only: [:show]
+  resource :transactions, only: [:show]
   resource :user_settings, only: [:edit]
 
   get 'accounts/:id/settings', to: 'accounts#settings', as: :account_settings
@@ -27,11 +27,11 @@ Rails.application.routes.draw do
   get 'app', to: 'app#index'
   get 'accounts/:id', to: 'accounts#show'
   post 'accounts/create_account', to: 'accounts#create_quick'
-  post 'transaction/create_transaction', to: 'transaction#create'
+  post 'transactions/create_transaction', to: 'transactions#create'
   devise_for :users, :controllers => { registrations: 'registrations' }
   resources :users, :only => [:create, :destroy, :edit]
   root 'welcome#index'
-  get 'transaction/:id', to: 'transaction#show'
+  get 'transactions/:id', to: 'transactions#show'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

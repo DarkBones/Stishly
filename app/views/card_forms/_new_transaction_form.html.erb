@@ -1,7 +1,7 @@
 <div id="transactionmenu" class="card-form">
   <h2 class="card-form__title">Create New Transaction<span class="card-form__close"></span></h2>
 
-  <%= form_for :transaction, :url => url_for(:controller => 'transaction', :action => 'create') do |f| %>
+  <%= form_for :transaction, :url => url_for(:controller => 'transactions', :action => 'create') do |f| %>
     <div class="card-form__form-row">
       <div class="card-form__form-col col-ten">
         <%= f.label :description %><br />
