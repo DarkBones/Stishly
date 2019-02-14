@@ -8,7 +8,7 @@
       if ($("#" + "<%= d %>").length > 0) {
         $("#" + "<%= d %> ul.parent_transactions").append("<%= j yield d %>");
       } else {
-        $("#transactions_list").append("<%= escape_javascript("#{render :partial => 'accounts/transactions_date', :locals => { :d => d, :d_formatted => d_formatted }}").html_safe %>");
+        $("#transactions_list").append("<%= escape_javascript("#{render :partial => 'accounts/transactions_date', :locals => { :d => d, :d_formatted => d_formatted, :account_currency => @account_currency, :day_total => @daily_totals[d] }}").html_safe %>");
       }
     }
   </script>

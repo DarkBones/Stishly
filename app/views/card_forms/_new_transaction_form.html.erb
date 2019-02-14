@@ -6,6 +6,7 @@
       <div class="card-form__form-col col-ten">
         <%= f.label :description %><br />
         <%= f.text_field :description, class: 'accountmenu__description' %>
+        <%= f.hidden_field :active_account, class: 'active_account', value: params[:id] %>
       </div>
     </div>
 

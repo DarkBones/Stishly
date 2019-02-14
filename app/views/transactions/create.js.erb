@@ -1,44 +1,90 @@
-ClearValues('#transactionmenu');
 ToggleCardForm('#transactionmenu');
 
+var active_account = '<%= @params[:active_account] %>';
+
+<%= puts @transactions.to_yaml %>
 <% @transactions.each do |t| %>
-  console.log("<%= t.category.name %>");
-<% end %>
+  // if transaction isn't a child of another transaction
+  var parent = parseInt('<%= t.parent_id %>');
+  if (isNaN(parent)) {
+    // check if the transaction should be shown in the current view
+    <% account = current_user.accounts.find(t.account_id) %>
+    var t_account = '<%= account.name %>';
+    var active_account = '<%= @params[:active_account] %>';
 
-var days = []
-$('#transactions_list div').each(function(index){
-  if (typeof $(this).attr('id') !== "undefined"){
-    console.log( index + ": " + $( this ).attr('id') );
-    days.push($(this).attr('id'));
-  }
-});
-var earliestDay = DayStrToNum(days[0]);
-var lastDay = DayStrToNum(days[days.length-1]);
+    if (active_account.length == 0 || active_account == t_account) {
+      // find all days shown in view
+      var days = []
+      $('#transactions_list div').each(function(index){
+        if (typeof $(this).attr('id') !== "undefined"){
+          days.push($(this).attr('id'));
+        }
+      });
 
-var t_date
-<% @transactions.each do |t| %>
-  // find what day to put the transaction in
-  t_date = "<%= t.local_datetime.to_s.split[0] %>";
-  t_time = "<%= t.local_datetime.to_s.split[1] %>";
-  console.log(t_date);
-  console.log(t_time);
+      // get transaction date and time
+      var t_date = '<%= t.local_datetime.to_s.split[0] %>'
+      var t_time = '<%= t.local_datetime.to_s.split[1] %>'
 
-  var $dayUl = $('#' + t_date + " ul");
+      // check if there is a UL for the date
+      var $dayUL = $('#' + t_date + " ul");
 
-  if ( $dayUl.length ){
-    $dayUl.prepend("<li><%= t.local_datetime %></li>")
-  } else {
-    if ( DayStrToNum(t_date) > earliestDay ){
-      $('#transactions_list').prepend("<div id=\"" + t_date + "\"><h3 id=\"day_" + t_date + "\">HELLO</h3></div>");
-    } else if ( DayStrToNum(t_date) < lastDay ){
-      for (var i = 0; i < days.length; i++) {
-
+      if ($dayUL.length == 0) {
+        // if there is no UL, render decide where to one
+        if (days.length == 0 ) {
+          $("#transactions_list").prepend(RenderDayUL(t_date, $("#transactions_list"), "prepend", t_account));
+        } else if (DayToNum(t_date) > DayToNum(days[0])) {
+          $("#transactions_list").prepend(RenderDayUL(t_date, $("#transactions_list"), "prepend", t_account));
+        } else if (DayToNum(t_date) > DayToNum(days[days.length-1])) {
+          console.log(DayToNum(t_date).toString() + " < " + DayToNum(days[days.length-1]).toString());
+          for (var i = 0; i < days.length; i++) {
+            if (DayToNum(t_date) > DayToNum(days[i])){
+              //$("#" + days[i]).insertBefore(RenderDayUL(t_date));
+              console.log(days[i]);
+              $(RenderDayUL(t_date, $("#" + days[i]), "before", t_account)).insertBefore("#" + days[i]);
+              break;
+            }
+          }
+        } else {
+          console.log('APPEND');
+          $('#transactions_list').append(RenderDayUL(t_date, $("#transactions_list"), "append", t_account));
+        }
       }
+
     }
   }
 <% end %>
 
-function DayStrToNum(str) {
-  var num = str.replace(/-/g, "")
-  return parseInt(num)
+// takes day and returns numeric value
+// "2019-02-28" returns 20190228
+function DayToNum(str) {
+  var num = str.replace(/-/g, "");
+  return parseInt(num);
+}
+
+function GenerateDayUL(date, $target, type, account) {
+  console.log("/api/transactions/prepare_new/" + date + "/" + account);
+  $.ajax({
+    type: "GET",
+    dataType: "json",
+    url: "/api/transactions/prepare_new/" + date + "/" + account,
+    success: function(data) {
+      switch (type) {
+        case "prepend":
+          $target.prepend("HELLO");
+          break;
+        case "append":
+          $target.append("HELLO");
+          break;
+        case "before":
+          $("HELLO").insertBefore($target);
+          break;
+      }
+    }
+  });
+
+  return "<%= escape_javascript("#{render :partial => 'accounts/transactions_date', :locals => { :d => "2019-02-14", :d_formatted => "Today", :day_total => 555, :account_currency => 'CAD' }}").html_safe %>"
+}
+
+function RenderDayUL(){
+  
 }

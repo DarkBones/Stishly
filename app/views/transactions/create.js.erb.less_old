@@ -1,0 +1,22 @@
+<% account = current_user.accounts.find(@transactions[0].account_id) %>
+
+var t_account = '<%= account.name %>';
+<% puts @params.to_yaml %>
+var active_account = '<%= @params[:active_account] %>';
+//console.log(active_account.length);
+//console.log('................');
+
+if (active_account.length == 0 || active_account == t_account) {
+  console.log('show this transaction');
+  // get the days currently in view
+
+
+  // takes day and returns numeric value
+  // "2019-02-28" returns 20190228
+  function DayToNum(str) {
+    var num = str.replace(/-/g, "");
+    return parseInt(num);
+  }
+} else{
+  console.log('NO TRANSACTION');
+}

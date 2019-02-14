@@ -38,4 +38,8 @@ class ApiController < ApplicationController
     render json: User.get_currency(current_user).iso_code
   end
 
+  def prepare_new_transaction
+    render json: Transaction.prepare_new(params, current_user)
+  end
+
 end

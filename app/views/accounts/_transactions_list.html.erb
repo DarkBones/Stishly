@@ -1,48 +1,6 @@
 <% locals[:transactions].each do |t| %>
-  <% child_transactions = t.children %>
 
   <%= content_for t.local_datetime.to_date do %>
-    <% if child_transactions.length > 0 %>
-      <span class="show-child-transactions float-left clickable">
-        <%= image_tag 'arrow_right_line_white.svg' %>
-      </span>
-    <% end %>
-    
-    <a href="<%= transactions_path + '/' + t.id.to_s %>" class="no-link-style">
-      <li>
-        <%= image_tag 'categories/' + t.category.symbol + '.svg', :style => "background-color: hsl(" + t.category.color + ");" %>
-        <%= t.description %>
-        <span class="balance float-right">
-          <%= balance(t.account_currency_amount.to_f, Money::Currency.new(@active_account.currency), "cents") %>
-        </span>
-        <br />
-        <span>
-          <%= t.transfer_message %>
-        </span>
-
-        <span>
-          <%= t.conversion_message %>
-        </span>
-      </li>
-    </a>
-
-    <% if child_transactions.length > 0 %>
-      <ul class="child_transactions">
-        <% child_transactions.decorate.each do |ct| %>
-          <li>
-            <%= ct.description %>
-            <span class="balance float-right">
-              <%= balance(ct.account_currency_amount.to_f, Money::Currency.new(@active_account.currency), "cents") %>
-            </span>
-            <br />
-            <span>
-              <%= ct.conversion_message %>
-            </span>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-
-    <hr />
+    <%= render :partial => 'accounts/transaction', :locals => { :t => t, :active_account => @active_account } %>
   <% end %>
 <% end %>

@@ -1,0 +1,44 @@
+<% active_account == nil ? currency = User.get_currency(current_user).iso_code : currency = active_account.currency %>
+<% child_transactions = t.children %>
+<% if child_transactions.length > 0 %>
+  <span class="show-child-transactions float-left clickable">
+    <%= image_tag 'arrow_right_line_white.svg' %>
+  </span>
+<% end %>
+
+<a href="<%= transactions_path + '/' + t.id.to_s %>" class="no-link-style">
+  <li>
+    <%= image_tag 'categories/' + t.category.symbol + '.svg', :style => "background-color: hsl(" + t.category.color + ");" %>
+    <%= t.description %>
+    <span class="balance float-right">
+      <%= balance(t.account_currency_amount.to_f, Money::Currency.new(currency), "cents") %>
+    </span>
+    <br />
+    <span>
+      <%= t.transfer_message %>
+    </span>
+
+    <span>
+      <%= t.conversion_message %>
+    </span>
+  </li>
+</a>
+
+<% if child_transactions.length > 0 %>
+  <ul class="child_transactions">
+    <% child_transactions.decorate.each do |ct| %>
+      <li>
+        <%= ct.description %>
+        <span class="balance float-right">
+          <%= balance(ct.account_currency_amount.to_f, Money::Currency.new(currency), "cents") %>
+        </span>
+        <br />
+        <span>
+          <%= ct.conversion_message %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<hr />

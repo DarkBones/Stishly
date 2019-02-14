@@ -24,6 +24,15 @@ class Account < ApplicationRecord
   has_many :settings, through: :setting_values
   has_many :account_histories, dependent: :destroy
 
+  def self.get_from_name(name, current_user)
+    if name
+      account = current_user.accounts.where(name: name).take()
+    else
+      account = self.create_summary_account(current_user, true)
+    end
+    return account
+  end
+
   def self.get_accounts(current_user)
     return GetAccounts.new(current_user).perform
   end
@@ -71,7 +80,7 @@ class Account < ApplicationRecord
     return output
   end
 
-  def self.create_summary_account(current_user)
+  def self.create_summary_account(current_user, include_balance = false)
     account = Account.new
     account.id = 0
     account.is_real = false
@@ -79,7 +88,24 @@ class Account < ApplicationRecord
     account.user_id = current_user.id
     account.currency = User.get_currency(current_user).iso_code
 
+    if include_balance
+      account.balance = self.get_total_balance(current_user)
+    end
+
     return account
+  end
+
+  def self.get_total_balance(current_user)
+    total_balance = 0
+    user_currency = User.get_currency(current_user)
+    current_user.accounts.each do |a|
+      balance = a.balance
+      if a.currency != user_currency.iso_code
+        balance = CurrencyRate.convert(a.balance, Money::Currency.new(a.currency), user_currency)
+      end
+      total_balance += balance
+    end
+    return total_balance
   end
 
   def self.format_currency(amount, currency_iso)

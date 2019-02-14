@@ -22,6 +22,21 @@ class Transaction < ApplicationRecord
   has_one :parent, :class_name => 'Transaction'
   has_many :children, :class_name => 'Transaction', :foreign_key => 'parent_id'
 
+  def self.prepare_new(params, current_user)
+    """
+    needed parameters:
+    - d_formatted
+    - account_currency
+    - account_balance
+    """
+    account = Account.get_from_name(params[:account], current_user)
+    return {
+      d_formatted: User.format_date(params[:date].to_date),
+      account_currency: account.currency,
+      account_balance: account.balance
+    }
+  end
+
   def self.create_from_list(current_user, transactions)
     result = []
     transactions.each do |transaction|
