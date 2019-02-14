@@ -11,6 +11,9 @@ var active_account = '<%= @params[:active_account] %>';
     <% account = current_user.accounts.find(t.account_id) %>
     var t_account = '<%= account.name %>';
     var active_account = '<%= @params[:active_account] %>';
+    var account_currency_amount = <%= t.account_currency_amount %>;
+
+    var account_currency = '<%= current_user.accounts.where(name: @params[:active_account]).take.currency %>';
 
     if (active_account.length == 0 || active_account == t_account) {
       // find all days shown in view
@@ -31,22 +34,18 @@ var active_account = '<%= @params[:active_account] %>';
       if ($dayUL.length == 0) {
         // if there is no UL, render decide where to one
         if (days.length == 0 ) {
-          $("#transactions_list").prepend(RenderDayUL(t_date, $("#transactions_list"), "prepend", t_account));
+          GenerateDayUL(t_date, $("#transactions_list"), "prepend", account_currency, account_currency_amount);
         } else if (DayToNum(t_date) > DayToNum(days[0])) {
-          $("#transactions_list").prepend(RenderDayUL(t_date, $("#transactions_list"), "prepend", t_account));
+          GenerateDayUL(t_date, $("#transactions_list"), "prepend", account_currency, account_currency_amount);
         } else if (DayToNum(t_date) > DayToNum(days[days.length-1])) {
-          console.log(DayToNum(t_date).toString() + " < " + DayToNum(days[days.length-1]).toString());
           for (var i = 0; i < days.length; i++) {
             if (DayToNum(t_date) > DayToNum(days[i])){
-              //$("#" + days[i]).insertBefore(RenderDayUL(t_date));
-              console.log(days[i]);
-              $(RenderDayUL(t_date, $("#" + days[i]), "before", t_account)).insertBefore("#" + days[i]);
+              GenerateDayUL(t_date, $("#" + days[i]), "before", account_currency, account_currency_amount);
               break;
             }
           }
         } else {
-          console.log('APPEND');
-          $('#transactions_list').append(RenderDayUL(t_date, $("#transactions_list"), "append", t_account));
+          GenerateDayUL(t_date, $("#transactions_list"), "append", account_currency, account_currency_amount);
         }
       }
 
@@ -61,30 +60,29 @@ function DayToNum(str) {
   return parseInt(num);
 }
 
-function GenerateDayUL(date, $target, type, account) {
-  console.log("/api/transactions/prepare_new/" + date + "/" + account);
+function GenerateDayUL(date, $target, type, account_currency, amount) {
   $.ajax({
     type: "GET",
-    dataType: "json",
-    url: "/api/transactions/prepare_new/" + date + "/" + account,
+    dataType: "text",
+    url: '/api/transaction_date_ul/' + date + '/' + amount.toString() + '/' + account_currency,
     success: function(data) {
       switch (type) {
         case "prepend":
-          $target.prepend("HELLO");
+          $target.prepend(data);
           break;
         case "append":
-          $target.append("HELLO");
+          $target.append(data);
           break;
         case "before":
-          $("HELLO").insertBefore($target);
+          $(data).insertBefore($target);
           break;
       }
     }
   });
 
-  return "<%= escape_javascript("#{render :partial => 'accounts/transactions_date', :locals => { :d => "2019-02-14", :d_formatted => "Today", :day_total => 555, :account_currency => 'CAD' }}").html_safe %>"
+  
 }
 
-function RenderDayUL(){
-  
+function RenderDayUL(d, d_formatted, day_total){
+  return "<%= escape_javascript("#{render :partial => 'accounts/transactions_date', :locals => { :d => "2019-02-14", :d_formatted => "Today", :day_total => 555, :account_currency => 'CAD' }}").html_safe %>"
 }
