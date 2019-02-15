@@ -116,6 +116,16 @@ class Account < ApplicationRecord
     return Money::Currency.new(account.currency)
   end
 
+  # if account is found, returns the account currency. Otherwise, returns the user's currency
+  def self.get_account_or_user_currency(account_name, current_user)
+    account = self.get_from_name(account_name, current_user)
+    if account
+      return account.currency
+    else
+      return User.get_currency(current_user).iso_code
+    end
+  end
+
   def self.change_setting(account, params, current_user)
     sett_name = params[:setting_value].keys[0].to_s
     sett_value = params[:setting_value].values[0].to_s
