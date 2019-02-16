@@ -24,6 +24,9 @@ class TransactionsController < ApplicationController
     @params = params[:transaction]
     transactions = Transaction.create(params, current_user)
 
+    @transaction_amounts_all = []
+    @account_ids_all = []
+    
     @transactions_parent = []
     @transactions_child = []
     @account_names = []
@@ -33,10 +36,15 @@ class TransactionsController < ApplicationController
       if @params[:active_account].length == 0 || @params[:active_account] == t_account.name
         if t.parent_id
           @transactions_child.push(t)
-          @account_names.push(t_account.name)
         else
           @transactions_parent.push(t)
+          @account_names.push(t_account.name)
         end
+      end
+
+      if !t.parent_id
+        @transaction_amounts_all.push(t.account_currency_amount)
+        @account_ids_all.push(t_account.id)
       end
     end
   end

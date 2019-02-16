@@ -1,7 +1,10 @@
+ToggleCardForm('#transactionmenu');
+ClearValues('#transactionmenu');
+
 var active_account = '<%= @params[:active_account] %>';
 var active_account_currency = '<%= Account.get_account_or_user_currency(@params[:active_account], current_user) %>';
 
-<% @transactions_parent.each_with_index do |t, i| %>
+<% @transactions_parent.reverse.each_with_index do |t, i| %>
   <% puts t.description + ": " + t.amount.to_s %>
 
   var t_account = "<%= @account_names[i] %>";
@@ -21,7 +24,50 @@ var active_account_currency = '<%= Account.get_account_or_user_currency(@params[
   // insert the new transaction
   InsertTransaction($dayDiv, <%= t.time_num %>, <%= t.id %>);
 
+  UpdateDayTotal($dayDiv, account_currency_amount);
 <% end %>
+
+UpdateAccountTotals();
+
+function UpdateAccountTotals(){
+  var amount;
+  var account_id;
+  var account_currency;
+  var current_balance;
+  var $balance
+  <% @transaction_amounts_all.each_with_index do |a, i| %>
+    amount = <%= a.to_i %>
+    account_id = <%= @account_ids_all[i] %>
+
+    $balance = $('#accounts_list #account_' + account_id + " span")
+    current_balance = parseInt($balance.attr('balance'));
+    account_currency = $balance.attr('currency');
+
+    $.ajax({
+      type: "GET",
+      dataType: "json",
+      url: "/api/account_display_balance/" + current_balance + "/" + account_currency + "/" + account_currency + "/" + amount,
+      success: function(data) {
+        $balance.attr('balance', current_balance + amount);
+        $balance.html(data.html);
+      }
+    });
+  <% end %>
+}
+
+function UpdateDayTotal($dayDiv, amount) {
+  var new_total = parseInt($dayDiv.find("h3").attr("balance")) + amount;
+  $dayDiv.find("h3").attr("balance", new_total)
+
+  $.ajax({
+    type: "GET",
+    dataType: "json",
+    url: "/api/account_display_balance/" + new_total.toString() + "/" + active_account_currency + "/" + active_account_currency + "/0",
+    success: function(data) {
+      $dayDiv.find("h3 span").html(data.html);
+    }
+  });
+}
 
 // inserts a transaction
 function InsertTransaction($dayDiv, t_time, t_id) {
