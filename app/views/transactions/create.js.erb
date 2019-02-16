@@ -19,12 +19,10 @@ var active_account_currency = '<%= Account.get_account_or_user_currency(@params[
   });
 
   var t_date = '<%= t.local_datetime.to_s.split[0] %>'
-  var $dayDiv = GetdayDiv(t_date, days);
+  var $dayDiv = GetdayDiv(t_date, days, <%= t.time_num %>, <%= t.id %>, account_currency_amount);
 
   // insert the new transaction
-  InsertTransaction($dayDiv, <%= t.time_num %>, <%= t.id %>);
-
-  UpdateDayTotal($dayDiv, account_currency_amount);
+  
 <% end %>
 
 UpdateAccountTotals();
@@ -117,42 +115,46 @@ function DayToNum(str) {
 }
 
 // returns the correct list element for the transaction time
-function GetdayDiv(t_date, days) {
+function GetdayDiv(t_date, days, t_timenum, t_id, account_currency_amount) {
   // get the day UL
   var $dayDiv = $('#' + t_date);
 
   // if no UL exists for the date, create one
   if ($dayDiv.length == 0) {
-    CreateNewdayDiv(t_date, days)
+    CreateNewdayDiv(t_date, days, t_timenum, account_currency_amount, t_id)
     $dayDiv = $('#' + t_date);
+  } else {
+    InsertTransaction($dayDiv, t_timenum, t_id);
+    UpdateDayTotal($dayDiv, account_currency_amount);
   }
 
   return $dayDiv
 }
 
 // creates a new list element for transaction date
-function CreateNewdayDiv(t_date, days) {
+function CreateNewdayDiv(t_date, days, t_timenum, account_currency_amount, t_id) {
   var account_currency = '<%= Account.get_account_or_user_currency(@params[:active_account], current_user) %>';
 
   if (days.length == 0 || DayToNum(t_date) > DayToNum(days[0])) {
     // if no days exist in the ul, or the transaction is earlier than the earliest date, prepend a new one to #transactionslist
-    GeneratedayDiv(t_date, $("#transactions_list"), "prepend", account_currency, 0);
+    GeneratedayDiv(t_date, $("#transactions_list"), "prepend", account_currency, 0, t_timenum, account_currency_amount, t_id);
   } else if (DayToNum(t_date) > DayToNum(days[days.length-1])) {
     // if the transaction date is between the first and last day on the page, iterate through the days to find the correct place
     for (var i = 0; i < days.length; i++) {
       if (DayToNum(t_date) > DayToNum(days[i])){
-        GeneratedayDiv(t_date, $("#" + days[i]), "before", account_currency, 0);
+        GeneratedayDiv(t_date, $("#" + days[i]), "before", account_currency, 0, t_timenum, account_currency_amount, t_id);
         break;
       }
     }
   } else if ($('#transactions_list li').length % 30 != 0) { // TODO: Replace 30 with endless page system parameter
     // if the transaction is later than all days, put it on the end if there is room on the page (keep endless pagination in mind)
-    GeneratedayDiv(t_date, $("#transactions_list"), "append", account_currency, 0);
+    GeneratedayDiv(t_date, $("#transactions_list"), "append", account_currency, 0, t_timenum, account_currency_amount, t_id);
   }
 }
 
 // generate a new list element via an ajax job
-function GeneratedayDiv(date, $target, type, account_currency, amount) {
+function GeneratedayDiv(date, $target, type, account_currency, amount, t_timenum, account_currency_amount, t_id) {
+  var $dayDiv;
   $.ajax({
     type: "GET",
     dataType: "text",
@@ -169,6 +171,10 @@ function GeneratedayDiv(date, $target, type, account_currency, amount) {
           $(data).insertBefore($target);
           break;
       }
+      $dayDiv = $('#' + t_date);
     }
+  }).done(function() {
+    InsertTransaction($dayDiv, t_timenum, t_id);
+    UpdateDayTotal($dayDiv, account_currency_amount);
   });
 }
