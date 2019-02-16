@@ -26,23 +26,55 @@ var active_account = '<%= @params[:active_account] %>';
 
       // get transaction date and time
       var t_date = '<%= t.local_datetime.to_s.split[0] %>'
-      var t_time = '<%= t.local_datetime.to_s.split[1] %>'
 
       // check if there is a UL for the date
       var $dayDiv = GetdayDiv(t_date, days);
-      //$dayDiv = $('#' + t_date);
-      $dayDiv = $('#2019-02-15');
 
-      $dayDiv.ready(function() {
-        console.log('READY');
-        console.log($dayDiv.attr('id'));
-      });
-
-      console.log($dayDiv.attr('id'));
-      $dayDiv.prepend("HELLO");
-      $('#' + t_date).append("bye");
+      // insert the new transaction
+      InsertTransaction($dayDiv);
 
     }
+  }
+
+  // inserts a transaction
+  function InsertTransaction($dayDiv) {
+    var $entries = $dayDiv.find('ul li');
+    var t_time = <%= t.time_num %>
+
+    if ($entries.length == 0 || t_time > parseInt($entries.eq(0).attr('class'))){
+      GenerateTransaction($dayDiv.find('ul'), "prepend");
+    } else if (t_time < parseInt($entries.eq($entries.length - 1).attr('class'))) {
+      GenerateTransaction($dayDiv.find('ul'), "append");
+    } else {
+      for (var i = 0; i < $entries.length; i++) {
+        if (t_time > parseInt($entries.eq(i).attr('class'))) {
+          GenerateTransaction($entries.eq(i), "before");
+          break;
+        }
+      }
+    }
+  }
+
+  // generate transaction
+  function GenerateTransaction($target, type){
+    $.ajax({
+      type: "GET",
+      dataType: "text",
+      url: '/api/render_transaction/' + "<%= t.id %>" + '/' + "<%= @params[:active_account] %>",
+      success: function(data) {
+        switch (type) {
+          case "prepend":
+            $target.prepend(data);
+            break;
+          case "append":
+            $target.append(data);
+            break;
+          case "before":
+            $(data).insertBefore($target);
+            break;
+        }
+      }
+    });
   }
 <% end %>
 
@@ -107,7 +139,7 @@ function GeneratedayDiv(date, $target, type, account_currency, amount) {
           break;
       }
     }
-  }).done(function() {
-    $('#2019-02-15').append('SUCCES');
-  });
+  });//.done(function() {
+    //$('#2019-02-16').append('SUCCES');
+  //});
 }

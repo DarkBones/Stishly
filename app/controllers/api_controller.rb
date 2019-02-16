@@ -27,6 +27,13 @@ class ApiController < ApplicationController
     render partial: 'accounts/transactions_date', :locals => { :d => params[:date], :account_currency => params[:account_currency], :day_total => params[:day_total], :d_formatted => date_formatted }
   end
 
+  def render_transaction
+    active_account = Account.get_from_name(params[:account], current_user)
+    t = current_user.transactions.find(params[:t]).decorate
+
+    render partial: 'accounts/transaction', :locals => { :active_account => active_account, :t => t }
+  end
+
   def format_currency
     render json: Account.format_currency(params[:amount], params[:currency])
   end

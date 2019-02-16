@@ -35,6 +35,11 @@ class TransactionDecorator < ApplicationDecorator
     end
   end
 
+  def time_num
+
+    return model.local_datetime.strftime("%H%M%S").to_i
+  end
+
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
   #
