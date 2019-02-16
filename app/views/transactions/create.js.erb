@@ -1,82 +1,67 @@
-ToggleCardForm('#transactionmenu');
-
 var active_account = '<%= @params[:active_account] %>';
+var active_account_currency = '<%= Account.get_account_or_user_currency(@params[:active_account], current_user) %>';
 
-<%= puts @transactions.to_yaml %>
-<% @transactions.each do |t| %>
-  // if transaction isn't a child of another transaction
-  var parent = parseInt('<%= t.parent_id %>');
-  if (isNaN(parent)) {
-    // check if the transaction should be shown in the current view
-    <% account = current_user.accounts.find(t.account_id) %>
-    var t_account = '<%= account.name %>';
-    var active_account = '<%= @params[:active_account] %>';
-    var account_currency_amount = <%= t.account_currency_amount %>;
+<% @transactions_parent.each_with_index do |t, i| %>
+  <% puts t.description + ": " + t.amount.to_s %>
 
-    var account_currency = '<%= Account.get_account_or_user_currency(@params[:active_account], current_user) %>';
+  var t_account = "<%= @account_names[i] %>";
+  var account_currency_amount = <%= t.account_currency_amount %>;
 
-    if (active_account.length == 0 || active_account == t_account) {
-      // find all days shown in view
-      var days = []
-      $('#transactions_list div').each(function(index){
-        if (typeof $(this).attr('id') !== "undefined"){
-          days.push($(this).attr('id'));
-        }
-      });
-
-      // get transaction date and time
-      var t_date = '<%= t.local_datetime.to_s.split[0] %>'
-
-      // check if there is a UL for the date
-      var $dayDiv = GetdayDiv(t_date, days);
-
-      // insert the new transaction
-      InsertTransaction($dayDiv);
-
+  // find all days shown in view
+  var days = []
+  $('#transactions_list div').each(function(index){
+    if (typeof $(this).attr('id') !== "undefined"){
+      days.push($(this).attr('id'));
     }
-  }
+  });
 
-  // inserts a transaction
-  function InsertTransaction($dayDiv) {
-    var $entries = $dayDiv.find('ul li');
-    var t_time = <%= t.time_num %>
+  var t_date = '<%= t.local_datetime.to_s.split[0] %>'
+  var $dayDiv = GetdayDiv(t_date, days);
 
-    if ($entries.length == 0 || t_time > parseInt($entries.eq(0).attr('class'))){
-      GenerateTransaction($dayDiv.find('ul'), "prepend");
-    } else if (t_time < parseInt($entries.eq($entries.length - 1).attr('class'))) {
-      GenerateTransaction($dayDiv.find('ul'), "append");
-    } else {
-      for (var i = 0; i < $entries.length; i++) {
-        if (t_time > parseInt($entries.eq(i).attr('class'))) {
-          GenerateTransaction($entries.eq(i), "before");
-          break;
-        }
-      }
-    }
-  }
+  // insert the new transaction
+  InsertTransaction($dayDiv, <%= t.time_num %>, <%= t.id %>);
 
-  // generate transaction
-  function GenerateTransaction($target, type){
-    $.ajax({
-      type: "GET",
-      dataType: "text",
-      url: '/api/render_transaction/' + "<%= t.id %>" + '/' + "<%= @params[:active_account] %>",
-      success: function(data) {
-        switch (type) {
-          case "prepend":
-            $target.prepend(data);
-            break;
-          case "append":
-            $target.append(data);
-            break;
-          case "before":
-            $(data).insertBefore($target);
-            break;
-        }
-      }
-    });
-  }
 <% end %>
+
+// inserts a transaction
+function InsertTransaction($dayDiv, t_time, t_id) {
+  var $entries = $dayDiv.find('ul li');
+
+  if ($entries.length == 0 || t_time > parseInt($entries.eq(0).attr('class'))){
+    GenerateTransaction($dayDiv.find('ul'), "prepend", t_id);
+  } else if (t_time < parseInt($entries.eq($entries.length - 1).attr('class'))) {
+    GenerateTransaction($dayDiv.find('ul'), "append", t_id);
+  } else {
+    for (var i = 0; i < $entries.length; i++) {
+      if (t_time > parseInt($entries.eq(i).attr('class'))) {
+        GenerateTransaction($entries.eq(i), "before", t_id);
+        break;
+      }
+    }
+  }
+}
+
+// generate transaction
+function GenerateTransaction($target, type, t_id){
+  $.ajax({
+    type: "GET",
+    dataType: "text",
+    url: '/api/render_transaction/' + t_id.toString() + '/' + active_account,
+    success: function(data) {
+      switch (type) {
+        case "prepend":
+          $target.prepend(data);
+          break;
+        case "append":
+          $target.append(data);
+          break;
+        case "before":
+          $(data).insertBefore($target);
+          break;
+      }
+    }
+  });
+}
 
 // takes day and returns numeric value
 // "2019-02-28" returns 20190228
@@ -139,7 +124,5 @@ function GeneratedayDiv(date, $target, type, account_currency, amount) {
           break;
       }
     }
-  });//.done(function() {
-    //$('#2019-02-16').append('SUCCES');
-  //});
+  });
 }

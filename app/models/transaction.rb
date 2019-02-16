@@ -40,9 +40,15 @@ class Transaction < ApplicationRecord
   def self.create_from_list(current_user, transactions)
     result = []
     transactions.each do |transaction|
-      t = self.create_transaction(current_user, transaction)
+      if transaction.is_a? Hash
+        t = self.create_transaction(current_user, transaction)
+      elsif transaction.is_a? Transaction
+        t = transaction
+      end
+
       result.push(t.decorate)
     end
+    
     return result
   end
 

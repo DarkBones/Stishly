@@ -1,5 +1,5 @@
-<div id="transactionmenu" class="card-form" style="display: none;">
-  <h2 class="card-form__title" style="display: none;">Create New Transaction<span class="card-form__close"></span></h2>
+<div id="transactionmenu" class="card-form">
+  <h2 class="card-form__title">Create New Transaction<span class="card-form__close"></span></h2>
 
   <%= form_with(model: Transaction.new) do |f| %>
     <div class="card-form__form-row">
@@ -10,21 +10,21 @@
       </div>
     </div>
 
-    <div class="card-form__form-row" style="display: none;">
+    <div class="card-form__form-row">
       <div class="card-form__form-col col-ten">
         <%= f.label :type %><br />
         <%= f.select(:type, ["Expense", "Income", "Transfer"]) %>
       </div>
     </div>
 
-    <div class="card-form__form-row transactions_menu_single_account" style="display: none;">
+    <div class="card-form__form-row transactions_menu_single_account">
       <div class="card-form__form-col col-ten">
         <%= f.label :account %><br />
         <%= f.select(:account, user_accounts_array, selected: params[:id]) %>
       </div>
     </div>
 
-    <div class="card-form__form-row transactions_menu_multiple_accounts" style="display: none;">
+    <div class="card-form__form-row transactions_menu_multiple_accounts">
       <div class="card-form__form-col col-five">
         <%= f.label :from_account %><br />
         <%= f.select(:from_account, user_accounts_array, selected: params[:id]) %>
@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div class="card-form__form-row" style="display: none;">
+    <div class="card-form__form-row">
       <div class="card-form__form-col col-three">
         <%= f.label :currency %><br />
         <%= f.select(:currency, all_currencies(Money::Currency.table), selected: User.get_currency(current_user).iso_code, class: 'accountmenu__currency') %>

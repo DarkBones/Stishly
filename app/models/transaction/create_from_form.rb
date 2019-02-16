@@ -35,10 +35,20 @@ private
         base_transactions.each do |t|
           if t[:is_child] == false
             if type == 'transfer'
-              parent_id_from = Transaction.create_transaction(@current_user, transaction_object(t, @from_account)).id
-              parent_id_to = Transaction.create_transaction(@current_user, transaction_object(t, @to_account, true)).id
+              parent_transaction_from = Transaction.create_transaction(@current_user, transaction_object(t, @from_account))
+              parent_transaction_to = Transaction.create_transaction(@current_user, transaction_object(t, @to_account, true))
+
+              transactions.push(parent_transaction_from)
+              transactions.push(parent_transaction_to)
+
+              parent_id_from = parent_transaction_from.id
+              parent_id_to = parent_transaction_to.id
             else
-              parent_id = Transaction.create_transaction(@current_user, transaction_object(t, account)).id
+              parent_transaction = Transaction.create_transaction(@current_user, transaction_object(t, account))
+
+              transactions.push(parent_transaction)
+
+              parent_id = parent_transaction.id
             end
           end
         end

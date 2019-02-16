@@ -46,7 +46,7 @@ class TransactionsTest < ApplicationSystemTestCase
     fill_in "Description", with: "single expense euro"
     fill_in "Amount", with: "100.01"
 
-    click_on "Save Transaction"
+    click_on "Create Transaction"
 
     assert_selector '#transactions_list', text: "Today\n€-100.01"
     assert_selector '#transactions_list', text: "single expense euro\n€-100.01"
@@ -70,7 +70,7 @@ class TransactionsTest < ApplicationSystemTestCase
     page.check('transaction_multiple_transactions')
     fill_in "Transactions", with: "one 1\ntwo 2\nthree 3\nfour 4\npoint 05 .05"
 
-    click_on "Save Transaction"
+    click_on "Create Transaction"
 
     assert_selector '.child_transactions', visible: :hidden
     page.find('.show-child-transactions').click
@@ -105,7 +105,7 @@ class TransactionsTest < ApplicationSystemTestCase
     select "Income", from: "Type"
     fill_in "Amount", with: "100.01"
 
-    click_on "Save Transaction"
+    click_on "Create Transaction"
 
     assert_selector '#transactions_list', text: "Today\n€100.01"
     assert_selector '#transactions_list', text: "single income euro\n€100.01"
@@ -130,7 +130,7 @@ class TransactionsTest < ApplicationSystemTestCase
     page.check('transaction_multiple_transactions')
     fill_in "Transactions", with: "one 1\ntwo 2\nthree 3\nfour 4\npoint 05 .05"
 
-    click_on "Save Transaction"
+    click_on "Create Transaction"
 
     assert_selector '.child_transactions', visible: :hidden
     page.find('.show-child-transactions').click
@@ -163,7 +163,7 @@ class TransactionsTest < ApplicationSystemTestCase
     select "Savings Account", from: "To account"
     fill_in "Amount", with: "5000"
 
-    click_on "Save Transaction"
+    click_on "Create Transaction"
 		
     assert_selector '#transactions_list', text: "Today\n€0.00"
 
@@ -201,7 +201,7 @@ class TransactionsTest < ApplicationSystemTestCase
 		page.check('transaction_multiple_transactions')
     fill_in "Transactions", with: "one 1\ntwo 2\nthree 3\nfour 4\npoint 05 .05"
 		
-		click_on "Save Transaction"
+		click_on "Create Transaction"
 
     page.find_all('.show-child-transactions')[1].click
     page.find_all('.show-child-transactions')[0].click
@@ -243,7 +243,7 @@ class TransactionsTest < ApplicationSystemTestCase
 		select "JPY", from: "Currency"
     fill_in "Amount", with: "100"
 		
-		click_on "Save Transaction"
+		click_on "Create Transaction"
 		
 		assert_selector '#transactions_list', text: "Today\n€-0.80"
     assert_selector '#transactions_list', text: "single expense jpy\n€-0.80"
@@ -267,7 +267,7 @@ class TransactionsTest < ApplicationSystemTestCase
     page.check('transaction_multiple_transactions')
     fill_in "Transactions", with: "one 100\ntwo 200\nthree 300\nfour 400\n"
 
-    click_on "Save Transaction"
+    click_on "Create Transaction"
 		
 		assert_selector '#transactions_list', text: "Today\n€-8.00"
     assert_selector '#transactions_list', text: "multiple expense jpy\n€-8.00"
@@ -291,7 +291,7 @@ class TransactionsTest < ApplicationSystemTestCase
 		select "JPY", from: "Currency"
     fill_in "Amount", with: "100000"
 
-    click_on "Save Transaction"
+    click_on "Create Transaction"
 		
     assert_selector '#transactions_list', text: "Today\n€800.00"
     assert_selector '#transactions_list', text: "single income jpy\n€800.00"
@@ -316,7 +316,7 @@ class TransactionsTest < ApplicationSystemTestCase
 		page.check('transaction_multiple_transactions')
 		fill_in "Transactions", with: "one 1000\ntwo 2000\nthree 3000\nfour 4000\n"
 		
-		click_on "Save Transaction"
+		click_on "Create Transaction"
 
     assert_selector '.child_transactions', visible: :hidden
     page.find('.show-child-transactions').click
@@ -354,7 +354,7 @@ class TransactionsTest < ApplicationSystemTestCase
 		select "JPY", from: "Currency"
     fill_in "Amount", with: "100000"
 
-    click_on "Save Transaction"
+    click_on "Create Transaction"
 		
     assert_selector '#transactions_list', text: "Today\n€0.00"
     assert_selector '#transactions_list', text: "single transfer jpy\n€-800.00"
@@ -387,7 +387,7 @@ class TransactionsTest < ApplicationSystemTestCase
 		page.check('transaction_multiple_transactions')
 		fill_in "Transactions", with: "one 1000\ntwo 2000\nthree 3000\nfour 4000\n"
 		
-		click_on "Save Transaction"
+		click_on "Create Transaction"
 		
 		assert_selector '#transactions_list', text: "Today\n€0.00"
     assert_selector '#transactions_list', text: "multiple transfer jpy\n€-80.00"
@@ -417,7 +417,7 @@ class TransactionsTest < ApplicationSystemTestCase
 		select "JPY", from: "Currency"
 		fill_in "Amount", with: "1000"
 		
-		click_on "Save Transaction"
+		click_on "Create Transaction"
 		
 		click_on "New Transaction"
 		
