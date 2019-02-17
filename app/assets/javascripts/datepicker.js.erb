@@ -41,3 +41,45 @@ $(document).on('turbolinks:load', ()=> {
   });
 
 });
+
+function get_date() {
+  var dt = new Date(),
+      h = dt.getHours(),
+      m = dt.getMinutes();
+      d = dt.getDate();
+      mm = dt.getMonth();
+      y = dt.getYear() + 1900;
+  if(h < 10) h = '0' + h;
+  if(m < 10) m = '0' + m;
+  if(d < 10) d = '0' + d;
+
+  var month = new Array();
+  month[0] = "Jan";
+  month[1] = "Feb";
+  month[2] = "Mar";
+  month[3] = "Apr";
+  month[4] = "May";
+  month[5] = "Jun";
+  month[6] = "Jul";
+  month[7] = "Aug";
+  month[8] = "Sep";
+  month[9] = "Oct";
+  month[10] = "Nov";
+  month[11] = "Dec";
+
+  return d + '-' + month[mm] + '-' + y;
+}
+
+function get_time() {
+  var dt = new Date(),
+      h = dt.getHours(),
+      m = dt.getMinutes();
+      d = dt.getDate();
+      mm = dt.getMonth();
+      y = dt.getYear() + 1900;
+  if(h < 10) h = '0' + h;
+  if(m < 10) m = '0' + m;
+  if(d < 10) d = '0' + d;
+
+  return h + ':' + m;
+}
