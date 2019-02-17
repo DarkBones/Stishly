@@ -17,6 +17,15 @@ class ApiController < ApplicationController
     end
   end
 
+  def render_transactionsmenu
+    @active_account
+    if params[:account]
+      @active_account = Account.get_from_name(params[:account], current_user)
+    end
+
+    render partial: "card_forms/new_transaction_form", locals: {active_account: @active_account}
+  end
+
   def all_accounts_details
     @accounts = Account.get_accounts(current_user)
     render json: @accounts

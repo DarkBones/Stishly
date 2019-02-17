@@ -1,3 +1,5 @@
+var transactionsmenu_triggered = false;
+
 $(document).on('turbolinks:load', ()=> {
 
   $('.card-form__close').on('click', (event) => {
@@ -9,6 +11,21 @@ $(document).on('turbolinks:load', ()=> {
 function ToggleCardForm (formId) {
   $('#overlay').fadeToggle(200);
   $(formId).slideToggle(100);
+}
+
+function ShowTransactionsMenu() {
+  transactionsmenu_triggered = true;
+  $.ajax({
+    type: 'GET',
+    dataType: 'text',
+    url: '/api/render_transactionsmenu',
+    success: function(data) {
+      $('#content').prepend(data);
+      ToggleCardForm('#transactionmenu');
+
+      
+    }
+  });
 }
 
 function ClearValues (formId) {

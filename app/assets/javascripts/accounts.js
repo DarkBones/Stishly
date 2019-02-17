@@ -49,3 +49,12 @@ function display_summary_account() {
     $("#accounts_list p").show();
   }
 }
+
+function get_active_account_name(){
+  url_arr = window.location.pathname.split('/');
+  if (url_arr[1].toLowerCase() == 'accounts') {
+    return url_arr[2]
+  } else{
+    return null;
+  }
+}
