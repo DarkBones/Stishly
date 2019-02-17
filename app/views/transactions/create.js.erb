@@ -4,102 +4,171 @@ ClearValues('#transactionmenu');
 var active_account = '<%= @params[:active_account] %>';
 var active_account_currency = '<%= Account.get_account_or_user_currency(@params[:active_account], current_user) %>';
 
-<% @transactions_parent.reverse.each_with_index do |t, i| %>
-  <% puts t.description + ": " + t.amount.to_s %>
-
-  var t_account = "<%= @account_names[i] %>";
-  var account_currency_amount = <%= t.account_currency_amount %>;
-
-  // find all days shown in view
-  var days = []
-  $('#transactions_list div').each(function(index){
-    if (typeof $(this).attr('id') !== "undefined"){
+var t_date = '<%= @date %>';
+var days = [];
+$('#transactions_list div').each(function(index){
+  if (typeof $(this).attr('id') !== "undefined"){
+    if (/[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test($(this).attr('id'))) {
       days.push($(this).attr('id'));
     }
-  });
+  }
+});
 
-  var t_date = '<%= t.local_datetime.to_s.split[0] %>'
-  var $dayDiv = GetdayDiv(t_date, days, <%= t.time_num %>, <%= t.id %>, account_currency_amount);
+CreateDayDiv(t_date, days, active_account_currency);
 
-  // insert the new transaction
-  
-<% end %>
+var dayDivCreated = false;
+var $dayDiv = $('#transactions_list div#' + t_date);
+if ($dayDiv.length) {
+  dayDivCreated = true
+  InsertTransactions();
+}
 
-UpdateAccountTotals();
+$(document).ajaxStop(function () {
+  if (!dayDivCreated){
+    InsertTransactions();
+  }
+
+  dayDivCreated = true;
+});
+
+function InsertTransactions() {
+  <% @transactions_parent.reverse.each_with_index do |t, i| %>
+    var t_date = '<%= t.local_datetime.to_s.split[0] %>';
+    var $dayDiv = $('#transactions_list div#' + t_date);
+    if ($dayDiv.length > 0) {
+      var t_account = '<%= @account_names[i] %>';
+      var account_currency_amount = <%= t.account_currency_amount %>;
+      var t_time = <%= t.time_num %>;
+      var t_id = '<%= t.id %>';
+
+      InsertTransaction($dayDiv, t_time, t_id, active_account);
+    }
+  <% end %>
+
+  UpdateAccountTotals();
+}
 
 function UpdateAccountTotals(){
   var amount;
   var account_id;
   var account_currency;
   var current_balance;
-  var $balance
+  var $balance;
+
   <% @transaction_amounts_all.each_with_index do |a, i| %>
     amount = <%= a.to_i %>
     account_id = <%= @account_ids_all[i] %>
 
-    $balance = $('#accounts_list #account_' + account_id + " span")
+    $balance = $('#accounts_list #account_' + account_id + ' span');
     current_balance = parseInt($balance.attr('balance'));
     account_currency = $balance.attr('currency');
-
-    $.ajax({
-      type: "GET",
-      dataType: "json",
-      url: "/api/account_display_balance/" + current_balance + "/" + account_currency + "/" + account_currency + "/" + amount,
-      success: function(data) {
-        $balance.attr('balance', current_balance + amount);
-        $balance.html(data.html);
-      }
-    });
+    UpdateBalance($balance, current_balance, account_currency, amount);
+  <% end %>
+  $balance = $('#accounts_list #account_0 span');
+  current_balance = parseInt($balance.attr('balance'));
+  account_currency = $balance.attr('currency');
+  UpdateBalance($balance, current_balance, account_currency, parseInt('<%= @total_amount %>'));
+  <% if @update_day_total %>
+    console.log('UPDATE');
+    $balance = $('#transactions_list #' + '<%= @date %>' + ' h3 span');
+    current_balance = parseInt($balance.attr('balance'));
+    account_currency = $balance.attr('currency');
+    UpdateBalance($balance, current_balance, account_currency, parseInt('<%= @total_amount %>'));
   <% end %>
 }
 
-function UpdateDayTotal($dayDiv, amount) {
-  var new_total = parseInt($dayDiv.find("h3").attr("balance")) + amount;
-  $dayDiv.find("h3").attr("balance", new_total)
-
+function UpdateBalance($target, current_balance, currency, add) {
+  console.log(current_balance + ' ' + currency + ' ' + add);
   $.ajax({
-    type: "GET",
-    dataType: "json",
-    url: "/api/account_display_balance/" + new_total.toString() + "/" + active_account_currency + "/" + active_account_currency + "/0",
+    type: 'GET',
+    dataType: 'json',
+    url: '/api/account_display_balance/' + current_balance + '/' + currency + '/' + currency + '/' + add,
     success: function(data) {
-      $dayDiv.find("h3 span").html(data.html);
+      $target.attr('balance', current_balance + add);
+      $target.html(data.html);
     }
   });
 }
 
 // inserts a transaction
-function InsertTransaction($dayDiv, t_time, t_id) {
+function InsertTransaction($dayDiv, time, id, account) {
   var $entries = $dayDiv.find('ul li');
 
-  if ($entries.length == 0 || t_time > parseInt($entries.eq(0).attr('class'))){
-    GenerateTransaction($dayDiv.find('ul'), "prepend", t_id);
-  } else if (t_time < parseInt($entries.eq($entries.length - 1).attr('class'))) {
-    GenerateTransaction($dayDiv.find('ul'), "append", t_id);
-  } else {
+  if ($entries.length == 0 || time > parseInt($entries.eq(0).attr('class'))){
+    GenerateTransaction($dayDiv.find('ul'), 'prepend', id, account);
+  } else if (time < parseInt($entries.eq($entries.length - 1).attr('class'))){
+    GenerateTransaction($dayDiv.find('ul'), 'append', id, account);
+  } else if ($('#transactions_list li').length % 30 != 0) { // TODO: Replace 30 with endless page system parameter
     for (var i = 0; i < $entries.length; i++) {
-      if (t_time > parseInt($entries.eq(i).attr('class'))) {
-        GenerateTransaction($entries.eq(i), "before", t_id);
+      if (time > parseInt($entries.eq(i).attr('class'))) {
+        GenerateTransaction($entries.iq(i), 'before', id, account);
         break;
       }
     }
   }
 }
 
-// generate transaction
-function GenerateTransaction($target, type, t_id){
+function GenerateTransaction($target, type, id, account) {
   $.ajax({
-    type: "GET",
-    dataType: "text",
-    url: '/api/render_transaction/' + t_id.toString() + '/' + active_account,
+    type: 'GET',
+    dataType: 'text',
+    url: '/api/render_transaction/' + id.toString() + '/' + account,
     success: function(data) {
       switch (type) {
-        case "prepend":
+        case 'prepend':
           $target.prepend(data);
           break;
-        case "append":
+        case 'append':
           $target.append(data);
           break;
-        case "before":
+        case 'before':
+          $(data).insertBefore($target);
+          break;
+      }
+    }
+  });
+}
+
+// returns the correct div element for the transaction date
+function CreateDayDiv(date, days, currency){
+  var $dayDiv = $('#transactions_list div#' + date);
+
+  if ($dayDiv.length == 0) {
+    CreateNewDayDiv(date, days, currency);
+  }
+}
+
+function CreateNewDayDiv(date, days, currency) {
+  var account_currency = '<%= Account.get_account_or_user_currency(@params[:active_account], current_user) %>'
+
+  dateNum = DayToNum(date);
+  if(days.length == 0 || dateNum > DayToNum(days[0])){
+    GenerateDayDiv(date, $('#transactions_list'), 'prepend', currency);
+  } else if (dateNum > DayToNum(days[days.length-1])) {
+    for (var i = 0; i < days.length; i++) {
+      if (dateNum > DayToNum(days[i])) {
+        GenerateDayDiv(date, $('#transactions_list div#' + days[i]), 'before', currency);
+        break;
+      }
+    }
+  } else if ($('#transactions_list li').length % 30 != 0) { // TODO: Replace 30 with endless page system parameter
+    GenerateDayDiv(date, $('#transactions_list'), 'append', currency);
+  }
+}
+
+function GenerateDayDiv (date, $target, type, currency) {
+  $.ajax({
+    type: 'GET',
+    dataType: 'text',
+    url: '/api/transaction_date_ul/' + date + '/0/' + currency,
+    success: function(data) {
+      switch (type) {
+        case 'prepend':
+          $target.prepend(data);
+          break;
+        case 'append':
+          $target.append(data);
+        case 'before':
           $(data).insertBefore($target);
           break;
       }
@@ -114,67 +183,3 @@ function DayToNum(str) {
   return parseInt(num);
 }
 
-// returns the correct list element for the transaction time
-function GetdayDiv(t_date, days, t_timenum, t_id, account_currency_amount) {
-  // get the day UL
-  var $dayDiv = $('#' + t_date);
-
-  // if no UL exists for the date, create one
-  if ($dayDiv.length == 0) {
-    CreateNewdayDiv(t_date, days, t_timenum, account_currency_amount, t_id)
-    $dayDiv = $('#' + t_date);
-  } else {
-    InsertTransaction($dayDiv, t_timenum, t_id);
-    UpdateDayTotal($dayDiv, account_currency_amount);
-  }
-
-  return $dayDiv
-}
-
-// creates a new list element for transaction date
-function CreateNewdayDiv(t_date, days, t_timenum, account_currency_amount, t_id) {
-  var account_currency = '<%= Account.get_account_or_user_currency(@params[:active_account], current_user) %>';
-
-  if (days.length == 0 || DayToNum(t_date) > DayToNum(days[0])) {
-    // if no days exist in the ul, or the transaction is earlier than the earliest date, prepend a new one to #transactionslist
-    GeneratedayDiv(t_date, $("#transactions_list"), "prepend", account_currency, 0, t_timenum, account_currency_amount, t_id);
-  } else if (DayToNum(t_date) > DayToNum(days[days.length-1])) {
-    // if the transaction date is between the first and last day on the page, iterate through the days to find the correct place
-    for (var i = 0; i < days.length; i++) {
-      if (DayToNum(t_date) > DayToNum(days[i])){
-        GeneratedayDiv(t_date, $("#" + days[i]), "before", account_currency, 0, t_timenum, account_currency_amount, t_id);
-        break;
-      }
-    }
-  } else if ($('#transactions_list li').length % 30 != 0) { // TODO: Replace 30 with endless page system parameter
-    // if the transaction is later than all days, put it on the end if there is room on the page (keep endless pagination in mind)
-    GeneratedayDiv(t_date, $("#transactions_list"), "append", account_currency, 0, t_timenum, account_currency_amount, t_id);
-  }
-}
-
-// generate a new list element via an ajax job
-function GeneratedayDiv(date, $target, type, account_currency, amount, t_timenum, account_currency_amount, t_id) {
-  var $dayDiv;
-  $.ajax({
-    type: "GET",
-    dataType: "text",
-    url: '/api/transaction_date_ul/' + date + '/' + amount.toString() + '/' + account_currency,
-    success: function(data) {
-      switch (type) {
-        case "prepend":
-          $target.prepend(data);
-          break;
-        case "append":
-          $target.append(data);
-          break;
-        case "before":
-          $(data).insertBefore($target);
-          break;
-      }
-      $dayDiv = $('#' + t_date);
-    }
-  }).done(function() {
-    InsertTransaction($dayDiv, t_timenum, t_id);
-    UpdateDayTotal($dayDiv, account_currency_amount);
-  });
-}

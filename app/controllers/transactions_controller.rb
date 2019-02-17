@@ -26,19 +26,26 @@ class TransactionsController < ApplicationController
 
     @transaction_amounts_all = []
     @account_ids_all = []
-    
+
     @transactions_parent = []
     @transactions_child = []
     @account_names = []
+    @date = nil
+
+    @update_day_total = false
+    @total_amount = 0
 
     transactions.each do |t|
+      @date = t.local_datetime.to_s.split[0]
       t_account = current_user.accounts.find(t.account_id)
       if @params[:active_account].length == 0 || @params[:active_account] == t_account.name
+        @update_day_total = true
         if t.parent_id
           @transactions_child.push(t)
         else
           @transactions_parent.push(t)
           @account_names.push(t_account.name)
+          @total_amount += t.account_currency_amount
         end
       end
 
@@ -47,6 +54,8 @@ class TransactionsController < ApplicationController
         @account_ids_all.push(t_account.id)
       end
     end
+
+    @total_amount = @total_amount.to_s
   end
 
   def show
