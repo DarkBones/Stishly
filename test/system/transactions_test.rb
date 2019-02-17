@@ -34,6 +34,29 @@ class TransactionsTest < ApplicationSystemTestCase
     logout
   end
 
+  test "create multiple transactions" do
+    # login as transactions user
+    login_user(users(:transactions), 'SomePassword123^!')
+
+    5.times do
+        # click on new transaction
+        page.find("#account_0").click
+        click_on "New Transaction"
+
+        # fill in the details
+        fill_in "Description", with: "single expense euro"
+        fill_in "Amount", with: "100"
+
+        click_on "Create Transaction"
+    end
+
+    assert_selector '#transactions_list', text: "Today\n€-500.00"
+    assert_selector '#transactions_list', text: "single expense euro\n€-100.00"
+
+    assert_selector '#accounts_list', text: "All\n€9,500.00"
+    assert_selector '#accounts_list', text: "Current Account\n€9,500.00"
+  end
+
   test "create single expense transaction in same currency" do
     # login as transactions user
     login_user(users(:transactions), 'SomePassword123^!')
@@ -420,9 +443,6 @@ class TransactionsTest < ApplicationSystemTestCase
 		click_on "Create Transaction"
 		
 		click_on "New Transaction"
-		
-        puts find_field('Currency').find('option[selected]').text
-        puts '////////////////////////////////////'
 		
 		logout
 	end
