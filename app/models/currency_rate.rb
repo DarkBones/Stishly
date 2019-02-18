@@ -19,11 +19,28 @@ class CurrencyRate < ApplicationRecord
     else
       begin
         rate = Concurrency.conversion_rate(from, to)
-        self.update_rate(from, to, rate)
+        if rate > 0
+          self.update_rate(from, to, rate)
+        else
+          rate = self.where(from_currency: from, to_currency: to).take()
+          if rate
+            rate = rate.rate
+          end
+          if !rate
+            rate = GetCurrencyRate.new(from).perform
+            rate = self.where(from_currency: from, to_currency: to).take()
+            if rate
+              rate = rate.rate
+            end
+          end
+        end
       rescue
-        rate = self.where(from_currency: from, to_currency: to).take().rate
+        rate = self.where(from_currency: from, to_currency: to).take()
+        if rate
+          rate = rate.rate
+        end
         if !rate
-          rate = GetCurrencyRate.new('EUR').perform
+          rate = GetCurrencyRate.new(from).perform
         end
       end
       

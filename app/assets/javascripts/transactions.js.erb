@@ -18,6 +18,7 @@ $(document).on('turbolinks:load', ()=> {
   var transactionmenu_set = false;
 
   $('#create-transaction-button').on('click', () => {
+    console.log('create transaction button');
     ToggleCardForm('#transactionmenu');
     SetupTransactionForm();
     //ShowTransactionsMenu();
@@ -41,8 +42,6 @@ $(document).on('turbolinks:load', ()=> {
     //set_currency($('#transaction_from_account').val(), currency_changed, $('#transaction_currency'));
 
     $('#create-transaction-button').on('click', () => {
-      ToggleCardForm('#transactionmenu');
-      //ShowTransactionsMenu();
       $(".accountmenu__name").focus();
     });
 

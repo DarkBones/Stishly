@@ -3,6 +3,7 @@ var transactionsmenu_triggered = false;
 $(document).on('turbolinks:load', ()=> {
 
   $('.card-form__close').on('click', (event) => {
+    console.log('close button');
     ToggleCardForm('#' + $(event.target).closest('.card-form').attr('id'));
   });
 
@@ -21,7 +22,6 @@ function ShowTransactionsMenu() {
     url: '/api/render_transactionsmenu',
     success: function(data) {
       $('#content').prepend(data);
-      //ToggleCardForm('#transactionmenu');
 
       
     }
@@ -29,7 +29,7 @@ function ShowTransactionsMenu() {
 }
 
 function ClearValues (formId) {
-  /*if (formId == '#accountmenu') {
+  if (formId == '#accountmenu') {
       $.ajax({
       type: "GET",
       dataType: "text",
@@ -38,7 +38,7 @@ function ClearValues (formId) {
         $(formId).find("select#account_currency").val(data);
       }
     });
-  }*/
+  }
 
   var default_value;
   $(formId).find("input, textarea, select").each(function() {
