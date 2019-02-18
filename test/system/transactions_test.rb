@@ -42,6 +42,7 @@ class TransactionsTest < ApplicationSystemTestCase
         # click on new transaction
         page.find("#account_0").click
         click_on "New Transaction"
+        #sleep 15
 
         # fill in the details
         fill_in "Description", with: "single expense euro"
@@ -64,6 +65,7 @@ class TransactionsTest < ApplicationSystemTestCase
     # click on new transaction
     page.find("#account_0").click
     click_on "New Transaction"
+    #sleep 15
 
     # fill in the details
     fill_in "Description", with: "single expense euro"
@@ -87,6 +89,7 @@ class TransactionsTest < ApplicationSystemTestCase
     # click on new transaction
     page.find("#account_0").click
     click_on "New Transaction"
+    #sleep 15
 
     # fill in the details
     fill_in "Description", with: "multiple expense euro"
@@ -122,6 +125,7 @@ class TransactionsTest < ApplicationSystemTestCase
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
     click_on "New Transaction"
+    #sleep 15
 
     # fill in the details
     fill_in "Description", with: "single income euro"
@@ -146,6 +150,7 @@ class TransactionsTest < ApplicationSystemTestCase
     # click on new transaction
     page.find("#account_0").click
     click_on "New Transaction"
+    #sleep 15
 
     # fill in the details
     fill_in "Description", with: "multiple expense euro"
@@ -179,6 +184,7 @@ class TransactionsTest < ApplicationSystemTestCase
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
     click_on "New Transaction"
+    #sleep 15
 
     # fill in the details
     fill_in "Description", with: "single transfer euro"
@@ -215,21 +221,22 @@ class TransactionsTest < ApplicationSystemTestCase
     # login as transactions user
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
-		click_on "New Transaction"
+	click_on "New Transaction"
+    #sleep 15
 
     # fill in the details
     fill_in "Description", with: "multiple transfer euro"
     select "Transfer", from: "Type"
     select "Savings Account", from: "To account"
-		page.check('transaction_multiple_transactions')
+	page.check('transaction_multiple_transactions')
     fill_in "Transactions", with: "one 1\ntwo 2\nthree 3\nfour 4\npoint 05 .05"
 		
-		click_on "Create Transaction"
+	click_on "Create Transaction"
 
     page.find_all('.show-child-transactions')[1].click
     page.find_all('.show-child-transactions')[0].click
 
-		assert_selector '#transactions_list', text: "Today\n€0.00"
+	assert_selector '#transactions_list', text: "Today\n€0.00"
     assert_selector '#transactions_list', text: "multiple transfer euro\n€-10.05"
     assert_selector '#transactions_list', text: "one\n€-1.00"
     assert_selector '#transactions_list', text: "two\n€-2.00"
@@ -258,21 +265,22 @@ class TransactionsTest < ApplicationSystemTestCase
     # login as transactions user
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
-		click_on "New Transaction"
+	click_on "New Transaction"
+    #sleep 15
 
     # fill in the details
     fill_in "Description", with: "single expense jpy"
     select "Expense", from: "Type"
-		select "JPY", from: "Currency"
+	select "JPY", from: "Currency"
     fill_in "Amount", with: "100"
 		
-		click_on "Create Transaction"
+	click_on "Create Transaction"
 		
-		assert_selector '#transactions_list', text: "Today\n€-0.80"
+	assert_selector '#transactions_list', text: "Today\n€-0.80"
     assert_selector '#transactions_list', text: "single expense jpy\n€-0.80"
     assert_selector '#transactions_list', text: "~¥-100"
 
-		assert_selector '#accounts_list', text: "All\n€9,999.20"
+	assert_selector '#accounts_list', text: "All\n€9,999.20"
     assert_selector '#accounts_list', text: "Current Account\n€9,999.20"
 
     logout
@@ -282,21 +290,22 @@ class TransactionsTest < ApplicationSystemTestCase
     # login as transactions user
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
-		click_on "New Transaction"
+	click_on "New Transaction"
+    #sleep 15
 
     # fill in the details
     fill_in "Description", with: "multiple expense jpy"
-		select "JPY", from: "Currency"
+	select "JPY", from: "Currency"
     page.check('transaction_multiple_transactions')
     fill_in "Transactions", with: "one 100\ntwo 200\nthree 300\nfour 400\n"
 
     click_on "Create Transaction"
 		
-		assert_selector '#transactions_list', text: "Today\n€-8.00"
+	assert_selector '#transactions_list', text: "Today\n€-8.00"
     assert_selector '#transactions_list', text: "multiple expense jpy\n€-8.00"
     assert_selector '#transactions_list', text: "~¥-1,000"
 
-		assert_selector '#accounts_list', text: "All\n€9,992.00"
+	assert_selector '#accounts_list', text: "All\n€9,992.00"
     assert_selector '#accounts_list', text: "Current Account\n€9,992.00"
 
     logout
@@ -306,12 +315,13 @@ class TransactionsTest < ApplicationSystemTestCase
     # login as transactions user
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
-		click_on "New Transaction"
+	click_on "New Transaction"
+    #sleep 15
 
     # fill in the details
     fill_in "Description", with: "single income jpy"
     select "Income", from: "Type"
-		select "JPY", from: "Currency"
+	select "JPY", from: "Currency"
     fill_in "Amount", with: "100000"
 
     click_on "Create Transaction"
@@ -330,22 +340,23 @@ class TransactionsTest < ApplicationSystemTestCase
     # login as transactions user
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
-		click_on "New Transaction"
+	click_on "New Transaction"
+    #sleep 15
 
     # fill in the details
-		fill_in "Description", with: "multiple income jpy"
-		select "Income", from: "Type"
-		select "JPY", from: "Currency"
-		page.check('transaction_multiple_transactions')
-		fill_in "Transactions", with: "one 1000\ntwo 2000\nthree 3000\nfour 4000\n"
-		
-		click_on "Create Transaction"
+	fill_in "Description", with: "multiple income jpy"
+	select "Income", from: "Type"
+	select "JPY", from: "Currency"
+	page.check('transaction_multiple_transactions')
+	fill_in "Transactions", with: "one 1000\ntwo 2000\nthree 3000\nfour 4000\n"
+	
+	click_on "Create Transaction"
 
     assert_selector '.child_transactions', visible: :hidden
     page.find('.show-child-transactions').click
     assert_selector '.child_transactions', visible: :visible
 		
-		assert_selector '#transactions_list', text: "Today\n€80.00"
+	assert_selector '#transactions_list', text: "Today\n€80.00"
     assert_selector '#transactions_list', text: "multiple income jpy\n€80.00"
     assert_selector '#transactions_list', text: "one\n€8.00"
     assert_selector '#transactions_list', text: "two\n€16.00"
@@ -358,7 +369,7 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector '#transactions_list', text: "~¥3,000"
     assert_selector '#transactions_list', text: "~¥4,000"
 
-		assert_selector '#accounts_list', text: "All\n€10,080.00"
+	assert_selector '#accounts_list', text: "All\n€10,080.00"
     assert_selector '#accounts_list', text: "Current Account\n€10,080.00"
 
     logout
@@ -368,13 +379,14 @@ class TransactionsTest < ApplicationSystemTestCase
     # login as transactions user
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
-		click_on "New Transaction"
+	click_on "New Transaction"
+    #sleep 15
 
     # fill in the details
     fill_in "Description", with: "single transfer jpy"
     select "Transfer", from: "Type"
     select "Savings Account", from: "To account"
-		select "JPY", from: "Currency"
+	select "JPY", from: "Currency"
     fill_in "Amount", with: "100000"
 
     click_on "Create Transaction"
@@ -400,19 +412,20 @@ class TransactionsTest < ApplicationSystemTestCase
     # login as transactions user
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
-		click_on "New Transaction"
+	click_on "New Transaction"
+    #sleep 15
 
     # fill in the details
-		fill_in "Description", with: "multiple transfer jpy"
-		select "Transfer", from: "Type"
-		select "Savings Account", from: "To account"
-		select "JPY", from: "Currency"
-		page.check('transaction_multiple_transactions')
-		fill_in "Transactions", with: "one 1000\ntwo 2000\nthree 3000\nfour 4000\n"
-		
-		click_on "Create Transaction"
-		
-		assert_selector '#transactions_list', text: "Today\n€0.00"
+	fill_in "Description", with: "multiple transfer jpy"
+	select "Transfer", from: "Type"
+	select "Savings Account", from: "To account"
+	select "JPY", from: "Currency"
+	page.check('transaction_multiple_transactions')
+	fill_in "Transactions", with: "one 1000\ntwo 2000\nthree 3000\nfour 4000\n"
+	
+	click_on "Create Transaction"
+	
+	assert_selector '#transactions_list', text: "Today\n€0.00"
     assert_selector '#transactions_list', text: "multiple transfer jpy\n€-80.00"
     assert_selector '#transactions_list', text: "multiple transfer jpy\n€80.00"
 
@@ -422,29 +435,31 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector '#transactions_list', text: "Transferred from Current Account"
     assert_selector '#transactions_list', text: "Transferred to Savings Account"
 
-		assert_selector '#accounts_list', text: "All\n€10,000.00"
+	assert_selector '#accounts_list', text: "All\n€10,000.00"
     assert_selector '#accounts_list', text: "Current Account\n€9,920.00"
     assert_selector '#accounts_list', text: "Savings Account\n€80.00"
 
     logout
   end
 	
-	test "transaction currency resetting" do
-		# login as transactions user
-		login_user(users(:transactions), 'SomePassword123^!')
-		page.find("#account_0").click
-		click_on "New Transaction"
-		
-		# fill in the details
-		fill_in "Description", with: "JPY"
-		select "JPY", from: "Currency"
-		fill_in "Amount", with: "1000"
-		
-		click_on "Create Transaction"
-		
-		click_on "New Transaction"
-		
-		logout
-	end
+    test "transaction currency resetting" do
+        # login as transactions user
+        login_user(users(:transactions), 'SomePassword123^!')
+        page.find("#account_0").click
+        click_on "New Transaction"
+        #sleep 15
+
+        # fill in the details
+        fill_in "Description", with: "JPY"
+        select "JPY", from: "Currency"
+        fill_in "Amount", with: "1000"
+
+        click_on "Create Transaction"
+
+        click_on "New Transaction"
+        #sleep 15
+
+        logout
+    end
 
 end

@@ -18,30 +18,31 @@ $(document).on('turbolinks:load', ()=> {
   var transactionmenu_set = false;
 
   $('#create-transaction-button').on('click', () => {
-    //ToggleCardForm('#transactionmenu');
-    ShowTransactionsMenu();
+    ToggleCardForm('#transactionmenu');
+    SetupTransactionForm();
+    //ShowTransactionsMenu();
 
-    $(document).ajaxStop(function () {
+    /*$(document).ajaxStop(function () {
       if(transactionmenu_set == false) {
         SetupTransactionForm();
         $(".transactionmenu__description").focus();
       }
-    });
+    });*/
   });
 
   function SetupTransactionForm() {
     var currency_changed = false;
     var active_account_name = get_active_account_name();
 
-    $('#transaction_account').val(active_account_name);
-    $('#transaction_from_account').val(active_account_name);
+    //$('#transaction_account').val(active_account_name);
+    //$('#transaction_from_account').val(active_account_name);
 
-    set_currency($('#transaction_account').val(), currency_changed, $('#transaction_currency'));
-    set_currency($('#transaction_from_account').val(), currency_changed, $('#transaction_currency'));
+    //set_currency($('#transaction_account').val(), currency_changed, $('#transaction_currency'));
+    //set_currency($('#transaction_from_account').val(), currency_changed, $('#transaction_currency'));
 
     $('#create-transaction-button').on('click', () => {
-      //ToggleCardForm('#transactionmenu');
-      ShowTransactionsMenu();
+      ToggleCardForm('#transactionmenu');
+      //ShowTransactionsMenu();
       $(".accountmenu__name").focus();
     });
 

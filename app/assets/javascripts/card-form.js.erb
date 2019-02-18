@@ -21,7 +21,7 @@ function ShowTransactionsMenu() {
     url: '/api/render_transactionsmenu',
     success: function(data) {
       $('#content').prepend(data);
-      ToggleCardForm('#transactionmenu');
+      //ToggleCardForm('#transactionmenu');
 
       
     }
@@ -29,7 +29,7 @@ function ShowTransactionsMenu() {
 }
 
 function ClearValues (formId) {
-  if (formId == '#accountmenu') {
+  /*if (formId == '#accountmenu') {
       $.ajax({
       type: "GET",
       dataType: "text",
@@ -38,7 +38,14 @@ function ClearValues (formId) {
         $(formId).find("select#account_currency").val(data);
       }
     });
-  }
+  }*/
 
-  $(formId).find("input, textarea").val("");
+  var default_value;
+  $(formId).find("input, textarea, select").each(function() {
+    default_value = $(this).attr("default_value");
+    if (typeof default_value !== typeof undefined) {
+      console.log('default: ' + default_value);
+      $(this).val(default_value);
+    }
+  });
 }
