@@ -30,65 +30,6 @@ $(document).on('turbolinks:load', ()=> {
       }
     });*/
   });
-
-  function SetupTransactionForm() {
-    var currency_changed = false;
-    var active_account_name = get_active_account_name();
-
-    //$('#transaction_account').val(active_account_name);
-    //$('#transaction_from_account').val(active_account_name);
-
-    //set_currency($('#transaction_account').val(), currency_changed, $('#transaction_currency'));
-    //set_currency($('#transaction_from_account').val(), currency_changed, $('#transaction_currency'));
-
-    $('#create-transaction-button').on('click', () => {
-      $(".accountmenu__name").focus();
-    });
-
-    $('#transaction_currency').change(function() {
-      currency_changed = true;
-    });
-
-    $('.transactions_menu_multiple_accounts').hide();
-    $('.transactions_menu_single_account').show();
-
-    $('.transactions_menu_multiple').hide();
-    $('.transactions_menu_single').show();
-
-    $('#transaction_multiple_transactions').change(function() {
-      if($(this).is(":checked")) {
-        $('.transactions_menu_multiple').show();
-        $('.transactions_menu_single').hide();
-      } else {
-        $('.transactions_menu_multiple').hide();
-        $('.transactions_menu_single').show();
-      }
-    });
-
-    $('#transaction_type').change(function() {
-      if($(this).val().toLowerCase() == 'transfer'){
-        $('.transactions_menu_multiple_accounts').show();
-        $('.transactions_menu_single_account').hide();
-      } else {
-        $('.transactions_menu_multiple_accounts').hide();
-        $('.transactions_menu_single_account').show();
-      }
-    });
-
-    $('#transaction_account').change(function() {
-      set_currency($(this).val(), currency_changed, $('#transaction_currency'));
-    });
-
-    $('#transaction_from_account').change(function() {
-      set_currency($(this).val(), currency_changed, $('#transaction_currency'));
-    });
-
-    var currentDate = new Date();
-    $('#transaction_date').val(get_date());
-    $('#transaction_time').val(get_time());
-
-    transactionmenu_set = true;
-  }
 });
 
 $(document).on('click', '.show-child-transactions', (event) => {

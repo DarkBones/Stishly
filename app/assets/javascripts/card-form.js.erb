@@ -12,6 +12,11 @@ $(document).on('turbolinks:load', ()=> {
 function ToggleCardForm (formId) {
   $('#overlay').fadeToggle(200);
   $(formId).slideToggle(100);
+
+  if (formId == "#transactionmenu") {
+    $('#transaction_date').val(get_date());
+    $('#transaction_time').val(get_time());
+  }
 }
 
 function ShowTransactionsMenu() {
@@ -22,8 +27,6 @@ function ShowTransactionsMenu() {
     url: '/api/render_transactionsmenu',
     success: function(data) {
       $('#content').prepend(data);
-
-      
     }
   });
 }
@@ -31,21 +34,105 @@ function ShowTransactionsMenu() {
 function ClearValues (formId) {
   if (formId == '#accountmenu') {
       $.ajax({
-      type: "GET",
-      dataType: "text",
-      url: "/api/user_currency",
-      success: function(data) {
-        $(formId).find("select#account_currency").val(data);
-      }
-    });
+        type: "GET",
+        dataType: "text",
+        url: "/api/user_currency",
+        success: function(data) {
+          $(formId).find("select#account_currency").val(data);
+        }
+      });
+  } else if (formId == '#transactionmenu'){
+    $('#transaction_description').val('');
+    $('#transaction_type').val('Expense');
+    var account = get_active_account_name();
+    if (account.length > 0) {
+      $('#transaction_active_account').val(account);
+      $('#transaction_account').val(account);
+      $('#transaction_from_account').val(account);
+      $.ajax({
+        type: "GET",
+        dataType: "text",
+        url: "/api/account_currency/" + account,
+        success: function(data) {
+          $(formId).find("#transaction_currency").val(data);
+        }
+      });
+    } else{
+      $.ajax({
+        type: "GET",
+        dataType: "text",
+        url: "/api/user_currency",
+        success: function(data) {
+          $(formId).find("#transaction_currency").val(data);
+        }
+      });
+      $('#transaction_account').val($('#transaction_account').find('option').first().val());
+      $('#transaction_from_account').val($('#transaction_account').val());
+      $('#transaction_active_account').val($('#transaction_account').val());
+    }
+    $('#transaction_to_account').val($('#transaction_to_account').find('option').first().val());
+    $('#transaction_multiple_transactions').prop('checked', false);
+    $('#transaction_amount').val('');
+    $('#transaction_transactions').val('');
+    SetupTransactionForm();
   }
+}
 
-  var default_value;
-  $(formId).find("input, textarea, select").each(function() {
-    default_value = $(this).attr("default_value");
-    if (typeof default_value !== typeof undefined) {
-      console.log('default: ' + default_value);
-      $(this).val(default_value);
+function SetupTransactionForm() {
+  var currency_changed = false;
+  var active_account_name = get_active_account_name();
+
+  //$('#transaction_account').val(active_account_name);
+  //$('#transaction_from_account').val(active_account_name);
+
+  //set_currency($('#transaction_account').val(), currency_changed, $('#transaction_currency'));
+  //set_currency($('#transaction_from_account').val(), currency_changed, $('#transaction_currency'));
+
+  $('#create-transaction-button').on('click', () => {
+    $(".accountmenu__name").focus();
+  });
+
+  $('#transaction_currency').change(function() {
+    currency_changed = true;
+  });
+
+  $('.transactions_menu_multiple_accounts').hide();
+  $('.transactions_menu_single_account').show();
+
+  $('.transactions_menu_multiple').hide();
+  $('.transactions_menu_single').show();
+
+  $('#transaction_multiple_transactions').change(function() {
+    if($(this).is(":checked")) {
+      $('.transactions_menu_multiple').show();
+      $('.transactions_menu_single').hide();
+    } else {
+      $('.transactions_menu_multiple').hide();
+      $('.transactions_menu_single').show();
     }
   });
+
+  $('#transaction_type').change(function() {
+    if($(this).val().toLowerCase() == 'transfer'){
+      $('.transactions_menu_multiple_accounts').show();
+      $('.transactions_menu_single_account').hide();
+    } else {
+      $('.transactions_menu_multiple_accounts').hide();
+      $('.transactions_menu_single_account').show();
+    }
+  });
+
+  $('#transaction_account').change(function() {
+    set_currency($(this).val(), currency_changed, $('#transaction_currency'));
+  });
+
+  $('#transaction_from_account').change(function() {
+    set_currency($(this).val(), currency_changed, $('#transaction_currency'));
+  });
+
+  var currentDate = new Date();
+  $('#transaction_date').val(get_date());
+  $('#transaction_time').val(get_time());
+
+  transactionmenu_set = true;
 }

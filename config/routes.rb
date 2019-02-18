@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get 'api/transaction_date_ul/:date/:day_total/:account_currency', to: 'api#transaction_date_ul'
   get 'api/render_transaction/:t(/:account)', to: 'api#render_transaction'
   get 'api/render_transactionsmenu(/:account)', to: 'api#render_transactionsmenu'
+  get 'api/account_currency/:account', to: 'api#get_account_currency'
   #get 'api/account_currency/:from_currency/:to_currency/:amount/'
 
   get 'app', to: 'app#index'

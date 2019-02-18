@@ -112,6 +112,12 @@ class Account < ApplicationRecord
     return Money.new(amount, currency_iso).format
   end
 
+  def self.get_currency_from_name(account_name, current_user)
+    account = self.get_from_name(account_name, current_user)
+    currency = self.get_currency(account)
+    return currency
+  end
+
   def self.get_currency(account)
     return Money::Currency.new(account.currency)
   end

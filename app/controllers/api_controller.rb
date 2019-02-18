@@ -59,6 +59,10 @@ class ApiController < ApplicationController
     render json: User.get_currency(current_user).iso_code
   end
 
+  def get_account_currency
+    render json: Account.get_currency_from_name(params[:account], current_user).iso_code
+  end
+
   def prepare_new_transaction
     render json: Transaction.prepare_new(params, current_user)
   end
