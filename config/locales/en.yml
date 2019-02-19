@@ -35,6 +35,9 @@ en:
   account:
     confirmations:
       confirmed: "Account successfully created"
+  transaction:
+    confirmations:
+      confirmed: "Transaction successfully created"
     failure:
       invalid_name: "Invalid account name"
       invalid_name_dot: "Invalid account name. Dots (.) not allowed"

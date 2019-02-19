@@ -125,6 +125,7 @@ function GenerateTransaction($target, type, id, account) {
           $(data).insertBefore($target);
           break;
       }
+      $('#transaction_' + id).hide().fadeIn(500);
     }
   });
 }
@@ -183,3 +184,4 @@ function DayToNum(str) {
   return parseInt(num);
 }
 
+trigger_notice('<%= I18n.t("transaction.confirmations.confirmed") %>', false);

@@ -7,7 +7,7 @@
 <% end %>
 
 <a href="<%= transactions_path + '/' + t.id.to_s %>" class="no-link-style">
-  <li class="<%= t.time_num %>">
+  <li class="<%= t.time_num %>" id="transaction_<%= t.id %>">
     <%= image_tag 'categories/' + t.category.symbol + '.svg', :style => "background-color: hsl(" + t.category.color + ");" %>
     <%= t.description %>
     <span class="balance float-right">
