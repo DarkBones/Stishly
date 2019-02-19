@@ -1,7 +1,4 @@
 $(document).on('click', '.dropdown', (event)=> {
-  console.log('clicked');
-
-  console.log('dropdown');
   $(event.target).next('.dropdown__options').show();
   $(event.target).next('.dropdown__options').find('#search-categories').focus();
   event.stopPropagation();
