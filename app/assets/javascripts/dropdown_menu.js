@@ -19,9 +19,7 @@ $(document).on('keyup', '#search-categories', (event)=> {
 });
 
 $(document).on('click', (event) => {
-  if ($(".dropdown__options:visible").length > 0) {
-    $('.dropdown__options').hide();
-  }
+  $('.dropdown__options').hide();
 });
 
 function SearchCategories($categories, text, event) {

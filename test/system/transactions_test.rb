@@ -51,6 +51,8 @@ class TransactionsTest < ApplicationSystemTestCase
         click_on "Create Transaction"
     end
 
+    wait_for_ajax
+
     assert_selector '#transactions_list', text: "Today\n€-500.00"
     assert_selector '#transactions_list', text: "single expense euro\n€-100.00"
 

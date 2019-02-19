@@ -9,6 +9,21 @@ $(document).on('turbolinks:load', ()=> {
 
 });
 
+function HideCardforms(){
+  if ($('#transactionmenu').is(":visible"))  {
+    ToggleCardForm('#transactionmenu');
+  }
+  if ($('#accountmenu').is(":visible"))  {
+    ToggleCardForm('#accountmenu');
+  }
+}
+
+$(document).keydown(function(e) {
+   if (e.key === "Escape") { // escape key maps to keycode `27`
+    HideCardforms();
+  }
+});
+
 function ToggleCardForm (formId) {
   $('#overlay').fadeToggle(200);
   $(formId).slideToggle(100);
