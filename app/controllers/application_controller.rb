@@ -33,9 +33,7 @@ class ApplicationController < ActionController::Base
     categories = []
 
     current_user.categories.each do |c|
-      #categories.push("<img src=\"assets/categories/" + c.symbol + ".svg\" />".html_safe)
       categories.push("<b>" + c.symbol + "</b>".html_safe)
-      #categories.push(image_tag 'categories/' + c.symbol + '.svg', :style => "background-color: hsl(" + c.color + ");")
     end
 
     return categories
