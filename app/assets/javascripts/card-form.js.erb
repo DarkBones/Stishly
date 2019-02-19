@@ -6,6 +6,8 @@ $(document).on('turbolinks:load', ()=> {
     ToggleCardForm('#' + $(event.target).closest('.card-form').attr('id'));
   });
 
+  $( ".card-form" ).draggable();
+
 });
 
 // hide all visible card forms
