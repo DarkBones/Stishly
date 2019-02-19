@@ -3,27 +3,28 @@ var transactionsmenu_triggered = false;
 $(document).on('turbolinks:load', ()=> {
 
   $('.card-form__close').on('click', (event) => {
-    console.log('close button');
     ToggleCardForm('#' + $(event.target).closest('.card-form').attr('id'));
   });
 
 });
 
+// hide all visible card forms
 function HideCardforms(){
-  if ($('#transactionmenu').is(":visible"))  {
-    ToggleCardForm('#transactionmenu');
-  }
-  if ($('#accountmenu').is(":visible"))  {
-    ToggleCardForm('#accountmenu');
-  }
+  $('.card-form').each(function(index, item) {
+    if ($(this).is(':visible')){
+      ToggleCardForm('#' + $(this).attr('id'));
+    }
+  });
 }
 
+// hide all cardforms when pressing the Escape key
 $(document).keydown(function(e) {
    if (e.key === "Escape") { // escape key maps to keycode `27`
     HideCardforms();
   }
 });
 
+// toggle card form with given id
 function ToggleCardForm (formId) {
   $('#overlay').fadeToggle(200);
   $(formId).slideToggle(100);
@@ -34,6 +35,7 @@ function ToggleCardForm (formId) {
   }
 }
 
+// display the transactions menu through ajax
 function ShowTransactionsMenu() {
   transactionsmenu_triggered = true;
   $.ajax({
@@ -46,6 +48,7 @@ function ShowTransactionsMenu() {
   });
 }
 
+// clear the form values
 function ClearValues (formId) {
   if (formId == '#accountmenu') {
       $.ajax({
@@ -56,6 +59,7 @@ function ClearValues (formId) {
           $(formId).find("select#account_currency").val(data);
         }
       });
+      $("#accountmenu input[type=text], #accountmenu textarea").val("");
   } else if (formId == '#transactionmenu'){
     $('#transaction_description').val('');
     $('#transaction_type').val('Expense');
@@ -93,15 +97,10 @@ function ClearValues (formId) {
   }
 }
 
+// set up the transactions menu to show / hide the correct fields
 function SetupTransactionForm() {
   var currency_changed = false;
   var active_account_name = get_active_account_name();
-
-  //$('#transaction_account').val(active_account_name);
-  //$('#transaction_from_account').val(active_account_name);
-
-  //set_currency($('#transaction_account').val(), currency_changed, $('#transaction_currency'));
-  //set_currency($('#transaction_from_account').val(), currency_changed, $('#transaction_currency'));
 
   $('#create-transaction-button').on('click', () => {
     $(".accountmenu__name").focus();
