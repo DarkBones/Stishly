@@ -14,10 +14,6 @@ function hideTimeout(id) {
   setTimeout( function() {
     $parent.fadeOut(2000);
   }, 1000);
-
-  /*setTimeout( function() {
-    $parent.remove();
-  }, 5000);*/
 }
 
 function remove_notice(id) {
