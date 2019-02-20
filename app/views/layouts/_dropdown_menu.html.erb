@@ -1,0 +1,18 @@
+<%
+if is_dropdown
+  cl = 'dropdown-item'
+  li_pref = ''
+  li_suff = ''
+  divider = '<div class="dropdown-divider"></div>'
+else
+  cl = 'nav-link'
+  li_pref = '<li class="nav-item d-lg-none">'
+  li_suff = '</li>'
+  divider = ''
+end
+%>
+
+<%= li_pref.html_safe %><%= link_to 'Edit account', edit_user_registration_path, { :class=> cl } %><%= li_suff.html_safe %>
+<%= li_pref.html_safe %><%= link_to 'Settings', settings_url, { :class=> cl } %><%= li_suff.html_safe %>
+<%= divider.html_safe %>
+<%= li_pref.html_safe %><%= link_to 'Sign out', destroy_user_session_path, { :class=> cl } %><%= li_suff.html_safe %>

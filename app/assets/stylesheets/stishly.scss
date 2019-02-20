@@ -1,0 +1,9 @@
+.navbar-gear {
+  width: 30px;
+  height: 30px;
+  background-image: url('gear.svg');
+}
+
+.dropdown-toggle.no-caret::after {
+    display:none;
+}
