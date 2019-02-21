@@ -5,5 +5,68 @@
 }
 
 .dropdown-toggle.no-caret::after {
-    display:none;
+  display:none;
+}
+
+.wrapper {
+  //display: flex;
+  width: 100%;
+  //align-items: stretch;
+}
+
+#sidebar {
+  -webkit-transition: width 0.2s ease;
+  -moz-transition: width 0.2s ease;
+  -o-transition: width 0.2s ease;
+  transition: width 0.2s ease;
+
+  
+  height: calc(100vh - 50px);
+  margin-top: 50px;
+  background: blue;
+  overflow: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  width:0;
+  &.in {
+    width: 300px;
+  }
+  #menu-container {
+    min-width: 300px;
+    max-width: 300px;
+    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+}
+
+#content {
+  background: purple;
+  padding-top: 50px;
+  margin-left: 300px;
+  &.active {
+    //margin-left: 0;
+  }
+}
+
+a[data-toggle="collapse"] {
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    //margin-left: -300px;
+  }
+  #sidebar.active {
+    margin-left: 0;
+  }
 }

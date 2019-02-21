@@ -1,14 +1,14 @@
 <ul class="nav navbar-nav ml-auto">
   <% if user_signed_in? %>
-    <li class="nav-item dropdown d-none d-lg-block">
+
+    <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle no-caret" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <div class="navbar-gear"></div>
+        <div class="navbar-gear bg-primary rounded-circle"></div>
       </a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
         <%= render partial: 'layouts/dropdown_menu', :locals => { :is_dropdown => true } %>
       </div>
     </li>
-    <%= render partial: 'layouts/dropdown_menu', :locals => { :is_dropdown => false } %>
   <% else %>
     <li class="nav-item">
       <%= link_to 'Sign in', new_user_session_path, { :class=>"nav-link" } %>

@@ -7,4 +7,6 @@ $(document).on('turbolinks:load', ()=> {
   $(document).on('click', (event) => {
     $('.navbar__menu').slideUp(50);
   });
+
+  
 });

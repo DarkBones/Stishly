@@ -1,7 +1,7 @@
 var transactionsmenu_triggered = false;
 
 $(document).on('turbolinks:load', ()=> {
-
+  HideCardforms();
   $('.card-form__close').on('click', (event) => {
     ToggleCardForm('#' + $(event.target).closest('.card-form').attr('id'));
   });
