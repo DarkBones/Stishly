@@ -9,7 +9,7 @@
 <script>
 $("#sidebarCollapse").click(function() {
     var selector = $(this).data("target");
-    console.log(selector);
     $(selector).toggleClass('in');
+    $('#content').toggleClass('in');
 });
 </script>
