@@ -1,3 +1,5 @@
+$sidebar_width: 350px;
+
 .navbar-gear {
   width: 30px;
   height: 30px;
@@ -33,10 +35,10 @@
 
   width:0;
   &.in {
-    width: 300px;
+    width: $sidebar_width;
   }
   #menu-container {
-    min-width: 300px;
+    min-width: $sidebar_width;
     height: calc(100vh - 50px);
     overflow: scroll;
     overflow-y: scroll;
@@ -46,7 +48,7 @@
 
 #content {
   padding-top: 50px;
-  margin-left: 300px;
+  margin-left: $sidebar_width;
   &.in {
     margin-left: 0;
   }
@@ -69,7 +71,7 @@ a[data-toggle="collapse"] {
     width: 0;
   }
   #sidebar {
-    width: 300px;
+    width: $sidebar_width;
   }
   #content.in {
     margin-left: 0;
@@ -77,4 +79,11 @@ a[data-toggle="collapse"] {
   #content {
     margin-left: 0;
   }
+}
+
+.row {
+  background: green;
+}
+div[class^="col"], div[class*=" col"] {
+  background: blue;
 }

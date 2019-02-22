@@ -6,7 +6,7 @@
   </span>
 <% end %>
 
-<a href="<%= transactions_path + '/' + t.id.to_s %>" class="no-link-style">
+<a href="<%= transactions_path + '/' + t.id.to_s %>" class="text-light">
   <li class="<%= t.time_num %>" id="transaction_<%= t.id %>">
     <%= image_tag 'categories/' + t.category.symbol + '.svg', :style => "background-color: hsl(" + t.category.color + ");", :class => "rounded-circle", 'height' => '50' %>
     <%= t.description %>

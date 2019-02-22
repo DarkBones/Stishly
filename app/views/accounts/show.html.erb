@@ -3,6 +3,9 @@
 <%= render "account_tab_menu", locals: {active_tab: "Transactions"} %>
 
 <button id="create-transaction-button">New Transaction</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
 
 <%= link_to 'Settings', account_settings_path if @active_account.is_real %>
 

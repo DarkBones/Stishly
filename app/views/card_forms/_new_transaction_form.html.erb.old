@@ -1,0 +1,98 @@
+<div id="transactionmenu" class="card-form">
+  <h2 class="card-form__title">Create New Transaction<span class="card-form__close"></span></h2>
+
+  <%= form_with(model: Transaction.new) do |f| %>
+    <div class="card-form__form-row">
+      <div class="card-form__form-col col-ten">
+        <%= f.label :description %><br />
+        <%= f.text_field :description, class: 'transactionmenu__description', 'default_value' => '' %>
+        <%= f.hidden_field :active_account, class: 'active_account', value: params[:id], 'default_value' => params[:id] %>
+      </div>
+    </div>
+
+    <div class="card-form__form-row">
+      <div class="card-form__form-col col-ten">
+        <%= f.label :type %><br />
+        <%= f.select(:type, ["Expense", "Income", "Transfer"], 'default_value' => 'Expense') %>
+      </div>
+    </div>
+
+    <div class="card-form__form-row transactions_menu_single_account">
+      <div class="card-form__form-col col-ten">
+        <%= f.label :account %><br />
+        <%= f.select(:account, user_accounts_array, selected: params[:id], 'default_value' => params[:id]) %>
+      </div>
+    </div>
+
+    <div class="card-form__form-row transactions_menu_multiple_accounts">
+      <div class="card-form__form-col col-five">
+        <%= f.label :from_account %><br />
+        <%= f.select(:from_account, user_accounts_array, selected: params[:id], 'default_value' => params[:id]) %>
+      </div>
+      <div class="card-form__form-col col-five">
+        <%= f.label :to_account %><br />
+        <%= f.select(:to_account, user_accounts_array, 'default_value' => user_accounts_array[0]) %>
+      </div>
+    </div>
+
+    <div class="card-form__form-row">
+      <div class="card-form__form-col col-three">
+        <%= f.label :currency %><br />
+        <%= f.select(:currency, all_currencies(Money::Currency.table), selected: User.get_currency(current_user).iso_code, class: 'accountmenu__currency', 'default_value' => User.get_currency(current_user).iso_code) %>
+      </div>
+    </div>
+
+    <div class="card-form__form-row">
+      <div class="card-form__form-col col-ten">
+        <%= f.label :category %><br />
+        <%= render partial: "shared/custom_dropdown_categories", locals: {
+          selected: Category.get_user_categories(current_user, true, true)[0],
+          options: Category.get_user_categories(current_user, true, true),
+        } %>
+        
+        <% categories = Category.get_user_categories(current_user, true, true) %>
+        <%= f.hidden_field :category_id, value: 0 %>
+      </div>
+    </div>
+
+    <div class="card-form__form-row">
+      <div class = "card-form__form-col col-ten">
+        <%= f.label :multiple_transactions %>
+        <%= f.check_box(:multiple_transactions, 'default_value' => 'false') %>
+      </div>
+    </div>
+
+    <div class="card-form__form-row transactions_menu_multiple">
+      <div class="card-form__form-col col-ten">
+        <%= f.label :transactions %><br />
+        <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: 'accountmenu__description', 'default_value' => '' %>
+      </div>
+    </div>
+
+    <div class="card-form__form-row transactions_menu_single">
+      <div class="card-form__form-col col-ten">
+        <%= f.label :amount %><br />
+        <%= f.number_field :amount, placeholder: "99.87", class: 'accountmenu__balance', step: :any, 'default_value' => '' %>
+      </div>
+    </div>
+
+    <div class="card-form__form-row">
+      <div class = "card-form__form-col col-five">
+        <%= f.label :date %>
+        <%= f.text_field :date, class: 'datepicker' %>
+      </div>
+      <div class = "card-form__form-col col-five">
+        <%= f.label :time %>
+        <%= f.text_field :time, type: 'time', value:'now' %>
+      </div>
+    </div>
+
+    <%= f.hidden_field :timezone, id: 'timezone_input' %>
+
+    <div class="card-form__form-row">
+      <div class="card-form__form-col col-ten">
+        <%= f.submit %>
+      </div>
+    </div>
+  <% end %>
+</div>
