@@ -6,7 +6,7 @@
 <% li_c += " active" if @active_account && account.id == @active_account.id %>
 
 
-<li class="<%= li_c %>" name="accounts_<%= account.link %>" id="account_<%= account.id.to_s %>">
+<li class="<%= li_c %> py-2" name="accounts_<%= account.link %>" id="account_<%= account.id.to_s %>">
   <div class="sort-handle"></div>
   <% acc_curency = Account.get_currency(@account) %>
   <%= @account.short_name %>

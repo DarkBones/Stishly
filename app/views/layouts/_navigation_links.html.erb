@@ -9,6 +9,7 @@
         <%= render partial: 'layouts/dropdown_menu', :locals => { :is_dropdown => true } %>
       </div>
     </li>
+
   <% else %>
     <li class="nav-item">
       <%= link_to 'Sign in', new_user_session_path, { :class=>"nav-link" } %>
