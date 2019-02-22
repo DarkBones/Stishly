@@ -82,8 +82,14 @@ a[data-toggle="collapse"] {
 }
 
 .row {
-  background: green;
+  background: gray;
 }
 div[class^="col"], div[class*=" col"] {
   background: blue;
+  border: solid 5px black;
+}
+
+#button-group {
+
+  width: 100%;
 }

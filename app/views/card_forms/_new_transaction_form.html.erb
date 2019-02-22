@@ -10,21 +10,27 @@
       <div class="modal-body">
         <div class="container">
           <%= form_with(model: Transaction.new) do |f| %>
+
             <div class="row">
-              <div class="col-12 col-lg-6">
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                  <label class="btn btn-secondary active px-4">
+
+              <div class="col-12 col-lg-6 py-5">
+
+                <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
+                  <label class="btn btn-secondary active">
                     <input type="radio" name="type" id="expense" autocomplete="off" checked>Expense
                   </label>
-                  <label class="btn btn-secondary px-4">
+                  <label class="btn btn-secondary">
                     <input type="radio" name="type" id="income" autocomplete="off" checked>Income
                   </label>
-                  <label class="btn btn-secondary px-4">
+                  <label class="btn btn-secondary">
                     <input type="radio" name="type" id="transfer" autocomplete="off" checked>Transfer
                   </label>
                 </div>
+                
               </div>
+
             </div>
+
           <% end %>
         </div>
       </div>
