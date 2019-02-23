@@ -1,8 +1,8 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="transactionform" tabindex="-1" role="dialog" aria-labelledby="transactionformLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New Transaction</h5>
+        <h5 class="modal-title" id="transactionformLabel">New Transaction</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -14,19 +14,19 @@
 
             <div class="row">
 
-              <div class="col-12 col-lg-6">
+              <div class="col-12 col-lg-6 col-xl-7">
 
                 <div class="row">
                   <div class="col-12 py-5">
 
                     <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
-                      <label class="btn btn-secondary active">
+                      <label class="btn btn-secondary active py-3">
                         <%= f.radio_button :type, 'expense' %>Expense
                       </label>
-                      <label class="btn btn-secondary">
+                      <label class="btn btn-secondary py-3">
                         <%= f.radio_button :type, 'income' %>Income
                       </label>
-                      <label class="btn btn-secondary">
+                      <label class="btn btn-secondary py-3">
                         <%= f.radio_button :type, 'transfer' %>Transfer
                       </label>
                     </div>
@@ -39,7 +39,7 @@
 
                   <div class="col-12">
                     <%= f.label :description %><br />
-                    <%= f.text_field :description, class: 'transactionmenu__description', 'default_value' => '' %>
+                    <%= f.text_field :description, class: 'transactionmenu__description form-control', 'default_value' => '' %>
                   </div>
 
                 </div>
@@ -48,7 +48,7 @@
 
                   <div class="col-12">
                     <%= f.label :account %><br />
-                    <%= f.select(:account, user_accounts_array) %>
+                    <%= f.select(:account, user_accounts_array, {}, { :class => 'form-control' }) %>
                   </div>
 
                 </div>
@@ -57,12 +57,12 @@
 
                   <div class="col-12 col-lg-6">
                     <%= f.label :from_account %><br />
-                    <%= f.select(:from_account, user_accounts_array) %>
+                    <%= f.select(:from_account, user_accounts_array, {}, { :class => 'form-control' }) %>
                   </div>
 
                   <div class="col-12 col-lg-6">
                     <%= f.label :to_account %><br />
-                    <%= f.select(:to_account, user_accounts_array) %>
+                    <%= f.select(:to_account, user_accounts_array, {}, { :class => 'form-control' }) %>
                   </div>
 
                 </div>
@@ -77,24 +77,24 @@
                     } %>
                     
                     <% categories = Category.get_user_categories(current_user, true, true) %>
-                    <%= f.hidden_field :category_id, value: 0 %>
+                    <%= f.text_field :category_id, value: 0 %>
                   </div>
 
                 </div>
 
               </div>
 
-              <div class="col-12 col-lg-6">
+              <div class="col-12 col-lg-6 col-xl-5">
 
                 <div class="row">
 
                   <div class="col-12 py-5">
 
                     <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
-                      <label class="btn btn-secondary active">
+                      <label class="btn btn-secondary active py-3">
                         <%= f.radio_button :multiple, 'single' %>Single
                       </label>
-                      <label class="btn btn-secondary">
+                      <label class="btn btn-secondary py-3">
                         <%= f.radio_button :multiple, 'multiple' %>Multiple
                       </label>
                     </div>
@@ -108,21 +108,21 @@
                   <div class="col-4">
 
                     <%= f.label :currency %><br />
-                    <%= f.select(:currency, all_currencies(Money::Currency.table), selected: User.get_currency(current_user).iso_code, class: 'accountmenu__currency', 'default_value' => User.get_currency(current_user).iso_code) %>
+                    <%= f.select(:currency, all_currencies(Money::Currency.table), {}, { :class => 'form-control' }) %>
 
                   </div>
 
                   <div class="col-4">
 
                     <%= f.label :rate %><br />
-                    <input type="text" name="lname">
+                    <input type="number" name="lname", class="form-control">
 
                   </div>
 
                   <div class="col-4">
 
                     <%= f.label :result %><br />
-                    <input type="text" name="lname">
+                    <input type="number" name="lname" class="form-control">
 
                   </div>
 
@@ -133,7 +133,7 @@
                   <div class="col-12">
 
                     <%= f.label :amount %><br />
-                    <%= f.number_field :amount, placeholder: "99.87", class: 'accountmenu__balance', step: :any, 'default_value' => '' %>
+                    <%= f.number_field :amount, placeholder: "99.87", class: 'accountmenu__balance form-control', step: :any, 'default_value' => '' %>
 
                   </div>
 
@@ -144,7 +144,7 @@
                   <div class="col-12">
 
                     <%= f.label :transactions %><br />
-                    <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: 'accountmenu__description', 'default_value' => '' %>
+                    <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: 'accountmenu__description form-control', 'default_value' => '' %>
 
                   </div>
 
@@ -155,15 +155,15 @@
                   <div class="col-6">
 
                     <%= f.label :date %>
-                    <%= f.text_field :date, class: 'datepicker' %>
+                    <%= f.text_field :date, class: 'datepicker form-control' %>
 
                   </div>
 
                   <div class="col-6">
 
                     <%= f.label :time %>
-                    <%= f.text_field :time, type: 'time', value:'now' %>
-                    <%= f.hidden_field :timezone, id: 'timezone_input' %>
+                    <%= f.text_field :time, type: 'time', value:'now', class: 'form-control' %>
+                    <%= f.text_field :timezone, id: 'timezone_input' %>
 
                   </div>
 
@@ -178,7 +178,7 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <%= f.submit 'Create Transaction', :class => 'btn btn-primary' %>
         </div>
       <% end %>
     </div>
