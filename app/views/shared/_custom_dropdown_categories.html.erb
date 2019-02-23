@@ -1,7 +1,7 @@
 <div class="dropdown clickable">
 
   <div class="dropdown__selected">
-    <%= image_tag 'categories/' + selected[:symbol] + '.svg', :style => "background-color: hsl(" + selected[:color] + ");" %>
+    <%= image_tag 'categories/' + selected[:symbol] + '.svg', :class => 'rounded-circle', :style => "background-color: hsl(" + selected[:color] + ");", 'height' => '50' %>
     <%= selected[:name] %>
   </div>
 

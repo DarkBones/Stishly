@@ -7,37 +7,180 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <div class="container">
-          <%= form_with(model: Transaction.new) do |f| %>
+
+      <%= form_with(model: Transaction.new) do |f| %>
+        <div class="modal-body">
+          <div class="container">
 
             <div class="row">
 
-              <div class="col-12 col-lg-6 py-5">
+              <div class="col-12 col-lg-6">
 
-                <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
-                  <label class="btn btn-secondary active">
-                    <input type="radio" name="type" id="expense" autocomplete="off" checked>Expense
-                  </label>
-                  <label class="btn btn-secondary">
-                    <input type="radio" name="type" id="income" autocomplete="off" checked>Income
-                  </label>
-                  <label class="btn btn-secondary">
-                    <input type="radio" name="type" id="transfer" autocomplete="off" checked>Transfer
-                  </label>
+                <div class="row">
+                  <div class="col-12 py-5">
+
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
+                      <label class="btn btn-secondary active">
+                        <%= f.radio_button :type, 'expense' %>Expense
+                      </label>
+                      <label class="btn btn-secondary">
+                        <%= f.radio_button :type, 'income' %>Income
+                      </label>
+                      <label class="btn btn-secondary">
+                        <%= f.radio_button :type, 'transfer' %>Transfer
+                      </label>
+                    </div>
+
+                  </div>
+
                 </div>
-                
+
+                <div class="row">
+
+                  <div class="col-12">
+                    <%= f.label :description %><br />
+                    <%= f.text_field :description, class: 'transactionmenu__description', 'default_value' => '' %>
+                  </div>
+
+                </div>
+
+                <div class="row">
+
+                  <div class="col-12">
+                    <%= f.label :account %><br />
+                    <%= f.select(:account, user_accounts_array) %>
+                  </div>
+
+                </div>
+
+                <div class="row">
+
+                  <div class="col-12 col-lg-6">
+                    <%= f.label :from_account %><br />
+                    <%= f.select(:from_account, user_accounts_array) %>
+                  </div>
+
+                  <div class="col-12 col-lg-6">
+                    <%= f.label :to_account %><br />
+                    <%= f.select(:to_account, user_accounts_array) %>
+                  </div>
+
+                </div>
+
+                <div class="row">
+
+                  <div class="col-12">
+                    <%= f.label :category %><br />
+                    <%= render partial: "shared/custom_dropdown_categories", locals: {
+                      selected: Category.get_user_categories(current_user, true, true)[0],
+                      options: Category.get_user_categories(current_user, true, true),
+                    } %>
+                    
+                    <% categories = Category.get_user_categories(current_user, true, true) %>
+                    <%= f.hidden_field :category_id, value: 0 %>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="col-12 col-lg-6">
+
+                <div class="row">
+
+                  <div class="col-12 py-5">
+
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
+                      <label class="btn btn-secondary active">
+                        <%= f.radio_button :multiple, 'single' %>Single
+                      </label>
+                      <label class="btn btn-secondary">
+                        <%= f.radio_button :multiple, 'multiple' %>Multiple
+                      </label>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="row">
+
+                  <div class="col-4">
+
+                    <%= f.label :currency %><br />
+                    <%= f.select(:currency, all_currencies(Money::Currency.table), selected: User.get_currency(current_user).iso_code, class: 'accountmenu__currency', 'default_value' => User.get_currency(current_user).iso_code) %>
+
+                  </div>
+
+                  <div class="col-4">
+
+                    <%= f.label :rate %><br />
+                    <input type="text" name="lname">
+
+                  </div>
+
+                  <div class="col-4">
+
+                    <%= f.label :result %><br />
+                    <input type="text" name="lname">
+
+                  </div>
+
+                </div>
+
+                <div class="row">
+
+                  <div class="col-12">
+
+                    <%= f.label :amount %><br />
+                    <%= f.number_field :amount, placeholder: "99.87", class: 'accountmenu__balance', step: :any, 'default_value' => '' %>
+
+                  </div>
+
+                </div>
+
+                <div class="row">
+
+                  <div class="col-12">
+
+                    <%= f.label :transactions %><br />
+                    <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: 'accountmenu__description', 'default_value' => '' %>
+
+                  </div>
+
+                </div>
+
+                <div class="row">
+
+                  <div class="col-6">
+
+                    <%= f.label :date %>
+                    <%= f.text_field :date, class: 'datepicker' %>
+
+                  </div>
+
+                  <div class="col-6">
+
+                    <%= f.label :time %>
+                    <%= f.text_field :time, type: 'time', value:'now' %>
+                    <%= f.hidden_field :timezone, id: 'timezone_input' %>
+
+                  </div>
+
+                </div>
+
               </div>
 
             </div>
 
-          <% end %>
+          </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

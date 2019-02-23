@@ -6,6 +6,10 @@ $sidebar_width: 350px;
   background-image: url('gear.svg');
 }
 
+input, select, textarea {
+  width: 100%;
+}
+
 .dropdown-toggle.no-caret::after {
   display:none;
 }
@@ -66,7 +70,7 @@ a[data-toggle="collapse"] {
   transform: translateY(-50%);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   #sidebar.in {
     width: 0;
   }
