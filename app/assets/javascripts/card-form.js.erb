@@ -151,6 +151,143 @@ function SetupTransactionForm() {
   transactionmenu_set = true;
 }
 
+function ChangeType(type) {
+  switch(type) {
+    case 'transfer':
+      $('#transactionform #single-account').hide();
+      $('#transactionform #categories').hide();
+      $('#transactionform #transfer-account').show();
+      break;
+    default:
+      $('#transactionform #single-account').show();
+      $('#transactionform #categories').show();
+      $('#transactionform #transfer-account').hide();
+  }
+}
+
+function ChangeMultiple(type){
+  switch (type) {
+    case 'single':
+      $('#transactionform #amount').show();
+      $('#transactionform #transactions').hide();
+      break;
+    default:
+      $('#transactionform #amount').hide();
+      $('#transactionform #transactions').show();
+  }
+}
+
+function GetTotalFromMultiple($target) {
+  var text = $target.val();
+  lines = text.split('\n');
+
+  var total = 0
+  for (i=0; i<lines.length; i++){
+    words = lines[i].split(' ');
+    if (words.length > 0){
+      if (!isNaN(words[words.length - 1])){
+        total += parseFloat(words[words.length - 1])
+      }
+    }
+  }
+
+  return total;
+}
+
+function UpdateResult(rateTarget, resultTarget, amountTarget, isMultiple){
+  $rateTarget = $(rateTarget);
+  $resultTarget = $(resultTarget);
+  $amountTarget = $(amountTarget);
+  if($resultTarget.is(":visible")){
+    var rate = $rateTarget.val();
+    var amount = 0;
+    if (!isMultiple){
+      amount = $amountTarget.val();
+    } else{
+      amount = GetTotalFromMultiple($amountTarget);
+    }
+
+    result = Math.round((amount * rate) * 100) / 100
+
+    $resultTarget.val(result);
+  }
+}
+
+function UpdateRate(rateTarget, resultTarget, amountTarget1, amountTarget2){
+  $rateTarget = $(rateTarget);
+  $resultTarget = $(resultTarget);
+  $amountTarget1 = $(amountTarget1);
+  $amountTarget2 = $(amountTarget2);
+
+  isMultiple = false;
+  $amountTarget;
+  if ($amountTarget1.is(":visible")) {
+    $amountTarget = $amountTarget1;
+  } else if ($amountTarget2.is(":visible")) {
+    $amountTarget = $amountTarget2;
+    isMultiple = true;
+
+  } else {
+    return
+  }
+
+  if($resultTarget.is(":visible")){
+    var result = $resultTarget.val();
+    var amount = 0;
+    if (!isMultiple){
+      amount = $amountTarget.val();
+    } else{
+      amount = GetTotalFromMultiple($amountTarget);
+    }
+
+    rate = result / amount
+    $rateTarget.val(rate);
+  }
+}
+
+function ChangeCurrency(selectObject) {
+  var currency = selectObject.value;
+  var account = get_active_account_name();
+
+  if (account.length > 0) {
+    $.ajax({
+      type: "GET",
+      dataType: "text",
+      url: "/api/account_currency/" + account,
+      success: function(data_currency) {
+        if (data_currency != currency){
+          $('#transactionform #currency-rate').show();
+          $('#transactionform #currency-result').show();
+
+          $.ajax({
+            type: "GET",
+            dataType: "text",
+            url: "/api/currency_rate/" + currency + "/" + data_currency,
+            success: function(data_rate) {
+              $('#transactionform #currency-rate input').val(data_rate);
+
+              var result = 0;
+              if ($('#transactionform #amount').is(":visible")){
+                result = $('#transactionform #amount input').val() * data_rate
+              } else{
+                result = GetTotalFromMultiple($('#transactionform #transactions textarea')) * data_rate
+              }
+
+              $('#transactionform #currency-result input').val(result);
+            }
+          });
+
+        } else {
+          $('#transactionform #currency-rate').hide();
+          $('#transactionform #currency-result').hide();
+          $('#transactionform #currency-rate input').val('');
+          $('#transactionform #currency-result input').val('');
+        }
+      }
+    });
+  }
+}
+
 function ResetTransactionMenu(){
   // reset the button-group elements
   $('#transactionform #button-group').each(function(index){
@@ -200,6 +337,11 @@ function ResetTransactionMenu(){
       }
     });
   }
+
+  // update the category dropdown
+  $('#transactionform #transaction_category_id').val(0);
+  var optionHtml = $('#transactionform #categoriesDropdownOptions').find('li').first().html();
+  $('#transactionform button#categories-dropdown').html(optionHtml);
 
   // show & hide correct fields
   $('#transactionform div.default-show').show();

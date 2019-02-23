@@ -26,6 +26,10 @@ class ApiController < ApplicationController
     render partial: "card_forms/new_transaction_form", locals: {active_account: @active_account}
   end
 
+  def get_currency_rate
+    render json: CurrencyRate.get_rate(params[:from], params[:to])
+  end
+
   def all_accounts_details
     @accounts = Account.get_accounts(current_user)
     render json: @accounts

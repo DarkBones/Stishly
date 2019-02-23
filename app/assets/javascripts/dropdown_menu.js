@@ -19,8 +19,11 @@ $(document).on('click', (event) => {
   $('.dropdown__options').hide();
 });
 
-function SearchCategories($categories, text, event) {
-  li = $categories.find('li')
+function SearchCategories(target, input){
+  var $categories = $(target);
+  var text = $(input).val();
+
+  li = $categories.find('li');
   for (i = 0; i < li.length; i++){
 
     if (li[i].innerText.toUpperCase().indexOf(text.toUpperCase()) != -1) {
@@ -29,4 +32,9 @@ function SearchCategories($categories, text, event) {
       li[i].style.display = "none";
     }
   }
+}
+
+function SetCategory(id) {
+  $('button#categories-dropdown').html($('#categoriesDropdownOptions li.category_' + id.toString()).html());
+  $($('button#categories-dropdown').attr('input-target')).val(id);
 }

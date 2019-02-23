@@ -1,13 +1,9 @@
-<div class="dropdown clickable">
-
-  <div class="dropdown__selected">
-    <%= image_tag 'categories/' + selected[:symbol] + '.svg', :class => 'rounded-circle', :style => "background-color: hsl(" + selected[:color] + ");", 'height' => '50' %>
-    <%= selected[:name] %>
-  </div>
-
-  <div class="dropdown__options">
-    <input id="search-categories" placeholder="Search"></input>
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="categories-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" input-target="<%= input_target %>">
+    Category
+  </button>
+  <div class="dropdown-menu" aria-labelledby="categories-dropdown" id="categoriesDropdownOptions">
+    <input id="search-categories" placeholder="Search" class="form-control" onkeypress="SearchCategories('#categoriesDropdownOptions', '#search-categories')"></input>
     <%= draw_tree(options) %>
   </div>
-
 </div>
