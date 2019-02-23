@@ -1,7 +1,9 @@
 $(document).on('turbolinks:load', ()=> {
 
+  $('.datepicker').datepicker();
+  
   $('.datepicker').each(function(){
-    $(this).attr({'value': get_date})
+    $(this).attr({'value': get_date});
   });
 
   $('input[type="time"][value="now"]').each(function(){

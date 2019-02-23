@@ -1,155 +1,5 @@
 var transactionsmenu_triggered = false;
-
-$(document).on('turbolinks:load', ()=> {
-  HideCardforms();
-  $('.card-form__close').on('click', (event) => {
-    ToggleCardForm('#' + $(event.target).closest('.card-form').attr('id'));
-  });
-  
-});
-
-// hide all visible card forms
-function HideCardforms(){
-  $('.card-form').each(function(index, item) {
-    if ($(this).is(':visible')){
-      ToggleCardForm('#' + $(this).attr('id'));
-    }
-  });
-}
-
-// hide all cardforms when pressing the Escape key
-$(document).keydown(function(e) {
-   if (e.key === "Escape") { // escape key maps to keycode `27`
-    HideCardforms();
-  }
-});
-
-// toggle card form with given id
-function ToggleCardForm (formId) {
-  $('#overlay').fadeToggle(200);
-  $(formId).slideToggle(100);
-
-  if (formId == "#transactionmenu") {
-    $('#transaction_date').val(get_date());
-    $('#transaction_time').val(get_time());
-  }
-}
-
-// display the transactions menu through ajax
-function ShowTransactionsMenu() {
-  transactionsmenu_triggered = true;
-  $.ajax({
-    type: 'GET',
-    dataType: 'text',
-    url: '/api/render_transactionsmenu',
-    success: function(data) {
-      $('#content').prepend(data);
-    }
-  });
-}
-
-// clear the form values
-function ClearValues (formId) {
-  if (formId == '#accountmenu') {
-      $.ajax({
-        type: "GET",
-        dataType: "text",
-        url: "/api/user_currency",
-        success: function(data) {
-          $(formId).find("select#account_currency").val(data);
-        }
-      });
-      $("#accountmenu input[type=text], #accountmenu textarea").val("");
-  } else if (formId == '#transactionmenu'){
-    $('#transaction_description').val('');
-    $('#transaction_type').val('Expense');
-    var account = get_active_account_name();
-    if (account.length > 0) {
-      $('#transaction_active_account').val(account);
-      $('#transaction_account').val(account);
-      $('#transaction_from_account').val(account);
-      $.ajax({
-        type: "GET",
-        dataType: "text",
-        url: "/api/account_currency/" + account,
-        success: function(data) {
-          $(formId).find("#transaction_currency").val(data);
-        }
-      });
-    } else{
-      $.ajax({
-        type: "GET",
-        dataType: "text",
-        url: "/api/user_currency",
-        success: function(data) {
-          $(formId).find("#transaction_currency").val(data);
-        }
-      });
-      $('#transaction_account').val($('#transaction_account').find('option').first().val());
-      $('#transaction_from_account').val($('#transaction_account').val());
-      $('#transaction_active_account').val($('#transaction_account').val());
-    }
-    $('#transaction_to_account').val($('#transaction_to_account').find('option').first().val());
-    $('#transaction_multiple_transactions').prop('checked', false);
-    $('#transaction_amount').val('');
-    $('#transaction_transactions').val('');
-    SetupTransactionForm();
-  }
-}
-
-// set up the transactions menu to show / hide the correct fields
-function SetupTransactionForm() {
-  var currency_changed = false;
-  var active_account_name = get_active_account_name();
-
-  $('#create-transaction-button').on('click', () => {
-    $(".accountmenu__name").focus();
-  });
-
-  $('#transaction_currency').change(function() {
-    currency_changed = true;
-  });
-
-  $('.transactions_menu_multiple_accounts').hide();
-  $('.transactions_menu_single_account').show();
-
-  $('.transactions_menu_multiple').hide();
-  $('.transactions_menu_single').show();
-
-  $('#transaction_multiple_transactions').change(function() {
-    if($(this).is(":checked")) {
-      $('.transactions_menu_multiple').show();
-      $('.transactions_menu_single').hide();
-    } else {
-      $('.transactions_menu_multiple').hide();
-      $('.transactions_menu_single').show();
-    }
-  });
-
-  $('#transaction_type').change(function() {
-    if($(this).val().toLowerCase() == 'transfer'){
-      $('.transactions_menu_multiple_accounts').show();
-      $('.transactions_menu_single_account').hide();
-    } else {
-      $('.transactions_menu_multiple_accounts').hide();
-      $('.transactions_menu_single_account').show();
-    }
-  });
-
-  $('#transaction_account').change(function() {
-    set_currency($(this).val(), currency_changed, $('#transaction_currency'));
-  });
-
-  $('#transaction_from_account').change(function() {
-    set_currency($(this).val(), currency_changed, $('#transaction_currency'));
-  });
-
-  var currentDate = new Date();
-  $('#transaction_date').val(get_date());
-  $('#transaction_time').val(get_time());
-
-  transactionmenu_set = true;
-}
+var currency_changed = false;
 
 function ChangeType(type) {
   switch(type) {
@@ -157,11 +7,25 @@ function ChangeType(type) {
       $('#transactionform #single-account').hide();
       $('#transactionform #categories').hide();
       $('#transactionform #transfer-account').show();
+      $('#transactionform #type').removeClass('bg-danger');
+      $('#transactionform #type').addClass('bg-warning');
+      $('#transactionform #type').removeClass('bg-success');
+      break;
+    case 'income':
+      $('#transactionform #single-account').show();
+      $('#transactionform #categories').show();
+      $('#transactionform #transfer-account').hide();
+      $('#transactionform #type').removeClass('bg-danger');
+      $('#transactionform #type').removeClass('bg-warning');
+      $('#transactionform #type').addClass('bg-success');
       break;
     default:
       $('#transactionform #single-account').show();
       $('#transactionform #categories').show();
       $('#transactionform #transfer-account').hide();
+      $('#transactionform #type').addClass('bg-danger');
+      $('#transactionform #type').removeClass('bg-warning');
+      $('#transactionform #type').removeClass('bg-success');
   }
 }
 
@@ -183,10 +47,12 @@ function GetTotalFromMultiple($target) {
 
   var total = 0
   for (i=0; i<lines.length; i++){
-    words = lines[i].split(' ');
-    if (words.length > 0){
-      if (!isNaN(words[words.length - 1])){
-        total += parseFloat(words[words.length - 1])
+    if (lines[i].length > 0){
+      words = lines[i].split(' ');
+      if (words.length > 0){
+        if (!isNaN(words[words.length - 1])){
+          total += parseFloat(words[words.length - 1])
+        }
       }
     }
   }
@@ -245,11 +111,31 @@ function UpdateRate(rateTarget, resultTarget, amountTarget1, amountTarget2){
   }
 }
 
-function ChangeCurrency(selectObject) {
-  var currency = selectObject.value;
+function ChangeAccount(selectObject) {
+  var account = selectObject.value;
+  $.ajax({
+    type: "GET",
+    dataType: "text",
+    url: "/api/account_currency/" + account,
+    success: function(data) {
+      if(!currency_changed){
+        $("#transactionform #transaction_currency").val(data);
+      } else {
+        ChangeCurrency(null, data);
+      }
+    }
+  });
+}
+
+function ChangeCurrency(selectObject='', currency='') {
+  currency_changed = true;
+  var currency_provided = currency.length > 0;
+  if(currency.length == 0){
+    var currency = selectObject.value;
+  }
   var account = get_active_account_name();
 
-  if (account.length > 0) {
+  if (account.length > 0 || currency_provided) {
     $.ajax({
       type: "GET",
       dataType: "text",
@@ -273,7 +159,7 @@ function ChangeCurrency(selectObject) {
                 result = GetTotalFromMultiple($('#transactionform #transactions textarea')) * data_rate
               }
 
-              $('#transactionform #currency-result input').val(result);
+              $('#transactionform #currency-result input').val(Math.round(result * 100) / 100);
             }
           });
 
@@ -289,6 +175,8 @@ function ChangeCurrency(selectObject) {
 }
 
 function ResetTransactionMenu(){
+  currency_changed = false;
+
   // reset the button-group elements
   $('#transactionform #button-group').each(function(index){
     $(this).find('input').each(function(i){

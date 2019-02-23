@@ -14,19 +14,19 @@
 
             <div class="row">
 
-              <div class="col-12 col-lg-6 col-xl-7 px-5">
+              <div class="col-12 col-lg-6 col-xl-7 px-5 border-right">
 
-                <div class="row py-3">
-                  <div class="col-12 py-5">
+                <div class="row py-2">
+                  <div class="col-12 py-5 bg-danger rounded" id="type">
 
                     <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
-                      <label class="btn btn-secondary active py-3" onclick="ChangeType('expense')">
+                      <label class="btn btn-outline-light active py-3" onclick="ChangeType('expense')">
                         <%= f.radio_button :type, 'expense' %>Expense
                       </label>
-                      <label class="btn btn-secondary py-3" onclick="ChangeType('income')">
+                      <label class="btn btn-outline-light py-3" onclick="ChangeType('income')">
                         <%= f.radio_button :type, 'income' %>Income
                       </label>
-                      <label class="btn btn-secondary py-3" onclick="ChangeType('transfer')">
+                      <label class="btn btn-outline-light py-3" onclick="ChangeType('transfer')">
                         <%= f.radio_button :type, 'transfer' %>Transfer
                       </label>
                     </div>
@@ -35,9 +35,9 @@
 
                 </div>
 
-                <div class="row py-3">
+                <div class="row py-2">
 
-                  <div class="col-12">
+                  <div class="col-12 py-2">
                     <%= f.label :description %><br />
                     <%= f.text_field :description, class: 'transactionmenu__description form-control', 'default_value' => '' %>
                   </div>
@@ -46,9 +46,9 @@
 
                 <div class="row py-3 default-show" id="single-account">
 
-                  <div class="col-12">
+                  <div class="col-12 py-2">
                     <%= f.label :account %><br />
-                    <%= f.select(:account, user_accounts_array, {}, { :class => 'form-control' }) %>
+                    <%= f.select(:account, user_accounts_array, {}, { :class => 'form-control', 'onchange' => 'ChangeAccount(this)' }) %>
                     <%= f.hidden_field :active_account, class: 'active_account' %>
                   </div>
 
@@ -56,12 +56,12 @@
 
                 <div class="row py-3 default-hide" id="transfer-account">
 
-                  <div class="col-12 col-lg-6">
+                  <div class="col-12 col-lg-6 py-2">
                     <%= f.label :from_account %><br />
-                    <%= f.select(:from_account, user_accounts_array, {}, { :class => 'form-control' }) %>
+                    <%= f.select(:from_account, user_accounts_array, {}, { :class => 'form-control', 'onchange' => 'ChangeAccount(this)' }) %>
                   </div>
 
-                  <div class="col-12 col-lg-6">
+                  <div class="col-12 col-lg-6 py-2">
                     <%= f.label :to_account %><br />
                     <%= f.select(:to_account, user_accounts_array, {}, { :class => 'form-control' }) %>
                   </div>
@@ -70,7 +70,7 @@
 
                 <div class="row py-3 default-show" id="categories">
 
-                  <div class="col-12">
+                  <div class="col-12 py-2">
                     <%= f.label :category %><br />
                     <%= render partial: "shared/custom_dropdown_categories", locals: {
                       selected: Category.get_user_categories(current_user, true, true)[0],
@@ -88,7 +88,7 @@
 
               <div class="col-12 col-lg-6 col-xl-5">
 
-                <div class="row py-3">
+                <div class="row py-2">
 
                   <div class="col-12 py-5">
 
@@ -105,34 +105,34 @@
 
                 </div>
 
-                <div class="row py-3">
-
-                  <div class="col-12 col-xl-4">
+                <div class="row py-2 border-bottom">
+                  
+                  <div class="col-12 col-xl-3 py-2">
 
                     <%= f.label :currency %><br />
                     <%= f.select(:currency, all_currencies(Money::Currency.table), {}, { :class => 'form-control', 'onchange' => 'ChangeCurrency(this)' }) %>
 
                   </div>
 
-                  <div class="col-5 col-xl-3 default-hide" id="currency-rate">
+                  <div class="col-5 col-xl-3 default-hide py-2" id="currency-rate">
 
                     <%= f.label :rate %><br />
                     <input type="number" name="lname" class="form-control" step="any">
 
                   </div>
 
-                  <div class="col-7 col-xl-5 default-hide" id="currency-result">
+                  <div class="col-7 col-xl-6 default-hide py-2" id="currency-result">
 
                     <%= f.label :account_currency %><br />
                     <%= f.number_field :account_currency_amount, placeholder: "99.87", class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'UpdateRate(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')' %>
 
                   </div>
-
+                  
                 </div>
 
                 <div class="row py-3 default-show" id="amount">
 
-                  <div class="col-12">
+                  <div class="col-12 py-2">
 
                     <%= f.label :amount %><br />
                     <%= f.number_field :amount, placeholder: "99.87", class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'UpdateResult(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #amount input\', false)' %>
@@ -143,7 +143,7 @@
 
                 <div class="row py-3 default-hide" id="transactions">
 
-                  <div class="col-12">
+                  <div class="col-12 py-2">
 
                     <%= f.label :transactions %><br />
                     <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: 'accountmenu__description form-control', 'default_value' => '', 'onkeyup' => 'UpdateResult(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #transactions textarea\', true)' %>
@@ -152,16 +152,16 @@
 
                 </div>
 
-                <div class="row py-3">
+                <div class="row py-2">
 
-                  <div class="col-6">
+                  <div class="col-6 py-2">
 
                     <%= f.label :date %>
                     <%= f.text_field :date, class: 'datepicker form-control' %>
 
                   </div>
 
-                  <div class="col-6">
+                  <div class="col-6 py-2">
 
                     <%= f.label :time %>
                     <%= f.text_field :time, type: 'time', value:'now', class: 'form-control' %>

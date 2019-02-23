@@ -102,3 +102,15 @@ div[class^="col"], div[class*=" col"] {
   max-height: 350px;
   overflow-y: scroll;
 }
+#transactionform #categories button {
+  width: 100%;
+}
+#transactionform textarea {
+  height: 200px;
+}
+
+hr.form-divider {
+  height:0.1px;
+  background-color: black;
+  width:100%;
+}
