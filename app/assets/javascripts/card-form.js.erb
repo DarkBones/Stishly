@@ -150,3 +150,58 @@ function SetupTransactionForm() {
 
   transactionmenu_set = true;
 }
+
+function ResetTransactionMenu(){
+  // reset the button-group elements
+  $('#transactionform #button-group').each(function(index){
+    $(this).find('input').each(function(i){
+      $(this).prop("checked", i==0)
+    });
+    $(this).find('label').each(function(i){
+      if(i == 0){
+        $(this).addClass('active');
+      } else {
+        $(this).removeClass('active');
+      }
+    });
+  });
+
+  // reset the text inputs
+  $('#transactionform input.form-control, #transactionform textarea.form-control').each(function(index){
+    $(this).val('');
+  });
+
+  // update date & time
+  $('#transactionform #transaction_date').val(get_date());
+  $('#transactionform #transaction_time').val(get_time());
+
+  // update account & currency dropdowns
+  var account = get_active_account_name();
+  if (account.length > 0) {
+    $('#transactionform #transaction_active_account').val(account);
+    $('#transactionform #transaction_account').val(account);
+    $('#transactionform #transaction_from_account').val(account);
+
+    $.ajax({
+      type: "GET",
+      dataType: "text",
+      url: "/api/account_currency/" + account,
+      success: function(data) {
+        $("#transactionform #transaction_currency").val(data);
+      }
+    });
+  } else {
+    $.ajax({
+      type: "GET",
+      dataType: "text",
+      url: "/api/user_currency/" + account,
+      success: function(data) {
+        $("#transactionform #transaction_currency").val(data);
+      }
+    });
+  }
+
+  // show & hide correct fields
+  $('#transactionform div.default-show').show();
+  $('#transactionform div.default-hide').hide();
+}
