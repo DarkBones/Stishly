@@ -136,3 +136,15 @@ hr.form-divider {
   padding: 25px;
   background-color: #ededed;
 }
+
+.child_transactions {
+  display: none;
+}
+.show-child-transactions {
+  display: inline-block;
+  position: relative;
+  width: 15px;
+  height: 15px;
+  margin-left: -10px;
+  margin-top: 10px;
+}

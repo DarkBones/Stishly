@@ -237,7 +237,7 @@ function ResetTransactionMenu(){
   $('#transactionform #transaction_time').val(get_time());
 
   // update account & currency dropdowns
-  var account = get_active_account_name();
+  var account = decodeURI(get_active_account_name());
   if (account.length > 0) {
     $('#transactionform #transaction_active_account').val(account);
     $('#transactionform #transaction_account').val(account);

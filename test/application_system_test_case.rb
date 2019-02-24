@@ -22,7 +22,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def logout
-    #page.find(".navbar__menu-toggle").click
+    sleep 2
+    page.find(".navbar-gear").click
     click_on "Sign out"
   end
 end

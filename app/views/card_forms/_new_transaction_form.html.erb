@@ -20,13 +20,13 @@
                   <div class="col-12 py-5 bg-danger rounded" id="type">
 
                     <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
-                      <label class="btn btn-outline-light active py-3" onclick="ChangeType('expense')">
+                      <label class="btn btn-outline-light active py-3" onclick="ChangeType('expense')" id="type-expense">
                         <%= f.radio_button :type, 'expense' %>Expense
                       </label>
-                      <label class="btn btn-outline-light py-3" onclick="ChangeType('income')">
+                      <label class="btn btn-outline-light py-3" onclick="ChangeType('income')" id="type-income">
                         <%= f.radio_button :type, 'income' %>Income
                       </label>
-                      <label class="btn btn-outline-light py-3" onclick="ChangeType('transfer')">
+                      <label class="btn btn-outline-light py-3" onclick="ChangeType('transfer')" id="type-transfer">
                         <%= f.radio_button :type, 'transfer' %>Transfer
                       </label>
                     </div>
@@ -93,10 +93,10 @@
                   <div class="col-12 py-5">
 
                     <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
-                      <label class="btn btn-secondary active py-3" onclick="ChangeMultiple('single')">
+                      <label class="btn btn-secondary active py-3" onclick="ChangeMultiple('single')" id="multiple-single">
                         <%= f.radio_button :multiple, 'single' %>Single
                       </label>
-                      <label class="btn btn-secondary py-3" onclick="ChangeMultiple('multiple')">
+                      <label class="btn btn-secondary py-3" onclick="ChangeMultiple('multiple')" id="multiple-multiple">
                         <%= f.radio_button :multiple, 'multiple' %>Multiple
                       </label>
                     </div>

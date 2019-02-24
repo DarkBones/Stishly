@@ -162,6 +162,7 @@ function GenerateDayDiv (date, $target, type, currency) {
     dataType: 'text',
     url: '/api/transaction_date_ul/' + date + '/0/' + currency,
     success: function(data) {
+      console.log(data);
       switch (type) {
         case 'prepend':
           $target.prepend(data);

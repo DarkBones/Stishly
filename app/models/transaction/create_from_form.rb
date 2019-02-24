@@ -136,7 +136,7 @@ private
 
       if transaction_currency.iso_code != account_currency.iso_code
         rate = @params[:exchange_rate].to_f
-        return amount.to_f * rate
+        return CurrencyRate.convert(amount, transaction_currency, account_currency, rate)
       else
         return amount
       end

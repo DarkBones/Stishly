@@ -23,13 +23,13 @@ class TransactionsTest < ApplicationSystemTestCase
     click_on "New Transaction"
 
     # check if the transaction menu is visible
-    assert_selector '#transactionmenu', visible: :visible
+    assert_selector '#transactionform', visible: :visible
 
     # close the menu
-    page.find(".card-form__close").click
+    page.find("#transactionform button.close").click
 
     # check if menu is hidden
-    assert_selector '#transactionmenu', visible: :hidden
+    assert_selector '#transactionform', visible: :hidden
 
     logout
   end
@@ -49,6 +49,7 @@ class TransactionsTest < ApplicationSystemTestCase
         fill_in "Amount", with: "100"
 
         click_on "Create Transaction"
+        sleep 1
     end
 
     wait_for_ajax
@@ -95,7 +96,7 @@ class TransactionsTest < ApplicationSystemTestCase
 
     # fill in the details
     fill_in "Description", with: "multiple expense euro"
-    page.check('transaction_multiple_transactions')
+    page.find("#transactionform #multiple-multiple").click
     fill_in "Transactions", with: "one 1\ntwo 2\nthree 3\nfour 4\npoint 05 .05"
 
     click_on "Create Transaction"
@@ -131,7 +132,7 @@ class TransactionsTest < ApplicationSystemTestCase
 
     # fill in the details
     fill_in "Description", with: "single income euro"
-    select "Income", from: "Type"
+    page.find("#transactionform #type-income").click
     fill_in "Amount", with: "100.01"
 
     click_on "Create Transaction"
@@ -156,8 +157,8 @@ class TransactionsTest < ApplicationSystemTestCase
 
     # fill in the details
     fill_in "Description", with: "multiple expense euro"
-    select "Income", from: "Type"
-    page.check('transaction_multiple_transactions')
+    page.find("#transactionform #type-income").click
+    page.find("#transactionform #multiple-multiple").click
     fill_in "Transactions", with: "one 1\ntwo 2\nthree 3\nfour 4\npoint 05 .05"
 
     click_on "Create Transaction"
@@ -190,7 +191,7 @@ class TransactionsTest < ApplicationSystemTestCase
 
     # fill in the details
     fill_in "Description", with: "single transfer euro"
-    select "Transfer", from: "Type"
+    page.find("#transactionform #type-transfer").click
     select "Savings Account", from: "To account"
     fill_in "Amount", with: "5000"
 
@@ -228,9 +229,9 @@ class TransactionsTest < ApplicationSystemTestCase
 
     # fill in the details
     fill_in "Description", with: "multiple transfer euro"
-    select "Transfer", from: "Type"
+    page.find("#transactionform #type-transfer").click
     select "Savings Account", from: "To account"
-	page.check('transaction_multiple_transactions')
+	page.find("#transactionform #multiple-multiple").click
     fill_in "Transactions", with: "one 1\ntwo 2\nthree 3\nfour 4\npoint 05 .05"
 		
 	click_on "Create Transaction"
@@ -298,7 +299,7 @@ class TransactionsTest < ApplicationSystemTestCase
     # fill in the details
     fill_in "Description", with: "multiple expense jpy"
 	select "JPY", from: "Currency"
-    page.check('transaction_multiple_transactions')
+    page.find("#transactionform #multiple-multiple").click
     fill_in "Transactions", with: "one 100\ntwo 200\nthree 300\nfour 400\n"
 
     click_on "Create Transaction"
@@ -322,7 +323,7 @@ class TransactionsTest < ApplicationSystemTestCase
 
     # fill in the details
     fill_in "Description", with: "single income jpy"
-    select "Income", from: "Type"
+    page.find("#transactionform #type-income").click
 	select "JPY", from: "Currency"
     fill_in "Amount", with: "100000"
 
@@ -347,9 +348,9 @@ class TransactionsTest < ApplicationSystemTestCase
 
     # fill in the details
 	fill_in "Description", with: "multiple income jpy"
-	select "Income", from: "Type"
+	page.find("#transactionform #type-income").click
 	select "JPY", from: "Currency"
-	page.check('transaction_multiple_transactions')
+	page.find("#transactionform #multiple-multiple").click
 	fill_in "Transactions", with: "one 1000\ntwo 2000\nthree 3000\nfour 4000\n"
 	
 	click_on "Create Transaction"
@@ -386,7 +387,7 @@ class TransactionsTest < ApplicationSystemTestCase
 
     # fill in the details
     fill_in "Description", with: "single transfer jpy"
-    select "Transfer", from: "Type"
+    page.find("#transactionform #type-transfer").click
     select "Savings Account", from: "To account"
 	select "JPY", from: "Currency"
     fill_in "Amount", with: "100000"
@@ -419,10 +420,10 @@ class TransactionsTest < ApplicationSystemTestCase
 
     # fill in the details
 	fill_in "Description", with: "multiple transfer jpy"
-	select "Transfer", from: "Type"
+	page.find("#transactionform #type-transfer").click
 	select "Savings Account", from: "To account"
 	select "JPY", from: "Currency"
-	page.check('transaction_multiple_transactions')
+	page.find("#transactionform #multiple-multiple").click
 	fill_in "Transactions", with: "one 1000\ntwo 2000\nthree 3000\nfour 4000\n"
 	
 	click_on "Create Transaction"
