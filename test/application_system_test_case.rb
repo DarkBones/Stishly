@@ -6,7 +6,6 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def login_user(user, password)
     visit root_path
 
-    page.find(".navbar__menu-toggle").click
     click_on "Sign in"
 
     fill_in "Email", with: user.email
@@ -23,7 +22,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def logout
-    page.find(".navbar__menu-toggle").click
+    #page.find(".navbar__menu-toggle").click
     click_on "Sign out"
   end
 end

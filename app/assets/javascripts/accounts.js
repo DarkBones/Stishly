@@ -1,7 +1,7 @@
 $(document).on('turbolinks:load', ()=> {
 
   // Disable the submit button
-  $("#accountmenu").find("input[type=submit]").attr("disabled", "disabled");
+  $("#accountform").find("input[type=submit]").attr("disabled", "disabled");
 
   // if the create account button is clicked, show the account creation menu
   $('#create-account-button').on('click', () => {
@@ -13,15 +13,15 @@ $(document).on('turbolinks:load', ()=> {
   $('.accountmenu__name').attr('maxlength',50);
 
   // don't allow dots in input field
-  $('.accountmenu__name').keyup(function(e){
-    name_value = $('.accountmenu__name').val()
-    $('.accountmenu__name').val(name_value.replace(/\./g, ""));
+  $('#accountform input#account_name').keyup(function(e){
+    name_value = $('#accountform input#account_name').val()
+    $('#accountform input#account_name').val(name_value.replace(/\./g, ""));
 
     // Activate submit button if name is provided
     if (name_value.length > 0){
-      $("#accountmenu").find("input[type=submit]").removeAttr("disabled");
+      $("#accountform").find("input[type=submit]").removeAttr("disabled");
     } else{
-      $("#accountmenu").find("input[type=submit]").attr("disabled", "disabled");
+      $("#accountform").find("input[type=submit]").attr("disabled", "disabled");
     }
   });
 

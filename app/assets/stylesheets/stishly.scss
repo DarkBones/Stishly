@@ -8,6 +8,8 @@ div[class^="col"], div[class*=" col"] {
   //border: solid 5px black;
 }
 
+.navbar-toggler { display:block!important; }
+
 .navbar-gear {
   width: 30px;
   height: 30px;
@@ -91,6 +93,12 @@ a[data-toggle="collapse"] {
   }
   #content {
     margin-left: 0;
+  }
+}
+
+@media (max-width: 575px) {
+  #content, #sidebar {
+    padding-top: 120px;
   }
 }
 

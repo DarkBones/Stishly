@@ -44,6 +44,8 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  config.serve_static_files = true
+
   #config.assets.prefix = ''
 
   # Raises error for missing translations
