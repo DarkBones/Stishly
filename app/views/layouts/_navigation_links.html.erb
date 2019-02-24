@@ -1,6 +1,12 @@
 <ul class="nav navbar-nav ml-auto">
   <% if user_signed_in? %>
 
+    <li class="nav-item my-auto">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#transactionform" onclick="ResetTransactionMenu();">
+        New Transaction
+      </button>
+    </li>
+
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle no-caret" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <div class="navbar-gear bg-primary rounded-circle"></div>
