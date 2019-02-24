@@ -23,6 +23,7 @@
 
       <div class="wrapper">
         <% if current_user %>
+          <%= render "card_forms/new_account_form" %>
           <%= render "card_forms/new_transaction_form" %>
           <%= render 'layouts/left_menu', locals: {active_account: @active_account} %>
         <% end %>

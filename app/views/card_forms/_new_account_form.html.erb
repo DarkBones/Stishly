@@ -1,5 +1,5 @@
 <div class="modal fade" id="accountform" tabindex="-1" role="dialog" aria-labelledby="transactionformLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="transactionformLabel">New Account</h5>
@@ -12,10 +12,29 @@
         <div class="modal-body">
           <div class="container">
 
-            <div class="row">
+            <div class="row py-2">
+              <div class="col-12">
+                <%= f.label :name %><br />
+                <%= f.text_field :name, placeholder: "Current account", class: 'form-control' %>
+              </div>
+            </div>
 
-              
+            <div class="row py-2">
+              <div class="col-9">
+                <%= f.label :balance %><br />
+                <%= f.number_field :balance, placeholder: "1000.00", class: 'form-control', step: :any %>
+              </div>
+              <div class="col-3">
+                <%= f.label :currency %><br />
+                <%= f.select(:currency, all_currencies(Money::Currency.table), {}, { :class => 'form-control' }) %>
+              </div>
+            </div>
 
+            <div class="row py-2">
+              <div class="col-12">
+                <%= f.label :description %><br />
+                <%= f.text_area :description, class: 'form-control' %>
+              </div>
             </div>
 
           </div>
@@ -23,7 +42,7 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <%= f.submit 'Create Transaction', :class => 'btn btn-primary' %>
+          <%= f.submit 'Create Account', :class => 'btn btn-primary' %>
         </div>
       <% end %>
     </div>

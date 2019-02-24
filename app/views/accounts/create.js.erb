@@ -1,9 +1,8 @@
 <% if @account.is_a? String %>
   trigger_notice('<%= @account %>', true);
-  $('#accountmenu').effect( "shake", { direction: "left", times: 4, distance: 6} );
+  $('#accountform').effect( "shake", { direction: "left", times: 4, distance: 6} );
 <% else %>
-  ToggleCardForm('#accountmenu');
-  ClearValues('#accountmenu');
+  $("[data-dismiss=modal]").trigger({ type: "click" });
 
   $('#user_accounts_list').prepend('<%= j render @account %>');
   $('#account_' + <%= @account.id %>).hide().fadeIn(1000);

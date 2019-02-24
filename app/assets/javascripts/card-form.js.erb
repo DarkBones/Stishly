@@ -197,6 +197,19 @@ function UpdateTransactionsTotal(targetTotal, targetTransactions, targetCurrency
   });
 }
 
+function ResetAccountMenu(){
+  $('#accountform').find("input[type=text], textarea").val("");
+
+  $.ajax({
+    type: "GET",
+    dataType: "text",
+    url: "/api/account_currency/",
+    success: function(data) {
+      $('#accountform').find('select').val(data);
+    }
+  });
+}
+
 function ResetTransactionMenu(){
   currency_changed = false;
 
