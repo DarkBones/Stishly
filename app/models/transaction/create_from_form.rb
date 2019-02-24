@@ -31,7 +31,7 @@ private
       parent_id = nil
       parent_id_from = nil
       parent_id_to = nil
-      if @params[:multiple_transactions] == '1'
+      if @params[:multiple] == 'multiple'
         base_transactions.each do |t|
           if t[:is_child] == false
             if type == 'transfer'
@@ -55,7 +55,7 @@ private
       end
 
       base_transactions.each do |t|
-        if (t[:is_child] == true && @params[:multiple_transactions] == '1') || (@params[:multiple_transactions] == '0')
+        if (t[:is_child] == true && @params[:multiple] == 'multiple') || (@params[:multiple] == 'single')
           if type == 'transfer'
             transactions.push(transaction_object(t, @from_account, false, parent_id_from))
             transactions.push(transaction_object(t, @to_account, true, parent_id_to))
@@ -159,7 +159,7 @@ private
     def get_base_transactions
       transactions = []
 
-      if @params[:multiple_transactions] == '1'
+      if @params[:multiple] == 'multiple'
         multiple_transactions = parse_multiple_transactions
         child_transactions = multiple_transactions[:transactions]
         total_amount = multiple_transactions[:total_amount]
