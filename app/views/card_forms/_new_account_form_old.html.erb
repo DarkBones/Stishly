@@ -1,0 +1,36 @@
+<div id="accountmenu" class="card-form">
+  <h2 class="card-form__title">Create New Account<span class="card-form__close"></span></h2>
+
+  <%= form_with(model: Account.new) do |f| %>
+    <div class="card-form__form-row">
+      <div class="card-form__form-col col-ten">
+        <%= f.label :name %><br />
+        <%= f.text_field :name, placeholder: "Current account", class: 'accountmenu__name' %>
+      </div>
+    </div>
+
+    <div class="card-form__form-row">
+      <div class="card-form__form-col col-seven">
+        <%= f.label :balance %><br />
+        <%= f.number_field :balance, placeholder: "1000.00", class: 'accountmenu__balance', step: :any %>
+      </div>
+      <div class="card-form__form-col col-three">
+        <%= f.label :currency %><br />
+        <%= f.select(:currency, all_currencies(Money::Currency.table), selected: User.get_currency(current_user).iso_code, class: 'accountmenu__currency') %>
+      </div>
+    </div>
+
+    <div class="card-form__form-row">
+      <div class="card-form__form-col col-ten">
+        <%= f.label :description %><br />
+        <%= f.text_area :description, class: 'accountmenu__description' %>
+      </div>
+    </div>
+
+    <div class="card-form__form-row">
+      <div class="card-form__form-col col-ten">
+        <%= f.submit %>
+      </div>
+    </div>
+  <% end %>
+</div>
