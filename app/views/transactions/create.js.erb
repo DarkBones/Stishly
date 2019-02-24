@@ -1,6 +1,3 @@
-ToggleCardForm('#transactionmenu');
-ClearValues('#transactionmenu');
-
 var active_account = '<%= @params[:active_account] %>';
 var active_account_currency = '<%= Account.get_account_or_user_currency(@params[:active_account], current_user) %>';
 
