@@ -48,7 +48,11 @@ class ApiController < ApplicationController
   end
 
   def format_currency
-    render json: Account.format_currency(params[:amount], params[:currency])
+    if params[:float]
+      render json: Account.format_currency_float(params[:amount].sub('$', '.'), params[:currency])
+    else
+      render json: Account.format_currency(params[:amount], params[:currency])
+    end
   end
 
   def convert_currency

@@ -147,7 +147,7 @@
 
                     <%= f.label :transactions %><br />
                     <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: 'accountmenu__description form-control', 'default_value' => '', 'onkeyup' => 'UpdateResult(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #transactions textarea\', true)' %>
-
+                    <p>Total: <span id="transactions-total">0</span></p>
                   </div>
 
                 </div>

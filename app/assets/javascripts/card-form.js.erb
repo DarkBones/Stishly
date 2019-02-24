@@ -38,6 +38,8 @@ function ChangeMultiple(type){
     default:
       $('#transactionform #amount').hide();
       $('#transactionform #transactions').show();
+      // update the total amount
+      UpdateTransactionsTotal('#transactionform #transactions-total','#transactionform #transactions textarea' ,'#transactionform #transaction_currency');
   }
 }
 
@@ -76,6 +78,10 @@ function UpdateResult(rateTarget, resultTarget, amountTarget, isMultiple){
     result = Math.round((amount * rate) * 100) / 100
 
     $resultTarget.val(result);
+  }
+
+  if(isMultiple){
+    UpdateTransactionsTotal('#transactionform #transactions-total','#transactionform #transactions textarea' ,'#transactionform #transaction_currency');
   }
 }
 
@@ -172,6 +178,26 @@ function ChangeCurrency(selectObject='', currency='') {
       }
     });
   }
+  UpdateTransactionsTotal('#transactionform #transactions-total','#transactionform #transactions textarea' ,'#transactionform #transaction_currency');
+}
+
+function UpdateTransactionsTotal(targetTotal, targetTransactions, targetCurrency){
+  var $targetTotal = $(targetTotal);
+  var $targetTransactions = $(targetTransactions);
+  var $targetCurrency = $(targetCurrency);
+
+  var total = GetTotalFromMultiple($targetTransactions);
+  total = total.toString().replace('.', '$');
+  var currency = $targetCurrency.val();
+
+  $.ajax({
+    type: 'GET',
+    dataType: 'text',
+    url: '/api/format_currency/' + total + '/' + currency + '/true',
+    success: function(data) {
+      $targetTotal.text(data);
+    }
+  });
 }
 
 function ResetTransactionMenu(){
