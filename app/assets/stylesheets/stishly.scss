@@ -1,5 +1,13 @@
 $sidebar_width: 350px;
 
+.row {
+  //background: gray;
+}
+div[class^="col"], div[class*=" col"] {
+  //background: blue;
+  //border: solid 5px black;
+}
+
 .navbar-gear {
   width: 30px;
   height: 30px;
@@ -53,6 +61,7 @@ input, select, textarea {
 #content {
   padding-top: 50px;
   margin-left: $sidebar_width;
+  min-height: 100vh;
   &.in {
     margin-left: 0;
   }
@@ -85,14 +94,6 @@ a[data-toggle="collapse"] {
   }
 }
 
-.row {
-  //background: gray;
-}
-div[class^="col"], div[class*=" col"] {
-  //background: blue;
-  //border: solid 5px black;
-}
-
 #button-group {
 
   width: 100%;
@@ -113,4 +114,17 @@ hr.form-divider {
   height:0.1px;
   background-color: black;
   width:100%;
+}
+
+.alert {
+  z-index: 2000;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  margin-left: -250px;
+  width: 500px;
+  text-align: center;
+  font-weight: bolder;
+  padding: 25px;
+  background-color: #ededed;
 }

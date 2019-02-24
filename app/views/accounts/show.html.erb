@@ -1,11 +1,22 @@
-<h2><%= @active_account.name %> Transactions</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2><%= @active_account.name %> Transactions</h2>
+    </div>
+  </div>
 
-<%= render "account_tab_menu", locals: {active_tab: "Transactions"} %>
+  <div class="row">
+    <div class="col-12">
+      <%= render "account_tab_menu", locals: {active_tab: "Transactions"} %>
+    </div>
+  </div>
 
-<%= link_to 'Settings', account_settings_path if @active_account.is_real %>
-
-<div id="transactions_list">
-  <% locals = {transactions: @account_transactions, daily_totals: @daily_totals, account_currency: @account_currency} %>
-  <%= render "transactions", locals: locals %>
+  <div class="row">
+    <div class="col-12">
+      <div id="transactions_list">
+        <% locals = {transactions: @account_transactions, daily_totals: @daily_totals, account_currency: @account_currency} %>
+        <%= render "transactions", locals: locals %>
+      </div>
+    </div>
+  </div>
 </div>
-
