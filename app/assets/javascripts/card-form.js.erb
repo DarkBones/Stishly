@@ -135,49 +135,46 @@ function ChangeAccount(selectObject) {
 
 function ChangeCurrency(selectObject='', currency='') {
   currency_changed = true;
-  var currency_provided = currency.length > 0;
   if(currency.length == 0){
     var currency = selectObject.value;
   }
   var account = get_active_account_name();
 
-  if (account.length > 0 || currency_provided) {
-    $.ajax({
-      type: "GET",
-      dataType: "text",
-      url: "/api/account_currency/" + account,
-      success: function(data_currency) {
-        if (data_currency != currency){
-          $('#transactionform #currency-rate').show();
-          $('#transactionform #currency-result').show();
+  $.ajax({
+    type: "GET",
+    dataType: "text",
+    url: "/api/account_currency/" + account,
+    success: function(data_currency) {
+      if (data_currency != currency){
+        $('#transactionform #currency-rate').show();
+        $('#transactionform #currency-result').show();
 
-          $.ajax({
-            type: "GET",
-            dataType: "text",
-            url: "/api/currency_rate/" + currency + "/" + data_currency,
-            success: function(data_rate) {
-              $('#transactionform #currency-rate input').val(data_rate);
+        $.ajax({
+          type: "GET",
+          dataType: "text",
+          url: "/api/currency_rate/" + currency + "/" + data_currency,
+          success: function(data_rate) {
+            $('#transactionform #currency-rate input').val(data_rate);
 
-              var result = 0;
-              if ($('#transactionform #amount').is(":visible")){
-                result = $('#transactionform #amount input').val() * data_rate
-              } else{
-                result = GetTotalFromMultiple($('#transactionform #transactions textarea')) * data_rate
-              }
-
-              $('#transactionform #currency-result input').val(Math.round(result * 100) / 100);
+            var result = 0;
+            if ($('#transactionform #amount').is(":visible")){
+              result = $('#transactionform #amount input').val() * data_rate
+            } else{
+              result = GetTotalFromMultiple($('#transactionform #transactions textarea')) * data_rate
             }
-          });
 
-        } else {
-          $('#transactionform #currency-rate').hide();
-          $('#transactionform #currency-result').hide();
-          $('#transactionform #currency-rate input').val('');
-          $('#transactionform #currency-result input').val('');
-        }
+            $('#transactionform #currency-result input').val(Math.round(result * 100) / 100);
+          }
+        });
+
+      } else {
+        $('#transactionform #currency-rate').hide();
+        $('#transactionform #currency-result').hide();
+        $('#transactionform #currency-rate input').val('');
+        $('#transactionform #currency-result input').val('');
       }
-    });
-  }
+    }
+  });
   UpdateTransactionsTotal('#transactionform #transactions-total','#transactionform #transactions textarea' ,'#transactionform #transaction_currency');
 }
 

@@ -117,14 +117,15 @@
                   <div class="col-5 col-xl-3 default-hide py-2" id="currency-rate">
 
                     <%= f.label :rate %><br />
-                    <input type="number" name="lname" class="form-control" step="any">
+                    <!--<input type="number" name="lname" class="form-control" step="any">-->
+                    <%= f.number_field :exchange_rate, class: 'form-control', step: :any, 'default_value' => '1', 'onkeyup' => 'UpdateResult(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')', 'onchange' => 'UpdateResult(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')' %>
 
                   </div>
 
                   <div class="col-7 col-xl-6 default-hide py-2" id="currency-result">
 
                     <%= f.label :account_currency %><br />
-                    <%= f.number_field :account_currency_amount, placeholder: "99.87", class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'UpdateRate(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')' %>
+                    <%= f.number_field :account_currency_amount, class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'UpdateRate(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')', 'onchange' => 'UpdateRate(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')' %>
 
                   </div>
                   
@@ -135,7 +136,7 @@
                   <div class="col-12 py-2">
 
                     <%= f.label :amount %><br />
-                    <%= f.number_field :amount, placeholder: "99.87", class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'UpdateResult(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #amount input\', false)' %>
+                    <%= f.number_field :amount, placeholder: "99.87", class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'UpdateResult(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #amount input\', false)', 'onchange' => 'UpdateResult(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #amount input\', false)' %>
 
                   </div>
 

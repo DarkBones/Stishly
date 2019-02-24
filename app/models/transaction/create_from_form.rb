@@ -135,7 +135,8 @@ private
       account_currency = Money::Currency.new(account.currency)
 
       if transaction_currency.iso_code != account_currency.iso_code
-        return CurrencyRate.convert(amount, transaction_currency, account_currency)
+        rate = @params[:exchange_rate].to_f
+        return amount.to_f * rate
       else
         return amount
       end
