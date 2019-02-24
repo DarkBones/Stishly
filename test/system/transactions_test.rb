@@ -31,6 +31,7 @@ class TransactionsTest < ApplicationSystemTestCase
     # check if menu is hidden
     assert_selector '#transactionform', visible: :hidden
 
+    page.driver.browser.navigate.refresh
     logout
   end
 
@@ -82,6 +83,7 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector '#accounts_list', text: "All\n€9,899.99"
     assert_selector '#accounts_list', text: "Current Account\n€9,899.99"
 
+    page.driver.browser.navigate.refresh
     logout
   end
 
@@ -120,6 +122,7 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector '#accounts_list', text: "All\n€9,989.95"
     assert_selector '#accounts_list', text: "Current Account\n€9,989.95"
 
+    page.driver.browser.navigate.refresh
     logout
   end
 
@@ -143,6 +146,7 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector '#accounts_list', text: "All\n€10,100.01"
     assert_selector '#accounts_list', text: "Current Account\n€10,100.01"
 
+    page.driver.browser.navigate.refresh
     logout
   end
 
@@ -179,6 +183,7 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector '#accounts_list', text: "All\n€10,010.05"
     assert_selector '#accounts_list', text: "Current Account\n€10,010.05"
 
+    page.driver.browser.navigate.refresh
     logout
   end
 
@@ -217,6 +222,7 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector '#accounts_list', text: "Current Account\n€5,000.00"
     assert_selector '#accounts_list', text: "Savings Account\n€5,000.00"
 
+    page.driver.browser.navigate.refresh
     logout
   end
 
@@ -261,6 +267,7 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector '#accounts_list', text: "Current Account\n€9,989.95"
     assert_selector '#accounts_list', text: "Savings Account\n€10.05"
 
+    page.driver.browser.navigate.refresh
     logout
   end
 
@@ -273,7 +280,7 @@ class TransactionsTest < ApplicationSystemTestCase
 
     # fill in the details
     fill_in "Description", with: "single expense jpy"
-    select "Expense", from: "Type"
+    page.find("#transactionform #type-expense").click
 	select "JPY", from: "Currency"
     fill_in "Amount", with: "100"
 		
@@ -286,6 +293,7 @@ class TransactionsTest < ApplicationSystemTestCase
 	assert_selector '#accounts_list', text: "All\n€9,999.20"
     assert_selector '#accounts_list', text: "Current Account\n€9,999.20"
 
+    page.driver.browser.navigate.refresh
     logout
   end
 
@@ -311,6 +319,7 @@ class TransactionsTest < ApplicationSystemTestCase
 	assert_selector '#accounts_list', text: "All\n€9,992.00"
     assert_selector '#accounts_list', text: "Current Account\n€9,992.00"
 
+    page.driver.browser.navigate.refresh
     logout
   end
 
@@ -336,6 +345,7 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector '#accounts_list', text: "All\n€10,800.00"
     assert_selector '#accounts_list', text: "Current Account\n€10,800.00"
 
+    page.driver.browser.navigate.refresh
     logout
   end
 
@@ -375,6 +385,7 @@ class TransactionsTest < ApplicationSystemTestCase
 	assert_selector '#accounts_list', text: "All\n€10,080.00"
     assert_selector '#accounts_list', text: "Current Account\n€10,080.00"
 
+    page.driver.browser.navigate.refresh
     logout
   end
 
@@ -408,6 +419,7 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector '#accounts_list', text: "Current Account\n€9,200.00"
     assert_selector '#accounts_list', text: "Savings Account\n€800.00"
 
+    page.driver.browser.navigate.refresh
     logout
   end
 
@@ -442,27 +454,28 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector '#accounts_list', text: "Current Account\n€9,920.00"
     assert_selector '#accounts_list', text: "Savings Account\n€80.00"
 
+    page.driver.browser.navigate.refresh
     logout
   end
 	
-    test "transaction currency resetting" do
-        # login as transactions user
-        login_user(users(:transactions), 'SomePassword123^!')
-        page.find("#account_0").click
-        click_on "New Transaction"
-        #sleep 15
+  test "transaction currency resetting" do
+    # login as transactions user
+    login_user(users(:transactions), 'SomePassword123^!')
+    page.find("#account_0").click
+    click_on "New Transaction"
+    #sleep 15
 
-        # fill in the details
-        fill_in "Description", with: "JPY"
-        select "JPY", from: "Currency"
-        fill_in "Amount", with: "1000"
+    # fill in the details
+    fill_in "Description", with: "JPY"
+    select "JPY", from: "Currency"
+    fill_in "Amount", with: "1000"
 
-        click_on "Create Transaction"
+    click_on "Create Transaction"
 
-        click_on "New Transaction"
-        #sleep 15
-
-        logout
-    end
+    click_on "New Transaction"
+    #sleep 15
+    page.driver.browser.navigate.refresh
+    logout
+  end
 
 end
