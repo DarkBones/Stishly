@@ -14,7 +14,7 @@ class SettingsTest < ApplicationSystemTestCase
 
     login_user(user, password)
 
-    page.find(".navbar__menu-toggle").click
+    page.find(".navbar-gear").click
 
     click_on "Settings"
 
