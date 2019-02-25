@@ -15,11 +15,15 @@ class CurrencyRate
 
       rates = result["rates"]
 
-      rates.each do |currency, rate|
-        CurrencyRate.update_rate(@currency, currency, rate)
-      end
+      if rates
+        rates.each do |currency, rate|
+          CurrencyRate.update_rate(@currency, currency, rate)
+        end
 
-      return rates[@currency]
+        return rates[@currency]
+      else
+        return 0
+      end
     end
 
     def make_request

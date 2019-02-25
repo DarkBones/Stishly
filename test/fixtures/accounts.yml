@@ -157,7 +157,8 @@ transactions_2: {
   name: 'Current Account',
   is_default: true,
   currency: 'EUR',
-  is_real: 1
+  is_real: 1,
+  position: 0
 }
 
 transactions_3: {
@@ -165,7 +166,19 @@ transactions_3: {
   balance: 0,
   user_id: 8,
   name: 'Savings Account',
-  is_default: true,
+  is_default: false,
   currency: 'EUR',
-  is_real: 1
+  is_real: 1,
+  position: 1
+}
+
+transactions_4: {
+  id: 18,
+  balance: 0,
+  user_id: 8,
+  name: 'JPY',
+  is_default: false,
+  currency: 'JPY',
+  is_real: 1,
+  position: 2
 }

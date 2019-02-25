@@ -119,26 +119,32 @@ function UpdateRate(rateTarget, resultTarget, amountTarget1, amountTarget2){
 
 function ChangeAccount(selectObject) {
   var account = selectObject.value;
-  $.ajax({
-    type: "GET",
-    dataType: "text",
-    url: "/api/account_currency/" + account,
-    success: function(data) {
-      if(!currency_changed){
+  console.log("CHANGE ACCOUNT" + account);
+  $('#transactionform #transaction_account').val(account);
+  $('#transactionform #transaction_from_account').val(account);
+
+  if (!currency_changed){
+    $.ajax({
+      type: "GET",
+      dataType: "text",
+      url: "/api/account_currency/" + account,
+      success: function(data) {
         $("#transactionform #transaction_currency").val(data);
-      } else {
-        ChangeCurrency(null, data);
       }
-    }
-  });
+    });
+  } else {
+    ChangeCurrency($('#transactionform #transaction_currency').val());
+  }
 }
 
 function ChangeCurrency(selectObject='', currency='') {
+  console.log(currency);
   currency_changed = true;
   if(currency.length == 0){
     var currency = selectObject.value;
   }
-  var account = get_active_account_name();
+
+  var account = $('#transactionform #single-account select').val();
 
   $.ajax({
     type: "GET",
@@ -237,8 +243,8 @@ function ResetTransactionMenu(){
   $('#transactionform #transaction_time').val(get_time());
 
   // update account & currency dropdowns
-  var account = decodeURI(get_active_account_name());
-  if (account.length > 0) {
+  var account = $('#transactionform #single-account select').val();
+  if (account) {
     $('#transactionform #transaction_active_account').val(account);
     $('#transactionform #transaction_account').val(account);
     $('#transactionform #transaction_from_account').val(account);
@@ -255,7 +261,7 @@ function ResetTransactionMenu(){
     $.ajax({
       type: "GET",
       dataType: "text",
-      url: "/api/user_currency/" + account,
+      url: "/api/user_currency",
       success: function(data) {
         $("#transactionform #transaction_currency").val(data);
       }
