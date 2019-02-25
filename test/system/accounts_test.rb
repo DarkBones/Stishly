@@ -27,7 +27,7 @@ class AccountsTest < ApplicationSystemTestCase
     submit = page.find("#accountform input[type=submit]")
     # Fill in the details
     fill_in "account[name]", with: "test. account. two"
-    fill_in "account[balance]", with: "50sd0df0FD"
+    fill_in "account[balance]", with: "5000"
     fill_in "account[description]", with: "Test description"
     # Save the account
     click_on "Create Account"
