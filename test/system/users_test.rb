@@ -16,10 +16,8 @@ class UsersTest < ApplicationSystemTestCase
 
     assert_selector 'h1', text: I18n.t('homepage.welcome_h1')
 
-    page.find(".navbar__menu-toggle").click
-
-    assert_selector '.navbar__menu', text: 'Sign up'
-    assert_selector '.navbar__menu', text: 'Sign in'
+    assert_selector '.navbar-nav', text: 'Sign up'
+    assert_selector '.navbar-nav', text: 'Sign in'
 
     take_screenshot
   end
@@ -110,7 +108,7 @@ class UsersTest < ApplicationSystemTestCase
     take_screenshot
 
     assert_selector '#flash_notice', text: I18n.t('devise.sessions.signed_in')
-    assert_selector '#left-menu', text: I18n.t('accounts.instructions.create')
+    assert_selector '#sidebar', text: I18n.t('accounts.instructions.create')
   end
 
   test 'log out' do
@@ -130,16 +128,14 @@ class UsersTest < ApplicationSystemTestCase
 
     assert_selector '#flash_notice', text: I18n.t('devise.sessions.signed_in')
 
-    page.find(".navbar__menu-toggle").click
+    page.find(".navbar-gear").click
     click_on "Sign out"
 
     assert_selector '#flash_notice', text: I18n.t('devise.sessions.signed_out')
     assert_selector 'h1', text: I18n.t('homepage.welcome_h1')
 
-    page.find(".navbar__menu-toggle").click
-
-    assert_selector '.navbar__menu', text: 'Sign up'
-    assert_selector '.navbar__menu', text: 'Sign in'
+    assert_selector '.navbar-nav', text: 'Sign up'
+    assert_selector '.navbar-nav', text: 'Sign in'
   end
 
   test 'destroy account' do
@@ -160,7 +156,7 @@ class UsersTest < ApplicationSystemTestCase
 
     assert_selector '#flash_notice', text: I18n.t('devise.sessions.signed_in')
 
-    page.find(".navbar__menu-toggle").click
+    page.find(".navbar-gear").click
 
     click_on "Edit account"
 
