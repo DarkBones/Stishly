@@ -127,6 +127,7 @@ class TransactionMenuTest < ApplicationSystemTestCase
     # JPY CURRENCY
     #puts page.driver.browser.manage.logs.get(:browser)
     select "JPY", from: "Currency"
+    wait_for_ajax
     # assert visible
     assert_selector '#currency-rate', visible: :visible
     assert_selector '#currency-result', visible: :visible
@@ -139,10 +140,51 @@ class TransactionMenuTest < ApplicationSystemTestCase
 
     # JPY ACCOUNT
     select "JPY", from: "Account"
+    wait_for_ajax
     # assert visible
     assert_selector '#currency-rate', visible: :visible
     assert_selector '#currency-result', visible: :visible
 
+  end
+
+  test "live currency conversion" do
+    """
+    Log in and click on 'new transaction'
+    Select JPY as currency
+    - Currency rate should be 0.008
+    - Account currency should be 0
+    fill in amount = 10000
+    - Account currency should be 80
+    Select Multiple
+    Fill in transactions:
+        one 10000
+        two 20000
+        three 30000
+        four 40000
+    - Account currency should be 800
+    """
+    # login as transactions user
+    login_user(users(:transactions), 'SomePassword123^!')
+
+    # open the transaction menu
+    click_on "New Transaction"
+    select "JPY", from: "Currency"
+
+    #assert_select "#transaction_exchange_rate[value='0.008']"
+    assert page.find("#transaction_rate").value == '0.008'
+    assert page.find("#transaction_account_currency").value == '0'
+
+    fill_in "Amount", with: "10000"
+    assert page.find("#transaction_account_currency").value == '80'
+
+    page.find("#transactionform #multiple-multiple").click
+    fill_in "Transactions", with: "one 10000\ntwo 20000\nthree 30000\nfour 40000"
+    assert page.find("#transaction_account_currency").value == '800'
+
+    fill_in "Account currency", with: "400"
+    assert page.find("#transaction_rate").value == '0.004'
+
+    assert_selector '#transaction_total', text: "Total: ¥100,000"
   end
 
 end

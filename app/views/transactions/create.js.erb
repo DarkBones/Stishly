@@ -32,6 +32,7 @@ $(document).ajaxStop(function () {
 
 function InsertTransactions() {
   <% @transactions_parent.reverse.each_with_index do |t, i| %>
+    console.log('INSERTING TRANSACTION ' + <%= i.to_s %>)
     var t_date = '<%= t.local_datetime.to_s.split[0] %>';
     var $dayDiv = $('#transactions_list div#' + t_date);
     if ($dayDiv.length > 0) {

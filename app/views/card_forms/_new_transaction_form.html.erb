@@ -49,7 +49,7 @@
                   <div class="col-12 py-2">
                     <%= f.label :account %><br />
                     <%= f.select(:account, user_accounts_array, {}, { :class => 'form-control', 'onchange' => 'ChangeAccount(this)' }) %>
-                    <%= f.hidden_field :active_account, class: 'active_account' %>
+                    <%= f.hidden_field :active_account, class: 'active_account', id: 'active_account_field' %>
                   </div>
 
                 </div>
@@ -115,21 +115,21 @@
                   </div>
 
                   <div class="col-12 col-xl-9 py-2 default-hide" id="exchange_rate_spinner">
-                    <%= image_tag 'ajax_spinner.svg', 'height' => '70' %>
+                    <%= image_tag 'ajax_spinner.svg', 'height' => '70', class: 'my-auto mx-auto' %>
                   </div>
 
                   <div class="col-5 col-xl-3 default-hide py-2" id="currency-rate">
 
                     <%= f.label :rate %><br />
                     <!--<input type="number" name="lname" class="form-control" step="any">-->
-                    <%= f.number_field :exchange_rate, class: 'form-control', step: :any, 'default_value' => '1', 'onkeyup' => 'UpdateResult(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')', 'onchange' => 'UpdateResult(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')' %>
+                    <%= f.number_field :rate, class: 'form-control', step: :any, 'default_value' => '1', 'onkeyup' => 'UpdateResult(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')', 'onchange' => 'UpdateResult(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')' %>
 
                   </div>
 
                   <div class="col-7 col-xl-6 default-hide py-2" id="currency-result">
 
                     <%= f.label :account_currency %><br />
-                    <%= f.number_field :account_currency_amount, class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'UpdateRate(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')', 'onchange' => 'UpdateRate(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')' %>
+                    <%= f.number_field :account_currency, class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'UpdateRate(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')', 'onchange' => 'UpdateRate(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')' %>
 
                   </div>
                   
@@ -152,7 +152,7 @@
 
                     <%= f.label :transactions %><br />
                     <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: 'accountmenu__description form-control', 'default_value' => '', 'onkeyup' => 'UpdateResult(\'#transactionform #currency-rate input\', \'#transactionform #currency-result input\', \'#transactionform #transactions textarea\', true)' %>
-                    <p>Total: <span id="transactions-total">0</span></p>
+                    <p id="transaction_total">Total: <span id="transactions-total">0</span></p>
                   </div>
 
                 </div>

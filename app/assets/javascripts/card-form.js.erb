@@ -223,6 +223,10 @@ function ResetAccountMenu(){
 function ResetTransactionMenu(){
   currency_changed = false;
 
+  // update the active account field
+  var active_account = get_active_account_name();
+  $('#transactionform #active_account_field').val(active_account);
+
   // reset the button-group elements
   $('#transactionform #button-group').each(function(index){
     $(this).find('input').each(function(i){
