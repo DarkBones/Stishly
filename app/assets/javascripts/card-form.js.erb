@@ -138,6 +138,9 @@ function ChangeAccount(selectObject) {
 }
 
 function ChangeCurrency(selectObject='', currency='') {
+  $('#transactionform #currency-rate').hide();
+  $('#transactionform #currency-result').hide();
+
   console.log(currency);
   currency_changed = true;
   if(currency.length == 0){
@@ -152,14 +155,15 @@ function ChangeCurrency(selectObject='', currency='') {
     url: "/api/account_currency/" + account,
     success: function(data_currency) {
       if (data_currency != currency){
-        $('#transactionform #currency-rate').show();
-        $('#transactionform #currency-result').show();
-
+        $('#transactionform #exchange_rate_spinner').show();
         $.ajax({
           type: "GET",
           dataType: "text",
           url: "/api/currency_rate/" + currency + "/" + data_currency,
           success: function(data_rate) {
+            $('#transactionform #exchange_rate_spinner').hide();
+            $('#transactionform #currency-rate').show();
+            $('#transactionform #currency-result').show();
             $('#transactionform #currency-rate input').val(data_rate);
 
             var result = 0;
