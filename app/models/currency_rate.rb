@@ -34,42 +34,6 @@ class CurrencyRate < ApplicationRecord
     return rate
   end
 
-  def self.get_rate_OLD(from, to)
-    currency_rate = self.where(from_currency: from, to_currency: to, updated_at: 1.days.ago..Time.now).take
-    if currency_rate
-      rate = currency_rate.rate
-    else
-      begin
-        rate = Concurrency.conversion_rate(from, to)
-        if rate > 0
-          self.update_rate(from, to, rate)
-        else
-          rate = self.where(from_currency: from, to_currency: to).take()
-          if rate
-            rate = rate.rate
-          end
-          if !rate
-            rate = GetCurrencyRate.new(from).perform
-            rate = self.where(from_currency: from, to_currency: to).take()
-            if rate
-              rate = rate.rate
-            end
-          end
-        end
-      rescue
-        rate = self.where(from_currency: from, to_currency: to).take()
-        if rate
-          rate = rate.rate
-        end
-        if !rate
-          rate = GetCurrencyRate.new(from).perform
-        end
-      end
-      
-    end
-    return rate
-  end
-
   def self.update_rate(from, to, rate)
     currency_rate = self.where(from_currency: from, to_currency: to).take
     if currency_rate
