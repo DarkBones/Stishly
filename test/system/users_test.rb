@@ -108,7 +108,7 @@ class UsersTest < ApplicationSystemTestCase
     take_screenshot
 
     assert_selector '#flash_notice', text: I18n.t('devise.sessions.signed_in')
-    assert_selector '#sidebar', text: I18n.t('accounts.instructions.create')
+    assert_selector '#sidebar', text: I18n.t('account.instructions.create')
   end
 
   test 'log out' do

@@ -22,7 +22,7 @@ class AccountsTest < ApplicationSystemTestCase
     page.driver.browser.navigate.refresh
 
     # Open the new account menu
-    click_on "New Account"
+    page.find("#new-account-button").click
     # Find and store the submit button
     submit = page.find("#accountform input[type=submit]")
     # Fill in the details
@@ -34,7 +34,7 @@ class AccountsTest < ApplicationSystemTestCase
     page.driver.browser.navigate.refresh
 
     # Open the new account menu
-    click_on "New Account"
+    page.find("#new-account-button").click
     # Find and store the submit button
     submit = page.find("#accountform input[type=submit]")
     # Fill in the same name as the previous account
@@ -50,7 +50,7 @@ class AccountsTest < ApplicationSystemTestCase
     #page.find("#accountform button.close").click
 
     # Open the new account menu
-    click_on "New Account"
+    page.find("#new-account-button").click
     # Find and store the submit button
     submit = page.find("#accountform input[type=submit]")
     # Fill in the details
@@ -61,7 +61,7 @@ class AccountsTest < ApplicationSystemTestCase
     page.driver.browser.navigate.refresh
 
     # Open the new account menu
-    click_on "New Account"
+    page.find("#new-account-button").click
     # Find and store the submit button
     submit = page.find("#accountform input[type=submit]")
     # Fill in the details
@@ -75,7 +75,7 @@ class AccountsTest < ApplicationSystemTestCase
     #puts page.driver.browser.manage.logs.get(:browser)
 
     # Open the new account menu
-    click_on "New Account"
+    page.find("#new-account-button").click
     # Find and store the submit button
     submit = page.find("#accountform input[type=submit]")
     # Fill in the details
