@@ -53,6 +53,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'rails_best_practices'
   gem 'peek'
+  gem 'bullet', group: 'development'
 end
 
 group :test do
