@@ -8,6 +8,8 @@ div[class^="col"], div[class*=" col"] {
   //border: solid 5px black;
 }
 
+body { padding-right: 0 !important }
+
 .navbar-toggler { display:block!important; }
 
 .navbar-gear {
@@ -61,8 +63,9 @@ input, select, textarea {
 }
 
 #content {
+  width: 100%;
   padding-top: 50px;
-  margin-left: $sidebar_width;
+  padding-left: $sidebar_width;
   min-height: 100vh;
   &.in {
     margin-left: 0;
@@ -89,10 +92,10 @@ a[data-toggle="collapse"] {
     width: $sidebar_width;
   }
   #content.in {
-    margin-left: 0;
+    padding-left: 0;
   }
   #content {
-    margin-left: 0;
+    padding-left: 0;
   }
 }
 
