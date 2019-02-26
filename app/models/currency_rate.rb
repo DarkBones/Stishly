@@ -13,6 +13,28 @@
 
 class CurrencyRate < ApplicationRecord
   def self.get_rate(from, to)
+    currency_rate_record = self.where(from_currency: from, to_currency: to, updated_at: 1.days.ago..Time.now).take
+    if currency_rate_record
+      return currency_rate_record.rate
+    end
+
+    require 'money/bank/open_exchange_rates_bank'
+
+    oxr = Money::Bank::OpenExchangeRatesBank.new
+    oxr.app_id = Rails.application.credentials.openexchangerates[:api_key]
+    oxr.update_rates
+
+    oxr.cache = '/tmp/cache/exchange_rates.json'
+    oxr.ttl_in_seconds = 86400
+
+    Money.default_bank = oxr
+    rate = Money.default_bank.get_rate(from, to).to_f
+
+    self.update_rate(from, to, rate)
+    return rate
+  end
+
+  def self.get_rate_OLD(from, to)
     currency_rate = self.where(from_currency: from, to_currency: to, updated_at: 1.days.ago..Time.now).take
     if currency_rate
       rate = currency_rate.rate

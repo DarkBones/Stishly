@@ -2,7 +2,7 @@ class CurrencyRate
   class GetCurrencyRate
 
     def initialize(currency)
-      @api_key = '5d6b2fcffb65761bad14c88a'
+      @api_key = Rails.application.credentials.concurrency[:api_key]
       @base_url = 'https://v3.exchangerate-api.com/bulk/'
       @currency = currency
     end

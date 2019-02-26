@@ -84,6 +84,9 @@ gem 'country_select', '~> 3.1'
 gem 'money'
 gem 'currency_select'
 gem 'concurrency'
+gem 'money-open-exchange-rates'
+
+gem 'whenever', require: false
 
 gem 'draper'
 
