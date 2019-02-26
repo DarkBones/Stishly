@@ -1,7 +1,7 @@
 <div id="sidebar" class="position-fixed collapse in width show bg-dark" aria-expanded="true">
   <div id="menu-container" class="px-4 text-light">
     <%= render partial: "left_menu/section", locals: {
-      title: "Accounts <span id=\"create-account-button\" class=\"float-right clickable\">+</span>".html_safe,
+      title: "Accounts <span id=\"create-account-button\" class=\"float-right\"><button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#accountform\" onclick=\"ResetAccountMenu();\" id=\"new-account-button\">+</button></span>".html_safe,
       section_layout: "left_menu/user_accounts",
       locals: { accounts: user_accounts, active_account: locals[:active_account] }
     } %>

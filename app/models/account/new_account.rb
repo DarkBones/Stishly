@@ -2,6 +2,7 @@ class Account
   class NewAccount
     def initialize(params, current_user)
       @name = params[:name]
+      @name.gsub! '.', ''
       @description = params[:description]
       @balance = params[:balance].to_f
       @currency = Money::Currency.new(params[:currency])

@@ -3,32 +3,27 @@ $(document).on('turbolinks:load', ()=> {
   // Disable the submit button
   $("#accountform").find("input[type=submit]").attr("disabled", "disabled");
 
-  // if the create account button is clicked, show the account creation menu
-  $('#create-account-button').on('click', () => {
-    ToggleCardForm('#accountmenu');
-    $(".accountmenu__name").focus();
-  });
-
-  // set a maximum length of 50 for the account creation menu
-  $('.accountmenu__name').attr('maxlength',50);
-
-  // don't allow dots in input field
-  $('#accountform input#account_name').keyup(function(e){
-    name_value = $('#accountform input#account_name').val()
-    $('#accountform input#account_name').val(name_value.replace(/\./g, ""));
-
-    // Activate submit button if name is provided
-    if (name_value.length > 0){
-      $("#accountform").find("input[type=submit]").removeAttr("disabled");
-    } else{
-      $("#accountform").find("input[type=submit]").attr("disabled", "disabled");
-    }
-  });
-
   // decide whether to show the summary account
   display_summary_account();
 
 });
+
+function UpdateAccountNameInput(inputObject) {
+  var $accountform = $();
+
+  var $input = $('#' + inputObject.id);
+  $accountform = $input.closest('#accountform');
+  var inputValue = $input.val();
+
+  // don't allow dots in input field
+  $input.val(inputValue.replace(/\./g, ""));
+
+  if (inputValue.length > 0) {
+    $accountform.find("input[type=submit]").removeAttr("disabled");
+  } else {
+    $accountform.find("input[type=submit]").attr("disabled", "disabled");
+  }
+}
 
 // if one of the accounts in the left menu is clicked, navigate to that account's page
 $(document).on('click', '.account-button', (event) => {

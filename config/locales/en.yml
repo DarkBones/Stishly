@@ -35,6 +35,8 @@ en:
   account:
     confirmations:
       confirmed: "Account successfully created"
+    instructions:
+      create: "Create an account by clicking the '+' button"
   transaction:
     confirmations:
       confirmed: "Transaction successfully created"
@@ -42,8 +44,6 @@ en:
       invalid_name: "Invalid account name"
       invalid_name_dot: "Invalid account name. Dots (.) not allowed"
       already_exists: "Account already exists"
-    instructions:
-      create: "Create an account by clicking the + button"
   dates:
     today: "Today"
     yesterday: "Yesterday"

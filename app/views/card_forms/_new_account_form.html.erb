@@ -15,7 +15,7 @@
             <div class="row py-2">
               <div class="col-12">
                 <%= f.label :name %><br />
-                <%= f.text_field :name, placeholder: "Current account", class: 'form-control' %>
+                <%= f.text_field :name, placeholder: "Current account", class: 'form-control', 'onkeyup' => 'UpdateAccountNameInput(this)' %>
               </div>
             </div>
 
