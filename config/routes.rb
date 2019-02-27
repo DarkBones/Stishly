@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   post 'accounts/:id/settings/edit', to: 'accounts#edit', as: :edit_account_settings
   get 'accounts/:id/set_default', to: 'accounts#set_default', as: :set_default_account
 
+  get 'schedules', to: 'schedules#index', as: :schedules
+
   get 'api/accounts/:id/details', to: 'api#account_details', as: :account_details
   get 'api/accounts/details', to: 'api#all_accounts_details', as: :account_all_details
   get 'api/format_currency/:amount/:currency(/:float)', to: 'api#format_currency'
