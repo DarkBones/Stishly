@@ -239,7 +239,11 @@ function resetTransactionMenu(){
   if (active_account) {
     $('#transactionform #transaction_account').val(active_account);
     $('#transactionform #transaction_from_account').val(active_account);
+  } else {
+    $("#transactionform #transaction_account").val($("#transactionform #transaction_account option:first").val());
+    $("#transactionform #transaction_from_account").val($("#transactionform #transaction_from_account option:first").val());
   }
+  $("#transactionform #transaction_to_account").val($("#transactionform #transaction_to_account option:first").val());
 
   // reset the button-group elements
   $('#transactionform #button-group').each(function(index){
