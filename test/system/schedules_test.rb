@@ -25,8 +25,19 @@ class SchedulesTest < ApplicationSystemTestCase
     assert_selector 'button#new-schedule-button', text: "New Schedule"
   end
 
-  test "new schedule form" do
+  test "open and close schedule form" do
     login_as_blank
     visit "/schedules"
+    click_on "New Schedule"
+
+    # check if the menu is visible
+    assert_selector '#scheduleform', visible: :visible
+    assert_selector '#scheduleform h5', text: 'New Schedule'
+
+    # close the menu
+    page.find("#scheduleform button.close").click
+
+    # check if menu is hidden
+    assert_selector '#transactionform', visible: :hidden
   end
 end
