@@ -6,8 +6,6 @@ $(document).on('turbolinks:load', ()=> {
   // decide whether to show the summary account
   displaySummaryAccount();
 
-  console.log(getActiveAccountName());
-
 });
 
 function updateAccountNameInput(inputObject) {

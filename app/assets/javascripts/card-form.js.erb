@@ -236,6 +236,10 @@ function resetTransactionMenu(){
   // update the active account field
   active_account = getActiveAccountName();
   $('#transactionform #active_account_field').val(active_account);
+  if (active_account) {
+    $('#transactionform #transaction_account').val(active_account);
+    $('#transactionform #transaction_from_account').val(active_account);
+  }
 
   // reset the button-group elements
   $('#transactionform #button-group').each(function(index){
@@ -267,8 +271,6 @@ function resetTransactionMenu(){
   account = $('#transactionform #single-account select').val();
   if (account) {
     $('#transactionform #transaction_active_account').val(account);
-    $('#transactionform #transaction_account').val(account);
-    $('#transactionform #transaction_from_account').val(account);
 
     $.ajax({
       type: "GET",
