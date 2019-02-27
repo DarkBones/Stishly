@@ -8,13 +8,20 @@
         </button>
       </div>
 
-      <div class="modal-body">
+      <%= form_with(model: Schedule.new) do |f| %>
+        <div class="modal-body">
+          <%= f.label :name %><br />
+          <%= f.text_field :name, placeholder: "Salary", class: 'form-control' %>
+          <%= f.label :run_every %>
+          <%= f.number_field :run_number, placeholder: "1", class: 'form-control' %>
+          <%= f.select(:period, ["days", "weeks", "months", "years"], {}, { :class => 'form-control' }) %>
+        </div>
 
-      </div>
-
-      <div class="modal-footer">
-        
-      </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit 'Create Schedule', :class => 'btn btn-primary' %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

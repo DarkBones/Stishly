@@ -40,4 +40,15 @@ class SchedulesTest < ApplicationSystemTestCase
     # check if menu is hidden
     assert_selector '#transactionform', visible: :hidden
   end
+
+  test "basic fields" do
+    login_as_blank
+    visit "/schedules"
+    click_on "New Schedule"
+
+    assert_selector '#scheduleform input#schedule_name', visible: :visible
+    assert_selector '#scheduleform input#schedule_run_number', visible: :visible
+    assert_selector '#scheduleform select#schedule_period', visible: :visible
+    assert_selector '#scheduleform input[type=submit]', visible: :visible
+  end
 end
