@@ -93,12 +93,13 @@ function UpdateBalance($target, current_balance, currency, add) {
 // inserts a transaction
 function InsertTransaction($dayDiv, time, id, account) {
   var $entries = $dayDiv.find('ul li');
+  var pageLength = <%= APP_CONFIG['ui']['transactions']['page_length'] %>;
 
   if ($entries.length == 0 || time > parseInt($entries.eq(0).attr('class'))){
     GenerateTransaction($dayDiv.find('ul'), 'prepend', id, account);
   } else if (time < parseInt($entries.eq($entries.length - 1).attr('class'))){
     GenerateTransaction($dayDiv.find('ul'), 'append', id, account);
-  } else if ($('#transactions_list li').length % 30 != 0) { // TODO: Replace 30 with endless page system parameter
+  } else if ($('#transactions_list li').length % pageLength != 0) {
     for (var i = 0; i < $entries.length; i++) {
       if (time > parseInt($entries.eq(i).attr('class'))) {
         GenerateTransaction($entries.iq(i), 'before', id, account);
@@ -141,6 +142,7 @@ function CreateDayDiv(date, days, currency){
 
 function CreateNewDayDiv(date, days, currency) {
   var account_currency = '<%= Account.get_account_or_user_currency(@params[:active_account], current_user) %>'
+  var pageLength = <%= APP_CONFIG['ui']['transactions']['page_length'] %>;
 
   dateNum = DayToNum(date);
   if(days.length == 0 || dateNum > DayToNum(days[0])){
@@ -152,7 +154,7 @@ function CreateNewDayDiv(date, days, currency) {
         break;
       }
     }
-  } else if ($('#transactions_list li').length % 30 != 0) { // TODO: Replace 30 with endless page system parameter
+  } else if ($('#transactions_list li').length % pageLength != 0) {
     GenerateDayDiv(date, $('#transactions_list'), 'append', currency);
   }
 }
