@@ -1,7 +1,14 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h2><%= @active_account.name %> Transactions <%= APP_CONFIG['test']['hur'] %></h2>
+      <h2><%= @active_account.name %>
+        <% if @active_account.is_real %>
+          -
+          <span id="account-title-balance" balance=<%= @active_account.balance %>>
+            <%= balance(@active_account.balance.to_f, Account.get_currency(@active_account), "cents") %>
+          </span>
+        <% end %>
+      </h2>
     </div>
   </div>
 
