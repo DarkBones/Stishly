@@ -49,7 +49,7 @@
                   <div class="col-12 py-2">
                     <%= f.label :account %><br />
                     <%= f.select(:account, user_accounts_array, {}, { :class => 'form-control', 'onchange' => 'changeTransactionAccount(this)' }) %>
-                    <%= f.text_field :active_account, class: 'active_account', id: 'active_account_field' %>
+                    <%= f.hidden_field :active_account, class: 'active_account', id: 'active_account_field' %>
                   </div>
 
                 </div>
