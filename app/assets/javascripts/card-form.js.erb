@@ -1,5 +1,21 @@
 var currencyChanged = false;
 
+// auto-focus on account name field
+$(document).on('show.bs.modal','#accountform', function () {
+  setTimeout(function(){ 
+    $('#accountform #account_name').trigger('focus');
+  }, 500);
+});
+
+// auto-focus on transaction description field
+$(document).on('show.bs.modal','#transactionform', function () {
+  setTimeout(function(){ 
+    $('#transactionform #transaction_description').trigger('focus');
+  }, 500);
+});
+
+
+
 function changeTransactionType(type) {
   switch(type) {
     case 'transfer':
