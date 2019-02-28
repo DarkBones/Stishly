@@ -22,3 +22,16 @@ function hideWeekday(){
   $('#scheduleform #simple-period').show();
   $('#scheduleform #weekday').hide();
 }
+
+function advancedScheduleOptions(){
+  var $advancedOptions = $("#scheduleform #schedule_advanced");
+  var $advancedOptionsToggle = $("#scheduleform #schedule_advanced_toggle");
+
+  if ($advancedOptions.is(":visible")){
+    $advancedOptions.slideUp(200);
+    $advancedOptionsToggle.text('show advanced options');
+  } else {
+    $advancedOptions.slideDown(200);
+    $advancedOptionsToggle.text('hide advanced options');
+  }
+}

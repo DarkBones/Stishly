@@ -13,21 +13,6 @@
           <div class="container">
 
             <div class="row py-2">
-              <div class="col-12 py-5 bg-primary rounded" id="type">
-
-                <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
-                  <label class="btn btn-outline-light active py-3" id="type-simple">
-                    <%= f.radio_button :type, 'simple' %>Simple
-                  </label>
-                  <label class="btn btn-outline-light py-3" id="type-advanced">
-                    <%= f.radio_button :type, 'advanced' %>Advanced
-                  </label>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="row py-2">
               <div class="col-12">
 
                 <%= f.label :name %>
@@ -91,6 +76,16 @@
                 <%= f.label :start_date %>
                 <%= f.text_field :start_date, class: 'datepicker form-control' %>
               </div>
+            </div>
+
+            <div class="row py-2">
+              <div class="col-12">
+                <button type="button" class="btn btn-link" id="schedule_advanced_toggle" onclick="advancedScheduleOptions();">show advanced options</button>
+              </div>
+            </div>
+
+            <div id="schedule_advanced" style="display: none;">
+              So advanced...
             </div>
 
           </div>
