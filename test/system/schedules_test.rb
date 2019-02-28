@@ -52,6 +52,7 @@ class SchedulesTest < ApplicationSystemTestCase
     assert_selector '#scheduleform input#schedule_name', visible: :visible
     assert_selector '#scheduleform select#schedule_period', visible: :visible
     assert_selector '#scheduleform input#schedule_period_numeric', visible: :visible
+    assert_selector '#scheduleform input#schedule_start_date', visible: :visible
     assert_selector '#scheduleform #weekday', visible: :hidden
 
     assert_selector ("#scheduleform p#period"), text: "Days"
@@ -84,6 +85,5 @@ class SchedulesTest < ApplicationSystemTestCase
     select "Days", from: "Period"
     assert_selector '#scheduleform #simple-period', visible: :visible
     assert_selector '#scheduleform #weekday', visible: :hidden
-
   end
 end
