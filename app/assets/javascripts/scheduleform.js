@@ -14,9 +14,11 @@ function changeSchedulePeriod(selectObject) {
 }
 
 function showWeekday(){
-
+  $('#scheduleform #simple-period').hide();
+  $('#scheduleform #weekday').show();
 }
 
 function hideWeekday(){
-  
+  $('#scheduleform #simple-period').show();
+  $('#scheduleform #weekday').hide();
 }

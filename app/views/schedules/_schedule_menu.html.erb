@@ -16,10 +16,10 @@
               <div class="col-12 py-5 bg-primary rounded" id="type">
 
                 <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
-                  <label class="btn btn-outline-light active py-3" onclick="changeTransactionType('expense')" id="type-simple">
+                  <label class="btn btn-outline-light active py-3" id="type-simple">
                     <%= f.radio_button :type, 'simple' %>Simple
                   </label>
-                  <label class="btn btn-outline-light py-3" onclick="changeTransactionType('income')" id="type-advanced">
+                  <label class="btn btn-outline-light py-3" id="type-advanced">
                     <%= f.radio_button :type, 'advanced' %>Advanced
                   </label>
                 </div>
@@ -45,7 +45,7 @@
               </div>
             </div>
 
-            <div class="row py-2">
+            <div class="row py-2" id="simple-period">
               <div class="col-12">
 
                 <%= f.label :every %>
@@ -54,6 +54,35 @@
                   Days
                 </p>
 
+              </div>
+            </div>
+
+            <div class="row py-2" id="weekday" style="display: none;">
+              <div class="col-12">
+
+                <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
+                  <label class="btn btn-secondary py-3">
+                    <%= f.check_box :monday %>Monday
+                  </label>
+                  <label class="btn btn-secondary py-3">
+                    <%= f.check_box :tuesday %>Tuesday
+                  </label>
+                  <label class="btn btn-secondary py-3">
+                    <%= f.check_box :wednesday %>Wednesday
+                  </label>
+                  <label class="btn btn-secondary py-3">
+                    <%= f.check_box :thursday %>Thursday
+                  </label>
+                  <label class="btn btn-secondary py-3">
+                    <%= f.check_box :friday %>Friday
+                  </label>
+                  <label class="btn btn-secondary py-3">
+                    <%= f.check_box :saturday %>Saturday
+                  </label>
+                  <label class="btn btn-secondary py-3">
+                    <%= f.check_box :sunday %>Sunday
+                  </label>
+                </div>
               </div>
             </div>
 
