@@ -3,7 +3,9 @@ $(document).on('turbolinks:load', ()=> {
   $('.datepicker').datepicker();
   
   $('.datepicker').each(function(){
-    $(this).attr({'value': get_date});
+    if (!$(this).hasClass('datepicker-null')){
+      $(this).attr({'value': get_date});
+    }
   });
 
   $('input[type="time"][value="now"]').each(function(){
