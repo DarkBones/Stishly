@@ -40,7 +40,7 @@
               <div class="col-12">
 
                 <%= f.label :period %>
-                <%= f.select(:period, ["Days", "Months", "Years", "Weekday"], {}, { :class => 'form-control' }) %>
+                <%= f.select(:period, ["Days", "Months", "Years", "Weekday"], {}, { :class => 'form-control', 'onchange' => 'changeSchedulePeriod(this)' }) %>
 
               </div>
             </div>
@@ -50,7 +50,7 @@
 
                 <%= f.label :every %>
                 <%= f.number_field :period_numeric, class: 'form-control', placeholder: "1" %>
-                <p>
+                <p id="period">
                   Days
                 </p>
 

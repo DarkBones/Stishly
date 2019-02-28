@@ -52,20 +52,22 @@ class SchedulesTest < ApplicationSystemTestCase
     assert_selector '#scheduleform input#schedule_name', visible: :visible
     assert_selector '#scheduleform select#schedule_period', visible: :visible
     assert_selector '#scheduleform input#schedule_period_numeric', visible: :visible
+
+    assert_selector ("#scheduleform p#period"), text: "Days"
   end
 
-  test "submit button disabled on empty name" do
+  test "change simple period" do
     login_as_blank
     visit "/schedules"
     click_on "New Schedule"
 
-    # Find and store the submit button
-    submit = page.find("#scheduleform input[type=submit]")
-    # Check if button is disabled correctly
-    assert submit[:disabled] == "", format_error("Save schedule button not disabled when name is blank", "disabled = true", "disabled = " + submit[:disabled].to_s)
+    select "Months", from: "Period"
+    assert_selector ("#scheduleform p#period"), text: "Months"
 
-    # Fill in a name
-    #fill_in "#schedule_name", with: "t"
-    #assert !submit[:disabled], format_error("Save schedule button disabled when name is not blank", "disabled = false", "disabled = " + submit[:disabled].to_s)
+    select "Years", from: "Period"
+    assert_selector ("#scheduleform p#period"), text: "Years"
+
+    select "Days", from: "Period"
+    assert_selector ("#scheduleform p#period"), text: "Days"
   end
 end
