@@ -10,11 +10,54 @@
 
       <%= form_with(model: Schedule.new) do |f| %>
         <div class="modal-body">
-          <%= f.label :name %><br />
-          <%= f.text_field :name, placeholder: "Salary", class: 'form-control' %>
-          <%= f.label :run_every %>
-          <%= f.number_field :run_number, placeholder: "1", class: 'form-control' %>
-          <%= f.select(:period, ["days", "weeks", "months", "years"], {}, { :class => 'form-control' }) %>
+          <div class="container">
+
+            <div class="row py-2">
+              <div class="col-12 py-5 bg-primary rounded" id="type">
+
+                <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
+                  <label class="btn btn-outline-light active py-3" onclick="changeTransactionType('expense')" id="type-simple">
+                    <%= f.radio_button :type, 'simple' %>Simple
+                  </label>
+                  <label class="btn btn-outline-light py-3" onclick="changeTransactionType('income')" id="type-advanced">
+                    <%= f.radio_button :type, 'advanced' %>Advanced
+                  </label>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row py-2">
+              <div class="col-12">
+
+                <%= f.label :name %>
+                <%= f.text_field :name, class: 'form-control', placeholder: "Payday" %>
+
+              </div>
+            </div>
+
+            <div class="row py-2">
+              <div class="col-12">
+
+                <%= f.label :period %>
+                <%= f.select(:period, ["Days", "Months", "Years", "Weekday"], {}, { :class => 'form-control' }) %>
+
+              </div>
+            </div>
+
+            <div class="row py-2">
+              <div class="col-12">
+
+                <%= f.label :every %>
+                <%= f.number_field :period_numeric, class: 'form-control', placeholder: "1" %>
+                <p>
+                  Days
+                </p>
+
+              </div>
+            </div>
+
+          </div>
         </div>
 
         <div class="modal-footer">

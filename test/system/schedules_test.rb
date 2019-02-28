@@ -41,14 +41,31 @@ class SchedulesTest < ApplicationSystemTestCase
     assert_selector '#transactionform', visible: :hidden
   end
 
-  test "basic fields" do
+  test "default fields" do
     login_as_blank
     visit "/schedules"
     click_on "New Schedule"
 
+    assert_selector ("#scheduleform #type-simple"), text: "Simple"
+    assert_selector ("#scheduleform #type-advanced"), text: "Advanced"
+
     assert_selector '#scheduleform input#schedule_name', visible: :visible
-    assert_selector '#scheduleform input#schedule_run_number', visible: :visible
     assert_selector '#scheduleform select#schedule_period', visible: :visible
-    assert_selector '#scheduleform input[type=submit]', visible: :visible
+    assert_selector '#scheduleform input#schedule_period_numeric', visible: :visible
+  end
+
+  test "submit button disabled on empty name" do
+    login_as_blank
+    visit "/schedules"
+    click_on "New Schedule"
+
+    # Find and store the submit button
+    submit = page.find("#scheduleform input[type=submit]")
+    # Check if button is disabled correctly
+    assert submit[:disabled] == "", format_error("Save schedule button not disabled when name is blank", "disabled = true", "disabled = " + submit[:disabled].to_s)
+
+    # Fill in a name
+    #fill_in "#schedule_name", with: "t"
+    #assert !submit[:disabled], format_error("Save schedule button disabled when name is not blank", "disabled = false", "disabled = " + submit[:disabled].to_s)
   end
 end
