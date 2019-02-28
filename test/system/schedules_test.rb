@@ -103,7 +103,6 @@ class SchedulesTest < ApplicationSystemTestCase
     assert_selector '#scheduleform input#schedule_end_date', visible: :visible
     assert page.find("#scheduleform input#schedule_end_date").value == "", format_error("Incorrect end date shown", "", page.find("#scheduleform input#schedule_end_date").value)
 
-    
 
     click_on "hide advanced options"
     assert_selector '#scheduleform #schedule_advanced', visible: :hidden
