@@ -151,3 +151,24 @@ hr.form-divider {
   margin-left: -10px;
   margin-top: 10px;
 }
+
+#scheduleform #daypicker {
+  table {
+    width: 100%;
+    text-align: center;
+    td {
+      height: 50px;
+      border: 1px solid blue;
+      &:hover {
+        background-color: gray;
+      }
+      &.active {
+        background-color: blue;
+        &:hover{
+          background-color: red;
+        }
+      }
+    }
+  }
+}
+
