@@ -12,7 +12,7 @@
         <div class="modal-body">
           <div class="container">
             <div class = "row">
-              <div class = "col-12 col-lg-6 col-xl-7 px-2 px-sm-5 border-right">
+              <div class = "col-12 col-lg-7 col-xl-7 px-2 px-sm-5 border-right">
 
                 <div class="row py-2">
                   <div class="col-12">
@@ -65,7 +65,7 @@
                         <%= f.select(:days, ["Pick manually", "Every ...", "Every first ...", "Every last ...", "Every second ...", "Every third ...", "Every fourth ..."], {}, { :class => 'form-control', 'onchange' => 'changeScheduleDays(this)' }) %>
                       </div>
                       <div class="col-6">
-                        <%= f.select(:days2, ["Day", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], {}, { :class => 'form-control' }) %>
+                        <%= f.select(:days2, ["Day", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], {}, { :class => 'form-control', :style => 'display:none;' }) %>
                       </div>
                     </div>
 
@@ -129,10 +129,45 @@
                       <%= f.text_field :end_date, class: 'datepicker datepicker-null form-control' %>
                     </div>
                   </div>
+
+                  <div class="row py2">
+                    <div class="col-12">
+                      <%= f.label :run_only_on %>
+                    </div>
+                  </div>
+
+                  <div class="row py-2" id="weekday-exclude">
+                    <div class="col-12">
+
+                      <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
+                        <label class="btn btn-secondary py-3 active" id="weekday-exclude-mon">
+                          <%= f.check_box :mon, checked: true %>Mon
+                        </label>
+                        <label class="btn btn-secondary py-3 active" id="weekday-exclude-tue">
+                          <%= f.check_box :tue, checked: true %>Tue
+                        </label>
+                        <label class="btn btn-secondary py-3 active" id="weekday-exclude-wed">
+                          <%= f.check_box :wed, checked: true %>Wed
+                        </label>
+                        <label class="btn btn-secondary py-3 active" id="weekday-exclude-thu">
+                          <%= f.check_box :thu, checked: true %>Thu
+                        </label>
+                        <label class="btn btn-secondary py-3 active" id="weekday-exclude-fri">
+                          <%= f.check_box :fri, checked: true %>Fri
+                        </label>
+                        <label class="btn btn-secondary py-3 active" id="weekday-exclude-sat">
+                          <%= f.check_box :sat, checked: true %>Sat
+                        </label>
+                        <label class="btn btn-secondary py-3 active" id="weekday-exclude-sun">
+                          <%= f.check_box :sun, checked: true %>Sun
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
               </div>
-              <div class="col-12 col-lg-6 col-xl-7 px-2 px-sm-5 border-right">
+              <div class="col-12 col-lg-5 col-xl-5 px-2 px-sm-5 border-right">
                 <div class="row py2">
                   <div class="col-12">
                     <p>Next occurrences</p>
