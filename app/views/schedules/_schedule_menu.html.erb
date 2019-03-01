@@ -58,6 +58,15 @@
               <div class="col-12">
 
                 <%= f.label :days %>
+                <div class="row">
+                  <div class="col-6">
+                    <%= f.select(:days, ["Pick manually", "Every ...", "Every first ...", "Every last ...", "Every second ...", "Every third ...", "Every fourth ..."], {}, { :class => 'form-control', 'onchange' => 'changeScheduleDays(this)' }) %>
+                  </div>
+                  <div class="col-6">
+                    <%= f.select(:days2, ["Day", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], {}, { :class => 'form-control' }) %>
+                  </div>
+                </div>
+
                 <div id="daypicker">
                   <table>
                     <tr>

@@ -22,6 +22,32 @@ function changeSchedulePeriod(selectObject) {
   }
 }
 
+function changeScheduleDays(selectObject){
+  var val = ""
+
+  val = selectObject.value;
+
+  switch (val.toLowerCase()) {
+    case 'pick manually':
+      console.log(val);
+      showDaypicker();
+      $('#scheduleform #schedule_days2').hide();
+      break;
+    default:
+      hideDaypicker();
+      $('#scheduleform #schedule_days2').show();
+  }
+}
+
+function showDaypicker(){
+  var $daypicker = $("#scheduleform #daypicker")
+  $daypicker.show();
+}
+function hideDaypicker(){
+  var $daypicker = $("#scheduleform #daypicker")
+  $daypicker.hide();
+}
+
 function showWeekday(){
   $('#scheduleform #simple-period').hide();
   $('#scheduleform #weekday').show();
