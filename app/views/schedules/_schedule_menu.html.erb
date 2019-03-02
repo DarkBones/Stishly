@@ -62,10 +62,10 @@
                     <%= f.label :days %>
                     <div class="row">
                       <div class="col-6">
-                        <%= f.select(:days, ["Pick manually", "Every ...", "Every first ...", "Every last ...", "Every second ...", "Every third ...", "Every fourth ..."], {}, { :class => 'form-control', 'onchange' => 'changeScheduleDays(this)' }) %>
+                        <%= f.select(:days, ["Pick manually", "Every first ...", "Every last ...", "Every second ...", "Every third ...", "Every fourth ..."], {}, { :class => 'form-control', 'onchange' => 'changeScheduleDays(this)' }) %>
                       </div>
                       <div class="col-6">
-                        <%= f.select(:days2, ["Day", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], {}, { :class => 'form-control', :style => 'display:none;' }) %>
+                        <%= f.select(:days2, ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], {}, { :class => 'form-control', :style => 'display:none;', 'onchange' => 'changeScheduleDays(this)' }) %>
                       </div>
                     </div>
 
@@ -76,7 +76,7 @@
                             <% if (i-1) % 7 == 0 %>
                               </tr><tr>
                             <% end %>
-                            <td onclick="schedulePickDate(this)"><%= i %></td>
+                            <td onclick="schedulePickDate(this, $('#scheduleform #schedule_dates_picked'))"><%= i %></td>
                           <% end %>
                         </tr>
                       </table>
@@ -132,7 +132,7 @@
 
                   <div class="row py2">
                     <div class="col-12">
-                      <%= f.label :run_only_on %>
+                      <%= f.label :exclude %>
                     </div>
                   </div>
 
@@ -140,31 +140,48 @@
                     <div class="col-12">
 
                       <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
-                        <label class="btn btn-secondary py-3 active" id="weekday-exclude-mon">
-                          <%= f.check_box :mon, checked: true %>Mon
+                        <label class="btn btn-secondary py-3" id="weekday-exclude-mon">
+                          <%= f.check_box :mon %>Mon
                         </label>
-                        <label class="btn btn-secondary py-3 active" id="weekday-exclude-tue">
-                          <%= f.check_box :tue, checked: true %>Tue
+                        <label class="btn btn-secondary py-3" id="weekday-exclude-tue">
+                          <%= f.check_box :tue %>Tue
                         </label>
-                        <label class="btn btn-secondary py-3 active" id="weekday-exclude-wed">
-                          <%= f.check_box :wed, checked: true %>Wed
+                        <label class="btn btn-secondary py-3" id="weekday-exclude-wed">
+                          <%= f.check_box :wed %>Wed
                         </label>
-                        <label class="btn btn-secondary py-3 active" id="weekday-exclude-thu">
-                          <%= f.check_box :thu, checked: true %>Thu
+                        <label class="btn btn-secondary py-3" id="weekday-exclude-thu">
+                          <%= f.check_box :thu %>Thu
                         </label>
-                        <label class="btn btn-secondary py-3 active" id="weekday-exclude-fri">
-                          <%= f.check_box :fri, checked: true %>Fri
+                        <label class="btn btn-secondary py-3" id="weekday-exclude-fri">
+                          <%= f.check_box :fri %>Fri
                         </label>
-                        <label class="btn btn-secondary py-3 active" id="weekday-exclude-sat">
-                          <%= f.check_box :sat, checked: true %>Sat
+                        <label class="btn btn-secondary py-3" id="weekday-exclude-sat">
+                          <%= f.check_box :sat %>Sat
                         </label>
-                        <label class="btn btn-secondary py-3 active" id="weekday-exclude-sun">
-                          <%= f.check_box :sun, checked: true %>Sun
+                        <label class="btn btn-secondary py-3" id="weekday-exclude-sun">
+                          <%= f.check_box :sun %>Sun
                         </label>
                       </div>
+
                     </div>
                   </div>
-                </div>
+
+                  <div class="row py-2" id="daypicker-exclude" style="display: none">
+                    <div class="col-12">
+                      <table>
+                        <tr>
+                          <% for i in 1..31 do %>
+                            <% if (i-1) % 7 == 0 %>
+                              </tr><tr>
+                            <% end %>
+                            <td onclick="schedulePickDate(this, $('#scheduleform #schedule_dates_picked_exclude'))"><%= i %></td>
+                          <% end %>
+                        </tr>
+                      </table>
+                    </div>
+                    <%= f.text_field :dates_picked_exclude, class: 'form-control' %>
+                    </div>
+                  </div>
 
               </div>
               <div class="col-12 col-lg-5 col-xl-5 px-2 px-sm-5 border-right">

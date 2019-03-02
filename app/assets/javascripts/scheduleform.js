@@ -1,5 +1,5 @@
 function changeSchedulePeriod(selectObject) {
-  var val = ""
+  var val = "";
 
   val = selectObject.value;
 
@@ -23,29 +23,39 @@ function changeSchedulePeriod(selectObject) {
 }
 
 function changeScheduleDays(selectObject){
-  var val = ""
+  var val = "";
+  var $scheduleDays2 = $('#scheduleform #schedule_days2');
 
   val = selectObject.value;
 
   switch (val.toLowerCase()) {
     case 'pick manually':
-      console.log(val);
       showDaypicker();
-      $('#scheduleform #schedule_days2').hide();
+      $scheduleDays2.hide();
       break;
     default:
       hideDaypicker();
-      $('#scheduleform #schedule_days2').show();
+      $scheduleDays2.show();
   }
 }
 
 function showDaypicker(){
-  var $daypicker = $("#scheduleform #daypicker")
+  var $daypicker = $("#scheduleform #daypicker");
+  var $daypickerExclude = $("#scheduleform #daypicker-exclude");
+  var $weekdayExclude = $("#scheduleform #weekday-exclude");
+
   $daypicker.show();
+  $daypickerExclude.hide();
+  $weekdayExclude.show();
 }
 function hideDaypicker(){
-  var $daypicker = $("#scheduleform #daypicker")
+  var $daypicker = $("#scheduleform #daypicker");
+  var $daypickerExclude = $("#scheduleform #daypicker-exclude");
+  var $weekdayExclude = $("#scheduleform #weekday-exclude");
+
   $daypicker.hide();
+  $daypickerExclude.show();
+  $weekdayExclude.hide();
 }
 
 function showWeekday(){
@@ -71,9 +81,9 @@ function advancedScheduleOptions(){
   }
 }
 
-function schedulePickDate(date) {
+function schedulePickDate(date, $datesPicked) {
   var is_active = false;
-  var $datesPicked = $('#scheduleform #schedule_dates_picked');
+  //var $datesPicked = $('#scheduleform #schedule_dates_picked');
   var dates = $datesPicked.val().split(' ');
   var index = -1;
   var value = $(date).text();
