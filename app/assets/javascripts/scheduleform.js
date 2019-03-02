@@ -22,6 +22,21 @@ function changeSchedulePeriod(selectObject) {
   }
 }
 
+function changeScheduleExclusionMet(selectObject){
+  var val = "";
+  var $exlusionMet2 = $('#scheduleform #schedule_exclusion_met2');
+
+  val = selectObject.value;
+
+  switch (val.toLowerCase()) {
+    case 'don\'t run':
+      $exlusionMet2.hide();
+      break;
+    default:
+      $exlusionMet2.show();
+  }
+}
+
 function changeScheduleDays(selectObject){
   var val = "";
   var $scheduleDays2 = $('#scheduleform #schedule_days2');
