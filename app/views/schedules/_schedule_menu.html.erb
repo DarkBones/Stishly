@@ -127,7 +127,7 @@
                   </div>
                   <div class="row">
                     <div class="col-6">
-                      <%= f.select(:exclusion_met1, ["Don't run", "Run on the previous", "Run on the next"], {}, { :class => 'form-control', 'onchange' => 'changeScheduleExclusionMet(this)' }) %>
+                      <%= f.select(:exclusion_met1, ["Don't run", "Run on the previous ...", "Run on the next ..."], {}, { :class => 'form-control', 'onchange' => 'changeScheduleExclusionMet(this)' }) %>
                     </div>
                     <div class="col-6">
                       <%= f.select(:exclusion_met2, ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], {}, { :class => 'form-control', :style => 'display:none;' }) %>
