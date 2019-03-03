@@ -120,5 +120,5 @@ function schedulePickDate(date, $datesPicked) {
 }
 
 function resetScheduleMenu(){
-
+  
 }
