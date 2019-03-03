@@ -46,13 +46,17 @@
 
                 <div class="row py-2" class="schedule-simple-period">
                   <div class="col-12">
-
                     <%= f.label :run_every %>
+                  </div>
+                </div>
+                <div class="row" class="schedule-simple-period">
+                  <div class="col-6">
                     <%= f.number_field :run_every, class: 'form-control', value: "1" %>
+                  </div>
+                  <div class="col-6 px-0 py-2">
                     <p id="period">
                       Days
                     </p>
-
                   </div>
                 </div>
 
@@ -98,6 +102,7 @@
                       <%= f.text_field :end_date, class: 'datepicker datepicker-null form-control' %>
                     </div>
                   </div>
+                  
 
                   <div class="row py2">
                     <div class="col-12">
@@ -134,8 +139,7 @@
                     </div>
                   </div>
 
-
-                  </div>
+                </div>
 
               </div>
               <div class="col-12 col-lg-5 col-xl-5 px-2 px-sm-5 border-right">
