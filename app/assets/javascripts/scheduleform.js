@@ -44,7 +44,7 @@ function changeScheduleDays(selectObject){
   val = selectObject.value;
 
   switch (val.toLowerCase()) {
-    case 'pick manually':
+    case 'specific dates':
       showDaypicker();
       $scheduleDays2.hide();
       break;
