@@ -62,7 +62,7 @@
                     <%= f.label :days %>
                     <div class="row">
                       <div class="col-6">
-                        <%= f.select(:days, ["Pick manually", "Every first ...", "Every last ...", "Every second ...", "Every third ...", "Every fourth ..."], {}, { :class => 'form-control', 'onchange' => 'changeScheduleDays(this)' }) %>
+                        <%= f.select(:days, ["Specific dates", "Every first ...", "Every last ...", "Every second ...", "Every third ...", "Every fourth ..."], {}, { :class => 'form-control', 'onchange' => 'changeScheduleDays(this)' }) %>
                       </div>
                       <div class="col-6">
                         <%= f.select(:days2, ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], {}, { :class => 'form-control', :style => 'display:none;', 'onchange' => 'changeScheduleDays(this)' }) %>

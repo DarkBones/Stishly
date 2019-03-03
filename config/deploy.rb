@@ -8,7 +8,7 @@ require 'mina/rvm'
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :application_name, 'rails-demo'
+set :application_name, 'stishly'
 set :domain, '68.183.41.157'
 set :user, fetch(:application_name)
 set :deploy_to, "/home/#{fetch(:user)}/app"
