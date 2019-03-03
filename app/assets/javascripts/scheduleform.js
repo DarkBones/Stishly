@@ -74,12 +74,12 @@ function hideDaypicker(){
 }
 
 function showWeekday(){
-  $('#scheduleform #simple-period').hide();
+  $('#scheduleform .schedule-simple-period').hide();
   $('#scheduleform #weekday').show();
 }
 
 function hideWeekday(){
-  $('#scheduleform #simple-period').show();
+  $('#scheduleform .schedule-simple-period').show();
   $('#scheduleform #weekday').hide();
 }
 
