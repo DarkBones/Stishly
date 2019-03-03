@@ -81,29 +81,7 @@
                 <div class="row py-2" id="weekday" style="display: none;">
                   <div class="col-12">
 
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
-                      <label class="btn btn-secondary py-3" id="weekday-monday">
-                        <%= f.check_box :monday %>Monday
-                      </label>
-                      <label class="btn btn-secondary py-3" id="weekday-tuesday">
-                        <%= f.check_box :tuesday %>Tuesday
-                      </label>
-                      <label class="btn btn-secondary py-3" id="weekday-wednesday">
-                        <%= f.check_box :wednesday %>Wednesday
-                      </label>
-                      <label class="btn btn-secondary py-3" id="weekday-thursday">
-                        <%= f.check_box :thursday %>Thursday
-                      </label>
-                      <label class="btn btn-secondary py-3" id="weekday-friday">
-                        <%= f.check_box :friday %>Friday
-                      </label>
-                      <label class="btn btn-secondary py-3" id="weekday-saturday">
-                        <%= f.check_box :saturday %>Saturday
-                      </label>
-                      <label class="btn btn-secondary py-3" id="weekday-sunday">
-                        <%= f.check_box :sunday %>Sunday
-                      </label>
-                    </div>
+                    <%= render partial: 'schedules/weekday_picker', :locals => {:id_prefix => 'weekday', :f => f} %>
                   </div>
                 </div>
 
@@ -130,29 +108,7 @@
                   <div class="row py-2" id="weekday-exclude">
                     <div class="col-12">
 
-                      <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
-                        <label class="btn btn-secondary py-3" id="weekday-exclude-mon">
-                          <%= f.check_box :mon %>Mon
-                        </label>
-                        <label class="btn btn-secondary py-3" id="weekday-exclude-tue">
-                          <%= f.check_box :tue %>Tue
-                        </label>
-                        <label class="btn btn-secondary py-3" id="weekday-exclude-wed">
-                          <%= f.check_box :wed %>Wed
-                        </label>
-                        <label class="btn btn-secondary py-3" id="weekday-exclude-thu">
-                          <%= f.check_box :thu %>Thu
-                        </label>
-                        <label class="btn btn-secondary py-3" id="weekday-exclude-fri">
-                          <%= f.check_box :fri %>Fri
-                        </label>
-                        <label class="btn btn-secondary py-3" id="weekday-exclude-sat">
-                          <%= f.check_box :sat %>Sat
-                        </label>
-                        <label class="btn btn-secondary py-3" id="weekday-exclude-sun">
-                          <%= f.check_box :sun %>Sun
-                        </label>
-                      </div>
+                      <%= render partial: 'schedules/weekday_picker', :locals => {:id_prefix => 'weekday-exclude', :f => f} %>
 
                     </div>
                   </div>
