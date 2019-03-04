@@ -119,6 +119,14 @@ function schedulePickDate(date, $datesPicked) {
   $datesPicked.val(dates.join(' '));
 }
 
+function changeScheduleType(type){
+  if (type == 'simple'){
+    $('.schedule-advanced').hide();
+  } else {
+    $('.schedule-advanced').show();
+  }
+}
+
 function resetScheduleMenu(){
-  
+  changeScheduleType('simple');
 }

@@ -16,6 +16,22 @@
               <div class = "col-12 col-lg-7 col-xl-7 px-2 px-sm-5 border-right">
 
                 <div class="row py-2">
+                  <div class="col-12 py-5 bg-primary rounded" id="type">
+
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
+                      <label class="btn btn-outline-light active py-3" onclick="changeScheduleType('simple')" id="type-simple">
+                        <%= f.radio_button :type, 'expense' %>Simple
+                      </label>
+                      <label class="btn btn-outline-light py-3" onclick="changeScheduleType('advanced')" id="type-advanced">
+                        <%= f.radio_button :type, 'income' %>Advanced
+                      </label>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="row py-2">
                   <div class="col-12">
 
                     <%= f.label :name %>
@@ -62,7 +78,7 @@
                 </div>
 
                 <div class="row py-2" class="schedule-simple-period">
-                  <div class="col-12">
+                  <div class="col-12 schedule-advanced">
 
                     <%= f.label :days %>
                     <div class="row">
@@ -90,7 +106,7 @@
                   </div>
                 </div>
 
-                <div class="row py-2">
+                <div class="row py-2 schedule-advanced">
                   <div class="col-12">
                     <button type="button" class="btn btn-link" id="schedule_advanced_toggle" onclick="advancedScheduleOptions();">show advanced options</button>
                   </div>
