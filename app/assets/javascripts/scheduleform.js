@@ -127,14 +127,28 @@ function schedulePickDate(date, $datesPicked) {
 
 function changeScheduleType(type){
   if (type == 'simple'){
-    $('.schedule-advanced').hide();
+    $('#scheduleform .schedule-advanced').hide();
   } else {
-    $('.schedule-advanced').show();
+    $('#scheduleform .schedule-advanced').show();
   }
 }
 
 function resetScheduleMenu(){
-  changeScheduleType('simple');
   $('#scheduleform #schedule_schedule').val('Monthly');
   changeSchedulePeriod('monthly');
+  changeScheduleType('simple');
+
+  // reset the button-group elements
+  $('#scheduleform #button-group').each(function(index){
+    $(this).find('input').each(function(i){
+      $(this).prop("checked", i==0)
+    });
+    $(this).find('label').each(function(i){
+      if(i == 0){
+        $(this).addClass('active');
+      } else {
+        $(this).removeClass('active');
+      }
+    });
+  });
 }
