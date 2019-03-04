@@ -56,7 +56,7 @@
                   <div class="col-12">
 
                     <%= f.label :schedule %>
-                    <%= f.select(:schedule, ["Daily", "Weekly", "Monthly", "Annually"], {}, { :class => 'form-control', 'onchange' => 'changeSchedulePeriod(this)' }) %>
+                    <%= f.select(:schedule, ["Daily", "Weekly", "Monthly", "Annually"], {}, { :class => 'form-control', 'onchange' => 'changeSchedulePeriod(this.value)' }) %>
 
                   </div>
                 </div>
@@ -77,13 +77,13 @@
                   </div>
                 </div>
 
-                <div class="row py-2" class="schedule-simple-period">
-                  <div class="col-12 schedule-advanced">
+                <div class="row py-2" class="schedule-simple-period schedule-advanced">
+                  <div class="col-12 schedule-advanced monthly">
 
                     <%= f.label :days %>
                     <div class="row">
                       <div class="col-6">
-                        <%= f.select(:days, ["Specific dates", "Every first ...", "Every last ...", "Every second ...", "Every third ...", "Every fourth ..."], {}, { :class => 'form-control', 'onchange' => 'changeScheduleDays(this)' }) %>
+                        <%= f.select(:days, ["Specific dates", "Every first ...", "Every last ...", "Every second ...", "Every third ...", "Every fourth ..."], {}, { :class => 'form-control', 'onchange' => 'changeScheduleDays(this.value)' }) %>
                       </div>
                       <div class="col-6">
                         <%= f.select(:days2, ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], {}, { :class => 'form-control', :style => 'display:none;', 'onchange' => 'changeScheduleDays(this)' }) %>
@@ -94,13 +94,13 @@
                       <%= render partial: 'schedules/date_picker', :locals => {:input_target => '#schedule_dates_picked'} %>
                     </div>
 
-                    <%= f.text_field :dates_picked, class: 'form-control' %>
+                    <%= f.hidden_field :dates_picked, class: 'form-control' %>
                   </div>
                 </div>
 
 
                 <div class="row py-2" id="weekday" style="display: none;">
-                  <div class="col-12">
+                  <div class="col-12 weekly">
 
                     <%= render partial: 'schedules/weekday_picker', :locals => {:id_prefix => 'weekday', :f => f} %>
                   </div>
@@ -113,7 +113,7 @@
                 </div>
 
                 <div id="schedule_advanced" style="display: none;">
-                  <div class="row py-2" id="start-date">
+                  <div class="row py-2" id="end-date">
                     <div class="col-12">
                       <%= f.label :end_date %>
                       <%= f.text_field :end_date, class: 'datepicker datepicker-null form-control' %>
@@ -127,7 +127,7 @@
                     </div>
                   </div>
 
-                  <div class="row py-2" id="weekday-exclude">
+                  <div class="row py-2 monthly" id="weekday-exclude">
                     <div class="col-12">
 
                       <%= render partial: 'schedules/weekday_picker', :locals => {:id_prefix => 'weekday-exclude', :f => f} %>
@@ -135,11 +135,11 @@
                     </div>
                   </div>
 
-                  <div class="row py-2" id="daypicker-exclude" style="display: none">
+                  <div class="row py-2 monthly" id="daypicker-exclude" style="display: none">
                     <div class="col-12">
                       <%= render partial: 'schedules/date_picker', :locals => {:input_target => '#schedule_dates_picked_exclude'} %>
                     </div>
-                    <%= f.text_field :dates_picked_exclude, class: 'form-control' %>
+                    <%= f.hidden_field :dates_picked_exclude, class: 'form-control' %>
                   </div>
 
                   <div class="row py-2">
@@ -149,10 +149,10 @@
                   </div>
                   <div class="row">
                     <div class="col-6">
-                      <%= f.select(:exclusion_met1, ["Don't run", "Run on the previous ...", "Run on the next ..."], {}, { :class => 'form-control', 'onchange' => 'changeScheduleExclusionMet(this)' }) %>
+                      <%= f.select(:exclusion_met1, ["Don't run", "Run on the previous ...", "Run on the next ..."], {}, { :class => 'form-control', 'onchange' => 'changeScheduleExclusionMet(this.value)' }) %>
                     </div>
                     <div class="col-6">
-                      <%= f.select(:exclusion_met2, ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], {}, { :class => 'form-control', :style => 'display:none;' }) %>
+                      <%= f.select(:exclusion_met2, ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], {}, { :class => 'form-control monthly', :style => 'display:none;' }) %>
                     </div>
                   </div>
 

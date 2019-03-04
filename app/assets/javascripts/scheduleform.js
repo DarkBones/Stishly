@@ -1,20 +1,32 @@
-function changeSchedulePeriod(selectObject) {
-  var val = "";
-
-  val = selectObject.value;
-
+function changeSchedulePeriod(val) {
   switch (val.toLowerCase()) {
     case 'daily':
       $('#scheduleform p#period').text('Days');
+      $('#scheduleform .daily').show();
+      $('#scheduleform .weekly').hide();
+      $('#scheduleform .monthly').hide();
+      $('#scheduleform .annually').hide();
       break;
     case 'weekly':
       $('#scheduleform p#period').text('Weeks');
+      $('#scheduleform .daily').hide();
+      $('#scheduleform .weekly').show();
+      $('#scheduleform .monthly').hide();
+      $('#scheduleform .annually').hide();
       break;
     case 'monthly':
       $('#scheduleform p#period').text('Months');
+      $('#scheduleform .daily').hide();
+      $('#scheduleform .weekly').hide();
+      $('#scheduleform .monthly').show();
+      $('#scheduleform .annually').hide();
       break;
     case 'annually':
       $('#scheduleform p#period').text('Years');
+      $('#scheduleform .daily').hide();
+      $('#scheduleform .weekly').hide();
+      $('#scheduleform .monthly').hide();
+      $('#scheduleform .annually').show();
       break;
     default:
       //hideWeekday();
@@ -22,11 +34,8 @@ function changeSchedulePeriod(selectObject) {
   }
 }
 
-function changeScheduleExclusionMet(selectObject){
-  var val = "";
+function changeScheduleExclusionMet(val){
   var $exlusionMet2 = $('#scheduleform #schedule_exclusion_met2');
-
-  val = selectObject.value;
 
   switch (val.toLowerCase()) {
     case 'don\'t run':
@@ -37,11 +46,8 @@ function changeScheduleExclusionMet(selectObject){
   }
 }
 
-function changeScheduleDays(selectObject){
-  var val = "";
+function changeScheduleDays(val){
   var $scheduleDays2 = $('#scheduleform #schedule_days2');
-
-  val = selectObject.value;
 
   switch (val.toLowerCase()) {
     case 'specific dates':
@@ -129,4 +135,6 @@ function changeScheduleType(type){
 
 function resetScheduleMenu(){
   changeScheduleType('simple');
+  $('#scheduleform #schedule_schedule').val('Monthly');
+  changeSchedulePeriod('monthly');
 }
