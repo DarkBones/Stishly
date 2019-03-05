@@ -109,56 +109,60 @@
                   </div>
                 </div>
 
-                <div class="row py-2 schedule-advanced">
-                  <div class="col-12">
-                    <button type="button" class="btn btn-link" id="schedule_advanced_toggle" onclick="advancedScheduleOptions();">show advanced options</button>
-                  </div>
-                </div>
-
-                <div id="schedule_advanced" style="display: none;" class="schedule-advanced">
-                  <div class="row py-2" id="end-date">
+                <div class="schedule-advanced">
+                  <div class="row py-2">
                     <div class="col-12">
-                      <%= f.label :end_date %>
-                      <%= f.text_field :end_date, class: 'datepicker datepicker-null form-control' %>
-                    </div>
-                  </div>
-                  
-
-                  <div class="row py2 monthly">
-                    <div class="col-12">
-                      <%= f.label :exclude %>
+                      <button type="button" class="btn btn-link" id="schedule_advanced_toggle" onclick="advancedScheduleOptions();">show advanced options</button>
                     </div>
                   </div>
 
-                  <div class="row py-2 monthly" id="weekday-exclude">
-                    <div class="col-12">
-
-                      <%= render partial: 'schedules/weekday_picker', :locals => {:id_prefix => 'weekday-exclude', :f => f} %>
-
+                  <div id="schedule_advanced" style="display: none;">
+                    <div class="row py-2" id="end-date">
+                      <div class="col-12">
+                        <%= f.label :end_date %>
+                        <%= f.text_field :end_date, class: 'datepicker datepicker-null form-control' %>
+                      </div>
                     </div>
+                    
+
+                    <div class="row py2 monthly">
+                      <div class="col-12">
+                        <%= f.label :exclude %>
+                      </div>
+                    </div>
+
+                    <div class="monthly">
+                      <div class="row py-2" id="weekday-exclude">
+                        <div class="col-12">
+
+                          <%= render partial: 'schedules/weekday_picker', :locals => {:id_prefix => 'weekday-exclude', :f => f} %>
+
+                        </div>
+                      </div>
+
+                      <div class="row py-2" id="daypicker-exclude" style="display: none">
+                        <div class="col-12">
+                          <%= render partial: 'schedules/date_picker', :locals => {:input_target => '#schedule_dates_picked_exclude'} %>
+                        </div>
+                        <%= f.hidden_field :dates_picked_exclude, class: 'form-control' %>
+                      </div>
+                    </div>
+
+                    <div class="row py-2 monthly">
+                      <div class="col-12">
+                        <%= f.label :if_exclusion_met %>
+                      </div>
+                    </div>
+                    <div class="row monthly">
+                      <div class="col-6">
+                        <%= f.select(:exclusion_met1, ["Don't run", "Run on the previous ...", "Run on the next ..."], {}, { :class => 'form-control', 'onchange' => 'changeScheduleExclusionMet(this.value)' }) %>
+                      </div>
+                      <div class="col-6">
+                        <%= f.select(:exclusion_met2, ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], {}, { :class => 'form-control monthly', :style => 'display:none;' }) %>
+                      </div>
+                    </div>
+
                   </div>
-
-                  <div class="row py-2 monthly" id="daypicker-exclude" style="display: none">
-                    <div class="col-12">
-                      <%= render partial: 'schedules/date_picker', :locals => {:input_target => '#schedule_dates_picked_exclude'} %>
-                    </div>
-                    <%= f.hidden_field :dates_picked_exclude, class: 'form-control' %>
-                  </div>
-
-                  <div class="row py-2 monthly">
-                    <div class="col-12">
-                      <%= f.label :if_exclusion_met %>
-                    </div>
-                  </div>
-                  <div class="row monthly">
-                    <div class="col-6">
-                      <%= f.select(:exclusion_met1, ["Don't run", "Run on the previous ...", "Run on the next ..."], {}, { :class => 'form-control', 'onchange' => 'changeScheduleExclusionMet(this.value)' }) %>
-                    </div>
-                    <div class="col-6">
-                      <%= f.select(:exclusion_met2, ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], {}, { :class => 'form-control monthly', :style => 'display:none;' }) %>
-                    </div>
-                  </div>
-
                 </div>
 
               </div>
