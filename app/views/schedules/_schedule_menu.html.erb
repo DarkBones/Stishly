@@ -13,7 +13,7 @@
           <div class="container">
 
             <div class = "row">
-              <div class = "col-12 col-lg-7 col-xl-7 px-2 px-sm-5 border-right">
+              <div class = "col-12 col-lg-7 col-xl-7 px-3 px-xl-5 border-right">
 
                 <div class="row py-2">
                   <div class="col-12 py-5 bg-primary rounded" id="type">
@@ -77,24 +77,26 @@
                   </div>
                 </div>
 
-                <div class="row py-2" class="schedule-simple-period schedule-advanced">
-                  <div class="col-12 schedule-advanced monthly">
+                <div class="schedule-advanced">
+                  <div class="row py-2 schedule-simple-period monthly">
+                    <div class="col-12">
 
-                    <%= f.label :days %>
-                    <div class="row">
-                      <div class="col-6">
-                        <%= f.select(:days, ["Specific dates", "Every first ...", "Every last ...", "Every second ...", "Every third ...", "Every fourth ..."], {}, { :class => 'form-control', 'onchange' => 'changeScheduleDays(this.value)' }) %>
+                      <%= f.label :days %>
+                      <div class="row">
+                        <div class="col-6">
+                          <%= f.select(:days, ["Specific dates", "Every first ...", "Every last ...", "Every second ...", "Every third ...", "Every fourth ..."], {}, { :class => 'form-control', 'onchange' => 'changeScheduleDays(this.value)' }) %>
+                        </div>
+                        <div class="col-6">
+                          <%= f.select(:days2, ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], {}, { :class => 'form-control', :style => 'display:none;', 'onchange' => 'changeScheduleDays(this)' }) %>
+                        </div>
                       </div>
-                      <div class="col-6">
-                        <%= f.select(:days2, ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], {}, { :class => 'form-control', :style => 'display:none;', 'onchange' => 'changeScheduleDays(this)' }) %>
+
+                      <div id="daypicker">
+                        <%= render partial: 'schedules/date_picker', :locals => {:input_target => '#schedule_dates_picked'} %>
                       </div>
-                    </div>
 
-                    <div id="daypicker">
-                      <%= render partial: 'schedules/date_picker', :locals => {:input_target => '#schedule_dates_picked'} %>
+                      <%= f.hidden_field :dates_picked, class: 'form-control' %>
                     </div>
-
-                    <%= f.hidden_field :dates_picked, class: 'form-control' %>
                   </div>
                 </div>
 
@@ -112,7 +114,7 @@
                   </div>
                 </div>
 
-                <div id="schedule_advanced" style="display: none;">
+                <div id="schedule_advanced" style="display: none;" class="schedule-advanced">
                   <div class="row py-2" id="end-date">
                     <div class="col-12">
                       <%= f.label :end_date %>
