@@ -137,6 +137,7 @@ function resetScheduleMenu(){
   $('#scheduleform #schedule_schedule').val('Monthly');
   changeSchedulePeriod('monthly');
   changeScheduleType('simple');
+  changeScheduleExclusionMet('Don't run');
 
   // reset the button-group elements
   $('#scheduleform #button-group').each(function(index){
