@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_11_203409) do
+ActiveRecord::Schema.define(version: 2019_03_07_090946) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -82,22 +82,29 @@ ActiveRecord::Schema.define(version: 2019_02_11_203409) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id"
+  create_table "schedule_joins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "transaction_id"
-    t.bigint "account_id"
+    t.bigint "schedule_id"
+    t.index ["schedule_id"], name: "index_schedule_joins_on_schedule_id"
+    t.index ["transaction_id"], name: "index_schedule_joins_on_transaction_id"
+  end
+
+  create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
     t.date "start_date"
     t.date "end_date"
     t.string "period"
-    t.integer "period_day"
-    t.integer "period_occurences"
-    t.string "exception_days"
-    t.string "exception_rule"
-    t.date "next_occurrence"
+    t.integer "period_num"
+    t.integer "days"
+    t.string "days_month"
+    t.string "days_month_day"
+    t.integer "days_exclude"
+    t.string "exclusion_met"
+    t.string "exclusion_met_day"
+    t.string "timezone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_schedules_on_account_id"
-    t.index ["transaction_id"], name: "index_schedules_on_transaction_id"
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
@@ -181,4 +188,5 @@ ActiveRecord::Schema.define(version: 2019_02_11_203409) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "schedules", "users"
 end
