@@ -21,6 +21,8 @@ class Transaction < ApplicationRecord
   belongs_to :category, optional: true
   has_one :parent, :class_name => 'Transaction'
   has_many :children, :class_name => 'Transaction', :foreign_key => 'parent_id'
+  has_many :schedule_joins
+  has_many :schedules, through: :schedule_joins
 
   def self.prepare_new(params, current_user)
     """
