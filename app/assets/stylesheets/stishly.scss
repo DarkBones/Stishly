@@ -57,7 +57,7 @@ input, select, textarea {
     min-width: $sidebar_width;
     height: calc(100vh - 50px);
     overflow: scroll;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
   }
 }
