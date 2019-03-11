@@ -140,6 +140,10 @@ function resetScheduleMenu(){
   changeScheduleDays('specific dates');
   changeScheduleExclusionMet('Don\'t run');
 
+  // update date & time
+  $('#scheduleform #schedule_start_date').val(get_date());
+  $('#scheduleform #schedule_start_time').val(get_time());
+
   // reset the button-group elements
   $('#scheduleform #button-group').each(function(index){
     $(this).find('input').each(function(i){
