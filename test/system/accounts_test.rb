@@ -103,8 +103,6 @@ class AccountsTest < ApplicationSystemTestCase
         end
     end
 
-    take_screenshot
-
   end
 
   test "Endless page test" do
@@ -124,8 +122,6 @@ class AccountsTest < ApplicationSystemTestCase
     end
 
     assert_selector 'li', text: "transaction 100"
-
-    take_screenshot
   end
   
 end

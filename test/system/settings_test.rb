@@ -24,6 +24,5 @@ class SettingsTest < ApplicationSystemTestCase
 
     assert_selector '#accounts_list', text: "All\n¥248"
 
-    take_screenshot
   end
 end

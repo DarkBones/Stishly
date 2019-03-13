@@ -19,7 +19,6 @@ class UsersTest < ApplicationSystemTestCase
     assert_selector '.navbar-nav', text: 'Sign up'
     assert_selector '.navbar-nav', text: 'Sign in'
 
-    take_screenshot
   end
 
   test 'creating user account' do
@@ -88,7 +87,7 @@ class UsersTest < ApplicationSystemTestCase
         assert_selector '#flash_notice', text: I18n.t('devise.registrations.signed_up')
       end
 
-      page.save_screenshot 'tmp/screenshots/test_creating_user_account_' + i.to_s + '.png'
+      #page.save_screenshot 'tmp/screenshots/test_creating_user_account_' + i.to_s + '.png'
     end
   end
 
@@ -104,8 +103,6 @@ class UsersTest < ApplicationSystemTestCase
     password = "SomePassword123^!"
 
     login_user(user, password)
-
-    take_screenshot
 
     assert_selector '#flash_notice', text: I18n.t('devise.sessions.signed_in')
     assert_selector '#sidebar', text: I18n.t('account.instructions.create')

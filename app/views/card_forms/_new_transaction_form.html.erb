@@ -1,4 +1,4 @@
-<div class="modal fade" id="transactionform" tabindex="-1" role="dialog" aria-labelledby="transactionformLabel" aria-hidden="true">
+<div class="modal <%= 'fade' if Rails.env.test? == false %>" id="transactionform" tabindex="-1" role="dialog" aria-labelledby="transactionformLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

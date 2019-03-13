@@ -227,19 +227,27 @@ class TransactionsTest < ApplicationSystemTestCase
   end
 
   test "create multiple transfer transactions in same currency" do
+    #page.save_screenshot 'tmp/screenshots/transaction_1.png'
     # login as transactions user
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
 	click_on "New Transaction"
     #sleep 15
 
+    #page.save_screenshot 'tmp/screenshots/transaction_2.png'
+
     # fill in the details
     fill_in "Description", with: "multiple transfer euro"
     page.find("#transactionform #type-transfer").click
+    #page.save_screenshot 'tmp/screenshots/transaction_3.png'
     select "Savings Account", from: "To account"
+    #page.save_screenshot 'tmp/screenshots/transaction_4.png'
 	page.find("#transactionform #multiple-multiple").click
+    #page.save_screenshot 'tmp/screenshots/transaction_5.png'
     fill_in "Transactions", with: "one 1\ntwo 2\nthree 3\nfour 4\npoint 05 .05"
-		
+	
+    #page.save_screenshot 'tmp/screenshots/transaction_6.png'
+
 	click_on "Create Transaction"
 
     page.find_all('.show-child-transactions')[1].click
@@ -361,8 +369,9 @@ class TransactionsTest < ApplicationSystemTestCase
 	page.find("#transactionform #type-income").click
 	select "JPY", from: "Currency"
 	page.find("#transactionform #multiple-multiple").click
-	fill_in "Transactions", with: "one 1000\ntwo 2000\nthree 3000\nfour 4000\n"
-	
+	#fill_in "Transactions", with: "one 1000\ntwo 2000\nthree 3000\nfour 4000\n"
+
+    page.find("#transactionform #transaction_transactions").set("one 1000\ntwo 2000\nthree 3000\nfour 4000")
 	click_on "Create Transaction"
 
     assert_selector '.child_transactions', visible: :hidden

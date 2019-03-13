@@ -69,7 +69,7 @@ end
 # Adds user authentication
 gem 'devise'
 gem 'devise_roles'
-gem 'bootstrap-sass'
+#gem 'bootstrap-sass'
 gem 'pundit'
 gem 'rails_layout'
 gem 'jquery-rails'
