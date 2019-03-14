@@ -66,10 +66,11 @@ group :test do
   gem 'chromedriver-helper'
 end
 
+gem 'bootstrap-sass'
+
 # Adds user authentication
 gem 'devise'
 gem 'devise_roles'
-#gem 'bootstrap-sass'
 gem 'pundit'
 gem 'rails_layout'
 gem 'jquery-rails'

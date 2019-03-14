@@ -41,8 +41,8 @@ class ScheduleFormsTest < ApplicationSystemTestCase
       "#scheduleform #end-date",
       "#scheduleform #weekday-exclude",
       "#scheduleform #daypicker-exclude",
-      "#scheduleform #exclusion_met1",
-      "#scheduleform #exclusion_met2"
+      "#scheduleform #schedule_exclusion_met1",
+      "#scheduleform #schedule_exclusion_met2"
     ]
 
     login_as_blank
@@ -58,12 +58,13 @@ class ScheduleFormsTest < ApplicationSystemTestCase
       ["Daily", "Weekly", "Monthly", "Annually"].each do |schedule|
         field_mask = 0b0
         field_mask = add_field_mask("#scheduleform", field_mask, form_fields)
-        field_mask = add_field_mask("#scheduleform #scheduleform_type", field_mask, form_fields)
-        field_mask = add_field_mask("#scheduleform #scheduleform_schedule", field_mask, form_fields)
+        field_mask = add_field_mask("#scheduleform #schedule_type", field_mask, form_fields)
+        field_mask = add_field_mask("#scheduleform #schedule_schedule", field_mask, form_fields)
 
         select schedule, from: "Schedule"
 
         if type == "advanced"
+          field_mask = add_field_mask("#scheduleform .schedule-advanced", field_mask, form_fields)
 
           if schedule == "Weekly"
             field_mask = add_field_mask("#scheduleform #weekday", field_mask, form_fields)
@@ -72,13 +73,22 @@ class ScheduleFormsTest < ApplicationSystemTestCase
             click_on "show advanced options"
             field_mask = add_field_mask("#scheduleform #end-date", field_mask, form_fields)
             form_fields_bitmask(field_mask, form_fields)
+            click_on "hide advanced options"
           elsif schedule == "Monthly"
-            field_mask = add_field_mask("#scheduleform #scheduleform_days", field_mask, form_fields)
+            field_mask = add_field_mask("#scheduleform #schedule_days", field_mask, form_fields)
 
             ["every fourth", "every third", "every second", "every last", "every first", "specific dates"].each do |days|
               if days == "specific dates"
                 field_mask = add_field_mask("#scheduleform #daypicker", field_mask, form_fields)
                 
+                form_fields_bitmask(field_mask, form_fields)
+
+                click_on "show advanced options"
+                field_mask = add_field_mask("#scheduleform #end-date", field_mask, form_fields)
+                field_mask = add_field_mask("#scheduleform #weekday-exclude", field_mask, form_fields)
+                field_mask = add_field_mask("#scheduleform #schedule_exclusion_met1", field_mask, form_fields)
+
+                form_fields_bitmask(field_mask, form_fields)
               end
             end
           end
@@ -96,13 +106,12 @@ class ScheduleFormsTest < ApplicationSystemTestCase
   end
 
   def form_fields_bitmask(bitmask, form_fields)
-    puts bitmask.to_s(2).reverse
     bitmask = bitmask.to_s(2).reverse.split("")
     form_fields.each_with_index do |ff, ind|
       if bitmask[ind] == "1"
         assert_selector form_fields[ind].to_s, visible: :visible
       else
-        #assert_selector form_fields[ind], visible: :hidden
+        assert_selector form_fields[ind], visible: :hidden
       end
     end
   end
