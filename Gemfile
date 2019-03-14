@@ -64,6 +64,7 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+  gem 'bootstrap', '~> 4.3.1'
 end
 
 gem 'bootstrap-sass'
@@ -101,7 +102,7 @@ gem 'bootstrap-datepicker-rails'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
-gem 'bootstrap', '~> 4.3.1'
+#gem 'bootstrap', '~> 4.3.1'
 
 group :production do
   gem 'pg'
