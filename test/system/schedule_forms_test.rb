@@ -77,8 +77,11 @@ class ScheduleFormsTest < ApplicationSystemTestCase
           elsif schedule == "Monthly"
             field_mask = add_field_mask("#scheduleform #schedule_days", field_mask, form_fields)
 
-            ["every fourth", "every third", "every second", "every last", "every first", "specific dates"].each do |days|
-              if days == "specific dates"
+            ["Every fourth ...", "Every third ...", "Every second ...", "Every last ...", "Every first ...", "Specific dates"].each do |days|
+              puts days
+              page.find("#scheduleform #schedule_days").select(days)
+              if days == "Specific dates"
+                field_mask = remove_field_mask("#scheduleform #schedule_days2", field_mask, form_fields)
                 field_mask = add_field_mask("#scheduleform #daypicker", field_mask, form_fields)
                 
                 form_fields_bitmask(field_mask, form_fields)
@@ -88,6 +91,21 @@ class ScheduleFormsTest < ApplicationSystemTestCase
                 field_mask = add_field_mask("#scheduleform #weekday-exclude", field_mask, form_fields)
                 field_mask = add_field_mask("#scheduleform #schedule_exclusion_met1", field_mask, form_fields)
 
+                form_fields_bitmask(field_mask, form_fields)
+
+                ["Run on the next ...", "Run on the previous ...", "Don't run"].each do |exclusion1|
+                  page.find("#scheduleform #schedule_exclusion_met1").select(exclusion1)
+
+                  if exclusion1 != "Don't run"
+                    field_mask = add_field_mask("#scheduleform #schedule_exclusion_met2", field_mask, form_fields)
+                  else
+                    field_mask = remove_field_mask("#scheduleform #schedule_exclusion_met2", field_mask, form_fields)
+                  end
+
+                  form_fields_bitmask(field_mask, form_fields)
+                end
+              else
+                field_mask = add_field_mask("#scheduleform #schedule_days2", field_mask, form_fields)
                 form_fields_bitmask(field_mask, form_fields)
               end
             end
@@ -103,6 +121,10 @@ class ScheduleFormsTest < ApplicationSystemTestCase
 
   def add_field_mask(field, field_mask, form_fields)
     return field_mask | (1 << form_fields.index(field).to_i)
+  end
+
+  def remove_field_mask(field, field_mask, form_fields)
+    return field_mask ^ (1 << form_fields.index(field).to_i)
   end
 
   def form_fields_bitmask(bitmask, form_fields)
