@@ -4,16 +4,13 @@ class ScheduleFormsTest < ApplicationSystemTestCase
 
 =begin
   test "initial visible fields" do
-
     login_as_blank
     page.find(".navbar-gear").click
     click_on "Schedules"
     click_on "New Schedule"
-
     assert_selector "#scheduleform", visible: :visible
     assert_selector "#scheduleform #scheduleform_type", visible: :visible
     assert_selector "#scheduleform #scheduleform_schedule", visible: :visible
-
     assert_selector "#scheduleform .schedule-advanced", visible: :hidden
     assert_selector "#scheduleform #scheduleform_days", visible: :hidden
     assert_selector "#scheduleform #scheduleform_days2", visible: :hidden
@@ -24,7 +21,6 @@ class ScheduleFormsTest < ApplicationSystemTestCase
     assert_selector "#scheduleform #daypicker-exclude", visible: :hidden
     assert_selector "#scheduleform #exclusion_met1", visible: :hidden
     assert_selector "#scheduleform #exclusion_met2", visible: :hidden
-
   end
 =end
 
@@ -82,6 +78,7 @@ class ScheduleFormsTest < ApplicationSystemTestCase
               page.find("#scheduleform #schedule_days").select(days)
               if days == "Specific dates"
                 field_mask = remove_field_mask("#scheduleform #schedule_days2", field_mask, form_fields)
+                field_mask = remove_field_mask("#scheduleform #daypicker-exclude", field_mask, form_fields)
                 field_mask = add_field_mask("#scheduleform #daypicker", field_mask, form_fields)
                 
                 form_fields_bitmask(field_mask, form_fields)
@@ -107,8 +104,17 @@ class ScheduleFormsTest < ApplicationSystemTestCase
               else
                 field_mask = add_field_mask("#scheduleform #schedule_days2", field_mask, form_fields)
                 form_fields_bitmask(field_mask, form_fields)
+
+                click_on "show advanced options"
+                field_mask = add_field_mask("#scheduleform #daypicker-exclude", field_mask, form_fields)
               end
+              click_on "hide advanced options"
             end
+          else
+            form_fields_bitmask(field_mask, form_fields)
+            click_on "show advanced options"
+            field_mask = add_field_mask("#scheduleform #end-date", field_mask, form_fields)
+            form_fields_bitmask(field_mask, form_fields)
           end
 
         end
