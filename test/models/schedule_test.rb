@@ -84,7 +84,30 @@ class ScheduleTest < ActiveSupport::TestCase
       type: 'advanced',
       name: 'test schedule',
       start_date: '17-Mar-2019',
-      
+      timezone: 'Europe/London',
+      schedule: 'Monthly',
+      run_every: '1',
+      days: 'Specific dates',
+      days2: 'Day',
+      dates_picked: ' 28',
+      weekday_mon: '0',
+      weekday_tue: '0',
+      weekday_wed: '0',
+      weekday_thu: '0',
+      weekday_fri: '0',
+      weekday_sat: '0',
+      weekday_sun: '0',
+      end_date: '02-feb-2020',
+      weekday_exclude_mon: '0',
+      weekday_exclude_tue: '0',
+      weekday_exclude_wed: '0',
+      weekday_exclude_thu: '0',
+      weekday_exclude_fri: '0',
+      weekday_exclude_sat: '1',
+      weekday_exclude_sun: '1',
+      dates_picked_exclude: '',
+      exclusion_met1: 'Run on the previous ...'
+      exclusion_met2: 'Friday'
     }
   end
 

@@ -43,7 +43,7 @@ class User < ApplicationRecord
   has_many :categories, dependent: :destroy
   has_many :transactions, through: :accounts
   has_many :account_histories, through: :accounts
-  belongs_to :country
+  belongs_to :country, optional: :true
 
   validates :country_code, :first_name, :last_name, presence: true
 
@@ -114,6 +114,11 @@ class User < ApplicationRecord
   end
 
   def initialize_user_data
+    country = Country.where(country_code: self.country_code).take()
+    if country
+      self.country_id = country.id
+      self.save
+    end
     InitializeUserData.new(self).perform
   end
 end

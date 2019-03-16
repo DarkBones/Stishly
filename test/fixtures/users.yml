@@ -41,6 +41,7 @@ bas: {
   last_name: 'Donker',
   email: 'bassiedoinker@example.com',
   country_code: 'IE',
+  country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40'
@@ -52,6 +53,7 @@ sab: {
   last_name: 'Reknod',
   email: 'rekniodeissab@example.com',
   country_code: 'IE',
+  country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40'
@@ -63,6 +65,7 @@ new: {
   last_name: 'User',
   email: 'new_user@example.com',
   country_code: 'IE',
+  country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40'
@@ -74,6 +77,7 @@ transactions_test: {
   last_name: 'Test',
   email: 'transactions@test.com',
   country_code: 'IE',
+  country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40'
@@ -85,6 +89,7 @@ currency_test: {
   last_name: 'Test',
   email: 'currency@test.com',
   country_code: 'IE',
+  country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40'
@@ -96,6 +101,7 @@ endless_page: {
   last_name: 'Page',
   email: 'endless@page.com',
   country_code: 'IE',
+  country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40'
@@ -107,6 +113,7 @@ destroy: {
   last_name: 'Me',
   email: 'destroy@me.com',
   country_code: 'IE',
+  country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40'
@@ -118,6 +125,7 @@ transactions: {
   last_name: 'Creating',
   email: 'transactions@creator.com',
   country_code: 'IE',
+  country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40'

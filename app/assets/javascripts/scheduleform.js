@@ -38,7 +38,7 @@ function changeScheduleExclusionMet(val){
   var $exlusionMet2 = $('#scheduleform #schedule_exclusion_met2');
 
   switch (val.toLowerCase()) {
-    case 'don\'t run':
+    case 'cancel':
       $exlusionMet2.hide();
       break;
     default:
@@ -50,7 +50,7 @@ function changeScheduleDays(val){
   var $scheduleDays2 = $('#scheduleform #schedule_days2');
 
   switch (val.toLowerCase()) {
-    case 'specific dates':
+    case 'specific':
       showDaypicker();
       $scheduleDays2.hide();
       break;
@@ -134,11 +134,11 @@ function changeScheduleType(type){
 }
 
 function resetScheduleMenu(){
-  $('#scheduleform #schedule_schedule').val('Monthly');
+  $('#scheduleform #schedule_schedule').val('monthly');
   changeSchedulePeriod('monthly');
   changeScheduleType('simple');
   changeScheduleDays('specific dates');
-  changeScheduleExclusionMet('Don\'t run');
+  changeScheduleExclusionMet('cancel');
 
   // update date & time
   $('#scheduleform #schedule_start_date').val(get_date());

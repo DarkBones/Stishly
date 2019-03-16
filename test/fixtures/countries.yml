@@ -4,8 +4,10 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+ie: {
+  id: 1,
+  name: 'Ireland',
+  date_format: 'dd/mm/yyyy',
+  week_start: 1,
+  country_code: 'IE',
+}
