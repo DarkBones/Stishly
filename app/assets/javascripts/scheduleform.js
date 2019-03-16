@@ -137,7 +137,7 @@ function resetScheduleMenu(){
   $('#scheduleform #schedule_schedule').val('monthly');
   changeSchedulePeriod('monthly');
   changeScheduleType('simple');
-  changeScheduleDays('specific dates');
+  changeScheduleDays('specific');
   changeScheduleExclusionMet('cancel');
 
   // update date & time

@@ -36,6 +36,10 @@ class Schedule < ApplicationRecord
   belongs_to :user
   has_many :schedule_joins
   has_many :transactions, through: :schedule_joins
+
+  def self.create_from_form
+
+  end
 end
 
 

@@ -85,10 +85,10 @@ class ScheduleTest < ActiveSupport::TestCase
       name: 'test schedule',
       start_date: '17-Mar-2019',
       timezone: 'Europe/London',
-      schedule: 'Monthly',
+      schedule: 'monthly',
       run_every: '1',
-      days: 'Specific dates',
-      days2: 'Day',
+      days: 'specific',
+      days2: 'day',
       dates_picked: ' 28',
       weekday_mon: '0',
       weekday_tue: '0',
@@ -106,9 +106,12 @@ class ScheduleTest < ActiveSupport::TestCase
       weekday_exclude_sat: '1',
       weekday_exclude_sun: '1',
       dates_picked_exclude: '',
-      exclusion_met1: 'Run on the previous ...'
-      exclusion_met2: 'Friday'
+      exclusion_met1: 'previous',
+      exclusion_met2: 'fri'
     }
+
+    schedule = Schedule.create_from_form(params, current_user)
+    assert schedule.is_a?(ActiveRecord::Base), format_error("Schedule from form didn't return schedule")
   end
 
 end
