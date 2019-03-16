@@ -77,4 +77,15 @@ class ScheduleTest < ActiveSupport::TestCase
     assert_not schedule.save, "Saved schedule without start date"
   end
 
+  test "Schedule from form" do
+    current_user = users(:bas)
+
+    params = {
+      type: 'advanced',
+      name: 'test schedule',
+      start_date: '17-Mar-2019',
+      
+    }
+  end
+
 end
