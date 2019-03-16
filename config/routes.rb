@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   get 'accounts/:id', to: 'accounts#show'
   post 'accounts/create_account', to: 'accounts#create_quick'
   post 'transactions', to: 'transactions#create'
+  post 'schedules', to: 'schedules#create'
   devise_for :users, :controllers => { registrations: 'registrations' }
   resources :users, :only => [:create, :destroy, :edit]
   root 'welcome#index'
