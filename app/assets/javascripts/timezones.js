@@ -4,6 +4,9 @@ $(document).on('turbolinks:load', ()=> {
     $('#timezone_input').set_timezone();
   });
 
-  $('#timezone_input').set_timezone();
+  //$('#timezone_input').set_timezone();
+  $('#timezone_input').each(function(){
+    $(this).set_timezone();
+  });
   
 });

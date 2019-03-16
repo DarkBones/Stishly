@@ -143,6 +143,7 @@ function resetScheduleMenu(){
   // update date & time
   $('#scheduleform #schedule_start_date').val(get_date());
   $('#scheduleform #schedule_start_time').val(get_time());
+  $('#scheduleform #timezone_input').set_timezone();
 
   // reset the button-group elements
   $('#scheduleform #button-group').each(function(index){
