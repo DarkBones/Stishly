@@ -17,6 +17,10 @@ class ApiController < ApplicationController
     end
   end
 
+  def get_week_start
+    render json: current_user.country.week_start
+  end
+
   def render_transactionsmenu
     @active_account
     if params[:account]

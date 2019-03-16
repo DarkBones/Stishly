@@ -1,9 +1,24 @@
 $(document).on('turbolinks:load', ()=> {
 
-  $('.datepicker').datepicker({
-    format: 'dd-M-yyyy',
-    todayHighlight: true,
-    weekStart: 1
+  $.ajax({
+    type: "GET",
+    dataType: "text",
+    url: "/api/week_start",
+    success: function(data) {
+      $('.datepicker').datepicker({
+        format: 'dd-M-yyyy',
+        todayHighlight: true,
+        weekStart: parseInt(data),
+        autoclose: true
+      });
+    },
+    error: function(request, status, error) {
+      $('.datepicker').datepicker({
+        format: 'dd-M-yyyy',
+        todayHighlight: true,
+        autoclose: true
+      });
+    }
   });
   
   $('.datepicker').each(function(){
