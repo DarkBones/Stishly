@@ -1,6 +1,10 @@
 $(document).on('turbolinks:load', ()=> {
 
-  $('.datepicker').datepicker();
+  $('.datepicker').datepicker({
+    format: 'dd-M-yyyy',
+    todayHighlight: true,
+    weekStart: 1
+  });
   
   $('.datepicker').each(function(){
     if (!$(this).hasClass('datepicker-null')){
