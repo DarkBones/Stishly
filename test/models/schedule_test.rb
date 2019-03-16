@@ -21,7 +21,60 @@
 require 'test_helper'
 
 class ScheduleTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
+  test "Create Schedule" do
+    current_user = users(:bas)
+
+    params = {
+      name: "test schedule",
+      start_date: Time.now,
+      period: "month",
+      period_num: 1,
+      days: 0b0 | (1 << 28),
+      days_exclude: 0b0 | (1 << 5) | (1 << 6),
+      exclusion_met: "previous",
+      exclusion_met_day: "fri",
+      timezone: "Europe/London"
+    }
+
+    schedule = current_user.schedules.build(params)
+    assert schedule.save
+  end
+
+  test "Schedule without name" do
+    current_user = users(:bas)
+
+    params = {
+      start_date: Time.now,
+      period: "month",
+      period_num: 1,
+      days: 0b0 | (1 << 28),
+      days_exclude: 0b0 | (1 << 5) | (1 << 6),
+      exclusion_met: "previous",
+      exclusion_met_day: "fri",
+      timezone: "Europe/London"
+    }
+
+    schedule = current_user.schedules.build(params)
+    assert_not schedule.save, "Saved schedule without name"
+  end
+
+  test "Schedule without start date" do
+    current_user = users(:bas)
+
+    params = {
+      name: "test schedule",
+      period: "month",
+      period_num: 1,
+      days: 0b0 | (1 << 28),
+      days_exclude: 0b0 | (1 << 5) | (1 << 6),
+      exclusion_met: "previous",
+      exclusion_met_day: "fri",
+      timezone: "Europe/London"
+    }
+
+    schedule = current_user.schedules.build(params)
+    assert_not schedule.save, "Saved schedule without start date"
+  end
+
 end

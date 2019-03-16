@@ -31,6 +31,8 @@
 #
 
 class Schedule < ApplicationRecord
+  validates :name, :start_date, :user_id, presence: true
+
   belongs_to :user
   has_many :schedule_joins
   has_many :transactions, through: :schedule_joins
