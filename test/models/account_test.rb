@@ -36,9 +36,8 @@ class AccountTest < ActiveSupport::TestCase
   test "Save with dots in name" do
     current_user = users(:bas)
     account = Account.create_new({:name => 'test.dot.', :currency => 'EUR'}, current_user)
-
-    assert_not account.is_a?(ActiveRecord::Base), format_error("Created account with dots in name")
-    assert account == I18n.t('account.failure.invalid_name_dot'), format_error("Unexpected error", I18n.t('account.failure.invalid_name_dot'), account)
+    
+    assert_not account.name == "test.dot.", format_error("Created account with dots in name")
   end
 
   test "Save account without balance" do

@@ -27,7 +27,7 @@ class ScheduleFormsTest < ApplicationSystemTestCase
   test "show hide fields" do
 
     form_fields = ["#scheduleform",
-      "#scheduleform #schedule_type",
+      "#scheduleform #button-group",
       "#scheduleform #schedule_schedule",
       "#scheduleform .schedule-advanced",
       "#scheduleform #schedule_days",
@@ -54,7 +54,7 @@ class ScheduleFormsTest < ApplicationSystemTestCase
       ["Daily", "Weekly", "Monthly", "Annually"].each do |schedule|
         field_mask = 0b0
         field_mask = add_field_mask("#scheduleform", field_mask, form_fields)
-        field_mask = add_field_mask("#scheduleform #schedule_type", field_mask, form_fields)
+        field_mask = add_field_mask("#scheduleform #button-group", field_mask, form_fields)
         field_mask = add_field_mask("#scheduleform #schedule_schedule", field_mask, form_fields)
 
         select schedule, from: "Schedule"

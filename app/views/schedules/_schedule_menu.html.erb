@@ -18,7 +18,7 @@
                 <div class="row py-2">
                   <div class="col-12 py-5 bg-primary rounded" id="type">
 
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons" id="schedule_type">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
                       <label class="btn btn-outline-light active py-3" onclick="changeScheduleType('simple')" id="type-simple">
                         <%= f.radio_button :type, 'simple' %>Simple
                       </label>
@@ -48,7 +48,7 @@
                   <div class="col-6">
                     <%= f.label :start_time %>
                     <%= f.text_field :start_time, type: 'time', value:'now', class: 'form-control' %>
-                    <%= f.hidden_field :timezone, id: 'timezone_input' %>
+                    <%= f.text_field :timezone, id: 'timezone_input' %>
                   </div>
                 </div>
 
