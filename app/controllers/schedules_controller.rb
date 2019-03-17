@@ -3,6 +3,7 @@ class SchedulesController < ApplicationController
   end
 
   def create
-    puts params.to_yaml
+    schedule = Schedule.create_from_form(params, current_user)
+    schedule.save
   end
 end

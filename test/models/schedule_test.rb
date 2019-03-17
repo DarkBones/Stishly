@@ -110,7 +110,7 @@ class ScheduleTest < ActiveSupport::TestCase
       exclusion_met2: 'fri'
     }
 
-    schedule = Schedule.create_from_form(params, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user)
     assert schedule.is_a?(ActiveRecord::Base), format_error("Schedule from form didn't return schedule")
   end
 

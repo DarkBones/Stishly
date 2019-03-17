@@ -37,8 +37,9 @@ class Schedule < ApplicationRecord
   has_many :schedule_joins
   has_many :transactions, through: :schedule_joins
 
-  def self.create_from_form
-
+  def self.create_from_form(params, current_user)
+    schedule = CreateFromForm.new(params, current_user).perform()
+    return schedule
   end
 end
 
