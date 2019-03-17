@@ -47,7 +47,7 @@ class Schedule
 
     def get_month_day
       month_day = ''
-      if @params[:schedule] == 'monthly' && @params[:days] == 'specific' && @params[:type] == 'advanced'
+      if @params[:schedule] == 'monthly' && @params[:days] != 'specific' && @params[:type] == 'advanced'
         month_day = @params[:days2]
       end
       return month_day
@@ -87,7 +87,7 @@ class Schedule
             'weekday_exclude_sat',
             'weekday_exclude_sun'])
           else
-            bitmask = get_month_bitmask(@params[:days_picked_exclude])
+            bitmask = get_month_bitmask(@params[:dates_picked_exclude])
           end
 
         end

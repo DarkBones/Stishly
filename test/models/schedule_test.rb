@@ -208,16 +208,16 @@ class ScheduleTest < ActiveSupport::TestCase
       schedule: 'monthly',
       run_every: '1',
       days: 'specific',
-      days2: 'day',
+      days2: 'thu',
       dates_picked: ' 28',
       weekday_mon: '0',
       weekday_tue: '0',
       weekday_wed: '0',
       weekday_thu: '0',
       weekday_fri: '0',
-      weekday_sat: '1',
-      weekday_sun: '1',
-      end_date: '20-Feb-2020',
+      weekday_sat: '0',
+      weekday_sun: '0',
+      end_date: '20-Feb-2025',
       weekday_exclude_mon: '0',
       weekday_exclude_tue: '0',
       weekday_exclude_wed: '0',
@@ -231,8 +231,15 @@ class ScheduleTest < ActiveSupport::TestCase
     }
 
     schedule = Schedule.create_from_form({schedule: params}, current_user)
+    next_date = Schedule.next_occurrence(schedule, Date.new(2019, 03, 29))
 
-    assert Schedule.next_occurrence(schedule) == '2019-03-28'.to_date
+    puts next_date
+
+    12.times do
+      next_date = Schedule.next_occurrence(schedule, next_date + 5)
+      puts next_date
+    end
+    #assert Schedule.next_occurrence(schedule) == '2019-03-28'.to_date
   end
 
 end
