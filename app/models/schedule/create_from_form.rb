@@ -16,7 +16,7 @@ class Schedule
         period: get_period,
         period_num: @params[:run_every],
         days: get_days,
-        days_month: @params[:days],
+        days_month: get_days_month,
         days_month_day: get_month_day,
         days_exclude: get_days_exclude,
         exclusion_met: get_exclusion_met,
@@ -30,16 +30,24 @@ class Schedule
     end
 
     def get_end_date
-      if @params[:end_date].length > 0
+      if @params[:end_date].length > 0 && @params[:type] == 'advanced'
         return @params[:end_date].to_date
       else
         return ''
       end
     end
 
+    def get_days_month
+      days_month = ''
+      if @params[:type] == 'advanced'
+        days_month = @params[:days]
+      end
+      return days_month
+    end
+
     def get_month_day
       month_day = ''
-      if @params[:schedule] == 'monthly' && @params[:days] == 'specific'
+      if @params[:schedule] == 'monthly' && @params[:days] == 'specific' && @params[:type] == 'advanced'
         month_day = @params[:days2]
       end
       return month_day
@@ -48,7 +56,7 @@ class Schedule
     def get_exclusion_met
       met = ''
 
-      if @params[:schedule] == 'monthly' && @excluding == true
+      if @params[:schedule] == 'monthly' && @excluding == true && @params[:type] == 'advanced'
         met = @params[:exclusion_met1]
       end
 
@@ -58,7 +66,7 @@ class Schedule
     def get_exclusion_met_day
       met = ''
 
-      if @params[:schedule] == 'monthly' && @excluding == true
+      if @params[:schedule] == 'monthly' && @excluding == true && @params[:type] == 'advanced'
         met = @params[:exclusion_met2]
       end
 
@@ -67,23 +75,25 @@ class Schedule
 
     def get_days_exclude
       bitmask = 0b0
-      if @params[:schedule] == 'monthly'
-        
-        if @params[:days] == 'specific'
-          bitmask = get_weekday_bitmask(['weekday_exclude_mon',
-          'weekday_exclude_tue',
-          'weekday_exclude_wed',
-          'weekday_exclude_thu',
-          'weekday_exclude_fri',
-          'weekday_exclude_sat',
-          'weekday_exclude_sun'])
-        else
-          bitmask = get_month_bitmask(@params[:days_picked_exclude])
+      if @params[:type] == 'advanced'
+        if @params[:schedule] == 'monthly'
+          
+          if @params[:days] == 'specific'
+            bitmask = get_weekday_bitmask(['weekday_exclude_mon',
+            'weekday_exclude_tue',
+            'weekday_exclude_wed',
+            'weekday_exclude_thu',
+            'weekday_exclude_fri',
+            'weekday_exclude_sat',
+            'weekday_exclude_sun'])
+          else
+            bitmask = get_month_bitmask(@params[:days_picked_exclude])
+          end
+
         end
 
+        @excluding = true if bitmask > 0
       end
-
-      @excluding = true if bitmask > 0
 
       return bitmask
     end
@@ -102,16 +112,19 @@ class Schedule
     def get_days
 
       bitmask = 0b0
-      if @params[:schedule] == 'weekly'
-        bitmask = get_weekday_bitmask(['weekday_mon',
-          'weekday_tue',
-          'weekday_wed',
-          'weekday_thu',
-          'weekday_fri',
-          'weekday_sat',
-          'weekday_sun'])
-      elsif @params[:schedule] == 'monthly' && @params[:days] == 'specific'
-        bitmask = get_month_bitmask(@params[:dates_picked])
+
+      if @params[:type] == 'advanced'
+        if @params[:schedule] == 'weekly'
+          bitmask = get_weekday_bitmask(['weekday_mon',
+            'weekday_tue',
+            'weekday_wed',
+            'weekday_thu',
+            'weekday_fri',
+            'weekday_sat',
+            'weekday_sun'])
+        elsif @params[:schedule] == 'monthly' && @params[:days] == 'specific'
+          bitmask = get_month_bitmask(@params[:dates_picked])
+        end
       end
 
       return bitmask

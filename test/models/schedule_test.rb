@@ -114,4 +114,84 @@ class ScheduleTest < ActiveSupport::TestCase
     assert schedule.is_a?(ActiveRecord::Base), format_error("Schedule from form didn't return schedule")
   end
 
+  test "simple monthly schedule" do
+    current_user = users(:bas)
+
+    params = {
+      type: 'simple',
+      name: 'test schedule',
+      start_date: '17-Mar-2019',
+      timezone: 'Europe/London',
+      schedule: 'monthly',
+      run_every: '1',
+      days: 'specific',
+      days2: 'day',
+      dates_picked: ' 28',
+      weekday_mon: '0',
+      weekday_tue: '0',
+      weekday_wed: '0',
+      weekday_thu: '0',
+      weekday_fri: '0',
+      weekday_sat: '1',
+      weekday_sun: '1',
+      end_date: '20-Feb-2020',
+      weekday_exclude_mon: '0',
+      weekday_exclude_tue: '0',
+      weekday_exclude_wed: '0',
+      weekday_exclude_thu: '0',
+      weekday_exclude_fri: '0',
+      weekday_exclude_sat: '1',
+      weekday_exclude_sun: '1',
+      dates_picked_exclude: '',
+      exclusion_met1: 'previous',
+      exclusion_met2: 'fri'
+    }
+
+    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    assert schedule.name == 'test schedule', format_error("Unexpected schedule name", 'test schedule', schedule.name)
+    assert schedule.days_month == '', format_error("Unexpected schedule days_month", '', schedule.days_month)
+    assert schedule.end_date == nil, format_error("Unexpected schedule end date", '', schedule.end_date)
+    assert schedule.days == 0, format_error("Unexpected schedule days", '0', schedule.days)
+  end
+
+  test "advanced monthly schedule" do
+    current_user = users(:bas)
+
+    params = {
+      type: 'advanced',
+      name: 'test schedule',
+      start_date: '17-Mar-2019',
+      timezone: 'Europe/London',
+      schedule: 'monthly',
+      run_every: '1',
+      days: 'specific',
+      days2: 'day',
+      dates_picked: ' 28',
+      weekday_mon: '0',
+      weekday_tue: '0',
+      weekday_wed: '0',
+      weekday_thu: '0',
+      weekday_fri: '0',
+      weekday_sat: '1',
+      weekday_sun: '1',
+      end_date: '20-Feb-2020',
+      weekday_exclude_mon: '0',
+      weekday_exclude_tue: '0',
+      weekday_exclude_wed: '0',
+      weekday_exclude_thu: '0',
+      weekday_exclude_fri: '0',
+      weekday_exclude_sat: '1',
+      weekday_exclude_sun: '1',
+      dates_picked_exclude: '',
+      exclusion_met1: 'previous',
+      exclusion_met2: 'fri'
+    }
+
+    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    assert schedule.name == 'test schedule', format_error("Unexpected schedule name", 'test schedule', schedule.name)
+    assert schedule.days_month == 'specific', format_error("Unexpected schedule days_month", 'specific', schedule.days_month)
+    assert schedule.end_date == '2020-02-20'.to_date, format_error("Unexpected schedule end date", '2020-02-20', schedule.end_date)
+    assert schedule.days == 268435456, format_error("Unexpected schedule days", '268435456', schedule.days)
+  end
+
 end
