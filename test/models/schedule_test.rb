@@ -3,19 +3,22 @@
 # Table name: schedules
 #
 #  id                :bigint(8)        not null, primary key
+#  name              :string(255)
 #  user_id           :bigint(8)
-#  transaction_id    :bigint(8)
-#  account_id        :bigint(8)
 #  start_date        :date
 #  end_date          :date
 #  period            :string(255)
-#  period_day        :integer
-#  period_occurences :integer
-#  exception_days    :string(255)
-#  exception_rule    :string(255)
-#  next_occurrence   :date
+#  period_num        :integer
+#  days              :integer
+#  days_month        :string(255)
+#  days_month_day    :string(255)
+#  days_exclude      :integer
+#  exclusion_met     :string(255)
+#  exclusion_met_day :string(255)
+#  timezone          :string(255)
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#  is_active         :boolean          default(TRUE)
 #
 
 require 'test_helper'
@@ -192,6 +195,44 @@ class ScheduleTest < ActiveSupport::TestCase
     assert schedule.days_month == 'specific', format_error("Unexpected schedule days_month", 'specific', schedule.days_month)
     assert schedule.end_date == '2020-02-20'.to_date, format_error("Unexpected schedule end date", '2020-02-20', schedule.end_date)
     assert schedule.days == 268435456, format_error("Unexpected schedule days", '268435456', schedule.days)
+  end
+
+  test "next occurrence" do
+    current_user = users(:bas)
+
+    params = {
+      type: 'advanced',
+      name: 'test schedule',
+      start_date: '17-Mar-2019',
+      timezone: 'Europe/London',
+      schedule: 'monthly',
+      run_every: '1',
+      days: 'specific',
+      days2: 'day',
+      dates_picked: ' 28',
+      weekday_mon: '0',
+      weekday_tue: '0',
+      weekday_wed: '0',
+      weekday_thu: '0',
+      weekday_fri: '0',
+      weekday_sat: '1',
+      weekday_sun: '1',
+      end_date: '20-Feb-2020',
+      weekday_exclude_mon: '0',
+      weekday_exclude_tue: '0',
+      weekday_exclude_wed: '0',
+      weekday_exclude_thu: '0',
+      weekday_exclude_fri: '0',
+      weekday_exclude_sat: '1',
+      weekday_exclude_sun: '1',
+      dates_picked_exclude: '',
+      exclusion_met1: 'previous',
+      exclusion_met2: 'fri'
+    }
+
+    schedule = Schedule.create_from_form({schedule: params}, current_user)
+
+    assert Schedule.next_occurrence(schedule) == '2019-03-28'.to_date
   end
 
 end

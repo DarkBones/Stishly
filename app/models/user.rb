@@ -27,6 +27,7 @@
 #  locked_at              :datetime
 #  timezone               :string(255)
 #  country_code           :string(255)
+#  country_id             :bigint(8)
 #
 
 class User < ApplicationRecord
