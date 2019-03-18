@@ -145,8 +145,11 @@ class Schedule
     # finds the previous occurrence in a bitmask
     def find_previous_in_bitmask(bits, day)
       mask = bitmask(bits).reverse
+      
       mask.each_with_index do |b, idx|
-        return idx if mask[(idx - day) % mask.length] == '1'
+        if mask[((mask.length - 0 - idx) + day) % mask.length] == '1'
+          return idx
+        end
       end
     end
 
