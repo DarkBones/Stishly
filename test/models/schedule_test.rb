@@ -209,7 +209,7 @@ class ScheduleTest < ActiveSupport::TestCase
       run_every: '1',
       days: 'specific',
       days2: 'thu',
-      dates_picked: ' 3 28',
+      dates_picked: ' 28',
       weekday_mon: '0',
       weekday_tue: '0',
       weekday_wed: '0',
@@ -226,8 +226,8 @@ class ScheduleTest < ActiveSupport::TestCase
       weekday_exclude_sat: '1',
       weekday_exclude_sun: '1',
       dates_picked_exclude: '',
-      exclusion_met1: 'previous',
-      exclusion_met2: 'fri'
+      exclusion_met1: 'next',
+      exclusion_met2: 'mon'
     }
 
     schedule = Schedule.create_from_form({schedule: params}, current_user)

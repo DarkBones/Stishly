@@ -41,9 +41,15 @@ class Schedule
 
         if @schedule.days_month == 'specific'
 
-          # if the date was a result of an exclusion rule, set the date to before running the exclusion
-          if was_excluded
-            @date += find_next_in_bitmask(@schedule.days, @date.day)
+          # if the date was a result of an exclusion rule, set the date to the next valid date
+          if was_excluded(@date.day)
+            #puts "#{@date} was excluded"
+            if @schedule.exclusion_met == 'previous' || @schedule.exclusion_met == 'cancel'
+              @date += find_next_in_bitmask(@schedule.days, @date.day)
+            else
+              #puts find_previous_in_bitmask(@schedule.days, @date.day)
+              @date -= find_previous_in_bitmask(@schedule.days, @date.day)
+            end
           end
 
 
@@ -56,10 +62,15 @@ class Schedule
             month = @date.month + ((@schedule.start_date.month - @date.month) % @schedule.period_num)
             return Date.new(@schedule.start_date.year, month, @schedule.start_date.day)
           else
-            puts "#{@date} + #{find_next_in_bitmask(@schedule.days, @date.day)} = #{@date + find_next_in_bitmask(@schedule.days, @date.day)}"
+            #puts "#{@date} + #{find_next_in_bitmask(@schedule.days, @date.day)} = #{@date + find_next_in_bitmask(@schedule.days, @date.day)}"
             @date += find_next_in_bitmask(@schedule.days, @date.day)
           end
         else
+          # if the date was a result of an exclusion rule, set the date to the next valid date
+          if was_excluded(@date.wday)
+            @date += find_next_in_bitmask(@schedule.days, @date.wday)
+          end
+
           @date = find_next_non_specific
         end
 
@@ -76,8 +87,8 @@ class Schedule
     end
 
     # checks if a date is the result of an exclusion
-    def was_excluded
-      return bitmask(@schedule.days)[@date.day] != '1'
+    def was_excluded(day)
+      return bitmask(@schedule.days)[day] != '1' && @schedule.days != 0
     end
 
     def run_exclusion_rule(next_only=false)
@@ -128,6 +139,14 @@ class Schedule
       mask = bitmask(bits)
       mask.each_with_index do |b, idx|
         return idx if mask[(idx + day) % mask.length] == '1'
+      end
+    end
+
+    # finds the previous occurrence in a bitmask
+    def find_previous_in_bitmask(bits, day)
+      mask = bitmask(bits).reverse
+      mask.each_with_index do |b, idx|
+        return idx if mask[(idx - day) % mask.length] == '1'
       end
     end
 
