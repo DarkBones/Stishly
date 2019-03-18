@@ -34,6 +34,10 @@ class Schedule < ApplicationRecord
   end
 
   def self.next_occurrence(schedule, date=nil)
+    return NextOccurrence.new(schedule, date).perform
+  end
+
+  def self.next_occurrence_OLD(schedule, date=nil)
     # set the date
     if date == nil
       tz = TZInfo::Timezone.get(schedule.timezone)

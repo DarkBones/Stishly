@@ -17,7 +17,7 @@ class Schedule
       return nil if schedule_expired
 
       # return the date if it runs on this date and is not excluded
-      return date if runs_on_date && !is_excluded
+      return @date if runs_on_date && !is_excluded
 
       return run_exclusion_rule(true) if is_excluded
 
@@ -40,10 +40,23 @@ class Schedule
       when 'months'
 
         if @schedule.days_month == 'specific'
+
+          # if the date was a result of an exclusion rule, set the date to before running the exclusion
+          if was_excluded
+            @date += find_next_in_bitmask(@schedule.days, @date.day)
+          end
+
+
+          #if @date.day > bitmask(@schedule.days).length
+            #@date = @date.at_beginning_of_month.next_month
+            #puts "BEGINNING #{@date}"
+          #end
+
           if @schedule.days == 0
             month = @date.month + ((@schedule.start_date.month - @date.month) % @schedule.period_num)
             return Date.new(@schedule.start_date.year, month, @schedule.start_date.day)
           else
+            puts "#{@date} + #{find_next_in_bitmask(@schedule.days, @date.day)} = #{@date + find_next_in_bitmask(@schedule.days, @date.day)}"
             @date += find_next_in_bitmask(@schedule.days, @date.day)
           end
         else
@@ -62,6 +75,11 @@ class Schedule
       end
     end
 
+    # checks if a date is the result of an exclusion
+    def was_excluded
+      return bitmask(@schedule.days)[@date.day] != '1'
+    end
+
     def run_exclusion_rule(next_only=false)
       weekdays = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
 
@@ -69,7 +87,9 @@ class Schedule
       when 'next'
         return @date + (weekdays.index(@schedule.exclusion_met_day) - @date.wday) % 7
       when 'previous'
-        return @date - (@date.wday - weekdays.index(@schedule.exclusion_met_day)) % 7
+        return @date - (@date.wday - weekdays.index(@schedule.exclusion_met_day)) % 7 if !next_only
+        @date += 1
+        return self.perform
       when 'cancel'
         @date += 1
         return self.perform

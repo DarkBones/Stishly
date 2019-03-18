@@ -233,10 +233,11 @@ class ScheduleTest < ActiveSupport::TestCase
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     next_date = Schedule.next_occurrence(schedule, Date.new(2019, 03, 29))
 
+    puts ""
     puts next_date
 
     12.times do
-      next_date = Schedule.next_occurrence(schedule, next_date + 5)
+      next_date = Schedule.next_occurrence(schedule, next_date + 1)
       puts next_date
     end
     #assert Schedule.next_occurrence(schedule) == '2019-03-28'.to_date
