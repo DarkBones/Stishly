@@ -71,10 +71,10 @@ class Schedule
             return new_date
           else
             if @date.day > bitmask(@schedule.days).length-1
-              months_since_startdate = (@schedule.start_date.month - @date.month)
+              months_since_startdate = (@date.year * 12 + @date.month) - (@schedule.start_date.year * 12 + @schedule.start_date.month)
               puts (@schedule.period_num - (months_since_startdate % @schedule.period_num)).to_i
-              #@date += (@schedule.period_num - (months_since_startdate % @schedule.period_num)).to_i.months
-              @date += (@schedule.period_num-1).months
+              @date += ((@schedule.period_num - (months_since_startdate % @schedule.period_num)).to_i - 1).months.at_beginning_of_month
+              #@date += (@schedule.period_num-1).months
             end
 
             @date += find_next_in_bitmask(@schedule.days, @date.day, Date.new(@date.year, @date.month, -1).day)
