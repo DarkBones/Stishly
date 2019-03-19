@@ -23,6 +23,7 @@
 
 class Schedule < ApplicationRecord
   validates :name, :start_date, :user_id, presence: true
+  validates_numericality_of :period_num, :greater_than => 0
 
   belongs_to :user
   has_many :schedule_joins

@@ -1,6 +1,7 @@
 class ChangeCountriesTable < ActiveRecord::Migration[5.2]
   def change
-    #change_column :countries, :week_start, :integer
-    #remove_column :countries, :currency_id
+    execute <<-SQL
+      ALTER TABLE schedules ADD CONSTRAINT period_num CHECK (period_num > 0);
+    SQL
   end
 end

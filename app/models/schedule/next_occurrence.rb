@@ -33,21 +33,25 @@ class Schedule
         return @date + ((@schedule.start_date - @date) % @schedule.period_num)
       when 'weeks'
         if @schedule.days == 0
-          return @date + (@schedule.start_date.wday - @date.wday) % 7
-        else
-          return @date + find_next_in_bitmask(@schedule.days, @date.wday)
+          return @date + ((@schedule.start_date.wday - @date.wday) % 7) + (7 * ((@schedule.start_date - @date) % @schedule.period_num))
+        else 
+          new_date = @date + find_next_in_bitmask(@schedule.days, @date.wday, 7) + 1
+
+          if @date.wday > bitmask(@schedule.days).length
+            weeks_since_startdate = (@date - @schedule.start_date) / 7
+            new_date += (@schedule.period_num - (weeks_since_startdate % @schedule.period_num)).to_i * 7
+          end
+
+          return new_date
         end
       when 'months'
-
-        if @schedule.days_month == 'specific'
+        if @schedule.days_month == 'specific' || @schedule.days == 0
 
           # if the date was a result of an exclusion rule, set the date to the next valid date
-          if was_excluded(@date.day)
-            #puts "#{@date} was excluded"
+          if was_excluded(@date.day) && @date != @schedule.start_date
             if @schedule.exclusion_met == 'previous' || @schedule.exclusion_met == 'cancel'
               @date += find_next_in_bitmask(@schedule.days, @date.day)
-            else
-              #puts find_previous_in_bitmask(@schedule.days, @date.day)
+            elsif @schedule.exclusion_met == 'next'
               @date -= find_previous_in_bitmask(@schedule.days, @date.day)
             end
           end
@@ -59,11 +63,31 @@ class Schedule
           #end
 
           if @schedule.days == 0
-            month = @date.month + ((@schedule.start_date.month - @date.month) % @schedule.period_num)
-            return Date.new(@schedule.start_date.year, month, @schedule.start_date.day)
+
+            days = 0b0 | (1 << @schedule.start_date.day)
+            new_date = @date + (@schedule.period_num-1).months
+            new_date += find_next_in_bitmask(days, new_date.day, Date.new(new_date.year, new_date.month, -1).day)
+
+            return new_date
           else
-            #puts "#{@date} + #{find_next_in_bitmask(@schedule.days, @date.day)} = #{@date + find_next_in_bitmask(@schedule.days, @date.day)}"
-            @date += find_next_in_bitmask(@schedule.days, @date.day)
+            if @date.day > bitmask(@schedule.days).length-1
+              months_since_startdate = (@schedule.start_date.month - @date.month)
+              puts (@schedule.period_num - (months_since_startdate % @schedule.period_num)).to_i
+              #@date += (@schedule.period_num - (months_since_startdate % @schedule.period_num)).to_i.months
+              @date += (@schedule.period_num-1).months
+            end
+
+            @date += find_next_in_bitmask(@schedule.days, @date.day, Date.new(@date.year, @date.month, -1).day)
+
+            #@date = run_exclusion_rule if is_excluded
+
+            while is_excluded do
+              @date = run_exclusion_rule
+            end
+
+            puts @date
+
+            return @date
           end
         else
           # if the date was a result of an exclusion rule, set the date to the next valid date
@@ -92,6 +116,7 @@ class Schedule
     end
 
     def run_exclusion_rule(next_only=false)
+      puts 'RUN EXCLUSION'
       weekdays = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
 
       case @schedule.exclusion_met
@@ -118,13 +143,13 @@ class Schedule
 
       case @schedule.days_month
       when 'last'
-        return Date.new(@date.year, @date.month, -1) if @schedules.days_month_day == 'day'
+        return Date.new(@date.year, @date.month, -1) if @schedule.days_month_day == 'day'
 
         d = Date.new(@date.year, @date.month, -1)
         d -= (d.wday - weekday) % 7
         return d
       else
-        return Date.new(@date.year, @date.month, values.index(@schedule.days_month)+1) if @schedules.days_month_day == 'day'
+        return Date.new(@date.year, @date.month, values.index(@schedule.days_month)+1) if @schedule.days_month_day == 'day'
 
         d = Date.new(@date.year, @date.month, 1)
         d += (weekday - d.wday) % 7
@@ -135,16 +160,29 @@ class Schedule
     end
 
     # finds the next occurrence in a bitmask
-    def find_next_in_bitmask(bits, day)
+    def find_next_in_bitmask(bits, day, mask_length=nil)
       mask = bitmask(bits)
+      
+      if mask_length != nil
+        while mask.length < mask_length do
+          mask.push('0')
+        end
+      end
+
       mask.each_with_index do |b, idx|
         return idx if mask[(idx + day) % mask.length] == '1'
       end
     end
 
     # finds the previous occurrence in a bitmask
-    def find_previous_in_bitmask(bits, day)
+    def find_previous_in_bitmask(bits, day, mask_length=nil)
       mask = bitmask(bits).reverse
+
+      if mask_length != nil
+        while mask.length < mask_length do
+          mask.push('0')
+        end
+      end
       
       mask.each_with_index do |b, idx|
         if mask[((mask.length - 0 - idx) + day) % mask.length] == '1'
@@ -203,10 +241,11 @@ class Schedule
         return false if (@date.month - @schedule.start_date.month) % @schedule.period_num != 0
 
         # if no advanced rules, and date matches
-        return @date.day == @schedule.start_date.day if @schedule.days == 0 && @schedule.days_month == 'specific'
+        return @date.day == @schedule.start_date.day if @schedule.days == 0
+
 
         # if scheduled to run on a specific date, and today matches the bitmask
-        return bitmask(@schedule.days)[@date.day] == '1' if @schedule.days_month == 'specific'
+        return bitmask(@schedule.days)[@date.day] == '1' if @schedule.days_month == 'specific' || @schedule.days == 0
 
         d = find_next_non_specific
         return @date == d
