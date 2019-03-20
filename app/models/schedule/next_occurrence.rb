@@ -50,17 +50,22 @@ class Schedule
           # if the date was a result of an exclusion rule, set the date to the next valid date
           if was_excluded(@date.day) && @date != @schedule.start_date
             if @schedule.exclusion_met == 'previous' || @schedule.exclusion_met == 'cancel'
-              @date += find_next_in_bitmask(@schedule.days, @date.day)
+              puts "#{@date} + #{find_next_in_bitmask(@schedule.days, @date.day)} = #{@date + find_next_in_bitmask(@schedule.days, @date.day)}"
+
+              month_before = @date.month
+              #@date += find_next_in_bitmask(@schedule.days, @date.day, Date.new(@date.year, @date.month, -1).day)
+              month_after = @date.month
+
+              if month_before != month_after
+                months_since_startdate = (@date.year * 12 + @date.month) - (@schedule.start_date.year * 12 + @schedule.start_date.month)
+                #@date += ((@schedule.period_num - (months_since_startdate % @schedule.period_num)).to_i).months
+                puts (@schedule.period_num - (months_since_startdate % @schedule.period_num)).to_s + " month"
+              end
+
             elsif @schedule.exclusion_met == 'next'
               @date -= find_previous_in_bitmask(@schedule.days, @date.day)
             end
           end
-
-
-          #if @date.day > bitmask(@schedule.days).length
-            #@date = @date.at_beginning_of_month.next_month
-            #puts "BEGINNING #{@date}"
-          #end
 
           if @schedule.days == 0
 
@@ -70,10 +75,16 @@ class Schedule
 
             return new_date
           else
+            puts "#{@date} > #{bitmask(@schedule.days).length-1}"
             if @date.day > bitmask(@schedule.days).length-1
               months_since_startdate = (@date.year * 12 + @date.month) - (@schedule.start_date.year * 12 + @schedule.start_date.month)
-              puts (@schedule.period_num - (months_since_startdate % @schedule.period_num)).to_i
-              @date += ((@schedule.period_num - (months_since_startdate % @schedule.period_num)).to_i - 1).months.at_beginning_of_month
+              puts "#{months_since_startdate} months since start date"
+              puts "plus #{(@schedule.period_num - (months_since_startdate % @schedule.period_num)).to_i} months"
+              puts @date
+              @date += ((@schedule.period_num - (months_since_startdate % @schedule.period_num)).to_i).months
+              puts @date
+              @date = @date.at_beginning_of_month
+              puts @date
               #@date += (@schedule.period_num-1).months
             end
 
@@ -84,8 +95,6 @@ class Schedule
             while is_excluded do
               @date = run_exclusion_rule
             end
-
-            puts @date
 
             return @date
           end
@@ -116,18 +125,27 @@ class Schedule
     end
 
     def run_exclusion_rule(next_only=false)
-      puts 'RUN EXCLUSION'
       weekdays = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
 
       case @schedule.exclusion_met
       when 'next'
         return @date + (weekdays.index(@schedule.exclusion_met_day) - @date.wday) % 7
       when 'previous'
+        puts "#{@date} excluded to #{@date - (@date.wday - weekdays.index(@schedule.exclusion_met_day)) % 7}" if !next_only if !next_only
         return @date - (@date.wday - weekdays.index(@schedule.exclusion_met_day)) % 7 if !next_only
         @date += 1
         return self.perform
       when 'cancel'
-        @date += 1
+        month_before = @date.month
+        @date += find_next_in_bitmask(@schedule.days, @date.day) + 1
+        month_after = @date.month
+
+        if month_before != month_after
+          months_since_startdate = (@date.year * 12 + @date.month) - (@schedule.start_date.year * 12 + @schedule.start_date.month)
+          @date += ((@schedule.period_num - (months_since_startdate % @schedule.period_num)).to_i).months
+        end
+
+        puts "Date after exclusion rule: #{@date}"
         return self.perform
       else
         return nil

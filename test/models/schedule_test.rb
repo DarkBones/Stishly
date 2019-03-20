@@ -510,7 +510,8 @@ class ScheduleTest < ActiveSupport::TestCase
       '2019-07-05',
       '2019-11-05',
       '2020-01-28',
-      '2020-05-05'
+      '2020-05-05',
+      '2020-07-28'
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
