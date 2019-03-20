@@ -44,7 +44,7 @@ class Schedule
         else 
           new_date = @date + find_next_in_bitmask(@schedule.days, @date.wday, 7) + 1
 
-          if @date.wday > bitmask(@schedule.days).length
+          if @date.wday > bitmask(@schedule.days).length + 1
             weeks_since_startdate = (@date - @schedule.start_date) / 7
             new_date += (@schedule.period_num - (weeks_since_startdate % @schedule.period_num)).to_i * 7
           end
@@ -90,7 +90,7 @@ class Schedule
 
             return new_date
           else
-            if @date.day > bitmask(@schedule.days).length-1
+            if @date.day > bitmask(@schedule.days).length
               months_since_startdate = (@date.year * 12 + @date.month) - (@schedule.start_date.year * 12 + @schedule.start_date.month)
               @date += ((@schedule.period_num - (months_since_startdate % @schedule.period_num)).to_i).months
               @date = @date.at_beginning_of_month
@@ -202,7 +202,7 @@ class Schedule
     end
 
     # finds the previous occurrence in a bitmask
-    def find_previous_in_bitmask(bits, day, mask_length=nil)
+    def find_previous_in_bitmask_OLD(bits, day, mask_length=nil)
       puts "Finding previous in bitmask for #{@date}"
       mask = bitmask(bits)
 
@@ -232,6 +232,24 @@ class Schedule
           return steps
         end
         steps += 1
+      end
+    end
+    
+    def find_previous_in_bitmask(bits, day, mask_length=nil)
+      mask = bitmask(bits)
+
+      if mask_length != nil
+        while mask.length < mask_length do
+          mask.push('0')
+        end
+      end
+
+      mask = mask.reverse
+
+      mask.each_with_index do |b, idx|
+        if mask[(idx + day) % mask.length] == '1'
+          return idx
+        end
       end
     end
 
