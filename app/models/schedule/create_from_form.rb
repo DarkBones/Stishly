@@ -134,7 +134,7 @@ class Schedule
       bitmask = 0b0
       weekdays.each_with_index do |d, i|
         if @params[d.to_sym] == '1'
-          bitmask = bitmask | (1 << i)
+          bitmask = bitmask | (1 << i-1)
         end
       end
       return bitmask
@@ -146,7 +146,7 @@ class Schedule
 
       bitmask = 0b0
       days.each do |d|
-        bitmask = bitmask | (1 << d.to_i)
+        bitmask = bitmask | (1 << d.to_i-1)
       end
 
       return bitmask
