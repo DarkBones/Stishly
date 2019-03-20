@@ -4,30 +4,37 @@ class Schedule
     def initialize(schedule, date=nil)
       @schedule = schedule
       @date = date
+
+      puts "Initialized with date #{@date}"
     end
 
-    def perform
+    def perform(excluded=false)
       # set the timezone to that of the schedule
       tz = TZInfo::Timezone.get(@schedule.timezone)
 
       # if no date given, set date to today
       @date ||= tz.utc_to_local(Time.now).to_date
+      puts "Date after timezone set: #{@date}"
 
       # check if the schedule expired
       return nil if schedule_expired
 
       # return the date if it runs on this date and is not excluded
+      puts "Initialized date #{@date} runs on first try" if runs_on_date && !is_excluded
       return @date if runs_on_date && !is_excluded
 
-      return run_exclusion_rule(true) if is_excluded
+      puts "Date #{@date} was excluded" if runs_on_date && is_excluded
+      return run_exclusion_rule(true) if runs_on_date && is_excluded
 
       # find the next date
-      return find_next_date
+      return find_next_date(excluded)
 
     end
 
     # finds the next scheduled date
-    def find_next_date
+    def find_next_date(excluded=false)
+      puts "Searching for next run date after #{@date}"
+
       case @schedule.period
       when 'days'
         return @date + ((@schedule.start_date - @date) % @schedule.period_num)
@@ -48,22 +55,30 @@ class Schedule
         if @schedule.days_month == 'specific' || @schedule.days == 0
 
           # if the date was a result of an exclusion rule, set the date to the next valid date
-          if was_excluded(@date.day) && @date != @schedule.start_date
+          if was_excluded(@date.day-1) && @date != @schedule.start_date
+            puts "Date #{@date - 1} was the result of an exclusion"
             if @schedule.exclusion_met == 'previous' || @schedule.exclusion_met == 'cancel'
-              puts "#{@date} + #{find_next_in_bitmask(@schedule.days, @date.day)} = #{@date + find_next_in_bitmask(@schedule.days, @date.day)}"
 
               month_before = @date.month
-              #@date += find_next_in_bitmask(@schedule.days, @date.day, Date.new(@date.year, @date.month, -1).day)
+
+              #@date -= 1
+              puts "The un-excluded date for #{@date} is #{(@date-1).day + find_next_in_bitmask(@schedule.days, @date.day, Date.new(@date.year, @date.month, -1).day)}"
+              @date += find_next_in_bitmask(@schedule.days, (@date-1).day, Date.new(@date.year, @date.month, -1).day)
+
               month_after = @date.month
 
-              if month_before != month_after
-                months_since_startdate = (@date.year * 12 + @date.month) - (@schedule.start_date.year * 12 + @schedule.start_date.month)
-                #@date += ((@schedule.period_num - (months_since_startdate % @schedule.period_num)).to_i).months
-                puts (@schedule.period_num - (months_since_startdate % @schedule.period_num)).to_s + " month"
-              end
+              @date += 1 if @schedule.exclusion_met != 'cancel' && !excluded
+
+              #if month_before != month_after
+              #  months_since_startdate = (@date.year * 12 + @date.month) - (@schedule.start_date.year * 12 + @schedule.start_date.month)
+              #  @date += ((months_since_startdate % @schedule.period_num).to_i).months
+              #else
+                #@date += 1 if @schedule.exclusion_met != 'cancel'
+              #end
 
             elsif @schedule.exclusion_met == 'next'
-              @date -= find_previous_in_bitmask(@schedule.days, @date.day)
+              puts "The un-excluded date for #{@date-1} is #{@date - find_previous_in_bitmask(@schedule.days, (@date).day, Date.new(@date.year, @date.month, -1).day)}"
+              @date -= find_previous_in_bitmask(@schedule.days, (@date).day, Date.new(@date.year, @date.month, -1).day)
             end
           end
 
@@ -75,16 +90,10 @@ class Schedule
 
             return new_date
           else
-            puts "#{@date} > #{bitmask(@schedule.days).length-1}"
             if @date.day > bitmask(@schedule.days).length-1
               months_since_startdate = (@date.year * 12 + @date.month) - (@schedule.start_date.year * 12 + @schedule.start_date.month)
-              puts "#{months_since_startdate} months since start date"
-              puts "plus #{(@schedule.period_num - (months_since_startdate % @schedule.period_num)).to_i} months"
-              puts @date
               @date += ((@schedule.period_num - (months_since_startdate % @schedule.period_num)).to_i).months
-              puts @date
               @date = @date.at_beginning_of_month
-              puts @date
               #@date += (@schedule.period_num-1).months
             end
 
@@ -125,16 +134,17 @@ class Schedule
     end
 
     def run_exclusion_rule(next_only=false)
+      puts "Running exclusion rule for #{@date}"
       weekdays = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
 
       case @schedule.exclusion_met
       when 'next'
+        puts "Adding #{(weekdays.index(@schedule.exclusion_met_day) - @date.wday) % 7} to #{@date}"
         return @date + (weekdays.index(@schedule.exclusion_met_day) - @date.wday) % 7
       when 'previous'
-        puts "#{@date} excluded to #{@date - (@date.wday - weekdays.index(@schedule.exclusion_met_day)) % 7}" if !next_only if !next_only
         return @date - (@date.wday - weekdays.index(@schedule.exclusion_met_day)) % 7 if !next_only
         @date += 1
-        return self.perform
+        return self.perform(true)
       when 'cancel'
         month_before = @date.month
         @date += find_next_in_bitmask(@schedule.days, @date.day) + 1
@@ -145,7 +155,6 @@ class Schedule
           @date += ((@schedule.period_num - (months_since_startdate % @schedule.period_num)).to_i).months
         end
 
-        puts "Date after exclusion rule: #{@date}"
         return self.perform
       else
         return nil
@@ -194,18 +203,35 @@ class Schedule
 
     # finds the previous occurrence in a bitmask
     def find_previous_in_bitmask(bits, day, mask_length=nil)
-      mask = bitmask(bits).reverse
+      puts "Finding previous in bitmask for #{@date}"
+      mask = bitmask(bits)
 
       if mask_length != nil
         while mask.length < mask_length do
           mask.push('0')
         end
       end
-      
+
+      mask = mask.reverse
+
+      masktest = ''
       mask.each_with_index do |b, idx|
-        if mask[((mask.length - 0 - idx) + day) % mask.length] == '1'
-          return idx
+        if day % mask.length == idx
+          masktest += "'#{mask[idx]}'"
+        else
+          masktest += mask[idx]
         end
+      end
+      puts "#{masktest}: #{mask.length}"
+      
+      steps = 0
+      mask.each_with_index do |b, idx|
+        puts (((idx + day) % mask.length)).to_i
+        if mask[(idx + day) % mask.length] == '1'
+          puts "Subtracting #{steps+1} from #{@date}"
+          return steps
+        end
+        steps += 1
       end
     end
 
