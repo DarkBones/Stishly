@@ -241,7 +241,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     message = ""
 
-    message = "simple daily schedule"
+    message = "1. simple daily schedule"
     params = reset_params
     params[:schedule] = 'daily'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
@@ -259,7 +259,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "simple every three days"
+    message = "2. simple every three days"
     params[:run_every] = '3'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
@@ -270,7 +270,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "advanced every day, with end date"
+    message = "3. advanced every day, with end date"
     params[:run_every] = '1'
     params[:type] = 'advanced'
     params[:end_date] = '02-Apr-2019'
@@ -290,7 +290,7 @@ class ScheduleTest < ActiveSupport::TestCase
     assert_dates(schedule, dates, start_date, params, message)
 
     params = reset_params
-    message = "simple every week"
+    message = "4. simple every week"
     params[:schedule] = 'weekly'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
@@ -304,7 +304,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "simple every two weeks"
+    message = "5. simple every two weeks"
     params[:run_every] = '2'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
@@ -315,7 +315,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "simple every three weeks"
+    message = "6. simple every three weeks"
     params[:run_every] = '3'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
@@ -325,7 +325,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "simple every four weeks"
+    message = "7. simple every four weeks"
     params[:run_every] = '4'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
@@ -334,7 +334,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "advanced every week on Fridays"
+    message = "8. advanced every week on Fridays"
     params[:run_every] = '1'
     params[:type] = 'advanced'
     params[:weekday_fri] = '1'
@@ -349,7 +349,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "advanced every week on Fridays and Wednesdays"
+    message = "9. advanced every week on Fridays and Wednesdays"
     params[:type] = 'advanced'
     params[:weekday_wed] = '1'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
@@ -364,7 +364,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "advanced every two weeks on Fridays and Wednesdays"
+    message = "10. advanced every two weeks on Fridays and Wednesdays"
     params[:run_every] = '2'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
@@ -375,7 +375,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "advanced every 3 weeks on Fridays and Wednesdays"
+    message = "11. advanced every 3 weeks on Fridays and Wednesdays"
     params[:run_every] = '3'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
@@ -388,7 +388,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "advanced every four weeks on Fridays and Wednesdays"
+    message = "12. advanced every four weeks on Fridays and Wednesdays"
     params[:run_every] = '4'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
@@ -399,7 +399,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "advanced every five weeks on Fridays and Wednesdays"
+    message = "13. advanced every five weeks on Fridays and Wednesdays"
     params[:run_every] = '5'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
@@ -411,7 +411,7 @@ class ScheduleTest < ActiveSupport::TestCase
     assert_dates(schedule, dates, start_date, params, message)
 
     params = reset_params
-    message = "simple monthly every month"
+    message = "14. simple monthly every month"
     params[:schedule] = 'monthly'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
@@ -429,7 +429,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "simple monthly every two months"
+    message = "15. simple monthly every two months"
     params[:run_every] = '2'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
@@ -442,7 +442,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "simple monthly every three months"
+    message = "16. simple monthly every three months"
     params[:run_every] = '3'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
@@ -453,7 +453,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "simple monthly every four months"
+    message = "17. simple monthly every four months"
     params[:run_every] = '4'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
@@ -463,11 +463,28 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "advanced monthly every month on the 28th"
+    message = "18. advanced monthly every month on the 1st"
     params[:type] = 'advanced'
     params[:run_every] = '1'
-    params[:dates_picked] = ' 28'
+    params[:dates_picked] = ' 1'
     params[:days] = 'specific'
+    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    dates = [
+      '2019-04-01',
+      '2019-05-01',
+      '2019-06-01',
+      '2019-07-01',
+      '2019-08-01',
+      '2019-09-01',
+      '2019-10-01',
+      '2019-11-01',
+      '2019-12-01',
+      '2020-01-01'
+    ]
+    assert_dates(schedule, dates, start_date, params, message)
+
+    message = "19. advanced monthly every month on the 28th"
+    params[:dates_picked] = ' 28'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
       '2019-03-28',
@@ -484,7 +501,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "advanced monthly every two months on the 28th and on the 5th"
+    message = "20. advanced monthly every two months on the 28th and on the 5th"
     params[:run_every] = '2'
     params[:dates_picked] = ' 5 28'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
@@ -499,7 +516,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "advanced monthly every two months on the 28th and on the 5th, but not on weekends or Thursdays"
+    message = "21. advanced monthly every two months on the 28th and on the 5th, but not on weekends or Thursdays"
     params[:weekday_exclude_thu] = '1'
     params[:weekday_exclude_sat] = '1'
     params[:weekday_exclude_sun] = '1'
@@ -515,7 +532,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "advanced monthly every month on the 28th and on the 5th, but not on weekends. If excluded, run on the previous Thursday"
+    message = "22. advanced monthly every month on the 28th and on the 5th, but not on weekends. If excluded, run on the previous Thursday"
     params[:run_every] = '1'
     params[:weekday_exclude_thu] = '0'
     params[:weekday_exclude_sat] = '1'
@@ -540,7 +557,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "advanced monthly every month on the 28th and on the 5th, but not on weekends. If excluded, run on the next Monday"
+    message = "23. advanced monthly every month on the 28th and on the 5th, but not on weekends. If excluded, run on the next Monday"
     params[:exclusion_met1] = 'next'
     params[:exclusion_met2] = 'mon'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
@@ -561,7 +578,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "advanced monthly every month on the last Friday"
+    message = "24. advanced monthly every month on the last Friday"
     params[:weekday_exclude_sat] = '0'
     params[:weekday_exclude_sun] = '0'
     params[:dates_picked] = ''
@@ -581,7 +598,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "advanced monthly every month on the last Friday, except on the 26th"
+    message = "25. advanced monthly every month on the last Friday, except on the 26th"
     params[:exclusion_met1] = 'cancel'
     params[:dates_picked_exclude] = ' 26'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
@@ -594,9 +611,9 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "advanced monthly every month on the last Friday, except on the 26th. Run on previous Wednesday if excluded"
+    message = "26. advanced monthly every month on the last Friday, except on the 26th. Run on previous Wednesday if excluded"
     params[:exclusion_met1] = 'previous'
-    params[:exclusion_met1] = 'wed'
+    params[:exclusion_met2] = 'wed'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
       '2019-03-29',
@@ -609,7 +626,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "advanced monthly every month on the last day"
+    message = "27. advanced monthly every month on the last day"
     params[:days2] = 'day'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
@@ -623,11 +640,11 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "advanced monthly every month on the last day, except on weekends"
+    message = "28. advanced monthly every month on the last day, except on weekends"
     params[:weekday_exclude_sat] = '1'
     params[:weekday_exclude_sun] = '1'
     params[:exclusion_met1] = 'cancel'
-    params[:exclusion_met1] = ''
+    params[:exclusion_met2] = ''
     params[:dates_picked_exclude] = ''
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
@@ -638,7 +655,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "advanced monthly every month on the last day, except on weekends. Run the previous Friday if excluded"
+    message = "29. advanced monthly every month on the last day, except on weekends. Run the previous Friday if excluded"
     params[:exclusion_met1] = 'previous'
     params[:exclusion_met2] = 'fri'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
@@ -653,7 +670,7 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    message = "advanced monthly every month on the last day, except on weekends. Run the next Friday if excluded"
+    message = "30. advanced monthly every month on the last day, except on weekends. Run the next Friday if excluded"
     params[:exclusion_met1] = 'next'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
@@ -668,7 +685,7 @@ class ScheduleTest < ActiveSupport::TestCase
     assert_dates(schedule, dates, start_date, params, message)
 
     params = reset_params
-    message = "simple annually every 5 years"
+    message = "31. simple annually every 5 years"
     params[:schedule] = 'annually'
     params[:run_every] = '5'
     schedule = Schedule.create_from_form({schedule: params}, current_user)

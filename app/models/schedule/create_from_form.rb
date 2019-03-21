@@ -78,7 +78,7 @@ class Schedule
       if @params[:type] == 'advanced'
         if @params[:schedule] == 'monthly'
           
-          if @params[:days] == 'specific'
+          if @params[:days] == 'specific' || (@params[:days] != 'specific' && @params[:days2] == 'day')
             bitmask = get_weekday_bitmask(['weekday_exclude_mon',
             'weekday_exclude_tue',
             'weekday_exclude_wed',
@@ -124,6 +124,9 @@ class Schedule
             'weekday_sun'])
         elsif @params[:schedule] == 'monthly' && @params[:days] == 'specific'
           bitmask = get_month_bitmask(@params[:dates_picked])
+        elsif @params[:schedule] == 'monthly' && @params[:days] != 'specific' && @params[:days2] != 'day'
+          weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+          bitmask = 0b0 | (1 << weekdays.index(@params[:days2]))
         end
       end
 
@@ -134,7 +137,7 @@ class Schedule
       bitmask = 0b0
       weekdays.each_with_index do |d, i|
         if @params[d.to_sym] == '1'
-          bitmask = bitmask | (1 << i-1)
+          bitmask = bitmask | (1 << i)
         end
       end
       return bitmask
@@ -146,7 +149,7 @@ class Schedule
 
       bitmask = 0b0
       days.each do |d|
-        bitmask = bitmask | (1 << d.to_i-1)
+        bitmask = bitmask | (1 << d.to_i)
       end
 
       return bitmask
