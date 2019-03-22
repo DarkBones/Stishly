@@ -463,6 +463,29 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
+    message = "17.1 simple monthly every seven months"
+    params[:run_every] = '7'
+    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    dates = [
+      '2019-03-25',
+      '2019-10-25',
+      '2020-05-25',
+      '2020-12-25'
+    ]
+    assert_dates(schedule, dates, start_date, params, message)
+
+    message = "17.2 simple monthly every thirteen months"
+    params[:run_every] = '13'
+    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    dates = [
+      '2019-03-25',
+      '2020-04-25',
+      '2021-05-25',
+      '2022-06-25',
+      '2023-07-25'
+    ]
+    assert_dates(schedule, dates, start_date, params, message)
+
     message = "18. advanced monthly every month on the 1st"
     params[:type] = 'advanced'
     params[:run_every] = '1'

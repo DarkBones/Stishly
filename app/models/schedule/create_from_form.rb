@@ -79,13 +79,14 @@ class Schedule
         if @params[:schedule] == 'monthly'
           
           if @params[:days] == 'specific' || (@params[:days] != 'specific' && @params[:days2] == 'day')
-            bitmask = get_weekday_bitmask(['weekday_exclude_mon',
-            'weekday_exclude_tue',
-            'weekday_exclude_wed',
-            'weekday_exclude_thu',
-            'weekday_exclude_fri',
-            'weekday_exclude_sat',
-            'weekday_exclude_sun'])
+            bitmask = get_weekday_bitmask([
+              'weekday_exclude_sun',
+              'weekday_exclude_mon',
+              'weekday_exclude_tue',
+              'weekday_exclude_wed',
+              'weekday_exclude_thu',
+              'weekday_exclude_fri',
+              'weekday_exclude_sat'])
           else
             bitmask = get_month_bitmask(@params[:dates_picked_exclude])
           end
@@ -115,13 +116,14 @@ class Schedule
 
       if @params[:type] == 'advanced'
         if @params[:schedule] == 'weekly'
-          bitmask = get_weekday_bitmask(['weekday_mon',
+          bitmask = get_weekday_bitmask([
+            'weekday_sun',
+            'weekday_mon',
             'weekday_tue',
             'weekday_wed',
             'weekday_thu',
             'weekday_fri',
-            'weekday_sat',
-            'weekday_sun'])
+            'weekday_sat'])
         elsif @params[:schedule] == 'monthly' && @params[:days] == 'specific'
           bitmask = get_month_bitmask(@params[:dates_picked])
         elsif @params[:schedule] == 'monthly' && @params[:days] != 'specific' && @params[:days2] != 'day'
