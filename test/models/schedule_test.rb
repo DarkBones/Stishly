@@ -734,6 +734,11 @@ class ScheduleTest < ActiveSupport::TestCase
       next_occurrence = Schedule.next_occurrence(schedule, next_occurrence)
 
       assert date.to_s == next_occurrence.to_s, format_error("Unexpected next occurrence\n#{message}", date.to_s, next_occurrence.to_s)
+
+      #if schedule.period == 'months' && params[:type] != 'simple' && schedule.days_month != 'last' && schedule.days_month_day != 'day'
+      #  assert schedule.days > 0
+      #end
+      
       #puts "#{date} == #{next_occurrence.to_s}"
 
       next_occurrence += 1 if next_occurrence != nil

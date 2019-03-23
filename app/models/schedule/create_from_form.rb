@@ -64,10 +64,12 @@ class Schedule
     end
 
     def get_exclusion_met_day
-      met = ''
+      weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+
+      met = 0
 
       if @params[:schedule] == 'monthly' && @excluding == true && @params[:type] == 'advanced'
-        met = @params[:exclusion_met2]
+        met = weekdays.index(@params[:exclusion_met2])
       end
 
       return met
