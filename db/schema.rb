@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_23_130620) do
+ActiveRecord::Schema.define(version: 2019_03_23_162943) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 2019_03_23_130620) do
     t.integer "period_num"
     t.integer "days"
     t.string "days_month"
-    t.string "days_month_day"
+    t.integer "days_month_day"
     t.integer "days_exclude"
     t.string "exclusion_met"
     t.integer "exclusion_met_day"
