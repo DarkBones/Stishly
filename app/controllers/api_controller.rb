@@ -21,6 +21,22 @@ class ApiController < ApplicationController
     render json: current_user.country.week_start
   end
 
+  def get_next_schedule_occurrences
+    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    #render json: Schedule.next_occurrence(schedule, params[:start_date].to_date)
+
+    occurrences = []
+    next_occurrence = params[:start_date].to_date
+    params[:occurrence_count].to_i.times do
+      next_occurrence = Schedule.next_occurrence(schedule, next_occurrence)
+      occurrences.push(next_occurrence)
+
+      next_occurrence += 1 if next_occurrence != nil
+    end
+
+    render json: occurrences
+  end
+
   def render_transactionsmenu
     @active_account
     if params[:account]
