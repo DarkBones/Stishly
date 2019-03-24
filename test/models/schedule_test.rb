@@ -684,7 +684,19 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
+    message = "26.1 advanced monthly every two months on the last Friday, except on the 26th. Run on previous Wednesday if excluded"
+    params[:run_every] = '2'
+    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    dates = [
+      '2019-03-29',
+      '2019-05-31',
+      '2019-07-24',
+      '2019-09-27'
+    ]
+    assert_dates(schedule, dates, start_date, params, message)
+
     message = "27. advanced monthly every month on the last day"
+    params[:run_every] = '1'
     params[:days2] = 'day'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
@@ -753,15 +765,48 @@ class ScheduleTest < ActiveSupport::TestCase
       '2029-03-25',
       '2034-03-25',
       '2039-03-25',
-      '2044-03-25',
+      '2044-03-25'
+    ]
+    assert_dates(schedule, dates, start_date, params, message)
+
+    params = reset_params
+    message = "32. advanced monthly every month on second tuesday"
+    params[:type] = 'advanced'
+    params[:schedule] = 'monthly'
+    params[:days] = 'second'
+    params[:days2] = 'tue'
+    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    dates = [
+      '2019-04-09',
+      '2019-05-14',
+      '2019-06-11',
+      '2019-07-09',
+      '2019-08-13',
+      '2019-09-10',
+      '2019-10-08',
+      '2019-11-12',
+      '2019-12-10',
+      '2020-01-14'
+    ]
+    assert_dates(schedule, dates, start_date, params, message)
+
+    message = "33. advanced monthly every two months on second tuesday"
+    params[:run_every] = '2'
+    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    dates = [
+      '2019-05-14',
+      '2019-07-09',
+      '2019-09-10',
+      '2019-11-12',
+      '2020-01-14'
     ]
     assert_dates(schedule, dates, start_date, params, message)
   end
 
   def assert_dates(schedule, dates, start_date, params, message)
-    puts '---------------'
-    puts message
-    puts dates.to_s
+    #puts '---------------'
+    #puts message
+    #puts dates.to_s
     next_occurrence = start_date
     for i in 0...dates.length do
       date = dates[i]
