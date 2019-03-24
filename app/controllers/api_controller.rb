@@ -29,9 +29,14 @@ class ApiController < ApplicationController
     next_occurrence = params[:start_date].to_date
     params[:occurrence_count].to_i.times do
       next_occurrence = Schedule.next_occurrence(schedule, next_occurrence)
-      occurrences.push(User.format_date(next_occurrence, true))
 
-      next_occurrence += 1 if next_occurrence != nil
+      if next_occurrence != nil
+        occurrences.push(User.format_date(next_occurrence, true))
+
+        next_occurrence += 1
+      else
+        break
+      end
     end
 
     render json: occurrences
