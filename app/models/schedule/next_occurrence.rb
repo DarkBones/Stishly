@@ -57,6 +57,7 @@ class Schedule
 
       if mask_length != nil
         while mask.length < mask_length do
+          puts "        EXTENDING BITMASK"
           mask.push('0')
         end
       end
@@ -254,21 +255,11 @@ class Schedule
       return false
     end
 
-    # returns true if given date was the result of an exclusion rule
-    def was_excluded_NEW(date)
-      puts "Checking if #{date} was excluded"
-
-      if @schedule.days_month == 'specific'
-        return false if bitmask(@schedule.days)[date.day] == '1'
-        return date.wday == @schedule.exclusion_met_day if @schedule.exclusion_met_day
-      elsif @schedule.days_month != 'specific'
-
-      end
-    end
-
     # reverse of exclusion
     def unexclude(date)
       puts "Unexcluding date #{date}"
+
+      date_p = date
 
       case @schedule.exclusion_met
       when 'previous'
@@ -318,6 +309,15 @@ class Schedule
       if @schedule.days_month == '' || @schedule.days_month == 'specific'
         date += find_next_in_bitmask(days, date.day, month_length(date))
         date += periods_to_add(date).months
+
+        # required for dates with day larger than 28 (not included in all months)
+        if @schedule.days > 0
+          while bitmask(@schedule.days)[date.day] != '1' do
+            date += find_next_in_bitmask(days, date.day, month_length(date))
+            date += periods_to_add(date).months
+          end
+        end
+
       else
         date = find_next_non_specific(date)
       end
@@ -332,13 +332,6 @@ class Schedule
         end
         date = run_exclusion(date)
       end
-
-      # if not advanced
-      #if @schedule.days == 0 && (@schedule.days_month == 'specific' || @schedule.days_month = '')
-      #  puts "      simple schedule"
-      #else
-      #  puts "      advanced schedule"
-      #end
 
       return date
     end

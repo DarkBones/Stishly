@@ -524,6 +524,28 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
+    message = "19.1 advanced monthly every month on the 31st"
+    params[:dates_picked] = ' 31'
+    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    dates = [
+      '2019-03-31',
+      '2019-05-31',
+      '2019-07-31',
+      '2019-08-31'
+    ]
+    assert_dates(schedule, dates, start_date, params, message)
+
+    message = "19.1 advanced monthly every two months on the 31st"
+    params[:run_every] = '2'
+    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    dates = [
+      '2019-03-31',
+      '2019-05-31',
+      '2019-07-31',
+      '2020-01-31'
+    ]
+    assert_dates(schedule, dates, start_date, params, message)
+
     message = "20. advanced monthly every two months on the 28th and on the 5th"
     params[:run_every] = '2'
     params[:dates_picked] = ' 5 28'
@@ -600,6 +622,19 @@ class ScheduleTest < ActiveSupport::TestCase
       '2019-09-30'
     ]
     assert_dates(schedule, dates, start_date, params, message)
+
+    #message = "23.1 advanced monthly every month on the 1st and on the 31th, but not on weekends. If excluded, run on the next Friday"
+    #params[:exclusion_met2] = 'fri'
+    #params[:dates_picked] = ' 1 31'
+    #schedule = Schedule.create_from_form({schedule: params}, current_user)
+    #dates = [
+    #  '2019-04-05',
+    #  '2019-04-01',
+    #  '2019-05-01',
+    #  '2019-05-31',
+    #  '2019-06-07'
+    #]
+    #assert_dates(schedule, dates, start_date, params, message)
 
     message = "24. advanced monthly every month on the last Friday"
     params[:weekday_exclude_sat] = '0'
@@ -738,18 +773,18 @@ class ScheduleTest < ActiveSupport::TestCase
       #if schedule.period == 'months' && params[:type] != 'simple' && schedule.days_month != 'last' && schedule.days_month_day != 'day'
       #  assert schedule.days > 0
       #end
-      
+
       #puts "#{date} == #{next_occurrence.to_s}"
 
       next_occurrence += 1 if next_occurrence != nil
     end
   end
 
-  def reset_params
+  def reset_params(date='25-Mar-2019')
     return {
       type: 'simple',
       name: 'test schedule',
-      start_date: '25-Mar-2019',
+      start_date: date,
       timezone: 'Europe/London',
       schedule: '',
       run_every: '1',
