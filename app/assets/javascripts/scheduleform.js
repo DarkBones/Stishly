@@ -48,6 +48,9 @@ function changeScheduleExclusionMet(val){
 
 function changeScheduleDays(val){
   var $scheduleDays2 = $('#scheduleform #schedule_days2');
+  var $daypickerExclude = $("#scheduleform #daypicker-exclude");
+  var $weekdayExclude = $("#scheduleform #weekday-exclude");
+  var $daypicker = $("#scheduleform #daypicker");
 
   switch (val.toLowerCase()) {
     case 'specific':
@@ -55,8 +58,17 @@ function changeScheduleDays(val){
       $scheduleDays2.hide();
       break;
     default:
-      hideDaypicker();
+      $daypicker.hide();
       $scheduleDays2.show();
+      switch ($scheduleDays2.val()) {
+        case 'day':
+          $weekdayExclude.show();
+          $daypickerExclude.hide();
+          break;
+        default:
+          $weekdayExclude.hide();
+          $daypickerExclude.show();
+      }
   }
 }
 
