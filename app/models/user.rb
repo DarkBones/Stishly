@@ -54,7 +54,7 @@ class User < ApplicationRecord
     @current_user = current_user
   end
 
-  def self.format_date(d)
+  def self.format_date(d, include_weekday=false)
     tz = TZInfo::Timezone.get(@current_user.timezone)
     today = tz.utc_to_local(Time.now).to_date
     yesterday = tz.utc_to_local(Time.now).to_date - 1.day
@@ -80,6 +80,10 @@ class User < ApplicationRecord
     date_format.sub! "m", "%-m" if !date_format.include? "%m"
     date_format.sub! "yyyy", "%Y"
     date_format.sub! "yy", "%y"
+
+    if include_weekday
+      date_format = "%a, " + date_format
+    end
 
     #return d.strftime("%d %b %Y")
     return d.strftime(date_format)

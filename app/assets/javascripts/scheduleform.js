@@ -38,7 +38,11 @@ function getScheduleNextOccurrences(){
     dataType: "json",
     url: url,
     success: function(data) {
-      $("#scheduleform #next_occurrences").text(data);
+      $("#scheduleform #next_occurrences").html("<ul>")
+      data.forEach(function(d) {
+        $("#scheduleform #next_occurrences").append("<li>" + d + "</li>");
+      })
+      $("#scheduleform #next_occurrences").append("</ul>");
     }
   })
 }
