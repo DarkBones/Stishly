@@ -1,0 +1,7 @@
+<% if @schedule.is_a? String %>
+  trigger_notice('<%= @schedule %>', true);
+  $('#scheduleform').effect( "shake", { direction: "left", times: 4, distance: 6} );
+<% else %>
+  $("[data-dismiss=modal]").trigger({ type: "click" });
+  
+<% end %>

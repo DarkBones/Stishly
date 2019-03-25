@@ -9,6 +9,15 @@ class Schedule
     end
 
     def perform
+      if @params[:name].length == 0
+        return I18n.t('schedule.failure.invalid_name')
+      end
+
+      schedules = @current_user.schedules.where(:name => @params[:name]).take()
+      if schedules
+        return I18n.t('schedule.failure.already_exists')
+      end
+
       schedule_params = {
         name: @params[:name],
         start_date: @params[:start_date].to_date,

@@ -22,7 +22,7 @@
 #
 
 class Schedule < ApplicationRecord
-  validates :name, :start_date, :user_id, presence: true
+  validates :user_id, presence: true
   validates_numericality_of :period_num, :greater_than => 0
 
   belongs_to :user
@@ -31,7 +31,7 @@ class Schedule < ApplicationRecord
 
   def self.create_from_form(params, current_user)
     schedule = CreateFromForm.new(params, current_user).perform()
-    schedule.next_occurrence = self.next_occurrence(schedule)
+    schedule.next_occurrence = self.next_occurrence(schedule) if schedule.is_a?(ActiveRecord::Base)
     return schedule
   end
 

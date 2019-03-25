@@ -37,13 +37,19 @@ en:
       confirmed: "Account successfully created"
     instructions:
       create: "Create an account by clicking the '+' button"
-  transaction:
-    confirmations:
-      confirmed: "Transaction successfully created"
     failure:
       invalid_name: "Invalid account name"
       invalid_name_dot: "Invalid account name. Dots (.) not allowed"
-      already_exists: "Account already exists"
+      already_exists: "Account with the same name already exists"
+  transaction:
+    confirmations:
+      confirmed: "Transaction successfully created"
+  schedule:
+    confirmations:
+      confirmed: "Schedule successfully created"
+    failure:
+      invalid_name: "Invalid schedule name"
+      already_exists: "Schedule with the same name already exists"
   dates:
     today: "Today"
     yesterday: "Yesterday"
