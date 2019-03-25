@@ -155,6 +155,16 @@ class Schedule
         if @schedule.days_month == '' || @schedule.days_month == 'specific'
           date += find_next_in_bitmask(get_days_month(date), date.day, month_length(date))
           date += periods_to_add(date).months
+
+          # required for dates with day larger than 28 (not included in all months)
+          if @schedule.days > 0
+            while bitmask(@schedule.days)[date.day] != '1' do
+              puts 'not found'
+              date += find_next_in_bitmask(get_days_month, date.day, month_length(date))
+              date += periods_to_add(date).months
+            end
+          end
+
         else
           date = find_next_non_specific(date)
         end
