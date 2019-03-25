@@ -31,6 +31,7 @@ class Schedule < ApplicationRecord
 
   def self.create_from_form(params, current_user)
     schedule = CreateFromForm.new(params, current_user).perform()
+    schedule.next_occurrence = self.next_occurrence(schedule)
     return schedule
   end
 
