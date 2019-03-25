@@ -203,4 +203,5 @@ class SchedulesTest < ApplicationSystemTestCase
     assert_selector '#scheduleform #weekday-exclude', visible: :hidden
     assert_selector '#scheduleform #daypicker-exclude', visible: :hidden
   end
+  
 end
