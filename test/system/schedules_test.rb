@@ -46,7 +46,9 @@ class SchedulesTest < ApplicationSystemTestCase
     visit "/schedules"
     click_on "New Schedule"
 
-    
+    assert_selector '#scheduleform #type-simple.active', text: 'Simple'
+    assert_selector '#scheduleform #schedule_name'
+    expect(page).to have_select('#scheduleform #schedule_schedule', selected: 'Monthly')
   end
 
   test "change simple period" do
