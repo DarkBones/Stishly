@@ -59,7 +59,7 @@ class ScheduleTest < ActiveSupport::TestCase
     }
 
     schedule = current_user.schedules.build(params)
-    assert_not schedule.save, "Saved schedule without name"
+    assert schedule.is_a?(ActiveRecord::Base), "Saved schedule without name"
   end
 
   test "Schedule without start date" do
@@ -77,7 +77,7 @@ class ScheduleTest < ActiveSupport::TestCase
     }
 
     schedule = current_user.schedules.build(params)
-    assert_not schedule.save, "Saved schedule without start date"
+    assert schedule.is_a?(ActiveRecord::Base), "Saved schedule without start date"
   end
 
   test "Schedule with negative period_num" do
@@ -96,7 +96,7 @@ class ScheduleTest < ActiveSupport::TestCase
     }
 
     schedule = current_user.schedules.build(params)
-    assert_not schedule.save, "Saved schedule with negative period_num"
+    assert schedule.is_a?(ActiveRecord::Base), "Saved schedule with negative period_num"
   end
 
   test "Schedule with zero period_num" do
@@ -115,7 +115,7 @@ class ScheduleTest < ActiveSupport::TestCase
     }
 
     schedule = current_user.schedules.build(params)
-    assert_not schedule.save, "Saved schedule with zero period_num"
+    assert schedule.is_a?(ActiveRecord::Base), "Saved schedule with zero period_num"
   end
 
   test "Schedule from form" do
