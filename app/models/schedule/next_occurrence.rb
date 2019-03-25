@@ -1,7 +1,7 @@
 class Schedule
   class NextOccurrence
 
-    def initialize(schedule, date=nil)
+    def initialize(schedule, date=nil, testing=false)
       @schedule = schedule
       @date = date
     end
@@ -12,6 +12,8 @@ class Schedule
 
       # if no date given, set date to today
       @date ||= tz.utc_to_local(Time.now).to_date
+
+      @date = Time.now.to_date if @date < Time.now.to_date && testing
 
       if schedule_expired
         return nil

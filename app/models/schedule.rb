@@ -35,8 +35,8 @@ class Schedule < ApplicationRecord
     return schedule
   end
 
-  def self.next_occurrence(schedule, date=nil)
-    return NextOccurrence.new(schedule, date).perform
+  def self.next_occurrence(schedule, date=nil, testing=false)
+    return NextOccurrence.new(schedule, date, testing).perform
   end
 
 end
