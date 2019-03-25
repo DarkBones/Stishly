@@ -1,6 +1,7 @@
 var type = "simple"
 
 function getScheduleNextOccurrences(){
+
   $("#scheduleform #next_occurrences").text("");
   //var type = ""
   var name = sanitize($("#scheduleform #schedule_name").val());
@@ -45,6 +46,17 @@ function getScheduleNextOccurrences(){
       $("#scheduleform #next_occurrences").append("</ul>");
     }
   })
+}
+
+// don't allow values less than one in the 'run_every' field
+function changeRunsEvery() {
+  var val = 0;
+  val = $("#scheduleform #schedule_run_every").val();
+  console.log(val);
+  if (val < 1){
+    $("#scheduleform #schedule_run_every").val('1');
+  }
+  getScheduleNextOccurrences();
 }
 
 function sanitize(val) {

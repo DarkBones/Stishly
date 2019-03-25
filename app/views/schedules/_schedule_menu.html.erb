@@ -64,7 +64,7 @@
                 </div>
                 <div class="row" class="schedule-simple-period">
                   <div class="col-6">
-                    <%= f.number_field :run_every, class: 'form-control', value: "1" %>
+                    <%= f.number_field :run_every, class: 'form-control', value: "1", 'onchange' => 'changeRunsEvery()' %>
                   </div>
                   <div class="col-6 px-0 py-2">
                     <p id="period">
