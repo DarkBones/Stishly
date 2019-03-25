@@ -9,17 +9,25 @@
 <h3>Active Schedules</h3>
 <div id="active-schedules">
   <ul>
-    <p>
-      <%= I18n.t('schedules.no_active_schedules') %>
-    </p>
+    <% if @schedules.length == 0 %>
+      <p>
+        <%= I18n.t('schedules.no_active_schedules') %>
+      </p>
+    <% else %>
+      render schedules here
+    <% end %>
   </ul>
 </div>
 
 <h3>Inactive Schedules</h3>
 <div id="inactive-schedules">
   <ul>
-    <p>
-      <%= I18n.t('schedules.no_inactive_schedules') %>
-    </p>
+    <% if @inactive_schedules.length == 0 %>
+      <p>
+        <%= I18n.t('schedules.no_inactive_schedules') %>
+      </p>
+    <% else %>
+      render inactive schedules here
+    <% end %>
   </ul>
 </div>

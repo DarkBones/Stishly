@@ -1,5 +1,7 @@
 class SchedulesController < ApplicationController
   def index
+    @schedules = current_user.schedules.where(:is_active => 1)
+    @inactive_schedules = current_user.schedules.where(:is_active => 0)
   end
 
   def create
