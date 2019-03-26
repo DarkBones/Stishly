@@ -174,14 +174,14 @@ function hideWeekday(){
   $('#scheduleform #weekday').hide();
 }
 
-function advancedScheduleOptions(){
+function advancedScheduleOptions(force=0){
   var $advancedOptions = $("#scheduleform #schedule_advanced");
   var $advancedOptionsToggle = $("#scheduleform #schedule_advanced_toggle");
 
-  if ($advancedOptions.is(":visible")){
+  if ($advancedOptions.is(":visible") || force == -1){
     $advancedOptions.slideUp(200);
     $advancedOptionsToggle.text('show advanced options');
-  } else {
+  } else if ($advancedOptions.is(":hidden") || force == 1) {
     $advancedOptions.slideDown(200);
     $advancedOptionsToggle.text('hide advanced options');
   }
@@ -232,6 +232,24 @@ function resetScheduleMenu(){
   $('#scheduleform #schedule_start_time').val(get_time());
   $('#scheduleform #timezone_input').set_timezone();
 
+  $('#scheduleform #schedule_dates_picked').val('');
+  $('#scheduleform #schedule_dates_picked_exclude').val('');
+
+  $('#scheduleform #schedule_name').val('');
+  $('#scheduleform #schedule_exclusion_met1').val('cancel');
+  $('#scheduleform #schedule_exclusion_met2').val('mon');
+
+  $('#scheduleform #schedule_days').val('specific');
+  $('#scheduleform #schedule_days2').val('day');
+
+  $('#scheduleform #daypicker table td').each(function(i){
+    $(this).removeClass('active');
+  });
+
+  $('#scheduleform #daypicker-exclude table td').each(function(i){
+    $(this).removeClass('active');
+  });
+
   // reset the button-group elements
   $('#scheduleform #button-group').each(function(index){
     $(this).find('input').each(function(i){
@@ -246,5 +264,17 @@ function resetScheduleMenu(){
     });
   });
 
-  getScheduleNextOccurrences()
+  // reset the button-group-weekdays elements
+  $('#scheduleform #button-group-weekdays').each(function(index){
+    $(this).find('input').each(function(i){
+      $(this).prop("checked", false)
+    });
+    $(this).find('label').each(function(i){
+      $(this).removeClass('active');
+    });
+  });
+
+  advancedScheduleOptions(-1);
+
+  getScheduleNextOccurrences();
 }
