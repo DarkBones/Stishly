@@ -203,5 +203,36 @@ class SchedulesTest < ApplicationSystemTestCase
     assert_selector '#scheduleform #weekday-exclude', visible: :hidden
     assert_selector '#scheduleform #daypicker-exclude', visible: :hidden
   end
+
+  test "reset form on open" do
+    login_as_blank
+    visit "/schedules"
+
+    click_on "New Schedule"
+    page.find('#scheduleform #type-advanced').click
+    click_on 'show advanced options'
+
+    fill_in "schedule[name]", with: "Test name"
+    fill_in "schedule[start_date]", with: "25-Feb-2019"
+    select 'Every last ...', from: "schedule[days]"
+    select 'Friday', from: "schedule[days2]"
+    fill_in "schedule[end_date]", with: "25-Mar-2019"
+    select 'Run on the previous ...', from: "schedule[exclusion_met1]"
+    select 'Friday', from: "schedule[exclusion_met2]"
+
+    page.find('#schedule_close_form').click
+
+    click_on "New Schedule"
+    page.find('#scheduleform #type-advanced').click
+    #click_on 'show advanced options'
+
+    end_date = page.find('#scheduleform #schedule_end_date').value
+    exclusion_met1 = page.find('#scheduleform #schedule_exclusion_met1').value
+    
+    assert end_date == '', format_error('unexpected end_date', '', end_date)
+    assert exclusion_met1 == 'cancel', format_error('unexpected exclusion_met1', 'cancel', exclusion_met1)
+
+    puts exclusion_met2
+  end
   
 end
