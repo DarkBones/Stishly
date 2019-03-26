@@ -4,6 +4,7 @@ class Schedule
     def initialize(schedule, date=nil, testing=false)
       @schedule = schedule
       @date = date
+      @testing = testing
     end
 
     def perform
@@ -13,7 +14,7 @@ class Schedule
       # if no date given, set date to today
       @date ||= tz.utc_to_local(Time.now).to_date
 
-      @date = Time.now.to_date if @date < Time.now.to_date && testing
+      @date = Time.now.to_date if @date < Time.now.to_date && @testing
 
       if schedule_expired
         return nil
@@ -250,8 +251,22 @@ class Schedule
 
         return d
       else
-        return Date.new(date.year, date.month, values.index(@schedule.days_month)+1) if @schedule.days_month_day == 'day'
-
+        if @schedule.days_month_day == nil
+          puts "values.index(@schedule.days_month) + 1 > date.day"
+          puts "#{values.index(@schedule.days_month) + 1} < #{date.day}"
+          if values.index(@schedule.days_month) + 1 < date.day
+            months_to_add = @schedule.period_num
+            months_since_startdate = (date.year * 12 + date.month) - (@schedule.start_date.year * 12 + @schedule.start_date.month)
+            if (months_since_startdate % @schedule.period_num) > 0
+              months_to_add = @schedule.period_num - (months_since_startdate % @schedule.period_num)
+            end
+            date += months_to_add.months
+            puts "Added #{months_to_add} months"
+          end
+          
+          return Date.new(date.year, date.month, values.index(@schedule.days_month)+1) if @schedule.days_month_day == nil
+        end
+        
         d = Date.new(date.year, date.month, 1)
         d += (@schedule.days_month_day - d.wday) % 7
         d += (7 * values.index(@schedule.days_month))
