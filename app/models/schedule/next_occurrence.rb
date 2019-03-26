@@ -14,7 +14,7 @@ class Schedule
       # if no date given, set date to today
       @date ||= tz.utc_to_local(Time.now).to_date
 
-      @date = Time.now.to_date if @date < Time.now.to_date && @testing
+      @date = Time.now.to_date if @date < Time.now.to_date && !@testing
 
       if schedule_expired
         return nil
