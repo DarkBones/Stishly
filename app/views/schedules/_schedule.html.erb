@@ -3,7 +3,7 @@
     <%= schedule.name %>
   </td>
   <td>
-    <%= User.format_date(schedule.run_date) %>
+    <%= User.format_date(schedule.run_date) if schedule.run_date %>
   </td>
   <td>
     options

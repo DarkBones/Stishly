@@ -30,12 +30,17 @@ class Schedule
         days_exclude: get_days_exclude,
         exclusion_met: get_exclusion_met,
         exclusion_met_day: get_exclusion_met_day,
-        timezone: @params[:timezone]
+        timezone: @params[:timezone],
+        is_active: get_is_active
       }
 
       #schedule = Schedule.new(schedule_params)
       schedule = @current_user.schedules.new(schedule_params)
       return schedule
+    end
+
+    def get_is_active
+      return Time.now.to_date < @params[:end_date].to_date if @params[:end_date].length >= 11
     end
 
     def get_end_date

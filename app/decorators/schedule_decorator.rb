@@ -4,8 +4,10 @@ class ScheduleDecorator < ApplicationDecorator
   def time_num
     if model.is_active == true
       return model.next_occurrence.strftime("%Y%m%d").to_i
-    else
+    elsif model.last_occurrence
       return model.last_occurrence.strftime("%Y%m%d").to_i
+    else
+      return 0
     end
   end
 
