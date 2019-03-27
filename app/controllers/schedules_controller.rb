@@ -10,7 +10,7 @@ class SchedulesController < ApplicationController
   end
 
   def run_schedules
-    schedules_to_run = Schedule.where(:next_occurrence_utc) >= Time.now
+    schedules_to_run = Schedule.where(:next_occurrence_utc >= Time.now, :is_active => true)
 
     #TODO: run the schedules
   end

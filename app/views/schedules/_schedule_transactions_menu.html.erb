@@ -1,0 +1,27 @@
+<div class="modal <%= 'fade' if Rails.env.test? == false %>" id="schedule_transactions_form" tabindex="-1" role="dialog" aria-labelledby="schedule-transactions-formLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="scheduleformLabel">Transactions</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <%= form_with(model: Schedule.new) do |f| %>
+        <div class="modal-body">
+          <div class="container">
+
+            
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="schedule_close_form">Close</button>
+          <%= f.submit 'Create Schedule', :class => 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
