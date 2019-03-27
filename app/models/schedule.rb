@@ -22,7 +22,7 @@
 #
 
 class Schedule < ApplicationRecord
-  validates :user_id, presence: true
+  validates :user_id, :timezone, presence: true
   validates_numericality_of :period_num, :greater_than => 0
 
   belongs_to :user
