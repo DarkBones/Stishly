@@ -37,7 +37,7 @@ class Schedule < ApplicationRecord
 
       next_occurrence = self.next_occurrence(schedule, nil, false, true)
       schedule.next_occurrence = tz.utc_to_local(next_occurrence).to_date
-      schedule.next_occurrenct_gmt = next_occurrence
+      schedule.next_occurrence_utc = next_occurrence
     end
 
     return schedule
