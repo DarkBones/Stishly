@@ -1,6 +1,16 @@
+<% if active %>
+  <% table_id = 'schedules_active' %>
+  <% schedules = @schedules %>
+  <% th_run_date = 'Next run date' %>
+<% else %>
+  <% table_id = 'schedules_inactive' %>
+  <% schedules = @inactive_schedules %>
+  <% th_run_date = 'Last run date' %>
+<% end %>
+
 <table id="<%= table_id %>">
   <th>Name</th>
-  <th>Next run date</th>
+  <th><%= th_run_date %></th>
   <th></th>
-  <%= render @schedules %>
+  <%= render schedules %>
 </table>

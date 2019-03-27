@@ -20,6 +20,9 @@ class SchedulesTableTest < ApplicationSystemTestCase
     assert_selector 'table#schedules_active tr td', text: '28/04/2018'
     assert_selector 'table#schedules_active tr td', text: '29/03/2018'
     assert_selector 'table#schedules_active tr td', text: '31/05/2018'
+
+    assert_selector 'table#schedules_inactive tr td', text: 'Inactive schedule'
+    assert_selector 'table#schedules_inactive tr td', text: '31/05/2018'
   end
 
   def schedule_login

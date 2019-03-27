@@ -14,7 +14,7 @@
         <%= I18n.t('schedules.no_active_schedules') %>
       </p>
     <% else %>
-      <%= render 'schedules_table', :table_id => 'schedules_active' %>
+      <%= render 'schedules_table', :active => true %>
     <% end %>
   </ul>
 </div>
@@ -27,7 +27,7 @@
         <%= I18n.t('schedules.no_inactive_schedules') %>
       </p>
     <% else %>
-      render inactive schedules here
+      <%= render 'schedules_table', :active => false %>
     <% end %>
   </ul>
 </div>
