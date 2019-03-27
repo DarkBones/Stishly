@@ -27,8 +27,78 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+payday: {
+  name: 'Payday',
+  user_id: 9,
+  start_date: '2019-03-25',
+  period: 'months',
+  period_num: 1,
+  days: 268435456,
+  days_month: 'specific',
+  days_month_day: 0,
+  days_exclude: 65,
+  exclusion_met: 'previous',
+  exclusion_met_day: 5,
+  timezone: 'Europe/London',
+  created_at: '<%= Time.now %>',
+  updated_at: '<%= Time.now %>',
+  is_active: 1,
+  next_occurrence: '2019-03-28'
+}
+
+bonus_day: {
+  name: 'Bonus day',
+  user_id: 9,
+  start_date: '2019-04-25',
+  period: 'months',
+  period_num: 3,
+  days: 268435456,
+  days_month: 'specific',
+  days_month_day: 0,
+  days_exclude: 65,
+  exclusion_met: 'previous',
+  exclusion_met_day: 5,
+  timezone: 'Europe/London',
+  created_at: '<%= Time.now %>',
+  updated_at: '<%= Time.now %>',
+  is_active: 1,
+  next_occurrence: '2019-04-28'
+}
+
+payday_cvg: {
+  name: 'Payday CVG',
+  user_id: 9,
+  start_date: '2019-04-25',
+  period: 'months',
+  period_num: 1,
+  days: 16,
+  days_month: 'last',
+  days_month_day: 5,
+  days_exclude: 0,
+  exclusion_met: '',
+  exclusion_met_day: 0,
+  timezone: 'Europe/London',
+  created_at: '<%= Time.now %>',
+  updated_at: '<%= Time.now %>',
+  is_active: 1,
+  next_occurrence: '2019-03-29'
+}
+
+bonus_day_cvg: {
+  name: 'Bonus day CVG',
+  user_id: 9,
+  start_date: '2018-05-25',
+  period: 'months',
+  period_num: 3,
+  days: 16,
+  days_month: 'last',
+  days_month_day: 5,
+  days_exclude: 0,
+  exclusion_met: '',
+  exclusion_met_day: 0,
+  timezone: 'Europe/London',
+  created_at: '<%= Time.now %>',
+  updated_at: '<%= Time.now %>',
+  is_active: 1,
+  next_occurrence: '2019-05-31'
+}

@@ -3,7 +3,7 @@
     <%= schedule.name %>
   </td>
   <td>
-    <%= schedule.next_occurrence %>
+    <%= User.format_date(schedule.next_occurrence) %>
   </td>
   <td>
     options
