@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_27_102425) do
+ActiveRecord::Schema.define(version: 2019_03_27_112321) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -27,10 +27,10 @@ ActiveRecord::Schema.define(version: 2019_03_27_102425) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
+    t.string "name", null: false
     t.string "description"
     t.integer "position"
-    t.string "currency"
+    t.string "currency", null: false
     t.boolean "is_default"
     t.boolean "is_real", default: true
     t.index ["currency_id"], name: "index_accounts_on_currency_id"
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 2019_03_27_102425) do
   end
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.string "color"
+    t.string "name", null: false
+    t.string "color", null: false
     t.string "symbol"
     t.bigint "user_id"
     t.bigint "parent_id"
@@ -90,25 +90,25 @@ ActiveRecord::Schema.define(version: 2019_03_27_102425) do
   end
 
   create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.bigint "user_id"
-    t.date "start_date"
+    t.date "start_date", null: false
     t.date "end_date"
-    t.string "period"
-    t.integer "period_num"
-    t.integer "days"
+    t.string "period", null: false
+    t.integer "period_num", default: 0
+    t.integer "days", default: 0
     t.string "days_month"
     t.integer "days_month_day"
     t.integer "days_exclude"
     t.string "exclusion_met"
     t.integer "exclusion_met_day"
-    t.string "timezone"
+    t.string "timezone", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_active", default: true
     t.date "next_occurrence"
     t.date "last_occurrence"
-    t.datetime "next_occurrenct_gmt"
+    t.datetime "next_occurrence_utc"
     t.index ["name"], name: "index_schedules_on_name"
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
@@ -146,13 +146,13 @@ ActiveRecord::Schema.define(version: 2019_03_27_102425) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "account_id"
-    t.string "timezone"
+    t.string "timezone", null: false
     t.string "currency"
     t.integer "account_currency_amount"
     t.bigint "category_id"
     t.bigint "parent_id"
     t.boolean "exclude_from_all", default: false
-    t.datetime "local_datetime"
+    t.string "local_datetime", null: false
     t.bigint "transfer_account_id"
     t.index ["account_id"], name: "index_transactions_on_account_id"
     t.index ["category_id"], name: "index_transactions_on_category_id"
