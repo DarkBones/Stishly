@@ -102,3 +102,22 @@ bonus_day_cvg: {
   is_active: 1,
   next_occurrence: '2018-05-31'
 }
+
+innactive: {
+  name: 'Innactive schedule',
+  user_id: 9,
+  start_date: '2018-05-25',
+  period: 'months',
+  period_num: 3,
+  days: 16,
+  days_month: 'last',
+  days_month_day: 5,
+  days_exclude: 0,
+  exclusion_met: '',
+  exclusion_met_day: 0,
+  timezone: 'Europe/London',
+  created_at: '<%= Time.now %>',
+  updated_at: '<%= Time.now %>',
+  is_active: 0,
+  last_occurrence: '2018-05-31'
+}
