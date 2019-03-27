@@ -31,12 +31,20 @@ class Schedule < ApplicationRecord
 
   def self.create_from_form(params, current_user)
     schedule = CreateFromForm.new(params, current_user).perform()
-    schedule.next_occurrence = self.next_occurrence(schedule) if schedule.is_a?(ActiveRecord::Base)
+
+    if schedule.is_a?(ActiveRecord::Base)
+      tz = TZInfo::Timezone.get(schedule.timezone)
+
+      next_occurrence = self.next_occurrence(schedule, nil, false, true)
+      schedule.next_occurrence = tz.utc_to_local(next_occurrence).to_date
+      schedule.next_occurrenct_gmt = next_occurrence
+    end
+
     return schedule
   end
 
-  def self.next_occurrence(schedule, date=nil, testing=false)
-    return NextOccurrence.new(schedule, date, testing).perform
+  def self.next_occurrence(schedule, date=nil, testing=false, return_datetime=false)
+    return NextOccurrence.new(schedule, date, testing, return_datetime).perform
   end
 
 end

@@ -41,7 +41,7 @@ function getScheduleNextOccurrences(){
     success: function(data) {
       $("#scheduleform #next_occurrences").html("<ul>")
       data.forEach(function(d) {
-        $("#scheduleform #next_occurrences").append("<li>" + d + "</li>");
+        $("#scheduleform #next_occurrences").append("" + d + "");
       })
       $("#scheduleform #next_occurrences").append("</ul>");
     }

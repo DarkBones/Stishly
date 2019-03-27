@@ -41,6 +41,7 @@ class Schedule
 
     def get_is_active
       return Time.now.to_date < @params[:end_date].to_date if @params[:end_date].length >= 11
+      return true
     end
 
     def get_end_date

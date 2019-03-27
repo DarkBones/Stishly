@@ -23,20 +23,23 @@ class ApiController < ApplicationController
 
   def get_next_schedule_occurrences
     schedule = Schedule.create_from_form({schedule: params}, current_user)
-    #render json: Schedule.next_occurrence(schedule, params[:start_date].to_date)
-
+    
     occurrences = []
-    next_occurrence = params[:start_date].to_date
-    params[:occurrence_count].to_i.times do
-      next_occurrence = Schedule.next_occurrence(schedule, next_occurrence)
+    if schedule.is_a?(ActiveRecord::Base)
+      next_occurrence = params[:start_date].to_date
+      params[:occurrence_count].to_i.times do
+        next_occurrence = Schedule.next_occurrence(schedule, next_occurrence)
 
-      if next_occurrence != nil
-        occurrences.push(User.format_date(next_occurrence, true))
+        if next_occurrence != nil
+          occurrences.push(("<li>"+User.format_date(next_occurrence, true)+"</li>").html_safe)
 
-        next_occurrence += 1
-      else
-        break
+          next_occurrence += 1
+        else
+          break
+        end
       end
+    else
+      occurrences.push(("<p id='next_occurrence_error'>ERROR: #{schedule}</p>").html_safe)
     end
 
     render json: occurrences
