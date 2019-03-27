@@ -43,7 +43,7 @@ payday: {
   created_at: '<%= Time.now %>',
   updated_at: '<%= Time.now %>',
   is_active: 1,
-  next_occurrence: '2019-03-28'
+  next_occurrence: '2018-03-28'
 }
 
 bonus_day: {
@@ -62,7 +62,7 @@ bonus_day: {
   created_at: '<%= Time.now %>',
   updated_at: '<%= Time.now %>',
   is_active: 1,
-  next_occurrence: '2019-04-28'
+  next_occurrence: '2018-04-28'
 }
 
 payday_cvg: {
@@ -81,7 +81,7 @@ payday_cvg: {
   created_at: '<%= Time.now %>',
   updated_at: '<%= Time.now %>',
   is_active: 1,
-  next_occurrence: '2019-03-29'
+  next_occurrence: '2018-03-29'
 }
 
 bonus_day_cvg: {
@@ -100,5 +100,5 @@ bonus_day_cvg: {
   created_at: '<%= Time.now %>',
   updated_at: '<%= Time.now %>',
   is_active: 1,
-  next_occurrence: '2019-05-31'
+  next_occurrence: '2018-05-31'
 }
