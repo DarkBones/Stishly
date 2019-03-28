@@ -170,7 +170,6 @@ class Schedule
           # required for dates with day larger than 28 (not included in all months)
           if @schedule.days > 0
             while bitmask(@schedule.days)[date.day] != '1' do
-              puts 'not found'
               date += find_next_in_bitmask(get_days_month, date.day, month_length(date))
               date += periods_to_add(date).months
             end
@@ -200,9 +199,36 @@ class Schedule
 
     # returns true if given date was the result of an exclusion rule
     def was_excluded(date)
+      if @schedule.days_month == 'specific'
+        return false if bitmask(@schedule.days)[date.day] == '1'
+
+        if @schedule.exclusion_met_day
+          return date.wday == @schedule.exclusion_met_day
+        end
+      elsif @schedule.days_month == 'last' 
+        if @schedule.days_month_day == nil
+          return date.at_end_of_month != date
+        else
+          return date.wday != @schedule.days_month_day
+        end
+      elsif @schedule.days_month_day == nil
+        values = ['first', 'second', 'third', 'fourth']
+        return date.day != (values.index(@schedule.days_month) + 1)
+      else
+        weekdays = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
+        return date.wday != weekdays.index(@schedule.days_month_day)
+      end
+
+      return false
+    end
+
+    # returns true if given date was the result of an exclusion rule
+    def was_excluded_OLD(date)
+      values = ['first', 'second', 'third', 'fourth']
 
       if @schedule.days_month == 'specific' || (@schedule.days_month != 'specific' && @schedule.days_month_day == nil)
         return false if bitmask(@schedule.days)[date.day] == '1'
+
         if @schedule.exclusion_met_day && @schedule.days_month == 'specific'
           return date.wday == @schedule.exclusion_met_day
         elsif @schedule.days_month == 'last' && @schedule.days_month_day == nil
@@ -260,8 +286,6 @@ class Schedule
         return d
       else
         if @schedule.days_month_day == nil
-          puts "values.index(@schedule.days_month) + 1 > date.day"
-          puts "#{values.index(@schedule.days_month) + 1} < #{date.day}"
           if values.index(@schedule.days_month) + 1 < date.day
             months_to_add = @schedule.period_num
             months_since_startdate = (date.year * 12 + date.month) - (@schedule.start_date.year * 12 + @schedule.start_date.month)
@@ -269,7 +293,6 @@ class Schedule
               months_to_add = @schedule.period_num - (months_since_startdate % @schedule.period_num)
             end
             date += months_to_add.months
-            puts "Added #{months_to_add} months"
           end
           
           return Date.new(date.year, date.month, values.index(@schedule.days_month)+1) if @schedule.days_month_day == nil

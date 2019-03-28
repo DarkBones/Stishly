@@ -145,6 +145,10 @@ class Schedule
             'weekday_sat'])
         elsif @params[:schedule] == 'monthly' && @params[:days] == 'specific'
           bitmask = get_month_bitmask(@params[:dates_picked])
+          if bitmask == 0
+            bitmask = 0b0
+            bitmask = bitmask | (1 << @params[:start_date].to_date.day)
+          end
         elsif @params[:schedule] == 'monthly' && @params[:days] != 'specific' && @params[:days2] != 'day'
           weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
           bitmask = 0b0 | (1 << weekdays.index(@params[:days2]))
