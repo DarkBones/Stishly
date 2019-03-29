@@ -33,7 +33,7 @@ function getScheduleNextOccurrences(){
   var occurrence_count = "10";
 
   url = "api/next_occurrences" + "/" + type + "/" + name + "/" + start_date + "/" + timezone + "/" + schedule + "/" + run_every + "/" + days + "/" + days2 + "/" + dates_picked + "/" + weekday_mon + "/" + weekday_tue + "/" + weekday_wed + "/" + weekday_thu + "/" + weekday_fri + "/" + weekday_sat + "/" + weekday_sun + "/" + end_date + "/" + weekday_exclude_mon + "/" + weekday_exclude_tue + "/" + weekday_exclude_wed + "/" + weekday_exclude_thu + "/" + weekday_exclude_fri + "/" + weekday_exclude_sat + "/" + weekday_exclude_sun + "/" + dates_picked_exclude + "/" + exclusion_met1 + "/" + exclusion_met2 + "/" + occurrence_count;
-
+  console.log(url);
   $.ajax({
     type: "GET",
     dataType: "json",

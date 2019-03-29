@@ -222,34 +222,17 @@ class Schedule
       return false
     end
 
-    # returns true if given date was the result of an exclusion rule
-    def was_excluded_OLD(date)
-      values = ['first', 'second', 'third', 'fourth']
-
-      if @schedule.days_month == 'specific' || (@schedule.days_month != 'specific' && @schedule.days_month_day == nil)
-        return false if bitmask(@schedule.days)[date.day] == '1'
-
-        if @schedule.exclusion_met_day && @schedule.days_month == 'specific'
-          return date.wday == @schedule.exclusion_met_day
-        elsif @schedule.days_month == 'last' && @schedule.days_month_day == nil
-          return date.at_end_of_month != date
-        end
-      else
-        if date.wday != @schedule.days_month_day
-          return date.wday == @schedule.exclusion_met_day
-        end
-      end
-
-      return false
-    end
-
     # reverse of exclusion
     def unexclude(date)
       date_p = date
 
       case @schedule.exclusion_met
       when 'previous'
-        date += find_next_in_bitmask(get_days_month(date), date.day, month_length(date))
+        if @schedule.days_month == 'specific' || (@schedule.days_month != 'specific' && @schedule.days_month == nil)
+          date += find_next_in_bitmask(get_days_month(date), date.day, month_length(date))
+        else
+          date = find_next_non_specific(date)
+        end
       when 'next'
         date -= find_next_in_bitmask(get_days_month(date), date.day, month_length(date), true)
       end

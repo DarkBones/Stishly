@@ -623,19 +623,6 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
-    #message = "23.1 advanced monthly every month on the 1st and on the 31th, but not on weekends. If excluded, run on the next Friday"
-    #params[:exclusion_met2] = 'fri'
-    #params[:dates_picked] = ' 1 31'
-    #schedule = Schedule.create_from_form({schedule: params}, current_user)
-    #dates = [
-    #  '2019-04-05',
-    #  '2019-04-01',
-    #  '2019-05-01',
-    #  '2019-05-31',
-    #  '2019-06-07'
-    #]
-    #assert_dates(schedule, dates, start_date, params, message)
-
     message = "24. advanced monthly every month on the last Friday"
     params[:weekday_exclude_sat] = '0'
     params[:weekday_exclude_sun] = '0'
@@ -672,6 +659,7 @@ class ScheduleTest < ActiveSupport::TestCase
     message = "26. advanced monthly every month on the last Friday, except on the 26th. Run on previous Wednesday if excluded"
     params[:exclusion_met1] = 'previous'
     params[:exclusion_met2] = 'wed'
+    params[:dates_picked_exclude] = ' 26'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
       '2019-03-29',
@@ -689,6 +677,7 @@ class ScheduleTest < ActiveSupport::TestCase
     params[:weekday_exclude_sun] = '1'
     params[:days] = 'second'
     params[:days2] = 'day'
+    params[:dates_picked_exclude] = ''
     params[:exclusion_met2] = 'fri'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
@@ -702,12 +691,28 @@ class ScheduleTest < ActiveSupport::TestCase
     ]
     assert_dates(schedule, dates, start_date, params, message)
 
+    message = "26.05 advanced monthly every month on the first day, except on the weekends. Run on previous Monday if excluded"
+    params[:days] = 'first'
+    params[:exclusion_met2] = 'mon'
+    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    dates = [
+      '2019-04-01',
+      '2019-05-01',
+      '2019-05-27',
+      '2019-07-01',
+      '2019-08-01',
+      '2019-08-26',
+      '2019-10-01'
+    ]
+    assert_dates(schedule, dates, start_date, params, message)
+
     message = "26.1 advanced monthly every two months on the last Friday, except on the 26th. Run on previous Wednesday if excluded"
     params[:weekday_exclude_sat] = '0'
     params[:weekday_exclude_sun] = '0'
     params[:run_every] = '2'
     params[:days] = 'last'
     params[:days2] = 'fri'
+    params[:dates_picked_exclude] = ' 26'
     params[:exclusion_met2] = 'wed'
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     dates = [
