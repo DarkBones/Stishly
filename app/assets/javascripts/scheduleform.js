@@ -237,6 +237,7 @@ function resetScheduleMenu(){
   $('#scheduleform #schedule_name').val('');
   $('#scheduleform #schedule_exclusion_met1').val('cancel');
   $('#scheduleform #schedule_exclusion_met2').val('mon');
+  $('#scheduleform #schedule_run_every').val(1);
 
   $('#scheduleform #schedule_days').val('specific');
   $('#scheduleform #schedule_days2').val('day');
