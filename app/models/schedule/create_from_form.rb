@@ -14,6 +14,8 @@ class Schedule
         return I18n.t('schedule.failure.invalid_name')
       end
 
+      @params[:name].gsub! '.', ''
+
       date_regex = APP_CONFIG['ui']['dates']['regex']
       if /#{date_regex}/.match(@params[:start_date].downcase) == nil
         return I18n.t('schedule.failure.invalid_date')
@@ -31,7 +33,7 @@ class Schedule
         return I18n.t('schedule.failure.unknown')
       end
 
-      schedules = @current_user.schedules.where("LOWER(accounts.name) LIKE LOWER('" + @params[:name] + "')")
+      schedules = @current_user.schedules.where("LOWER(schedules.name) LIKE LOWER('" + @params[:name] + "')").take()
       if schedules && !@testing
         return I18n.t('schedule.failure.already_exists')
       end

@@ -47,6 +47,25 @@ function getScheduleNextOccurrences(){
   })
 }
 
+function updateScheduleNameInput(inputObject) {
+  var $scheduleform = $();
+  var $input = $();
+  var inputValue = "";
+
+  $input = $('#' + inputObject.id);
+  $scheduleform = $input.closest('#scheduleform');
+  inputValue = $input.val();
+
+  // don't allow dots in input field
+  $input.val(inputValue.replace(/\./g, ""));
+
+  if (inputValue.length > 0) {
+    $scheduleform.find("input[type=submit]").removeAttr("disabled");
+  } else {
+    $scheduleform.find("input[type=submit]").attr("disabled", "disabled");
+  } 
+}
+
 // don't allow values less than one in the 'run_every' field
 function changeRunsEvery() {
   var val = 0;
@@ -220,6 +239,7 @@ function changeScheduleType(sType){
 }
 
 function resetScheduleMenu(){
+  $('#scheduleform').find("input[type=submit]").attr("disabled", "disabled");
   $('#scheduleform #schedule_schedule').val('monthly');
   changeSchedulePeriod('monthly');
   changeScheduleType('simple');
