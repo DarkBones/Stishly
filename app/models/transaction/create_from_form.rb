@@ -116,10 +116,20 @@ private
     end
 
     def parse_datetime
+      months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+
       date_arr = @params[:date].split('-')
       
       day = date_arr[0]
+      month = months.index(date_arr[1].downcase)
+      if month < 10
+        month = '0' + month.to_s
+      else
+        month = month.to_s
+      end
+
       month = date_arr[1]
+
       year = date_arr[2]
 
       time_arr = @params[:time].split(':')
