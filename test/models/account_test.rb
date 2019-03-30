@@ -43,7 +43,7 @@ class AccountTest < ActiveSupport::TestCase
 
   test "Save account without balance" do
     current_user = users(:bas)
-    account = current_user.accounts.build({:name => 'test account'})
+    account = current_user.accounts.build({:name => 'test account', :currency => 'EUR'})
 
     assert account.save, format_error("Could not save account without specifying the balance")
     assert account.balance == 0, format_error("Unexpected default account balance", 0, account.balance)
@@ -57,6 +57,12 @@ class AccountTest < ActiveSupport::TestCase
 
     assert_not a2.is_a?(ActiveRecord::Base), format_error("Created duplicate account name")
     assert a2 == I18n.t('account.failure.already_exists'), format_error("Unexpected error", I18n.t('account.failure.already_exists'), a2)
+
+    b1 = Account.create({:name => 'test capital duplicate'}, current_user)
+    b2 = Account.create({:name => 'TEST capital DUPLICATE'}, current_user)
+
+    assert_not b2.is_a?(ActiveRecord::Base), format_error("Created duplicate account name")
+    assert b2 == I18n.t('account.failure.already_exists'), format_error("Unexpected error", I18n.t('account.failure.already_exists'), b2)
   end
 
   test "Create new account" do
