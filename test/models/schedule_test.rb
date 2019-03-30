@@ -78,6 +78,8 @@ class ScheduleTest < ActiveSupport::TestCase
     }
 
     schedule1 = Schedule.create_from_form({schedule: params}, current_user)
+    schedule1.save
+    assert schedule1.is_a?(ActiveRecord::Base), "Schedule not saved"
 
     params[:name] = "DuplicAtE"
 
