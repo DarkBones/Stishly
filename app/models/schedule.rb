@@ -29,8 +29,8 @@ class Schedule < ApplicationRecord
   has_many :schedule_joins
   has_many :transactions, through: :schedule_joins
 
-  def self.create_from_form(params, current_user)
-    schedule = CreateFromForm.new(params, current_user).perform()
+  def self.create_from_form(params, current_user, testing=false)
+    schedule = CreateFromForm.new(params, current_user, testing).perform()
 
     if schedule.is_a?(ActiveRecord::Base)
       tz = TZInfo::Timezone.get(schedule.timezone)

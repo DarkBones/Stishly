@@ -44,78 +44,195 @@ class ScheduleTest < ActiveSupport::TestCase
     assert schedule.save
   end
 
+  test "Duplicate name schedule" do
+    current_user = users(:bas)
+
+    params = {
+      type: 'advanced',
+      name: 'duplicate',
+      start_date: '17-Mar-2019',
+      timezone: 'Europe/London',
+      schedule: 'monthly',
+      run_every: '1',
+      days: 'specific',
+      days2: 'day',
+      dates_picked: ' 28',
+      weekday_mon: '0',
+      weekday_tue: '0',
+      weekday_wed: '0',
+      weekday_thu: '0',
+      weekday_fri: '0',
+      weekday_sat: '0',
+      weekday_sun: '0',
+      end_date: '02-feb-2020',
+      weekday_exclude_mon: '0',
+      weekday_exclude_tue: '0',
+      weekday_exclude_wed: '0',
+      weekday_exclude_thu: '0',
+      weekday_exclude_fri: '0',
+      weekday_exclude_sat: '1',
+      weekday_exclude_sun: '1',
+      dates_picked_exclude: '',
+      exclusion_met1: 'previous',
+      exclusion_met2: 'fri'
+    }
+
+    schedule1 = Schedule.create_from_form({schedule: params}, current_user)
+
+    params[:name] = "DuplicAtE"
+
+    schedule2 = Schedule.create_from_form({schedule: params}, current_user)
+
+    assert_not schedule2.is_a?(ActiveRecord::Base), "Saved schedule with duplicate name"
+
+  end
+
   test "Schedule without name" do
     current_user = users(:bas)
 
     params = {
-      start_date: Time.now,
-      period: "month",
-      period_num: 1,
-      days: 0b0 | (1 << 28),
-      days_exclude: 0b0 | (1 << 5) | (1 << 6),
-      exclusion_met: "previous",
-      exclusion_met_day: "fri",
-      timezone: "Europe/London"
+      type: 'advanced',
+      name: '',
+      start_date: '17-Mar-2019',
+      timezone: 'Europe/London',
+      schedule: 'monthly',
+      run_every: '1',
+      days: 'specific',
+      days2: 'day',
+      dates_picked: ' 28',
+      weekday_mon: '0',
+      weekday_tue: '0',
+      weekday_wed: '0',
+      weekday_thu: '0',
+      weekday_fri: '0',
+      weekday_sat: '0',
+      weekday_sun: '0',
+      end_date: '02-feb-2020',
+      weekday_exclude_mon: '0',
+      weekday_exclude_tue: '0',
+      weekday_exclude_wed: '0',
+      weekday_exclude_thu: '0',
+      weekday_exclude_fri: '0',
+      weekday_exclude_sat: '1',
+      weekday_exclude_sun: '1',
+      dates_picked_exclude: '',
+      exclusion_met1: 'previous',
+      exclusion_met2: 'fri'
     }
 
-    schedule = current_user.schedules.build(params)
-    assert schedule.is_a?(ActiveRecord::Base), "Saved schedule without name"
+    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    assert_not schedule.is_a?(ActiveRecord::Base), "Saved schedule without name"
   end
 
   test "Schedule without start date" do
     current_user = users(:bas)
 
     params = {
-      name: "test schedule",
-      period: "month",
-      period_num: 1,
-      days: 0b0 | (1 << 28),
-      days_exclude: 0b0 | (1 << 5) | (1 << 6),
-      exclusion_met: "previous",
-      exclusion_met_day: "fri",
-      timezone: "Europe/London"
+      type: 'advanced',
+      name: 'start date',
+      start_date: '',
+      timezone: 'Europe/London',
+      schedule: 'monthly',
+      run_every: '1',
+      days: 'specific',
+      days2: 'day',
+      dates_picked: ' 28',
+      weekday_mon: '0',
+      weekday_tue: '0',
+      weekday_wed: '0',
+      weekday_thu: '0',
+      weekday_fri: '0',
+      weekday_sat: '0',
+      weekday_sun: '0',
+      end_date: '02-feb-2020',
+      weekday_exclude_mon: '0',
+      weekday_exclude_tue: '0',
+      weekday_exclude_wed: '0',
+      weekday_exclude_thu: '0',
+      weekday_exclude_fri: '0',
+      weekday_exclude_sat: '1',
+      weekday_exclude_sun: '1',
+      dates_picked_exclude: '',
+      exclusion_met1: 'previous',
+      exclusion_met2: 'fri'
     }
 
-    schedule = current_user.schedules.build(params)
-    assert schedule.is_a?(ActiveRecord::Base), "Saved schedule without start date"
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
+    assert_not schedule.is_a?(ActiveRecord::Base), "Saved schedule without start date"
   end
 
   test "Schedule with negative period_num" do
     current_user = users(:bas)
 
     params = {
-      name: "test schedule",
-      start_date: Time.now,
-      period: "month",
-      period_num: -1,
-      days: 0b0 | (1 << 28),
-      days_exclude: 0b0 | (1 << 5) | (1 << 6),
-      exclusion_met: "previous",
-      exclusion_met_day: "fri",
-      timezone: "Europe/London"
+      type: 'advanced',
+      name: 'negative',
+      start_date: '17-Mar-2019',
+      timezone: 'Europe/London',
+      schedule: 'monthly',
+      run_every: '-1',
+      days: 'specific',
+      days2: 'day',
+      dates_picked: ' 28',
+      weekday_mon: '0',
+      weekday_tue: '0',
+      weekday_wed: '0',
+      weekday_thu: '0',
+      weekday_fri: '0',
+      weekday_sat: '0',
+      weekday_sun: '0',
+      end_date: '02-feb-2020',
+      weekday_exclude_mon: '0',
+      weekday_exclude_tue: '0',
+      weekday_exclude_wed: '0',
+      weekday_exclude_thu: '0',
+      weekday_exclude_fri: '0',
+      weekday_exclude_sat: '1',
+      weekday_exclude_sun: '1',
+      dates_picked_exclude: '',
+      exclusion_met1: 'previous',
+      exclusion_met2: 'fri'
     }
 
-    schedule = current_user.schedules.build(params)
-    assert schedule.is_a?(ActiveRecord::Base), "Saved schedule with negative period_num"
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
+    assert schedule.period_num == 1, "Saved schedule with negative period_num"
   end
 
   test "Schedule with zero period_num" do
     current_user = users(:bas)
 
     params = {
-      name: "test schedule",
-      start_date: Time.now,
-      period: "month",
-      period_num: 0,
-      days: 0b0 | (1 << 28),
-      days_exclude: 0b0 | (1 << 5) | (1 << 6),
-      exclusion_met: "previous",
-      exclusion_met_day: "fri",
-      timezone: "Europe/London"
+      type: 'advanced',
+      name: 'zero',
+      start_date: '17-Mar-2019',
+      timezone: 'Europe/London',
+      schedule: 'monthly',
+      run_every: '0',
+      days: 'specific',
+      days2: 'day',
+      dates_picked: ' 28',
+      weekday_mon: '0',
+      weekday_tue: '0',
+      weekday_wed: '0',
+      weekday_thu: '0',
+      weekday_fri: '0',
+      weekday_sat: '0',
+      weekday_sun: '0',
+      end_date: '02-feb-2020',
+      weekday_exclude_mon: '0',
+      weekday_exclude_tue: '0',
+      weekday_exclude_wed: '0',
+      weekday_exclude_thu: '0',
+      weekday_exclude_fri: '0',
+      weekday_exclude_sat: '1',
+      weekday_exclude_sun: '1',
+      dates_picked_exclude: '',
+      exclusion_met1: 'previous',
+      exclusion_met2: 'fri'
     }
 
-    schedule = current_user.schedules.build(params)
-    assert schedule.is_a?(ActiveRecord::Base), "Saved schedule with zero period_num"
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
+    assert schedule.period_num == 1, "Saved schedule with zero period_num"
   end
 
   test "Schedule from form" do
@@ -151,7 +268,7 @@ class ScheduleTest < ActiveSupport::TestCase
       exclusion_met2: 'fri'
     }
 
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     assert schedule.is_a?(ActiveRecord::Base), format_error("Schedule from form didn't return schedule")
   end
 
@@ -188,7 +305,7 @@ class ScheduleTest < ActiveSupport::TestCase
       exclusion_met2: 'fri'
     }
 
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     assert schedule.name == 'test schedule', format_error("Unexpected schedule name", 'test schedule', schedule.name)
     assert schedule.days_month == '', format_error("Unexpected schedule days_month", '', schedule.days_month)
     assert schedule.end_date == nil, format_error("Unexpected schedule end date", '', schedule.end_date)
@@ -228,7 +345,7 @@ class ScheduleTest < ActiveSupport::TestCase
       exclusion_met2: 'fri'
     }
 
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     assert schedule.name == 'test schedule', format_error("Unexpected schedule name", 'test schedule', schedule.name)
     assert schedule.days_month == 'specific', format_error("Unexpected schedule days_month", 'specific', schedule.days_month)
     assert schedule.end_date == '2020-02-20'.to_date, format_error("Unexpected schedule end date", '2020-02-20', schedule.end_date)
@@ -244,7 +361,7 @@ class ScheduleTest < ActiveSupport::TestCase
     message = "1. simple daily schedule"
     params = reset_params
     params[:schedule] = 'daily'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-25',
       '2019-03-26',
@@ -261,7 +378,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     message = "2. simple every three days"
     params[:run_every] = '3'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-25',
       '2019-03-28',
@@ -274,7 +391,7 @@ class ScheduleTest < ActiveSupport::TestCase
     params[:run_every] = '1'
     params[:type] = 'advanced'
     params[:end_date] = '02-Apr-2019'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-25',
       '2019-03-26',
@@ -292,7 +409,7 @@ class ScheduleTest < ActiveSupport::TestCase
     params = reset_params
     message = "4. simple every week"
     params[:schedule] = 'weekly'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-25',
       '2019-04-01',
@@ -306,7 +423,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     message = "5. simple every two weeks"
     params[:run_every] = '2'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-25',
       '2019-04-08',
@@ -317,7 +434,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     message = "6. simple every three weeks"
     params[:run_every] = '3'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-25',
       '2019-04-15',
@@ -327,7 +444,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     message = "7. simple every four weeks"
     params[:run_every] = '4'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-25',
       '2019-04-22'
@@ -338,7 +455,7 @@ class ScheduleTest < ActiveSupport::TestCase
     params[:run_every] = '1'
     params[:type] = 'advanced'
     params[:weekday_fri] = '1'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-29',
       '2019-04-05',
@@ -352,7 +469,7 @@ class ScheduleTest < ActiveSupport::TestCase
     message = "9. advanced every week on Fridays and Wednesdays"
     params[:type] = 'advanced'
     params[:weekday_wed] = '1'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-27',
       '2019-03-29',
@@ -366,7 +483,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     message = "10. advanced every two weeks on Fridays and Wednesdays"
     params[:run_every] = '2'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-27',
       '2019-03-29',
@@ -377,7 +494,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     message = "11. advanced every 3 weeks on Fridays and Wednesdays"
     params[:run_every] = '3'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-27',
       '2019-03-29',
@@ -390,7 +507,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     message = "12. advanced every four weeks on Fridays and Wednesdays"
     params[:run_every] = '4'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-27',
       '2019-03-29',
@@ -401,7 +518,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     message = "13. advanced every five weeks on Fridays and Wednesdays"
     params[:run_every] = '5'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-27',
       '2019-03-29',
@@ -413,7 +530,7 @@ class ScheduleTest < ActiveSupport::TestCase
     params = reset_params
     message = "14. simple monthly every month"
     params[:schedule] = 'monthly'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-25',
       '2019-04-25',
@@ -431,7 +548,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     message = "15. simple monthly every two months"
     params[:run_every] = '2'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-25',
       '2019-05-25',
@@ -444,7 +561,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     message = "16. simple monthly every three months"
     params[:run_every] = '3'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-25',
       '2019-06-25',
@@ -455,7 +572,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     message = "17. simple monthly every four months"
     params[:run_every] = '4'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-25',
       '2019-07-25',
@@ -465,7 +582,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     message = "17.1 simple monthly every seven months"
     params[:run_every] = '7'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-25',
       '2019-10-25',
@@ -476,7 +593,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     message = "17.2 simple monthly every thirteen months"
     params[:run_every] = '13'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-25',
       '2020-04-25',
@@ -491,7 +608,7 @@ class ScheduleTest < ActiveSupport::TestCase
     params[:run_every] = '1'
     params[:dates_picked] = ' 1'
     params[:days] = 'specific'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-04-01',
       '2019-05-01',
@@ -508,7 +625,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     message = "19. advanced monthly every month on the 28th"
     params[:dates_picked] = ' 28'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-28',
       '2019-04-28',
@@ -526,7 +643,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     message = "19.1 advanced monthly every month on the 31st"
     params[:dates_picked] = ' 31'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-31',
       '2019-05-31',
@@ -537,7 +654,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     message = "19.1 advanced monthly every two months on the 31st"
     params[:run_every] = '2'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-31',
       '2019-05-31',
@@ -549,7 +666,7 @@ class ScheduleTest < ActiveSupport::TestCase
     message = "20. advanced monthly every two months on the 28th and on the 5th"
     params[:run_every] = '2'
     params[:dates_picked] = ' 5 28'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-28',
       '2019-05-05',
@@ -566,7 +683,7 @@ class ScheduleTest < ActiveSupport::TestCase
     params[:weekday_exclude_sat] = '1'
     params[:weekday_exclude_sun] = '1'
     params[:exclusion_met1] = 'cancel'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-05-28',
       '2019-07-05',
@@ -584,7 +701,7 @@ class ScheduleTest < ActiveSupport::TestCase
     params[:weekday_exclude_sun] = '1'
     params[:exclusion_met1] = 'previous'
     params[:exclusion_met2] = 'thu'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-28',
       '2019-04-05',
@@ -605,7 +722,7 @@ class ScheduleTest < ActiveSupport::TestCase
     message = "23. advanced monthly every month on the 28th and on the 5th, but not on weekends. If excluded, run on the next Monday"
     params[:exclusion_met1] = 'next'
     params[:exclusion_met2] = 'mon'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-28',
       '2019-04-05',
@@ -631,7 +748,7 @@ class ScheduleTest < ActiveSupport::TestCase
     params[:exclusion_met2] = ''
     params[:days] = 'last'
     params[:days2] = 'fri'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-29',
       '2019-04-26',
@@ -646,7 +763,7 @@ class ScheduleTest < ActiveSupport::TestCase
     message = "25. advanced monthly every month on the last Friday, except on the 26th"
     params[:exclusion_met1] = 'cancel'
     params[:dates_picked_exclude] = ' 26'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-29',
       '2019-05-31',
@@ -660,7 +777,7 @@ class ScheduleTest < ActiveSupport::TestCase
     params[:exclusion_met1] = 'previous'
     params[:exclusion_met2] = 'wed'
     params[:dates_picked_exclude] = ' 26'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-29',
       '2019-04-24',
@@ -679,7 +796,7 @@ class ScheduleTest < ActiveSupport::TestCase
     params[:days2] = 'day'
     params[:dates_picked_exclude] = ''
     params[:exclusion_met2] = 'fri'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-04-02',
       '2019-05-02',
@@ -694,7 +811,7 @@ class ScheduleTest < ActiveSupport::TestCase
     message = "26.05 advanced monthly every month on the first day, except on the weekends. Run on previous Monday if excluded"
     params[:days] = 'first'
     params[:exclusion_met2] = 'mon'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-04-01',
       '2019-05-01',
@@ -714,7 +831,7 @@ class ScheduleTest < ActiveSupport::TestCase
     params[:days2] = 'fri'
     params[:dates_picked_exclude] = ' 26'
     params[:exclusion_met2] = 'wed'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-29',
       '2019-05-31',
@@ -726,7 +843,7 @@ class ScheduleTest < ActiveSupport::TestCase
     message = "27. advanced monthly every month on the last day"
     params[:run_every] = '1'
     params[:days2] = 'day'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-31',
       '2019-04-30',
@@ -744,7 +861,7 @@ class ScheduleTest < ActiveSupport::TestCase
     params[:exclusion_met1] = 'cancel'
     params[:exclusion_met2] = ''
     params[:dates_picked_exclude] = ''
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-04-30',
       '2019-05-31',
@@ -756,7 +873,7 @@ class ScheduleTest < ActiveSupport::TestCase
     message = "29. advanced monthly every month on the last day, except on weekends. Run the previous Friday if excluded"
     params[:exclusion_met1] = 'previous'
     params[:exclusion_met2] = 'fri'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-29',
       '2019-04-30',
@@ -770,7 +887,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     message = "30. advanced monthly every month on the last day, except on weekends. Run the next Friday if excluded"
     params[:exclusion_met1] = 'next'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-04-05',
       '2019-04-30',
@@ -786,7 +903,7 @@ class ScheduleTest < ActiveSupport::TestCase
     message = "31. simple annually every 5 years"
     params[:schedule] = 'annually'
     params[:run_every] = '5'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-03-25',
       '2024-03-25',
@@ -803,7 +920,7 @@ class ScheduleTest < ActiveSupport::TestCase
     params[:schedule] = 'monthly'
     params[:days] = 'second'
     params[:days2] = 'tue'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-04-09',
       '2019-05-14',
@@ -820,7 +937,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     message = "33. advanced monthly every two months on second tuesday"
     params[:run_every] = '2'
-    schedule = Schedule.create_from_form({schedule: params}, current_user)
+    schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     dates = [
       '2019-05-14',
       '2019-07-09',

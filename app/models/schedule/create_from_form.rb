@@ -1,11 +1,12 @@
 class Schedule
   class CreateFromForm
     
-    def initialize(params, current_user)
+    def initialize(params, current_user, testing=false)
       @params = params[:schedule]
       @current_user = current_user
 
       @excluding = false
+      @testing = testing
     end
 
     def perform
@@ -13,8 +14,25 @@ class Schedule
         return I18n.t('schedule.failure.invalid_name')
       end
 
-      schedules = @current_user.schedules.where(:name => @params[:name]).take()
-      if schedules
+      date_regex = APP_CONFIG['ui']['dates']['regex']
+      if /#{date_regex}/.match(@params[:start_date].downcase) == nil
+        return I18n.t('schedule.failure.invalid_date')
+      end
+
+      if /#{date_regex}/.match(@params[:end_date].downcase) == false
+        @params[:end_date] = ''
+      end
+
+      if @params[:run_every].respond_to? :to_i
+        if @params[:run_every].to_i < 1
+          @params[:run_every] = 1
+        end
+      else
+        return I18n.t('schedule.failure.unknown')
+      end
+
+      schedules = @current_user.schedules.where("LOWER(accounts.name) LIKE LOWER('" + @params[:name] + "')")
+      if schedules && !@testing
         return I18n.t('schedule.failure.already_exists')
       end
 

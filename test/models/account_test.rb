@@ -57,12 +57,14 @@ class AccountTest < ActiveSupport::TestCase
 
     assert_not a2.is_a?(ActiveRecord::Base), format_error("Created duplicate account name")
     assert a2 == I18n.t('account.failure.already_exists'), format_error("Unexpected error", I18n.t('account.failure.already_exists'), a2)
+    assert_not a2.include?("translation missing:"), "Translation missing for 'account.failure.already_exists'"
 
     b1 = Account.create({:name => 'test capital duplicate'}, current_user)
     b2 = Account.create({:name => 'TEST capital DUPLICATE'}, current_user)
 
     assert_not b2.is_a?(ActiveRecord::Base), format_error("Created duplicate account name")
     assert b2 == I18n.t('account.failure.already_exists'), format_error("Unexpected error", I18n.t('account.failure.already_exists'), b2)
+    assert_not b2.include?("translation missing:"), "Translation missing for 'account.failure.already_exists'"
   end
 
   test "Create new account" do
