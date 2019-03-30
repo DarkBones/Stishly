@@ -21,6 +21,27 @@ class ApiController < ApplicationController
     render json: current_user.country.week_start
   end
 
+  def transfer_accounts
+    from_account = Account.get_from_name(params[:from], current_user)
+    to_account = Account.get_from_name(params[:to], current_user)
+
+    currency_rate = 1
+
+    if from_account.currency != to_account.currency
+      currency_rate = CurrencyRate.get_rate(from_account.currency, to_account.currency)
+    end
+
+    render json: {
+      from_account: {
+        currency: from_account.currency
+      },
+      to_account: {
+        currency: to_account.currency
+      },
+      currency_rate: currency_rate
+    }
+  end
+
   def get_next_schedule_occurrences
     schedule = Schedule.create_from_form({schedule: params}, current_user)
     

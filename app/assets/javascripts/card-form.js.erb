@@ -1,4 +1,6 @@
 var currencyChanged = false;
+var transaction_type = 'expense'
+var multiple_transactions = false;
 
 // auto-focus on account name field
 $(document).on('show.bs.modal','#accountform', function () {
@@ -17,6 +19,8 @@ $(document).on('show.bs.modal','#transactionform', function () {
 
 
 function changeTransactionType(type) {
+  transaction_type = type
+  showTransferCurrencyRates();
   switch(type) {
     case 'transfer':
       $('#transactionform #single-account').hide();
@@ -25,6 +29,7 @@ function changeTransactionType(type) {
       $('#transactionform #type').removeClass('bg-danger');
       $('#transactionform #type').addClass('bg-warning');
       $('#transactionform #type').removeClass('bg-success');
+      $('#transactionform #transaction-currency-options').hide();
       break;
     case 'income':
       $('#transactionform #single-account').show();
@@ -33,6 +38,7 @@ function changeTransactionType(type) {
       $('#transactionform #type').removeClass('bg-danger');
       $('#transactionform #type').removeClass('bg-warning');
       $('#transactionform #type').addClass('bg-success');
+      $('#transactionform #transaction-currency-options').show();
       break;
     default:
       $('#transactionform #single-account').show();
@@ -41,6 +47,7 @@ function changeTransactionType(type) {
       $('#transactionform #type').addClass('bg-danger');
       $('#transactionform #type').removeClass('bg-warning');
       $('#transactionform #type').removeClass('bg-success');
+      $('#transactionform #transaction-currency-options').show();
   }
 }
 
@@ -49,13 +56,17 @@ function changeTransactionMultiple(type){
     case 'single':
       $('#transactionform #amount').show();
       $('#transactionform #transactions').hide();
+      multiple_transactions = false;
       break;
     default:
       $('#transactionform #amount').hide();
       $('#transactionform #transactions').show();
+      multiple_transactions = true;
       // update the total amount
       updateTransactionsTotal('#transactionform #transactions-total','#transactionform #transactions textarea' ,'#transactionform #transaction_currency');
   }
+
+  updateTransactionResult();
 }
 
 function getTransactionTotalFromMultiple($target) {
@@ -82,25 +93,36 @@ function getTransactionTotalFromMultiple($target) {
   return total;
 }
 
-function updateTransactionResult(rateTarget, resultTarget, amountTarget, isMultiple){
-  $rateTarget = $(rateTarget);
-  $resultTarget = $(resultTarget);
-  $amountTarget = $(amountTarget);
-  if($resultTarget.is(":visible")){
-    var rate = $rateTarget.val();
-    var amount = 0;
-    if (!isMultiple){
-      amount = $amountTarget.val();
-    } else{
-      amount = getTransactionTotalFromMultiple($amountTarget);
-    }
-
-    result = Math.round((amount * rate) * 100) / 100
-
-    $resultTarget.val(result);
+function updateTransactionResult() {
+  var rate = 1;
+  var amount = 0;
+  var $rateTarget = $("#transactionform #transaction_rate");
+  var $resultTarget = $("#transactionform #transaction_account_currency");
+  var $amountTarget = $("#transactionform #transaction_amount");
+  
+  if (multiple_transactions) {
+    $amountTarget = $("#transactionform #transaction_transactions");
   }
 
-  if(isMultiple){
+  if (transaction_type === 'transfer') {
+    $rateTarget = $("#transactionform #transaction_rate_from_to");
+    $resultTarget = $("#transactionform #transaction_to_account_currency");
+  }
+
+  if ($resultTarget.is(":visible")){
+    rate = $rateTarget.val();
+    if (multiple_transactions) {
+      amount = getTransactionTotalFromMultiple($amountTarget);
+    } else {
+      amount = $amountTarget.val();
+    }
+  }
+
+  result = Math.round((amount * rate) * 100) / 100
+
+  $resultTarget.val(result);
+
+  if (multiple_transactions){
     updateTransactionsTotal('#transactionform #transactions-total','#transactionform #transactions textarea' ,'#transactionform #transaction_currency');
   }
 }
@@ -144,21 +166,66 @@ function changeTransactionAccount(selectObject) {
   $('#transactionform #transaction_account').val(account);
   $('#transactionform #transaction_from_account').val(account);
 
-  if (!currencyChanged){
-    $.ajax({
-      type: "GET",
-      dataType: "text",
-      url: "/api/account_currency/" + account,
-      success: function(data) {
-        $("#transactionform #transaction_currency").val(data);
-      }
-    });
+  if (transaction_type != 'transfer') {
+    if (!currencyChanged){
+      $.ajax({
+        type: "GET",
+        dataType: "text",
+        url: "/api/account_currency/" + encodeURI(account),
+        success: function(data) {
+          $("#transactionform #transaction_currency").val(data);
+        }
+      });
+    } else {
+      changeTransactionCurrency($('#transactionform #transaction_currency').val());
+    }
   } else {
-    changeTransactionCurrency($('#transactionform #transaction_currency').val());
+    showTransferCurrencyRates();
   }
 }
 
-function changeTransactionCurrency(selectObject='', currency='') {
+function changeTransactionToAccount(selectObject) {
+  showTransferCurrencyRates();
+}
+
+function showTransferCurrencyRates() {
+  if (transaction_type == 'transfer') {
+    $('#transactionform #transaction-currency-options').hide();
+    var from = "";
+    var to = "";
+
+    from = encodeURI($("#transactionform #transaction_from_account").val());
+    to = encodeURI($("#transactionform #transaction_to_account").val());
+
+    console.log(from + "/" + to);
+    $.ajax({
+      type: "GET",
+      dataType: "json",
+      url: "/api/transfer_accounts/" + from + "/" + to,
+      success: function(data) {
+        if (data.from_account.currency !== data.to_account.currency){
+          $("#transactionform #to_account_currency").text('Amount in ' + data.to_account.currency);
+          $('#transactionform #transfer-currencies').show();
+          $('#transactionform #rate_from_to').text('Rate ' + data.from_account.currency + ' to ' + data.to_account.currency);
+          $('#transactionform #transaction_rate_from_to').val(data.currency_rate);
+        } else {
+          $('#transactionform #transaction_rate_from_to').val(data.currency_rate);
+          $('#transactionform #transfer-currencies').hide();
+        }
+
+        updateTransactionResult();
+      }
+    });
+  } else {
+    $('#transactionform #transaction_rate_from_to').val(1);
+    $('#transactionform #transfer-currencies').hide();
+    $('#transactionform #transaction-currency-options').show();
+  }
+
+  updateTransactionResult();
+}
+
+function changeTransactionCurrency(selectObject, currency='') {
   var account = "";
   var result = 0;
 
@@ -167,7 +234,7 @@ function changeTransactionCurrency(selectObject='', currency='') {
 
   currencyChanged = true;
   if(currency.length == 0){
-    var currency = selectObject.value;
+    var currency = $("#transactionform #transaction_currency").val();
   }
 
   account = $('#transactionform #single-account select').val();
@@ -175,7 +242,7 @@ function changeTransactionCurrency(selectObject='', currency='') {
   $.ajax({
     type: "GET",
     dataType: "text",
-    url: "/api/account_currency/" + account,
+    url: "/api/account_currency/" + encodeURI(account),
     success: function(data_currency) {
       if (data_currency != currency){
         $('#transactionform #exchange_rate_spinner').show();
@@ -185,6 +252,7 @@ function changeTransactionCurrency(selectObject='', currency='') {
           url: "/api/currency_rate/" + currency + "/" + data_currency,
           success: function(data_rate) {
             $('#transactionform #exchange_rate_spinner').hide();
+            $('#transactionform #account_currency').text('Amount in ' + data_currency);
             $('#transactionform #currency-rate').show();
             $('#transactionform #currency-result').show();
             $('#transactionform #currency-rate input').val(data_rate);
@@ -248,6 +316,8 @@ function resetTransactionMenu(){
   var optionHtml = "";
 
   currencyChanged = false;
+  transaction_type = 'expense'
+  multiple_transactions = false;
 
   // update the active account field
   active_account = getActiveAccountName();
@@ -295,7 +365,7 @@ function resetTransactionMenu(){
     $.ajax({
       type: "GET",
       dataType: "text",
-      url: "/api/account_currency/" + account,
+      url: "/api/account_currency/" + encodeURI(account),
       success: function(data) {
         $("#transactionform #transaction_currency").val(data);
       }
