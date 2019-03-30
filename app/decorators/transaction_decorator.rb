@@ -37,7 +37,7 @@ class TransactionDecorator < ApplicationDecorator
 
   def time_num
 
-    return model.local_datetime.strftime("%H%M%S").to_i
+    return model.local_datetime.to_datetime.strftime("%H%M%S").to_i
   end
 
   # Define presentation-specific methods here. Helpers are accessed through
