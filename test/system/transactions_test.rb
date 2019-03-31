@@ -99,7 +99,8 @@ class TransactionsTest < ApplicationSystemTestCase
     # fill in the details
     fill_in "Description", with: "multiple expense euro"
     page.find("#transactionform #multiple-multiple").click
-    fill_in "Transactions", with: "one 1\ntwo 2\nthree 3\nfour 4\npoint 05 .05"
+    fill_in "Transactions", with: "one 1\r\ntwo 2\r\nthree 3\r\nfour 4\r\npoint 05 .05"
+    take_screenshot
 
     click_on "Create Transaction"
 

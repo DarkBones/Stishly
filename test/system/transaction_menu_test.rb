@@ -117,34 +117,6 @@ class TransactionMenuTest < ApplicationSystemTestCase
     # assert hidden
     assert_selector '#amount', visible: :hidden
 
-    # JPY ACCOUNT
-    select "JPY", from: "Account"
-    # assert hidden
-    assert_selector '#currency-rate', visible: :hidden
-    assert_selector '#currency-result', visible: :hidden
-    select "Current Account", from: "Account"
-
-    # JPY CURRENCY
-    #puts page.driver.browser.manage.logs.get(:browser)
-    select "JPY", from: "Currency"
-    wait_for_ajax
-    # assert visible
-    assert_selector '#currency-rate', visible: :visible
-    assert_selector '#currency-result', visible: :visible
-
-    # EUR CURRENCY
-    select "EUR", from: "Currency"
-    # assert hidden
-    assert_selector '#currency-rate', visible: :hidden
-    assert_selector '#currency-result', visible: :hidden
-
-    # JPY ACCOUNT
-    select "JPY", from: "Account"
-    wait_for_ajax
-    # assert visible
-    assert_selector '#currency-rate', visible: :visible
-    assert_selector '#currency-result', visible: :visible
-
   end
 
   test "live currency conversion" do
@@ -170,7 +142,6 @@ class TransactionMenuTest < ApplicationSystemTestCase
     click_on "New Transaction"
     select "JPY", from: "Currency"
 
-    #assert_select "#transaction_exchange_rate[value='0.008']"
     assert page.find("#transaction_rate").value == '0.008'
     assert page.find("#transaction_account_currency").value == '0'
 
@@ -178,11 +149,10 @@ class TransactionMenuTest < ApplicationSystemTestCase
     assert page.find("#transaction_account_currency").value == '80'
 
     page.find("#transactionform #multiple-multiple").click
-    fill_in "Transactions", with: "one 10000\ntwo 20000\nthree 30000\nfour 40000"
-    assert page.find("#transaction_account_currency").value == '800'
+    assert page.find("#transaction_account_currency").value == '0'
 
-    fill_in "Account currency", with: "400"
-    assert page.find("#transaction_rate").value == '0.004'
+    fill_in "Transactions", with: "one 100000"
+    assert page.find("#transaction_account_currency").value == '800'
 
     assert_selector '#transaction_total', text: "Total: ¥100,000"
   end
