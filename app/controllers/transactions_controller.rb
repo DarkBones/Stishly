@@ -24,6 +24,8 @@ class TransactionsController < ApplicationController
     @params = params[:transaction]
     transactions = Transaction.create(params, current_user)
 
+    user_currency = User.get_currency(current_user)
+
     @transaction_amounts_all = []
     @account_ids_all = []
 
@@ -36,6 +38,11 @@ class TransactionsController < ApplicationController
     @total_amount = 0
 
     transactions.each do |t|
+      amount = t.account_currency_amount
+      if t.currency != user_currency.iso_code && @params[:active_account] == ''
+        amount = CurrencyRate.convert(amount, Money::Currency.new(t.currency), user_currency)
+      end
+      
       @date = t.local_datetime.to_s.split[0]
       t_account = current_user.accounts.find(t.account_id)
       if @params[:active_account].length == 0 || @params[:active_account] == t_account.name
@@ -45,12 +52,12 @@ class TransactionsController < ApplicationController
         else
           @transactions_parent.push(t)
           @account_names.push(t_account.name)
-          @total_amount += t.account_currency_amount
+          @total_amount += amount
         end
       end
 
       if !t.parent_id
-        @transaction_amounts_all.push(t.account_currency_amount)
+        @transaction_amounts_all.push(amount)
         @account_ids_all.push(t_account.id)
       end
     end

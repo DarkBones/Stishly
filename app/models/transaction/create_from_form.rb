@@ -36,7 +36,7 @@ private
           if t[:is_child] == false
             if type == 'transfer'
               parent_transaction_from = Transaction.create_transaction(@current_user, transaction_object(t, @from_account))
-              parent_transaction_to = Transaction.create_transaction(@current_user, transaction_object(t, @to_account, true))
+              parent_transaction_to = Transaction.create_transaction(@current_user, transaction_object(t, @to_account, true, nil))
 
               transactions.push(parent_transaction_from)
               transactions.push(parent_transaction_to)
@@ -77,9 +77,13 @@ private
         direction = -1
       end
 
-      direction *= -1 if reverse_direction
-
-      converted_amount = convert_transaction_amount(base_transaction[:amount]) * direction
+      converted_amount = 0
+      if !reverse_direction
+        converted_amount = convert_transaction_amount(base_transaction[:amount]) * direction
+      else
+        direction *= -1
+        converted_amount = get_account_currency_amount(convert_transaction_amount(base_transaction[:amount]), account) * direction
+      end
 
       converted_amount >= 0 ? real_direction = 1 : real_direction = -1
 
@@ -104,7 +108,7 @@ private
         transfer_account: transfer_account,
         #local_datetime: get_local_datetime(Time.now),
         local_datetime: parse_datetime,
-        currency: @params[:currency],
+        currency: get_currency(account),
         account_currency_amount: get_account_currency_amount(convert_transaction_amount(base_transaction[:amount]), account) * direction,
         category_id: @params[:category_id].to_i,
         is_child: base_transaction[:is_child],
@@ -113,6 +117,14 @@ private
       }
 
       return transaction
+    end
+
+    def get_currency(account)
+      if get_type == 'transfer'
+        return account.currency
+      else
+        return @params[:currency]
+      end
     end
 
     def parse_datetime
@@ -145,7 +157,12 @@ private
       account_currency = Money::Currency.new(account.currency)
 
       if transaction_currency.iso_code != account_currency.iso_code
-        rate = @params[:rate].to_f
+        rate = 1
+        if get_type == 'transfer'
+          rate = @params[:rate_from_to].to_f
+        else
+          rate = @params[:rate].to_f
+        end
         return CurrencyRate.convert(amount, transaction_currency, account_currency, rate)
       else
         return amount

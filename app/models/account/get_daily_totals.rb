@@ -34,7 +34,7 @@ class Account
             days[day] = 0
           end
 
-          days[day] += user_amount
+          days[day] += user_amount if t.transfer_account_id == nil
         end
 
       end
