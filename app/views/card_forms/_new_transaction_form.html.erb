@@ -210,3 +210,9 @@
     </div>
   </div>
 </div>
+
+<% if Rails.env == 'test' %>
+  <script type="text/javascript">
+     disableEnter();
+  </script>
+<% end %>

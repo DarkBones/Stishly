@@ -1,4 +1,4 @@
-var type = "simple"
+var type = "simple";
 
 function getScheduleNextOccurrences(){
 

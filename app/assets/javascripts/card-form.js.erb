@@ -2,6 +2,16 @@ var currencyChanged = false;
 var transaction_type = 'expense'
 var multiple_transactions = false;
 
+function disableEnter() {
+  $(document).on("keypress", '#scheduleform', function (e) {
+      var code = e.keyCode || e.which;
+      if (code == 13) {
+          e.preventDefault();
+          return false;
+      }
+  });
+}
+
 // auto-focus on account name field
 $(document).on('show.bs.modal','#accountform', function () {
   setTimeout(function(){ 
