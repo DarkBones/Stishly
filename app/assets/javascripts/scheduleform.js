@@ -1,38 +1,50 @@
 var type = "simple";
 
+function sanitize(val) {
+  val = val.toString();
+  val = val.replace(/\//g, "%2F");
+  if (val.length == 0) {
+    val = "%20"
+  }
+
+  val = val.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+
+  return val;
+}
+
 function getScheduleNextOccurrences(){
 
   $("#scheduleform #next_occurrences").text("");
   //var type = ""
   var name = sanitize($("#scheduleform #schedule_name").val());
-  var start_date = sanitize($("#scheduleform #schedule_start_date").val());
+  var startDate = sanitize($("#scheduleform #schedule_start_date").val());
   var timezone = sanitize($("#scheduleform #timezone_input").val());
   var schedule = sanitize($("#scheduleform #schedule_schedule").val());
-  var run_every = sanitize($("#scheduleform #schedule_run_every").val());
+  var runEvery = sanitize($("#scheduleform #schedule_run_every").val());
   var days = sanitize($("#scheduleform #schedule_days").val());
   var days2 = sanitize($("#scheduleform #schedule_days2").val());
-  var dates_picked = sanitize($("#scheduleform #schedule_dates_picked").val());
-  var weekday_mon = sanitize($("#scheduleform #schedule_weekday_mon").prop("checked")*1);
-  var weekday_tue = sanitize($("#scheduleform #schedule_weekday_tue").prop("checked")*1);
-  var weekday_wed = sanitize($("#scheduleform #schedule_weekday_wed").prop("checked")*1);
-  var weekday_thu = sanitize($("#scheduleform #schedule_weekday_thu").prop("checked")*1);
-  var weekday_fri = sanitize($("#scheduleform #schedule_weekday_fri").prop("checked")*1);
-  var weekday_sat = sanitize($("#scheduleform #schedule_weekday_sat").prop("checked")*1);
-  var weekday_sun = sanitize($("#scheduleform #schedule_weekday_sun").prop("checked")*1);
-  var end_date = sanitize($("#scheduleform #schedule_end_date").val());
-  var weekday_exclude_mon = sanitize($("#scheduleform #schedule_weekday_exclude_mon").prop("checked")*1);
-  var weekday_exclude_tue = sanitize($("#scheduleform #schedule_weekday_exclude_tue").prop("checked")*1);
-  var weekday_exclude_wed = sanitize($("#scheduleform #schedule_weekday_exclude_wed").prop("checked")*1);
-  var weekday_exclude_thu = sanitize($("#scheduleform #schedule_weekday_exclude_thu").prop("checked")*1);
-  var weekday_exclude_fri = sanitize($("#scheduleform #schedule_weekday_exclude_fri").prop("checked")*1);
-  var weekday_exclude_sat = sanitize($("#scheduleform #schedule_weekday_exclude_sat").prop("checked")*1);
-  var weekday_exclude_sun = sanitize($("#scheduleform #schedule_weekday_exclude_sun").prop("checked")*1);
-  var dates_picked_exclude = sanitize($("#scheduleform #schedule_dates_picked_exclude").val());
-  var exclusion_met1 = sanitize($("#scheduleform #schedule_exclusion_met1").val());
-  var exclusion_met2 = sanitize($("#scheduleform #schedule_exclusion_met2").val());
-  var occurrence_count = "10";
+  var datesPicked = sanitize($("#scheduleform #schedule_dates_picked").val());
+  var weekdayMon = sanitize($("#scheduleform #schedule_weekday_mon").prop("checked")*1);
+  var weekdayTue = sanitize($("#scheduleform #schedule_weekday_tue").prop("checked")*1);
+  var weekdayWed = sanitize($("#scheduleform #schedule_weekday_wed").prop("checked")*1);
+  var weekdayThu = sanitize($("#scheduleform #schedule_weekday_thu").prop("checked")*1);
+  var weekdayFri = sanitize($("#scheduleform #schedule_weekday_fri").prop("checked")*1);
+  var weekdaySat = sanitize($("#scheduleform #schedule_weekday_sat").prop("checked")*1);
+  var weekdaySun = sanitize($("#scheduleform #schedule_weekday_sun").prop("checked")*1);
+  var endDate = sanitize($("#scheduleform #schedule_end_date").val());
+  var weekdayExcludeMon = sanitize($("#scheduleform #schedule_weekday_exclude_mon").prop("checked")*1);
+  var weekdayExcludeTue = sanitize($("#scheduleform #schedule_weekday_exclude_tue").prop("checked")*1);
+  var weekdayExcludeWed = sanitize($("#scheduleform #schedule_weekday_exclude_wed").prop("checked")*1);
+  var weekdayExcludeThu = sanitize($("#scheduleform #schedule_weekday_exclude_thu").prop("checked")*1);
+  var weekdayExcludeFri = sanitize($("#scheduleform #schedule_weekday_exclude_fri").prop("checked")*1);
+  var weekdayExcludeSat = sanitize($("#scheduleform #schedule_weekday_exclude_sat").prop("checked")*1);
+  var weekdayExcludeSun = sanitize($("#scheduleform #schedule_weekday_exclude_sun").prop("checked")*1);
+  var datesPickedExclude = sanitize($("#scheduleform #schedule_dates_picked_exclude").val());
+  var exclusionMet1 = sanitize($("#scheduleform #schedule_exclusion_met1").val());
+  var exclusionMet2 = sanitize($("#scheduleform #schedule_exclusion_met2").val());
+  var occurrenceCount = "10";
 
-  url = "api/next_occurrences" + "/" + type + "/" + name + "/" + start_date + "/" + timezone + "/" + schedule + "/" + run_every + "/" + days + "/" + days2 + "/" + dates_picked + "/" + weekday_mon + "/" + weekday_tue + "/" + weekday_wed + "/" + weekday_thu + "/" + weekday_fri + "/" + weekday_sat + "/" + weekday_sun + "/" + end_date + "/" + weekday_exclude_mon + "/" + weekday_exclude_tue + "/" + weekday_exclude_wed + "/" + weekday_exclude_thu + "/" + weekday_exclude_fri + "/" + weekday_exclude_sat + "/" + weekday_exclude_sun + "/" + dates_picked_exclude + "/" + exclusion_met1 + "/" + exclusion_met2 + "/" + occurrence_count;
+  url = "api/next_occurrences" + "/" + type + "/" + name + "/" + startDate + "/" + timezone + "/" + schedule + "/" + runEvery + "/" + days + "/" + days2 + "/" + datesPicked + "/" + weekdayMon + "/" + weekdayTue + "/" + weekdayWed + "/" + weekdayThu + "/" + weekdayFri + "/" + weekdaySat + "/" + weekdaySun + "/" + endDate + "/" + weekdayExcludeMon + "/" + weekdayExcludeTue + "/" + weekdayExcludeWed + "/" + weekdayExcludeThu + "/" + weekdayExcludeFri + "/" + weekdayExcludeSat + "/" + weekdayExcludeSun + "/" + datesPickedExclude + "/" + exclusionMet1 + "/" + exclusionMet2 + "/" + occurrenceCount;
   $.ajax({
     type: "GET",
     dataType: "json",
@@ -75,18 +87,6 @@ function changeRunsEvery() {
     $("#scheduleform #schedule_run_every").val('1');
   }
   getScheduleNextOccurrences();
-}
-
-function sanitize(val) {
-  val = val.toString();
-  val = val.replace(/\//g, "%2F");
-  if (val.length == 0) {
-    val = "%20"
-  }
-
-  val = val.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
-
-  return val;
 }
 
 function changeSchedulePeriod(val) {
