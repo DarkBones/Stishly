@@ -1,3 +1,10 @@
+function hideTimeout(id) {
+  $parent = $(id).parent().closest('div');
+  setTimeout( function() {
+    $parent.fadeOut(2000);
+  }, 1000);
+}
+
 $(document).on('turbolinks:load', ()=> {
   if ($('#flash_notice').length) {
     hideTimeout('#flash_notice');
@@ -8,13 +15,6 @@ $(document).on('turbolinks:load', ()=> {
   }
 
 });
-
-function hideTimeout(id) {
-  $parent = $(id).parent().closest('div');
-  setTimeout( function() {
-    $parent.fadeOut(2000);
-  }, 1000);
-}
 
 function remove_notice(id) {
   $(id).parent().closest('div').remove();

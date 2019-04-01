@@ -85,7 +85,7 @@ class Transaction < ApplicationRecord
   end
 
   def self.create_from_string(params, current_user)
-    transaction = CreateFromString.new(params, current_user).perform
+    CreateFromString.new(params, current_user).perform
   end
 
   def self.create(params, current_user)

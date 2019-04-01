@@ -63,7 +63,7 @@ function getActiveAccountName(){
   var url_arr = [];
 
   url_arr = window.location.pathname.split('/');
-  if (url_arr[1].toLowerCase() == 'accounts') {
+  if (url_arr[1].toLowerCase() === 'accounts') {
     if (url_arr[2].length > 0){
       return decodeURI(url_arr[2]);
     }

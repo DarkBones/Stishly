@@ -3,7 +3,7 @@ var type = "simple";
 function sanitize(val) {
   val = val.toString();
   val = val.replace(/\//g, "%2F");
-  if (val.length == 0) {
+  if (val.length === 0) {
     val = "%20"
   }
 
@@ -137,6 +137,25 @@ function changeScheduleExclusionMet(val){
   }
 }
 
+function showDaypicker(){
+  var $daypicker = $("#scheduleform #daypicker");
+  var $daypickerExclude = $("#scheduleform #daypicker-exclude");
+  var $weekdayExclude = $("#scheduleform #weekday-exclude");
+
+  $daypicker.show();
+  $daypickerExclude.hide();
+  $weekdayExclude.show();
+}
+function hideDaypicker(){
+  var $daypicker = $("#scheduleform #daypicker");
+  var $daypickerExclude = $("#scheduleform #daypicker-exclude");
+  var $weekdayExclude = $("#scheduleform #weekday-exclude");
+
+  $daypicker.hide();
+  $daypickerExclude.show();
+  $weekdayExclude.hide();
+}
+
 function changeScheduleDays(val){
   var $scheduleDays2 = $('#scheduleform #schedule_days2');
   var $daypickerExclude = $("#scheduleform #daypicker-exclude");
@@ -163,25 +182,6 @@ function changeScheduleDays(val){
   }
 }
 
-function showDaypicker(){
-  var $daypicker = $("#scheduleform #daypicker");
-  var $daypickerExclude = $("#scheduleform #daypicker-exclude");
-  var $weekdayExclude = $("#scheduleform #weekday-exclude");
-
-  $daypicker.show();
-  $daypickerExclude.hide();
-  $weekdayExclude.show();
-}
-function hideDaypicker(){
-  var $daypicker = $("#scheduleform #daypicker");
-  var $daypickerExclude = $("#scheduleform #daypicker-exclude");
-  var $weekdayExclude = $("#scheduleform #weekday-exclude");
-
-  $daypicker.hide();
-  $daypickerExclude.show();
-  $weekdayExclude.hide();
-}
-
 function showWeekday(){
   $('#scheduleform .schedule-simple-period').hide();
   $('#scheduleform #weekday').show();
@@ -196,10 +196,10 @@ function advancedScheduleOptions(force=0){
   var $advancedOptions = $("#scheduleform #schedule_advanced");
   var $advancedOptionsToggle = $("#scheduleform #schedule_advanced_toggle");
 
-  if ($advancedOptions.is(":visible") || force == -1){
+  if ($advancedOptions.is(":visible") || force === -1){
     $advancedOptions.slideUp(200);
     $advancedOptionsToggle.text('show advanced options');
-  } else if ($advancedOptions.is(":hidden") || force == 1) {
+  } else {
     $advancedOptions.slideDown(200);
     $advancedOptionsToggle.text('hide advanced options');
   }

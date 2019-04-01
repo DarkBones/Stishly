@@ -1,3 +1,18 @@
+function SearchCategories(target, input){
+  var $categories = $(target);
+  var text = $(input).val();
+
+  li = $categories.find('li');
+  for (let i = 0; i < li.length; i++){
+
+    if (li[i].innerText.toUpperCase().indexOf(text.toUpperCase()) != -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+
 $(document).on('click', '.dropdown', (event)=> {
   $(event.target).next('.dropdown__options').show();
   $(event.target).next('.dropdown__options').find('#search-categories').focus();
@@ -18,21 +33,6 @@ $(document).on('keyup', '#search-categories', (event)=> {
 $(document).on('click', (event) => {
   $('.dropdown__options').hide();
 });
-
-function SearchCategories(target, input){
-  var $categories = $(target);
-  var text = $(input).val();
-
-  li = $categories.find('li');
-  for (let i = 0; i < li.length; i++){
-
-    if (li[i].innerText.toUpperCase().indexOf(text.toUpperCase()) != -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
-  }
-}
 
 function SetCategory(id) {
   $('button#categories-dropdown').html($('#categoriesDropdownOptions li.category_' + id.toString()).html());
