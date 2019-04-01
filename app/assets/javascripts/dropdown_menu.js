@@ -24,7 +24,7 @@ function SearchCategories(target, input){
   var text = $(input).val();
 
   li = $categories.find('li');
-  for (i = 0; i < li.length; i++){
+  for (let i = 0; i < li.length; i++){
 
     if (li[i].innerText.toUpperCase().indexOf(text.toUpperCase()) != -1) {
       li[i].style.display = "";

@@ -55,7 +55,7 @@ class AccountsController < ApplicationController
         format.js
       else
         @account = @account.decorate
-        format.html { redirect_to @account }
+        #format.html { redirect_to @account }
         format.json { render :show, status: :created, location: @account }
         format.js {}
       end
@@ -71,7 +71,7 @@ class AccountsController < ApplicationController
   end
 
   def edit
-    account = Account.find(params[:id])
+    account = current_user.accounts.find(params[:id])
     account = Account.change_setting(account, params, current_user)
 
     redirect_back(fallback_location: root_path)

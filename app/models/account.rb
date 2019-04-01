@@ -179,7 +179,8 @@ class Account < ApplicationRecord
     user_currency = User.get_currency(current_user)
 
     #existing_accounts = current_user.accounts.where("LOWER(name) = ?", params[:name].downcase)
-    existing_accounts = current_user.accounts.where("LOWER(accounts.name) LIKE LOWER('" + params[:name] + "')")
+    #existing_accounts = current_user.accounts.where("LOWER(accounts.name) LIKE LOWER('" + params[:name] + "')")
+    existing_accounts = current_user.accounts.where("LOWER(accounts.name) LIKE LOWER(?)", params[:name])
 
     default_account = current_user.accounts.where('is_default' => true)
     if default_account.length > 0

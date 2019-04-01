@@ -59,12 +59,12 @@ jstz.TimeZone.prototype.ambiguity_check = function () {
   }
   
   length = ambiguity_list.length;
-  i = 0;
+  //i = 0;
   
-  for (; i < length; i += 1) {
-    tz = ambiguity_list[i];
+  for (let i = 0; i < length; i += 1) {
+    //tz = ambiguity_list[i];
 
-    if (jstz.date_is_dst(jstz.olson.dst_start_dates[tz])) {
+    if (jstz.date_is_dst(jstz.olson.dst_start_dates[ambiguity_list[i]])) {
       this.olson_tz = tz;
       return;
     } 
