@@ -10,34 +10,9 @@ class Schedule
     end
 
     def perform
-      if @params[:name].length == 0
-        return I18n.t('schedule.failure.invalid_name')
-      end
-
-      # don't allow dots in schedule name
-      @params[:name].gsub! '.', ''
-
-      date_regex = APP_CONFIG['ui']['dates']['regex']
-      if /#{date_regex}/.match(@params[:start_date].downcase) == nil
-        return I18n.t('schedule.failure.invalid_date')
-      end
-
-      if /#{date_regex}/.match(@params[:end_date].downcase) == false
-        @params[:end_date] = ''
-      end
-
-      if @params[:run_every].respond_to? :to_i
-        if @params[:run_every].to_i < 1
-          @params[:run_every] = 1
-        end
-      else
-        return I18n.t('schedule.failure.unknown')
-      end
-
-      schedules = @current_user.schedules.where("LOWER(schedules.name) LIKE LOWER('" + @params[:name] + "')").take
-      if schedules && !@testing
-        return I18n.t('schedule.failure.already_exists')
-      end
+      @params[:name] = sanitise_name(@params[:name])
+      error = check_errors
+      return error[:message] if error[:is_error]
 
       schedule_params = {
         name: @params[:name],
@@ -58,6 +33,40 @@ class Schedule
       #schedule = Schedule.new(schedule_params)
       schedule = @current_user.schedules.new(schedule_params)
       return schedule
+    end
+
+    def sanitise_name(name_str)
+      # don't allow dots in schedule name
+      return name_str.gsub '.', ''
+    end
+
+    def check_errors
+      return {message: I18n.t('schedule.failure.invalid_name'), is_error: true} if @params[:name].length == 0
+
+      # check if start_date is valid
+      date_regex = APP_CONFIG['ui']['dates']['regex']
+      return {message: I18n.t('schedule.failure.invalid_date'), is_error: true} if /#{date_regex}/.match(@params[:start_date].downcase) == nil
+
+      # if the end_date format is invalid, just leave it empty
+      @params[:end_date] = '' if /#{date_regex}/.match(@params[:end_date].downcase) == false
+
+      # check if the period_num is valid
+      if @params[:run_every].respond_to? :to_i
+        if @params[:run_every].to_i < 1
+          @params[:run_every] = 1
+        end
+      else
+        return {message: I18n.t('schedule.failure.unknown'), is_error: true}
+      end
+
+      # check if the schedule already exists
+      schedules = @current_user.schedules.where("LOWER(schedules.name) LIKE LOWER(?)", @params[:name]).take
+      if schedules && !@testing
+        return {message: I18n.t('schedule.failure.already_exists'), is_error: true}
+      end
+
+      return {message: 'no errors', is_error: false}
+
     end
 
     def get_is_active
