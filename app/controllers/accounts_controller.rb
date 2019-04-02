@@ -72,7 +72,7 @@ class AccountsController < ApplicationController
 
   def edit
     account = current_user.accounts.find(params[:id])
-    account = Account.change_setting(account, params, current_user)
+    Account.change_setting(account, params)
 
     redirect_back(fallback_location: root_path)
   end

@@ -18,7 +18,7 @@ class Category < ApplicationRecord
   has_one :parent, :class_name => 'Category'
   has_many :children, :class_name => 'Category', :foreign_key => 'parent_id'
 
-  def self.get_user_categories(current_user, as_array=false, use_levels=false)
+  def self.get_user_categories(current_user, as_array=false)
     if as_array
       tree = Hash.new { |h,k| h[k] = { :name => nil, :children => [ ] } }
 

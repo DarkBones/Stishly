@@ -73,12 +73,12 @@
                   <div class="col-12 py-2">
                     <%= f.label :category %><br />
                     <%= render partial: "shared/custom_dropdown_categories", locals: {
-                      selected: Category.get_user_categories(current_user, true, true)[0],
-                      options: Category.get_user_categories(current_user, true, true),
+                      selected: Category.get_user_categories(current_user, true)[0],
+                      options: Category.get_user_categories(current_user, true),
                       input_target: '#transactionform #transaction_category_id'
                     } %>
                     
-                    <% categories = Category.get_user_categories(current_user, true, true) %>
+                    <% categories = Category.get_user_categories(current_user, true) %>
                     <%= f.hidden_field :category_id, value: 0 %>
                   </div>
 

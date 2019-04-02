@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    user = User.change_setting(current_user, params)
+    User.change_setting(current_user, params)
 
     redirect_back(fallback_location: root_path)
   end

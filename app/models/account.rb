@@ -141,7 +141,7 @@ class Account < ApplicationRecord
     end
   end
 
-  def self.change_setting(account, params, current_user)
+  def self.change_setting(account, params)
     sett_name = params[:setting_value].keys[0].to_s
     sett_value = params[:setting_value].values[0].to_s
 

@@ -28,7 +28,7 @@ class Account
     end
 
     def perform
-      result = @accounts
+      @accounts
     end
 
   end
