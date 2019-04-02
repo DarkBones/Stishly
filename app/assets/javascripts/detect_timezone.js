@@ -58,16 +58,29 @@ jstz.TimeZone.prototype.ambiguity_check = function () {
     return;
   }
   
-  length = ambiguity_list.length;
+  /*length = ambiguity_list.length;
   //i = 0;
   
   for (let i = 0; i < length; i += 1) {
-    tz = ambiguity_list.slice(i,i+1).pop();
+    tz = ambiguity_list.pop();
 
     if (jstz.date_is_dst(jstz.olson.dst_start_dates[tz])) {
       this.olson_tz = tz;
       return;
     } 
+  }*/
+
+  while (true) {
+    tz = ambiguity_list.pop();
+
+    if (typeof (tz) === 'undefined'){
+      break;
+    }
+
+    if (jstz.date_is_dst(jstz.olson.dst_start_dates[tz])) {
+      this.olson_tz = tz;
+      return;
+    }
   }
 };
 
