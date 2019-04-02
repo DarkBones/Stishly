@@ -62,7 +62,7 @@ jstz.TimeZone.prototype.ambiguity_check = function () {
   //i = 0;
   
   for (let i = 0; i < length; i += 1) {
-    tz = ambiguity_list[i];
+    tz = ambiguity_list.slice(i,i+1).pop();
 
     if (jstz.date_is_dst(jstz.olson.dst_start_dates[tz])) {
       this.olson_tz = tz;
@@ -302,15 +302,15 @@ jstz.olson.dst_start_dates = {
  * starts for the regions.
  */
 jstz.olson.ambiguity_list = {
-    'America/Denver' : {0: 'America/Denver', 1: 'America/Mazatlan'},
-    'America/Chicago' : {0: 'America/Chicago', 1: 'America/Mexico_City'},
-    'America/Asuncion' : {0: 'Atlantic/Stanley', 1: 'America/Asuncion', 2: 'America/Santiago', 3: 'America/Campo_Grande'},
-    'America/Montevideo' : {0: 'America/Montevideo', 1: 'America/Sao_Paulo'},
-    'Asia/Beirut' : {0: 'Asia/Gaza', 1: 'Asia/Beirut', 2: 'Europe/Minsk', 3: 'Europe/Istanbul', 4: 'Asia/Damascus', 5: 'Asia/Jerusalem', 6: 'Africa/Cairo'},
-    'Asia/Yerevan' : {0: 'Asia/Yerevan', 1: 'Asia/Baku'},
-    'Pacific/Auckland' : {0: 'Pacific/Auckland', 1: 'Pacific/Fiji'},
-    'America/Los_Angeles' : {0: 'America/Los_Angeles', 1: 'America/Santa_Isabel'},
-    'America/New_York' : {0: 'America/Havana', 1: 'America/New_York'},
-    'America/Halifax' : {0: 'America/Goose_Bay', 1: 'America/Halifax'},
-    'America/Godthab' : {0: 'America/Miquelon', 1: 'America/Godthab'}
+    'America/Denver' : ['America/Denver', 'America/Mazatlan'],
+    'America/Chicago' : ['America/Chicago', 'America/Mexico_City'],
+    'America/Asuncion' : ['Atlantic/Stanley', 'America/Asuncion', 'America/Santiago', 'America/Campo_Grande'],
+    'America/Montevideo' : ['America/Montevideo', 'America/Sao_Paulo'},
+    'Asia/Beirut' : ['Asia/Gaza', 'Asia/Beirut', 'Europe/Minsk', 'Europe/Istanbul', 'Asia/Damascus', 'Asia/Jerusalem', 'Africa/Cairo'],
+    'Asia/Yerevan' : ['Asia/Yerevan', 'Asia/Baku'],
+    'Pacific/Auckland' : ['Pacific/Auckland', 'Pacific/Fiji'],
+    'America/Los_Angeles' : ['America/Los_Angeles', 'America/Santa_Isabel'],
+    'America/New_York' : ['America/Havana', 'America/New_York'],
+    'America/Halifax' : ['America/Goose_Bay', 'America/Halifax'],
+    'America/Godthab' : ['America/Miquelon', 'America/Godthab']
 };
