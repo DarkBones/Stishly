@@ -153,6 +153,7 @@ class Schedule
       return 0b0 | (1 << @schedule.start_date.day)
     end
 
+=begin
     # runs the exclusion rule
     def run_exclusion(date)
       case @schedule.exclusion_met
@@ -177,6 +178,41 @@ class Schedule
 
         else
           date = find_next_non_specific(date)
+        end
+      end
+
+      return date
+    end
+=end
+
+    # runs the exclusion rule
+    def run_exclusion(date)
+      case @schedule.exclusion_met
+      when 'next'
+        return date + ((@schedule.exclusion_met_day - date.wday) % 7)
+      when 'previous'
+        return date - ((date.wday - @schedule.exclusion_met_day) % 7)
+      when 'cancel'
+        return run_cancel_exclusion(date)
+      end
+
+      return date
+    end
+
+    # runs the 'cancel' exclusion option to find the next date
+    def run_cancel_exclusion(date)
+      date += 1
+
+      return find_next_non_specific(date) if @schedule.days_month != '' && @schedule.days_month !='specific'
+
+      date += find_next_in_bitmask(get_days_month(date), date.day, month_length(date))
+      date += periods_to_add(date).months
+
+      # required for dates with day larger than 28 (not included in all months)
+      if @schedule.days > 0
+        while bitmask(@schedule.days)[date.day] != '1' do
+          date += find_next_in_bitmask(get_days_month, date.day, month_length(date))
+          date += periods_to_add(date).months
         end
       end
 
