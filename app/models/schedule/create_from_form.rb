@@ -159,37 +159,6 @@ class Schedule
       return result
     end
 
-=begin
-    def get_days
-
-      bitmask = 0b0
-
-      if @params[:type] == 'advanced'
-        if @params[:schedule] == 'weekly'
-          bitmask = get_weekday_bitmask([
-            'weekday_sun',
-            'weekday_mon',
-            'weekday_tue',
-            'weekday_wed',
-            'weekday_thu',
-            'weekday_fri',
-            'weekday_sat'])
-        elsif @params[:schedule] == 'monthly' && @params[:days] == 'specific'
-          bitmask = get_month_bitmask(@params[:dates_picked])
-          if bitmask == 0
-            bitmask = 0b0
-            bitmask = bitmask | (1 << @params[:start_date].to_date.day)
-          end
-        elsif @params[:schedule] == 'monthly' && @params[:days] != 'specific' && @params[:days2] != 'day'
-          weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
-          bitmask = 0b0 | (1 << weekdays.index(@params[:days2]))
-        end
-      end
-
-      return bitmask
-    end
-=end
-
     def get_days
       bitmask = 0b0
 
