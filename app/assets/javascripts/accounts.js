@@ -1,3 +1,19 @@
+// if there is less than two accounts, don't show the summary accounts
+function displaySummaryAccount() {
+  if ($("#accounts_list li").length < 3) {
+    $("#accounts_list li").first().hide();
+  } else{
+    $("#accounts_list li").first().show();
+  }
+
+  // if there are no accounts, display the instruction to create an account
+  if ($("#accounts_list li").length > 1) {
+    $("#accounts_list p").hide();
+  } else{
+    $("#accounts_list p").show();
+  }
+}
+
 $(document).on('turbolinks:load', ()=> {
 
   // Disable the submit button
@@ -41,22 +57,6 @@ function goToAccount(object) {
 $(document).ajaxComplete(function() {
   displaySummaryAccount();
 });
-
-// if there is less than two accounts, don't show the summary accounts
-function displaySummaryAccount() {
-  if ($("#accounts_list li").length < 3) {
-    $("#accounts_list li").first().hide();
-  } else{
-    $("#accounts_list li").first().show();
-  }
-
-  // if there are no accounts, display the instruction to create an account
-  if ($("#accounts_list li").length > 1) {
-    $("#accounts_list p").hide();
-  } else{
-    $("#accounts_list p").show();
-  }
-}
 
 // gets the currently active account by checking the URL of the current page
 function getActiveAccountName(){
