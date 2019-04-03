@@ -11,6 +11,7 @@ class Schedule
 
     def perform
       @params[:name] = sanitise_name(@params[:name])
+      @params[:run_every] = sanitise_period_num(@params[:run_every])
       error = check_errors
       return error[:message] if error[:is_error]
 
@@ -35,51 +36,82 @@ class Schedule
       return schedule
     end
 
+private
+
     def sanitise_name(name_str)
       # don't allow dots in schedule name
       return name_str.gsub '.', ''
     end
 
+    # takes run_every as string, and returns a positive integer
+    def sanitise_period_num(period_num)
+      if period_num.respond_to? :to_i
+        period_num = period_num.to_i
+        if period_num < 1
+          return 1
+        else
+          return period_num
+        end
+      else
+        return 1
+      end
+    end
+
+    # checks if there are any errors. Returns a message and a boolean whether an error has been found
     def check_errors
       return {message: I18n.t('schedule.failure.invalid_name'), is_error: true} if @params[:name].length == 0
 
       # check if start_date is valid
-      date_regex = APP_CONFIG['ui']['dates']['regex']
-      return {message: I18n.t('schedule.failure.invalid_date'), is_error: true} if /#{date_regex}/.match(@params[:start_date].downcase) == nil
+      return {message: I18n.t('schedule.failure.invalid_date'), is_error: true} if valid_date(@params[:start_date]) == false
 
       # if the end_date format is invalid, just leave it empty
-      @params[:end_date] = '' if /#{date_regex}/.match(@params[:end_date].downcase) == false
-
-      # check if the period_num is valid
-      if @params[:run_every].respond_to? :to_i
-        if @params[:run_every].to_i < 1
-          @params[:run_every] = 1
-        end
-      else
-        return {message: I18n.t('schedule.failure.unknown'), is_error: true}
-      end
+      @params[:end_date] = '' if valid_date(@params[:start_date]) == false
 
       # check if the schedule already exists
-      schedules = @current_user.schedules.where("LOWER(schedules.name) LIKE LOWER(?)", @params[:name]).take
-      if schedules && !@testing
-        return {message: I18n.t('schedule.failure.already_exists'), is_error: true}
-      end
+      return {message: I18n.t('schedule.failure.already_exists'), is_error: true} if is_duplicate(@params[:name])
 
+      # no errors found
       return {message: 'no errors', is_error: false}
 
     end
 
-    def get_is_active
-      return Time.now.to_date < @params[:end_date].to_date if @params[:end_date].length >= 11
-      return true
-    end
-
+    # returns the end date if the schedule type is 'advanced'
     def get_end_date
       if @params[:end_date].length > 0 && @params[:type] == 'advanced'
         return @params[:end_date].to_date
       else
         return ''
       end
+    end
+
+    # returns the period (days / weeks / months / years)
+    def get_period
+      result = case @params[:schedule]
+      when 'daily' then 'days'
+      when 'weekly' then 'weeks'
+      when 'monthly' then 'months'
+      else 'years'
+      end
+
+      return result
+    end
+
+    def get_days
+      bitmask = 0b0
+
+      return 0b0 if @params[:type] != 'advanced'
+
+      return get_weekday_bitmask(['weekday_sun', 'weekday_mon', 'weekday_tue', 'weekday_wed', 'weekday_thu', 'weekday_fri', 'weekday_sat']) if @params[:schedule] == 'weekly'
+
+      return get_month_bitmask(@params[:dates_picked]) if @params[:schedule] == 'monthly' && @params[:days] == 'specific'
+
+      if @params[:schedule] == 'monthly' && @params[:days] != 'specific' && @params[:days2] != 'day'
+        weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+        return 0b0 | (1 << weekdays.index(@params[:days2]))
+      end
+
+      return 0
+
     end
 
     def get_days_month
@@ -98,28 +130,6 @@ class Schedule
         month_day = weekdays.index(@params[:days2])
       end
       return month_day
-    end
-
-    def get_exclusion_met
-      met = ''
-
-      if @params[:schedule] == 'monthly' && @excluding == true && @params[:type] == 'advanced'
-        met = @params[:exclusion_met1]
-      end
-
-      return met
-    end
-
-    def get_exclusion_met_day
-      weekdays = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
-
-      met = 0
-
-      if @params[:schedule] == 'monthly' && @excluding == true && @params[:type] == 'advanced'
-        met = weekdays.index(@params[:exclusion_met2])
-      end
-
-      return met
     end
 
     def get_days_exclude
@@ -148,33 +158,49 @@ class Schedule
       return bitmask
     end
 
-    def get_period
-      result = case @params[:schedule]
-      when 'daily' then 'days'
-      when 'weekly' then 'weeks'
-      when 'monthly' then 'months'
-      else 'years'
+    def get_exclusion_met
+      met = ''
+
+      if @params[:schedule] == 'monthly' && @excluding == true && @params[:type] == 'advanced'
+        met = @params[:exclusion_met1]
       end
 
-      return result
+      return met
     end
 
-    def get_days
-      bitmask = 0b0
+    def get_exclusion_met_day
+      weekdays = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
 
-      return 0b0 if @params[:type] != 'advanced'
+      met = 0
 
-      return get_weekday_bitmask(['weekday_sun', 'weekday_mon', 'weekday_tue', 'weekday_wed', 'weekday_thu', 'weekday_fri', 'weekday_sat']) if @params[:schedule] == 'weekly'
-
-      return get_month_bitmask(@params[:dates_picked]) if @params[:schedule] == 'monthly' && @params[:days] == 'specific'
-
-      if @params[:schedule] == 'monthly' && @params[:days] != 'specific' && @params[:days2] != 'day'
-        weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
-        return 0b0 | (1 << weekdays.index(@params[:days2]))
+      if @params[:schedule] == 'monthly' && @excluding == true && @params[:type] == 'advanced'
+        met = weekdays.index(@params[:exclusion_met2])
       end
 
-      return 0
+      return met
+    end
 
+    # validates of the schedule is currently active (hasn't expired)
+    def get_is_active
+      return Time.now.to_date < @params[:end_date].to_date if @params[:end_date].length >= 11
+      return true
+    end
+
+    # validates a given date (string) is in the correct format
+    def valid_date(date)
+      date_regex = APP_CONFIG['ui']['dates']['regex']
+
+      return /#{date_regex}/.match(@params[:start_date].downcase) != nil
+    end
+
+    # validates if a schedule with the same name already exists
+    def is_duplicate(name_str)
+      schedules = @current_user.schedules.where("LOWER(schedules.name) LIKE LOWER(?)", name_str)
+      if schedules && !testing
+        return true
+      else
+        return false
+      end
     end
 
     def get_weekday_bitmask(weekdays)
