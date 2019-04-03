@@ -227,8 +227,6 @@ class Account < ApplicationRecord
   def self.record_history(current_user, id, local_datetime)
     account = current_user.accounts.find_by_id(id)
 
-    balance = account.balance
-
     histories = account.account_histories.new
     histories.account_id = account.id
     histories.balance = account.balance
