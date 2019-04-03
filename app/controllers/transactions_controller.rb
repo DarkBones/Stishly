@@ -64,8 +64,5 @@ class TransactionsController < ApplicationController
 
     @total_amount = @total_amount.to_s
   end
-
-  def show
-
-  end
+  
 end
