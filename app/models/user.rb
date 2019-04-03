@@ -75,11 +75,11 @@ class User < ApplicationRecord
     date_format = self.get_dateformat
 
     date_format.sub! "dd", "%d"
-    date_format.sub! "d", "%-d" if !date_format.include? "%d"
+    date_format.sub! "d", "%-d" unless date_format.include? "%d"
     date_format.sub! "mmmm", "%B"
     date_format.sub! "mmm", "%b"
     date_format.sub! "mm", "%m"
-    date_format.sub! "m", "%-m" if !date_format.include? "%m"
+    date_format.sub! "m", "%-m" unless date_format.include? "%m"
     date_format.sub! "yyyy", "%Y"
     date_format.sub! "yy", "%y"
 
@@ -97,7 +97,7 @@ class User < ApplicationRecord
     if user_setting
       return user_setting.value
     else
-      country_setting = Country.get_dateformat(@current_user.country_code)
+      return Country.get_dateformat(@current_user.country_code)
     end
   end
 

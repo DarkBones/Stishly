@@ -189,7 +189,7 @@ class Account < ApplicationRecord
       params[:is_default] = true
     end
 
-    if !params[:currency]
+    unless params[:currency]
       params[:currency] = user_currency.iso_code
     end
 
@@ -199,7 +199,7 @@ class Account < ApplicationRecord
       position = 1
     end
 
-    if position != nil
+    if !position.nil?
       params[:position] = position - 1
     else
       params[:position] = 0

@@ -30,8 +30,8 @@ function removeActiveNotices() {
   }
 }
 
-function removeActiveNotices (text, isError) {
-  remove_active_notices();
+function triggerNotice (text, isError) {
+  removeActiveNotices();
   
   var classes = "alert alert-dismissible";
   var id = "flash_";

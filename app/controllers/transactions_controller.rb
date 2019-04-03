@@ -56,7 +56,7 @@ class TransactionsController < ApplicationController
         end
       end
 
-      if !t.parent_id
+      unless t.parent_id
         @transaction_amounts_all.push(amount)
         @account_ids_all.push(t_account.id)
       end
