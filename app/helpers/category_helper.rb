@@ -3,7 +3,7 @@ module CategoryHelper
     result += "<ul>"
     node.each do |n|
       result += "<li class=\"category_" + n[:id].to_s + " dropdown-item py-2 px-0\""
-      result += " onclick=\"SetCategory(" + n[:id].to_s + ")\">"
+      result += " onclick=\"setCategory(" + n[:id].to_s + ")\">"
       result += image_tag('categories/' + n[:symbol] + '.svg', :class => 'rounded-circle', :style => 'background-color: hsl(' + n[:color] + ');', 'height' => '30')
       result += " " + n[:name]
       result += "</li>"
