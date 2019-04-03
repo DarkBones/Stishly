@@ -199,8 +199,8 @@ private
 
     # validates if a schedule with the same name already exists
     def is_duplicate(name_str)
-      schedules = @current_user.schedules.where("LOWER(schedules.name) LIKE LOWER(?)", name_str)
-      if schedules && !testing
+      schedules = @current_user.schedules.where("LOWER(schedules.name) LIKE LOWER(?)", name_str).take
+      if schedules && !@testing
         return true
       else
         return false
