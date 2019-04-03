@@ -74,9 +74,6 @@ class User < ApplicationRecord
 
     date_format = self.get_dateformat
 
-    month_no_padding = d.month.to_s
-    day_no_padding = d.day.to_s
-
     date_format.sub! "dd", "%d"
     date_format.sub! "d", "%-d" if !date_format.include? "%d"
     date_format.sub! "mmmm", "%B"
