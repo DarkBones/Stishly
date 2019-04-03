@@ -1,7 +1,3 @@
-$(document).on('turbolinks:load', ()=> {
-  makeSortableLists();
-});
-
 function makeSortableLists(class_name='.sortable-list', handle_name='.sort-handle'){
   $(class_name).sortable({
     cancel: '.no-sorting',
@@ -16,3 +12,7 @@ function makeSortableLists(class_name='.sortable-list', handle_name='.sort-handl
     }
   });
 }
+
+$(document).on('turbolinks:load', ()=> {
+  makeSortableLists();
+});
