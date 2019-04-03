@@ -5,7 +5,7 @@ function SearchCategories(target, input){
   li = $categories.find('li');
   for (let i = 0; i < li.length; i++){
 
-    if (li[i].innerText.toUpperCase().indexOf(text.toUpperCase()) != -1) {
+    if (li[i].innerText.toUpperCase().indexOf(text.toUpperCase()) !== -1) {
       li[i].style.display = "";
     } else {
       li[i].style.display = "none";
