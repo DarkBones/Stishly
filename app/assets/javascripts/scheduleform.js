@@ -52,7 +52,7 @@ function getScheduleNextOccurrences(){
       $("#scheduleform #next_occurrences").html("<ul>");
       data.forEach(function(d) {
         $("#scheduleform #next_occurrences").append("" + d + "");
-      })
+      });
       $("#scheduleform #next_occurrences").append("</ul>");
     }
   });
@@ -225,7 +225,7 @@ function schedulePickDate(date, $datesPicked) {
 
 function changeScheduleType(sType){
   type = sType;
-  if (sType == "simple"){
+  if (sType === "simple"){
     $("#scheduleform .schedule-advanced").hide();
   } else {
     $("#scheduleform .schedule-advanced").show();
@@ -267,10 +267,10 @@ function resetScheduleMenu(){
   // reset the button-group elements
   $("#scheduleform #button-group").each(function(index){
     $(this).find("input").each(function(i){
-      $(this).prop("checked", i==0)
+      $(this).prop("checked", i === 0);
     });
     $(this).find("label").each(function(i){
-      if(i == 0){
+      if(i === 0){
         $(this).addClass("active");
       } else {
         $(this).removeClass("active");
@@ -281,7 +281,7 @@ function resetScheduleMenu(){
   // reset the button-group-weekdays elements
   $("#scheduleform #button-group-weekdays").each(function(index){
     $(this).find("input").each(function(i){
-      $(this).prop("checked", false)
+      $(this).prop("checked", false);
     });
     $(this).find("label").each(function(i){
       $(this).removeClass("active");
