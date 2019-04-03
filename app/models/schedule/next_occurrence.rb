@@ -69,7 +69,7 @@ class Schedule
         mask = mask.reverse
       end
 
-      mask.each_with_index do |b, idx|
+      mask.each_with_index do |_b, idx|
         if mask[(idx + day) % mask.length] == '1'
           return idx
         end
