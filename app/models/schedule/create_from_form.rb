@@ -194,7 +194,7 @@ private
     def valid_date(date)
       date_regex = APP_CONFIG['ui']['dates']['regex']
 
-      return /#{date_regex}/.match(@params[:start_date].downcase) != nil
+      return !/#{date_regex}/.match(date.downcase).nil?
     end
 
     # validates if a schedule with the same name already exists
