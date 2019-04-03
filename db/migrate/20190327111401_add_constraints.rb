@@ -12,7 +12,7 @@ class AddConstraints < ActiveRecord::Migration[5.2]
     change_column :schedules, :timezone, :string, null: false
 
     change_column :transactions, :timezone, :string, null: false
-    change_column :transactions, :local_datetime, :string, null: false
+    #change_column :transactions, :local_datetime, :string, null: false
 
     change_column :schedules, :period_num, :integer, default: 0
     change_column :schedules, :days, :integer, default: 0
