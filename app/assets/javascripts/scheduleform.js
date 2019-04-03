@@ -118,10 +118,6 @@ function changeSchedulePeriod(val) {
       $('#scheduleform .weekly').hide();
       $('#scheduleform .monthly').hide();
       $('#scheduleform .annually').show();
-      break;
-    default:
-      //hideWeekday();
-      $('#scheduleform p#period').text('');
   }
 }
 
