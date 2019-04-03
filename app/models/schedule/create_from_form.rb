@@ -96,6 +96,7 @@ private
       return result
     end
 
+    # returns the days bitmask
     def get_days
       bitmask = 0b0
 
@@ -105,13 +106,17 @@ private
 
       return get_month_bitmask(@params[:dates_picked]) if @params[:schedule] == 'monthly' && @params[:days] == 'specific'
 
+      return get_unspecific_days
+
+    end
+
+    def get_unspecific_days
       if @params[:schedule] == 'monthly' && @params[:days] != 'specific' && @params[:days2] != 'day'
         weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
         return 0b0 | (1 << weekdays.index(@params[:days2]))
       end
 
       return 0
-
     end
 
     def get_days_month
