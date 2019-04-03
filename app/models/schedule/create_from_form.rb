@@ -98,7 +98,6 @@ private
 
     # returns the days bitmask
     def get_days
-      bitmask = 0b0
 
       return 0b0 if @params[:type] != 'advanced'
 
