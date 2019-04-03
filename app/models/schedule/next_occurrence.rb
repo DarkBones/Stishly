@@ -228,7 +228,6 @@ class Schedule
 
     # reverse of exclusion
     def unexclude(date)
-      date_p = date
 
       case @schedule.exclusion_met
       when 'previous'
