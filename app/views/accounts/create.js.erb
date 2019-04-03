@@ -1,5 +1,5 @@
 <% if @account.is_a? String %>
-  trigger_notice('<%= @account %>', true);
+  triggerNotice('<%= @account %>', true);
   $('#accountform').effect( "shake", { direction: "left", times: 4, distance: 6} );
 <% else %>
   $("[data-dismiss=modal]").trigger({ type: "click" });
@@ -21,7 +21,7 @@
     }
   });
 
-  trigger_notice('<%= I18n.t("account.confirmations.confirmed") %>', false);
+  triggerNotice('<%= I18n.t("account.confirmations.confirmed") %>', false);
 
   // add the new account in the transaction accounts options
   var o = new Option("<%= @account.name %>", "<%= @account.name %>");
@@ -30,10 +30,3 @@
 
   resetTransactionMenu();
 <% end %>
-
-  
-
-  
-
-  //trigger_notice('<%= I18n.t("account.confirmations.confirmed")', false);
-
