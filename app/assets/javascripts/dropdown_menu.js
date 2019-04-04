@@ -10,7 +10,7 @@ function searchCategories(target, input){
   while (liPos < liLength) {
     li = $(liArr.pop());
 
-    if (li.text().toUpperCase().indexOf(text) === -1) {
+    if (li.attr('path').toUpperCase().indexOf(text) === -1) {
       li.hide();
     } else {
       li.show();
