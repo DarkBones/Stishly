@@ -14,7 +14,7 @@ function displaySummaryAccount() {
   }
 }
 
-$(document).on('turbolinks:load', ()=> {
+$(document).on("turbolinks:load", () => {
 
   // Disable the submit button
   $("#accountform").find("input[type=submit]").attr("disabled", "disabled");
@@ -29,8 +29,8 @@ function updateAccountNameInput(inputObject) {
   var $input = $();
   var inputValue = "";
 
-  $input = $('#' + inputObject.id);
-  $accountform = $input.closest('#accountform');
+  $input = $("#" + inputObject.id);
+  $accountform = $input.closest("#accountform");
   inputValue = $input.val();
 
   // don't allow dots in input field
@@ -44,12 +44,11 @@ function updateAccountNameInput(inputObject) {
 }
 
 function goToAccount(object) {
-  var linkName = "";
-  var url = "";
+  var linkName, url, linkButton;
 
-  $accountButton = $('#' + object.id);
-  linkName = $accountButton.attr('name');
-  url = '/' + linkName.replace('_', '/');
+  $accountButton = $("#" + object.id);
+  linkName = $accountButton.attr("name");
+  url = "/" + linkName.replace("_", "/");
   window.location.href = url;
 }
 
@@ -60,12 +59,12 @@ $(document).ajaxComplete(function() {
 
 // gets the currently active account by checking the URL of the current page
 function getActiveAccountName(){
-  var url_arr = [];
+  var urlArr = [];
 
-  url_arr = window.location.pathname.split('/');
-  if (url_arr[1].toLowerCase() === 'accounts') {
-    if (url_arr[2].length > 0){
-      return decodeURI(url_arr[2]);
+  urlArr = window.location.pathname.split("/");
+  if (urlArr[1].toLowerCase() === "accounts") {
+    if (urlArr[2].length > 0){
+      return decodeURI(urlArr[2]);
     }
   }
 
