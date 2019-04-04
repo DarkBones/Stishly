@@ -133,8 +133,13 @@ a[data-toggle="collapse"] {
   width: 100%;
 }
 
+.grey-out {
+  opacity: 0.6;
+}
+
 #categoriesDropdownOptions {
   height: 350px;
+  width: 300px;
   overflow-y: scroll;
 }
 #transactionform #categories button {
