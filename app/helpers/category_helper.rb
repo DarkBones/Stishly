@@ -1,6 +1,5 @@
 module CategoryHelper
-=begin
-  def draw_tree(node, result="")
+  def draw_tree_OLD(node, result="")
     result += "<ul>"
     node.each do |n|
       result += "<li class=\"category_" + n[:id].to_s + " dropdown-item py-2 px-0\""
@@ -17,10 +16,9 @@ module CategoryHelper
 
     return result.html_safe
   end
-=end
 
-  def draw_tree(node, result="", path="")
-    result += "<ul>"
+  def draw_tree(node, path="")
+    result = "<ul>"
     node.each do |n|
 
       if n[:parent_id].nil?
@@ -34,10 +32,10 @@ module CategoryHelper
       result += " onclick=\"setCategory(" + n[:id].to_s + ")\">"
       result += image_tag('categories/' + n[:symbol] + '.svg', :class => 'rounded-circle', :style => 'background-color: hsl(' + n[:color] + ');', 'height' => '30')
       result += " " + n[:name]
-      if n[:children].any?
-        result += draw_tree(n[:children])
-      end
       result += "</li>"
+      if n[:children].any?
+        result += draw_tree(n[:children], path)
+      end
     end
 
     result += "</ul>"
