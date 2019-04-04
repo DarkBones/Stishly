@@ -26,6 +26,8 @@ class Category < ApplicationRecord
       tree[0][:name] = "Uncategorised"
       tree[0][:color] = "0, 0%, 50%"
       tree[0][:symbol] = "uncategorised"
+      tree[nil][:children_paths] = "uncategorised"
+      
       tree[nil][:children_paths] = ""
       tree[nil][:children].push(tree[0])
 
