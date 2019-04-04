@@ -6,10 +6,10 @@ module CategoryHelper
       result += " onclick=\"setCategory(" + n[:id].to_s + ")\">"
       result += image_tag('categories/' + n[:symbol] + '.svg', :class => 'rounded-circle', :style => 'background-color: hsl(' + n[:color] + ');', 'height' => '30')
       result += " " + n[:name]
+      result += "</li>"
       if n[:children].any?
         result += draw_tree(n[:children])
       end
-      result += "</li>"
     end
 
     result += "</ul>"
