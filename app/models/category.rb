@@ -31,6 +31,7 @@ class Category < ApplicationRecord
 
       tree[nil][:children].push(tree[0])
 
+      # set the parent_keys first (required for recursive search)
       current_user.categories.order(:name).each do |cat|
         tree[cat.id][:parent_id] = cat.parent_id
       end
