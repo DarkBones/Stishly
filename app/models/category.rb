@@ -27,7 +27,7 @@ class Category < ApplicationRecord
       tree[0][:color] = "0, 0%, 50%"
       tree[0][:symbol] = "uncategorised"
       tree[nil][:children_paths] = "uncategorised"
-      
+
       tree[nil][:children_paths] = ""
       tree[nil][:children].push(tree[0])
 
@@ -38,7 +38,7 @@ class Category < ApplicationRecord
         tree[cat.id][:symbol] = cat[:symbol]
         tree[cat.id][:children_paths] = cat[:name]
         tree[cat.parent_id][:children].push(tree[cat.id])
-        tree[cat.parent_id][:children_paths] += cat[:name] unless cat.parent_id.nil?
+        tree[cat.parent_id][:children_paths] = tree[cat.parent_id][:children_paths].to_s + cat[:name]
       end
       
       return tree[nil][:children]
