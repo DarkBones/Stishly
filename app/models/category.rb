@@ -35,7 +35,7 @@ class Category < ApplicationRecord
         tree[cat.id][:name] = cat.name
         tree[cat.id][:color] = cat.color
         tree[cat.id][:symbol] = cat.symbol
-        tree[cat.id][:children_paths] = cat.name
+        tree[cat.id][:children_paths] += cat.name
         tree[cat.parent_id][:children].push(tree[cat.id])
         tree[cat.parent_id][:children_paths] += cat.name
       end
