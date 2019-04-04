@@ -17,26 +17,19 @@ module CategoryHelper
     return result.html_safe
   end
 
-  def draw_tree(node, path="", is_child = false)
+  def draw_tree(node)
     result = "<ul>"
     node.each do |n|
 
-      if n[:is_child]
-        li_path = path + n[:name]
-      else
-        li_path = n[:name]
-        path = ""
-      end
-
       result += "<li class=\"category_" + n[:id].to_s + " dropdown-item py-2 px-0\""
-      result += " path=\"#{li_path}\""
+      result += " path=\"#{n[:children_paths]}\""
       result += " onclick=\"setCategory(" + n[:id].to_s + ")\">"
       result += image_tag('categories/' + n[:symbol] + '.svg', :class => 'rounded-circle', :style => 'background-color: hsl(' + n[:color] + ');', 'height' => '30')
       result += " " + n[:name]
       result += "</li>"
       if n[:children].any?
         path += li_path
-        result += draw_tree(n[:children], path, true)
+        result += draw_tree(n[:children])
       end
     end
 
