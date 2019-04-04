@@ -32,12 +32,12 @@ class Category < ApplicationRecord
 
       current_user.categories.order(:name).each do |cat|
         tree[cat.id][:id] = cat.id
-        tree[cat.id][:name] = cat[:name]
-        tree[cat.id][:color] = cat[:color]
-        tree[cat.id][:symbol] = cat[:symbol]
-        tree[cat.id][:children_paths] = cat[:name]
+        tree[cat.id][:name] = cat.name
+        tree[cat.id][:color] = cat.color
+        tree[cat.id][:symbol] = cat.symbol
+        tree[cat.id][:children_paths] = cat.name
         tree[cat.parent_id][:children].push(tree[cat.id])
-        tree[cat.parent_id][:children_paths] += tree[cat.id][:name]
+        tree[cat.parent_id][:children_paths] += cat.name
       end
       
       return tree[nil][:children]
