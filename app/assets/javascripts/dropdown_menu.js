@@ -21,13 +21,13 @@ $(document).on("click", ".dropdown", (event) => {
 
 });
 
-$(document).on("click", ".dropdown__options li", (event)=> {
+$(document).on("click", ".dropdown__options li", (event) => {
   $(event.target).closest(".dropdown__options").siblings(".dropdown__selected").html($(event.target).html());
   $(event.target).closest(".dropdown__options").hide();
   $(event.target).closest(".dropdown").next("input").val($(event.target).attr("class").split("_")[1]);
 });
 
-$(document).on("keyup", "#search-categories", (event)=> {
+$(document).on("keyup", "#search-categories", (event) => {
   searchCategories($(event.target).closest(".dropdown__options"), $(event.target).val(), event);
 });
 
