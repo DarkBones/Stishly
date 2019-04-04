@@ -26,7 +26,7 @@ class Category < ApplicationRecord
       tree[0][:name] = "Uncategorised"
       tree[0][:color] = "0, 0%, 50%"
       tree[0][:symbol] = "uncategorised"
-      tree[0][:is_child] = false
+      tree[0][:children_paths] = ""
       tree[nil][:children].push(tree[0])
 
       current_user.categories.order(:name).each do |cat|
@@ -34,8 +34,9 @@ class Category < ApplicationRecord
         tree[cat.id][:name] = cat[:name]
         tree[cat.id][:color] = cat[:color]
         tree[cat.id][:symbol] = cat[:symbol]
-        tree[cat.id][:is_child] = !cat[:parent_id].nil?
+        tree[cat.id][:children_paths] = cat[:name]
         tree[cat.parent_id][:children].push(tree[cat.id])
+        tree[cat.parent_id][:children_paths] += cat[:name]
       end
       
       return tree[nil][:children]
