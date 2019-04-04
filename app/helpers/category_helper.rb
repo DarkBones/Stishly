@@ -34,7 +34,7 @@ module CategoryHelper
       result += " " + n[:name]
       result += "</li>"
       if n[:children].any?
-        result += draw_tree(n[:children], path)
+        result += draw_tree(n[:children], path, true)
       end
     end
 
