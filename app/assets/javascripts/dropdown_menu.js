@@ -1,8 +1,14 @@
 function searchCategories(target, input){
   var $categories = $(target);
-  var text = $(input).val().toUpperCase();
+  var text = $(input).val();
   var liArr, liLength, li;
   var liPos = 0;
+
+  if (typeof(text) === 'undefined') {
+    return;
+  }
+
+  text = text.toUpperCase();
 
   liArr = $categories.find("li").toArray();
   liLength = liArr.length;
@@ -15,7 +21,8 @@ function searchCategories(target, input){
       li.removeClass('grey-out');
     } else {
       li.show();
-      if (li.text.toUpperCase().indexOf(text) === -1) {
+
+      if (li.text().toUpperCase().indexOf(text) === -1) {
         li.addClass('grey-out');
       } else {
         li.removeClass('grey-out');

@@ -20,24 +20,37 @@ class Category < ApplicationRecord
 
   def self.get_user_categories(current_user, as_array=false)
     if as_array
-      tree = Hash.new { |h,k| h[k] = { :name => nil, :children => [ ], :children_paths => "" } }
+      tree = Hash.new { |h,k| h[k] = { :name => nil, :children => [ ], :children_paths => "", :parent_id => nil } }
 
       tree[0][:id] = 0
       tree[0][:name] = "Uncategorised"
       tree[0][:color] = "0, 0%, 50%"
       tree[0][:symbol] = "uncategorised"
+      tree[0][:parent_id] = nil
       tree[0][:children_paths] = "uncategorised"
 
       tree[nil][:children].push(tree[0])
+
+      current_user.categories.order(:name).each do |cat|
+        tree[cat.id][:parent_id] = cat.parent_id
+      end
 
       current_user.categories.order(:name).each do |cat|
         tree[cat.id][:id] = cat.id
         tree[cat.id][:name] = cat.name
         tree[cat.id][:color] = cat.color
         tree[cat.id][:symbol] = cat.symbol
-        tree[cat.id][:children_paths] += cat.name
+        tree[cat.id][:children_paths] += ".#{cat.name}"
+        #tree[cat.id][:parent_id] = cat.parent_id
         tree[cat.parent_id][:children].push(tree[cat.id])
-        tree[cat.parent_id][:children_paths] += ".#{cat.name}"
+        #tree[cat.parent_id][:children_paths] += ".#{cat.name}"
+
+        id = cat.parent_id
+        while id != nil do
+          puts id
+          tree[id][:children_paths] += ".#{cat.name}"
+          id = tree[id][:parent_id]
+        end
       end
       
       return tree[nil][:children]
