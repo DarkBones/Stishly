@@ -44,7 +44,7 @@ function updateAccountNameInput(inputObject) {
 }
 
 function goToAccount(object) {
-  var linkName, url, linkButton;
+  var linkName, url, $accountButton;
 
   $accountButton = $("#" + object.id);
   linkName = $accountButton.attr("name");
