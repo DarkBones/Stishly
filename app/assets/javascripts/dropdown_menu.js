@@ -4,7 +4,7 @@ function searchCategories(target, input){
   var liArr, liLength, li;
   var liPos = 0;
 
-  if (typeof(text) === 'undefined') {
+  if (typeof(text) === "undefined") {
     return;
   }
 

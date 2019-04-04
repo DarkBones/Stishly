@@ -47,7 +47,7 @@ class Category < ApplicationRecord
         #tree[cat.parent_id][:children_paths] += ".#{cat.name}"
 
         id = cat.parent_id
-        while id != nil do
+        while !id.nil? do
           puts id
           tree[id][:children_paths] += ".#{cat.name}"
           id = tree[id][:parent_id]
