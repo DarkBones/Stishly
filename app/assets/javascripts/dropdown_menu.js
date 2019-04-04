@@ -20,22 +20,6 @@ function searchCategories(target, input){
   }
 }
 
-function searchCategories_OLD(target, input){
-  var $categories = $(target);
-  var text = $(input).val();
-  var li, i;
-
-  li = $categories.find("li");
-  for (let i = 0; i < li.length; i++){
-
-    if (li[i].innerText.toUpperCase().indexOf(text.toUpperCase()) !== -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
-  }
-}
-
 $(document).on("click", ".dropdown", (event) => {
   $(event.target).next(".dropdown__options").show();
   $(event.target).next(".dropdown__options").find("#search-categories").focus();
