@@ -17,14 +17,14 @@ module CategoryHelper
     return result.html_safe
   end
 
-  def draw_tree(node, path="")
+  def draw_tree(node, path="", is_child = false)
     result = "<ul>"
     node.each do |n|
 
-      if n[:parent_id].nil?
-        path = n[:name]
-      else
+      if is_child
         path += n[:name]
+      else
+        path = n[:name]
       end
 
       result += "<li class=\"category_" + n[:id].to_s + " dropdown-item py-2 px-0\""
