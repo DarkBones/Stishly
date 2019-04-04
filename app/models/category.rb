@@ -20,7 +20,7 @@ class Category < ApplicationRecord
 
   def self.get_user_categories(current_user, as_array=false)
     if as_array
-      tree = Hash.new { |h,k| h[k] = { :name => nil, :children => [ ] } }
+      tree = Hash.new { |h,k| h[k] = { :name => nil, :children => [ ], :children_paths => "" } }
 
       tree[0][:id] = 0
       tree[0][:name] = "Uncategorised"
@@ -38,7 +38,7 @@ class Category < ApplicationRecord
         tree[cat.id][:symbol] = cat[:symbol]
         tree[cat.id][:children_paths] = cat[:name]
         tree[cat.parent_id][:children].push(tree[cat.id])
-        tree[cat.parent_id][:children_paths] = tree[cat.parent_id][:children_paths].to_s + cat[:name]
+        tree[cat.parent_id][:children_paths] += cat[:name]
       end
       
       return tree[nil][:children]
