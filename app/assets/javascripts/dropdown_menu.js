@@ -1,5 +1,27 @@
 function searchCategories(target, input){
   var $categories = $(target);
+  var text = $(input).val().toUpperCase();
+  var liArr, liLength, li;
+  var liPos = 0;
+
+  liArr = $categories.find("li").toArray();
+  liLength = liArr.length;
+
+  while (liPos < liLength) {
+    li = $(liArr.pop());
+
+    if (li.text().toUpperCase().indexOf(text) === -1) {
+      li.hide();
+    } else {
+      li.show();
+    }
+
+    liPos += 1;
+  }
+}
+
+function searchCategories_OLD(target, input){
+  var $categories = $(target);
   var text = $(input).val();
   var li, i;
 
