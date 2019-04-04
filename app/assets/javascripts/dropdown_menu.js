@@ -12,8 +12,14 @@ function searchCategories(target, input){
 
     if (li.attr('path').toUpperCase().indexOf(text) === -1) {
       li.hide();
+      li.removeClass('grey-out');
     } else {
       li.show();
+      if (li.text.toUpperCase().indexOf(text) === -1) {
+        li.addClass('grey-out');
+      } else {
+        li.removeClass('grey-out');
+      }
     }
 
     liPos += 1;
