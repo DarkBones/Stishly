@@ -21,19 +21,21 @@ module CategoryHelper
     result = "<ul>"
     node.each do |n|
 
-      if is_child
-        path += n[:name]
+      if n[:is_child]
+        li_path = path + n[:name]
       else
-        path = n[:name]
+        li_path = n[:name]
+        path = ""
       end
 
       result += "<li class=\"category_" + n[:id].to_s + " dropdown-item py-2 px-0\""
-      result += " path=\"#{n[:parent_id]}\""
+      result += " path=\"#{path}\""
       result += " onclick=\"setCategory(" + n[:id].to_s + ")\">"
       result += image_tag('categories/' + n[:symbol] + '.svg', :class => 'rounded-circle', :style => 'background-color: hsl(' + n[:color] + ');', 'height' => '30')
       result += " " + n[:name]
       result += "</li>"
       if n[:children].any?
+        path += li_path
         result += draw_tree(n[:children], path, true)
       end
     end
