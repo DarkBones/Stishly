@@ -10,9 +10,9 @@ class ActiveSupport::TestCase
   def format_error(message, expected=nil, actual=nil, result: nil)
     error = message
 
-    error += "\nexpected:\t#{expected}" if expected != nil
-    error += "\nactual:\t\t#{actual}" if actual != nil
-    error += "\nresult:\t\t#{result}" if result != nil
+    error += "\nexpected:\t#{expected}" unless expected.nil?
+    error += "\nactual:\t\t#{actual}" unless actual.nil?
+    error += "\nresult:\t\t#{result}" unless result.nil?
 
     return error
   end
