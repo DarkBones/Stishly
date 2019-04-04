@@ -34,7 +34,7 @@ class Category < ApplicationRecord
         tree[cat.id][:name] = cat[:name]
         tree[cat.id][:color] = cat[:color]
         tree[cat.id][:symbol] = cat[:symbol]
-        tree[cat.id][:is_child] = cat[:parent_id].nil?
+        tree[cat.id][:is_child] = !cat[:parent_id].nil?
         tree[cat.parent_id][:children].push(tree[cat.id])
       end
       
