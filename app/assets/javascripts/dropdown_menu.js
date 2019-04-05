@@ -1,3 +1,17 @@
+function handleSearchResult(li, text) {
+  if (li.attr("path").toUpperCase().indexOf(text) === -1) {
+    li.hide();
+  } else {
+    li.show();
+
+    if (li.text().toUpperCase().indexOf(text) === -1) {
+      li.addClass("grey-out");
+    } else {
+      li.removeClass("grey-out");
+    }
+  }
+}
+
 function searchCategories(target, input){
   var $categories = $(target);
   var text = $(input).val();
@@ -16,18 +30,7 @@ function searchCategories(target, input){
   while (liPos < liLength) {
     li = $(liArr.pop());
 
-    if (li.attr('path').toUpperCase().indexOf(text) === -1) {
-      li.hide();
-      li.removeClass('grey-out');
-    } else {
-      li.show();
-
-      if (li.text().toUpperCase().indexOf(text) === -1) {
-        li.addClass('grey-out');
-      } else {
-        li.removeClass('grey-out');
-      }
-    }
+    handleSearchResult(li, text);
 
     liPos += 1;
   }
