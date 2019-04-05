@@ -48,7 +48,7 @@ function getScheduleNextOccurrences(){
     type: "GET",
     dataType: "json",
     url: "api/next_occurrences" + "/" + type + "/" + name + "/" + startDate + "/" + timezone + "/" + schedule + "/" + runEvery + "/" + days + "/" + days2 + "/" + datesPicked + "/" + weekdayMon + "/" + weekdayTue + "/" + weekdayWed + "/" + weekdayThu + "/" + weekdayFri + "/" + weekdaySat + "/" + weekdaySun + "/" + endDate + "/" + weekdayExcludeMon + "/" + weekdayExcludeTue + "/" + weekdayExcludeWed + "/" + weekdayExcludeThu + "/" + weekdayExcludeFri + "/" + weekdayExcludeSat + "/" + weekdayExcludeSun + "/" + datesPickedExclude + "/" + exclusionMet1 + "/" + exclusionMet2 + "/" + occurrenceCount,
-    success: function(data) {
+    success(data) {
       $("#scheduleform #next_occurrences").html("<ul>");
       data.forEach(function(d) {
         $("#scheduleform #next_occurrences").append("" + d + "");
@@ -88,33 +88,26 @@ function changeRunsEvery() {
 }
 
 function changeSchedulePeriod(val) {
+  $("#scheduleform .daily").hide();
+  $("#scheduleform .weekly").hide();
+  $("#scheduleform .monthly").hide();
+  $("#scheduleform .annually").hide();
+
   switch (val.toLowerCase()) {
     case "daily":
       $("#scheduleform p#period").text("Days");
       $("#scheduleform .daily").show();
-      $("#scheduleform .weekly").hide();
-      $("#scheduleform .monthly").hide();
-      $("#scheduleform .annually").hide();
       break;
     case "weekly":
       $("#scheduleform p#period").text("Weeks");
-      $("#scheduleform .daily").hide();
       $("#scheduleform .weekly").show();
-      $("#scheduleform .monthly").hide();
-      $("#scheduleform .annually").hide();
       break;
     case "monthly":
       $("#scheduleform p#period").text("Months");
-      $("#scheduleform .daily").hide();
-      $("#scheduleform .weekly").hide();
       $("#scheduleform .monthly").show();
-      $("#scheduleform .annually").hide();
       break;
     case "annually":
       $("#scheduleform p#period").text("Years");
-      $("#scheduleform .daily").hide();
-      $("#scheduleform .weekly").hide();
-      $("#scheduleform .monthly").hide();
       $("#scheduleform .annually").show();
   }
 }
