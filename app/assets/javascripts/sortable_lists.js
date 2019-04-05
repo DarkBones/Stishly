@@ -3,7 +3,7 @@ function makeSortableLists(className=".sortable-list", handleName=".sort-handle"
     cancel: ".no-sorting",
     handle: handleName,
     delay: 150,
-    update: function(e, ui) {
+    update(e, ui) {
       Rails.ajax({
         url: "/accounts/sort",
         type: "PATCH",
@@ -13,6 +13,6 @@ function makeSortableLists(className=".sortable-list", handleName=".sort-handle"
   });
 }
 
-$(document).on("turbolinks:load", ()=> {
+$(document).on("turbolinks:load", () => {
   makeSortableLists();
 });
