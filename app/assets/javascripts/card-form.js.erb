@@ -106,6 +106,7 @@ function getTransactionTotalFromMultiple($target) {
 function updateTransactionResult() {
   var rate = 1;
   var amount = 0;
+  var $accountTarget = $("#transactionform #transaction_account");
   var $rateTarget = $("#transactionform #transaction_rate");
   var $resultTarget = $("#transactionform #transaction_account_currency");
   var $amountTarget = $("#transactionform #transaction_amount");
@@ -128,13 +129,19 @@ function updateTransactionResult() {
     }
   }
 
-  result = Math.round((amount * rate) * 100) / 100
+  $.ajax({
+    type: "GET",
+    dataType: "json",
+    url: "/api/account_currency_details/" + encodeURI($accountTarget.val()),
+    success(data) {
+      result = Math.round((amount * rate) * data.subunit_to_unit) / data.subunit_to_unit
+      $resultTarget.val(result);
 
-  $resultTarget.val(result);
-
-  if (multiple_transactions){
-    updateTransactionsTotal('#transactionform #transactions-total','#transactionform #transactions textarea' ,'#transactionform #transaction_currency');
-  }
+      if (multiple_transactions){
+        updateTransactionsTotal('#transactionform #transactions-total','#transactionform #transactions textarea' ,'#transactionform #transaction_currency');
+      }
+    }
+  });
 }
 
 function updateTransactionRate(rateTarget, resultTarget, amountTarget1, amountTarget2){
@@ -251,18 +258,18 @@ function changeTransactionCurrency(selectObject, currency='') {
 
   $.ajax({
     type: "GET",
-    dataType: "text",
-    url: "/api/account_currency/" + encodeURI(account),
+    dataType: "json",
+    url: "/api/account_currency_details/" + encodeURI(account),
     success: function(data_currency) {
-      if (data_currency != currency){
+      if (data_currency.iso_code != currency){
         $('#transactionform #exchange_rate_spinner').show();
         $.ajax({
           type: "GET",
           dataType: "text",
-          url: "/api/currency_rate/" + currency + "/" + data_currency,
+          url: "/api/currency_rate/" + currency + "/" + data_currency.iso_code,
           success: function(data_rate) {
             $('#transactionform #exchange_rate_spinner').hide();
-            $('#transactionform #account_currency').text('Amount in ' + data_currency);
+            $('#transactionform #account_currency').text('Amount in ' + data_currency.iso_code);
             $('#transactionform #currency-rate').show();
             $('#transactionform #currency-result').show();
             $('#transactionform #currency-rate input').val(data_rate);
@@ -273,7 +280,7 @@ function changeTransactionCurrency(selectObject, currency='') {
               result = getTransactionTotalFromMultiple($('#transactionform #transactions textarea')) * data_rate
             }
 
-            $('#transactionform #currency-result input').val(Math.round(result * 100) / 100);
+            $('#transactionform #currency-result input').val(Math.round(result * data_currency.subunit_to_unit) / data_currency.subunit_to_unit);
           }
         });
 
@@ -286,6 +293,7 @@ function changeTransactionCurrency(selectObject, currency='') {
     }
   });
   updateTransactionsTotal('#transactionform #transactions-total','#transactionform #transactions textarea' ,'#transactionform #transaction_currency');
+  updateTransactionResult();
 }
 
 function updateTransactionsTotal(targetTotal, targetTransactions, targetCurrency){

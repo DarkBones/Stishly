@@ -84,6 +84,17 @@ class ApiController < ApplicationController
     render json: @accounts
   end
 
+  def account_currency_details
+    account = Account.get_from_name(params[:account_name], current_user)
+    currency = Money::Currency.new(account.currency)
+    render json: currency
+  end
+
+  def currency_details
+    currency = Money::Currency.new(params[:currency])
+    render json: currency
+  end
+
   def transaction_date_ul
     date_formatted = User.format_date(params[:date].to_date)
     render partial: 'accounts/transactions_date', :locals => { :d => params[:date], :account_currency => params[:account_currency], :day_total => params[:day_total], :d_formatted => date_formatted }
