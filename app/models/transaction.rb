@@ -59,6 +59,54 @@ class Transaction < ApplicationRecord
     return result
   end
 
+  def self.get_details(transactions, params, current_user)
+    transaction_amounts_all = []
+    account_ids_all = []
+    transactions_parent = []
+    account_names = []
+    date = nil
+    update_day_total = false
+    total_amount = 0
+
+    transactions.each do |t|
+      amount = get_user_currency_amount(t, params[:active_account], current_user)
+      date = t.local_datetime.to_s.split[0]
+
+      if params[:active_account].nil? || params[:active_account] == t.account.name
+        update_day_total = true
+
+        unless t.parent_id
+          transactions_parent.push(t)
+          account_names.push(t.account.name)
+          total_amount += amount
+          transaction_amounts_all.push(amount)
+          account_ids_all.push(t.account.id)
+        end
+      end
+    end
+
+    return {
+      transaction_amounts_all: transaction_amounts_all,
+      account_ids_all: account_ids_all,
+      transactions_parent: transactions_parent,
+      account_names: account_names,
+      date: date,
+      update_day_total: update_day_total,
+      total_amount: total_amount
+    }
+  end
+
+  def self.get_user_currency_amount(transaction, account_name, current_user)
+    user_currency = User.get_currency(current_user)
+
+    amount = transaction.account_currency_amount
+    if transaction.currency != user_currency.iso_code && account_name == ''
+      amount = CurrencyRate.convert(amount, Money::Currency.new(transaction.currency), user_currency)
+    end
+
+    return amount
+  end
+
   def self.create_transaction(current_user, transaction)
     t = Transaction.new
     t.user_id = transaction[:user_id]
