@@ -58,15 +58,13 @@ private
     def get_account
       return "transactions.account_id like ?" if @query[:account].length == 0
 
-      clause = "transactions.account_id = ?"
+      return "transactions.account_id = ?"
     end
 
     def get_account_value
       return "%" if @query[:account].length == 0
 
-      account = Account.get_from_name(@query[:account], @current_user)
-
-      return account.id
+      return Account.get_from_name(@query[:account], @current_user).id
     end
 
     def get_to_date
@@ -90,7 +88,7 @@ private
     def get_category
       return "transactions.category_id > ?" if @query[:category] < 0
 
-      clause = "transactions.category_id = ?"
+      return "transactions.category_id = ?"
     end
 
     def get_category_value
@@ -100,7 +98,7 @@ private
     def get_currency
       return "transactions.currency like ?" if @query[:currency].length == 0
 
-      clause = "transactions.currency = ?"
+      return "transactions.currency = ?"
     end
 
     def get_currency_value
@@ -112,7 +110,7 @@ private
     def get_exclude_currency
       return "transactions.currency like ?" if @query[:exclude_currency].length == 0
 
-      clause = "transactions.currency != ?"
+      return "transactions.currency != ?"
     end
 
     def get_exclude_currency_value
@@ -124,8 +122,7 @@ private
     def get_description
       return "transactions.description like ?" if @query[:description].length == 0
 
-      clause = ""
-      clause += "UPPER(" unless @query[:case_sensitive] == true
+      clause = "UPPER(" unless @query[:case_sensitive] == true
       clause += "transactions.description"
       clause += ")" unless @query[:case_sensitive] == true
 
@@ -135,7 +132,7 @@ private
         clause += " like"
       end
 
-      clause += " ?"
+      return clause += " ?"
     end
 
     def get_description_value
