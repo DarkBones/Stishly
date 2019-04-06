@@ -132,7 +132,8 @@ private
         clause += " like"
       end
 
-      return clause += " ?"
+      clause += " ?"
+      return clause
     end
 
     def get_description_value
