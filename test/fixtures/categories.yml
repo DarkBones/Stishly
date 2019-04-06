@@ -103,3 +103,6 @@ parking81: { id: 81, name: 'Parking', color: '324, 100%, 50%', symbol: 'parking'
 rentals82: { id: 82, name: 'Rental', color: '324, 100%, 50%', symbol: 'rentals', user_id: 1, parent_id: 10}
 
 destroy: { id: 83, name: 'Destroy', color: '144, 100%, 50%', symbol: 'salary', user_id: 7, parent_id: }
+
+public_transport752: { id: 84, name: 'Public Transport', color: '288, 100%, 50%', symbol: 'public_transport', user_id: 1}
+fuel772: { id: 85, name: 'Fuel', color: '324, 100%, 50%', symbol: 'fuel', user_id: 10}

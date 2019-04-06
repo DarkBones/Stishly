@@ -44,6 +44,10 @@ class Transaction < ApplicationRecord
     }
   end
 
+  def self.search(current_user, query)
+    return Search.new(current_user, query).perform
+  end
+
   def self.create_from_list(current_user, transactions)
     result = []
     transactions.each do |transaction|

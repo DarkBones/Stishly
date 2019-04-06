@@ -183,3 +183,25 @@ transactions_4: {
   is_real: 1,
   position: 2
 }
+
+search_1: {
+  id: 19,
+  balance: 0,
+  user_id: 10,
+  name: 'Current account',
+  is_default: true,
+  currency: 'EUR',
+  is_real: 1,
+  position: 1
+}
+
+search_2: {
+  id: 20,
+  balance: 0,
+  user_id: 10,
+  name: 'Savings account',
+  is_default: false,
+  currency: 'EUR',
+  is_real: 1,
+  position: 2
+}
