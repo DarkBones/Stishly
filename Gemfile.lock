@@ -1,5 +1,6 @@
 GEM
   remote: https://rubygems.org/
+  remote: https://rails-assets.org/
   specs:
     actioncable (5.2.2)
       actionpack (= 5.2.2)
@@ -225,6 +226,7 @@ GEM
       bundler (>= 1.3.0)
       railties (= 5.2.2)
       sprockets-rails (>= 2.0.0)
+    rails-assets-jsTimezoneDetect (1.0.6)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -391,6 +393,7 @@ DEPENDENCIES
   puma (~> 3.11)
   pundit
   rails (~> 5.2.1)
+  rails-assets-jsTimezoneDetect!
   rails_12factor
   rails_best_practices
   rails_layout

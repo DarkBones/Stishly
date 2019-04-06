@@ -15,27 +15,8 @@
   };
   
   $.fn.get_timezone = function(options) {
-    
-    var settings = {
-      "debug" : false,
-      "default" : "America/New_York"
-    };
-    
-    if(options) {
-      $.extend( settings, options );
-    }
-    
-    var tz_info = jstz.determine_timezone();
-    var timezone = tz_info.timezone;
-    if (timezone !== "undefined") {
-      timezone.ambiguity_check();
-      return timezone.olson_tz;
-    } else {
-      if(settings["debug"]) {
-        alert("no timezone to be found. using default.")
-      }
-      return settings["default"]
-    }
+    var tz_info = jstz.determine().name();
+    return tz_info;
   };
   
 })( jQuery );
