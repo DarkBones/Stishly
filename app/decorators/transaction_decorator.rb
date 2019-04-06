@@ -14,7 +14,7 @@ class TransactionDecorator < ApplicationDecorator
   end
 
   def transfer_message
-    if model.transfer_account_id != nil
+    unless model.transfer_account_id.nil?
       message = "Transferred "
       if model.direction == -1
         message += "to "

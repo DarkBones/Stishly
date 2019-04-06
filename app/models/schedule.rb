@@ -36,7 +36,7 @@ class Schedule < ApplicationRecord
       tz = TZInfo::Timezone.get(schedule.timezone)
 
       next_occurrence = self.next_occurrence(schedule, nil, false, true)
-      schedule.next_occurrence = tz.utc_to_local(next_occurrence).to_date if !next_occurrence.nil?
+      schedule.next_occurrence = tz.utc_to_local(next_occurrence).to_date unless next_occurrence.nil?
       schedule.next_occurrence_utc = next_occurrence
     end
 

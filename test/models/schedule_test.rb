@@ -347,7 +347,7 @@ class ScheduleTest < ActiveSupport::TestCase
     schedule = Schedule.create_from_form({schedule: params}, current_user, true)
     assert schedule.name == 'test schedule', format_error("Unexpected schedule name", 'test schedule', schedule.name)
     assert schedule.days_month == '', format_error("Unexpected schedule days_month", '', schedule.days_month)
-    assert schedule.end_date == nil, format_error("Unexpected schedule end date", '', schedule.end_date)
+    assert schedule.end_date.nil?, format_error("Unexpected schedule end date", '', schedule.end_date)
     assert schedule.days == 0, format_error("Unexpected schedule days", '0', schedule.days)
   end
 
@@ -1000,7 +1000,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
       assert date.to_s == next_occurrence.to_s, format_error("Unexpected next occurrence\n#{message}", date.to_s, next_occurrence.to_s)
 
-      next_occurrence += 1 if next_occurrence != nil
+      next_occurrence += 1 unless next_occurrence.nil?
     end
   end
 

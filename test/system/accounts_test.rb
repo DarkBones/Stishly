@@ -16,7 +16,7 @@ class AccountsTest < ApplicationSystemTestCase
     # Fill in an account name
     fill_in "account[name]", with: "test account one"
     # Check if the button is enabled correctly
-    assert submit[:disabled] == nil, format_error("Save account button disabled", "disabled = nil", "disabled = " + submit[:disabled].to_s)
+    assert submit[:disabled].nil?, format_error("Save account button disabled", "disabled = nil", "disabled = " + submit[:disabled].to_s)
     # Save the account
     click_on "Create Account"
     page.driver.browser.navigate.refresh

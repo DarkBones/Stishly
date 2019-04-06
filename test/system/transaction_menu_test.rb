@@ -152,6 +152,7 @@ class TransactionMenuTest < ApplicationSystemTestCase
     assert page.find("#transaction_account_currency").value == '0'
 
     fill_in "Transactions", with: "one 100000"
+    wait_for_ajax
     assert page.find("#transaction_account_currency").value == '800'
 
     assert_selector '#transaction_total', text: "Total: ¥100,000"
