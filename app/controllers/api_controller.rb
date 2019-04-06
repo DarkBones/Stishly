@@ -51,7 +51,7 @@ class ApiController < ApplicationController
       params[:occurrence_count].to_i.times do
         next_occurrence = Schedule.next_occurrence(schedule, next_occurrence)
 
-        if next_occurrence != nil
+        unless next_occurrence.nil?
           occurrences.push(("<li>"+User.format_date(next_occurrence, true)+"</li>").html_safe)
 
           next_occurrence += 1
