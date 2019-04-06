@@ -15,8 +15,7 @@
   };
   
   $.fn.get_timezone = function(options) {
-    var tz_info = jstz.determine().name();
-    return tz_info;
+    return jstz.determine().name();
   };
   
 })( jQuery );
