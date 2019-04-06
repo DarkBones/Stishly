@@ -23,17 +23,17 @@ $(document).on('turbolinks:load', ()=> {
   
   $('.datepicker').each(function(){
     if (!$(this).hasClass('datepicker-null')){
-      $(this).attr({'value': get_date});
+      $(this).attr({'value': getDate});
     }
   });
 
   $('input[type="time"][value="now"]').each(function(){
-    $(this).attr({'value': get_time});
+    $(this).attr({'value': getTime});
   });
 
 });
 
-function get_date() {
+function getDate() {
   var dt = new Date(),
       h = dt.getHours(),
       m = dt.getMinutes();
@@ -61,7 +61,7 @@ function get_date() {
   return d + '-' + month[mm] + '-' + y;
 }
 
-function get_time() {
+function getTime() {
   var dt = new Date(),
       h = dt.getHours(),
       m = dt.getMinutes();

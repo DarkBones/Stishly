@@ -8,13 +8,13 @@
 
 (function( $ ){
 
-  $.fn.set_timezone = function(options) {
+  $.fn.setTimezone = function(options) {
     
-      this.val(this.get_timezone(options));      
+      this.val(this.getTimezone(options));      
       return this;
   };
   
-  $.fn.get_timezone = function(options) {
+  $.fn.getTimezone = function(options) {
     return jstz.determine().name();
   };
   
