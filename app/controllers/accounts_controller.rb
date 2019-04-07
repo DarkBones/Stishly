@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  def show
+  def show_OLD
     @active_account = current_user.accounts.where(name: params[:id]).take.decorate
     @account_currency = Account.get_currency(@active_account)
 
@@ -7,7 +7,7 @@ class AccountsController < ApplicationController
     @daily_totals = Account.get_daily_totals(@active_account.id, @account_transactions, current_user)
   end
 
-  def index
+  def index_OLD
     @active_account = Account.create_summary_account(current_user).decorate
     @account_currency = User.get_currency(current_user)
 
@@ -15,6 +15,10 @@ class AccountsController < ApplicationController
     @daily_totals = Account.get_daily_totals(@active_account.id, @account_transactions, current_user)
 
     render 'show'
+  end
+
+  def show
+    
   end
 
   def details
