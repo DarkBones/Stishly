@@ -122,6 +122,7 @@ private
     def get_description
       return "transactions.description like ?" if @query[:description].length == 0
 
+      clause = ""
       clause = "UPPER(" unless @query[:case_sensitive] == true
       clause += "transactions.description"
       clause += ")" unless @query[:case_sensitive] == true
