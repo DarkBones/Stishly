@@ -103,12 +103,7 @@ class User < ApplicationRecord
 
   # Returns the currency (string) of a user
   def self.get_currency(current_user)
-    sett = SettingValue.get_setting(current_user, 'currency')
-    if !sett
-      return ISO3166::Country[current_user.country_code].currency
-    else
-      return Money::Currency.new(sett.value)
-    end
+    return Money::Currency.new(current_user.currency)
   end
 
   def self.change_setting(current_user, params)
