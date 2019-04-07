@@ -114,3 +114,6 @@ end
 gem 'mina-puma', :require => false
 
 gem 'rails-assets-jsTimezoneDetect', source: 'https://rails-assets.org'
+
+# model searching
+gem 'filterrific'
