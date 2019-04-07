@@ -110,6 +110,7 @@ private
         local_datetime: parse_datetime,
         currency: get_currency(account),
         account_currency_amount: get_account_currency_amount(convert_transaction_amount(base_transaction[:amount]), account) * direction,
+        user_currency_amount: get_user_currency_amount(convert_transaction_amount(base_transaction[:amount]), account) * direction,
         category_id: @params[:category_id].to_i,
         is_child: base_transaction[:is_child],
         exclude_from_all: exclude_from_all,
@@ -150,6 +151,17 @@ private
       seconds = Time.now.strftime('%S')
 
       return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds
+    end
+
+    def get_user_currency_amount(amount, account)
+      transaction_currency = Money::Currency.new(@params[:currency])
+      user_currency = Money::Currency.new(account.user.currency)
+
+      if transaction_currency.iso_code != user_currency.iso_code
+        return CurrencyRate.convert(amount, transaction_currency, user_currency)
+      end
+
+      return amount
     end
 
     def get_account_currency_amount(amount, account)
