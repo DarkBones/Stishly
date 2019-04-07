@@ -18,7 +18,16 @@ class AccountsController < ApplicationController
   end
 
   def show
-    
+    @filterrific = initialize_filterrific(
+      Transaction,
+      params[:filterrific]
+    ) or return
+    @transactions = @filterrific.find.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def details

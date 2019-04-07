@@ -29,6 +29,23 @@ class Transaction < ApplicationRecord
   has_many :schedule_joins
   has_many :schedules, through: :schedule_joins
 
+  filterrific(
+    #default_filter_params: { sorted_by: 'created_at_desc' },
+    available_filters: [
+      :description,
+      :from_date,
+      :to_date,
+      :from_amount,
+      :to_amount
+    ]
+  )
+
+  scope :description, ->(description) { where("UPPER(description) LIKE ?", description.upcase) }
+  scope :from_date, ->(from_date) { where("DATE(local_datetime) >= DATE(?)", from_date.to_date) }
+  scope :to_date, ->(to_date) { where("DATE(local_datetime) <= DATE(?)", to_date.to_date) }
+  scope :from_amount, ->(from_amount) { where("user_currency_amount >= ?", from_amount) }
+  scope :to_amount, ->(to_amount) { where("user_currency_amount >= ?", to_amount) }
+
   def self.prepare_new(params, current_user)
     """
     needed parameters:
