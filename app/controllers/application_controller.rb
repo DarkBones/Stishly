@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :except => [:country_currency]
   before_action :set_current_user
 
   helper_method :user_accounts, :user_accounts_array, :user_categories_array

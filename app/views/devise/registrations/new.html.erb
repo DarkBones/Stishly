@@ -16,7 +16,11 @@
     </div>
     <div class="form-group">
       <%= f.label "Country" %>
-      <%= f.country_select :country_code, class: 'form-control', include_blank: true %>
+      <%= f.country_select(:country_code , {:include_blank => true}, {:class => 'form-control', 'onchange' => 'changeUserCountry(this.value);'}) %>
+    </div>
+    <div class="form-group">
+      <%= f.label "Base Currency" %>
+      <%= f.select(:currency, all_currencies(Money::Currency.table), {:include_blank => true}, { :class => 'form-control', 'onchange' => 'changeUserCurrency(this.value);' }) %>
     </div>
     <div class="form-group">
       <%= f.label :password %>

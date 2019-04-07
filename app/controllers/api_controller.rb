@@ -17,6 +17,13 @@ class ApiController < ApplicationController
     end
   end
 
+  def country_currency
+    currency = ISO3166::Country[params[:country_code]].currency
+    iso_code = ""
+    iso_code = currency.iso_code unless currency.nil?
+    render json: iso_code
+  end
+
   def get_week_start
     render json: current_user.country.week_start
   end
@@ -81,6 +88,7 @@ class ApiController < ApplicationController
 
   def all_accounts_details
     @accounts = Account.get_accounts(current_user)
+
     render json: @accounts
   end
 
