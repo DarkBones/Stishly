@@ -11,7 +11,18 @@ class Transaction
 
       #puts "WHERE #{where}, (#{values})"
       #puts @current_user.transactions.where(where, get_description_value, get_currency_value, get_exclude_currency_value, get_category_value, get_from_date_value, get_to_date_value).to_sql
-      return @current_user.transactions.where(where, get_description_value, get_currency_value, get_exclude_currency_value, get_category_value, get_from_date_value, get_to_date_value, get_account_value)
+      return @current_user.transactions.where(
+        where, 
+        get_description_value, 
+        get_currency_value, 
+        get_exclude_currency_value, 
+        get_category_value, 
+        get_from_date_value, 
+        get_to_date_value, 
+        get_account_value,
+        get_from_amount_value,
+        get_to_amount_value
+        )
     end
 
 private
@@ -26,6 +37,9 @@ private
       query[:from_date] = "01-Jan-1970" if query[:from_date].nil?
       query[:to_date] = "31-12-9999" if query[:to_date].nil?
       query[:account] = "" if query[:account].nil?
+      query[:from_amount] = "null" if query[:from_amount].nil?
+      query[:to_amount] = "null" if query[:to_amount].nil?
+      query[:abs_amount] = true if query[:abs_amount].nil?
 
       return query
     end
@@ -40,6 +54,8 @@ private
       from_date = get_from_date
       to_date = get_to_date
       account = get_account
+      from_amount = get_from_amount
+      to_amount = get_to_amount
 
       clauses = []
       clauses.push(description)
@@ -49,10 +65,62 @@ private
       clauses.push(from_date)
       clauses.push(to_date)
       clauses.push(account)
+      clauses.push(from_amount)
+      clauses.push(to_amount)
 
       where = clauses.join(" AND ")
 
       return where
+    end
+
+    def get_to_amount
+      return "ABS(transactions.user_currency_amount) > ?" if @query[:to_amount] == "null"
+
+      clause = ""
+      clause += "ABS(" if @query[:abs_amount]
+      clause += "transactions.user_currency_amount"
+      clause += ")" if @query[:abs_amount]
+      clause += " <= ?"
+
+      return clause
+    end
+
+    def get_to_amount_value
+      return -1 if @query[:to_amount] == "null"
+
+      amount = @query[:to_amount].to_f
+
+      user_currency = Money::Currency.new(@current_user.currency)
+      amount *= user_currency.subunit_to_unit
+
+      amount = amount.abs if @query[:abs_amount]
+
+      return amount
+    end
+
+    def get_from_amount
+      return "ABS(transactions.user_currency_amount) > ?" if @query[:from_amount] == "null"
+
+      clause = ""
+      clause += "ABS(" if @query[:abs_amount]
+      clause += "transactions.user_currency_amount"
+      clause += ")" if @query[:abs_amount]
+      clause += " >= ?"
+
+      return clause
+    end
+
+    def get_from_amount_value
+      return -1 if @query[:from_amount] == "null"
+
+      amount = @query[:from_amount].to_f
+
+      user_currency = Money::Currency.new(@current_user.currency)
+      amount *= user_currency.subunit_to_unit
+
+      amount = amount.abs if @query[:abs_amount]
+
+      return amount
     end
 
     def get_account

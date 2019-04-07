@@ -159,16 +159,24 @@ class TransactionSearchTest < ActiveSupport::TestCase
     assert transactions.length == 10, format_error("Unexpected search result count", 10, transactions.length)
   end
 
-=begin
-  test "search by transaction amount" do
+  test "search by from amount" do
     current_user = users(:transaction_search)
     search_query = {
-      from_t_amount: 199.92
+      from_amount: 199.92
     }
 
     transactions = Transaction.search(current_user, search_query)
-    assert transactions.length == 10, format_error("Unexpected search result count", 10, transactions.length)
+    assert transactions.length == 7, format_error("Unexpected search result count", 7, transactions.length)
   end
-=end
+
+  test "search by to amount" do
+    current_user = users(:transaction_search)
+    search_query = {
+      to_amount: 15
+    }
+
+    transactions = Transaction.search(current_user, search_query)
+    assert transactions.length == 15, format_error("Unexpected search result count", 15, transactions.length)
+  end
 
 end
