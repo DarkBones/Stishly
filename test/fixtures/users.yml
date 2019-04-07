@@ -45,7 +45,8 @@ bas: {
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
-  confirmed_at: '2018-11-14 19:54:40'
+  confirmed_at: '2018-11-14 19:54:40',
+  currency: 'EUR'
 }
 
 sab: {
@@ -57,7 +58,8 @@ sab: {
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
-  confirmed_at: '2018-11-14 19:54:40'
+  confirmed_at: '2018-11-14 19:54:40',
+  currency: 'EUR'
 }
 
 new: {
@@ -69,7 +71,8 @@ new: {
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
-  confirmed_at: '2018-11-14 19:54:40'
+  confirmed_at: '2018-11-14 19:54:40',
+  currency: 'EUR'
 }
 
 transactions_test: {
@@ -81,7 +84,8 @@ transactions_test: {
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
-  confirmed_at: '2018-11-14 19:54:40'
+  confirmed_at: '2018-11-14 19:54:40',
+  currency: 'EUR'
 }
 
 currency_test: {
@@ -93,7 +97,8 @@ currency_test: {
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
-  confirmed_at: '2018-11-14 19:54:40'
+  confirmed_at: '2018-11-14 19:54:40',
+  currency: 'EUR'
 }
 
 endless_page: {
@@ -105,7 +110,8 @@ endless_page: {
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
-  confirmed_at: '2018-11-14 19:54:40'
+  confirmed_at: '2018-11-14 19:54:40',
+  currency: 'EUR'
 }
 
 destroy: {
@@ -117,7 +123,8 @@ destroy: {
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
-  confirmed_at: '2018-11-14 19:54:40'
+  confirmed_at: '2018-11-14 19:54:40',
+  currency: 'EUR'
 }
 
 transactions: {
@@ -129,7 +136,8 @@ transactions: {
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
-  confirmed_at: '2018-11-14 19:54:40'
+  confirmed_at: '2018-11-14 19:54:40',
+  currency: 'EUR'
 }
 
 schedules: {
@@ -141,7 +149,8 @@ schedules: {
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
-  confirmed_at: '2018-11-14 19:54:40'
+  confirmed_at: '2018-11-14 19:54:40',
+  currency: 'EUR'
 }
 
 transaction_search: {
@@ -153,5 +162,6 @@ transaction_search: {
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
-  confirmed_at: '2018-11-14 19:54:40'
+  confirmed_at: '2018-11-14 19:54:40',
+  currency: 'EUR'
 }

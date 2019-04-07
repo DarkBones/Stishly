@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_30_104017) do
+ActiveRecord::Schema.define(version: 2019_04_07_075909) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(version: 2019_03_30_104017) do
     t.boolean "exclude_from_all", default: false
     t.datetime "local_datetime", null: false
     t.bigint "transfer_account_id"
+    t.integer "user_currency_amount", null: false
     t.index ["account_id"], name: "index_transactions_on_account_id"
     t.index ["category_id"], name: "index_transactions_on_category_id"
     t.index ["parent_id"], name: "index_transactions_on_parent_id"
@@ -187,6 +188,7 @@ ActiveRecord::Schema.define(version: 2019_03_30_104017) do
     t.string "timezone"
     t.string "country_code"
     t.bigint "country_id"
+    t.string "currency", null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["country_id"], name: "index_users_on_country_id"
     t.index ["email"], name: "index_users_on_email", unique: true

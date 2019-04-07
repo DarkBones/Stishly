@@ -133,7 +133,7 @@ private
         clause += " like"
       end
 
-      clause += " ?"
+      clause += " binary ?"
       return clause
     end
 
