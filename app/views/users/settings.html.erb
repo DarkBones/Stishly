@@ -1,8 +1,3 @@
 <%= User.get_currency(current_user) %>
 <%= ISO3166::Country['us'].currency.iso_code %>
 <h3>User settings</h3>
-<%= form_for :setting_value, :url => edit_settings_path do |f| %>
-  <%= f.select(:currency, all_currencies(Money::Currency.table), selected: User.get_currency(current_user).iso_code) %>
-
-  <%= f.submit 'Save' %>
-<% end %>
