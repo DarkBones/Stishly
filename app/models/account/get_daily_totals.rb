@@ -18,9 +18,7 @@ class Account
         if @account_id != 0
           days[day] = @current_user.transactions.where("DATE(transactions.local_datetime) = DATE(?) AND parent_id IS NULL AND account_id = ?", day, @account_id).sum(:account_currency_amount) unless days.keys.include? day
         else
-          days[day] = 0 unless days.keys.include? day
-
-          days[day] += get_user_amount(t) if t.transfer_account_id.nil?
+          days[day] = @current_user.transactions.where("DATE(transactions.local_datetime) = DATE(?) AND parent_id IS NULL", day).sum(:user_currency_amount) unless days.keys.include? day
         end
       end
 

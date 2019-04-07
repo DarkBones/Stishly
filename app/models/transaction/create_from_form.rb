@@ -156,9 +156,18 @@ private
     def get_user_currency_amount(amount, account)
       transaction_currency = Money::Currency.new(@params[:currency])
       user_currency = Money::Currency.new(account.user.currency)
+      account_currency = Money::Currency.new(account.currency)
+
+      #if transaction_currency.iso_code != user_currency.iso_code
+      #  amount = CurrencyRate.convert(amount, transaction_currency, user_currency)
+      #end
 
       if transaction_currency.iso_code != user_currency.iso_code
-        return CurrencyRate.convert(amount, transaction_currency, user_currency)
+        if user_currency.iso_code == account_currency.iso_code
+          return get_account_currency_amount(amount, account)
+        else
+          return CurrencyRate.convert(amount, transaction_currency, user_currency)
+        end
       end
 
       return amount

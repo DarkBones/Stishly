@@ -11,7 +11,11 @@
     <%= image_tag 'categories/' + t.category.symbol + '.svg', :style => "background-color: hsl(" + t.category.color + ");", :class => "rounded-circle", 'height' => '50' %>
     <%= t.description %>
     <span class="balance float-right">
-      <%= balance(t.account_currency_amount.to_f, Money::Currency.new(t.account.currency), "cents") %>
+      <% unless active_account.is_real %>
+        <%= balance(t.user_currency_amount.to_f, Money::Currency.new(current_user.currency), "cents") %>
+      <% else %>
+        <%= balance(t.account_currency_amount.to_f, Money::Currency.new(t.account.currency), "cents") %>
+      <% end %>
     </span>
     <br />
     <span>
