@@ -40,7 +40,7 @@ class Transaction < ApplicationRecord
     ]
   )
 
-  scope :description, ->(description) { where("UPPER(description) LIKE ?", description.upcase) }
+  scope :description, ->(description) { where("UPPER(description) LIKE ?", "%#{description.upcase}%") }
   scope :from_date, ->(from_date) { where("DATE(local_datetime) >= DATE(?)", from_date.to_date) }
   scope :to_date, ->(to_date) { where("DATE(local_datetime) <= DATE(?)", to_date.to_date) }
   scope :from_amount, ->(from_amount) { where("user_currency_amount >= ?", from_amount) }
