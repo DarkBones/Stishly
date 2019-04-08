@@ -3,6 +3,7 @@
 ) %>
 <script type="text/javascript">
   $("#filterrific_results").append("<%= js %>");
+  $(".pagination").hide();
 </script>
 
 <%= will_paginate @transactions %>
