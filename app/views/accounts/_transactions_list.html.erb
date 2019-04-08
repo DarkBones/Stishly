@@ -1,4 +1,8 @@
+<% js = escape_javascript(
+  render @transactions
+) %>
+<script type="text/javascript">
+  $("#filterrific_results").append("<%= js %>");
+</script>
 
-
-<%= render @transactions %>
 <%= will_paginate @transactions %>
