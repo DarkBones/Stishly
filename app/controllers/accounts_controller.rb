@@ -19,15 +19,20 @@ class AccountsController < ApplicationController
 
   def show
     @filterrific = initialize_filterrific(
-      Transaction,
+      current_user.transactions,
       params[:filterrific]
     ) or return
-    @transactions = @filterrific.find.page(params[:page])
+    @transactions = @filterrific.find.page(params[:page]).includes(:account, :category)
+    #@transactions = current_user.transactions.page(params[:page])
 
     respond_to do |format|
       format.html
       format.js
     end
+  end
+
+  def index
+    render 'show'
   end
 
   def details

@@ -30,21 +30,42 @@ class Transaction < ApplicationRecord
   has_many :schedules, through: :schedule_joins
 
   filterrific(
-    #default_filter_params: { sorted_by: 'created_at_desc' },
+    default_filter_params: { sorted_by: 'created_at_desc' },
     available_filters: [
       :description,
       :from_date,
       :to_date,
       :from_amount,
-      :to_amount
+      :to_amount,
+      #:in_the_last,
+      :sorted_by
     ]
   )
+
+  delegate :name, :to => :category, :prefix => true, :allow_nil => true
+  delegate :name, :to => :account, :prefix => true, :allow_nil => false
 
   scope :description, ->(description) { where("UPPER(description) LIKE ?", "%#{description.upcase}%") }
   scope :from_date, ->(from_date) { where("DATE(local_datetime) >= DATE(?)", from_date.to_date) }
   scope :to_date, ->(to_date) { where("DATE(local_datetime) <= DATE(?)", to_date.to_date) }
   scope :from_amount, ->(from_amount) { where("user_currency_amount >= ?", from_amount) }
   scope :to_amount, ->(to_amount) { where("user_currency_amount >= ?", to_amount) }
+  
+  scope :sorted_by, ->(sort_option) {
+    direction = /desc$/.match?(sort_option) ? "desc" : "asc"
+    case sort_option.to_s
+    when /^created_at_/
+      order("transactions.local_datetime #{direction}")
+    when /^description_/
+      order("LOWER(transactions.description) #{direction}")
+    when /^amount_/
+      order("transactions.user_currency_amount #{direction}")
+    when /^account_/
+      joins(:account).order("accounts.name #{direction}")
+    else
+      raise(ArgumentError, "Invalid sort option: #{sort_option.inspect}")
+    end
+  }
 
   def self.prepare_new(params, current_user)
     """
