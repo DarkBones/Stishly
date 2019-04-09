@@ -18,16 +18,29 @@ class Category < ApplicationRecord
   has_one :parent, :class_name => 'Category'
   has_many :children, :class_name => 'Category', :foreign_key => 'parent_id'
 
-  def self.get_user_categories(current_user, as_array=false)
+  def self.get_user_categories(current_user, as_array=false, include_blank=false)
     if as_array
       tree = Hash.new { |h,k| h[k] = { :name => nil, :children => [ ], :children_paths => "", :parent_id => nil } }
 
-      tree[0][:id] = 0
-      tree[0][:name] = "Uncategorised"
-      tree[0][:color] = "0, 0%, 50%"
-      tree[0][:symbol] = "uncategorised"
-      tree[0][:parent_id] = nil
-      tree[0][:children_paths] = "uncategorised"
+      idx = 0
+
+      if include_blank
+        tree[idx][:id] = ""
+        tree[idx][:name] = "- any -"
+        tree[idx][:color] = ""
+        tree[idx][:symbol] = "any"
+        tree[idx][:parent_id] = nil
+        tree[idx][:children_paths] = ""
+
+        idx += 1
+      end
+
+      tree[idx][:id] = 0
+      tree[idx][:name] = "Uncategorised"
+      tree[idx][:color] = "0, 0%, 50%"
+      tree[idx][:symbol] = "uncategorised"
+      tree[idx][:parent_id] = nil
+      tree[idx][:children_paths] = "uncategorised"
 
       tree[nil][:children].push(tree[0])
 
@@ -66,6 +79,18 @@ class Category < ApplicationRecord
     cat.color = '0, 0%, 50%'
     cat.symbol = 'uncategorised'
     return cat
+  end
+
+  def self.get_children(category, result = [])
+    category.children.each do |c|
+      c = Category.where(id: c.id).includes(:children).first
+      result.push(c)
+      if c.children.any?
+        result = (self.get_children(c, result))
+      end
+    end
+
+    return result
   end
 
 end

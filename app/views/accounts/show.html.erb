@@ -1,29 +1,4 @@
-<%= form_for_filterrific @filterrific do |f| %>
-  <div>
-    Search
-    <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
-    <%= f.text_field(
-      :description,
-      class: 'filterrific-periodically-observed'
-    ) %>
-  </div>
-  <div>
-    Registered after
-    <%= f.text_field(:from_date, class: 'datepicker datepicker-null form-control') %>
-  </div>
-  <div>
-    Sorted by
-    <%= f.text_field(:to_date, class: 'datepicker datepicker-null form-control') %>
-  </div>
-  <div>
-    <%= link_to(
-      'Reset filters',
-      reset_filterrific_url,
-    ) %>
-  </div>
-  <%# add an automated spinner to your form when the list is refreshed %>
-  <%= render_filterrific_spinner %>
-<% end %>
+<%= render partial: "filter_form" %>
 
 <div id="filterrific_results">
   <%= render partial: "transactions_list" %>

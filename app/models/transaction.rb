@@ -37,6 +37,8 @@ class Transaction < ApplicationRecord
       :to_date,
       :from_amount,
       :to_amount,
+      :account,
+      :category_id,
       #:in_the_last,
       :sorted_by
     ]
@@ -45,11 +47,30 @@ class Transaction < ApplicationRecord
   delegate :name, :to => :category, :prefix => true, :allow_nil => true
   delegate :name, :to => :account, :prefix => true, :allow_nil => false
 
-  scope :description, ->(description) { where("UPPER(description) LIKE ?", "%#{description.upcase}%") }
+  scope :description, ->(description) { where("UPPER(transactions.description) LIKE ?", "%#{description.upcase}%") }
   scope :from_date, ->(from_date) { where("DATE(local_datetime) >= DATE(?)", from_date.to_date) }
   scope :to_date, ->(to_date) { where("DATE(local_datetime) <= DATE(?)", to_date.to_date) }
   scope :from_amount, ->(from_amount) { where("user_currency_amount >= ?", from_amount) }
   scope :to_amount, ->(to_amount) { where("user_currency_amount >= ?", to_amount) }
+  scope :account, ->(account_name) { joins(:account).where("accounts.name = ?", account_name) }
+
+  scope :category_id, ->(category_id) {
+    category_ids = []
+
+    category_ids.push(category_id)
+
+    if category_id != 0
+
+      cat = Category.where(id: category_id).includes(:children).first
+      children = Category.get_children(cat)
+
+      children.each do |c|
+        category_ids.push(c.id)
+      end
+    end
+
+    where("category_id in (?)", category_ids)
+  }
   
   scope :sorted_by, ->(sort_option) {
     direction = /desc$/.match?(sort_option) ? "desc" : "asc"

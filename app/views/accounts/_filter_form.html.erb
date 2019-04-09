@@ -1,0 +1,60 @@
+<%= form_for_filterrific @filterrific, html: { id: 'filter-form' } do |f| %>
+  <div class = "row">
+
+    <div class="col-12">
+      <%= f.label :description %>
+      <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+      <%= f.text_field(
+        :description,
+        class: 'filterrific-periodically-observed'
+      ) %>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-6">
+      <%= f.label :from_date %>
+      <%= f.text_field(:from_date, class: 'datepicker datepicker-null form-control') %>
+    </div>
+    <div class="col-6">
+      <%= f.label :to_date %>
+      <%= f.text_field(:to_date, class: 'datepicker datepicker-null form-control') %>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-12">
+      <%= f.label :account %>
+      <%= f.select(:account, user_accounts_array, { :include_blank => "- any -" }, { :class => 'form-control' }) %>
+    </div>
+
+  </div>
+  
+  <div class="row">
+
+    <div class="col-12">
+      <%= f.label :category %><br />
+      <%= render partial: "/shared/custom_dropdown_categories", locals: {
+        selected: Category.get_user_categories(current_user, true, true)[0],
+        options: Category.get_user_categories(current_user, true, true),
+        input_target: '#filter-form #filterrific_category_id'
+      } %>
+      <% categories = Category.get_user_categories(current_user, true) %>
+      <%= f.hidden_field :category_id %>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <%= link_to(
+      'Reset filters',
+      reset_filterrific_url,
+    ) %>
+  </div>
+  
+  <%= f.submit 'Search' %>
+<% end %>

@@ -57,7 +57,9 @@ $(document).on("click", (event) => {
   $(".dropdown__options").hide();
 });
 
-function setCategory(id) {
-  $("button#categories-dropdown").html($("#categoriesDropdownOptions li.category_" + id.toString()).html());
-  $($("button#categories-dropdown").attr("input-target")).val(id);
+function setCategory(obj, id) {
+  $categoriesDropdown = $(obj).closest("div#categoriesDropdownOptions").siblings("button#categories-dropdown");
+
+  $categoriesDropdown.html($("#categoriesDropdownOptions li.category_" + id.toString()).html());
+  $($categoriesDropdown.attr("input-target")).val(id);
 }

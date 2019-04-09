@@ -23,7 +23,7 @@ module CategoryHelper
 
       result += "<li class=\"category_" + n[:id].to_s + " dropdown-item py-2 px-0\""
       result += " path=\"#{n[:children_paths]}\""
-      result += " onclick=\"setCategory(" + n[:id].to_s + ")\">"
+      result += " onclick=\"setCategory(this, " + n[:id].to_s + ")\">"
       result += image_tag('categories/' + n[:symbol] + '.svg', :class => 'rounded-circle', :style => 'background-color: hsl(' + n[:color] + ');', 'height' => '30')
       result += " " + n[:name]
       result += "</li>"
