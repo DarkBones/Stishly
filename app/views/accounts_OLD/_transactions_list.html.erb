@@ -1,6 +1,0 @@
-<% locals[:transactions].each do |t| %>
-
-  <%= content_for t.local_datetime.to_date do %>
-    <%= render :partial => 'accounts/transaction', :locals => { :t => t, :active_account => @active_account } %>
-  <% end %>
-<% end %>
