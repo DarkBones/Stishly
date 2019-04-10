@@ -11,7 +11,7 @@ class AccountDecorator < Draper::Decorator
   #   end
 
   def form_id
-    if model.is_real
+    if model.persisted?
       model.id
     else
       Account.get_default(User.find(model.user_id)).id
@@ -19,7 +19,7 @@ class AccountDecorator < Draper::Decorator
   end
 
   def link
-    if model.is_real
+    if model.persisted?
       URI.encode(model.name).sub "/", "%2F"
     else
       ""

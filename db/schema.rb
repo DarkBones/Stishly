@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_07_075909) do
+ActiveRecord::Schema.define(version: 2019_04_10_192830) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(version: 2019_04_07_075909) do
     t.integer "position"
     t.string "currency", null: false
     t.boolean "is_default"
-    t.boolean "is_real", default: true
     t.index ["currency_id"], name: "index_accounts_on_currency_id"
     t.index ["name"], name: "index_accounts_on_name"
     t.index ["user_id"], name: "index_accounts_on_user_id"
@@ -142,7 +141,7 @@ ActiveRecord::Schema.define(version: 2019_04_07_075909) do
     t.bigint "user_id"
     t.integer "amount"
     t.integer "direction"
-    t.string "description"
+    t.string "description", limit: 100
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "account_id"

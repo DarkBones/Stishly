@@ -1,8 +1,8 @@
 <% @account = account if account.is_a? AccountDecorator %>
 
 <% li_c = "account-button clickable" %>
-<% li_c += " sortable" if account.is_real %>
-<% li_c += " no-sorting" if !account.is_real %>
+<% li_c += " sortable" if account.persisted? %>
+<% li_c += " no-sorting" if !account.persisted? %>
 <% li_c += " active" if @active_account && account.id == @active_account.id %>
 
 
@@ -15,6 +15,6 @@
   </span>
 </li>
 
-<% if !account.is_real %>
+<% if account.persisted? %>
   <span id="user_accounts_list"></span>
 <% end %>

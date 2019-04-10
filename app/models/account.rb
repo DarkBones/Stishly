@@ -84,7 +84,6 @@ class Account < ApplicationRecord
   def self.create_summary_account(current_user, include_balance = false)
     account = Account.new
     account.id = 0
-    account.is_real = false
     account.name = 'All'
     account.user_id = current_user.id
     account.currency = User.get_currency(current_user).iso_code
