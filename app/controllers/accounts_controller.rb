@@ -22,10 +22,7 @@ class AccountsController < ApplicationController
     unless params[:filterrific]
       params[:filterrific] = {}
     end
-
-    unless params[:filterrific][:account]
-      params[:filterrific][:account] = params[:id]
-    end
+    params[:filterrific][:account] = params[:id]
 
     @filterrific = initialize_filterrific(
       current_user.transactions,
@@ -37,7 +34,7 @@ class AccountsController < ApplicationController
       format.html
       format.js
     end
-    
+
   end
 
   def index
