@@ -1,2 +1,2 @@
 $('#transactions_list').removeClass('populated');
-$('#filterrific_results').append('<%= j render partial: "transactions_list" %>');
+$('#transactions_list').append('<%= j render "transactions", locals: {transactions: @account_transactions} %>');

@@ -18,37 +18,43 @@ class AccountsController < ApplicationController
   end
 
   def show
+    @active_account = current_user.accounts.where(name: params[:id]).take.decorate
 
-    unless params[:filterrific]
-      params[:filterrific] = {}
-    end
-    params[:filterrific][:account] = params[:id]
+    #unless params[:filterrific]
+    #  params[:filterrific] = {}
+    #end
+    #params[:filterrific][:account] = params[:id]
 
     @filterrific = initialize_filterrific(
       current_user.transactions,
       params[:filterrific]
     ) or return
-    @transactions = @filterrific.find.page(params[:page]).includes(:account, :category)
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    @transactions = @filterrific.find.page(params[:page]).includes(:category, :children).decorate
+    @daily_totals = Account.get_daily_totals(@active_account.id, @transactions, current_user)
+    @account_currency = Account.get_currency(@active_account)
+    
+    #respond_to do |format|
+    #  format.html
+    #  format.js
+    #end
 
   end
 
   def index
+    @active_account = Account.create_summary_account(current_user, true)
+
     @filterrific = initialize_filterrific(
       current_user.transactions,
       params[:filterrific]
     ) or return
-    @transactions = @filterrific.find.page(params[:page]).includes(:account, :category)
-    #@transactions = current_user.transactions.page(params[:page])
+    @transactions = @filterrific.find.page(params[:page]).includes(:category, :children).decorate
+    @daily_totals = Account.get_daily_totals(@active_account.id, @transactions, current_user)
+    @account_currency = Account.get_currency(@active_account)
 
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    #respond_to do |format|
+    #  format.html
+    #  format.js
+    #end
 
     render 'show'
   end

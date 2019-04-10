@@ -1,0 +1,29 @@
+<%= render "transactions_list" %>
+
+<% dates = distinct_dates(@transactions) %>
+<% dates.each do |d| %>
+  <% d_formatted = User.format_date(d) %>
+  <script type="text/javascript">
+
+    if ( $("#transactions_list").hasClass("populated") == false ) {
+      if ( $("#" + "<%= d %>").length > 0 ) {
+        $("#" + "<%= d %> ul.parent_transactions").append("<%= j yield d %>");
+      } else {
+        $("#transactions_list").append("<%= escape_javascript("#{
+          render :partial => "accounts/transactions_date", :locals => {
+            :d => d,
+            :d_formatted => d_formatted,
+            :account_currency => @account_currency,
+            :day_total => @daily_totals[d]
+          }}").html_safe %>");
+      }
+    }
+
+  </script>
+<% end %>
+
+<script type="text/javascript">
+  $('#transactions_list').addClass('populated');
+</script>
+
+<%= will_paginate @transactions %>

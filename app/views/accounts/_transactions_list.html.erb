@@ -1,9 +1,7 @@
-<% js = escape_javascript(
-  render @transactions
-) %>
-<script type="text/javascript">
-  $("#filterrific_results").append("<%= js %>");
-  $(".pagination").hide();
-</script>
+<% @transactions.each do |t| %>
+  
+  <%= content_for t.local_datetime.to_date do %>
+    <%= render :partial => 'accounts/transaction', :locals => { :t => t, :active_account => @active_account } %>
+  <% end %>
 
-<%= will_paginate @transactions %>
+<% end %>

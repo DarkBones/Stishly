@@ -1,5 +1,31 @@
-<%= render partial: "filter_form" %>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2>
 
-<div id="filterrific_results">
-  <%= render partial: "transactions_list" %>
+        <%= @active_account.name %> -
+        <span id="account-title-balance" balance=<%= @active_account.balance%>>
+          <%= balance(@active_account.balance.to_f, Account.get_currency(@active_account), "cents") %>
+        </span>
+
+      </h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <%#= render "account_tab_menu" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div id="transactions_list">
+
+        <%= render partial: "transactions" %>
+
+      </div>
+    </div>
+  </div>
+
 </div>
