@@ -1,29 +1,12 @@
 class AccountsController < ApplicationController
-  def show_OLD
-    @active_account = current_user.accounts.where(name: params[:id]).take.decorate
-    @account_currency = Account.get_currency(@active_account)
-
-    @account_transactions = Account.get_transactions(@active_account, params[:page], current_user).decorate
-    @daily_totals = Account.get_daily_totals(@active_account.id, @account_transactions, current_user)
-  end
-
-  def index_OLD
-    @active_account = Account.create_summary_account(current_user).decorate
-    @account_currency = User.get_currency(current_user)
-
-    @account_transactions = Account.get_transactions(@active_account, params[:page], current_user).decorate
-    @daily_totals = Account.get_daily_totals(@active_account.id, @account_transactions, current_user)
-
-    render 'show'
-  end
 
   def show
     @active_account = current_user.accounts.where(name: params[:id]).take.decorate
 
-    #unless params[:filterrific]
-    #  params[:filterrific] = {}
-    #end
-    #params[:filterrific][:account] = params[:id]
+    unless params[:filterrific]
+      params[:filterrific] = {}
+    end
+    params[:filterrific][:account] = params[:id]
 
     @filterrific = initialize_filterrific(
       current_user.transactions,
@@ -32,11 +15,6 @@ class AccountsController < ApplicationController
     @transactions = @filterrific.find.page(params[:page]).includes(:category, :children).decorate
     @daily_totals = Account.get_daily_totals(@active_account.id, @transactions, current_user)
     @account_currency = Account.get_currency(@active_account)
-    
-    #respond_to do |format|
-    #  format.html
-    #  format.js
-    #end
 
   end
 
@@ -50,11 +28,6 @@ class AccountsController < ApplicationController
     @transactions = @filterrific.find.page(params[:page]).includes(:category, :children).decorate
     @daily_totals = Account.get_daily_totals(@active_account.id, @transactions, current_user)
     @account_currency = Account.get_currency(@active_account)
-
-    #respond_to do |format|
-    #  format.html
-    #  format.js
-    #end
 
     render 'show'
   end
