@@ -18,6 +18,29 @@ class AccountsController < ApplicationController
   end
 
   def show
+
+    unless params[:filterrific]
+      params[:filterrific] = {}
+    end
+
+    unless params[:filterrific][:account]
+      params[:filterrific][:account] = params[:id]
+    end
+
+    @filterrific = initialize_filterrific(
+      current_user.transactions,
+      params[:filterrific]
+    ) or return
+    @transactions = @filterrific.find.page(params[:page]).includes(:account, :category)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+    
+  end
+
+  def index
     @filterrific = initialize_filterrific(
       current_user.transactions,
       params[:filterrific]
@@ -29,9 +52,7 @@ class AccountsController < ApplicationController
       format.html
       format.js
     end
-  end
 
-  def index
     render 'show'
   end
 
