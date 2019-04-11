@@ -56,7 +56,7 @@ class ApiController < ApplicationController
 
   # returns the next scheduled occurrences of a given schedule
   def get_next_schedule_occurrences
-    schedule = Schedule.create_from_form({schedule: schedule_params}, current_user)
+    schedule = Schedule.create_from_form(schedule_params, current_user)
     
     occurrences = []
     if schedule.is_a?(ActiveRecord::Base)

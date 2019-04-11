@@ -114,7 +114,7 @@ class AccountsTest < ApplicationSystemTestCase
 
     sleep 1
     assert_selector 'li', text: "transaction 1\n€1.00"
-    assert_select 'li', {count: 0, text: "transaction 100"}
+    assert_selector 'li', {count: 0, text: "transaction 100"}
 
     5.times do
         page.execute_script "window.scrollBy(0,10000)"

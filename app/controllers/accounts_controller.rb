@@ -3,8 +3,8 @@ class AccountsController < ApplicationController
   def show
     @active_account = current_user.accounts.where(name: params[:id]).take.decorate
 
-    unless params[:filterrific]
-      params[:filterrific] = {}
+    unless params.keys.include? "filterrific"
+      params[:filterrific] = { sorted_by: 'created_at_desc' }
     end
     params[:filterrific][:account] = params[:id]
 

@@ -76,7 +76,7 @@ class Transaction < ApplicationRecord
     direction = /desc$/.match?(sort_option) ? "desc" : "asc"
     case sort_option.to_s
     when /^created_at_/
-      order("transactions.local_datetime #{direction}")
+      reorder("transactions.local_datetime #{direction}")
     when /^description_/
       order("LOWER(transactions.description) #{direction}")
     when /^amount_/
