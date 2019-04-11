@@ -85,7 +85,7 @@ class AccountsController < ApplicationController
 
   def edit
     account = current_user.accounts.find(params[:id])
-    Account.change_setting(account, params)
+    Account.change_setting(account, account_settings_params)
 
     redirect_back(fallback_location: root_path)
   end
@@ -104,6 +104,10 @@ class AccountsController < ApplicationController
 
   def new_account_params
     params.require(:account).permit(:name, :balance, :currency, :description)
+  end
+
+  def account_settings_params
+    params.require(:account).permit(:setting)
   end
 
 end

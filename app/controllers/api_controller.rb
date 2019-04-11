@@ -167,6 +167,10 @@ class ApiController < ApplicationController
   end
 
 private
+
+  def account_display_balance_params
+    params.permit(:amount, :from, :to, :add)
+  end
   
   def schedule_params
     params.permit(

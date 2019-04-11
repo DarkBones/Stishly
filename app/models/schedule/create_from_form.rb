@@ -2,7 +2,7 @@ class Schedule
   class CreateFromForm
     
     def initialize(params, current_user, testing=false)
-      @params = params[:schedule]
+      @params = params
       @current_user = current_user
 
       @excluding = false
