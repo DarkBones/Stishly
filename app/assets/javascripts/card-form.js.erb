@@ -106,7 +106,7 @@ function getTransactionTotalFromMultiple($target) {
 function updateTransactionResult() {
   var rate = 1;
   var amount = 0;
-  var $accountTarget = $("#transactionform #transaction_account");
+  var $accountTarget;
   var $rateTarget = $("#transactionform #transaction_rate");
   var $resultTarget = $("#transactionform #transaction_account_currency");
   var $amountTarget = $("#transactionform #transaction_amount");
@@ -118,6 +118,9 @@ function updateTransactionResult() {
   if (transaction_type === 'transfer') {
     $rateTarget = $("#transactionform #transaction_rate_from_to");
     $resultTarget = $("#transactionform #transaction_to_account_currency");
+    $accountTarget = $("#transactionform #transaction_to_account");
+  } else {
+    $accountTarget = $("#transactionform #transaction_account");
   }
 
   if ($resultTarget.is(":visible")){
@@ -214,7 +217,6 @@ function showTransferCurrencyRates() {
     from = encodeURI($("#transactionform #transaction_from_account").val());
     to = encodeURI($("#transactionform #transaction_to_account").val());
 
-    console.log(from + "/" + to);
     $.ajax({
       type: "GET",
       dataType: "json",

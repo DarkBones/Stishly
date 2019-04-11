@@ -55,13 +55,12 @@ class AccountsController < ApplicationController
   end
 
   def all_details
-    #@accounts = current_user.accounts.decorate
     @accounts = Account.get_accounts(current_user)
     render json: @accounts
   end
 
   def create
-    @account = Account.create_new(params[:account], current_user)
+    @account = Account.create_new(new_account_params, current_user)
 
     respond_to do |format|
       if @account.is_a? String
@@ -70,7 +69,6 @@ class AccountsController < ApplicationController
         format.js
       else
         @account = @account.decorate
-        #format.html { redirect_to @account }
         format.json { render :show, status: :created, location: @account }
         format.js {}
       end
@@ -105,7 +103,7 @@ class AccountsController < ApplicationController
   private
 
   def new_account_params
-    params.require(:account).permit(:account_string)
+    params.require(:account).permit(:name, :balance, :currency, :description)
   end
 
 end
