@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   get 'api/transfer_accounts/:from/:to', to: 'api#transfer_accounts'
 
   get 'app', to: 'app#index'
-  get 'accounts/:id', to: 'accounts#show'
+  get 'accounts/:id', to: 'accounts#show', as: :show_account
   post 'accounts/create_account', to: 'accounts#create_quick'
   post 'transactions', to: 'transactions#create'
   post 'schedules', to: 'schedules#create'
