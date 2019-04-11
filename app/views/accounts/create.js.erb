@@ -1,5 +1,5 @@
-<% if @account.is_a? String %>
-  triggerNotice('<%= @account %>', true);
+<% if @account.invalid? %>
+  triggerNotice("<%= format_form_errors("account", @account.errors) %>", true);
   $('#accountform').effect( "shake", { direction: "left", times: 4, distance: 6} );
 <% else %>
   $("[data-dismiss=modal]").trigger({ type: "click" });

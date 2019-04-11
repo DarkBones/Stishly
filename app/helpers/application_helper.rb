@@ -21,4 +21,19 @@ module ApplicationHelper
 
     return result.html_safe
   end
+
+  def format_form_errors(obj, errors)
+    result = "Failed to save #{obj}"
+    result += "<ul>"
+
+    errors.each do |attribute, message|
+      #puts "<li>#{e[0]}: #{e[1][0]}</li>"
+      result += "<li>#{attribute}: #{message}</li>"
+    end
+
+    result += "</ul>"
+
+    puts result
+    return result.html_safe.to_s
+  end
 end

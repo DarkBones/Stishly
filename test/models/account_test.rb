@@ -38,33 +38,37 @@ class AccountTest < ActiveSupport::TestCase
     current_user = users(:bas)
     account = Account.create_new({:name => 'test.dot.', :currency => 'EUR'}, current_user)
     
-    assert_not account.name == "test.dot.", format_error("Created account with dots in name")
+    assert_not account.save, format_error("Created account with dots in name")
   end
 
   test "Save account without balance" do
     current_user = users(:bas)
-    account = current_user.accounts.build({:name => 'test account', :currency => 'EUR'})
+    account = current_user.accounts.build({:name => 'test account without balance', :currency => 'EUR'})
 
-    assert account.save, format_error("Could not save account without specifying the balance")
+    assert account.save, format_error("Could not save account without specifying the balance\n#{account.errors.messages}")
     assert account.balance == 0, format_error("Unexpected default account balance", 0, account.balance)
   end
 
   test "Create duplicate account" do
     current_user = users(:bas)
 
-    a1 = Account.create({:name => 'test duplicate'}, current_user)
-    a2 = Account.create({:name => 'test duplicate'}, current_user)
+    a1 = current_user.accounts.build({:name => 'test duplicate', :currency => 'EUR'})
+    a2 = current_user.accounts.build({:name => 'test duplicate', :currency => 'EUR'})
 
-    assert_not a2.is_a?(ActiveRecord::Base), format_error("Created duplicate account name")
-    assert a2 == I18n.t('account.failure.already_exists'), format_error("Unexpected error", I18n.t('account.failure.already_exists'), a2)
-    assert_not a2.include?("translation missing:"), "Translation missing for 'account.failure.already_exists'"
+    assert a1.save
+    assert_not a2.save, format_error("Created duplicate account name")
 
-    b1 = Account.create({:name => 'test capital duplicate'}, current_user)
-    b2 = Account.create({:name => 'TEST capital DUPLICATE'}, current_user)
+    #assert_not a2.is_a?(ActiveRecord::Base), format_error("Created duplicate account name")
+    #assert a2 == I18n.t('account.failure.already_exists'), format_error("Unexpected error", I18n.t('account.failure.already_exists'), a2)
+    #assert_not a2.include?("translation missing:"), "Translation missing for 'account.failure.already_exists'"
 
-    assert_not b2.is_a?(ActiveRecord::Base), format_error("Created duplicate account name")
-    assert b2 == I18n.t('account.failure.already_exists'), format_error("Unexpected error", I18n.t('account.failure.already_exists'), b2)
-    assert_not b2.include?("translation missing:"), "Translation missing for 'account.failure.already_exists'"
+    b1 = current_user.accounts.build({:name => 'test capital duplicate', :currency => 'EUR'})
+    b2 = current_user.accounts.build({:name => 'TEST capital DUPLICATE', :currency => 'EUR'})
+
+    assert b1.save
+    assert_not b2.save, format_error("Created duplicate account name")
+    #assert b2 == I18n.t('account.failure.already_exists'), format_error("Unexpected error", I18n.t('account.failure.already_exists'), b2)
+    #assert_not b2.include?("translation missing:"), "Translation missing for 'account.failure.already_exists'"
   end
 
   test "Create new account" do

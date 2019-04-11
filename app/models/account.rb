@@ -17,7 +17,10 @@
 #
 
 class Account < ApplicationRecord
-  validates :name, :user_id, presence: true
+  validates :name, presence: true
+  validates :name, format: { without: /\./, message: "No dots (.) allowed" }
+  validates :name, format: { without: /\?/, message: "No question marks (?) allowed" }
+  validates :name, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('account.failure.already_exists') }
 
   belongs_to :user
   has_many :transactions, dependent: :destroy
@@ -204,14 +207,19 @@ class Account < ApplicationRecord
       params[:position] = 0
     end
 
-    if existing_accounts.length == 0
-      account = current_user.accounts.build(params)
-      account.save
+    account = current_user.accounts.build(params)
+    account.save
 
-      return account
-    else
-      return I18n.t('account.failure.already_exists')
-    end
+    return account
+
+    #if existing_accounts.length == 0
+    #  account = current_user.accounts.build(params)
+    #  account.save
+
+    #  return account
+    #else
+    #  return I18n.t('account.failure.already_exists')
+    #end
   end
 
   def self.add(current_user, id, amount)

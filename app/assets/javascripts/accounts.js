@@ -15,13 +15,7 @@ function displaySummaryAccount() {
 }
 
 $(document).on("turbolinks:load", () => {
-
-  // Disable the submit button
-  $("#accountform").find("input[type=submit]").attr("disabled", "disabled");
-
-  // decide whether to show the summary account
   displaySummaryAccount();
-
 });
 
 function updateAccountNameInput(inputObject) {
@@ -36,11 +30,8 @@ function updateAccountNameInput(inputObject) {
   // don't allow dots in input field
   $input.val(inputValue.replace(/\./g, ""));
 
-  if (inputValue.length > 0) {
-    $accountform.find("input[type=submit]").removeAttr("disabled");
-  } else {
-    $accountform.find("input[type=submit]").attr("disabled", "disabled");
-  }
+  // don't allow question marks in input field
+  $input.val(inputValue.replace(/\?/g, ""));
 }
 
 function goToAccount(object) {
