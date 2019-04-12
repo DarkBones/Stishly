@@ -33,7 +33,6 @@ module ApplicationHelper
 
     result += "</ul>"
 
-    puts result
     return result.html_safe.to_s
   end
 end

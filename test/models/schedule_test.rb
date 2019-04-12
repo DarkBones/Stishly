@@ -85,7 +85,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     schedule2 = Schedule.create_from_form(params, current_user)
 
-    assert_not schedule2.is_a?(ActiveRecord::Base), "Saved schedule with duplicate name"
+    assert_not schedule2.save, "Saved schedule with duplicate name"
 
   end
 
@@ -123,7 +123,7 @@ class ScheduleTest < ActiveSupport::TestCase
     }
 
     schedule = Schedule.create_from_form(params, current_user)
-    assert_not schedule.is_a?(ActiveRecord::Base), "Saved schedule without name"
+    assert_not schedule.save, "Saved schedule without name"
   end
 
   test "Schedule with dots in the name" do
@@ -160,7 +160,7 @@ class ScheduleTest < ActiveSupport::TestCase
     }
 
     schedule = Schedule.create_from_form(params, current_user, true)
-    assert schedule.name == 'this_name_contains_dots', format_error("Saved schedule with dots in the name", "this_name_contains_dots", schedule.name)
+    assert_not schedule.save, "Saved schedule with dots in the name"
   end
 
   test "Schedule without start date" do
@@ -197,7 +197,7 @@ class ScheduleTest < ActiveSupport::TestCase
     }
 
     schedule = Schedule.create_from_form(params, current_user, true)
-    assert_not schedule.is_a?(ActiveRecord::Base), "Saved schedule without start date"
+    assert_not schedule.save, "Saved schedule without start date"
   end
 
   test "Schedule with negative period_num" do
@@ -234,7 +234,7 @@ class ScheduleTest < ActiveSupport::TestCase
     }
 
     schedule = Schedule.create_from_form(params, current_user, true)
-    assert schedule.period_num == 1, "Saved schedule with negative period_num"
+    assert_not schedule.save, "Saved schedule with negative period_num"
   end
 
   test "Schedule with zero period_num" do
@@ -271,7 +271,7 @@ class ScheduleTest < ActiveSupport::TestCase
     }
 
     schedule = Schedule.create_from_form(params, current_user, true)
-    assert schedule.period_num == 1, "Saved schedule with zero period_num"
+    assert_not schedule.valid? "Saved schedule with zero period_num"
   end
 
   test "Schedule from form" do
@@ -308,7 +308,7 @@ class ScheduleTest < ActiveSupport::TestCase
     }
 
     schedule = Schedule.create_from_form(params, current_user, true)
-    assert schedule.is_a?(ActiveRecord::Base), format_error("Schedule from form didn't return schedule")
+    assert schedule.save, "Schedule from form didn't return schedule"
   end
 
   test "simple monthly schedule" do

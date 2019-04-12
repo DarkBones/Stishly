@@ -31,7 +31,7 @@ class Schedule < ApplicationRecord
   validates :period_num, numericality: { greater_than: 0, message: "'Run every' must be greater than zero" }
   validates :name, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('schedule.failure.already_exists') }
 
-  validates_numericality_of :period_num, :greater_than => 0
+  #validates_numericality_of :period_num, :greater_than => 0
 
   belongs_to :user
   has_many :schedule_joins
@@ -52,7 +52,7 @@ class Schedule < ApplicationRecord
   end
 
   def self.next_occurrence(schedule, date=nil, testing=false, return_datetime=false)
-    return NextOccurrence.new(schedule, date, testing, return_datetime).perform
+    return NextOccurrence.new(schedule, date, testing, return_datetime).perform if schedule.valid?
   end
 
 end
