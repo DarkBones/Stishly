@@ -70,13 +70,10 @@ function updateScheduleNameInput(inputObject) {
   inputValue = $input.val();
 
   // don't allow dots in input field
-  $input.val(inputValue.replace(/\./g, ""));
+  //$input.val(inputValue.replace(/\./g, ""));
 
-  if (inputValue.length > 0) {
-    $scheduleform.find("input[type=submit]").removeAttr("disabled");
-  } else {
-    $scheduleform.find("input[type=submit]").attr("disabled", "disabled");
-  } 
+  // don't allow question marks in input field
+  //$input.val(inputValue.replace(/\?/g, ""));
 }
 
 // don't allow values less than one in the 'run_every' field
@@ -228,7 +225,7 @@ function changeScheduleType(sType){
 }
 
 function resetScheduleMenu(){
-  $("#scheduleform").find("input[type=submit]").attr("disabled", "disabled");
+  //$("#scheduleform").find("input[type=submit]").attr("disabled", "disabled");
   $("#scheduleform #schedule_schedule").val("monthly");
   changeSchedulePeriod("monthly");
   changeScheduleType("simple");

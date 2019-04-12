@@ -10,10 +10,7 @@ class Schedule
     end
 
     def perform
-      @params[:name] = sanitise_name(@params[:name])
-      @params[:run_every] = sanitise_period_num(@params[:run_every])
-      error = check_errors
-      return error[:message] if error[:is_error]
+      #@params[:run_every] = sanitise_period_num(@params[:run_every])
 
       schedule_params = {
         name: @params[:name],
@@ -38,11 +35,6 @@ class Schedule
 
 private
 
-    def sanitise_name(name_str)
-      # don't allow dots in schedule name
-      return name_str.gsub '.', ''
-    end
-
     # takes run_every as string, and returns a positive integer
     def sanitise_period_num(period_num)
       if period_num.respond_to? :to_i
@@ -55,24 +47,6 @@ private
       else
         return 1
       end
-    end
-
-    # checks if there are any errors. Returns a message and a boolean whether an error has been found
-    def check_errors
-      return {message: I18n.t('schedule.failure.invalid_name'), is_error: true} if @params[:name].length == 0
-
-      # check if start_date is valid
-      return {message: I18n.t('schedule.failure.invalid_date'), is_error: true} if valid_date(@params[:start_date]) == false
-
-      # if the end_date format is invalid, just leave it empty
-      @params[:end_date] = '' if valid_date(@params[:start_date]) == false
-
-      # check if the schedule already exists
-      return {message: I18n.t('schedule.failure.already_exists'), is_error: true} if is_duplicate(@params[:name])
-
-      # no errors found
-      return {message: 'no errors', is_error: false}
-
     end
 
     # returns the end date if the schedule type is 'advanced'

@@ -22,7 +22,15 @@
 #
 
 class Schedule < ApplicationRecord
-  validates :user_id, :timezone, presence: true
+
+  validates :name, :start_date, presence: true
+  validates :name, format: { without: /\./, message: "No dots (.) allowed" }
+  validates :name, format: { without: /\?/, message: "No question marks (?) allowed" }
+  validates :period_num, numericality: true
+  validates :period_num, numericality: { only_integer: true }
+  validates :period_num, numericality: { greater_than: 0, message: "'Run every' must be greater than zero" }
+  validates :name, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('schedule.failure.already_exists') }
+
   validates_numericality_of :period_num, :greater_than => 0
 
   belongs_to :user
