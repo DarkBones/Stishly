@@ -13,8 +13,12 @@ $(document).on('turbolinks:load', ()=> {
     }
   }
 
-  setDropdownButtonHtml();
+  function setSlider() {
+    var slider;
+    slider = new Slider('#filter-form #amount_slider', {tooltip: 'hover'});
+  }
 
-  var slider = new Slider('#amount_slider', {tooltip: 'always'});
+  setDropdownButtonHtml();
+  setSlider();
 
 });

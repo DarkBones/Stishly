@@ -1,4 +1,7 @@
 <%= form_for_filterrific @filterrific, html: { id: 'filter-form' } do |f| %>
+
+  <% user_currency = Money::Currency.new(current_user.currency) %>
+
   <div class = "row">
 
     <div class="col-12">
@@ -46,11 +49,28 @@
 
   </div>
 
+  <%
+  max_amount = current_user.transactions.maximum("ABS(user_currency_amount)")
+
+  max_amount = max_amount / user_currency.subunit_to_unit
+
+  max_amount = (max_amount + 1000) / 1000 * 1000
+
+  %>
+
   <div class="row">
     <div class="col-12">
-      <b>€ 10</b> <input id="amount_slider" type="text" class="span2" value="" data-slider-min="<%= current_user.transactions.minimum("user_currency_amount") %>" data-slider-max="<%= current_user.transactions.maximum("user_currency_amount") %>" data-slider-step="5" data-slider-value="[250,450]"/> <b>€ 1000</b>
+      <%# TODO: Find a better color for the slider; %>
+      <b><%= balance(0, user_currency, "none") %></b> <input id="amount_slider" type="text" class="span2" value="" data-slider-min="0" data-slider-max="<%= max_amount %>" data-slider-step="5" data-slider-value="[0,<%= max_amount / 2 %>]"/> <b><%= balance((max_amount * user_currency.subunit_to_unit), user_currency, "none") %></b>
     </div>
   </div>
+
+  <% 
+  include_children_slider_value = 1
+  if params[:filterrific] && params[:filterrific][:include_children]
+    include_children_slider_value = params[:filterrific][:include_children]
+  end
+  %>
 
   <div class="row">
     <div class="col-12">
@@ -63,7 +83,8 @@
       "data-slider-max" => "3",
       "data-slider-step" => "1",
       "data-slider-value" => "3",
-      "data-slider-tooltip" => "hide"
+      "data-slider-tooltip" => "hide",
+      "data-slider-value" => include_children_slider_value
       ) %>
       
     </div>

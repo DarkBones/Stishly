@@ -12,7 +12,7 @@ module ApplicationHelper
       result = balance[0]
     end
 
-    if balance[1]
+    if balance[1] && span_class != "none"
       result += ".<span"
       result += " class=\"#{span_class}\"" if span_class != ""
       result += " id=\"#{id}\"" if id != ""
