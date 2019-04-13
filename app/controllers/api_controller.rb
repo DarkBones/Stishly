@@ -163,13 +163,17 @@ class ApiController < ApplicationController
 
   # prepares a transaction to be shown in the user's format
   def prepare_new_transaction
-    render json: Transaction.prepare_new(params, current_user)
+    render json: Transaction.prepare_new(prepare_transaction_params, current_user)
   end
 
 private
 
   def account_display_balance_params
     params.permit(:amount, :from, :to, :add)
+  end
+
+  def prepare_transaction_params
+    params.require(:account, :date)
   end
   
   def schedule_params

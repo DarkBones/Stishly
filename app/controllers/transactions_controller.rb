@@ -7,9 +7,9 @@ class TransactionsController < ApplicationController
 
   def create
     @params = params[:transaction]
-    transactions = Transaction.create(params, current_user)
+    transactions = Transaction.create(transaction_params, current_user)
 
-    transaction_details = Transaction.get_details(transactions, params, current_user)
+    transaction_details = Transaction.get_details(transactions, transaction_details_params, current_user)
 
     @transaction_amounts_all = transaction_details[:transaction_amounts_all]
     @account_ids_all = transaction_details[:account_ids_all]
@@ -19,4 +19,31 @@ class TransactionsController < ApplicationController
     @update_day_total = transaction_details[:update_day_total]
     @total_amount = transaction_details[:total_amount].to_s
   end
+
+private
+
+  def transaction_details_params
+    params.permit(:active_account)
+  end
+  
+  def transaction_params
+    params.require(:transaction).permit(
+      :account,
+      :from_account,
+      :to_account,
+      :multiple,
+      :timezone,
+      :category_id,
+      :currency,
+      :date,
+      :time,
+      :rate_from_to,
+      :rate,
+      :type,
+      :description,
+      :amount,
+      :transactions
+      )
+  end
+
 end
