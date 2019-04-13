@@ -3,7 +3,7 @@ class Transaction
 
     def initialize(params, current_user)
       @current_user = current_user
-      @params = params[:transaction]
+      @params = params#[:transaction]
     end
 
     def perform

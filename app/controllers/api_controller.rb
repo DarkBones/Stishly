@@ -123,9 +123,9 @@ class ApiController < ApplicationController
   # renders a transaction
   def render_transaction
     active_account = Account.get_from_name(params[:account], current_user)
-    t = current_user.transactions.find(params[:t]).decorate
+    transaction = current_user.transactions.find(params[:t]).decorate
 
-    render partial: 'accounts/transaction', :locals => { :active_account => active_account, :t => t }
+    render partial: 'accounts/transaction', :locals => { :active_account => active_account, :transaction => transaction }
   end
 
   # formats a given amount according to the given currency

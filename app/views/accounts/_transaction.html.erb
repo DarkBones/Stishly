@@ -1,40 +1,53 @@
-<% active_account == nil ? currency = User.get_currency(current_user).iso_code : currency = active_account.currency %>
-<% child_transactions = t.children %>
-<% if child_transactions.length > 0 %>
+<% currency = active_account.id == 0 ? current_user.currency : active_account.currency %>
+<% amount = active_account.id == 0 ? transaction.user_currency_amount : transaction.account_currency_amount %>
+<% amount = balance(amount.to_f, Money::Currency.new(currency), "cents") %>
+
+<% conversion_message = nil %>
+<%
+  if transaction.currency != currency
+    conversion_message = balance(transaction.amount, Money::Currency.new(transaction.currency), "cents")
+  end
+  %>
+
+<% if transaction.children.length > 0 %>
   <span class="show-child-transactions float-left clickable">
     <%= image_tag 'arrow_right_line_white.svg' %>
   </span>
 <% end %>
 
-<a href="<%= transactions_path + '/' + t.id.to_s %>" class="text-light">
-  <li class="<%= t.time_num %>" id="transaction_<%= t.id %>">
-    <%= image_tag 'categories/' + t.category.symbol + '.svg', :style => "background-color: hsl(" + t.category.color + ");", :class => "rounded-circle", 'height' => '50' %>
-    <%= t.description %>
+<a href="<%= transactions_path + "/" + transaction.id.to_s %>" class="text-light">
+  <li time="<%= transaction.time_num %>" id="transaction_<%= transaction.id %>">
+
+    <%= image_tag "categories/" + transaction.category.symbol + ".svg",
+      :style => "background-color: hsl(" + transaction.category.color + ");",
+      :class => "rounded-circle",
+      "height" => "50" %>
+
+    <%= transaction.description %>
     <span class="balance float-right">
-      <%= balance(t.user_currency_amount.to_f, Money::Currency.new(current_user.currency), "cents") %>
+      <%= amount %>
     </span>
-    <br />
-    <span>
-      <%= t.transfer_message %>
+    <span class="float-right conversion-message">
+      <%= "~" if conversion_message %>
+      <%= conversion_message %>
     </span>
 
-    <span>
-      <%= t.conversion_message %>
+    <br />
+    <span class="transfer-message">
+      <%= transaction.transfer_message %>
     </span>
+
   </li>
 </a>
 
-<% if child_transactions.length > 0 %>
+<% if transaction.children.length > 0 %>
   <ul class="child_transactions list-unstyled">
-    <% child_transactions.decorate.each do |ct| %>
+    <% transaction.children.decorate.each do |ct| %>
+      <% child_currency = Money::Currency.new(ct.currency) %>
       <li>
         <%= ct.description %>
         <span class="balance float-right">
-          <%= balance(ct.account_currency_amount.to_f, Money::Currency.new(t.currency), "cents") %>
-        </span>
-        <br />
-        <span>
-          <%= ct.conversion_message %>
+          <%= balance(ct.amount.to_f, child_currency, "cents") %>
         </span>
       </li>
     <% end %>

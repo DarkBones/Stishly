@@ -44,8 +44,11 @@ class Transaction < ApplicationRecord
     ]
   )
 
-  delegate :name, :to => :category, :prefix => true, :allow_nil => true
   delegate :name, :to => :account, :prefix => true, :allow_nil => false
+
+  delegate :name, :to => :category, :prefix => true, :allow_nil => true
+  #delegate :symbol, :to => :category, :prefix => true, :allow_nil => true
+  #delegate :color, :to => :category, :prefix => true, :allow_nil => true
 
   scope :description, ->(description) { where("UPPER(transactions.description) LIKE ?", "%#{description.upcase}%") }
   scope :from_date, ->(from_date) { where("DATE(local_datetime) >= DATE(?)", from_date.to_date) }

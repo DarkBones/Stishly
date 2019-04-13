@@ -42,7 +42,10 @@ private
       :type,
       :description,
       :amount,
-      :transactions
+      :transactions,
+      :active_account,
+      :account_currency,
+      :to_account_currency
       )
   end
 

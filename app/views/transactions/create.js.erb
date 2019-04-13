@@ -94,14 +94,15 @@ function UpdateBalance($target, current_balance, currency, add) {
 function InsertTransaction($dayDiv, time, id, account) {
   var $entries = $dayDiv.find('ul li');
   var pageLength = <%= APP_CONFIG['ui']['transactions']['page_length'] %>;
+  console.log("TIME: " + parseInt($entries.eq($entries.length - 1).attr('time')));
 
-  if ($entries.length == 0 || time > parseInt($entries.eq(0).attr('class'))){
+  if ($entries.length == 0 || time > parseInt($entries.eq(0).attr('time'))){
     GenerateTransaction($dayDiv.find('ul'), 'prepend', id, account);
-  } else if (time < parseInt($entries.eq($entries.length - 1).attr('class'))){
+  } else if (time < parseInt($entries.eq($entries.length - 1).attr('time'))){
     GenerateTransaction($dayDiv.find('ul'), 'append', id, account);
   } else if ($('#transactions_list li').length % pageLength != 0) {
     for (var i = 0; i < $entries.length; i++) {
-      if (time > parseInt($entries.eq(i).attr('class'))) {
+      if (time > parseInt($entries.eq(i).attr('time'))) {
         GenerateTransaction($entries.iq(i), 'before', id, account);
         break;
       }
