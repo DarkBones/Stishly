@@ -47,6 +47,45 @@
   </div>
 
   <div class="row">
+    <div class="col-12">
+      <b>€ 10</b> <input id="amount_slider" type="text" class="span2" value="" data-slider-min="<%= current_user.transactions.minimum("user_currency_amount") %>" data-slider-max="<%= current_user.transactions.maximum("user_currency_amount") %>" data-slider-step="5" data-slider-value="[250,450]"/> <b>€ 1000</b>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <%= f.label :granularity %><br />
+      <%= f.text_field(:include_children,
+      "data-provide" => "slider",
+      "data-slider-ticks" => "[1, 2, 3]",
+      "data-slider-ticks-labels" => '["Parents", "Children", "Parents AND Children"]',
+      "data-slider-min" => "1",
+      "data-slider-max" => "3",
+      "data-slider-step" => "1",
+      "data-slider-value" => "3",
+      "data-slider-tooltip" => "hide"
+      ) %>
+      
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <%= f.label :sort_by %>
+      <%= f.select(:sorted_by, [
+        ["Created (desc)", "created_at_desc"], 
+        ["Created (asc)", "created_at_asc"], 
+        ["Description (desc)", "description_desc"], 
+        ["Description (asc)", "description_asc"], 
+        ["Amount (desc)", "amount_desc"],
+        ["Amount (asc)", "amount_asc"],
+        #["Category (desc)", "category_desc"],
+        #["Category (asc)", "category_asc"]
+        ], {}, { :class => 'form-control' }) %>
+    </div>
+  </div>
+
+  <div class="row">
     <%= link_to(
       'Reset filters',
       reset_filterrific_url,

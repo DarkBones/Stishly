@@ -1,7 +1,13 @@
 <% @transactions.each do |t| %>
-  
-  <%= content_for t.local_datetime.to_date do %>
-    <%= render :partial => 'transaction', :locals => { :transaction => t, :active_account => @active_account } %>
+
+  <% if params[:filterrific].nil? || (params[:filterrific] && /^created_at_/.match(params[:filterrific][:sorted_by])) %>
+    <%= content_for t.local_datetime.to_date do %>
+      <%= render :partial => 'transaction', :locals => { :transaction => t, :active_account => @active_account } %>
+    <% end %>
+  <% else %>
+    <ul class="list-unstyled">
+      <%= render :partial => 'transaction', :locals => { :transaction => t, :active_account => @active_account } %>
+    </ul>
   <% end %>
 
 <% end %>

@@ -39,6 +39,7 @@ class Transaction < ApplicationRecord
       :to_amount,
       :account,
       :category_id,
+      :include_children,
       #:in_the_last,
       :sorted_by
     ]
@@ -56,6 +57,14 @@ class Transaction < ApplicationRecord
   scope :from_amount, ->(from_amount) { where("user_currency_amount >= ?", from_amount) }
   scope :to_amount, ->(to_amount) { where("user_currency_amount >= ?", to_amount) }
   scope :account, ->(account_name) { joins(:account).where("accounts.name = ?", account_name) }
+  scope :include_children, ->(value) {
+    case value
+    when 1
+      where("parent_id IS NULL")
+    when 2
+      where("parent_id IS NOT NULL")
+    end
+  }
 
   scope :category_id, ->(category_id) {
     category_ids = []
@@ -86,6 +95,8 @@ class Transaction < ApplicationRecord
       order("transactions.user_currency_amount #{direction}")
     when /^account_/
       joins(:account).order("accounts.name #{direction}")
+    when /^category_/
+      joins(:category).order("category.name #{direction}")
     else
       raise(ArgumentError, "Invalid sort option: #{sort_option.inspect}")
     end

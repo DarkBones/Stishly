@@ -117,3 +117,5 @@ gem 'rails-assets-jsTimezoneDetect', source: 'https://rails-assets.org'
 
 # model searching
 gem 'filterrific'
+
+gem 'bootstrap-slider-rails'

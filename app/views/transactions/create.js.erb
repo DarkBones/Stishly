@@ -1,3 +1,4 @@
+
 $("[data-dismiss=modal]").trigger({ type: "click" });
 
 var active_account = '<%= @params[:active_account] %>';
@@ -13,7 +14,9 @@ $('#transactions_list div').each(function(index){
   }
 });
 
-CreateDayDiv(t_date, days, active_account_currency);
+<% if params[:filterrific].nil? || (params[:filterrific] && /^created_at_/.match(params[:filterrific][:sorted_by])) %>
+  CreateDayDiv(t_date, days, active_account_currency);
+<% end %>
 
 var dayDivCreated = false;
 var $dayDiv = $('#transactions_list div#' + t_date);
@@ -31,15 +34,23 @@ $(document).ajaxStop(function () {
 });
 
 function InsertTransactions() {
+  var $dayDiv, t_date, t_account, account_currency_amount, t_id;
+
   <% @transactions_parent.reverse.each_with_index do |t, i| %>
     console.log('INSERTING TRANSACTION ' + <%= i.to_s %>)
-    var t_date = '<%= t.local_datetime.to_s.split[0] %>';
-    var $dayDiv = $('#transactions_list div#' + t_date);
+    t_date = '<%= t.local_datetime.to_s.split[0] %>';
+
+    <% if params[:filterrific] && /^created_at_/.match(params[:filterrific][:sorted_by]) %>
+      $dayDiv = $('#transactions_list div#' + t_date);
+    <% else %>
+      $dayDiv = $("#transactions_list");
+    <% end %>
+
     if ($dayDiv.length > 0) {
-      var t_account = '<%= @account_names[i] %>';
-      var account_currency_amount = <%= t.account_currency_amount %>;
-      var t_time = <%= t.time_num %>;
-      var t_id = '<%= t.id %>';
+      t_account = '<%= @account_names[i] %>';
+      account_currency_amount = <%= t.account_currency_amount %>;
+      t_time = <%= t.time_num %>;
+      t_id = '<%= t.id %>';
 
       InsertTransaction($dayDiv, t_time, t_id, active_account);
     }
@@ -96,18 +107,22 @@ function InsertTransaction($dayDiv, time, id, account) {
   var pageLength = <%= APP_CONFIG['ui']['transactions']['page_length'] %>;
   console.log("TIME: " + parseInt($entries.eq($entries.length - 1).attr('time')));
 
-  if ($entries.length == 0 || time > parseInt($entries.eq(0).attr('time'))){
-    GenerateTransaction($dayDiv.find('ul'), 'prepend', id, account);
-  } else if (time < parseInt($entries.eq($entries.length - 1).attr('time'))){
-    GenerateTransaction($dayDiv.find('ul'), 'append', id, account);
-  } else if ($('#transactions_list li').length % pageLength != 0) {
-    for (var i = 0; i < $entries.length; i++) {
-      if (time > parseInt($entries.eq(i).attr('time'))) {
-        GenerateTransaction($entries.iq(i), 'before', id, account);
-        break;
+  <% if params[:filterrific] && /^created_at_/.match(params[:filterrific][:sorted_by]) %>
+    if ($entries.length == 0 || time > parseInt($entries.eq(0).attr('time'))){
+      GenerateTransaction($dayDiv.find('ul'), 'prepend', id, account);
+    } else if (time < parseInt($entries.eq($entries.length - 1).attr('time'))){
+      GenerateTransaction($dayDiv.find('ul'), 'append', id, account);
+    } else if ($('#transactions_list li').length % pageLength != 0) {
+      for (var i = 0; i < $entries.length; i++) {
+        if (time > parseInt($entries.eq(i).attr('time'))) {
+          GenerateTransaction($entries.iq(i), 'before', id, account);
+          break;
+        }
       }
     }
-  }
+  <% else %>
+    GenerateTransaction($dayDiv.find('ul'), 'prepend', id, account);
+  <% end %>
 }
 
 function GenerateTransaction($target, type, id, account) {

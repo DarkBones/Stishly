@@ -15,4 +15,6 @@ $(document).on('turbolinks:load', ()=> {
 
   setDropdownButtonHtml();
 
+  var slider = new Slider('#amount_slider', {tooltip: 'always'});
+
 });

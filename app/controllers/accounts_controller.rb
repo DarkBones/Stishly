@@ -12,7 +12,9 @@ class AccountsController < ApplicationController
       current_user.transactions,
       params[:filterrific]
     ) or return
+
     @transactions = @filterrific.find.page(params[:page]).includes(:category, :children).decorate
+
     @daily_totals = Account.get_daily_totals(@active_account.id, @transactions, current_user)
     @account_currency = Account.get_currency(@active_account)
 
