@@ -22,7 +22,7 @@ $(document).on('show.bs.modal','#accountform', function () {
 // auto-focus on transaction description field
 $(document).on('show.bs.modal','#transactionform', function () {
   setTimeout(function(){ 
-    $('#transactionform #transaction_description').trigger('focus');
+    //$('#transactionform #transaction_description').trigger('focus');
   }, 500);
 });
 
@@ -334,6 +334,10 @@ function resetTransactionMenu(){
   var active_account = "";
   var account = "";
   var optionHtml = "";
+
+  setTimeout(function(){ 
+    $('#transactionform #transaction_description').trigger('focus');
+  }, 500);
 
   currencyChanged = false;
   transaction_type = 'expense'
