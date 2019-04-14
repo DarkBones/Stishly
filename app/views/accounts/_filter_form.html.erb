@@ -51,17 +51,30 @@
 
   <%
   max_amount = current_user.transactions.maximum("ABS(user_currency_amount)")
-
   max_amount = max_amount / user_currency.subunit_to_unit
-
   max_amount = (max_amount + 1000) / 1000 * 1000
 
+  from_amount = 0
+  to_amount = max_amount
+
+  if params[:filterrific] && params[:filterrific][:amount_range]
+    range = params[:filterrific][:amount_range].split(",")
+    from_amount = range[0].to_i / user_currency.subunit_to_unit
+    to_amount = range[1].to_i / user_currency.subunit_to_unit
+  end
   %>
 
   <div class="row">
     <div class="col-12">
       <%# TODO: Find a better color for the slider; %>
-      <b><%= balance(0, user_currency, "none") %></b> <input id="amount_slider" type="text" class="span2" value="" data-slider-min="0" data-slider-max="<%= max_amount %>" data-slider-step="5" data-slider-value="[0,<%= max_amount / 2 %>]"/> <b><%= balance((max_amount * user_currency.subunit_to_unit), user_currency, "none") %></b>
+      <b><%= balance(0, user_currency, "none") %></b>
+      <%= f.text_field(:amount_range,
+        "data-slider-min" => "0",
+        "data-slider-max" => max_amount,
+        "data-slider-step" => "5",
+        "data-slider-value" => "[#{from_amount}, #{to_amount}]"
+        ) %><b>
+          <%= balance((max_amount * user_currency.subunit_to_unit), user_currency, "none") %></b>
     </div>
   </div>
 

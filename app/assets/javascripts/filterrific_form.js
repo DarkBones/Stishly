@@ -1,3 +1,5 @@
+var submitted = false;
+
 $(document).on('turbolinks:load', ()=> {
 
   function setDropdownButtonHtml() {
@@ -15,8 +17,40 @@ $(document).on('turbolinks:load', ()=> {
 
   function setSlider() {
     var slider;
-    slider = new Slider('#filter-form #amount_slider', {tooltip: 'hover'});
+    slider = new Slider('#filter-form #filterrific_amount_range', {tooltip: 'hover'});
   }
+
+  // converts the amount range to subunits before submitting the form
+  $("#filter-form").submit(function(e){
+    var $inputTarget = $("#filter-form #filterrific_amount_range");
+    var input = $inputTarget.val();
+    var subunits, from, to;
+
+    if (submitted) {
+      return true;
+    }
+
+    e.preventDefault();
+
+    if (input.match(/^\d+,\d+$/)){
+      $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "/api/user_currency/detailed",
+        success(data) {
+          submitted = true;
+
+          subunits = data.subunit_to_unit;
+
+          from = parseInt(input.split(",")[0]) * subunits;
+          to = parseInt(input.split(",")[1]) * subunits;
+
+          $inputTarget.val(from + "," + to);
+          $("#filter-form").submit();
+        }
+      });
+    }
+  });
 
   setDropdownButtonHtml();
   setSlider();

@@ -128,7 +128,7 @@ class ApiController < ApplicationController
     render partial: 'accounts/transaction', :locals => { :active_account => active_account, :transaction => transaction }
   end
 
-  # formats a given amount according to the given currency
+  # formats a given amount in base units and returns the amount in subunits (1 EUR = 100 subunits, 10 JPY = 10 subunits)
   def format_currency
     if params[:float]
       render json: Account.format_currency_float(params[:amount].sub('$', '.'), params[:currency])
@@ -149,7 +149,11 @@ class ApiController < ApplicationController
 
   # renders the iso code of the user's currency
   def get_user_currency
-    render json: User.get_currency(current_user).iso_code
+    if params[:detailed] == "detailed"
+      render json: User.get_currency(current_user)
+    else
+      render json: User.get_currency(current_user).iso_code
+    end
   end
 
   # renders the iso code of the currency of the given account

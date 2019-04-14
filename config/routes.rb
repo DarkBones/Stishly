@@ -20,10 +20,10 @@ Rails.application.routes.draw do
 
   get 'api/accounts/:id/details', to: 'api#account_details', as: :account_details
   get 'api/accounts/details', to: 'api#all_accounts_details', as: :account_all_details
-  get 'api/format_currency/:amount/:currency(/:float)', to: 'api#format_currency'
+  get 'api/format_currency/:amount(/:currency/:float)', to: 'api#format_currency'
   get 'api/convert_currency/:amount/:from/:to', to: 'api#convert_currency'
   get 'api/account_display_balance/:amount/:from/:to/:add', to: 'api#account_display_balance'
-  get 'api/user_currency', to: 'api#get_user_currency'
+  get 'api/user_currency(/:detailed)', to: 'api#get_user_currency'
   get 'api/transactions/prepare_new/:date(/:account)', to: 'api#prepare_new_transaction'
   get 'api/transaction_date_ul/:date/:day_total/:account_currency', to: 'api#transaction_date_ul'
   get 'api/render_transaction/:t(/:account)', to: 'api#render_transaction'

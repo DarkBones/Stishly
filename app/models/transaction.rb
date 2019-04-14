@@ -40,6 +40,7 @@ class Transaction < ApplicationRecord
       :account,
       :category_id,
       :include_children,
+      :amount_range,
       #:in_the_last,
       :sorted_by
     ]
@@ -57,6 +58,7 @@ class Transaction < ApplicationRecord
   scope :from_amount, ->(from_amount) { where("user_currency_amount >= ?", from_amount) }
   scope :to_amount, ->(to_amount) { where("user_currency_amount >= ?", to_amount) }
   scope :account, ->(account_name) { joins(:account).where("accounts.name = ?", account_name) }
+  
   scope :include_children, ->(value) {
     case value
     when 1
@@ -64,6 +66,11 @@ class Transaction < ApplicationRecord
     when 2
       where("parent_id IS NOT NULL")
     end
+  }
+
+  scope :amount_range, ->(range_str){
+    range_str = range_str.split(",")
+    where("ABS(user_currency_amount) >= ? AND ABS(user_currency_amount) <= ?", range_str[0], range_str[1])
   }
 
   scope :category_id, ->(category_id) {
@@ -92,7 +99,7 @@ class Transaction < ApplicationRecord
     when /^description_/
       order("LOWER(transactions.description) #{direction}")
     when /^amount_/
-      order("transactions.user_currency_amount #{direction}")
+      order("ABS(transactions.user_currency_amount) #{direction}")
     when /^account_/
       joins(:account).order("accounts.name #{direction}")
     when /^category_/
