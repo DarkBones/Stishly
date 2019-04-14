@@ -18,6 +18,8 @@ class AccountsController < ApplicationController
     @daily_totals = Account.get_daily_totals(@active_account.id, @transactions, current_user)
     @account_currency = Account.get_currency(@active_account)
 
+    @filtered = params[:filterrific].nil? ? false : true
+
   end
 
   def index
@@ -30,6 +32,8 @@ class AccountsController < ApplicationController
     @transactions = @filterrific.find.page(params[:page]).includes(:category, :children).decorate
     @daily_totals = Account.get_daily_totals(@active_account.id, @transactions, current_user)
     @account_currency = Account.get_currency(@active_account)
+
+    @filtered = params[:filterrific].nil? ? false : true
 
     render 'show'
   end

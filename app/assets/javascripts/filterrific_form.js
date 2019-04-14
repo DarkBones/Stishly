@@ -112,6 +112,14 @@ function getPeriodDate(add=0) {
   return d + '-' + month[mm] + '-' + y;
 }
 
+function reloadPageAfterClearFilters() {
+  var url = window.location.href;
+  url = url.split("?")[0]
+  url += "?filterrific%5Breset_filterrific%5D=true"
+  $(".pagination").hide();
+  window.location.href = url;
+}
+
 function changeFilterPeriod(val){
   switch(val) {
     case "custom":

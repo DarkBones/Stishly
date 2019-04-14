@@ -26,8 +26,8 @@
 
   <div class="row">
     <div class="col-12">
-      <div id="transactions_list">
-
+      <div id="transactions_list" class="py-4 px-4 <%= "border border-warning rounded border-3" if @filtered %>">
+        <%# TODO: Find better color for filtered border %>
         <%= render partial: "transactions" %>
 
       </div>
