@@ -25,9 +25,21 @@ $(document).on('turbolinks:load', ()=> {
     setSlider();
   }
 
+  function clearCustomRange(){
+    $periodSelector = $("#filter-form #filterrific_period");
+    $fromDate = $("#filter-form #filterrific_from_date");
+    $toDate = $("#filter-form #filterrific_to_date");
+
+    if ($periodSelector.val() !== "custom") {
+      $fromDate.val("");
+      $toDate.val("");
+    }
+  }
+
   if($("#filter-form").length > 0){
     setDropdownButtonHtml();
     setSlider();
+    clearCustomRange();
   }
 
   // converts the amount range to subunits before submitting the form
@@ -65,12 +77,69 @@ $(document).on('turbolinks:load', ()=> {
 });
 
 function advancedFilterOptions(){
-    var $advancedTarget = $("#filter-form .filter-advanced");
+  var $advancedTarget = $("#filter-form .filter-advanced");
 
-    $advancedTarget.slideToggle(200);
-    /*if ($advancedTarget).is(":visible"){
-      $advancedTarget.slideUp(200);
-    } else {
-      $advancedTarget.slideDown(200);
-    }*/
+  $advancedTarget.slideToggle(200);
+}
+
+function getPeriodDate(add=0) {
+  var dt = new Date();
+  dt.setDate( dt.getDate() + add );
+  var h = dt.getHours();
+  var m = dt.getMinutes();
+  var d = dt.getDate();
+  var mm = dt.getMonth();
+  var y = dt.getYear() + 1900;
+
+  if(h < 10) h = '0' + h;
+  if(m < 10) m = '0' + m;
+  if(d < 10) d = '0' + d;
+
+  var month = new Array();
+  month[0] = "Jan";
+  month[1] = "Feb";
+  month[2] = "Mar";
+  month[3] = "Apr";
+  month[4] = "May";
+  month[5] = "Jun";
+  month[6] = "Jul";
+  month[7] = "Aug";
+  month[8] = "Sep";
+  month[9] = "Oct";
+  month[10] = "Nov";
+  month[11] = "Dec";
+
+  return d + '-' + month[mm] + '-' + y;
+}
+
+function changeFilterPeriod(val){
+  switch(val) {
+    case "custom":
+      $("#filter-form #filterrific_from_date").val("");
+      $("#filter-form #filterrific_to_date").val("");
+      $("#filter-form #custom_range").show();
+      break;
+    case "any":
+      $("#filter-form #filterrific_from_date").val("");
+      $("#filter-form #filterrific_to_date").val("");
+      $("#filter-form #custom_range").hide();
+      break;
+    case "today":
+      $("#filter-form #filterrific_from_date").val(getPeriodDate());
+      $("#filter-form #filterrific_to_date").val(getPeriodDate());
+      $("#filter-form #custom_range").hide();
+      break;
+    case "7days":
+      $("#filter-form #filterrific_from_date").val(getPeriodDate(-7));
+      $("#filter-form #filterrific_to_date").val(getPeriodDate());
+      $("#filter-form #custom_range").hide();
+      break;
+    case "30days":
+      $("#filter-form #filterrific_from_date").val(getPeriodDate(-30));
+      $("#filter-form #filterrific_to_date").val(getPeriodDate());
+      $("#filter-form #custom_range").hide();
+      break;
+    default:
+      $("#filter-form #custom_range").hide();
   }
+}

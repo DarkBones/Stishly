@@ -41,6 +41,7 @@ class Transaction < ApplicationRecord
       :category_id,
       :include_children,
       :amount_range,
+      :period,
       #:in_the_last,
       :sorted_by
     ]
@@ -59,6 +60,10 @@ class Transaction < ApplicationRecord
   scope :to_amount, ->(to_amount) { where("user_currency_amount >= ?", to_amount) }
   scope :account, ->(account_name) { joins(:account).where("accounts.name = ?", account_name) }
   
+  scope :period, ->(range){
+    
+  }
+
   scope :include_children, ->(value) {
     case value
     when 1

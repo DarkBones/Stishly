@@ -1,140 +1,167 @@
-<%= form_for_filterrific @filterrific, html: { id: 'filter-form' } do |f| %>
+<div class="row">
+    <div class="col-12 col-lg-8">
 
-  <% user_currency = Money::Currency.new(current_user.currency) %>
+    <%= form_for_filterrific @filterrific, html: { id: 'filter-form' } do |f| %>
 
-  <div class = "row">
+      <% user_currency = Money::Currency.new(current_user.currency) %>
 
-    <div class="col-12">
-      <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
-      <%= f.text_field(:description, class: 'form-control', placeholder: "Search") %>
-    </div>
+      <div class = "row">
 
-  </div>
+        <div class="col-12">
+          <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+          <%= f.text_field(:description, class: 'form-control', placeholder: "Search") %>
+        </div>
 
-  <div class="row">
-    <div class="col-12">
-      <button type="button" class="btn btn-link float-right" id="advanced_search_toggle" onclick="advancedFilterOptions();">advanced</button>
-    </div>
-  </div>
-
-  <div class="filter-advanced">
-
-    <div class="row">
-
-      <div class="col-6">
-        <%= f.label :from_date %>
-        <%= f.text_field(:from_date, class: 'datepicker datepicker-null form-control') %>
-      </div>
-      <div class="col-6">
-        <%= f.label :to_date %>
-        <%= f.text_field(:to_date, class: 'datepicker datepicker-null form-control') %>
       </div>
 
-    </div>
-
-    <div class="row">
-
-      <div class="col-12">
-        <%= f.label :account %>
-        <%= f.select(:account, user_accounts_array, { :include_blank => "- any -" }, { :class => 'form-control' }) %>
+      <div class="row">
+        <div class="col-12">
+          <button type="button" class="btn btn-link float-right" id="advanced_search_toggle" onclick="advancedFilterOptions();">advanced</button>
+        </div>
       </div>
 
-    </div>
-    
-    <div class="row">
+      <div class="filter-advanced" style="display: block;">
 
-      <div class="col-12">
-        <%= f.label :category %><br />
-        <%= render partial: "/shared/custom_dropdown_categories", locals: {
-          selected: Category.get_user_categories(current_user, true, true)[0],
-          options: Category.get_user_categories(current_user, true, true),
-          input_target: '#filter-form #filterrific_category_id'
-        } %>
-        <% categories = Category.get_user_categories(current_user, true) %>
-        <%= f.hidden_field :category_id %>
-      </div>
+        <div class="row">
+          <div class="col-12">
+            <%= f.select(:period, [
+              ["Any", "any"],
+              ["Today", "today"],
+              ["Past 7 days", "7days"],
+              ["Past 30 days", "30days"],
+              #["Current period", "period"],
+              ["Custom range", "custom"]
+              ], {}, { :class => "form-control", "onchange" => "changeFilterPeriod(this.value)" }) %>
+          </div>
+        </div>
 
-    </div>
+        <%
+          display_custom_range = "none"
+          display_custom_range = "block" if params[:filterrific] && params[:filterrific][:period] == "custom"
+        %>
+        <div class="row" style="display: <%= display_custom_range %>;" id="custom_range">
 
-    <%
-    max_amount = current_user.transactions.maximum("ABS(user_currency_amount)")
-    max_amount ||= 1000
-    max_amount = max_amount / user_currency.subunit_to_unit
-    max_amount = (max_amount + 1000) / 1000 * 1000
+          <div class="col-6">
+            <%= f.label :from_date %>
+            <%= f.text_field(:from_date, class: 'datepicker datepicker-null form-control') %>
+          </div>
+          <div class="col-6">
+            <%= f.label :to_date %>
+            <%= f.text_field(:to_date, class: 'datepicker datepicker-null form-control') %>
+          </div>
 
-    from_amount = 0
-    to_amount = max_amount
+        </div>
 
-    if params[:filterrific] && params[:filterrific][:amount_range]
-      range = params[:filterrific][:amount_range].split(",")
-      from_amount = range[0].to_i / user_currency.subunit_to_unit
-      to_amount = range[1].to_i / user_currency.subunit_to_unit
-    end
-    %>
+        <div class="row">
 
-    <div class="row">
-      <div class="col-12">
-        <%= f.label :amount %><br />
-        <%# TODO: Find a better color for the slider; %>
-        <b><%= balance(0, user_currency, "none") %></b>
-        <%= f.text_field(:amount_range,
-          "data-slider-min" => "0",
-          "data-slider-max" => max_amount,
-          "data-slider-step" => "5",
-          "data-slider-value" => "[#{from_amount}, #{to_amount}]"
-          ) %><b>
-            <%= balance((max_amount * user_currency.subunit_to_unit), user_currency, "none") %></b>
-      </div>
-    </div>
+          <div class="col-12">
+            <%= f.label :account %>
+            <%= f.select(:account, user_accounts_array, { :include_blank => "- any -" }, { :class => 'form-control' }) %>
+          </div>
 
-    <% 
-    include_children_slider_value = 1
-    if params[:filterrific] && params[:filterrific][:include_children]
-      include_children_slider_value = params[:filterrific][:include_children]
-    end
-    %>
-
-    <div class="row">
-      <div class="col-12">
-        <%= f.label :granularity %><br />
-        <%= f.text_field(:include_children,
-        "data-provide" => "slider",
-        "data-slider-ticks" => "[1, 2, 3]",
-        "data-slider-ticks-labels" => '["Parents", "Children", "Parents AND Children"]',
-        "data-slider-min" => "1",
-        "data-slider-max" => "3",
-        "data-slider-step" => "1",
-        "data-slider-value" => "3",
-        "data-slider-tooltip" => "hide",
-        "data-slider-value" => include_children_slider_value
-        ) %>
+        </div>
         
-      </div>
-    </div>
+        <div class="row">
 
-    <div class="row">
-      <div class="col-12">
-        <%= f.label :sort_by %>
-        <%= f.select(:sorted_by, [
-          ["Created (desc)", "created_at_desc"], 
-          ["Created (asc)", "created_at_asc"], 
-          ["Description (desc)", "description_desc"], 
-          ["Description (asc)", "description_asc"], 
-          ["Amount (desc)", "amount_desc"],
-          ["Amount (asc)", "amount_asc"],
-          #["Category (desc)", "category_desc"],
-          #["Category (asc)", "category_asc"]
-          ], {}, { :class => 'form-control' }) %>
-      </div>
-    </div>
+          <div class="col-12">
+            <%= f.label :category %><br />
+            <%= render partial: "/shared/custom_dropdown_categories", locals: {
+              selected: Category.get_user_categories(current_user, true, true)[0],
+              options: Category.get_user_categories(current_user, true, true),
+              input_target: '#filter-form #filterrific_category_id',
+              button_type: "btn-light"
+            } %>
+            <% categories = Category.get_user_categories(current_user, true) %>
+            <%= f.hidden_field :category_id %>
+          </div>
 
-    <div class="row">
-      <%= link_to(
-        'Reset filters',
-        reset_filterrific_url,
-      ) %>
-    </div>
+        </div>
+
+        <%
+        max_amount = current_user.transactions.maximum("ABS(user_currency_amount)")
+        max_amount ||= 1000
+        max_amount = max_amount / user_currency.subunit_to_unit
+        max_amount = (max_amount + 1000) / 1000 * 1000
+
+        from_amount = 0
+        to_amount = max_amount
+
+        if params[:filterrific] && params[:filterrific][:amount_range]
+          range = params[:filterrific][:amount_range].split(",")
+          from_amount = range[0].to_i / user_currency.subunit_to_unit
+          to_amount = range[1].to_i / user_currency.subunit_to_unit
+        end
+        %>
+
+        <div class="row">
+          <div class="col-12">
+            <%= f.label :amount %><br />
+            <%# TODO: Find a better color for the slider; %>
+            <b><%= balance(0, user_currency, "none") %></b>
+            <%= f.text_field(:amount_range,
+              "data-slider-min" => "0",
+              "data-slider-max" => max_amount,
+              "data-slider-step" => "5",
+              "data-slider-value" => "[#{from_amount}, #{to_amount}]"
+              ) %><b>
+                <%= balance((max_amount * user_currency.subunit_to_unit), user_currency, "none") %></b>
+          </div>
+        </div>
+
+        <% 
+        include_children_slider_value = 1
+        if params[:filterrific] && params[:filterrific][:include_children]
+          include_children_slider_value = params[:filterrific][:include_children]
+        end
+        %>
+
+        <div class="row">
+          <div class="col-12">
+            <%= f.label :granularity %><br />
+            <%= f.text_field(:include_children,
+            "data-provide" => "slider",
+            "data-slider-ticks" => "[1, 2, 3]",
+            "data-slider-ticks-labels" => '["Parents", "Children", "Parents AND Children"]',
+            "data-slider-min" => "1",
+            "data-slider-max" => "3",
+            "data-slider-step" => "1",
+            "data-slider-value" => "3",
+            "data-slider-tooltip" => "hide",
+            "data-slider-value" => include_children_slider_value
+            ) %>
+            
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <%= f.label :sort_by %>
+            <%= f.select(:sorted_by, [
+              ["Created (desc)", "created_at_desc"], 
+              ["Created (asc)", "created_at_asc"], 
+              ["Description (desc)", "description_desc"], 
+              ["Description (asc)", "description_asc"], 
+              ["Amount (desc)", "amount_desc"],
+              ["Amount (asc)", "amount_asc"],
+              #["Category (desc)", "category_desc"],
+              #["Category (asc)", "category_asc"]
+              ], {}, { :class => 'form-control' }) %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <%= link_to(
+          'Reset filters',
+          reset_filterrific_url,
+        ) %>
+      </div>
+
   </div>
-  
-  <%= f.submit 'Search' %>
-<% end %>
+
+  <div class="span2">
+    <%= f.submit 'Search', :class => 'btn btn-primary btn-block' %>
+  </div>
+
+  <% end %>
+</div>

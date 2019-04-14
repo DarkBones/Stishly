@@ -75,7 +75,8 @@
                     <%= render partial: "shared/custom_dropdown_categories", locals: {
                       selected: Category.get_user_categories(current_user, true)[0],
                       options: Category.get_user_categories(current_user, true),
-                      input_target: '#transactionform #transaction_category_id'
+                      input_target: '#transactionform #transaction_category_id',
+                      button_type: 'btn-outline-dark'
                     } %>
                     
                     <% categories = Category.get_user_categories(current_user, true) %>
