@@ -12,27 +12,32 @@ function handleSearchResult(li, text) {
   }
 }
 
-function searchCategories(target, input){
-  var $categories = $(target);
-  var text = $(input).val();
-  var liArr, liLength, li;
-  var liPos = 0;
+function searchCategories(target, input, obj){
+  if (typeof(obj.id) !== "undefined"){
+    var $categories = $(target);
+    var text = $(input).val();
+    var liArr, liLength, li;
+    var liPos = 0;
+    var $obj = $("#" + obj.id);
 
-  if (typeof(text) === "undefined") {
-    return;
-  }
+    //console.log(obj.val());
 
-  text = text.toUpperCase();
+    if (typeof(text) === "undefined") {
+      return;
+    }
 
-  liArr = $categories.find("li").toArray();
-  liLength = liArr.length;
+    text = text.toUpperCase();
 
-  while (liPos < liLength) {
-    li = $(liArr.pop());
+    liArr = $categories.find("li").toArray();
+    liLength = liArr.length;
 
-    handleSearchResult(li, text);
+    while (liPos < liLength) {
+      li = $(liArr.pop());
 
-    liPos += 1;
+      handleSearchResult(li, text);
+
+      liPos += 1;
+    }
   }
 }
 

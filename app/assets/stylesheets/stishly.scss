@@ -137,10 +137,13 @@ a[data-toggle="collapse"] {
   opacity: 0.6;
 }
 
-#categoriesDropdownOptions {
+[id^=categoriesDropdownOptions] {
   height: 350px;
   width: 300px;
   overflow-y: scroll;
+  li {
+    margin-left: -30px;
+  }
 }
 #transactionform #categories button {
   width: 100%;

@@ -1,9 +1,9 @@
 <div class="dropdown">
-  <button class="btn <%= button_type %> dropdown-toggle text-left" type="button" id="categories-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" input-target="<%= input_target %>">
+  <button class="btn <%= button_type %> dropdown-toggle text-left" type="button" id="categories-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" input-target="<%= input_target + id_suff %>">
     Category
   </button>
-  <div class="dropdown-menu" aria-labelledby="categories-dropdown" id="categoriesDropdownOptions">
-    <input id="search-categories" placeholder="Search" class="form-control" onkeyup="searchCategories('#categoriesDropdownOptions', '#search-categories')"></input>
+  <div class="dropdown-menu" aria-labelledby="categories-dropdown" id="categoriesDropdownOptions<%= id_suff %>">
+    <input id="search-categories<%= id_suff %>" placeholder="Search" class="form-control" onkeyup="searchCategories('#categoriesDropdownOptions<%= id_suff %>', '#search-categories<%= id_suff %>', this)"></input>
     <%= draw_tree(options) %>
   </div>
 </div>

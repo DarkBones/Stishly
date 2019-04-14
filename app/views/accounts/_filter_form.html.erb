@@ -20,7 +20,7 @@
         </div>
       </div>
 
-      <div class="filter-advanced" style="display: none;">
+      <div class="filter-advanced" style="display: block;">
 
         <div class="row">
           <div class="col-12">
@@ -69,7 +69,8 @@
               selected: Category.get_user_categories(current_user, true, true)[0],
               options: Category.get_user_categories(current_user, true, true),
               input_target: '#filter-form #filterrific_category_id',
-              button_type: "btn-light"
+              button_type: "btn-light",
+              id_suff: "_filter"
             } %>
             <% categories = Category.get_user_categories(current_user, true) %>
             <%= f.hidden_field :category_id %>
