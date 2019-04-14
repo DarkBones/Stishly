@@ -1,35 +1,37 @@
 $(document).on('turbolinks:load', ()=> {
 
-  $.ajax({
-    type: "GET",
-    dataType: "text",
-    url: "/api/week_start",
-    success: function(data) {
-      $('.datepicker').datepicker({
-        format: 'dd-M-yyyy',
-        todayHighlight: true,
-        weekStart: parseInt(data),
-        autoclose: true
-      });
-    },
-    error: function(request, status, error) {
-      $('.datepicker').datepicker({
-        format: 'dd-M-yyyy',
-        todayHighlight: true,
-        autoclose: true
-      });
-    }
-  });
-  
-  $('.datepicker').each(function(){
-    if (!$(this).hasClass('datepicker-null')){
-      $(this).attr({'value': getDate});
-    }
-  });
+  if ($(".datepicker").length > 0){
+    $.ajax({
+      type: "GET",
+      dataType: "text",
+      url: "/api/week_start",
+      success: function(data) {
+        $('.datepicker').datepicker({
+          format: 'dd-M-yyyy',
+          todayHighlight: true,
+          weekStart: parseInt(data),
+          autoclose: true
+        });
+      },
+      error: function(request, status, error) {
+        $('.datepicker').datepicker({
+          format: 'dd-M-yyyy',
+          todayHighlight: true,
+          autoclose: true
+        });
+      }
+    });
+    
+    $('.datepicker').each(function(){
+      if (!$(this).hasClass('datepicker-null')){
+        $(this).attr({'value': getDate});
+      }
+    });
 
-  $('input[type="time"][value="now"]').each(function(){
-    $(this).attr({'value': getTime});
-  });
+    $('input[type="time"][value="now"]').each(function(){
+      $(this).attr({'value': getTime});
+    });
+  }
 
 });
 

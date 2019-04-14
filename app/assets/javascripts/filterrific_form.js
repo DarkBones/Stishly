@@ -20,6 +20,16 @@ $(document).on('turbolinks:load', ()=> {
     slider = new Slider('#filter-form #filterrific_amount_range', {tooltip: 'hover'});
   }
 
+  function setFilterForm() {
+    setDropdownButtonHtml();
+    setSlider();
+  }
+
+  if($("#filter-form").length > 0){
+    setDropdownButtonHtml();
+    setSlider();
+  }
+
   // converts the amount range to subunits before submitting the form
   $("#filter-form").submit(function(e){
     var $inputTarget = $("#filter-form #filterrific_amount_range");
@@ -52,7 +62,15 @@ $(document).on('turbolinks:load', ()=> {
     }
   });
 
-  setDropdownButtonHtml();
-  setSlider();
-
 });
+
+function advancedFilterOptions(){
+    var $advancedTarget = $("#filter-form .filter-advanced");
+
+    $advancedTarget.slideToggle(200);
+    /*if ($advancedTarget).is(":visible"){
+      $advancedTarget.slideUp(200);
+    } else {
+      $advancedTarget.slideDown(200);
+    }*/
+  }

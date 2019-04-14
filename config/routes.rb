@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   get 'api/render_transactionsmenu(/:account)', to: 'api#render_transactionsmenu'
   get 'api/account_currency(/:account)', to: 'api#get_account_currency'
   get 'api/currency_rate/:from/:to', to: 'api#get_currency_rate'
-  get 'api/week_start', to: 'api#get_week_start'
+  get 'api/week_start', to: 'api#get_week_start', as: :week_start
   get 'api/currency_details/:currency', to: 'api#currency_details'
   get 'api/account_currency_details/:account_name', to: 'api#account_currency_details'
   get 'api/country_currency/:country_code', to: 'api#country_currency', as: :country_currency
