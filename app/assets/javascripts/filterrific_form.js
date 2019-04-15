@@ -109,7 +109,7 @@ function getPeriodDate(add=0) {
   month[10] = "Nov";
   month[11] = "Dec";
 
-  return d + '-' + month[mm] + '-' + y;
+  return d + '-' + month[mm % month.length] + '-' + y;
 }
 
 function reloadPageAfterClearFilters() {
