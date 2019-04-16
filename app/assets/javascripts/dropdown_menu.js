@@ -63,7 +63,7 @@ $(document).on("click", (event) => {
 });
 
 function setCategory(obj, id) {
-  $categoriesDropdown = $(obj).closest("div#categoriesDropdownOptions").siblings("button#categories-dropdown");
+  var $categoriesDropdown = $(obj).closest("div#categoriesDropdownOptions").siblings("button#categories-dropdown");
 
   $categoriesDropdown.html($("#categoriesDropdownOptions li.category_" + id.toString()).html());
   $($categoriesDropdown.attr("input-target")).val(id);
