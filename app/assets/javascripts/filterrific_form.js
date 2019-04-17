@@ -1,15 +1,15 @@
 var submitted = false;
 
-$(document).on('turbolinks:load', ()=> {
+$(document).on("turbolinks:load", () => {
 
   function setDropdownButtonHtml() {
-    var cat_id, $button, $dropdownOption;
+    var catId, $button, $dropdownOption;
 
-    cat_id = $("#filter-form #filterrific_category_id").val();
+    catId = $("#filter-form #filterrific_category_id").val();
 
     $button = $("#filter-form #categories-dropdown");
 
-    $dropdownOption = $("#filter-form #categoriesDropdownOptions li.category_" + cat_id)
+    $dropdownOption = $("#filter-form #categoriesDropdownOptions li.category_" + catId);
     if (typeof($dropdownOption) !== "undefined") {
       $button.html($dropdownOption.html());
     }
@@ -17,7 +17,7 @@ $(document).on('turbolinks:load', ()=> {
 
   function setSlider() {
     var slider;
-    slider = new Slider('#filter-form #filterrific_amount_range', {tooltip: 'hover'});
+    slider = new Slider("#filter-form #filterrific_amount_range", {tooltip: "hover"});
   }
 
   function setFilterForm() {
@@ -26,9 +26,9 @@ $(document).on('turbolinks:load', ()=> {
   }
 
   function clearCustomRange(){
-    $periodSelector = $("#filter-form #filterrific_period");
-    $fromDate = $("#filter-form #filterrific_from_date");
-    $toDate = $("#filter-form #filterrific_to_date");
+    var $periodSelector = $("#filter-form #filterrific_period");
+    var $fromDate = $("#filter-form #filterrific_from_date");
+    var $toDate = $("#filter-form #filterrific_to_date");
 
     if ($periodSelector.val() !== "custom") {
       $fromDate.val("");
@@ -91,9 +91,9 @@ function getPeriodDate(add=0) {
   var mm = dt.getMonth();
   var y = dt.getYear() + 1900;
 
-  if(h < 10) h = '0' + h;
-  if(m < 10) m = '0' + m;
-  if(d < 10) d = '0' + d;
+  if(h < 10) {h = "0" + h};
+  if(m < 10) {m = "0" + m};
+  if(d < 10) {d = "0" + d};
 
   var month = new Array();
   month[0] = "Jan";
@@ -109,13 +109,13 @@ function getPeriodDate(add=0) {
   month[10] = "Nov";
   month[11] = "Dec";
 
-  return d + '-' + month[mm % month.length] + '-' + y;
+  return d + "-" + month[mm % month.length] + "-" + y;
 }
 
 function reloadPageAfterClearFilters() {
   var url = window.location.href;
-  url = url.split("?")[0]
-  url += "?filterrific%5Breset_filterrific%5D=true"
+  url = url.split("?")[0];
+  url += "?filterrific%5Breset_filterrific%5D=true";
   $(".pagination").hide();
   window.location.href = url;
 }
