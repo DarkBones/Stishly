@@ -6,7 +6,7 @@ function changeUserCountry(val) {
       type: "GET",
       dataType: "text",
       url: "/api/country_currency/" + val,
-      success: function(data) {
+      success(data) {
         $("#new_user #user_currency").val(data);
       }
     });
