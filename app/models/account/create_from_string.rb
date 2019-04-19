@@ -42,7 +42,7 @@ class Account
         end
       end
 
-      result = {:name => account_name, :balance => balance}
+      #result = {:name => account_name, :balance => balance}
 
     end
   end
