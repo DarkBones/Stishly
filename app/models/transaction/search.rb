@@ -1,3 +1,4 @@
+=begin
 class Transaction
   class Search
     
@@ -218,3 +219,4 @@ private
 
   end
 end
+=end
