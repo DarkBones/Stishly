@@ -15,6 +15,9 @@
   </span>
 <% end %>
 
+<%#= check_box_tag("delete[#{transaction.id}]",1, class: 'checkbox-inline') %>
+<%#= check_box_tag "delete[#{transaction.id}]", transaction.id, false, class: 'checkbox-inline'%>
+
 <a href="<%= transactions_path + "/" + transaction.id.to_s %>" class="text-light">
   <li time="<%= transaction.time_num %>" id="transaction_<%= transaction.id %>">
 
