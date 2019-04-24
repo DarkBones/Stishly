@@ -395,8 +395,6 @@ class ScheduleTest < ActiveSupport::TestCase
     current_user = users(:bas)
     start_date = Date.new(2019, 03, 25)
 
-    message = ""
-
     message = "1. simple daily schedule"
     params = reset_params
     params[:schedule] = 'daily'
@@ -987,7 +985,7 @@ class ScheduleTest < ActiveSupport::TestCase
     assert_dates(schedule, dates, start_date, params, message)
   end
 
-  def assert_dates(schedule, dates, start_date, params, message)
+  def assert_dates(schedule, dates, start_date, _params, message)
     #puts ''
     #puts '---------------'
     #puts message
