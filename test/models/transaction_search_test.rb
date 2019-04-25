@@ -1,3 +1,4 @@
+=begin
 require 'test_helper'
 
 class TransactionSearchTest < ActiveSupport::TestCase
@@ -180,3 +181,4 @@ class TransactionSearchTest < ActiveSupport::TestCase
   end
 
 end
+=end
