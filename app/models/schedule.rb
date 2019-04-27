@@ -24,8 +24,7 @@
 class Schedule < ApplicationRecord
 
   validates :name, :start_date, presence: true
-  validates :name, format: { without: /\./, message: "No dots (.) allowed" }
-  validates :name, format: { without: /\?/, message: "No question marks (?) allowed" }
+  validates :name, format: { without: /[-\._~:\/\?#\[\]@!\$&'\(\)\*\+,;={}"]/, message: "Special characters -._~:/?#[]@!$&\'()*+,;={}\" not allowed" }
   validates :period_num, numericality: true
   validates :period_num, numericality: { only_integer: true }
   validates :period_num, numericality: { greater_than: 0, message: "'Run every' must be greater than zero" }

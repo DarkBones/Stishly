@@ -126,12 +126,12 @@ class ScheduleTest < ActiveSupport::TestCase
     assert_not schedule.save, "Saved schedule without name"
   end
 
-  test "Schedule with dots in the name" do
+  test "Schedule with dangeroud characters in the name" do
     current_user = users(:bas)
 
     params = {
       type: 'advanced',
-      name: 'thi...s_.nam.e._con.tai.ns_d.ot.s.',
+      name: '',
       start_date: '17-Mar-2019',
       timezone: 'Europe/London',
       schedule: 'monthly',
@@ -159,8 +159,12 @@ class ScheduleTest < ActiveSupport::TestCase
       exclusion_met2: 'fri'
     }
 
-    schedule = Schedule.create_from_form(params, current_user, true)
-    assert_not schedule.save, "Saved schedule with dots in the name"
+    unsafe_chars = ["-", ".", "_", "~", ":", "/", "?", "#", "[", "]", "@", "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "=", "{", "}", "\""]
+    unsafe_chars.each do |c|
+      params[:name] = "test #{c} char"
+      schedule = Schedule.create_from_form(params, current_user, true)
+      assert_not schedule.save, format_error("Created schedule with special character #{c}")
+    end
   end
 
   test "Schedule without start date" do
