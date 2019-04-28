@@ -8,14 +8,22 @@
         </button>
       </div>
 
-      <%= form_with(model: Account.new) do |f| %>
+      <%= form_for ScheduleJoin.new do |f| %>
         <div class="modal-body">
           <div class="container">
 
             <div class="row py-2">
               <div class="col-12">
                 <%= f.label :schedule %><br />
-                <%= f.select(:schedule, user_schedules_array, {}, { :class => 'form-control' }) %>
+                <%= f.select(:schedules, user_schedules_array, {}, { :class => 'form-control' }) %>
+              </div>
+            </div>
+
+            <%= f.text_field :transactions, value:"" %>
+
+            <div class="row py-2">
+              <div class="col-12">
+                Next run date: <span id="next_run_date"></span>
               </div>
             </div>
 
