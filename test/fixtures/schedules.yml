@@ -2,23 +2,26 @@
 #
 # Table name: schedules
 #
-#  id                :bigint(8)        not null, primary key
-#  name              :string(255)
-#  user_id           :bigint(8)
-#  start_date        :date
-#  end_date          :date
-#  period            :string(255)
-#  period_num        :integer
-#  days              :integer
-#  days_month        :string(255)
-#  days_month_day    :string(255)
-#  days_exclude      :integer
-#  exclusion_met     :string(255)
-#  exclusion_met_day :string(255)
-#  timezone          :string(255)
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  is_active         :boolean          default(TRUE)
+#  id                  :bigint(8)        not null, primary key
+#  name                :string(255)      not null
+#  user_id             :bigint(8)
+#  start_date          :date             not null
+#  end_date            :date
+#  period              :string(255)      not null
+#  period_num          :integer          default(0)
+#  days                :integer          default(0)
+#  days_month          :string(255)
+#  days_month_day      :integer
+#  days_exclude        :integer
+#  exclusion_met       :string(255)
+#  exclusion_met_day   :integer
+#  timezone            :string(255)      not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  is_active           :boolean          default(TRUE)
+#  next_occurrence     :date
+#  last_occurrence     :date
+#  next_occurrence_utc :datetime
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

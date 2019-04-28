@@ -28,6 +28,7 @@
 #  timezone               :string(255)
 #  country_code           :string(255)
 #  country_id             :bigint(8)
+#  currency               :string(255)      not null
 #
 
 require 'test_helper'

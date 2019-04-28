@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_28_131345) do
+ActiveRecord::Schema.define(version: 2019_04_28_134449) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -79,6 +79,24 @@ ActiveRecord::Schema.define(version: 2019_04_28_131345) do
     t.integer "used_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "scheduled_transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "amount"
+    t.integer "direction"
+    t.string "description"
+    t.bigint "account_id"
+    t.string "currency"
+    t.bigint "category_id"
+    t.bigint "parent_id"
+    t.integer "transfer_account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_scheduled_transactions_on_account_id"
+    t.index ["category_id"], name: "index_scheduled_transactions_on_category_id"
+    t.index ["parent_id"], name: "index_scheduled_transactions_on_parent_id"
+    t.index ["user_id"], name: "index_scheduled_transactions_on_user_id"
   end
 
   create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

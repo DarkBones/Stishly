@@ -6,18 +6,19 @@
 #  user_id                 :bigint(8)
 #  amount                  :integer
 #  direction               :integer
-#  description             :string(255)
+#  description             :string(100)
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  account_id              :integer
-#  timezone                :string(255)
+#  timezone                :string(255)      not null
 #  currency                :string(255)
 #  account_currency_amount :integer
 #  category_id             :bigint(8)
 #  parent_id               :bigint(8)
 #  exclude_from_all        :boolean          default(FALSE)
-#  local_datetime          :datetime
+#  local_datetime          :datetime         not null
 #  transfer_account_id     :bigint(8)
+#  user_currency_amount    :integer          not null
 #
 
 class Transaction < ApplicationRecord
@@ -26,9 +27,6 @@ class Transaction < ApplicationRecord
   belongs_to :category, optional: true
   has_one :parent, :class_name => 'Transaction'
   has_many :children, :class_name => 'Transaction', :foreign_key => 'parent_id'
-  #has_many :schedule_joins
-  #has_and_belongs_to_many :schedules#, through: :schedule_joins
-  has_and_belongs_to_many :schedules
 
   filterrific(
     default_filter_params: { sorted_by: 'created_at_desc' },

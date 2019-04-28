@@ -3,8 +3,8 @@
 # Table name: categories
 #
 #  id         :bigint(8)        not null, primary key
-#  name       :string(255)
-#  color      :string(255)
+#  name       :string(255)      not null
+#  color      :string(255)      not null
 #  symbol     :string(255)
 #  user_id    :bigint(8)
 #  parent_id  :bigint(8)

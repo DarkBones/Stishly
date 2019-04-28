@@ -8,12 +8,11 @@
 #  user_id     :bigint(8)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  name        :string(255)
+#  name        :string(255)      not null
 #  description :string(255)
 #  position    :integer
-#  currency    :string(255)
+#  currency    :string(255)      not null
 #  is_default  :boolean
-#  is_real     :boolean          default(TRUE)
 #
 
 class Account < ApplicationRecord
