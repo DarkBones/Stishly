@@ -44,6 +44,34 @@ function selectTransaction(obj) {
   }
 }
 
+function selectAllTransactions(obj) {
+  if (obj.checked) {
+    addAllTransactions();
+  } else {
+    removeAllTransactions();
+  }
+}
+
+function addAllTransactions() {
+  var $transactions;
+
+  $transactions = $(".transaction-checkbox-input");
+  $transactions.each(function(index, value){
+    value.checked = true;
+    addTransaction(value.value);
+  });
+}
+
+function removeAllTransactions() {
+  var $transactions;
+
+  $transactions = $(".transaction-checkbox-input");
+  $transactions.each(function(index, value){
+    value.checked = false;
+    removeTransaction(value.value);
+  });
+}
+
 function addTransaction(tId) {
   var $selectedTarget, selectedStr, selectedArr, currentId;
 
