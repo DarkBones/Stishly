@@ -26,6 +26,7 @@ class Account < ApplicationRecord
   has_many :setting_values, :as => :entity
   has_many :settings, through: :setting_values
   has_many :account_histories, dependent: :destroy
+  has_many :sch_transactions
 
   def self.get_from_name(name, current_user)
     if name

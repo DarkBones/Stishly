@@ -45,6 +45,7 @@ class User < ApplicationRecord
   has_many :categories, dependent: :destroy
   has_many :transactions, through: :accounts
   has_many :account_histories, through: :accounts
+  has_many :sch_transactions
   belongs_to :country, optional: :true
 
   validates :country_code, :first_name, :last_name, presence: true
