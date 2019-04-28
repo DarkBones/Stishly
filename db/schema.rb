@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_10_192830) do
+ActiveRecord::Schema.define(version: 2019_04_28_131345) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -81,13 +81,6 @@ ActiveRecord::Schema.define(version: 2019_04_10_192830) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "schedule_joins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "transaction_id"
-    t.bigint "schedule_id"
-    t.index ["schedule_id"], name: "index_schedule_joins_on_schedule_id"
-    t.index ["transaction_id"], name: "index_schedule_joins_on_transaction_id"
-  end
-
   create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "user_id"
@@ -110,6 +103,13 @@ ActiveRecord::Schema.define(version: 2019_04_10_192830) do
     t.datetime "next_occurrence_utc"
     t.index ["name"], name: "index_schedules_on_name"
     t.index ["user_id"], name: "index_schedules_on_user_id"
+  end
+
+  create_table "schedules_transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "transaction_id"
+    t.bigint "schedule_id"
+    t.index ["schedule_id"], name: "index_schedules_transactions_on_schedule_id"
+    t.index ["transaction_id"], name: "index_schedules_transactions_on_transaction_id"
   end
 
   create_table "setting_values", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

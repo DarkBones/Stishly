@@ -33,8 +33,9 @@ class Schedule < ApplicationRecord
   #validates_numericality_of :period_num, :greater_than => 0
 
   belongs_to :user
-  has_many :schedule_joins
-  has_many :transactions, through: :schedule_joins
+  #has_many :schedule_joins
+  #has_and_belongs_to_many :transactions#, through: :schedule_joins
+  has_and_belongs_to_many :usertransactions, foreign_key: "transaction_id", class_name: "Transaction"
 
   def self.create_from_form(params, current_user, testing=false)
     schedule = CreateFromForm.new(params, current_user, testing).perform()
