@@ -36,12 +36,29 @@ $(document).on('click', '.show-child-transactions', (event) => {
   }
 });
 
+function enableMassActionButtons() {
+  var $buttons;
+
+  $buttons = $(".mass_transaction_action_button");
+  if ($("#selected-transactions").val().length > 0) {
+    $buttons.each(function(index, value){
+      $("#" + value.id).removeClass("disabled");
+    });
+  } else {
+    $buttons.each(function(index, value){
+      $("#" + value.id).addClass("disabled");
+    });
+  }
+}
+
 function selectTransaction(obj) {
   if (obj.checked) {
     addTransaction(obj.value);
   } else {
     removeTransaction(obj.value);
   }
+
+  enableMassActionButtons();
 }
 
 function selectAllTransactions(obj) {
@@ -50,6 +67,8 @@ function selectAllTransactions(obj) {
   } else {
     removeAllTransactions();
   }
+
+  enableMassActionButtons();
 }
 
 function addAllTransactions() {
