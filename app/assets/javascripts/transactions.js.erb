@@ -35,3 +35,45 @@ $(document).on('click', '.show-child-transactions', (event) => {
     $(event.currentTarget).find('img').addClass('rotated');
   }
 });
+
+function selectTransaction(obj) {
+  if (obj.checked) {
+    addTransaction(obj.value);
+  } else {
+    removeTransaction(obj.value);
+  }
+}
+
+function addTransaction(tId) {
+  var $selectedTarget, selectedStr, selectedArr, currentId;
+
+  $selectedTarget = $("#selected-transactions");
+  selectedStr = $selectedTarget.val();
+  selectedArr = selectedStr.split(" ");
+
+  // check if transaction id is already in the list
+  currentId = "";
+  while (typeof(currentId) !== "undefined") {
+    currentId = selectedArr.pop();
+    if (currentId === tId) {
+      return;
+    }
+  }
+
+  $selectedTarget.val((selectedStr + " " + tId).trim())
+}
+
+function removeTransaction(tId) {
+  var $selectedTarget, selectedStr, selectedArr, index;
+
+  $selectedTarget = $("#selected-transactions");
+  selectedStr = $selectedTarget.val();
+  selectedArr = selectedStr.split(" ");
+
+  index = selectedArr.indexOf(tId);
+  if (index > -1) {
+    selectedArr.splice(index, 1);
+  }
+
+  $selectedTarget.val(selectedArr.join(" "));
+}
