@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, :except => [:country_currency]
   before_action :set_current_user
 
-  helper_method :user_accounts, :user_accounts_array, :user_categories_array
+  helper_method :user_accounts, :user_accounts_array, :user_categories_array, :user_schedules_array
 
   def get_accounts_currencies
     @accounts_currencies = Account.get_accounts_with_currencies(current_user)
@@ -27,6 +27,16 @@ class ApplicationController < ActionController::Base
     end
 
     return accounts
+  end
+
+  def user_schedules_array
+    schedules = []
+
+    current_user.schedules.each do |s|
+      schedules.push([s.name, s.id])
+    end
+
+    return schedules
   end
 
   def user_categories_array
