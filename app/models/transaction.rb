@@ -143,6 +143,27 @@ class Transaction < ApplicationRecord
 
       result.push(t.decorate)
     end
+
+    # find transfer_transaction_id for transfer transactions
+    transfer_transactions = []
+    result.each do |t|
+      if t.parent_id.nil?
+        unless t.transfer_account_id.nil?
+          transfer_transactions.push(t)
+        end
+      end
+    end
+
+    if transfer_transactions.length == 2
+      t1 = transfer_transactions[0]
+      t2 = transfer_transactions[1]
+
+      t1.transfer_transaction_id = t2.id
+      t2.transfer_transaction_id = t1.id
+
+      t1.save
+      t2.save
+    end
     
     return result
   end

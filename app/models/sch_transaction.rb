@@ -25,12 +25,13 @@ class SchTransaction < ApplicationRecord
   has_many :children, :class_name => 'Transaction', :foreign_key => 'parent_id'
 
   def self.create_from_transaction(transaction, current_user, transfer_transaction=nil, parent_id=nil, transactions=[])
+    puts "//////////////////CREATING FROM TRANSACTION"
     unless transfer_transaction.nil?
       transaction = current_user.transactions.where(id: transfer_transaction).take
     end
 
-    t = current_user.sch_transactions.where(original_transaction_id: transaction.id)
-    t = current_user.sch_transactions.new
+    t = current_user.sch_transactions.where(original_transaction_id: transaction.id).take
+    t ||= current_user.sch_transactions.new
     t.amount = transaction.amount
     t.direction = transaction.direction
     t.description = transaction.description
@@ -40,18 +41,20 @@ class SchTransaction < ApplicationRecord
     t.parent_id = parent_id
     t.transfer_account_id = transaction.transfer_account_id
     t.original_transaction_id = transaction.id
+    t.transfer_transaction_id = transaction.transfer_transaction_id
 
     t.save
 
     transactions.push(t)
 
-    unless transaction.transfer_account_id.nil? && transfer_transaction.nil?
-      transactions = self.create_from_transaction(t, current_user, transaction.transfer_account_id, nil, transactions)
+    unless transaction.transfer_transaction_id.nil?
+      puts "YYYYYYYYYYYYYYYYYYYYYYYYY"
+      transactions = self.create_from_transaction(transaction, current_user, transaction.transfer_transaction_id, nil, transactions) if transfer_transaction.nil?
     end
 
     if transaction.children.length > 0
       transaction.children.each do |ct|
-        transactions = self.create_from_transaction(ct, current_user, transfer_transaction, t.id, transactions)
+        transactions = self.create_from_transaction(ct, current_user, nil, t.id, transactions)
       end
     end
 
