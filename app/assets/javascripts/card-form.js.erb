@@ -179,7 +179,22 @@ function changeTransactionAccount(selectObject) {
   $('#transactionform #transaction_account').val(account);
   $('#transactionform #transaction_from_account').val(account);
 
-  if (transaction_type != 'transfer') {
+  if (!currencyChanged || transaction_type === 'transfer') {
+    $.ajax({
+      type: "GET",
+      dataType: "text",
+      url: "/api/account_currency/" + encodeURI(account),
+      success: function(data) {
+        $("#transactionform #transaction_currency").val(data);
+      }
+    });
+  } else if (currencyChanged) {
+    changeTransactionCurrency($('#transactionform #transaction_currency').val());
+  }
+
+  showTransferCurrencyRates();
+
+  /*if (transaction_type != 'transfer') {
     if (!currencyChanged){
       $.ajax({
         type: "GET",
@@ -194,7 +209,7 @@ function changeTransactionAccount(selectObject) {
     }
   } else {
     showTransferCurrencyRates();
-  }
+  }*/
 }
 
 function changeTransactionToAccount(selectObject) {
