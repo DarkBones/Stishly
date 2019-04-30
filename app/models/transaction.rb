@@ -29,7 +29,7 @@ class Transaction < ApplicationRecord
   has_many :children, :class_name => 'Transaction', :foreign_key => 'parent_id'
 
   filterrific(
-    default_filter_params: { sorted_by: 'created_at_desc' },
+    default_filter_params: { sorted_by: 'created_at_desc', include_children: 1 },
     available_filters: [
       :description,
       :from_date,
