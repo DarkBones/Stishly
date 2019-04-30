@@ -193,23 +193,6 @@ function changeTransactionAccount(selectObject) {
   }
 
   showTransferCurrencyRates();
-
-  /*if (transaction_type != 'transfer') {
-    if (!currencyChanged){
-      $.ajax({
-        type: "GET",
-        dataType: "text",
-        url: "/api/account_currency/" + encodeURI(account),
-        success: function(data) {
-          $("#transactionform #transaction_currency").val(data);
-        }
-      });
-    } else {
-      changeTransactionCurrency($('#transactionform #transaction_currency').val());
-    }
-  } else {
-    showTransferCurrencyRates();
-  }*/
 }
 
 function changeTransactionToAccount(selectObject) {
