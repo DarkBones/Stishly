@@ -20,8 +20,6 @@ function searchCategories(target, input, obj){
     var liPos = 0;
     var $obj = $("#" + obj.id);
 
-    console.log(text);
-
     //console.log(obj.val());
 
     if (typeof(text) === "undefined") {
@@ -64,9 +62,10 @@ $(document).on("click", (event) => {
   $(".dropdown__options").hide();
 });
 
-function setCategory(obj, id) {
-  var $categoriesDropdown = $(obj).closest("div#categoriesDropdownOptions").siblings("button#categories-dropdown");
+function setCategory(obj, id, suff="") {
+  var $categoriesDropdown = $(obj).closest("div#categoriesDropdownOptions" + suff).siblings("button#categories-dropdown");
 
-  $categoriesDropdown.html($("#categoriesDropdownOptions li.category_" + id.toString()).html());
+  $categoriesDropdown.html($("#categoriesDropdownOptions" + suff + " li.category_" + id.toString()).html());
   $($categoriesDropdown.attr("input-target")).val(id);
+  //alert($categoriesDropdown.attr("input-target"));
 }

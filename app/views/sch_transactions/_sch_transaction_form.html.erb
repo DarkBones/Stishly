@@ -101,7 +101,7 @@
             } %>
             
             <% categories = Category.get_user_categories(current_user, true) %>
-            <%= f.text_field :category_id, :id => "edit_sch_transaction_" + sch_transaction.id.to_s + "_category_id" %>
+            <%= f.text_field :category_id, :id => "edit_sch_transaction_" + sch_transaction.id.to_s + "_category_id_" + sch_transaction.id.to_s %>
           </div>
 
         </div>

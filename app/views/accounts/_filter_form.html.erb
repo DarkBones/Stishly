@@ -73,7 +73,7 @@
               id_suff: "_filter"
             } %>
             <% categories = Category.get_user_categories(current_user, true) %>
-            <%= f.hidden_field :category_id %>
+            <%= f.hidden_field :category_id, :id => "filterrific_category_id_filter" %>
           </div>
 
         </div>
