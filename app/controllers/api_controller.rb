@@ -19,6 +19,13 @@ class ApiController < ApplicationController
     end
   end
 
+  def schedule_transactions
+    schedule = current_user.schedules.find(params[:schedule_id])
+    transactions = schedule.sch_transactions.where(parent_id: nil).decorate
+
+    render transactions
+  end
+
   # renders the iso code of the currency of the given account name
   def country_currency
     currency = ISO3166::Country[params[:country_code]].currency

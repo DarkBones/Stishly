@@ -4,11 +4,17 @@ class TransactionDecorator < ApplicationDecorator
   def category
     if model.category
       model.category
+    elsif model.transfer_transaction_id
+      category = Category.new
+      category.symbol = "transfer"
+      category.name = "transfer"
+      category.color = "45, 100%, 51%";
+      return category
     else
       category = Category.new
       category.symbol = "uncategorised"
       category.name = "uncategorised"
-      category.color = "6A6C6E";
+      category.color = "0, 0%, 50%";
       return category
     end
   end
