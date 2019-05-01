@@ -1,16 +1,17 @@
 <% if sch_transaction.transfer_transaction_id == nil || (sch_transaction.transfer_transaction_id != nil && sch_transaction.direction == 1) %>
-  <tr>
-    <td>
-      <%= image_tag "categories/" + sch_transaction.category.symbol + ".svg",
-        :style => "background-color: hsl(" + sch_transaction.category.color + ");",
-        :class => "rounded-circle",
-        "height" => "30" %>
-    </td>
-    <td>
-      <%= sch_transaction.description %>
-    </td>
-    <td style="text-align:right">
-      <%= balance(sch_transaction.amount.to_f, Money::Currency.new(sch_transaction.currency), "cents") %>
-    </td>
-  </tr>
+  <a href="#">
+    <li>
+        <%= image_tag "categories/" + sch_transaction.category.symbol + ".svg",
+          :style => "background-color: hsl(" + sch_transaction.category.color + ");",
+          :class => "rounded-circle",
+          "height" => "30" %>
+        <%= sch_transaction.description %>
+      <span class="float-right">
+        <%= balance(sch_transaction.amount.to_f, Money::Currency.new(sch_transaction.currency), "cents") %>
+      </span>
+    </li>
+  </a>
+  
+  <%= render partial: "sch_transactions/sch_transaction_form", :locals => {:sch_transaction => sch_transaction} %>
+
 <% end %>

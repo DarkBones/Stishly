@@ -1,0 +1,114 @@
+<% sch_transaction ||= SchTransaction.new %>
+<% sch_transaction.direction = -1 %>
+<%
+  transaction_type = "expense"
+  type_bg_color = "bg-danger"
+  expense_class = ""
+  income_class = ""
+  transfer_class = ""
+  show_single_account = "default-show"
+  show_transfer_account = "default-hide"
+  from_account_name = ""
+  to_account_name = ""
+
+  if sch_transaction.persisted?
+    from_account_name = sch_transaction.account.name
+    to_account_name = from_account_name
+    if sch_transaction.transfer_account_id
+      to_account_name = current_user.accounts.find(sch_transaction.transfer_account_id).name
+    end
+  else
+    from_account_name = Account.get_accounts(current_user)[0].name
+    to_account_name = from_account_name
+  end
+
+  if sch_transaction.transfer_transaction_id
+    transaction_type = "transfer"
+    type_bg_color = "bg-warning"
+    transfer_class = "active"
+    show_transfer_account = "default-show"
+    show_single_account = "default-hide"
+  elsif sch_transaction.amount > 0
+    transaction_type = "income"
+    type_bg_color = "bg-success"
+    income_class = "active"
+  else
+    expense_class = "active"
+  end
+%>
+
+<%= form_for sch_transaction, :method => :put do |f| %>
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-12 col-lg-6 col-xl-7 px-2 px-sm-5 border-right">
+
+        <div class="row py-2">
+          <div class="col-12 py-5 <%= type_bg_color %> rounded" id="type">
+          
+            <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
+              <label class="btn btn-outline-light py-3 <%= expense_class %>" id="type-expense" onclick="changeTransactionType('expense', this)">
+                <%= f.radio_button :type, "expense" %>Expense
+              </label>
+              <label class="btn btn-outline-light py-3 <%= income_class %>" id="type-expense" onclick="changeTransactionType('income', this)">
+                <%= f.radio_button :type, "expense" %>Income
+              </label>
+              <label class="btn btn-outline-light py-3 <%= transfer_class %>" id="type-expense" onclick="changeTransactionType('transfer', this)">
+                <%= f.radio_button :type, "expense" %>Transfer
+              </label>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row py-2">
+          <div class="col-12 py-2">
+            <%= f.label :description %><br />
+            <%= f.text_field :description, class: 'transactionmenu__description form-control', 'default_value' => '' %>
+          </div>
+        </div>
+
+        <div class="row py-3 <%= show_single_account %>" id="single-account">
+          <div class="col-12 py-2">
+            <%= f.label :account %><br />
+            <%= f.select(:account, user_accounts_array, {:selected => from_account_name}, { :class=> "form-control", "onchange" => "changeTransactionAccount(this)", :selected => from_account_name }) %>
+          </div>
+        </div>
+
+        <div class="row py-3 <%= show_transfer_account %>" id="transfer-account">
+          <div class="col-12 col-lg-6 py-2">
+            <%= f.label :from_account %><br />
+            <%= f.select(:from_account, user_accounts_array, {:selected => from_account_name}, { :class => 'form-control', 'onchange' => 'changeTransactionAccount(this)' }) %>
+          </div>
+
+          <div class="col-12 col-lg-6 py-2">
+            <%= f.label :to_account %><br />
+            <%= f.select(:to_account, user_accounts_array, {:selected => to_account_name}, { :class => 'form-control', 'onchange' => 'changeTransactionAccount(this)' }) %>
+          </div>
+        </div>
+
+        <div class="row py-3 default-show" id="categories">
+
+          <div class="col-12 py-2">
+            <%= f.label :category %><br />
+            <%= render partial: "shared/custom_dropdown_categories", locals: {
+              selected: Category.get_user_categories(current_user, true)[0],
+              options: Category.get_user_categories(current_user, true),
+              input_target: "#edit_sch_transaction_" + sch_transaction.id.to_s + "_category_id",
+              button_type: 'btn-outline-dark',
+              id_suff: "_" + sch_transaction.id.to_s
+            } %>
+            
+            <% categories = Category.get_user_categories(current_user, true) %>
+            <%= f.text_field :category_id, :id => "edit_sch_transaction_" + sch_transaction.id.to_s + "_category_id" %>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+<% end %>

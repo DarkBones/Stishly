@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resource :transactions, only: [:show]
   resource :user_settings, only: [:edit]
   resource :sch_transactions_schedules
-  resource :sch_transactions
+  resource :sch_transaction
 
   get 'accounts/:id/settings', to: 'accounts#settings', as: :account_settings
 
