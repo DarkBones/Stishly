@@ -60,8 +60,8 @@ class SchTransaction < ApplicationRecord
 
     # find transfer_transaction_id
     transfer_transactions = []
-    transactions.each do |t|
-      transfer_transactions.push(t) if t.parent_id.nil?
+    transactions.each do |trx|
+      transfer_transactions.push(trx) if trx.parent_id.nil?
     end
 
     if transfer_transactions.length == 2
