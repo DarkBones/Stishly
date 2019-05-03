@@ -22,9 +22,9 @@ class SchTransaction < ApplicationRecord
   has_one :user, through: :account
   belongs_to :category, optional: true
   has_one :parent, :class_name => 'ScheduledTransaction'
-  has_many :children, :class_name => 'Transaction', :foreign_key => 'parent_id'
+  has_many :children, :class_name => 'SchTransaction', :foreign_key => 'parent_id'
 
-  attr_accessor :type, :from_account, :to_account
+  attr_accessor :type, :from_account, :to_account, :multiple
 
   def self.create_from_transaction(transaction, current_user, transfer_transaction=nil, parent_id=nil, transactions=[])
     unless transfer_transaction.nil?

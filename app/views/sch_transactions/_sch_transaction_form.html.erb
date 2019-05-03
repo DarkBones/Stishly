@@ -1,5 +1,5 @@
-<% sch_transaction ||= SchTransaction.new %>
-<% sch_transaction.direction = -1 %>
+<% sch_transaction ||= SchTransaction.new.decorate %>
+<%# sch_transaction.direction = -1 %>
 <%
   transaction_type = "expense"
   type_bg_color = "bg-danger"
@@ -34,6 +34,16 @@
     income_class = "active"
   else
     expense_class = "active"
+  end
+
+  multiple_class = ""
+  single_class = ""
+  if sch_transaction.children.length > 0
+    multiple_class = "active"
+    single_class = ""
+  else
+    multiple_class = ""
+    single_class = "active"
   end
 %>
 
@@ -104,6 +114,46 @@
             <%= f.text_field :category_id, :id => "edit_sch_transaction_" + sch_transaction.id.to_s + "_category_id_" + sch_transaction.id.to_s %>
           </div>
 
+        </div>
+
+      </div>
+
+      <div class="col-12 col-lg-6 col-xl-5">
+
+        <div class="row py-2">
+          <div class="col-12 py-5">
+
+            <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
+              <label class="btn btn-secondary <%= single_class %> py-3" onclick="changeTransactionMultiple('single')" id="multiple-single">
+                <%= f.radio_button :multiple, 'single' %>Single
+              </label>
+              <label class="btn btn-secondary <%= multiple_class %> py-3" onclick="changeTransactionMultiple('multiple')" id="multiple-multiple">
+                <%= f.radio_button :multiple, 'multiple' %>Multiple
+              </label>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row py-3">
+          <div class="col-12">
+            <%= f.label :currency %><br />
+            <%= f.select(:currency, all_currencies(Money::Currency.table), {}, { :class => 'form-control' }) %>
+          </div>
+        </div>
+
+        <div class="row py-3" id="single-amount">
+          <div class="col-12">
+            <%= f.label :amount %><br />
+            <%= f.number_field :amount, placeholder: "99.87", class: 'accountmenu__balance form-control', step: :any, value: sch_transaction.amount_single %>
+          </div>
+        </div>
+
+        <div class="row py-3" id="multi-amount">
+          <div class="col-12">
+            <%= f.label :transactions %><br />
+            <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: 'accountmenu__description form-control', value: sch_transaction.amount_multiple %>
+          </div>
         </div>
 
       </div>

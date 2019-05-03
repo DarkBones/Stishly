@@ -19,4 +19,22 @@ class SchTransactionDecorator < ApplicationDecorator
     end
   end
 
+  def amount_single
+    currency = Money::Currency.new(model.currency)
+    return (model.amount / currency.subunit_to_unit).abs
+  end
+
+  def amount_multiple
+    currency = Money::Currency.new(model.currency)
+    if model.children.length > 0
+      result = ""
+      model.children.each do |ct|
+        result += "#{ct.description} #{ct.amount / currency.subunit_to_unit}\n"
+      end
+      return result
+    else
+      return ""
+    end
+  end
+
 end

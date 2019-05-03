@@ -1,4 +1,4 @@
-<% if sch_transaction.transfer_transaction_id == nil || (sch_transaction.transfer_transaction_id != nil && sch_transaction.direction == 1) %>
+<% if sch_transaction.transfer_transaction_id == nil || (sch_transaction.transfer_transaction_id != nil && sch_transaction.direction == -1) %>
   <a href="#">
     <li>
         <%= image_tag "categories/" + sch_transaction.category.symbol + ".svg",
