@@ -6,10 +6,12 @@
   expense_class = ""
   income_class = ""
   transfer_class = ""
-  show_single_account = "default-show"
-  show_transfer_account = "default-hide"
   from_account_name = ""
   to_account_name = ""
+  single_account_style = ""
+  transfer_account_style = ""
+  single_amount_style = ""
+  multiple_amount_style = ""
 
   if sch_transaction.persisted?
     from_account_name = sch_transaction.account.name
@@ -26,14 +28,18 @@
     transaction_type = "transfer"
     type_bg_color = "bg-warning"
     transfer_class = "active"
-    show_transfer_account = "default-show"
-    show_single_account = "default-hide"
+    single_account_style = "display: none;"
+    transfer_account_style = ""
   elsif sch_transaction.amount > 0
     transaction_type = "income"
     type_bg_color = "bg-success"
     income_class = "active"
+    single_account_style = ""
+    transfer_account_style = "display: none;"
   else
     expense_class = "active"
+    single_account_style = ""
+    transfer_account_style = "display: none;"
   end
 
   multiple_class = ""
@@ -41,9 +47,13 @@
   if sch_transaction.children.length > 0
     multiple_class = "active"
     single_class = ""
+    single_amount_style = "display: none;"
+    multiple_amount_style = ""
   else
     multiple_class = ""
     single_class = "active"
+    single_amount_style = ""
+    multiple_amount_style = "display: none;"
   end
 %>
 
@@ -79,14 +89,14 @@
           </div>
         </div>
 
-        <div class="row py-3 <%= show_single_account %>" id="single-account">
+        <div class="row py-3" id="single-account" style="<%= single_account_style %>">
           <div class="col-12 py-2">
             <%= f.label :account %><br />
             <%= f.select(:account, user_accounts_array, {:selected => from_account_name}, { :class=> "form-control", "onchange" => "changeTransactionAccount(this, '#sch_transaction_currency')", :selected => from_account_name }) %>
           </div>
         </div>
 
-        <div class="row py-3 <%= show_transfer_account %>" id="transfer-account">
+        <div class="row py-3" id="transfer-account" style="<%= transfer_account_style %>">
           <div class="col-12 col-lg-6 py-2">
             <%= f.label :from_account %><br />
             <%= f.select(:from_account, user_accounts_array, {:selected => from_account_name}, { :class => 'form-control', 'onchange' => 'changeTransactionAccount(this, "#sch_transaction_currency")' }) %>
@@ -98,7 +108,7 @@
           </div>
         </div>
 
-        <div class="row py-3 default-show" id="categories">
+        <div class="row py-3 default-show" id="categories" style="<%= single_account_style %>">
 
           <div class="col-12 py-2">
             <%= f.label :category %><br />
@@ -142,20 +152,24 @@
           </div>
         </div>
 
-        <div class="row py-3" id="amount">
+        <div class="row py-3" id="amount" style="<%= single_amount_style %>">
           <div class="col-12">
             <%= f.label :amount %><br />
             <%= f.number_field :amount, placeholder: "99.87", class: 'accountmenu__balance form-control', step: :any, value: sch_transaction.amount_single %>
           </div>
         </div>
 
-        <div class="row py-3" id="transactions">
+        <div class="row py-3" id="transactions" style="<%= multiple_amount_style %>">
           <div class="col-12">
             <%= f.label :transactions %><br />
             <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: 'accountmenu__description form-control', value: sch_transaction.amount_multiple %>
           </div>
         </div>
 
+      </div>
+
+      <div class="col-12">
+        <%= f.submit 'Save', :class => 'btn btn-primary' %>
       </div>
 
     </div>
