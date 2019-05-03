@@ -29,7 +29,7 @@ class SchTransactionDecorator < ApplicationDecorator
     if model.children.length > 0
       result = ""
       model.children.each do |ct|
-        result += "#{ct.description} #{ct.amount / currency.subunit_to_unit}\n"
+        result += "#{ct.description} #{(ct.amount / currency.subunit_to_unit).abs}\n"
       end
       return result
     else

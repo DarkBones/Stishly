@@ -1,4 +1,4 @@
-<div class="modal <%= 'fade' if Rails.env.test? == false %>" id="transactionform" tabindex="-1" role="dialog" aria-labelledby="transactionformLabel" aria-hidden="true">
+<div class="modal transactionform <%= 'fade' if Rails.env.test? == false %>" id="transactionform" tabindex="-1" role="dialog" aria-labelledby="transactionformLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -20,13 +20,13 @@
                   <div class="col-12 py-5 bg-danger rounded" id="type">
 
                     <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
-                      <label class="btn btn-outline-light active py-3" onclick="changeTransactionType('expense')" id="type-expense">
+                      <label class="btn btn-outline-light active py-3" onclick="changeTransactionType('expense', this)" id="type-expense">
                         <%= f.radio_button :type, 'expense' %>Expense
                       </label>
-                      <label class="btn btn-outline-light py-3" onclick="changeTransactionType('income')" id="type-income">
+                      <label class="btn btn-outline-light py-3" onclick="changeTransactionType('income', this)" id="type-income">
                         <%= f.radio_button :type, 'income' %>Income
                       </label>
-                      <label class="btn btn-outline-light py-3" onclick="changeTransactionType('transfer')" id="type-transfer">
+                      <label class="btn btn-outline-light py-3" onclick="changeTransactionType('transfer', this)" id="type-transfer">
                         <%= f.radio_button :type, 'transfer' %>Transfer
                       </label>
                     </div>
@@ -95,10 +95,10 @@
                   <div class="col-12 py-5">
 
                     <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
-                      <label class="btn btn-secondary active py-3" onclick="changeTransactionMultiple('single')" id="multiple-single">
+                      <label class="btn btn-secondary active py-3" onclick="changeTransactionMultiple('single', this)" id="multiple-single">
                         <%= f.radio_button :multiple, 'single' %>Single
                       </label>
-                      <label class="btn btn-secondary py-3" onclick="changeTransactionMultiple('multiple')" id="multiple-multiple">
+                      <label class="btn btn-secondary py-3" onclick="changeTransactionMultiple('multiple', this)" id="multiple-multiple">
                         <%= f.radio_button :multiple, 'multiple' %>Multiple
                       </label>
                     </div>

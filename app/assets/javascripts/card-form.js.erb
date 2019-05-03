@@ -21,52 +21,54 @@ $(document).on('show.bs.modal','#accountform', function () {
 
 
 
-function changeTransactionType(type) {
+function changeTransactionType(type, obj) {
+  var formId = "#" + $(obj).parents(".transactionform").attr("id");
   transaction_type = type
   showTransferCurrencyRates();
   switch(type) {
     case 'transfer':
-      $('#transactionform #single-account').hide();
-      $('#transactionform #categories').hide();
-      $('#transactionform #transfer-account').show();
-      $('#transactionform #type').removeClass('bg-danger');
-      $('#transactionform #type').addClass('bg-warning');
-      $('#transactionform #type').removeClass('bg-success');
-      $('#transactionform #transaction-currency-options').hide();
+      $(formId + ' #single-account').hide();
+      $(formId + ' #categories').hide();
+      $(formId + ' #transfer-account').show();
+      $(formId + ' #type').removeClass('bg-danger');
+      $(formId + ' #type').addClass('bg-warning');
+      $(formId + ' #type').removeClass('bg-success');
+      $(formId + ' #transaction-currency-options').hide();
       break;
     case 'income':
-      $('#transactionform #single-account').show();
-      $('#transactionform #categories').show();
-      $('#transactionform #transfer-account').hide();
-      $('#transactionform #type').removeClass('bg-danger');
-      $('#transactionform #type').removeClass('bg-warning');
-      $('#transactionform #type').addClass('bg-success');
-      $('#transactionform #transaction-currency-options').show();
+      $(formId + ' #single-account').show();
+      $(formId + ' #categories').show();
+      $(formId + ' #transfer-account').hide();
+      $(formId + ' #type').removeClass('bg-danger');
+      $(formId + ' #type').removeClass('bg-warning');
+      $(formId + ' #type').addClass('bg-success');
+      $(formId + ' #transaction-currency-options').show();
       break;
     default:
-      $('#transactionform #single-account').show();
-      $('#transactionform #categories').show();
-      $('#transactionform #transfer-account').hide();
-      $('#transactionform #type').addClass('bg-danger');
-      $('#transactionform #type').removeClass('bg-warning');
-      $('#transactionform #type').removeClass('bg-success');
-      $('#transactionform #transaction-currency-options').show();
+      $(formId + ' #single-account').show();
+      $(formId + ' #categories').show();
+      $(formId + ' #transfer-account').hide();
+      $(formId + ' #type').addClass('bg-danger');
+      $(formId + ' #type').removeClass('bg-warning');
+      $(formId + ' #type').removeClass('bg-success');
+      $(formId + ' #transaction-currency-options').show();
   }
 }
 
-function changeTransactionMultiple(type){
+function changeTransactionMultiple(type, obj){
+  var formId = "#" + $(obj).parents(".transactionform").attr("id");
   switch (type) {
     case 'single':
-      $('#transactionform #amount').show();
-      $('#transactionform #transactions').hide();
+      $(formId + ' #amount').show();
+      $(formId + ' #transactions').hide();
       multiple_transactions = false;
       break;
     default:
-      $('#transactionform #amount').hide();
-      $('#transactionform #transactions').show();
+      $(formId + ' #amount').hide();
+      $(formId + ' #transactions').show();
       multiple_transactions = true;
       // update the total amount
-      updateTransactionsTotal('#transactionform #transactions-total','#transactionform #transactions textarea' ,'#transactionform #transaction_currency');
+      updateTransactionsTotal(formId + ' #transactions-total','#transactionform #transactions textarea' ,'#transactionform #transaction_currency');
   }
 
   updateTransactionResult();
@@ -173,11 +175,12 @@ function updateTransactionRate(rateTarget, resultTarget, amountTarget1, amountTa
   }
 }
 
-function changeTransactionAccount(selectObject) {
+function changeTransactionAccount(selectObject, target="#transaction_currency") {
+  var formId = "#" + $(selectObject).parents(".transactionform").attr("id");
   var account = selectObject.value;
 
-  $('#transactionform #transaction_account').val(account);
-  $('#transactionform #transaction_from_account').val(account);
+  $(formId + ' #transaction_account').val(account);
+  $(formId + ' #transaction_from_account').val(account);
 
   if (!currencyChanged || transaction_type === 'transfer') {
     $.ajax({
@@ -185,11 +188,11 @@ function changeTransactionAccount(selectObject) {
       dataType: "text",
       url: "/api/account_currency/" + encodeURI(account),
       success: function(data) {
-        $("#transactionform #transaction_currency").val(data);
+        $(formId + " " + target).val(data);
       }
     });
   } else if (currencyChanged) {
-    changeTransactionCurrency($('#transactionform #transaction_currency').val());
+    changeTransactionCurrency($(formId + ' #transaction_currency').val());
   }
 
   showTransferCurrencyRates();
