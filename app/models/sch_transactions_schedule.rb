@@ -29,4 +29,5 @@ class SchTransactionsSchedule < ApplicationRecord
     end
 
   end
+
 end

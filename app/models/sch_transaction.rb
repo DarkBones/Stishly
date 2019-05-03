@@ -75,4 +75,18 @@ class SchTransaction < ApplicationRecord
     return transactions
 
   end
+
+  def self.update(params, current_user)
+    puts "TYPE: #{params[:type]}"
+    sch_transaction = current_user.sch_transactions.find(params[:id])
+    puts "MMMMMMMMMMMMMMMMMMMMMMMMM"
+    #sch_transaction.children.destroy_all
+  end
+
+private
+
+  def self.update_transaction(transaction)
+
+  end
+
 end

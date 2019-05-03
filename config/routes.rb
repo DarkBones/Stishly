@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resource :user_settings, only: [:edit]
   resource :sch_transactions_schedules
   resource :sch_transaction
+  #resource :schedules, only: [:index]
 
   get 'accounts/:id/settings', to: 'accounts#settings', as: :account_settings
 
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
   get 'accounts/:id/set_default', to: 'accounts#set_default', as: :set_default_account
 
   get 'schedules', to: 'schedules#index', as: :schedules
+  patch 'schedules', to: 'sch_transactions#update'
 
   get 'api/accounts/:id/details', to: 'api#account_details', as: :account_details
   get 'api/accounts/details', to: 'api#all_accounts_details', as: :account_all_details

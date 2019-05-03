@@ -56,8 +56,8 @@
     multiple_amount_style = "display: none;"
   end
 %>
-
-<%= form_for sch_transaction, :method => :put do |f| %>
+<%= form_for sch_transaction do |f| %>
+  <%= f.hidden_field :id, value: sch_transaction.id %>
   <div class="container">
 
     <div class="row">
@@ -121,7 +121,7 @@
             } %>
             
             <% categories = Category.get_user_categories(current_user, true) %>
-            <%= f.text_field :category_id, :id => "edit_sch_transaction_" + sch_transaction.id.to_s + "_category_id_" + sch_transaction.id.to_s %>
+            <%= f.hidden_field :category_id, :id => "edit_sch_transaction_" + sch_transaction.id.to_s + "_category_id_" + sch_transaction.id.to_s %>
           </div>
 
         </div>
