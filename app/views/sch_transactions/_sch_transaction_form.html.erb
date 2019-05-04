@@ -69,13 +69,13 @@
           
             <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
               <label class="btn btn-outline-light py-3 <%= expense_class %>" id="type-expense" onclick="changeTransactionType('expense', this)">
-                <%= f.radio_button :type, "expense" %>Expense
+                <%= f.radio_button :type, "expense", :checked => (transaction_type == "expense") %>Expense
               </label>
-              <label class="btn btn-outline-light py-3 <%= income_class %>" id="type-expense" onclick="changeTransactionType('income', this)">
-                <%= f.radio_button :type, "expense" %>Income
+              <label class="btn btn-outline-light py-3 <%= income_class %>" id="type-income" onclick="changeTransactionType('income', this)">
+                <%= f.radio_button :type, "income", :checked => (transaction_type == "income") %>Income
               </label>
-              <label class="btn btn-outline-light py-3 <%= transfer_class %>" id="type-expense" onclick="changeTransactionType('transfer', this)">
-                <%= f.radio_button :type, "expense" %>Transfer
+              <label class="btn btn-outline-light py-3 <%= transfer_class %>" id="type-transfer" onclick="changeTransactionType('transfer', this)">
+                <%= f.radio_button :type, "transfer", :checked => (transaction_type == "transfer") %>Transfer
               </label>
             </div>
 
@@ -135,10 +135,10 @@
 
             <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
               <label class="btn btn-secondary <%= single_class %> py-3" onclick="changeTransactionMultiple('single', this)" id="multiple-single">
-                <%= f.radio_button :multiple, 'single' %>Single
+                <%= f.radio_button :multiple, 'single', :checked => (sch_transaction.children.length == 0) %>Single
               </label>
               <label class="btn btn-secondary <%= multiple_class %> py-3" onclick="changeTransactionMultiple('multiple', this)" id="multiple-multiple">
-                <%= f.radio_button :multiple, 'multiple' %>Multiple
+                <%= f.radio_button :multiple, 'multiple', :checked => (sch_transaction.children.length > 0) %>Multiple
               </label>
             </div>
 
