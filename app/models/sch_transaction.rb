@@ -78,12 +78,13 @@ class SchTransaction < ApplicationRecord
 
   def self.update(params, current_user)
     sch_transaction = current_user.sch_transactions.find(params[:id])
-    self.update_transaction(sch_transaction, params, current_user) unless sch_transaction.nil?
+    self.create_transaction(sch_transaction, params, current_user) unless sch_transaction.nil?
+    self.destroy_original(sch_transaction, current_user)
   end
 
 private
 
-  def self.update_transaction(transaction, params, current_user)
+  def self.create_transaction(transaction, params, current_user)
     transaction = current_user.sch_transactions.find(params[:id])
     new_transactions = self.make_transactions(params, current_user, transaction.original_transaction_id)
 
@@ -107,7 +108,16 @@ private
       end
     end
 
-    #transaction.children.destroy_all
+  end
+
+  def self.destroy_original(transaction, current_user)
+    transfer_transaction = current_user.sch_transactions.find(transaction.transfer_transaction_id) unless transaction.transfer_transaction_id.nil?
+
+    transaction.children.destroy_all
+    transfer_transaction.children.destroy_all unless transfer_transaction.nil?
+
+    transaction.destroy
+    transfer_transaction.destroy unless transfer_transaction.nil?
   end
 
   def self.make_transactions(params, current_user, original_transaction_id=nil, parent_id=nil, transferred=false)
