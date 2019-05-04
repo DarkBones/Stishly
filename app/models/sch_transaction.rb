@@ -135,7 +135,7 @@ private
     transaction.direction = self.get_direction(params[:type], params[:amount].to_f, transferred)
     transaction.amount = self.get_amount(params[:currency], params[:amount].to_f, params[:transactions], params[:multiple]) * transaction.direction
     transaction.description = params[:description]
-    transaction.currency = self.get_currency(params[:type], params[:currency], from_account, to_account, transferred)
+    transaction.currency = self.get_currency(params[:type], params[:currency], from_account)
     transaction.category_id = params[:category_id]
     transaction.transfer_account_id = self.get_transfer_account_id(params[:type], from_account, to_account, transferred)
     transaction.original_transaction_id = original_transaction_id unless parent_id.nil?
@@ -185,7 +185,7 @@ private
     return to_account.id
   end
 
-  def self.get_currency(type, currency, from_account, to_account, transferred)
+  def self.get_currency(type, currency, from_account)
     if type != "transfer"
       return currency
     else
