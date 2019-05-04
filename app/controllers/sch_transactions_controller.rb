@@ -25,7 +25,8 @@ private
       :currency,
       :amount,
       :transactions,
-      :multiple
+      :multiple,
+      :type
       )
   end
 
