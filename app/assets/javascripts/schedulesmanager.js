@@ -4,7 +4,7 @@ function scheduleTransactionsForm(scheduleId) {
     dataType: "html",
     url: "api/schedule_transactions/" + scheduleId,
     success(data) {
-      $("#sch_transactions_list").html(data);
+      $("#sch_transactions_list").prepend(data);
     }
   });
 }

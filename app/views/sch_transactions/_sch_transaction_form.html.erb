@@ -1,6 +1,9 @@
-<% sch_transaction ||= SchTransaction.new.decorate %>
+<% sch_transaction ||= current_user.sch_transactions.new.decorate %>
 <%# sch_transaction.direction = -1 %>
 <%
+  sch_transaction.amount ||= 0
+  sch_transaction.currency ||= current_user.currency
+
   transaction_type = "expense"
   type_bg_color = "bg-danger"
   expense_class = ""
@@ -58,6 +61,7 @@
     multiple_amount_style = "display: none;"
   end
 %>
+<%#= form_for sch_transaction, url: {action: "create"} do |f| %>
 <%= form_for sch_transaction do |f| %>
   <%= f.hidden_field :id, value: sch_transaction.id %>
   <div class="container" id="sch_transaction_<%= sch_transaction.id %>">
