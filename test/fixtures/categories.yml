@@ -29,7 +29,7 @@ others7: { id: 7, name: 'Other', color: '216, 100%, 50%', symbol: 'others', user
 shopping8: { id: 8, name: 'Shopping', color: '252, 100%, 50%', symbol: 'shopping', user_id: 1, parent_id: }
 transport9: { id: 9, name: 'Transport', color: '288, 100%, 50%', symbol: 'transport', user_id: 1, parent_id: }
 vehicle10: { id: 10, name: 'Vehicle', color: '324, 100%, 50%', symbol: 'vehicle', user_id: 1, parent_id: }
-cinema11: { id: 11, name: 'Cinema', color: '0, 100%, 50%', symbol: 'cinema', user_id: 1, parent_id: 1}
+cinema11: { id: 11, name: 'Cinema', color: '0, 100%, 50%', symbol: 'cinema', user_id: 1, parent_id: 12}
 date12: { id: 12, name: 'Date', color: '0, 100%, 50%', symbol: 'date', user_id: 1, parent_id: 1}
 hobbies13: { id: 13, name: 'Hobbies', color: '0, 100%, 50%', symbol: 'hobbies', user_id: 1, parent_id: 1}
 holiday14: { id: 14, name: 'Holiday', color: '0, 100%, 50%', symbol: 'holiday', user_id: 1, parent_id: 1}

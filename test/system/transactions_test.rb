@@ -1,4 +1,3 @@
-=begin
 require "application_system_test_case"
 
 class TransactionsTest < ApplicationSystemTestCase
@@ -36,457 +35,254 @@ class TransactionsTest < ApplicationSystemTestCase
     logout
   end
 
-  test "create multiple transactions" do
-    # login as transactions user
+  test "automatic account selection" do
     login_user(users(:transactions), 'SomePassword123^!')
 
-    5.times do
-        # click on new transaction
-        page.find("#account_0").click
-        click_on "New Transaction"
-        #sleep 15
-
-        # fill in the details
-        fill_in "Description", with: "single expense euro"
-        fill_in "Amount", with: "100"
-
-        click_on "Create Transaction"
-        sleep 1
-    end
-
-    wait_for_ajax
-
-    assert_selector '#transactions_list', text: "Today\n€-500.00"
-    assert_selector '#transactions_list', text: "single expense euro\n€-100.00"
-
-    assert_selector '#accounts_list', text: "All\n€9,500.00"
-    assert_selector '#accounts_list', text: "Current Account\n€9,500.00"
-  end
-
-  test "create single expense transaction in same currency" do
-    # login as transactions user
-    login_user(users(:transactions), 'SomePassword123^!')
-
-    # click on new transaction
-    page.find("#account_0").click
     click_on "New Transaction"
-    #sleep 15
 
-    # fill in the details
-    fill_in "Description", with: "single expense euro"
-    fill_in "Amount", with: "100.01"
-
-    click_on "Create Transaction"
-
-    assert_selector '#transactions_list', text: "Today\n€-100.01"
-    assert_selector '#transactions_list', text: "single expense euro\n€-100.01"
-
-    assert_selector '#accounts_list', text: "All\n€9,899.99"
-    assert_selector '#accounts_list', text: "Current Account\n€9,899.99"
-
-    page.driver.browser.navigate.refresh
-    logout
-  end
-
-  test "create multiple expense transactions in same currency" do
-    # login as transactions user
-    login_user(users(:transactions), 'SomePassword123^!')
-
-    # click on new transaction
-    page.find("#account_0").click
-    click_on "New Transaction"
-    #sleep 15
-
-    # fill in the details
-    fill_in "Description", with: "multiple expense euro"
-    page.find("#transactionform #multiple-multiple").click
-    fill_in "Transactions", with: "one 1\r\ntwo 2\r\nthree 3\r\nfour 4\r\npoint 05 .05"
-
-    click_on "Create Transaction"
-
-    assert_selector '.child_transactions', visible: :hidden
-    page.find('.show-child-transactions').click
-    assert_selector '.child_transactions', visible: :visible
-
-    assert_selector '#transactions_list', text: "Today\n€-10.05"
-    assert_selector '#transactions_list', text: "multiple expense euro\n€-10.05"
-
-    assert_selector '.child_transactions', text: "one\n€-1.00"
-    assert_selector '.child_transactions', text: "two\n€-2.00"
-    assert_selector '.child_transactions', text: "three\n€-3.00"
-    assert_selector '.child_transactions', text: "four\n€-4.00"
-    assert_selector '.child_transactions', text: "point 05\n€-0.05"
-
-    page.find('.show-child-transactions').click
-    assert_selector '.child_transactions', visible: :hidden
-
-    assert_selector '#accounts_list', text: "All\n€9,989.95"
-    assert_selector '#accounts_list', text: "Current Account\n€9,989.95"
-
-    page.driver.browser.navigate.refresh
-    logout
-  end
-
-  test "create single income transaction in same currency" do
-    # login as transactions user
-    login_user(users(:transactions), 'SomePassword123^!')
-    page.find("#account_0").click
-    click_on "New Transaction"
-    #sleep 15
-
-    # fill in the details
-    fill_in "Description", with: "single income euro"
-    page.find("#transactionform #type-income").click
-    fill_in "Amount", with: "100.01"
-
-    click_on "Create Transaction"
-
-    assert_selector '#transactions_list', text: "Today\n€100.01"
-    assert_selector '#transactions_list', text: "single income euro\n€100.01"
-
-    assert_selector '#accounts_list', text: "All\n€10,100.01"
-    assert_selector '#accounts_list', text: "Current Account\n€10,100.01"
-
-    page.driver.browser.navigate.refresh
-    logout
-  end
-
-  test "create multiple income transactions in same currency" do
-    # login as transactions user
-    login_user(users(:transactions), 'SomePassword123^!')
-
-    # click on new transaction
-    page.find("#account_0").click
-    click_on "New Transaction"
-    #sleep 15
-
-    # fill in the details
-    fill_in "Description", with: "multiple expense euro"
-    page.find("#transactionform #type-income").click
-    page.find("#transactionform #multiple-multiple").click
-    fill_in "Transactions", with: "one 1\ntwo 2\nthree 3\nfour 4\npoint 05 .05"
-
-    click_on "Create Transaction"
-
-    assert_selector '.child_transactions', visible: :hidden
-    page.find('.show-child-transactions').click
-    assert_selector '.child_transactions', visible: :visible
-
-    assert_selector '#transactions_list', text: "Today\n€10.05"
-    assert_selector '#transactions_list', text: "multiple expense euro\n€10.05"
-    assert_selector '#transactions_list', text: "one\n€1.00"
-    assert_selector '#transactions_list', text: "two\n€2.00"
-    assert_selector '#transactions_list', text: "three\n€3.00"
-    assert_selector '#transactions_list', text: "four\n€4.00"
-    assert_selector '#transactions_list', text: "point 05\n€0.05"
-    
-
-    assert_selector '#accounts_list', text: "All\n€10,010.05"
-    assert_selector '#accounts_list', text: "Current Account\n€10,010.05"
-
-    page.driver.browser.navigate.refresh
-    logout
-  end
-
-  test "create single transfer transaction in same currency" do
-    # login as transactions user
-    login_user(users(:transactions), 'SomePassword123^!')
-    page.find("#account_0").click
-    click_on "New Transaction"
-    #sleep 15
-
-    # fill in the details
-    fill_in "Description", with: "single transfer euro"
-    page.find("#transactionform #type-transfer").click
-    select "Savings Account", from: "To account"
-    fill_in "Amount", with: "5000"
-
-    click_on "Create Transaction"
-        
-    assert_selector '#transactions_list', text: "Today\n€0.00"
-
-    assert_selector '#transactions_list', text: "single transfer euro\n€-5,000.00"
-    assert_selector '#transactions_list', text: "single transfer euro\n€5,000.00"
-
-    assert_selector '#transactions_list', text: "Transferred from Current Account"
-    assert_selector '#transactions_list', text: "Transferred to Savings Account"
+    assert page.find("#transaction_account").value == "Current Account", format_error("Unexpected selected account", "Current Account", page.find("#transaction_account").value)
+    click_on "Close"
 
     page.find("#account_16").click
-    assert_selector '#transactions_list', text: "Today\n€-5,000.00"
-    assert_selector '#transactions_list', text: "single transfer euro\n€-5,000.00"
+    click_on "New Transaction"
+    assert page.find("#transaction_account").value == "Current Account", format_error("Unexpected selected account", "Current Account", page.find("#transaction_account").value)
+    click_on "Close"
 
     page.find("#account_17").click
-    assert_selector '#transactions_list', text: "Today\n€5,000.00"
-    assert_selector '#transactions_list', text: "single transfer euro\n€5,000.00"
-
-    assert_selector '#accounts_list', text: "All\n€10,000.00"
-    assert_selector '#accounts_list', text: "Current Account\n€5,000.00"
-    assert_selector '#accounts_list', text: "Savings Account\n€5,000.00"
-
-    page.driver.browser.navigate.refresh
-    logout
+    click_on "New Transaction"
+    assert page.find("#transaction_account").value == "Savings Account", format_error("Unexpected selected account", "Savings Account", page.find("#transaction_account").value)
   end
 
-  test "create multiple transfer transactions in same currency" do
-    #page.save_screenshot 'tmp/screenshots/transaction_1.png'
-    # login as transactions user
+  test "automatic currency selection" do
     login_user(users(:transactions), 'SomePassword123^!')
-    page.find("#account_0").click
+
     click_on "New Transaction"
-    #sleep 15
+    assert page.find("#transaction_currency").value == "EUR", format_error("Unexpected selected currency", "EUR", page.find("#transaction_currency").value)
 
-    #page.save_screenshot 'tmp/screenshots/transaction_2.png'
+    select "JPY", from: "Account"
+    assert page.find("#transaction_currency").value == "JPY", format_error("Unexpected selected currency", "JPY", page.find("#transaction_currency").value)
 
-    # fill in the details
-    fill_in "Description", with: "multiple transfer euro"
-    page.find("#transactionform #type-transfer").click
-    #page.save_screenshot 'tmp/screenshots/transaction_3.png'
-    select "Savings Account", from: "To account"
-    #page.save_screenshot 'tmp/screenshots/transaction_4.png'
-    page.find("#transactionform #multiple-multiple").click
-    #page.save_screenshot 'tmp/screenshots/transaction_5.png'
-    fill_in "Transactions", with: "one 1\ntwo 2\nthree 3\nfour 4\npoint 05 .05"
+    select "CAD", from: "Currency"
+    select "Current Account", from: "Account"
+    assert page.find("#transaction_currency").value == "CAD", format_error("Unexpected selected currency", "CAD", page.find("#transaction_currency").value)
+  end
+
+  test "open category dropdown" do
+    login_user(users(:transactions), 'SomePassword123^!')
+
+    click_on "New Transaction"
+
+    assert_selector '#categoriesDropdownOptions', visible: :hidden
+    page.find("#categories-dropdown").click
+    assert_selector '#categoriesDropdownOptions', visible: :visible
+  end
+
+  test "select category" do
+    login_user(users(:bas), 'SomePassword123^!')
+
+    click_on "New Transaction"
+
+    assert_selector "#categories-dropdown", text: "Uncategorised"
+
+    page.find("#categories-dropdown").click
+    page.find(".category_11").click
+
+    assert_selector "#categories-dropdown", text: "Cinema"
+  end
+
+  test "search category" do
+    login_user(users(:bas), 'SomePassword123^!')
+
+    click_on "New Transaction"
+
+    assert_selector "#categories-dropdown", text: "Uncategorised"
+
+    page.find("#categories-dropdown").click
+    page.find("#search-categories").fill_in with: "cinem"
     
-    #page.save_screenshot 'tmp/screenshots/transaction_6.png'
+    assert_selector ".category_1", visible: :visible
+    assert_selector ".category_12", visible: :visible
+    assert_selector ".category_11", visible: :visible
 
-    click_on "Create Transaction"
-
-    page.find_all('.show-child-transactions')[1].click
-    page.find_all('.show-child-transactions')[0].click
-
-    assert_selector '#transactions_list', text: "Today\n€0.00"
-    assert_selector '#transactions_list', text: "multiple transfer euro\n€-10.05"
-    assert_selector '#transactions_list', text: "one\n€-1.00"
-    assert_selector '#transactions_list', text: "two\n€-2.00"
-    assert_selector '#transactions_list', text: "three\n€-3.00"
-    assert_selector '#transactions_list', text: "four\n€-4.00"
-    assert_selector '#transactions_list', text: "point 05\n€-0.05"
-
-    assert_selector '#transactions_list', text: "multiple transfer euro\n€10.05"
-    assert_selector '#transactions_list', text: "one\n€1.00"
-    assert_selector '#transactions_list', text: "two\n€2.00"
-    assert_selector '#transactions_list', text: "three\n€3.00"
-    assert_selector '#transactions_list', text: "four\n€4.00"
-    assert_selector '#transactions_list', text: "point 05\n€0.05"
-
-    assert_selector '#transactions_list', text: "Transferred from Current Account"
-    assert_selector '#transactions_list', text: "Transferred to Savings Account"
-
-    assert_selector '#accounts_list', text: "All\n€10,000.00"
-    assert_selector '#accounts_list', text: "Current Account\n€9,989.95"
-    assert_selector '#accounts_list', text: "Savings Account\n€10.05"
-
-    page.driver.browser.navigate.refresh
-    logout
+    for i in 1..82
+        unless [1, 12, 11].include? i
+            assert_selector ".category_" + i.to_s, visible: :hidden
+        end
+    end
   end
 
-  test "create single expense transaction in different currency" do
-    # login as transactions user
+  test "simple transaction" do
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
-    click_on "New Transaction"
-    #sleep 15
 
-    # fill in the details
-    fill_in "Description", with: "single expense jpy"
-    page.find("#transactionform #type-expense").click
-    select "JPY", from: "Currency"
-    fill_in "Amount", with: "100"
-        
-    click_on "Create Transaction"
-        
-    assert_selector '#transactions_list', text: "Today\n€-0.80"
-    assert_selector '#transactions_list', text: "single expense jpy\n€-0.80"
-    assert_selector '#transactions_list', text: "~¥-100"
+    create_transaction
 
-    assert_selector '#accounts_list', text: "All\n€9,999.20"
-    assert_selector '#accounts_list', text: "Current Account\n€9,999.20"
-
-    page.driver.browser.navigate.refresh
-    logout
+    assert_selector "#transactions_list", text: "Today\n€0.00"
+    assert_selector "#transactions_list", text: "test\n€0.00"
   end
 
-  test "create multiple expense transactions in different currency" do
-    # login as transactions user
+  test "expense different currency" do
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
-    click_on "New Transaction"
-    #sleep 15
 
-    # fill in the details
-    fill_in "Description", with: "multiple expense jpy"
-    select "JPY", from: "Currency"
-    page.find("#transactionform #multiple-multiple").click
-    fill_in "Transactions", with: "one 100\ntwo 200\nthree 300\nfour 400\n"
-    take_screenshot
-    click_on "Create Transaction"
-        
-    assert_selector '#transactions_list', text: "Today\n€-8.00"
-    assert_selector '#transactions_list', text: "multiple expense jpy\n€-8.00"
-    assert_selector '#transactions_list', text: "~¥-1,000"
+    params = {
+        currency: "JPY",
+        amount: "100"
+    }
 
-    assert_selector '#accounts_list', text: "All\n€9,992.00"
-    assert_selector '#accounts_list', text: "Current Account\n€9,992.00"
-
-    page.driver.browser.navigate.refresh
-    logout
+    create_transaction(params)
+    assert_selector "#transactions_list", text: "~ ¥-100"
+    assert_selector "#transactions_list", text: "€-0.80"
   end
 
-  test "create single income transaction in different currency" do
-    # login as transactions user
+  test "simple income" do
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
-    click_on "New Transaction"
-    #sleep 15
 
-    # fill in the details
-    fill_in "Description", with: "single income jpy"
-    page.find("#transactionform #type-income").click
-    select "JPY", from: "Currency"
-    fill_in "Amount", with: "100000"
+    params = {
+        type: "income",
+        amount: "100.85"
+    }
 
-    click_on "Create Transaction"
-        
-    assert_selector '#transactions_list', text: "Today\n€800.00"
-    assert_selector '#transactions_list', text: "single income jpy\n€800.00"
-    assert_selector '#transactions_list', text: "~¥100,000"
-
-    assert_selector '#accounts_list', text: "All\n€10,800.00"
-    assert_selector '#accounts_list', text: "Current Account\n€10,800.00"
-
-    page.driver.browser.navigate.refresh
-    logout
+    create_transaction(params)
+    assert_selector "#transactions_list", text: "€100.85"
   end
 
-  test "create multiple income transactions in different currency" do
-    # login as transactions user
+  test "simple transfer" do
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
-    click_on "New Transaction"
-    #sleep 15
 
-    # fill in the details
-    fill_in "Description", with: "multiple income jpy"
-    page.find("#transactionform #type-income").click
-    select "JPY", from: "Currency"
-    page.find("#transactionform #multiple-multiple").click
-    #fill_in "Transactions", with: "one 1000\ntwo 2000\nthree 3000\nfour 4000\n"
+    params = {
+        type: "transfer",
+        from_account: "Current Account",
+        to_account: "Savings Account",
+        amount: "500.05"
+    }
 
-    page.find("#transactionform #transaction_transactions").set("one 1000\ntwo 2000\nthree 3000\nfour 4000")
-    click_on "Create Transaction"
+    create_transaction(params)
 
-    assert_selector '.child_transactions', visible: :hidden
-    page.find('.show-child-transactions').click
-    assert_selector '.child_transactions', visible: :visible
-        
-    assert_selector '#transactions_list', text: "Today\n€80.00"
-    assert_selector '#transactions_list', text: "multiple income jpy\n€80.00"
-    assert_selector '#transactions_list', text: "one\n€8.00"
-    assert_selector '#transactions_list', text: "two\n€16.00"
-    assert_selector '#transactions_list', text: "three\n€24.00"
-    assert_selector '#transactions_list', text: "four\n€32.00"
-
-    assert_selector '#transactions_list', text: "~¥10,000"
-    assert_selector '#transactions_list', text: "~¥1,000"
-    assert_selector '#transactions_list', text: "~¥2,000"
-    assert_selector '#transactions_list', text: "~¥3,000"
-    assert_selector '#transactions_list', text: "~¥4,000"
-
-    assert_selector '#accounts_list', text: "All\n€10,080.00"
-    assert_selector '#accounts_list', text: "Current Account\n€10,080.00"
-
-    page.driver.browser.navigate.refresh
-    logout
+    assert_selector "#transactions_list", text: "Today\n€0.00"
+    assert_selector "#transactions_list", text: "€500.05"
+    assert_selector "#transactions_list", text: "€-500.05"
+    assert_selector "#transactions_list", text: "Transferred from Current Account"
+    assert_selector "#transactions_list", text: "Transferred to Savings Account"
   end
 
-  test "create single transfer transaction in different currency" do
-    # login as transactions user
+  test "multiple transactions" do
     login_user(users(:transactions), 'SomePassword123^!')
     page.find("#account_0").click
-    click_on "New Transaction"
-    #sleep 15
 
-    # fill in the details
-    fill_in "Description", with: "single transfer jpy"
-    page.find("#transactionform #type-transfer").click
-    select "Savings Account", from: "To account"
-    select "JPY", from: "Currency"
-    fill_in "Amount", with: "100000"
+    params = {
+        multiple: "multiple",
+        transactions: "one 100\ntwo 200\nthree 300\nfour 400",
+    }
 
-    click_on "Create Transaction"
-        
-    assert_selector '#transactions_list', text: "Today\n€0.00"
-    assert_selector '#transactions_list', text: "single transfer jpy\n€-800.00"
-    assert_selector '#transactions_list', text: "single transfer jpy\n€800.00"
+    create_transaction(params)
+    assert_selector "#transactions_list", text: "Today\n€-1,000.00"
 
-    assert_selector '#transactions_list', text: "~¥-100,000"
-    assert_selector '#transactions_list', text: "~¥100,000"
+    assert_selector ".child_transactions", visible: :hidden
 
-    assert_selector '#transactions_list', text: "Transferred from Current Account"
-    assert_selector '#transactions_list', text: "Transferred to Savings Account"
+    page.find(".show-child-transactions").click
+    sleep 0.2
 
-    assert_selector '#accounts_list', text: "All\n€10,000.00"
-    assert_selector '#accounts_list', text: "Current Account\n€9,200.00"
-    assert_selector '#accounts_list', text: "Savings Account\n€800.00"
-
-    page.driver.browser.navigate.refresh
-    logout
+    assert_selector ".child_transactions", visible: :visible
+    assert_selector "#transactions_list", text: "one"
+    assert_selector "#transactions_list", text: "two"
+    assert_selector "#transactions_list", text: "three"
+    assert_selector "#transactions_list", text: "four"
+    assert_selector "#transactions_list", text: "€-100.00"
+    assert_selector "#transactions_list", text: "€-200.00"
+    assert_selector "#transactions_list", text: "€-300.00"
+    assert_selector "#transactions_list", text: "€-400.00"
   end
 
-  test "create multiple transfer transactions in different currency" do
-    # login as transactions user
-    login_user(users(:transactions), 'SomePassword123^!')
-    page.find("#account_0").click
-    click_on "New Transaction"
-    #sleep 15
-
-    # fill in the details
-    fill_in "Description", with: "multiple transfer jpy"
-    page.find("#transactionform #type-transfer").click
-    select "Savings Account", from: "To account"
-    select "JPY", from: "Currency"
-    page.find("#transactionform #multiple-multiple").click
-    fill_in "Transactions", with: "one 1000\ntwo 2000\nthree 3000\nfour 4000\n"
+  def create_transaction(params={})
+    params = create_params(params)
     
+    while check_form(params) == false
+        unless page.find("#transaction_description", visible: :all).visible?
+            click_on "New Transaction"
+        end
+        fill_form(params)
+    end
+
     click_on "Create Transaction"
-    
-    assert_selector '#transactions_list', text: "Today\n€0.00"
-    assert_selector '#transactions_list', text: "multiple transfer jpy\n€-80.00"
-    assert_selector '#transactions_list', text: "multiple transfer jpy\n€80.00"
-
-    assert_selector '#transactions_list', text: "~¥-10,000"
-    assert_selector '#transactions_list', text: "~¥10,000"
-
-    assert_selector '#transactions_list', text: "Transferred from Current Account"
-    assert_selector '#transactions_list', text: "Transferred to Savings Account"
-
-    assert_selector '#accounts_list', text: "All\n€10,000.00"
-    assert_selector '#accounts_list', text: "Current Account\n€9,920.00"
-    assert_selector '#accounts_list', text: "Savings Account\n€80.00"
-
-    page.driver.browser.navigate.refresh
-    logout
+    sleep 0.2
   end
-    
-  test "transaction currency resetting" do
-    # login as transactions user
-    login_user(users(:transactions), 'SomePassword123^!')
-    page.find("#account_0").click
-    click_on "New Transaction"
-    #sleep 15
 
-    # fill in the details
-    fill_in "Description", with: "JPY"
-    select "JPY", from: "Currency"
-    fill_in "Amount", with: "1000"
+  def create_params(custom_params={})
+    params = {
+        type: "expense",
+        description: "test",
+        account: "Current Account",
+        from_account: "Current Account",
+        to_account: "Current Account",
+        category: 0,
+        multiple: "single",
+        amount: 0,
+        transactions: "",
+        currency: nil,
+        date: nil,
+        time: nil,
+        rate: nil,
+        amount_in_account_currency: nil,
+        transfer_rate: nil,
+        amount_in_transfer_currency: nil
+    }
 
-    click_on "Create Transaction"
+    custom_params.keys.each do |cp|
+      params[cp] = custom_params[cp]
+    end
 
-    click_on "New Transaction"
-    #sleep 15
-    page.driver.browser.navigate.refresh
-    logout
+    return params
+
+  end
+
+  def fill_form(params)
+    unless page.find("#transaction_description", visible: :all).visible?
+        click_on "New Transaction"
+    end
+
+    page.find("#type-" + params[:type]).click
+    fill_in "Description", with: params[:description]
+    select params[:account], from: "Account" unless params[:type] == "transfer"
+    select params[:from_account], from: "From account" if params[:type] == "transfer"
+    select params[:to_account], from: "To account" if params[:type] == "transfer"
+
+    unless params[:type] == "transfer"
+        page.find("#categories-dropdown").click
+        page.find(".category_" + params[:category].to_s).click
+        select params[:currency], from: "Currency" unless params[:currency].nil?
+    end
+
+    page.find("#multiple-" + params[:multiple]).click
+
+    if params[:multiple] == "single"
+        fill_in "Amount", with: params[:amount].to_s
+    else
+        fill_in "Transactions", with: params[:transactions]
+    end
+
+    fill_in "Date", with: params[:date] unless params[:date].nil?
+    fill_in "Time", with: params[:time] unless params[:time].nil?
+    fill_in "Rate", with: params[:rate] unless params[:rate].nil?
+    page.find("#transaction_account_currency").fill_in with: params[:amount_in_account_currency] unless params[:amount_in_account_currency].nil?
+    page.find("#transaction_rate_from_to").fill_in with: params[:transfer_rate] unless params[:transfer_rate].nil?
+    page.find("#transaction_to_account_currency").fill_in with: params[:amount_in_transfer_currency] unless params[:amount_in_transfer_currency].nil?
+
+    #take_screenshot
+  end
+
+  def check_form(params)
+    unless page.find("#transaction_description", visible: :all).visible?
+        click_on "New Transaction"
+    end
+
+    return false if page.find("#transaction_description").value != params[:description].to_s
+    return false if page.find("#transaction_amount").value != params[:amount].to_s unless params[:multiple] == "multiple"
+    return false if page.find("#transaction_transactions").value != params[:transactions].to_s unless params[:multiple] == "single"
+
+    return true
   end
 
 end
-=end
