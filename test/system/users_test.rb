@@ -168,4 +168,25 @@ class UsersTest < ApplicationSystemTestCase
     assert_selector '#flash_alert', text: I18n.t('devise.failure.not_found_in_database')
   end
 
+  test "Automatic currency selection" do
+    """
+    Click 'sign up'
+    Select Ireland as country
+    Expected result: Currency is set to 'EUR'
+    Select Canada as country
+    Expected result: Currency is set to 'CAD'
+    Select Japan as country
+    Expected result: Currency is set to 'JPY'
+    Select USD as currency
+    Select Netherlands as country
+    Expected result: Currency is set to 'USD'
+    """
+
+    visit root_path
+
+    all('a', :text => 'Sign up')[0].click
+
+    take_screenshot
+  end
+
 end
