@@ -186,7 +186,18 @@ class UsersTest < ApplicationSystemTestCase
 
     all('a', :text => 'Sign up')[0].click
 
-    take_screenshot
+    select "Ireland", from: "user_country_code"
+    assert_selector "#user_currency", text: "EUR"
+
+    select "Canada", from: "user_country_code"
+    assert_selector "#user_currency", text: "CAD"
+
+    select "Japan", from: "user_country_code"
+    assert_selector "#user_currency", text: "JPY"
+
+    select "USD", from: "user_currency"
+    select "Netherlands", from: "user_country_code"
+    assert_selector "#user_currency", text: "USD"
   end
 
 end
