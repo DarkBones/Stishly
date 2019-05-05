@@ -45,8 +45,7 @@ private
       :transactions,
       :active_account,
       :account_currency,
-      :to_account_currency,
-      :active_account
+      :to_account_currency
       )
   end
 
