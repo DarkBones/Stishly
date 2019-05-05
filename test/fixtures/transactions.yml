@@ -203,3 +203,169 @@ search_202: {
   timezone: "Europe/London",
   category_id: 85
 }
+
+schedule_1: {
+  id: 801,
+  user_id: 10,
+  description: Test,
+  account_id: 21,
+  amount: 1090,
+  account_currency_amount: 1090,
+  user_currency_amount: 1090,
+  currency: EUR,
+  created_at: "2018-01-01 00:00",
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= 100.seconds.ago %>",
+  timezone: "Europe/London",
+  category_id: 0
+}
+
+schedule_2: {
+  id: 802,
+  user_id: 10,
+  description: Test2,
+  account_id: 21,
+  amount: 1090,
+  account_currency_amount: 1090,
+  user_currency_amount: 1090,
+  currency: EUR,
+  created_at: "2018-01-01 00:00",
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= 99.seconds.ago %>",
+  timezone: "Europe/London",
+  category_id: 0
+}
+
+schedule_3: {
+  id: 803,
+  user_id: 10,
+  description: Test3,
+  account_id: 21,
+  amount: 1090,
+  account_currency_amount: 1090,
+  user_currency_amount: 1090,
+  currency: EUR,
+  created_at: "2018-01-01 00:00",
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= 98.seconds.ago %>",
+  timezone: "Europe/London",
+  category_id: 0
+}
+
+schedule_4_main: {
+  id: 804,
+  user_id: 10,
+  description: Main,
+  account_id: 21,
+  amount: 1000,
+  account_currency_amount: 1000,
+  user_currency_amount: 1000,
+  currency: EUR,
+  created_at: "2018-01-01 00:00",
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= 98.seconds.ago %>",
+  timezone: "Europe/London",
+  category_id: 0
+}
+
+schedule_4_child_1: {
+  id: 701,
+  user_id: 10,
+  description: One,
+  account_id: 21,
+  amount: 100,
+  account_currency_amount: 100,
+  user_currency_amount: 100,
+  currency: EUR,
+  created_at: "2018-01-01 00:00",
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= 98.seconds.ago %>",
+  timezone: "Europe/London",
+  category_id: 0,
+  parent_id: 804
+}
+schedule_4_child_2: {
+  id: 702,
+  user_id: 10,
+  description: Two,
+  account_id: 21,
+  amount: 200,
+  account_currency_amount: 200,
+  user_currency_amount: 200,
+  currency: EUR,
+  created_at: "2018-01-01 00:00",
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= 98.seconds.ago %>",
+  timezone: "Europe/London",
+  category_id: 0,
+  parent_id: 804
+}
+schedule_4_child_3: {
+  id: 703,
+  user_id: 10,
+  description: Three,
+  account_id: 21,
+  amount: 300,
+  account_currency_amount: 300,
+  user_currency_amount: 300,
+  currency: EUR,
+  created_at: "2018-01-01 00:00",
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= 98.seconds.ago %>",
+  timezone: "Europe/London",
+  category_id: 0,
+  parent_id: 804
+}
+schedule_4_child_4: {
+  id: 704,
+  user_id: 10,
+  description: Four,
+  account_id: 21,
+  amount: 400,
+  account_currency_amount: 400,
+  user_currency_amount: 400,
+  currency: EUR,
+  created_at: "2018-01-01 00:00",
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= 98.seconds.ago %>",
+  timezone: "Europe/London",
+  category_id: 0,
+  parent_id: 804
+}
+
+schedule_5_from: {
+  id: 805,
+  direction: 1,
+  user_id: 10,
+  description: Transfer,
+  account_id: 21,
+  amount: 50000,
+  account_currency_amount: 50000,
+  user_currency_amount: 50000,
+  currency: EUR,
+  created_at: "2018-01-01 00:00",
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= 97.seconds.ago %>",
+  timezone: "Europe/London",
+  category_id: 0,
+  transfer_account_id: 22,
+  transfer_transaction_id: 806
+}
+schedule_5_to: {
+  id: 806,
+  direction: -1,
+  user_id: 10,
+  description: Transfer,
+  account_id: 22,
+  amount: -50000,
+  account_currency_amount: -50000,
+  user_currency_amount: -50000,
+  currency: EUR,
+  created_at: "2018-01-01 00:00",
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= 97.seconds.ago %>",
+  timezone: "Europe/London",
+  category_id: 0,
+  transfer_account_id: 21,
+  transfer_transaction_id: 805
+}

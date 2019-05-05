@@ -186,3 +186,23 @@ search_2: {
   currency: 'EUR',
   position: 2
 }
+
+schedule_1: {
+  id: 21,
+  balance: 0,
+  user_id: 9,
+  name: Scheduled transactions,
+  is_default: true,
+  currency: EUR,
+  position: 1
+}
+
+schedule_2: {
+  id: 22,
+  balance: 500,
+  user_id: 9,
+  name: Savings account,
+  is_default: false,
+  currency: EUR,
+  position: 2
+}

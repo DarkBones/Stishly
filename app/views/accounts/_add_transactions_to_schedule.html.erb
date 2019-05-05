@@ -7,8 +7,8 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-
-      <%= form_for SchTransactionsSchedule.new do |f| %>
+      
+      <%= form_with(model: SchTransactionsSchedule.new) do |f| %>
         <div class="modal-body">
           <div class="container">
 
@@ -19,7 +19,7 @@
               </div>
             </div>
 
-            <%= f.text_field :transactions, value:"" %>
+            <%= f.hidden_field :transactions, value:"" %>
 
             <div class="row py-2">
               <div class="col-12">
