@@ -17,8 +17,13 @@ class AccountsController < ApplicationController
 
     @daily_totals = Account.get_daily_totals(@active_account.id, @transactions, current_user)
     @account_currency = Account.get_currency(@active_account)
-
-    @filtered = params[:filterrific].nil? ? false : true
+    
+    filter_keys = []
+    filter_keys = params[:filterrific].keys.dup if params[:filterrific]
+    filter_keys.delete("account")
+    filter_keys.delete("sorted_by")
+    
+    @filtered = filter_keys.length > 0
 
   end
 
@@ -34,6 +39,13 @@ class AccountsController < ApplicationController
     @account_currency = Account.get_currency(@active_account)
 
     @filtered = params[:filterrific].nil? ? false : true
+
+    filter_keys = []
+    filter_keys = params[:filterrific].keys.dup if params[:filterrific]
+    filter_keys.delete("account")
+    filter_keys.delete("sorted_by")
+    
+    @filtered = filter_keys.length > 0
 
     render 'show'
   end
