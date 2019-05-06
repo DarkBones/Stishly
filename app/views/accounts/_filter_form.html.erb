@@ -1,3 +1,5 @@
+<% selected_category = Category.get_uncategorised %>
+
 <div class="row py-4">
     <div class="col-12 col-lg-8">
 
@@ -66,7 +68,7 @@
           <div class="col-12">
             <%= f.label :category %><br />
             <%= render partial: "/shared/custom_dropdown_categories", locals: {
-              selected: Category.get_user_categories(current_user, true, true)[0],
+              selected: selected_category,
               options: Category.get_user_categories(current_user, true, true),
               input_target: '#filter-form #filterrific_category_id',
               button_type: "btn-light",

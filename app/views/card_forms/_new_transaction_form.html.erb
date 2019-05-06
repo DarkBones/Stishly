@@ -1,3 +1,5 @@
+<% selected_category = Category.get_uncategorised %>
+
 <div class="modal transactionform <%= 'fade' if Rails.env.test? == false %>" id="transactionform" tabindex="-1" role="dialog" aria-labelledby="transactionformLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog" role="document">
     <div class="modal-content">
@@ -73,7 +75,7 @@
                   <div class="col-12 py-2">
                     <%= f.label :category %><br />
                     <%= render partial: "shared/custom_dropdown_categories", locals: {
-                      selected: Category.get_user_categories(current_user, true)[0],
+                      selected: selected_category,
                       options: Category.get_user_categories(current_user, true),
                       input_target: '#transactionform #transaction_category_id',
                       button_type: 'btn-outline-dark',

@@ -15,6 +15,9 @@
   transfer_account_style = ""
   single_amount_style = ""
   multiple_amount_style = ""
+  selected_category = Category.get_uncategorised
+  selected_category = current_user.categories.find(sch_transaction.category_id) if sch_transaction.category_id > 0
+  
 
   if sch_transaction.persisted?
     from_account_name = sch_transaction.account.name
@@ -119,7 +122,8 @@
           <div class="col-12 py-2">
             <%= f.label :category %><br />
             <%= render partial: "shared/custom_dropdown_categories", locals: {
-              selected: Category.get_user_categories(current_user, true)[0],
+              #selected: Category.get_user_categories(current_user, true)[0],
+              selected: selected_category,
               options: Category.get_user_categories(current_user, true),
               input_target: "#edit_sch_transaction_" + sch_transaction.id.to_s + "_category_id",
               button_type: 'btn-outline-dark',
