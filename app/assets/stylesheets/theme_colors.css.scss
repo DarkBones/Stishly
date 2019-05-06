@@ -1,0 +1,13 @@
+$primaryColor:  hsl(227, 99%, 58%);
+
+[class$="-primary"] {
+  background-color: $primaryColor;
+  border-color: $primaryColor;
+  //border-color: darken($primaryColor, 10%);
+  //border-width: 10px;
+}
+
+[class$="-primary"]:hover {
+  background-color: lighten($primaryColor, 5%);;
+  border-color: lighten($primaryColor, 5%);
+}
