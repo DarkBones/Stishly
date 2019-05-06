@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: sch_transactions_schedules
+#
+#  id                 :bigint(8)        not null, primary key
+#  sch_transaction_id :bigint(8)
+#  schedule_id        :bigint(8)
+#
+
 class SchTransactionsSchedule < ApplicationRecord
   has_many :sch_transactions
   has_many :schedules

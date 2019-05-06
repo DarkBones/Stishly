@@ -5,7 +5,8 @@ class SchTransactionsController < ApplicationController
   end
 
   def update
-    SchTransaction.update(update_params, current_user)
+    @transactions = SchTransaction.update(update_params, current_user)
+    redirect_back fallback_location: root_path
   end
 
 private

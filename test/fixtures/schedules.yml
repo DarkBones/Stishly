@@ -31,6 +31,7 @@
 # below each fixture, per the syntax in the comments below
 #
 payday: {
+  id: 1,
   name: 'Payday',
   user_id: 9,
   start_date: '2019-03-25',
@@ -50,6 +51,7 @@ payday: {
 }
 
 bonus_day: {
+  id: 2,
   name: 'Bonus day',
   user_id: 9,
   start_date: '2019-04-25',

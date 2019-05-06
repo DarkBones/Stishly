@@ -1,19 +1,21 @@
 # == Schema Information
 #
-# Table name: s_transactions
+# Table name: sch_transactions
 #
-#  id                  :bigint(8)        not null, primary key
-#  user_id             :bigint(8)
-#  amount              :integer
-#  direction           :integer
-#  description         :string(255)
-#  account_id          :bigint(8)
-#  currency            :string(255)
-#  category_id         :bigint(8)
-#  parent_id           :bigint(8)
-#  transfer_account_id :integer
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
+#  id                      :bigint(8)        not null, primary key
+#  user_id                 :bigint(8)
+#  amount                  :integer
+#  direction               :integer
+#  description             :string(255)
+#  account_id              :bigint(8)
+#  currency                :string(255)
+#  category_id             :bigint(8)
+#  parent_id               :bigint(8)
+#  transfer_account_id     :integer
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  original_transaction_id :integer
+#  transfer_transaction_id :integer
 #
 
 class SchTransaction < ApplicationRecord
@@ -78,8 +80,10 @@ class SchTransaction < ApplicationRecord
 
   def self.update(params, current_user)
     sch_transaction = current_user.sch_transactions.find(params[:id])
-    self.create_transaction(sch_transaction, params, current_user) unless sch_transaction.nil?
+    new_transactions = self.create_transaction(sch_transaction, params, current_user) unless sch_transaction.nil?
     self.destroy_original(sch_transaction, current_user)
+
+    return new_transactions
   end
 
 private
@@ -107,6 +111,8 @@ private
         nt.schedules << sc
       end
     end
+
+    return new_transactions
 
   end
 

@@ -19,6 +19,7 @@
 #  local_datetime          :datetime         not null
 #  transfer_account_id     :bigint(8)
 #  user_currency_amount    :integer          not null
+#  transfer_transaction_id :integer
 #
 
 class Transaction < ApplicationRecord

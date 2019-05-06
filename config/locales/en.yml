@@ -34,7 +34,7 @@ en:
     welcome_h1: "Welcome"
   account:
     confirmations:
-      confirmed: "Account successfully created"
+      confirmed: "Account created"
     instructions:
       create: "Create an account by clicking the '+' button"
     failure:
@@ -43,10 +43,10 @@ en:
       already_exists: "Account with the same name already exists"
   transaction:
     confirmations:
-      confirmed: "Transaction successfully created"
+      confirmed: "Transaction created"
   schedule:
     confirmations:
-      confirmed: "Schedule successfully created"
+      confirmed: "Schedule created"
     failure:
       invalid_name: "Invalid schedule name"
       invalid_date: "Invalid date"
@@ -63,4 +63,5 @@ en:
     no_inactive_schedules: "There are no inactive schedules"
   sch_transactions:
     confirmations:
-      confirmed: "Successfully added {num} {transactions} to {schedule}"
+      confirmed: "Added {num} {transactions} to {schedule}"
+      updated: "Successfully updated transaction"

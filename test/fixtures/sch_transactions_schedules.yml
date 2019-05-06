@@ -1,0 +1,48 @@
+# == Schema Information
+#
+# Table name: sch_transactions_schedules
+#
+#  id                 :bigint(8)        not null, primary key
+#  sch_transaction_id :bigint(8)
+#  schedule_id        :bigint(8)
+#
+
+one: {
+  sch_transaction_id: 1,
+  schedule_id: 2
+}
+
+two: {
+  sch_transaction_id: 2,
+  schedule_id: 2
+}
+
+three: {
+  sch_transaction_id: 101,
+  schedule_id: 2
+}
+
+four: {
+  sch_transaction_id: 102,
+  schedule_id: 2
+}
+
+five: {
+  sch_transaction_id: 103,
+  schedule_id: 2
+}
+
+six: {
+  sch_transaction_id: 104,
+  schedule_id: 2
+}
+
+seven: {
+  sch_transaction_id: 3,
+  schedule_id: 2
+}
+
+eight: {
+  sch_transaction_id: 4,
+  schedule_id: 2
+}
