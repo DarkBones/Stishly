@@ -15,7 +15,7 @@
             <div class="row py-2">
               <div class="col-12">
                 <%= f.label :schedule %><br />
-                <%= f.select(:schedules, user_schedules_array, {}, { :class => 'form-control' }) %>
+                <%= f.select(:schedules, user_schedules_array, {:include_blank => true}, { :class => 'form-control', 'onchange' => 'changeSchedule(this.value)' }) %>
               </div>
             </div>
 
@@ -23,7 +23,7 @@
 
             <div class="row py-2">
               <div class="col-12">
-                Next run date: <span id="next_run_date"></span>
+                <span id="next_run_date"></span>
               </div>
             </div>
 

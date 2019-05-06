@@ -19,6 +19,12 @@ class ApiController < ApplicationController
     end
   end
 
+  def next_schedule_date
+    schedule = current_user.schedules.find(params[:schedule_id])
+    next_occurrence = Schedule.next_occurrence(schedule)
+    render json: User.format_date(next_occurrence, true)
+  end
+
   def schedule_transactions
     schedule = current_user.schedules.find(params[:schedule_id])
     transactions = schedule.sch_transactions.where("parent_id is null AND (transfer_transaction_id is null OR (transfer_transaction_id is not null AND direction = -1))").order(:description).decorate
