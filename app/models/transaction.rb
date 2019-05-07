@@ -15,7 +15,6 @@
 #  account_currency_amount :integer
 #  category_id             :bigint(8)
 #  parent_id               :bigint(8)
-#  exclude_from_all        :boolean          default(FALSE)
 #  local_datetime          :datetime         not null
 #  transfer_account_id     :bigint(8)
 #  user_currency_amount    :integer          not null
