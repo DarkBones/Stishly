@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_07_183808) do
+ActiveRecord::Schema.define(version: 2019_05_07_184419) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -86,33 +86,6 @@ ActiveRecord::Schema.define(version: 2019_05_07_183808) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "sch_transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id"
-    t.integer "amount"
-    t.integer "direction"
-    t.string "description"
-    t.bigint "account_id"
-    t.string "currency"
-    t.bigint "category_id"
-    t.bigint "parent_id"
-    t.integer "transfer_account_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "original_transaction_id"
-    t.integer "transfer_transaction_id"
-    t.index ["account_id"], name: "index_sch_transactions_on_account_id"
-    t.index ["category_id"], name: "index_sch_transactions_on_category_id"
-    t.index ["parent_id"], name: "index_sch_transactions_on_parent_id"
-    t.index ["user_id"], name: "index_sch_transactions_on_user_id"
-  end
-
-  create_table "sch_transactions_schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "sch_transaction_id"
-    t.bigint "schedule_id"
-    t.index ["sch_transaction_id"], name: "index_sch_transactions_schedules_on_sch_transaction_id"
-    t.index ["schedule_id"], name: "index_sch_transactions_schedules_on_schedule_id"
-  end
-
   create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "user_id"
@@ -135,6 +108,13 @@ ActiveRecord::Schema.define(version: 2019_05_07_183808) do
     t.datetime "next_occurrence_utc"
     t.index ["name"], name: "index_schedules_on_name"
     t.index ["user_id"], name: "index_schedules_on_user_id"
+  end
+
+  create_table "schedules_transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "sch_transaction_id"
+    t.bigint "schedule_id"
+    t.index ["sch_transaction_id"], name: "index_schedules_transactions_on_sch_transaction_id"
+    t.index ["schedule_id"], name: "index_schedules_transactions_on_schedule_id"
   end
 
   create_table "setting_values", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
