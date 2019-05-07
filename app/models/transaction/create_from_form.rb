@@ -230,7 +230,7 @@ private
       transactions = []
       total_amount = 0
 
-      reg = ".+\s+[\.,]*[0-9\.,]+$"
+      reg = ".+\s+[\.,]*-?[0-9\.,]*$"
 
       transaction_text = @params[:transactions]
       transaction_list = transaction_text.split("\n")

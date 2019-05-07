@@ -21,20 +21,46 @@ class SchTransactionDecorator < ApplicationDecorator
 
   def amount_single
     currency = Money::Currency.new(model.currency)
-    return (model.amount / currency.subunit_to_unit).abs
+
+    amount = format_amount(model.amount.abs, currency)
+
+    return amount
   end
 
   def amount_multiple
     currency = Money::Currency.new(model.currency)
+
     if model.children.length > 0
       result = ""
+
       model.children.each do |ct|
-        result += "#{ct.description} #{(ct.amount / currency.subunit_to_unit).abs}\n"
+        amount = ct.amount * model.direction
+        result += "#{ct.description} #{format_amount(amount, currency)}\n"
       end
       return result
     else
       return ""
     end
   end
+  
+private
+
+    def format_amount(amount, currency)
+      amount = (amount.to_f / currency.subunit_to_unit)
+
+      if currency.subunit_to_unit > 1
+        amount = amount.to_s
+        cents_str = amount.split(".")[1]
+        cents_digits = Math.log10(currency.subunit_to_unit).ceil
+        while cents_str.length < cents_digits
+          amount += "0"
+          cents_str = amount.split(".")[1]
+        end
+      else
+        amount = amount.to_i.to_s
+      end
+
+      return amount
+    end
 
 end
