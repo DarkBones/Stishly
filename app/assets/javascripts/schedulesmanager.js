@@ -10,14 +10,14 @@ function scheduleTransactionsForm(scheduleId) {
   });
 }
 
-function changeSchedule(sch_id) {
+function changeSchedule(schId) {
   $("#next_run_date").text("");
   $.ajax({
     type: "GET",
     dataType: "text",
-    url: "/api/get_next_schedule_date/" + sch_id,
+    url: "/api/get_next_schedule_date/" + schId,
     success(data) {
       $("#next_run_date").text("Next run date: " + data);
     }
-  })
+  });
 }
