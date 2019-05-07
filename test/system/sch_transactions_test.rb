@@ -16,6 +16,9 @@ class SchTransactionsTest < ApplicationSystemTestCase
 
     assert page.find("#sch_transactions_schedule_transactions", visible: false).value == "801 804 806"
 
+    #select "Payday", from: "Schedule"
+    page.find("#sch_transactions_schedule_schedules").select("Payday")
+
     click_on "Add"
 
     assert_selector "#flash_notice", text: "Added 3 transactions to Payday"
