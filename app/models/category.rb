@@ -32,6 +32,8 @@ class Category < ApplicationRecord
         tree[idx][:parent_id] = nil
         tree[idx][:children_paths] = ""
 
+        tree[nil][:children].push(tree[idx])
+
         idx += 1
       end
 
@@ -42,7 +44,7 @@ class Category < ApplicationRecord
       tree[idx][:parent_id] = nil
       tree[idx][:children_paths] = "uncategorised"
 
-      tree[nil][:children].push(tree[0])
+      tree[nil][:children].push(tree[idx])
 
       # set the parent_keys first (required for recursive search)
       current_user.categories.order(:name).each do |cat|
