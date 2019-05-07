@@ -11,6 +11,18 @@
 class SchedulesTransaction < ApplicationRecord
 
   def self.join_transactions(params, current_user)
+    schedule = current_user.schedules.find(params[:schedules])
+    
+    return if schedule.nil?
+
+    transaction_ids = params[:transactions].split
+    transaction_ids.each do |t_id|
+      transaction = current_user.transactions.find(t_id)
+
+      next if transaction.nil?
+
+      link = transaction.schedules << schedule
+    end
 
   end
 

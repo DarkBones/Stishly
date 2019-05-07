@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_07_185524) do
+ActiveRecord::Schema.define(version: 2019_05_07_191756) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -113,7 +113,6 @@ ActiveRecord::Schema.define(version: 2019_05_07_185524) do
   create_table "schedules_transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "schedule_id"
     t.bigint "transaction_id"
-    t.boolean "original_link"
     t.index ["schedule_id"], name: "index_schedules_transactions_on_schedule_id"
     t.index ["transaction_id"], name: "index_schedules_transactions_on_transaction_id"
   end
