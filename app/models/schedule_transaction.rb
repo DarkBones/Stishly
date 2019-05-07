@@ -1,0 +1,2 @@
+class ScheduleTransaction < ApplicationRecord
+end
