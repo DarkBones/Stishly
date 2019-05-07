@@ -27,11 +27,10 @@ class ApiController < ApplicationController
 
   def schedule_transactions
     schedule = current_user.schedules.find(params[:schedule_id])
-    transactions = schedule.sch_transactions.where("parent_id is null AND (transfer_transaction_id is null OR (transfer_transaction_id is not null AND direction = -1))").order(:description).decorate
-    #transactions = schedule.sch_transactions.where(parent_id: nil).decorate
-
-    #if sch_transaction.transfer_transaction_id == nil || (sch_transaction.transfer_transaction_id != nil && sch_transaction.direction == -1)
-    render transactions
+    #transactions = schedule.user_transactions.where("parent_id is null AND (transfer_transaction_id is null OR (transfer_transaction_id is not null AND direction = -1))").order(:description).decorate
+    transactions = schedule.user_transactions
+    
+    render json: transactions.length
   end
 
   # renders the iso code of the currency of the given account name

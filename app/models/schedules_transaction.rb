@@ -10,6 +10,8 @@
 
 class SchedulesTransaction < ApplicationRecord
 
+  before_save
+
   def self.join_transactions(params, current_user)
     schedule = current_user.schedules.find(params[:schedules])
     
