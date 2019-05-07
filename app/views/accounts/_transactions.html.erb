@@ -2,12 +2,6 @@
   <input id="selected-transactions" style="display:none;">
 </div>
 
-<div class="transaction-checkbox">
-
-  <%#= check_box_tag("delete[#{transaction.id}]",1, class: 'checkbox-inline') %>
-  <%= check_box_tag "select_all", "all_visible_transactions", false, class: 'checkbox-inline', 'onchange' => 'selectAllTransactions(this);'%>
-
-</div>
 <%= render "transactions_list" %>
 <% dates = distinct_dates(@transactions) %>
 <% dates.each do |d| %>

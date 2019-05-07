@@ -37,6 +37,11 @@
     <div class="col-12">
       <%= render :partial => "add_transactions_to_schedule" %>
       <%= render :partial => "mass_transaction_actions" %>
+
+      <div class="transaction-checkbox mx-4">
+        <%= check_box_tag "select_all", "all_visible_transactions", false, class: 'checkbox-inline', 'onchange' => 'selectAllTransactions(this);'%>
+      </div>
+
       <div id="transactions_list" class="py-4 px-4 <%= "border border-warning rounded-bottom border-3" if @filtered %>">
         <%# TODO: Find better color for filtered border %>
         <%= render partial: "transactions" %>
