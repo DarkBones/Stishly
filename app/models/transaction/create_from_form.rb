@@ -88,14 +88,11 @@ private
       converted_amount >= 0 ? real_direction = 1 : real_direction = -1
 
       if type == 'transfer'
-        exclude_from_all = 1
         if real_direction == 1
           transfer_account = @from_account.id
         else
           transfer_account = @to_account.id
         end
-      else
-        exclude_from_all = 0
       end
 
       transaction = {
@@ -113,7 +110,6 @@ private
         user_currency_amount: get_user_currency_amount(convert_transaction_amount(base_transaction[:amount]), account) * direction,
         category_id: @params[:category_id].to_i,
         is_child: base_transaction[:is_child],
-        exclude_from_all: exclude_from_all,
         parent_id: parent_id
       }
 

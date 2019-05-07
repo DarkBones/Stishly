@@ -230,7 +230,6 @@ class Transaction < ApplicationRecord
     t.account_currency_amount = transaction[:account_currency_amount]
     t.user_currency_amount = transaction[:user_currency_amount]
     t.category_id = transaction[:category_id]
-    t.exclude_from_all = transaction[:exclude_from_all]
     t.parent_id = transaction[:parent_id]
     t.transfer_account_id = transaction[:transfer_account]
     t.save
