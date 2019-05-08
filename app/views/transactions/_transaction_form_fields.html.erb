@@ -1,0 +1,44 @@
+<% params = transaction_form_params(transaction) %>
+
+<div class="row">
+
+  <div class="col-12 col-lg-6 col-xl-7 px-2 px-sm-5 border-right">
+
+    <%# EXPENSE / INCOME / TRANSFER button group %>
+    <div class="row py-2">
+      <div class=" col-12 py-5 rounded <%= params[:type_bg_color] %>" id="type">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
+          <label class="btn btn-outline-light py-3 <%= params[:type_expense_class] %>" id="type-expense" onclick="changeTransactionType('expense', this)">
+            <%= f.radio_button :type, "expense", :checked => (params[:type] == "expense") %>Expense
+          </label>
+
+          <label class="btn btn-outline-light py-3 <%= params[:type_income_class] %>" id="type-income" onclick="changeTransactionType('income', this)">
+            <%= f.radio_button :type, "income", :checked => (params[:type] == "income") %>Income
+          </label>
+
+          <label class="btn btn-outline-light py-3 <%= params[:type_transfer_class] %>" id="type-transfer" onclick="changeTransactionType('transfer', this)">
+            <%= f.radio_button :type, "transfer", :checked => (params[:type] == "transfer") %>Transfer
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <%# DESCRIPTION %>
+    <div class="row py-2">
+      <div class="col-12 py-2">
+        <%= f.label :description %>
+        <%= f.text_field :description, class: "form-control" %>
+      </div>
+    </div>
+
+    <%# SINGLE ACCOUNT %>
+    <div class="row py-2" id="single-account" style="<%= params[:single_account_style] %>">
+      <div class="col-12 py-2">
+        <%= f.label :account %>
+        <%= f.select(:account, user_accounts_array, {:selected => params[:from_account_name]}, { :class => "form-control", "onchange" => "changeTransactionAccount(this, '#transaction_currency');"}) %>
+      </div>
+    </div>
+
+  </div>
+
+</div>

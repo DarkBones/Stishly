@@ -17,7 +17,15 @@
   
   <div id="collapse<%= transaction.id %>" class="collapse" aria-labelledby="heading<%= transaction.id %>" data-parent="#accordion">
     <div class="card-body">
-      <%#= render partial: "transactions/transaction_form", :locals => {:transaction => transaction} %>
+
+      <div class="container" id="transaction_<%= transaction.id %>">
+        <%= form_for transaction, url: transactions_path, :method => "put" do |f| %>
+
+          <%= render partial: "transactions/transaction_form_fields", :locals => {:transaction => transaction, :f => f} %>
+
+        <% end %>
+      </div>
+
     </div>
   </div>
 
