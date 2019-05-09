@@ -60,19 +60,19 @@ module TransactionHelper
       else
         params[:conversion_rate] = transaction.account_currency_amount.to_f / transaction.amount.to_f
       end
-      
+
     else
       params[:from_account_name] = account.name
       params[:to_account_name] = params[:from_account_name]
     end
 
     if transaction.children.length > 0
-      params[:multiple_transaction_class] = "active .children"
+      params[:multiple_transaction_class] = "active"
       params[:single_transaction_selected] = false
       params[:multiple_transaction_selected] = true
       params[:amount_style] = "display: none;"
     else
-      params[:single_transaction_class] = "active .nochildren"
+      params[:single_transaction_class] = "active"
       params[:single_transaction_selected] = true
       params[:multiple_transaction_selected] = false
       params[:transactions_style] = "display: none;"

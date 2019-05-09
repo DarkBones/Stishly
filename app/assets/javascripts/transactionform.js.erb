@@ -1,0 +1,287 @@
+function getFormId(obj) {
+  return "#" + $(obj).parents(".transactionform").attr("id");
+}
+
+function changeTransactionType(type, obj) {
+  var formId = getFormId(obj)
+
+  showTransferCurrencyRates(formId);
+  switch(type) {
+    case "transfer":
+      $(formId + " #single-account").hide();
+      $(formId + " #categories").hide();
+      $(formId + " #transfer-account").show();
+      $(formId + " #type").removeClass("bg-danger");
+      $(formId + " #type").addClass("bg-warning");
+      $(formId + " #type").removeClass("bg-success");
+      $(formId + ' #transaction-currency-options').hide();
+      break;
+    case "income":
+      $(formId + " #single-account").show();
+      $(formId + " #categories").show();
+      $(formId + " #transfer-account").hide();
+      $(formId + " #type").removeClass("bg-danger");
+      $(formId + " #type").removeClass("bg-warning");
+      $(formId + " #type").addClass("bg-success");
+      $(formId + ' #transaction-currency-options').show();
+      break;
+    default:
+      $(formId + " #single-account").show();
+      $(formId + " #categories").show();
+      $(formId + " #transfer-account").hide();
+      $(formId + " #type").addClass("bg-danger");
+      $(formId + " #type").removeClass("bg-warning");
+      $(formId + " #type").removeClass("bg-success");
+      $(formId + ' #transaction-currency-options').show();
+  }
+}
+
+function changeTransactionMultiple(type, obj){
+  var formId = getFormId(obj)
+  switch (type) {
+    case "single":
+      $(formId + " #amount").show();
+      $(formId + " #transactions").hide();
+      break;
+    default:
+      $(formId + " #amount").hide();
+      $(formId + " #transactions").show();
+  }
+}
+
+function updateTransactionResult(formId) {
+  var type, multipleTransactions, rate, amount, $accountTarget, $rateTarget, $resultTarget, $amountTarget;
+
+  rate = 1;
+  amount = 0;
+  $rateTarget = $(formId + " #transaction_rate");
+  $resultTarget = $(formId + " #transaction_account_currency");
+  $amountTarget = $(formId + " #transaction_amount");
+  type = getTransactionType(formId);
+  multipleTransactions = isTransactionMultiple()
+
+  if (multipleTransactions) {
+    $amountTarget = $(formId + " #transaction_transactions");
+  }
+
+  if (type === "transfer") {
+    $rateTarget = $(formId + " #transaction_rate_from_to");
+    $resultTarget = $(formId + " #transaction_to_account_currency");
+    $accountTarget = $(formId + " #transaction_to_account");
+  } else {
+    $accountTarget = $(formId + " #transaction_account");
+  }
+
+  if ($resultTarget.is(":visible")) {
+    rate = $rateTarget.val();
+    if (multipleTransactions) {
+      amount = getTransactionTotalFromMultiple($amountTarget);
+    } else {
+      amount = $amountTarget.val();
+    }
+  }
+
+  $.ajax({
+    type: "GET",
+    dataType: "json",
+    url: "/api/account_currency_details/" + encodeURI($accountTarget.val()),
+    success(data) {
+      result = Math.round((amount * rate) * data.subunit_to_unit) / data.subunit_to_unit
+      $resultTarget.val(result);
+
+      if (multipleTransactions){
+        updateTransactionsTotal(formId + " #transactions-total", formId + " #transactions textarea" ,formId + " #transaction_currency");
+      }
+    }
+  });
+}
+
+// TODO
+function updateTransactionRate(obj) {
+  var formId = getFormId(obj)
+
+}
+
+function changeTransactionAccount(obj) {
+  var formId, account
+  
+  formId = getFormId(obj)
+  account = $(obj).val();
+
+  $(formId + " #transaction_account").val(account);
+  $(formId + " #transaction_from_account").val(account);
+
+  if (transaction_type !== "transfer") {
+    $.ajax({
+      type: "GET",
+      dataType: "text",
+      url: "/api/account_currency/" + encodeURI(account),
+      success(data) {
+        $(formId + " #transaction_currency").val(data);
+      }
+    });
+  }
+
+  showTransferCurrencyRates(formId);
+}
+
+function updateTransactionsTotal(targetTotal, targetTransactions, targetCurrency) {
+  var currency, total, $targetTotal, $targetTransactions, $targetCurrency;
+
+  $targetTotal = $(targetTotal);
+  $targetTransactions = $(targetTransactions);
+  $targetCurrency = $(targetCurrency);
+
+  total = getTransactionTotalFromMultiple($targetTransactions);
+  total = total.toString().replace(".", "$");
+  currency = $targetCurrency.val();
+
+  $.ajax({
+    type: "GET",
+    dataType: "text",
+    url: "api/format_currency/" + total + "/" + currency + "/true",
+    success(data) {
+      $targetTotal.text(data);
+    }
+  });
+}
+
+function getTransactionTotalFromMultiple($target) {
+  var test, lines, total, words, i;
+
+  text = $target.val();
+  lines = text.split("\n");
+
+  for (i=0; i<lines.length; i++) {
+    if (lines[i].length > 0) {
+      words = lines[i].split(" ");
+      if (words.length > 0) {
+        if (!isNaN(words[words.length - 1])) {
+          total += parseFloat(wods[words.length - 1]);
+        }
+      }
+    }
+  }
+
+  return total;
+}
+
+function changeTransactionToAccount(obj) {
+  var formId = getFormId(obj)
+  showTransferCurrencyRates(formId);
+}
+
+function changeTransactionCurrency(obj, currency=""){
+  var formId, result, currency, account
+
+  formId = getFormId(obj);
+  result = 0;
+
+  $(formId + " #currency-rate").hide();
+  $(formId + " #currency-result").hide();
+
+  if(currency.length == 0) {
+    currency = $(formId + " #transaction_currency").val();
+  }
+
+  account = $(formId + " #single-account select").val();
+
+  $.ajax({
+    type: "GET",
+    dataType: "json",
+    url: "/api/account_currency_details/" + encodeURI(account),
+    success: function(data_currency) {
+      if (data_currency.iso_code != currency){
+        $(formId + " #exchange_rate_spinner").show();
+        $.ajax({
+          type: "GET",
+          dataType: "text",
+          url: "/api/currency_rate/" + currency + "/" + data_currency.iso_code,
+          success: function(data_rate) {
+            $(formId + ' #exchange_rate_spinner').hide();
+            $(formId + ' #account_currency').text('Amount in ' + data_currency.iso_code);
+            $(formId + ' #currency-rate').show();
+            $(formId + ' #currency-result').show();
+            $(formId + ' #currency-rate input').val(data_rate);
+
+            if ($(formId + ' #amount').is(":visible")){
+              result = $('#transactionform #amount input').val() * data_rate
+            } else{
+              result = getTransactionTotalFromMultiple($(formId + ' #transactions textarea')) * data_rate
+            }
+
+            $(formId + ' #currency-result input').val(Math.round(result * data_currency.subunit_to_unit) / data_currency.subunit_to_unit);
+          }
+        });
+
+      } else {
+        $(formId + ' #currency-rate').hide();
+        $(formId + ' #currency-result').hide();
+        $(formId + ' #currency-rate input').val('');
+        $(formId + ' #currency-result input').val('');
+      }
+    }
+  });
+  updateTransactionsTotal(formId + ' #transactions-total',formId + ' #transactions textarea' ,formId + ' #transaction_currency');
+  updateTransactionResult();
+}
+
+// handles whether the transfer currency rates should be shown
+function showTransferCurrencyRates(formId) {
+  var from, to;
+
+  if (getTransactionType() == "transfer") {
+    $(formId + " #transfer-currency-options").hide();
+    
+    from = encodeURI($(formId + " #transaction_from_account").val());
+    to = encodeURI($(formId + " #transaction_to_account").val());
+
+    $.ajax({
+      type: "GET",
+      dataType: "json",
+      url: "/api/transfer_accounts/" + from + "/" + to,
+      success: function(data) {
+        if (data.from_account.currency !== data.to_account.currency){
+          $(formId + " #to_account_currency").text('Amount in ' + data.to_account.currency);
+          $(formId + " #transfer-currencies").show();
+          $(formId + " #rate_from_to").text('Rate ' + data.from_account.currency + ' to ' + data.to_account.currency);
+          $(formId + " #transaction_rate_from_to").val(data.currency_rate);
+        } else {
+          $(formId + " #transaction_rate_from_to").val(data.currency_rate);
+          $(formId + " #transfer-currencies").hide();
+        }
+
+        updateTransactionResult(formId);
+      }
+    });
+  } else {
+    $(formId + " #transaction_rate_from_to").val(1);
+    $(formId + " #transaction-currencies").hide();
+    $(formId + " #transaction-currency-options").show();
+  }
+
+  updateTransactionResult(formId);
+}
+
+// returns the type of transaction
+function getTransactionType(formId) {
+  var type;
+
+  if ($(formId + " #type-expense").hasClass("active")) {
+    return "expense";
+  } else if ($(formId + " #type-income").hasClass("active")) {
+    return "income";
+  } else {
+    return "transfer";
+  }
+
+}
+
+// returns true if there are multiple transactions
+function isTransactionMultiple(formId) {
+  if ($(formId + " #multiple-single").hasClass("active")) {
+    return true;
+  } else {
+    return false;
+  }
+}

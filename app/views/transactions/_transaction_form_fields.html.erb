@@ -5,7 +5,7 @@ selected_category = current_user.categories.find(transaction.category_id) if tra
 
 %>
 
-<div class="row">
+<div class="row transactionform" id="<%= form_id_prefix %>transactionform<%= form_id_suffix %>">
 
   <%# COLUMN 1 %>
   <div class="col-12 col-lg-6 col-xl-7 px-2 px-sm-5 border-right">
@@ -100,7 +100,7 @@ selected_category = current_user.categories.find(transaction.category_id) if tra
     <div class="row py-2" id="amount" style="<%= params[:amount_style] %>">
       <div class="col-12">
         <%= f.label :amount %>
-        <%= f.number_field :amount, placeholder: "99.87", class: "form-control", step: :any, value: transaction.amount_single %>
+        <%= f.number_field :amount, placeholder: "99.87", class: "form-control", step: :any, value: transaction.amount_single, 'onkeyup' => 'updateTransactionResult()' %>
       </div>
     </div>
 
@@ -128,7 +128,7 @@ selected_category = current_user.categories.find(transaction.category_id) if tra
 
         <div class="col-7 col-xl-6 default-hide py-2" id="currency-result" style="<%= params[:currency_conversion_style] %>">
           <%= f.label :amount_in, id: 'account_currency' %>
-          <%= f.number_field :account_currency_amount, class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'updateTransactionRate(\'#transactionform #transaction_rate\', \'#transactionform #transaction_account_currency\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')', 'onchange' => 'updateTransactionRate(\'#transactionform #transaction_rate\', \'#transactionform #transaction_account_currency\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')' %>
+          <%= f.number_field :account_currency, class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'updateTransactionRate(\'#transactionform #transaction_rate\', \'#transactionform #transaction_account_currency\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')', 'onchange' => 'updateTransactionRate(\'#transactionform #transaction_rate\', \'#transactionform #transaction_account_currency\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')', value: transaction.amount_account %>
         </div>
 
       <% end %>

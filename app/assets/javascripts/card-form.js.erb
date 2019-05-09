@@ -21,10 +21,13 @@ $(document).on('show.bs.modal','#accountform', function () {
 
 
 
-function changeTransactionType(type, obj) {
+function changeTransactionType_OLD(type, obj) {
   var formId = "#" + $(obj).parents(".transactionform").attr("id");
+  alert(formId);
   transaction_type = type
+  // TODO
   showTransferCurrencyRates();
+  // END TODO
   switch(type) {
     case 'transfer':
       $(formId + ' #single-account').hide();
@@ -55,25 +58,30 @@ function changeTransactionType(type, obj) {
   }
 }
 
-function changeTransactionMultiple(type, obj){
+function changeTransactionMultiple_OLD(type, obj){
   var formId = "#" + $(obj).parents(".transactionform").attr("id");
   switch (type) {
     case 'single':
       $(formId + ' #amount').show();
       $(formId + ' #transactions').hide();
+      // TODO
       multiple_transactions = false;
+      // END TODO
       break;
     default:
       $(formId + ' #amount').hide();
       $(formId + ' #transactions').show();
       multiple_transactions = true;
+      // TODO
       // update the total amount
       updateTransactionsTotal(formId + ' #transactions-total','#transactionform #transactions textarea' ,'#transactionform #transaction_currency');
+      // END TODO
   }
 
   updateTransactionResult();
 }
 
+// TODO
 function getTransactionTotalFromMultiple($target) {
   var text = "";
   var lines = [];
@@ -97,8 +105,9 @@ function getTransactionTotalFromMultiple($target) {
 
   return total;
 }
+// END TODO
 
-function updateTransactionResult() {
+function updateTransactionResult_OLD() {
   var rate = 1;
   var amount = 0;
   var $accountTarget;
@@ -202,7 +211,7 @@ function changeTransactionToAccount(selectObject) {
   showTransferCurrencyRates();
 }
 
-function showTransferCurrencyRates() {
+function showTransferCurrencyRates_OLD() {
   if (transaction_type == 'transfer') {
     $('#transactionform #transaction-currency-options').hide();
     var from = "";
@@ -292,7 +301,7 @@ function changeTransactionCurrency(selectObject, currency='') {
   updateTransactionResult();
 }
 
-function updateTransactionsTotal(targetTotal, targetTransactions, targetCurrency){
+function updateTransactionsTotal_OLD(targetTotal, targetTransactions, targetCurrency){
   var $targetTotal = $(targetTotal);
   var $targetTransactions = $(targetTransactions);
   var $targetCurrency = $(targetCurrency);
