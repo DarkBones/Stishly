@@ -1,7 +1,13 @@
-<% params = transaction_form_params(transaction) %>
+<% 
+params = transaction_form_params(transaction)
+selected_category = Category.get_uncategorised
+selected_category = current_user.categories.find(transaction.category_id) if transaction.category_id > 0
+
+%>
 
 <div class="row">
 
+  <%# COLUMN 1 %>
   <div class="col-12 col-lg-6 col-xl-7 px-2 px-sm-5 border-right">
 
     <%# EXPENSE / INCOME / TRANSFER button group %>
@@ -37,6 +43,96 @@
         <%= f.label :account %>
         <%= f.select(:account, user_accounts_array, {:selected => params[:from_account_name]}, { :class => "form-control", "onchange" => "changeTransactionAccount(this, '#transaction_currency');"}) %>
       </div>
+    </div>
+
+    <%# TRANSFER ACCOUNTS %>
+    <div class="row py-2" id="transfer-account" style="<%= params[:transfer_account_style] %>">
+      <div class="col-12 col-lg-6 py-2">
+        <%= f.label :from_account %>
+        <%= f.select(:from_account, user_accounts_array, {:selected => params[:from_account_name]}, { :class => "form-control", "onchange" => "changeTransactionAccount(this, '#transaction_currency');"}) %>
+      </div>
+      <div class="col-12 col-lg-6 py-2">
+        <%= f.label :to_account %>
+        <%= f.select(:to_account, user_accounts_array, {:selected => params[:to_account_name]}, { :class => "form-control" }) %>
+      </div>
+    </div>
+
+    <%# CATEGORIES %>
+    <div class="row py-2 default-show" id="categories" style="<%= params[:category_style] %>">
+      <div class="col-12 py-2">
+        <%= f.label :category %><br />
+        <%= render partial: "shared/custom_dropdown_categories", locals: {
+          #selected: Category.get_user_categories(current_user, true)[0],
+          selected: selected_category,
+          options: Category.get_user_categories(current_user, true),
+          input_target: "#edit_transaction_" + transaction.id.to_s + "_category_id",
+          button_type: 'btn-outline-dark',
+          id_suff: "_" + transaction.id.to_s
+        } %>
+        
+        <% categories = Category.get_user_categories(current_user, true) %>
+        <%= f.hidden_field :category_id, :id => "edit_transaction_" + transaction.id.to_s + "_category_id_" + transaction.id.to_s %>
+      </div>
+    </div>
+
+  </div>
+
+  <%# COLUMN 2 %>
+  <div class="col-12 col-lg-6 col-xl-5">
+
+    <%# MULTIPLE / SINGLE button group %>
+    <div class="row py-2">
+      <div class="col-12 py-5">
+
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
+          <label class="btn btn-secondary py-3 <%= params[:single_transaction_class] %>" onclick="changeTransactionMultiple('single', this);" id="multiple-single">
+            <%= f.radio_button :multiple, "single", :checked => params[:single_transaction_selected] %>Single
+          </label>
+          <label class="btn btn-secondary py-3 <%= params[:multiple_transaction_class] %>" onclick="changeTransactionMultiple('multiple', this);" id="multiple_multiple">
+            <%= f.radio_button :multiple, "multiple", :checked => params[:multiple_transaction_selected] %>Multiple
+          </label>
+        </div>
+
+      </div>
+    </div>
+
+    <%# AMOUNT SINGLE %>
+    <div class="row py-2" id="amount" style="<%= params[:amount_style] %>">
+      <div class="col-12">
+        <%= f.label :amount %>
+        <%= f.number_field :amount, placeholder: "99.87", class: "form-control", step: :any, value: transaction.amount_single %>
+      </div>
+    </div>
+
+    <%# AMOUNT MULTIPLE %>
+    <div class="row py-2" id="transactions" style="<%= params[:transactions_style] %>">
+      <div class="col-12">
+        <%= f.label :transactions %>
+        <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: "form-control", value: transaction.amount_multiple %>
+      </div>
+    </div>
+
+    <%# CURRENCY %>
+    <div class="row py-2" id="transaction-currency-options" style="<%= params[:currency_style] %>">
+      <div class="col-12 col-xl-3 py-2">
+        <%= f.label :currency %>
+        <%= f.select(:currency, all_currencies(Money::Currency.table), {}, { :class => "form-control" }) %>
+      </div>
+
+      <%# CURRENCY CONVERSION %>
+      <% unless base_only %>
+        <div class="col-5 col-xl-3 py-2" id="currency-rate" style="<%= params[:currency_conversion_style] %>">
+          <%= f.label :rate %><br />
+          <%= f.number_field :rate, class: 'form-control', step: :any, 'default_value' => '1', 'onkeyup' => 'updateTransactionResult()', 'onchange' => 'updateTransactionResult()', value: params[:conversion_rate] %>
+        </div>
+
+        <div class="col-7 col-xl-6 default-hide py-2" id="currency-result" style="<%= params[:currency_conversion_style] %>">
+          <%= f.label :amount_in, id: 'account_currency' %>
+          <%= f.number_field :account_currency_amount, class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'updateTransactionRate(\'#transactionform #transaction_rate\', \'#transactionform #transaction_account_currency\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')', 'onchange' => 'updateTransactionRate(\'#transactionform #transaction_rate\', \'#transactionform #transaction_account_currency\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')' %>
+        </div>
+
+      <% end %>
+
     </div>
 
   </div>
