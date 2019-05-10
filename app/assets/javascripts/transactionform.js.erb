@@ -133,6 +133,11 @@ function updateTransactionsTotal(targetTotal, targetTransactions, targetCurrency
   $targetCurrency = $(targetCurrency);
 
   total = getTransactionTotalFromMultiple($targetTransactions);
+
+  if(typeof(total) === "undefined") {
+    return;
+  }
+
   total = total.toString().replace(".", "$");
   currency = $targetCurrency.val();
 
@@ -171,7 +176,12 @@ function changeTransactionToAccount(obj) {
   showTransferCurrencyRates(formId);
 }
 
-function changeTransactionCurrency(obj, currency=""){
+function changeTransactionCurrency(obj, currency="", ignore){
+  // return if the form only uses base transaction fields
+  if (ignore) {
+    return;
+  }
+
   var formId, result, currency, account
 
   formId = getFormId(obj);
@@ -205,9 +215,9 @@ function changeTransactionCurrency(obj, currency=""){
             $(formId + ' #currency-rate input').val(data_rate);
 
             if ($(formId + ' #amount').is(":visible")){
-              result = $('#transactionform #amount input').val() * data_rate
+              result = $('#transactionform #amount input').val() * data_rate;
             } else{
-              result = getTransactionTotalFromMultiple($(formId + ' #transactions textarea')) * data_rate
+              result = getTransactionTotalFromMultiple($(formId + ' #transactions textarea')) * data_rate;
             }
 
             $(formId + ' #currency-result input').val(Math.round(result * data_currency.subunit_to_unit) / data_currency.subunit_to_unit);
@@ -223,7 +233,7 @@ function changeTransactionCurrency(obj, currency=""){
     }
   });
   updateTransactionsTotal(formId + ' #transactions-total',formId + ' #transactions textarea' ,formId + ' #transaction_currency');
-  updateTransactionResult();
+  updateTransactionResult(formId);
 }
 
 // handles whether the transfer currency rates should be shown

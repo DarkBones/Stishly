@@ -116,7 +116,7 @@ selected_category = current_user.categories.find(transaction.category_id) if tra
     <div class="row py-2" id="transaction-currency-options" style="<%= params[:currency_style] %>">
       <div class="col-12 col-xl-3 py-2">
         <%= f.label :currency %>
-        <%= f.select(:currency, all_currencies(Money::Currency.table), {}, { :class => "form-control" }) %>
+        <%= f.select(:currency, all_currencies(Money::Currency.table), {}, { :class => "form-control", 'onchange' => 'changeTransactionCurrency(this, "", ' + base_only.to_s + ')' }) %>
       </div>
 
       <%# CURRENCY CONVERSION %>

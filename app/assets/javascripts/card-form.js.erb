@@ -82,7 +82,7 @@ function changeTransactionMultiple_OLD(type, obj){
 }
 
 // TODO
-function getTransactionTotalFromMultiple($target) {
+function getTransactionTotalFromMultiple_OLD($target) {
   var text = "";
   var lines = [];
   var total = 0;
@@ -151,7 +151,7 @@ function updateTransactionResult_OLD() {
   });
 }
 
-function updateTransactionRate(rateTarget, resultTarget, amountTarget1, amountTarget2){
+function updateTransactionRate_OLD(rateTarget, resultTarget, amountTarget1, amountTarget2){
   var $rateTarget = $(rateTarget);
   var $resultTarget = $(resultTarget);
   var $amountTarget1 = $(amountTarget1);
@@ -184,7 +184,7 @@ function updateTransactionRate(rateTarget, resultTarget, amountTarget1, amountTa
   }
 }
 
-function changeTransactionAccount(selectObject, target="#transaction_currency") {
+function changeTransactionAccount_OLD(selectObject, target="#transaction_currency") {
   var formId = "#" + $(selectObject).parents(".transactionform").attr("id");
   var account = selectObject.value;
 
@@ -207,7 +207,7 @@ function changeTransactionAccount(selectObject, target="#transaction_currency") 
   showTransferCurrencyRates();
 }
 
-function changeTransactionToAccount(selectObject) {
+function changeTransactionToAccount_OLD(selectObject) {
   showTransferCurrencyRates();
 }
 
@@ -247,7 +247,7 @@ function showTransferCurrencyRates_OLD() {
   updateTransactionResult();
 }
 
-function changeTransactionCurrency(selectObject, currency='') {
+function changeTransactionCurrency_OLD(selectObject, currency='') {
   var account = "";
   var result = 0;
 
