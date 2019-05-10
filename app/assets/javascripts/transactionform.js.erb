@@ -81,6 +81,9 @@ function updateTransactionResult(formId) {
     }
   }
 
+  console.log(formId);
+  console.log($accountTarget.val());
+
   $.ajax({
     type: "GET",
     dataType: "json",

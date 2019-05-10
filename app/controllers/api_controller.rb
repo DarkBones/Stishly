@@ -120,7 +120,7 @@ class ApiController < ApplicationController
   # renders the currency details of a given account
   def account_currency_details
     account = Account.get_from_name(params[:account_name], current_user)
-    puts params
+    puts "PARAMS: #{params}"
     currency = Money::Currency.new(account.currency)
     render json: currency
   end

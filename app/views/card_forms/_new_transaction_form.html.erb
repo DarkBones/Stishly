@@ -1,4 +1,9 @@
-<% selected_category = Category.get_uncategorised %>
+<% 
+
+selected_category = Category.get_uncategorised
+formId = "transactionform"
+
+%>
 
 <div class="modal transactionform <%= 'fade' if Rails.env.test? == false %>" id="transactionform" tabindex="-1" role="dialog" aria-labelledby="transactionformLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog" role="document">
@@ -114,7 +119,7 @@
                   <div class="col-12 py-2">
 
                     <%= f.label :amount %><br />
-                    <%= f.number_field :amount, placeholder: "99.87", class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'updateTransactionResult()' %>
+                    <%= f.number_field :amount, placeholder: "99.87", class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'updateTransactionResult(' + formId + ')' %>
 
                   </div>
 
@@ -125,7 +130,7 @@
                   <div class="col-12 py-2">
 
                     <%= f.label :transactions %><br />
-                    <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: 'accountmenu__description form-control', 'default_value' => '', 'onkeyup' => 'updateTransactionResult()' %>
+                    <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: 'accountmenu__description form-control', 'default_value' => '', 'onkeyup' => 'updateTransactionResult(' + formId + ')' %>
                     <p id="transaction_total">Total: <span id="transactions-total">0</span></p>
                   </div>
 
@@ -148,7 +153,7 @@
 
                     <%= f.label :rate %><br />
                     <!--<input type="number" name="lname" class="form-control" step="any">-->
-                    <%= f.number_field :rate, class: 'form-control', step: :any, 'default_value' => '1', 'onkeyup' => 'updateTransactionResult()', 'onchange' => 'updateTransactionResult()' %>
+                    <%= f.number_field :rate, class: 'form-control', step: :any, 'default_value' => '1', 'onkeyup' => 'updateTransactionResult(' + formId + ')', 'onchange' => 'updateTransactionResult(' + formId + ')' %>
 
                   </div>
 
