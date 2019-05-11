@@ -160,7 +160,7 @@ formId = "#transactionform"
                   <div class="col-7 col-xl-6 default-hide py-2" id="currency-result">
 
                     <%= f.label :amount_in, id: 'account_currency' %><br />
-                    <%= f.number_field :account_currency, class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'updateTransactionRate(' + formId + ')' %>
+                    <%= f.number_field :account_currency, class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'updateTransactionRate(\'#transactionform #transaction_rate\', \'#transactionform #transaction_account_currency\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')', 'onchange' => 'updateTransactionRate(\'#transactionform #transaction_rate\', \'#transactionform #transaction_account_currency\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')' %>
 
                   </div>
                   
@@ -179,7 +179,7 @@ formId = "#transactionform"
                   <div class="col-6 default-show py-2" id="currency-result">
 
                     <%= f.label :amount_in, id: 'to_account_currency' %><br />
-                    <%= f.number_field :to_account_currency, class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'updateTransactionRate(' + formId + ')' %>
+                    <%= f.number_field :to_account_currency, class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'updateTransactionRate(\'#transactionform #transaction_rate_from_to\', \'#transactionform #transaction_to_account_currency\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')', 'onchange' => 'updateTransactionRate(\'#transactionform #transaction_rate_from_to\', \'#transactionform #transaction_to_account_currency\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')' %>
 
                   </div>
 

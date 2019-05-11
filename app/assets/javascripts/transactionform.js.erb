@@ -106,9 +106,40 @@ function updateTransactionResult(formId) {
   }
 }
 
-// TODO
+
 function updateTransactionRate(obj) {
-  var formId = getFormId(obj)
+  var $rateTarget,
+    $resultTarget,
+    isMultiple,
+    $amountTarget,
+    result,
+    amount,
+    rate;
+
+  formId = getFormId(obj)
+  $rateTarget = $(formId + " #transaction_rate");
+  $resultTarget = $(formId + " #transaction_account_currency");
+  isMultiple = isTransactionMultiple(formId);
+  result = 0;
+  amount = 0;
+  rate = 0;
+
+  if (isMultiple) {
+    $amountTarget = $(formId + " #amount_input");
+  } else {
+    $amountTarget = $(formId + " #transactions textarea");
+  }
+
+  if($resultTarget.is(":visible")) {
+    result = $resultTarget.val();
+    if (isMultiple) {
+      amount = getTransactionTotalFromMultiple(formId);
+    } else {
+      amount = $amountTarget.val();
+    }
+    rate = result / amount;
+    $target.val(rate);
+  }
 
 }
 
@@ -155,7 +186,7 @@ function updateTransactionsTotal(formId) {
   $.ajax({
     type: "GET",
     dataType: "text",
-    url: "api/format_currency/" + total + "/" + currency + "/true",
+    url: "/api/format_currency/" + total + "/" + currency + "/true",
     success(data) {
       $targetTotal.text(data);
     }
@@ -175,7 +206,7 @@ function getTransactionTotalFromMultiple(formId) {
     if (lines[i].length > 0) {
       words = lines[i].split(" ");
       if (words.length > 0) {
-        if (!isNaN(words[words.length - 1])) {
+        if (!isNaN(words[words.length - 1]) && words[words.length - 1].length > 0) {
           total += parseFloat(words[words.length - 1]);
         }
       }
