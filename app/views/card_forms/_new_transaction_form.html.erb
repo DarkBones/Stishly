@@ -1,7 +1,7 @@
 <% 
 
 selected_category = Category.get_uncategorised
-formId = "transactionform"
+formId = "#transactionform"
 
 %>
 
@@ -56,7 +56,7 @@ formId = "transactionform"
                   <div class="col-12 py-2">
                     <%= f.label :account %><br />
                     <%= f.select(:account, user_accounts_array, {}, { :class => 'form-control', 'onchange' => 'changeTransactionAccount(this)' }) %>
-                    <%= f.hidden_field :active_account, class: 'active_account', id: 'active_account_field' %>
+                    <%= f.text_field :active_account, class: 'active_account', id: 'active_account_field' %>
                   </div>
 
                 </div>
@@ -119,7 +119,7 @@ formId = "transactionform"
                   <div class="col-12 py-2">
 
                     <%= f.label :amount %><br />
-                    <%= f.number_field :amount, placeholder: "99.87", class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'updateTransactionResult(' + formId + ')' %>
+                    <%= f.number_field :amount, placeholder: "99.87", class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'updateTransactionResult("' + formId + '");' %>
 
                   </div>
 
@@ -130,7 +130,7 @@ formId = "transactionform"
                   <div class="col-12 py-2">
 
                     <%= f.label :transactions %><br />
-                    <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: 'accountmenu__description form-control', 'default_value' => '', 'onkeyup' => 'updateTransactionResult(' + formId + ')' %>
+                    <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: 'accountmenu__description form-control', 'default_value' => '', 'onkeyup' => 'updateTransactionResult("' + formId + '");' %>
                     <p id="transaction_total">Total: <span id="transactions-total">0</span></p>
                   </div>
 
@@ -172,7 +172,7 @@ formId = "transactionform"
 
                     <%= f.label :rate_from_to, id: 'rate_from_to' %><br />
                     <!--<input type="number" name="lname" class="form-control" step="any">-->
-                    <%= f.number_field :rate_from_to, class: 'form-control', step: :any, 'default_value' => '1', 'onkeyup' => 'updateTransactionResult()', 'onchange' => 'updateTransactionResult()' %>
+                    <%= f.number_field :rate_from_to, class: 'form-control', step: :any, 'default_value' => '1', 'onkeyup' => 'updateTransactionResult(' + formId + ')', 'onchange' => 'updateTransactionResult(' + formId + ')' %>
 
                   </div>
 

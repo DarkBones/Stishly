@@ -2,10 +2,11 @@ function getFormId(obj) {
   return "#" + $(obj).parents(".transactionform").attr("id");
 }
 
-function changeTransactionType(type, obj) {
-  var formId = getFormId(obj)
+function changeTransactionType(type, obj, formId=null) {
+  if (formId == null){
+    var formId = getFormId(obj)
+  }
 
-  showTransferCurrencyRates(formId);
   switch(type) {
     case "transfer":
       $(formId + " #single-account").hide();
@@ -15,6 +16,7 @@ function changeTransactionType(type, obj) {
       $(formId + " #type").addClass("bg-warning");
       $(formId + " #type").removeClass("bg-success");
       $(formId + ' #transaction-currency-options').hide();
+      $(formId + " #transaction_type_transfer").prop("checked", true);
       break;
     case "income":
       $(formId + " #single-account").show();
@@ -24,6 +26,7 @@ function changeTransactionType(type, obj) {
       $(formId + " #type").removeClass("bg-warning");
       $(formId + " #type").addClass("bg-success");
       $(formId + ' #transaction-currency-options').show();
+      $(formId + " #transaction_type_income").prop("checked", true);
       break;
     default:
       $(formId + " #single-account").show();
@@ -33,7 +36,10 @@ function changeTransactionType(type, obj) {
       $(formId + " #type").removeClass("bg-warning");
       $(formId + " #type").removeClass("bg-success");
       $(formId + ' #transaction-currency-options').show();
+      $(formId + " #transaction_type_expense").prop("checked", true);
   }
+
+  showTransferCurrencyRates(formId, type);
 }
 
 function changeTransactionMultiple(type, obj){
@@ -58,7 +64,7 @@ function updateTransactionResult(formId) {
   $resultTarget = $(formId + " #transaction_account_currency");
   $amountTarget = $(formId + " #transaction_amount");
   type = getTransactionType(formId);
-  multipleTransactions = isTransactionMultiple()
+  multipleTransactions = isTransactionMultiple(formId)
 
   if (multipleTransactions) {
     $amountTarget = $(formId + " #transaction_transactions");
@@ -75,14 +81,11 @@ function updateTransactionResult(formId) {
   if ($resultTarget.is(":visible")) {
     rate = $rateTarget.val();
     if (multipleTransactions) {
-      amount = getTransactionTotalFromMultiple($amountTarget);
+      amount = getTransactionTotalFromMultiple(formId);
     } else {
       amount = $amountTarget.val();
     }
   }
-
-  console.log(formId);
-  console.log($accountTarget.val());
 
   $.ajax({
     type: "GET",
@@ -93,10 +96,14 @@ function updateTransactionResult(formId) {
       $resultTarget.val(result);
 
       if (multipleTransactions){
-        updateTransactionsTotal(formId + " #transactions-total", formId + " #transactions textarea" ,formId + " #transaction_currency");
+        updateTransactionsTotal(formId);
       }
     }
   });
+
+  if (multipleTransactions) {
+    //updateTransactionsTotal(formId);
+  }
 }
 
 // TODO
@@ -128,14 +135,15 @@ function changeTransactionAccount(obj) {
   showTransferCurrencyRates(formId);
 }
 
-function updateTransactionsTotal(targetTotal, targetTransactions, targetCurrency) {
+function updateTransactionsTotal(formId) {
   var currency, total, $targetTotal, $targetTransactions, $targetCurrency;
 
-  $targetTotal = $(targetTotal);
-  $targetTransactions = $(targetTransactions);
-  $targetCurrency = $(targetCurrency);
+  $targetTotal = $(formId + " #transactions-total");
+  $targetTransactions = $(formId + " #transaction_transactions");
+  $targetCurrency = $(formId + " #transaction_currency");
 
-  total = getTransactionTotalFromMultiple($targetTransactions);
+  total = getTransactionTotalFromMultiple(formId);
+  //console.log(total);
 
   if(typeof(total) === "undefined") {
     return;
@@ -154,8 +162,11 @@ function updateTransactionsTotal(targetTotal, targetTransactions, targetCurrency
   });
 }
 
-function getTransactionTotalFromMultiple($target) {
-  var test, lines, total, words, i;
+function getTransactionTotalFromMultiple(formId) {
+  var test, lines, total, words, i, $target;
+  total = 0;
+
+  $target = $(formId + " #transaction_transactions");
 
   text = $target.val();
   lines = text.split("\n");
@@ -165,7 +176,7 @@ function getTransactionTotalFromMultiple($target) {
       words = lines[i].split(" ");
       if (words.length > 0) {
         if (!isNaN(words[words.length - 1])) {
-          total += parseFloat(wods[words.length - 1]);
+          total += parseFloat(words[words.length - 1]);
         }
       }
     }
@@ -220,7 +231,7 @@ function changeTransactionCurrency(obj, currency="", ignore){
             if ($(formId + ' #amount').is(":visible")){
               result = $('#transactionform #amount input').val() * data_rate;
             } else{
-              result = getTransactionTotalFromMultiple($(formId + ' #transactions textarea')) * data_rate;
+              result = getTransactionTotalFromMultiple(formId) * data_rate;
             }
 
             $(formId + ' #currency-result input').val(Math.round(result * data_currency.subunit_to_unit) / data_currency.subunit_to_unit);
@@ -235,15 +246,19 @@ function changeTransactionCurrency(obj, currency="", ignore){
       }
     }
   });
-  updateTransactionsTotal(formId + ' #transactions-total',formId + ' #transactions textarea' ,formId + ' #transaction_currency');
+  updateTransactionsTotal(formId);
   updateTransactionResult(formId);
 }
 
 // handles whether the transfer currency rates should be shown
-function showTransferCurrencyRates(formId) {
+function showTransferCurrencyRates(formId, type=null) {
   var from, to;
 
-  if (getTransactionType() == "transfer") {
+  if (type == null) {
+    type = getTransactionType(formId);
+  }
+
+  if (type === "transfer") {
     $(formId + " #transfer-currency-options").hide();
     
     from = encodeURI($(formId + " #transaction_from_account").val());
@@ -270,6 +285,7 @@ function showTransferCurrencyRates(formId) {
   } else {
     $(formId + " #transaction_rate_from_to").val(1);
     $(formId + " #transaction-currencies").hide();
+    $(formId + " #transfer-currencies").hide();
     $(formId + " #transaction-currency-options").show();
   }
 
@@ -292,9 +308,121 @@ function getTransactionType(formId) {
 
 // returns true if there are multiple transactions
 function isTransactionMultiple(formId) {
-  if ($(formId + " #multiple-single").hasClass("active")) {
+  if ($(formId + " #multiple-multiple").hasClass("active")) {
     return true;
   } else {
     return false;
   }
+}
+
+function resetTransactionMenu(formId){
+  setTimeout(function(){ 
+    $('#transactionform #transaction_description').trigger('focus');
+  }, 500);
+
+  changeTransactionType("expense", null, formId);
+  resetAccountOptions(formId);
+  resetButtonGroups(formId);
+  resetTextInputs(formId);
+  resetDateAndTime(formId);
+  resetAccountAndCurrencyDropdowns(formId);
+  resetCategoryDropdown(formId);
+  showTransferCurrencyRates(formId);
+
+  // show & hide default fields
+  $(formId + " div.default-show").show();
+  $(formId + " div.default-hide").hide();
+}
+
+function resetAccountOptions(formId) {
+  activeAccount = getActiveAccountName();
+  if (activeAccount) {
+    $(formId + "#transaction_account").val(activeAccount);
+    $(formId + " #transaction_from_account").val(activeAccount);
+  } else {
+    $(formId + " #transaction_account").val($(formId + " #transaction_account option:first").val());
+    $(formId + " #transaction_from_account").val($(formId + " #transaction_from_account option:first").val());
+  }
+  $(formId + " #transaction_to_account").val($(formId + " #transaction_to_account option:first").val());
+}
+
+function resetButtonGroups(formId) {
+  $(formId + " #button-group").each(function(index){
+    $(this).find("input").each(function(i){
+      $(this).prop("checked", i==0);
+    });
+    $(this).find("label").each(function(i){
+      if(i == 0){
+        $(this).addClass("active");
+      } else {
+        $(this).removeClass("active");
+      }
+    });
+  });
+}
+
+function resetTextInputs(formId) {
+  $(formId + " input.form-control, " + formId + " textarea.form-control").each(function(index){
+    $(this).val("");
+  });
+}
+
+function resetDateAndTime(formId) {
+  $(formId + " #transaction_date").val(getDate());
+  $(formId + " #transaction_time").val(getTime());
+}
+
+function resetAccountAndCurrencyDropdowns(formId) {
+  var account;
+
+  account = getActiveAccountName();
+  if (account == null) {
+    account = $(formId + " #transaction_account").find("option:first").val();
+  }
+
+  $(formId + " #transaction_account").val(account);
+  $(formId + " #transaction_from_account").val(account);
+
+  $.ajax({
+    type: "GET",
+    dataType: "text",
+    url: "/api/account_currency/" + encodeURI(account),
+    success(data) {
+      $(formId + " #transaction_currency").val(data);
+    }
+  });
+}
+
+function resetAccountAndCurrencyDropdowns_OLD(formId) {
+  var account
+
+  account = getActiveAccountName();
+  alert(account);
+
+  if (account) {
+    $(formId + " #single-account select").val(account);
+    $.ajax({
+      type: "GET",
+      dataType: "text",
+      url: "/api/account_currency/" + encodeURI(account),
+      success(data) {
+        $(formId + " #transaction_currency").val(data);
+      }
+    });
+  } else {
+    $.ajax({
+      type: "GET",
+      dataType: "text",
+      url: "/api/user_currency",
+      success(data) {
+        $(formId + " #transaction_currency").val(data);
+      }
+    });
+  }
+}
+
+function resetCategoryDropdown(formId) {
+  $(formId + " #transaction_category_id").val(0);
+  optionHtml = $(formId + " #categoriesDropdownOptions").find("li").first().html();
+  $(formId + " button#categories-dropdown").html(optionHtml);
 }
