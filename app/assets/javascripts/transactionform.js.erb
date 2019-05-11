@@ -108,15 +108,9 @@ function updateTransactionResult(formId) {
 
 
 function updateTransactionRate(obj) {
-  var $rateTarget,
-    $resultTarget,
-    isMultiple,
-    $amountTarget,
-    result,
-    amount,
-    rate;
-
-  formId = getFormId(obj)
+  var $rateTarget, $resultTarget, isMultiple, $amountTarget, result, amount, rate;
+  
+  formId = getFormId(obj);
   $rateTarget = $(formId + " #transaction_rate");
   $resultTarget = $(formId + " #transaction_account_currency");
   isMultiple = isTransactionMultiple(formId);
@@ -125,9 +119,9 @@ function updateTransactionRate(obj) {
   rate = 0;
 
   if (isMultiple) {
-    $amountTarget = $(formId + " #amount_input");
-  } else {
     $amountTarget = $(formId + " #transactions textarea");
+  } else {
+    $amountTarget = $(formId + " #transaction_amount");
   }
 
   if($resultTarget.is(":visible")) {
@@ -138,7 +132,7 @@ function updateTransactionRate(obj) {
       amount = $amountTarget.val();
     }
     rate = result / amount;
-    $target.val(rate);
+    $rateTarget.val(rate);
   }
 
 }
