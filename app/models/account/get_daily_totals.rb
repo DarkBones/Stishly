@@ -16,9 +16,9 @@ class Account
         day = t.local_datetime.to_date
 
         if @account_id != 0
-          days[day] = @current_user.transactions.where("DATE(transactions.local_datetime) = DATE(?) AND parent_id IS NULL AND account_id = ?", day, @account_id).sum(:account_currency_amount) unless days.keys.include? day
+          days[day] = @current_user.transactions.where("DATE(transactions.local_datetime) = DATE(?) AND parent_id IS NULL AND account_id = ? AND is_scheduled = 0", day, @account_id).sum(:account_currency_amount) unless days.keys.include? day
         else
-          days[day] = @current_user.transactions.where("DATE(transactions.local_datetime) = DATE(?) AND parent_id IS NULL", day).sum(:user_currency_amount) unless days.keys.include? day
+          days[day] = @current_user.transactions.where("DATE(transactions.local_datetime) = DATE(?) AND parent_id IS NULL AND is_scheduled = 0", day).sum(:user_currency_amount) unless days.keys.include? day
         end
       end
 

@@ -18,9 +18,15 @@ class SchedulesTransaction < ApplicationRecord
 
     transaction_ids = params[:transactions].split
     transaction_ids.each do |t_id|
-      transaction = current_user.transactions.find(t_id)
+      original_transaction = current_user.transactions.find(t_id)
 
-      next if transaction.nil?
+      next if original_transaction.nil?
+
+      transaction = original_transaction.dup
+
+      #transaction = current_user.transaction.find(transaction.id)
+      transaction.is_scheduled = true
+      transaction.save
 
       link = transaction.schedules << schedule
     end

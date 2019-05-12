@@ -32,7 +32,7 @@ class Transaction < ApplicationRecord
   attr_reader :rate, :account_currency, :rate_from_to, :to_account_currency, :date, :time
 
   filterrific(
-    default_filter_params: { sorted_by: 'created_at_desc', include_children: 1 },
+    default_filter_params: { sorted_by: 'created_at_desc', include_children: 1, is_scheduled: 0 },
     available_filters: [
       :description,
       :from_date,
@@ -45,7 +45,8 @@ class Transaction < ApplicationRecord
       :amount_range,
       :period,
       #:in_the_last,
-      :sorted_by
+      :sorted_by,
+      :is_scheduled
     ]
   )
 
@@ -61,6 +62,7 @@ class Transaction < ApplicationRecord
   scope :from_amount, ->(from_amount) { where("user_currency_amount >= ?", from_amount) }
   scope :to_amount, ->(to_amount) { where("user_currency_amount >= ?", to_amount) }
   scope :account, ->(account_name) { joins(:account).where("accounts.name = ?", account_name) }
+  scope :is_scheduled, ->(scheduled) { where("is_scheduled = 0") }
   
   scope :period, ->(range){
     
