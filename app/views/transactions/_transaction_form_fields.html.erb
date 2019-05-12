@@ -1,4 +1,5 @@
 <% 
+puts transaction.amount
 params = transaction_form_params(transaction)
 selected_category = Category.get_uncategorised
 selected_category = current_user.categories.find(transaction.category_id) if transaction.category_id > 0
@@ -42,7 +43,7 @@ formId = form_id_prefix.to_s + "transactionform" + form_id_suffix.to_s
     <div class="row py-2" id="single-account" style="<%= params[:single_account_style] %>">
       <div class="col-12 py-2">
         <%= f.label :account %>
-        <%= f.select(:account, user_accounts_array, {:selected => params[:from_account_name]}, { :class => "form-control", "onchange" => "changeTransactionAccount(this, '#transaction_currency');"}) %>
+        <%= f.select(:account, user_accounts_array, {:selected => params[:from_account_name]}, { :class => "form-control", "onchange" => "changeTransactionAccount(this);"}) %>
       </div>
     </div>
 
@@ -50,16 +51,16 @@ formId = form_id_prefix.to_s + "transactionform" + form_id_suffix.to_s
     <div class="row py-2" id="transfer-account" style="<%= params[:transfer_account_style] %>">
       <div class="col-12 col-lg-6 py-2">
         <%= f.label :from_account %>
-        <%= f.select(:from_account, user_accounts_array, {:selected => params[:from_account_name]}, { :class => "form-control", "onchange" => "changeTransactionAccount(this, '#transaction_currency');"}) %>
+        <%= f.select(:from_account, user_accounts_array, {:selected => params[:from_account_name]}, { :class => "form-control", "onchange" => "changeTransactionAccount(this);"}) %>
       </div>
       <div class="col-12 col-lg-6 py-2">
         <%= f.label :to_account %>
-        <%= f.select(:to_account, user_accounts_array, {:selected => params[:to_account_name]}, { :class => "form-control" }) %>
+        <%= f.select(:to_account, user_accounts_array, {:selected => params[:to_account_name]}, { :class => "form-control", "onchange" => "changeTransactionAccount(this);" }) %>
       </div>
     </div>
 
     <%# CATEGORIES %>
-    <div class="row py-2 default-show" id="categories" style="<%= params[:category_style] %>">
+    <div class="row py-2 <%= params[:category_class] %>" id="categories" style="<%= params[:category_style] %>">
       <div class="col-12 py-2">
         <%= f.label :category %><br />
         <%= render partial: "shared/custom_dropdown_categories", locals: {
@@ -98,15 +99,15 @@ formId = form_id_prefix.to_s + "transactionform" + form_id_suffix.to_s
     </div>
 
     <%# AMOUNT SINGLE %>
-    <div class="row py-2" id="amount" style="<%= params[:amount_style] %>">
+    <div class="row py-2 <%= params[:amount_class] %>" id="amount" style="<%= params[:amount_style] %>">
       <div class="col-12">
         <%= f.label :amount %>
-        <%= f.number_field :amount, placeholder: "99.87", class: "form-control", step: :any, value: transaction.amount_single, 'onkeyup' => 'updateTransactionResult(' + formId + ')' %>
+        <%= f.number_field :amount, placeholder: "99.87", class: "form-control", step: :any, value: transaction.amount_single, 'onkeyup' => 'updateTransactionResult("#' + formId + '");' %>
       </div>
     </div>
 
     <%# AMOUNT MULTIPLE %>
-    <div class="row py-2" id="transactions" style="<%= params[:transactions_style] %>">
+    <div class="row py-2 <%= params[:transactions_class] %>" id="transactions" style="<%= params[:transactions_style] %>">
       <div class="col-12">
         <%= f.label :transactions %>
         <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: "form-control", value: transaction.amount_multiple %>
@@ -122,14 +123,45 @@ formId = form_id_prefix.to_s + "transactionform" + form_id_suffix.to_s
 
       <%# CURRENCY CONVERSION %>
       <% unless base_only %>
-        <div class="col-5 col-xl-3 py-2" id="currency-rate" style="<%= params[:currency_conversion_style] %>">
+        <div class="col-5 col-xl-3 py-2 <%= params[:currency_conversion_class] %>" id="currency-rate" style="<%= params[:currency_conversion_style] %>">
           <%= f.label :rate %><br />
-          <%= f.number_field :rate, class: 'form-control', step: :any, 'default_value' => '1', 'onkeyup' => 'updateTransactionResult(' + formId + ')', 'onchange' => 'updateTransactionResult(' + formId + ')', value: params[:conversion_rate] %>
+          <%= f.number_field :rate, class: 'form-control', step: :any, 'default_value' => '1', 'onkeyup' => 'updateTransactionResult("#' + formId + '")', 'onchange' => 'updateTransactionResult("#' + formId + '")', value: params[:conversion_rate] %>
         </div>
 
-        <div class="col-7 col-xl-6 default-hide py-2" id="currency-result" style="<%= params[:currency_conversion_style] %>">
+        <div class="col-7 col-xl-6 py-2 <%= params[:currency_conversion_class] %>" id="currency-result" style="<%= params[:currency_conversion_style] %>">
           <%= f.label :amount_in, id: 'account_currency' %>
-          <%= f.number_field :account_currency, class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'updateTransactionRate(\'#transactionform #transaction_rate\', \'#transactionform #transaction_account_currency\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')', 'onchange' => 'updateTransactionRate(\'#transactionform #transaction_rate\', \'#transactionform #transaction_account_currency\', \'#transactionform #amount input\', \'#transactionform #transactions textarea\')', value: transaction.amount_account %>
+          <%= f.number_field :account_currency, class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'updateTransactionRate(this)', 'onchange' => 'updateTransactionRate(this)', value: transaction.amount_account %>
+        </div>
+      </div>
+
+        <%# TRANSFER CURRENCY CONVERSION %>
+        <div class="row py-2 <%= params[:transfer_conversion_class] %>" id="transfer-currencies">
+
+          <div class="col-6 default-show py-2" id="currency-rate">
+            <%= f.label :rate_from_to, id: "rate_from_to" %>
+            <%= f.number_field :rate_from_to, class: "form-control", step: :any, "default_value" => "1", "onkeyup" => "updateTransactionResult('#" + formId + "');", "onchange" => "updateTransactionResult('#" + formId + "');" %>
+          </div>
+
+          <div class="col-6 default-show py-2" id="currency-result">
+            <%= f.label :amount_in, id: "to_account_currency" %>  
+            <%= f.number_field :to_account_currency, class: "form-control", step: :any, "default_value" => "", "onkeyup" => "updateTransactionRate(this);" %>
+          </div>
+
+        </div>
+
+        <%# DATE AND TIME %>
+
+        <div class="row py-2">
+          <div class="col-6 py-2">
+            <%= f.label :date %>
+            <%= f.text_field :date, class: 'datepicker form-control' %>
+          </div>
+
+          <div class="col-6 py-2">
+            <%= f.label :time %>
+            <%= f.text_field :time, type: 'time', value:'now', class: 'form-control' %>
+            <%= f.hidden_field :timezone, id: 'timezone_input' %>
+          </div>
         </div>
 
       <% end %>
@@ -138,4 +170,3 @@ formId = form_id_prefix.to_s + "transactionform" + form_id_suffix.to_s
 
   </div>
 
-</div>

@@ -19,7 +19,19 @@ class TransactionDecorator < ApplicationDecorator
     end
   end
 
+  def amount
+    return model.amount unless model.amount.nil?
+    return 0
+  end
+
+  def category_id
+    return model.category_id unless model.category_id.nil?
+    return 0
+  end
+
   def amount_single
+    return 0 if model.currency.nil?
+
     currency = Money::Currency.new(model.currency)
 
     amount = format_amount(model.amount.abs, currency)
@@ -36,6 +48,8 @@ class TransactionDecorator < ApplicationDecorator
   end
 
   def amount_multiple
+    return 0 if model.currency.nil?
+
     currency = Money::Currency.new(model.currency)
 
     if model.children.length > 0

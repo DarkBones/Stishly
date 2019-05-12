@@ -64,7 +64,7 @@ function updateTransactionResult(formId) {
   $resultTarget = $(formId + " #transaction_account_currency");
   $amountTarget = $(formId + " #transaction_amount");
   type = getTransactionType(formId);
-  multipleTransactions = isTransactionMultiple(formId)
+  multipleTransactions = isTransactionMultiple(formId);
 
   if (multipleTransactions) {
     $amountTarget = $(formId + " #transaction_transactions");
@@ -109,7 +109,7 @@ function updateTransactionResult(formId) {
 
 function updateTransactionRate(obj) {
   var $rateTarget, $resultTarget, isMultiple, $amountTarget, result, amount, rate;
-  
+
   formId = getFormId(obj);
   $rateTarget = $(formId + " #transaction_rate");
   $resultTarget = $(formId + " #transaction_account_currency");
@@ -143,8 +143,10 @@ function changeTransactionAccount(obj) {
   formId = getFormId(obj)
   account = $(obj).val();
 
-  $(formId + " #transaction_account").val(account);
-  $(formId + " #transaction_from_account").val(account);
+  if ($(obj).attr("id") !== "transaction_to_account") {
+    $(formId + " #transaction_account").val(account);
+    $(formId + " #transaction_from_account").val(account);
+  }
 
   if (transaction_type !== "transfer") {
     $.ajax({
@@ -168,7 +170,6 @@ function updateTransactionsTotal(formId) {
   $targetCurrency = $(formId + " #transaction_currency");
 
   total = getTransactionTotalFromMultiple(formId);
-  //console.log(total);
 
   if(typeof(total) === "undefined") {
     return;

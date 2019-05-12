@@ -34,6 +34,18 @@ module TransactionHelper
       params[:single_account_style] = "display: none;"
       params[:transfer_account_style] = "display: block;"
       params[:currency_style] = "display: block;"
+      params[:category_class] = "default-hide"
+      params[:category_style] = "display: none;"
+
+      from_account_currency = transaction.account.currency
+      to_account_currency = current_user.accounts.find(transaction.transfer_transaction_id).currency
+
+      if from_account_currency != to_account_currency
+        params[:transfer_conversion_class] = "default-show"
+      else
+        params[:transfer_conversion_class] = "default-hide"
+      end
+
     elsif type == "income"
       params[:type_bg_color] = "bg-success"
       params[:type_income_class] = "active"
@@ -55,13 +67,17 @@ module TransactionHelper
         params[:to_account_name] = current_user.accounts.find(transaction.transfer_account_id).name
       end
 
-      if currency == account.currency
+      if currency == account.currency || currency.nil?
         params[:currency_conversion_style] = "display: none;"
+        params[:currency_conversion_class] = "default-hide"
       else
         params[:conversion_rate] = transaction.account_currency_amount.to_f / transaction.amount.to_f
+        params[:currency_conversion_class] = "default-show"
       end
 
     else
+      params[:currency_conversion_style] = "display: none;"
+      params[:currency_conversion_class] = "default-hide"
       params[:from_account_name] = account.name
       params[:to_account_name] = params[:from_account_name]
     end
@@ -71,11 +87,15 @@ module TransactionHelper
       params[:single_transaction_selected] = false
       params[:multiple_transaction_selected] = true
       params[:amount_style] = "display: none;"
+      params[:amount_class] = "default-hide"
+      params[:transactions_class] = "default-show"
     else
       params[:single_transaction_class] = "active"
       params[:single_transaction_selected] = true
       params[:multiple_transaction_selected] = false
       params[:transactions_style] = "display: none;"
+      params[:amount_class] = "default-show"
+      params[:transactions_class] = "default-hide"
     end
 
     return params
