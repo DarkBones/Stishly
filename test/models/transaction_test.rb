@@ -61,7 +61,6 @@ class TransactionTest < ActiveSupport::TestCase
 
   test "Currency conversion" do
     current_user = users(:bas)
-
     params = {
       type: "expense",
       amount: "10000",

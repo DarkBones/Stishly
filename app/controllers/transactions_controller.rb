@@ -20,6 +20,11 @@ class TransactionsController < ApplicationController
     @total_amount = transaction_details[:total_amount].to_s
   end
 
+  def update
+    @transactions = Transaction.update(update_params, current_user)
+    redirect_back fallback_location: root_path
+  end
+
 private
 
   def transaction_details_params

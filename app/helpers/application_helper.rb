@@ -27,7 +27,6 @@ module ApplicationHelper
     result += "<ul>"
 
     errors.each do |attribute, message|
-      #puts "<li>#{e[0]}: #{e[1][0]}</li>"
       result += "<li>#{attribute}: #{message}</li>"
     end
 

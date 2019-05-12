@@ -38,7 +38,7 @@ module TransactionHelper
       params[:category_style] = "display: none;"
 
       from_account_currency = transaction.account.currency
-      to_account_currency = current_user.accounts.find(transaction.transfer_transaction_id).currency
+      to_account_currency = current_user.accounts.find(transaction.transfer_account_id).currency
 
       if from_account_currency != to_account_currency
         params[:transfer_conversion_class] = "default-show"
