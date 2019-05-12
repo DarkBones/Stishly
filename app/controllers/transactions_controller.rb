@@ -21,8 +21,8 @@ class TransactionsController < ApplicationController
   end
 
   def update
-    @transactions = Transaction.update(update_params, current_user)
-    redirect_back fallback_location: root_path
+    @transactions = Transaction.update(params[:id], transaction_params, current_user)
+    #redirect_back fallback_location: root_path
   end
 
 private
@@ -33,6 +33,7 @@ private
   
   def transaction_params
     params.require(:transaction).permit(
+      :id,
       :account,
       :from_account,
       :to_account,

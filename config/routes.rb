@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :transaction
+  resource :transaction, only: [:index, :show]
   resource :user_settings, only: [:edit]
   resource :schedules_transactions
   #resource :schedules, only: [:index]
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   get 'schedules', to: 'schedules#index', as: :schedules
   #patch 'schedules', to: 'sch_transactions#update'
 
-  put '/transactions', to: 'transactions#update'
+  put '/transaction/:id/edit', to: 'transactions#update', as: :edit_transaction
 
   get 'api/accounts/:id/details', to: 'api#account_details', as: :account_details
   get 'api/accounts/details', to: 'api#all_accounts_details', as: :account_all_details

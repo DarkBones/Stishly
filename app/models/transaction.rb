@@ -118,6 +118,10 @@ class Transaction < ApplicationRecord
     end
   }
 
+  def self.update(transaction_id, params, current_user)
+    @transactions = UpdateTransaction.new(transaction_id, params, current_user).perform
+  end
+
   def self.prepare_new(params, current_user)
     """
     needed parameters:
