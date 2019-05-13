@@ -122,6 +122,10 @@ class Transaction < ApplicationRecord
     @transactions = UpdateTransaction.new(transaction_id, params, current_user).perform
   end
 
+  def self.create_scheduled_transactions(transaction, current_user)
+    return CreateScheduledTransactions.new(transaction, current_user).perform
+  end
+
   def self.prepare_new(params, current_user)
     """
     needed parameters:

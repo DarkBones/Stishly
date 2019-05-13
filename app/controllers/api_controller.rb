@@ -28,7 +28,7 @@ class ApiController < ApplicationController
   def schedule_transactions
     schedule = current_user.schedules.find(params[:schedule_id])
     #transactions = schedule.user_transactions.where("parent_id is null AND (transfer_transaction_id is null OR (transfer_transaction_id is not null AND direction = -1))").order(:description).decorate
-    transactions = schedule.user_transactions.decorate
+    transactions = schedule.user_transactions.where("parent_id is null AND (transfer_transaction_id is null OR (transfer_transaction_id is not null AND direction = -1))").order(:description).decorate
     
     #render partial: "schedules/transactions", :locals => {:transactions => transactions}
     #render transactions, layout: "schedules"

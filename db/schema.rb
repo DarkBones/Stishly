@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_12_152228) do
+ActiveRecord::Schema.define(version: 2019_05_13_180316) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -38,11 +38,6 @@ ActiveRecord::Schema.define(version: 2019_05_12_152228) do
   end
 
   create_table "apis", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "base_transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -87,11 +82,11 @@ ActiveRecord::Schema.define(version: 2019_05_12_152228) do
   end
 
   create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name"
     t.bigint "user_id"
-    t.date "start_date", null: false
+    t.date "start_date"
     t.date "end_date"
-    t.string "period", null: false
+    t.string "period"
     t.integer "period_num", default: 0
     t.integer "days", default: 0
     t.string "days_month"
@@ -99,7 +94,7 @@ ActiveRecord::Schema.define(version: 2019_05_12_152228) do
     t.integer "days_exclude"
     t.string "exclusion_met"
     t.integer "exclusion_met_day"
-    t.string "timezone", null: false
+    t.string "timezone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_active", default: true
@@ -150,14 +145,14 @@ ActiveRecord::Schema.define(version: 2019_05_12_152228) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "account_id"
-    t.string "timezone", null: false
+    t.string "timezone"
     t.string "currency"
     t.integer "account_currency_amount"
     t.bigint "category_id"
     t.bigint "parent_id"
-    t.datetime "local_datetime", null: false
+    t.datetime "local_datetime"
     t.bigint "transfer_account_id"
-    t.integer "user_currency_amount", null: false
+    t.integer "user_currency_amount"
     t.integer "transfer_transaction_id"
     t.integer "scheduled_transaction_id"
     t.boolean "is_scheduled", default: false
