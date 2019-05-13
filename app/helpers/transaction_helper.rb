@@ -16,6 +16,8 @@ module TransactionHelper
   def transaction_form_params(transaction)
     params = {}
 
+    params[:transactions_total] = 0
+
     type = ""
     if transaction.transfer_transaction_id
       type = "transfer"
@@ -26,14 +28,14 @@ module TransactionHelper
     end
     params[:type] = type
 
-    params[:single_account_style] = "display: block;"
-    params[:transfer_account_style] = "display: none;"
+    #params[:single_account_style] = "display: block;"
+    #params[:transfer_account_style] = "display: none;"
     if type == "transfer"
       params[:type_bg_color] = "bg-warning"
       params[:type_transfer_class] = "active"
       params[:single_account_style] = "display: none;"
-      params[:transfer_account_style] = "display: block;"
-      params[:currency_style] = "display: block;"
+      #params[:transfer_account_style] = "display: block;"
+      params[:currency_style] = "display: none;"
       params[:category_class] = "default-hide"
       params[:category_style] = "display: none;"
 
@@ -49,9 +51,11 @@ module TransactionHelper
     elsif type == "income"
       params[:type_bg_color] = "bg-success"
       params[:type_income_class] = "active"
+      params[:transfer_account_style] = "display: none;"
     else
       params[:type_bg_color] = "bg-danger"
       params[:type_expense_class] = "active"
+      params[:transfer_account_style] = "display: none;"
     end
 
     account = Account.get_accounts(current_user)[0]
@@ -89,6 +93,7 @@ module TransactionHelper
       params[:amount_style] = "display: none;"
       params[:amount_class] = "default-hide"
       params[:transactions_class] = "default-show"
+      params[:transactions_total] = Money.new(transaction.amount.abs, transaction.currency).format
     else
       params[:single_transaction_class] = "active"
       params[:single_transaction_selected] = true
