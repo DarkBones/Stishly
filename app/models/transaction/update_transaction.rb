@@ -62,10 +62,23 @@ private
       transaction.transfer_account_id = get_transfer_account_id(params[:type], from_account, to_account, transferred)
       transaction.is_scheduled = @transaction.is_scheduled
       transaction.parent_id = parent_id
-      # TODO: Figure out how to set the date and time (scheduled transacitons won't use this, but regular transaction will)
+      transaction.local_datetime = get_local_datetime(params[:date], params[:time])
+      transaction.timezone = @transaction.timezone
+
+      #transaction.account_currency_amount = get_account_currency_amount(params[:currency], )
 
       transaction.save
       parent_id = transaction.id
+    end
+
+    def get_local_datetime(date_str, time_str)
+      return if @transaction.is_scheduled || date_str.nil? || time_str.nil?
+
+      # get the time in seconds if there is a local_datetime stored
+      seconds = @transaction.local_datetime.strftime("%S")
+      datetime_str = "#{date_str} #{time_str}:#{seconds}"
+
+      return Date.parse(datetime_str)
     end
 
     def get_transfer_account_id(type, from_account, to_account, transferred)
