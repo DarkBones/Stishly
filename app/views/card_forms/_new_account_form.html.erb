@@ -26,7 +26,7 @@
               </div>
               <div class="col-12 col-sm-3">
                 <%= f.label :currency %><br />
-                <%= f.select(:currency, all_currencies(Money::Currency.table), {}, { :class => 'form-control' }) %>
+                <%= f.select(:currency, all_currencies(Money::Currency.table), {selected: current_user.currency}, { :class => 'form-control', "default_option" => current_user.currency }) %>
               </div>
             </div>
 

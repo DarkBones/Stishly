@@ -323,14 +323,8 @@ function updateTransactionsTotal_OLD(targetTotal, targetTransactions, targetCurr
 function resetAccountMenu(){
   $('#accountform').find("input[type=text], textarea").val("");
 
-  $.ajax({
-    type: "GET",
-    dataType: "text",
-    url: "/api/account_currency/",
-    success: function(data) {
-      $('#accountform').find('select').val(data);
-    }
-  });
+  $currencyTarget = $("#accountform").find("#account_currency");
+  $currencyTarget.val($currencyTarget.attr("default_option"));
 }
 
 function resetTransactionMenu_OLD(){
