@@ -7,8 +7,6 @@ class AccountsTest < ApplicationSystemTestCase
 
     page.driver.browser.navigate.refresh
 
-    puts "\n\n/////////////////// 100 ///////////////////\n\n"
-
     # Open the new account menu
     page.find("#new-account-button").click
     # Find and store the submit button
@@ -23,8 +21,6 @@ class AccountsTest < ApplicationSystemTestCase
     click_on "Create Account"
     page.driver.browser.navigate.refresh
 
-    puts "\n\n/////////////////// 200 ///////////////////\n\n"
-
     # Open the new account menu
     page.find("#new-account-button").click
     # Find and store the submit button
@@ -36,8 +32,6 @@ class AccountsTest < ApplicationSystemTestCase
     # Save the account
     click_on "Create Account"
     page.driver.browser.navigate.refresh
-
-    puts "\n\n/////////////////// 300 ///////////////////\n\n"
 
     # Open the new account menu
     page.find("#new-account-button").click
@@ -56,8 +50,6 @@ class AccountsTest < ApplicationSystemTestCase
     #page.find("#accountform button.close").click
 
     # Open the new account menu
-    puts "\n\n/////////////////// 400 ///////////////////\n\n"
-
     page.find("#new-account-button").click
     # Find and store the submit button
     submit = page.find("#accountform input[type=submit]")
@@ -67,8 +59,6 @@ class AccountsTest < ApplicationSystemTestCase
     # Save the account
     click_on "Create Account"
     page.driver.browser.navigate.refresh
-
-    puts "\n\n/////////////////// 500 ///////////////////\n\n"
 
     # Open the new account menu
     page.find("#new-account-button").click
@@ -81,8 +71,6 @@ class AccountsTest < ApplicationSystemTestCase
     # Save the account
     click_on "Create Account"
     page.driver.browser.navigate.refresh
-
-    puts "\n\n/////////////////// 600 ///////////////////\n\n"
 
     #puts page.driver.browser.manage.logs.get(:browser)
 

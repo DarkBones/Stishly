@@ -54,14 +54,9 @@ class SchedulesTransaction < ApplicationRecord
         add = false if trx.transfer_transaction_id == t.id
       end
 
-      puts "ADD = #{add}"
-
       transactions.push(t) if add
 
     end
-
-    puts transactions.length
-    puts "/////////////////////////"
 
     transactions.each do |t|
       #transaction = current_user.transactions.find(t)

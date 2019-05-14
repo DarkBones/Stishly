@@ -72,9 +72,9 @@ class TransactionsTest < ApplicationSystemTestCase
 
     click_on "New Transaction"
 
-    assert_selector '#categoriesDropdownOptions', visible: :hidden
+    assert_selector '#categoriesDropdownOptions_', visible: :hidden
     page.find("#categories-dropdown").click
-    assert_selector '#categoriesDropdownOptions', visible: :visible
+    assert_selector '#categoriesDropdownOptions_', visible: :visible
   end
 
   test "select category" do
@@ -98,7 +98,7 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector "#categories-dropdown", text: "Uncategorised"
 
     page.find("#categories-dropdown").click
-    page.find("#search-categories").fill_in with: "cinem"
+    page.find("#search-categories_").fill_in with: "cinem"
     
     assert_selector ".category_1", visible: :visible
     assert_selector ".category_12", visible: :visible

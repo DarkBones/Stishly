@@ -15,7 +15,7 @@ class ChildTransactionsTest < ApplicationSystemTestCase
     click_on "New Transaction"
 
     fill_in "Description", with: "Multiple transactions"
-    page.find("#transactionform #multiple_multiple").click
+    page.find("#transactionform #multiple-multiple").click
     fill_in "Transactions", with: "one 1\r\ntwo 2\r\nthree 3\r\nfour 4\r\n"
     click_on "Create Transaction"
     sleep 2

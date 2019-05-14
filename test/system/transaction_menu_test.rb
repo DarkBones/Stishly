@@ -151,7 +151,7 @@ class TransactionMenuTest < ApplicationSystemTestCase
     page.find("#transactionform #multiple-multiple").click
     assert page.find("#transaction_account_currency").value == '0'
 
-    fill_in "Transactions", with: "one 100000\n"
+    fill_in "Transactions", with: "one 100000 \n"
     wait_for_ajax
     assert page.find("#transaction_account_currency").value == '800'
 

@@ -48,14 +48,16 @@ function changeTransactionMultiple(type, obj){
     case "single":
       $(formId + " #amount").show();
       $(formId + " #transactions").hide();
+      updateTransactionResult(formId, false);
       break;
     default:
       $(formId + " #amount").hide();
       $(formId + " #transactions").show();
+      updateTransactionResult(formId, true);
   }
 }
 
-function updateTransactionResult(formId) {
+function updateTransactionResult(formId, multipleTransactions=null) {
   var type, multipleTransactions, rate, amount, $accountTarget, $rateTarget, $resultTarget, $amountTarget;
 
   rate = 1;
@@ -64,7 +66,10 @@ function updateTransactionResult(formId) {
   $resultTarget = $(formId + " #transaction_account_currency");
   $amountTarget = $(formId + " #transaction_amount");
   type = getTransactionType(formId);
-  multipleTransactions = isTransactionMultiple(formId);
+  
+  if (multipleTransactions == null) {
+    multipleTransactions = isTransactionMultiple(formId);
+  }
 
   if (multipleTransactions) {
     $amountTarget = $(formId + " #transaction_transactions");
@@ -77,6 +82,7 @@ function updateTransactionResult(formId) {
   } else {
     $accountTarget = $(formId + " #transaction_account");
   }
+
 
   if ($resultTarget.is(":visible")) {
     rate = $rateTarget.val();
@@ -228,7 +234,6 @@ function changeTransactionCurrency(obj, ignore=false, lockCurrency=true){
 
   var formId, result, currency, account
 
-  console.log(lockCurrency);
   if(lockCurrency){
     $(obj).addClass("changed");
   }
@@ -341,7 +346,7 @@ function getTransactionType(formId) {
 
 // returns true if there are multiple transactions
 function isTransactionMultiple(formId) {
-  if ($(formId + " #multiple_multiple").hasClass("active")) {
+  if ($(formId + " #multiple-multiple").hasClass("active")) {
     return true;
   } else {
     return false;

@@ -22,7 +22,7 @@ class TransactionsController < ApplicationController
 
   def update
     @transactions = Transaction.update(params[:id], transaction_params, current_user)
-    #redirect_back fallback_location: root_path
+    redirect_back fallback_location: root_path
   end
 
 private
