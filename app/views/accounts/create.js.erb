@@ -28,5 +28,5 @@
   $(o).html("<%= @account.name %>");
   $("#transactionform #transaction_account, #transactionform #transaction_from_account, #transactionform #transaction_to_account").prepend(o);
 
-  resetTransactionMenu();
+  resetTransactionMenu("#transactionform");
 <% end %>
