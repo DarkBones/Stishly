@@ -76,7 +76,6 @@ task :deploy do
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
-    invoke :'rails:db_seed'
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
 
