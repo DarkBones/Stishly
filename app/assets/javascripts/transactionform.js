@@ -3,7 +3,7 @@ function getFormId(obj) {
 }
 
 function getTransactionTotalFromMultiple(formId) {
-  var test, lines, total, words, i, $target;
+  var text, lines, total, words, i, $target;
   total = 0;
 
   $target = $(formId + " #transaction_transactions");
@@ -11,10 +11,15 @@ function getTransactionTotalFromMultiple(formId) {
   text = $target.val();
   lines = text.split("\n");
 
-  for (i=0; i<lines.length; i++) {
-    if (lines[i].length > 0) {
-      words = lines[i].split(" ");
-      if (words.length > 0) {
+  line = ""
+  while (typeof(line) !== "undefined"){
+    line = lines.pop();
+    if (typeof(line) === "undefined"){
+      break;
+    }
+    if (line.length > 0) {
+      words = line.split(" ");
+      if(words.length > 0) {
         if (!isNaN(words[words.length - 1]) && words[words.length - 1].length > 0) {
           total += parseFloat(words[words.length - 1]);
         }
