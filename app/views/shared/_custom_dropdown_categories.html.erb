@@ -1,7 +1,7 @@
 <div class="dropdown">
   <button class="btn <%= button_type %> dropdown-toggle text-left" type="button" id="categories-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" input-target="<%= input_target + id_suff %>">
     <% if selected.nil? %>
-      <%= "Select category" %>
+      <%= "- any -" %>
     <% else %>
       <%= image_tag('categories/' + selected.symbol + '.svg', :class => 'rounded-circle', :style => 'background-color: hsl(' + selected.color + ');', 'height' => '30') %> <%= selected.name %>
     <% end %>
