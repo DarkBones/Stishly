@@ -11,13 +11,13 @@ class MergeMigrations < ActiveRecord::Migration[5.2]
     
     create_table :accounts do |t|
       t.integer :balance, default: 0
-      t.references :currency # TODO: check if still needed
+      t.references :currency # TODO: remove or transform into foreign key
       t.references :user
       t.string :name
       t.string :description
       t.integer :position
       t.string :currency
-      t.boolean :is_default # TODO: check if still needed
+      t.boolean :is_default # TODO: remove field
       t.timestamps
       t.index :name
     end
@@ -43,7 +43,7 @@ class MergeMigrations < ActiveRecord::Migration[5.2]
       t.timestamps
     end
     
-    create_table :currencies do |t| # check if still needed
+    create_table :currencies do |t| # TODO: remove table
       t.string :name
       t.string :symbol
       t.string :iso_code
