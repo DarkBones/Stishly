@@ -147,6 +147,30 @@ class TransactionTest < ActiveSupport::TestCase
     assert transactions.length == 10, format_error("Unexpected amount of transactions", 10, transactions.length)
   end
 
+  test "transfer between accounts with different currencies" do
+    current_user = users(:bas)
+    from_account = accounts(:bas_JPY)
+    to_account = accounts(:bas_EUR)
+
+    params = {
+      type: "transfer",
+      amount: "100",
+      from_account: from_account.name,
+      to_account: to_account.name
+    }
+    params = create_params(params)
+
+    transactions = Transaction.create(params, current_user)
+    transactions.each do |t|
+      if t.currency == "JPY"
+        assert t.amount == -100, format_error("Unexpected transaction amount", -100, t.amount)
+      else
+        assert t.amount == 80, format_error("Unexpected transaction amount", 80, t.amount)
+      end
+    end
+
+  end
+
   def create_params(customised_params={}, current_user=nil, account=nil)
     current_user ||= users(:bas)
     account ||= accounts(:bas_1)

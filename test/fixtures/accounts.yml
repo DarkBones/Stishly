@@ -67,6 +67,24 @@ bas_5: {
   currency: 'EUR'
 }
 
+bas_JPY: {
+  id: 6,
+  balance: 0,
+  user_id: 1,
+  name: 'Test account JPY',
+  is_default: false,
+  currency: 'JPY'
+}
+
+bas_EUR: {
+  id: 7,
+  balance: 0,
+  user_id: 1,
+  name: 'Test account EUR',
+  is_default: false,
+  currency: 'EUR'
+}
+
 sab_1: {
   balance: -400,
   user_id: 2,
