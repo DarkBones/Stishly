@@ -79,10 +79,12 @@ private
 
       converted_amount = 0
       if !reverse_direction
-        converted_amount = convert_transaction_amount(base_transaction[:amount]) * direction
+        converted_amount = convert_transaction_amount(base_transaction[:amount], account.currency) * direction
       else
         direction *= -1
         converted_amount = get_account_currency_amount(convert_transaction_amount(base_transaction[:amount]), account) * direction
+        puts "#{@params[:description]}"
+        puts "#{base_transaction[:amount]} #{account.currency} >> #{converted_amount}"
       end
 
       converted_amount >= 0 ? real_direction = 1 : real_direction = -1
@@ -191,8 +193,10 @@ private
       return tz.utc_to_local(time)
     end
 
-    def convert_transaction_amount(amount)
-      currency = Money::Currency.new(@params[:currency])
+    def convert_transaction_amount(amount, currency_code=nil)
+      currency_code ||= @params[:currency]
+
+      currency = Money::Currency.new(currency_code)
 
       return (amount * currency.subunit_to_unit).round.to_i
     end
