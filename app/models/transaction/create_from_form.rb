@@ -79,12 +79,18 @@ private
 
       converted_amount = 0
       if !reverse_direction
-        converted_amount = convert_transaction_amount(base_transaction[:amount], account.currency) * direction
+        if type == 'transfer'
+          converted_amount = convert_transaction_amount(base_transaction[:amount], account.currency) * direction
+        else
+          converted_amount = convert_transaction_amount(base_transaction[:amount]) * direction
+        end
+
       else
         direction *= -1
-        converted_amount = get_account_currency_amount(convert_transaction_amount(base_transaction[:amount]), account) * direction
-        puts "#{@params[:description]}"
-        puts "#{base_transaction[:amount]} #{account.currency} >> #{converted_amount}"
+        if type == 'transfer'
+          base_transaction[:amount] = base_transaction[:amount].to_f * @params[:rate_from_to].to_f
+        end
+        converted_amount = get_account_currency_amount(convert_transaction_amount(base_transaction[:amount], account.currency), account) * direction
       end
 
       converted_amount >= 0 ? real_direction = 1 : real_direction = -1

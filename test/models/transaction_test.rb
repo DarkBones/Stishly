@@ -157,7 +157,9 @@ class TransactionTest < ActiveSupport::TestCase
       amount: "100",
       description: "transfer between accounts with different currencies",
       from_account: from_account.name,
-      to_account: to_account.name
+      to_account: to_account.name,
+      rate_from_to: "0.008",
+      account_currency: "JPY"
     }
     params = create_params(params)
 
