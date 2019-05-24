@@ -167,8 +167,13 @@ class TransactionTest < ActiveSupport::TestCase
     transactions.each do |t|
       if t.currency == "JPY"
         assert t.amount == -100, format_error("Unexpected transaction amount", -100, t.amount)
+        assert t.account_currency_amount == -100, format_error("Unexpected transaction amount", -100, t.account_currency_amount)
+        assert t.user_currency_amount == -80, format_error("Unexpected transaction amount", -80, t.user_currency_amount)
+
       else
         assert t.amount == 80, format_error("Unexpected transaction amount", 80, t.amount)
+        assert t.account_currency_amount == -80, format_error("Unexpected transaction amount", -80, t.account_currency_amount)
+        assert t.user_currency_amount == -80, format_error("Unexpected transaction amount", -80, t.user_currency_amount)
       end
     end
 
