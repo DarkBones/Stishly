@@ -69,6 +69,7 @@ private
     end
 
     def transaction_object(base_transaction, account, reverse_direction = false, parent_id = nil)
+      puts base_transaction.to_yaml
       direction = 1
       transfer_account = nil
       type = get_type
@@ -178,6 +179,8 @@ private
     end
 
     def get_account_currency_amount(amount, account)
+      puts "#{@params[:description]}"
+      puts "get_account_currency_amount #{amount} #{account.currency}"
       transaction_currency = Money::Currency.new(@params[:currency])
       account_currency = Money::Currency.new(account.currency)
 
