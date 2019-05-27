@@ -55,9 +55,10 @@ private
       t = current_user.transactions.new
 
       t.amount = transaction[:amount]
+      t.user_id = current_user.id
       t.direction = transaction[:direction]
       t.description = transaction[:description]
-      t.account_id = transaction[:transfer_account_id]
+      t.account_id = transaction[:account_id]
       t.timezone = transaction[:timezone]
       t.currency = transaction[:currency]
       t.account_currency_amount = transaction[:account_currency_amount]
@@ -65,8 +66,9 @@ private
       t.parent_id = parent_id
       t.transfer_account_id = transfer_account_id
       t.user_currency_amount = transaction[:user_currency_amount]
+      t.local_datetime = transaction[:local_datetime]
 
-      t.save
+      t.save!
 
       return t
     end

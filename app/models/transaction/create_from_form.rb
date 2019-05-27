@@ -85,8 +85,8 @@ private
         base_transactions[idxs[0]][:transfer_transaction_id] = idxs[1]
         base_transactions[idxs[1]][:transfer_transaction_id] = idxs[0]
 
-        base_transactions[idxs[0]][:transfer_account_id] = base_transactions[idxs[1]][:account].id
-        base_transactions[idxs[1]][:transfer_account_id] = base_transactions[idxs[0]][:account].id
+        base_transactions[idxs[0]][:transfer_account_id] = base_transactions[idxs[0]][:account].id
+        base_transactions[idxs[1]][:transfer_account_id] = base_transactions[idxs[1]][:account].id
       end
 
       return base_transactions
@@ -140,11 +140,13 @@ private
         return total * get_direction(params, transferred)
       end
 
-      transactions = params[:transactions].split("\n")
-      transactions.each do |t_name_amount|
-        if /#{@reg}/.match(t_name_amount)
-          amount = t_name_amount.split(' ')[-1]
-          total += amount.to_f if amount.respond_to? "to_f"
+      unless params[:transactions].nil?
+        transactions = params[:transactions].split("\n")
+        transactions.each do |t_name_amount|
+          if /#{@reg}/.match(t_name_amount)
+            amount = t_name_amount.split(' ')[-1]
+            total += amount.to_f if amount.respond_to? "to_f"
+          end
         end
       end
 
@@ -182,8 +184,6 @@ private
 
     # returns a transaction object from a base transaction
     def base_transaction_to_transaction(bt)
-      #puts bt.to_yaml
-      #puts "././././././././. #{bt[:amount]} #{bt[:currency]}"
       transaction = {
         amount: amount_float_int(bt[:amount], bt[:currency]),
         direction: bt[:direction],

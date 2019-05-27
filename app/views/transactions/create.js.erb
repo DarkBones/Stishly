@@ -37,6 +37,7 @@ function InsertTransactions() {
   var $dayDiv, t_date, t_account, account_currency_amount, t_id;
 
   <% @transactions_parent.reverse.each_with_index do |t, i| %>
+    
     console.log('INSERTING TRANSACTION ' + <%= i.to_s %>)
     t_date = '<%= t.local_datetime.to_s.split[0] %>';
 
