@@ -259,7 +259,8 @@ class Transaction < ApplicationRecord
   end
 
   def self.create(params, current_user)
-    CreateFromForm.new(params, current_user).perform
+    transactions = CreateFromForm.new(params, current_user).perform
+    transactions = SaveTransactions.new(transactions, current_user).perform
   end
 
 end

@@ -10,10 +10,10 @@ class Transaction
     def perform
       base_transactions = get_base_transactions(@params)
       base_transactions = link_transferred_transactions(@params, base_transactions)
-      puts "......................."
-      puts base_transactions.to_yaml if @params[:type] == 'transfer' && @params[:multiple] == 'multiple'
-    end
+      transactions = process_base_transactions(base_transactions)
 
+      return transactions
+    end
 
 private
 
@@ -22,12 +22,22 @@ private
 
       account = get_account(params, transferred)
       currency = get_currency(params)
+      user_rate = get_user_rate(currency, @current_user)
 
       current_transaction = {
+        direction: get_direction(params, transferred),
         description: params[:description],
         amount: get_total_amount(params, transferred),
         currency: currency,
-        account: account.name
+        account: account,
+        user_currency: @current_user.currency,
+        account_rate: get_account_rate(params, account, currency, transferred),
+        user_rate: user_rate,
+        timezone: params[:timezone],
+        category_id: params[:category_id],
+        local_datetime: parse_datetime(params[:date], params[:time]),
+        schedule_id: params[:schedule_id],
+        is_scheduled: !params[:schedule_id].nil?
       }
       transactions.push(current_transaction)
 
@@ -50,7 +60,7 @@ private
             child_params[:amount] = amount
 
             current_transaction[:children] ||= []
-            current_transaction[:children].push(get_base_transactions(child_params, transferred, true))
+            current_transaction[:children].push(get_base_transactions(child_params, transferred, true)[0])
           end
         end
       end
@@ -74,9 +84,33 @@ private
       if idxs.length == 2
         base_transactions[idxs[0]][:transfer_transaction_id] = idxs[1]
         base_transactions[idxs[1]][:transfer_transaction_id] = idxs[0]
+
+        base_transactions[idxs[0]][:transfer_account_id] = base_transactions[idxs[1]][:account].id
+        base_transactions[idxs[1]][:transfer_account_id] = base_transactions[idxs[0]][:account].id
       end
 
       return base_transactions
+    end
+
+    # returns the rate between transaction currency and account currency
+    def get_account_rate(params, account, currency, transferred)
+      if params[:type] == 'transfer'
+        return 1 unless transferred
+        return params[:rate_from_to]
+      end
+
+      return 1 if account.currency == currency
+
+      return params[:rate]
+    end
+
+    # returns the rate between transaction currency and user currency
+    def get_user_rate(currency, current_user)
+      user_currency = User.get_currency(current_user)
+
+      return 1 if user_currency.iso_code == currency
+
+      return CurrencyRate.get_rate(currency, user_currency.iso_code)
     end
 
     # returns the account object
@@ -103,7 +137,6 @@ private
 
       if params[:multiple] == 'single'
         total = params[:amount].to_f
-        #total *= -1 if transferred
         return total * get_direction(params, transferred)
       end
 
@@ -114,8 +147,6 @@ private
           total += amount.to_f if amount.respond_to? "to_f"
         end
       end
-
-      #total *= -1 if transferred
 
       return total * get_direction(params, transferred)
     end
@@ -131,16 +162,76 @@ private
       return direction
     end
 
-    class BaseTransaction
+    def process_base_transactions(base_transactions)
+      transactions = []
+      base_transactions.each do |bt|
+        transaction = base_transaction_to_transaction(bt)
 
-      def initialize(params, current_user)
-        # description
-        # amount (float)
-        # currency
-        # account
-        # parent id
+        unless bt[:children].nil?
+          transaction[:children] = []
+          bt[:children].each do |ct|
+            transaction[:children].push(base_transaction_to_transaction(ct))
+          end
+        end
+
+        transactions.push(transaction)
       end
 
+      return transactions
+    end
+
+    # returns a transaction object from a base transaction
+    def base_transaction_to_transaction(bt)
+      #puts bt.to_yaml
+      #puts "././././././././. #{bt[:amount]} #{bt[:currency]}"
+      transaction = {
+        amount: amount_float_int(bt[:amount], bt[:currency]),
+        direction: bt[:direction],
+        description: bt[:description],
+        account_id: bt[:account].id,
+        timezone: bt[:timezone],
+        currency: bt[:currency],
+        account_currency_amount: amount_float_int((bt[:amount].to_f * bt[:account_rate].to_f), bt[:account].currency),
+        category_id: bt[:category_id],
+        local_datetime: bt[:local_datetime],
+        transfer_account_id: bt[:transfer_account_id],
+        user_currency_amount: amount_float_int((bt[:amount].to_f * bt[:user_rate].to_f), @current_user.currency),
+        transfer_transaction_id: bt[:transfer_transaction_id],
+        schedule_id: bt[:schedule_id],
+        is_scheduled: bt[:is_scheduled]
+      }
+    end
+
+    def parse_datetime(date, time)
+      months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+
+      date_arr = date.split('-')
+      
+      day = date_arr[0]
+      month = months.index(date_arr[1].downcase)
+      if month < 10
+        month = '0' + month.to_s
+      else
+        month = month.to_s
+      end
+
+      month = date_arr[1]
+
+      year = date_arr[2]
+
+      time_arr = time.split(':')
+      hours = time_arr[0]
+      minutes = time_arr[1]
+      seconds = Time.now.strftime('%S')
+
+      return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds
+    end
+
+    # convers a float amount to an integer amount (1 EUR = 100 EUR cents)
+    def amount_float_int(amount, currency_code)
+      currency = Money::Currency.new(currency_code)
+
+      return (amount * currency.subunit_to_unit).round.to_i
     end
 
   end
