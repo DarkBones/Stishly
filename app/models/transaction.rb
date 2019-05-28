@@ -191,7 +191,10 @@ class Transaction < ApplicationRecord
     total_amount = 0
 
     transactions.each do |t|
-      amount = get_user_currency_amount(t, params[:active_account], current_user)
+
+      amount = 0
+
+      amount = get_user_currency_amount(t, params[:active_account], current_user) if t.transfer_transaction_id.nil?
       date = t.local_datetime.to_s.split[0]
 
       if params[:active_account].nil? || params[:active_account] == t.account.name

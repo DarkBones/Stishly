@@ -344,10 +344,10 @@ function changeTransactionAccount(obj) {
         url: "/api/account_currency/" + encodeURI(account),
         success(data) {
           $(formId + " #transaction_currency").val(data);
+          changeTransactionCurrency($(formId + " #transaction_currency"), false, false);
         }
       });
     }
-    changeTransactionCurrency($(formId + " #transaction_currency"), false, false);
   }
 
   showTransferCurrencyRates(formId);
