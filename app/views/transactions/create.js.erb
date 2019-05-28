@@ -1,3 +1,4 @@
+//"use strict";
 
 $("[data-dismiss=modal]").trigger({ type: "click" });
 
@@ -34,7 +35,7 @@ $(document).ajaxStop(function () {
 });
 
 function InsertTransactions() {
-  var $dayDiv, t_date, t_account, account_currency_amount, t_id;
+  var $dayDiv, t_date, t_account, account_currency_amount, t_id, t_time;
 
   <% @transactions_parent.reverse.each_with_index do |t, i| %>
     <% t = t.decorate %>
