@@ -20,8 +20,6 @@ function searchCategories(target, input, obj){
     var liPos = 0;
     var $obj = $("#" + obj.id);
 
-    //console.log(obj.val());
-
     if (typeof(text) === "undefined") {
       return;
     }

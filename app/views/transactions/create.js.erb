@@ -39,7 +39,6 @@ function InsertTransactions() {
   <% @transactions_parent.reverse.each_with_index do |t, i| %>
     <% t = t.decorate %>
 
-    console.log('INSERTING TRANSACTION ' + <%= i.to_s %>)
     t_date = '<%= t.local_datetime.to_s.split[0] %>';
 
     <% if params[:filterrific] && /^created_at_/.match(params[:filterrific][:sorted_by]) %>
@@ -82,7 +81,6 @@ function UpdateAccountTotals(){
   account_currency = $balance.attr('currency');
   UpdateBalance($balance, current_balance, account_currency, parseInt('<%= @total_amount %>'));
   <% if @update_day_total %>
-    console.log('UPDATE');
     $balance = $('#transactions_list #' + '<%= @date %>' + ' h3 span');
     current_balance = parseInt($balance.attr('balance'));
     account_currency = $balance.attr('currency');
@@ -91,7 +89,6 @@ function UpdateAccountTotals(){
 }
 
 function UpdateBalance($target, current_balance, currency, add) {
-  console.log(current_balance + ' ' + currency + ' ' + add);
   $.ajax({
     type: 'GET',
     dataType: 'json',
@@ -107,7 +104,6 @@ function UpdateBalance($target, current_balance, currency, add) {
 function InsertTransaction($dayDiv, time, id, account) {
   var $entries = $dayDiv.find('ul li');
   var pageLength = <%= APP_CONFIG['ui']['transactions']['page_length'] %>;
-  console.log("TIME: " + parseInt($entries.eq($entries.length - 1).attr('time')));
 
   <% if params[:filterrific] && /^created_at_/.match(params[:filterrific][:sorted_by]) %>
     if ($entries.length == 0 || time > parseInt($entries.eq(0).attr('time'))){
@@ -183,7 +179,6 @@ function GenerateDayDiv (date, $target, type, currency) {
     dataType: 'text',
     url: '/api/transaction_date_ul/' + date + '/0/' + currency,
     success: function(data) {
-      console.log(data);
       switch (type) {
         case 'prepend':
           $target.prepend(data);
