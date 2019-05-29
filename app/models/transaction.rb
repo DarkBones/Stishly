@@ -141,46 +141,6 @@ class Transaction < ApplicationRecord
     }
   end
 
-  def self.search(current_user, query)
-    return Search.new(current_user, query).perform
-  end
-
-  def self.create_from_list(current_user, transactions)
-    result = []
-    transactions.each do |transaction|
-      if transaction.is_a? Hash
-        t = self.create_transaction(current_user, transaction)
-      elsif transaction.is_a? Transaction
-        t = transaction
-      end
-
-      result.push(t.decorate)
-    end
-
-    # find transfer_transaction_id for transfer transactions
-    transfer_transactions = []
-    result.each do |t|
-      if t.parent_id.nil?
-        unless t.transfer_account_id.nil?
-          transfer_transactions.push(t)
-        end
-      end
-    end
-
-    if transfer_transactions.length == 2
-      t1 = transfer_transactions[0]
-      t2 = transfer_transactions[1]
-
-      t1.transfer_transaction_id = t2.id
-      t2.transfer_transaction_id = t1.id
-
-      t1.save
-      t2.save
-    end
-    
-    return result
-  end
-
   def self.get_details(transactions, params, current_user)
     transaction_amounts_all = []
     account_ids_all = []
@@ -194,7 +154,7 @@ class Transaction < ApplicationRecord
 
       amount = 0
 
-      amount = get_user_currency_amount(t, params[:active_account], current_user) if t.transfer_transaction_id.nil?
+      amount = get_account_currency_amount(t, params[:active_account])
       date = t.local_datetime.to_s.split[0]
 
       if params[:active_account].nil? || params[:active_account] == t.account.name
@@ -221,6 +181,11 @@ class Transaction < ApplicationRecord
     }
   end
 
+  def self.get_account_currency_amount(transaction, account_name)
+    return transaction.user_currency_amount if account_name == ''
+    return transaction.account_currency_amount
+  end
+
   def self.get_user_currency_amount(transaction, account_name, current_user)
     user_currency = User.get_currency(current_user)
 
@@ -230,31 +195,6 @@ class Transaction < ApplicationRecord
     end
 
     return amount
-  end
-
-  def self.create_transaction(current_user, transaction)
-    t = Transaction.new
-    t.user_id = transaction[:user_id]
-    t.amount = transaction[:amount]
-    t.direction = transaction[:direction]
-    t.description = transaction[:description]
-    t.account_id = transaction[:account_id]
-    t.timezone = transaction[:timezone]
-    t.local_datetime = transaction[:local_datetime]
-    t.currency = transaction[:currency]
-    t.account_currency_amount = transaction[:account_currency_amount]
-    t.user_currency_amount = transaction[:user_currency_amount]
-    t.category_id = transaction[:category_id]
-    t.parent_id = transaction[:parent_id]
-    t.transfer_account_id = transaction[:transfer_account]
-    t.save
-
-    if transaction[:is_child] == false
-      Account.add(current_user, transaction[:account_id], transaction[:account_currency_amount])
-      Account.record_history(current_user, transaction[:account_id], transaction[:local_datetime])
-    end
-
-    return t
   end
 
   def self.create_from_string(params, current_user)

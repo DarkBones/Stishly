@@ -7,7 +7,20 @@ class TransactionsController < ApplicationController
 
   def create
     @params = params[:transaction]
-    transactions = Transaction.create(transaction_params, current_user)
+    all_transactions = Transaction.create(transaction_params, current_user)
+
+    puts params.to_yaml
+
+    transactions = []
+    if @params[:active_account] == ''
+      transactions = all_transactions
+    else
+      active_account_id = Account.get_from_name(@params[:active_account], current_user).id
+      all_transactions.each do |t|
+        transactions.push(t) if t.account_id == active_account_id
+      end
+    end
+
 
     transaction_details = Transaction.get_details(transactions, transaction_details_params, current_user)
 

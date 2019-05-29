@@ -363,6 +363,7 @@ function resetAccountOptions(formId) {
   if (activeAccount) {
     $(formId + "#transaction_account").val(activeAccount);
     $(formId + " #transaction_from_account").val(activeAccount);
+    $(formId + " #active_account_field").val(activeAccount);
   } else {
     $(formId + " #transaction_account").val($(formId + " #transaction_account option:first").val());
     $(formId + " #transaction_from_account").val($(formId + " #transaction_from_account option:first").val());
