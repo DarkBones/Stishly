@@ -204,6 +204,9 @@ class Transaction < ApplicationRecord
   def self.create(params, current_user)
     transactions = CreateFromForm.new(params, current_user).perform
     transactions = SaveTransactions.new(transactions, current_user).perform
+    transactions.each do |t|
+      Account.add(current_user, t.account_id, t.account_currency_amount) if t.parent_id.nil?
+    end
   end
 
 end
