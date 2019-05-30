@@ -29,7 +29,7 @@ class Transaction < ApplicationRecord
   has_many :children, :class_name => 'Transaction', :foreign_key => 'parent_id'
   has_and_belongs_to_many :schedules
 
-  attr_reader :rate, :account_currency, :rate_from_to, :to_account_currency, :date, :time
+  attr_reader :rate, :account_currency, :rate_from_to, :to_account_currency, :date, :time, :active_account
 
   filterrific(
     default_filter_params: { sorted_by: 'created_at_desc', include_children: 1, is_scheduled: 0 },
