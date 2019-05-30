@@ -1,3 +1,5 @@
+//= require jquery.detect_timezone
+
 $(document).on("turbolinks:load", () => {
 
   $(".timezone-on-focus").on("focusin", () => {
