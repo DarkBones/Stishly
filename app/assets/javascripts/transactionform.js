@@ -3,7 +3,7 @@ function getFormId(obj) {
 }
 
 function getTransactionTotalFromMultiple(formId) {
-  var text, lines, total, words, i, $target;
+  var text, lines, total, words, i, $target, line;
   total = 0;
 
   $target = $(formId + " #transaction_transactions");
@@ -11,7 +11,7 @@ function getTransactionTotalFromMultiple(formId) {
   text = $target.val();
   lines = text.split("\n");
 
-  line = ""
+  line = "";
   while (typeof(line) !== "undefined"){
     line = lines.pop();
     if (typeof(line) === "undefined"){
@@ -80,7 +80,7 @@ function getTransactionType(formId) {
 }
 
 function updateTransactionResult(formId, multipleTransactions=null) {
-  var type, multipleTransactions, rate, amount, $accountTarget, $rateTarget, $resultTarget, $amountTarget;
+  var type, multipleTransactions, rate, amount, $accountTarget, $rateTarget, $resultTarget, $amountTarget, result;
 
   rate = 1;
   amount = 0;
@@ -120,7 +120,7 @@ function updateTransactionResult(formId, multipleTransactions=null) {
     dataType: "json",
     url: "/api/account_currency_details/" + encodeURI($accountTarget.val()),
     success(data) {
-      result = Math.round((amount * rate) * data.subunit_to_unit) / data.subunit_to_unit
+      result = Math.round((amount * rate) * data.subunit_to_unit) / data.subunit_to_unit;
       $resultTarget.val(result);
 
       if (multipleTransactions){
@@ -152,11 +152,11 @@ function showTransferCurrencyRates(formId, type=null) {
       type: "GET",
       dataType: "json",
       url: "/api/transfer_accounts/" + from + "/" + to,
-      success: function(data) {
+      success(data) {
         if (data.from_account.currency !== data.to_account.currency){
-          $(formId + " #to_account_currency").text('Amount in ' + data.to_account.currency);
+          $(formId + " #to_account_currency").text("Amount in " + data.to_account.currency);
           $(formId + " #transfer-currencies").show();
-          $(formId + " #rate_from_to").text('Rate ' + data.from_account.currency + ' to ' + data.to_account.currency);
+          $(formId + " #rate_from_to").text("Rate " + data.from_account.currency + " to " + data.to_account.currency);
           $(formId + " #transaction_rate_from_to").val(data.currency_rate);
         } else {
           $(formId + " #transaction_rate_from_to").val(data.currency_rate);
@@ -233,7 +233,7 @@ function changeTransactionMultiple(type, obj){
 
 
 function updateTransactionRate(obj) {
-  var $rateTarget, $resultTarget, isMultiple, $amountTarget, result, amount, rate;
+  var $rateTarget, $resultTarget, isMultiple, $amountTarget, result, amount, rate, formId;
 
   formId = getFormId(obj);
   $rateTarget = $(formId + " #transaction_rate");
@@ -268,7 +268,7 @@ function changeTransactionCurrency(obj, ignore=false, lockCurrency=true){
     return;
   }
 
-  var formId, result, currency, account
+  var formId, result, currency, account;
 
   if(lockCurrency){
     $(obj).addClass("changed");
@@ -288,27 +288,27 @@ function changeTransactionCurrency(obj, ignore=false, lockCurrency=true){
     type: "GET",
     dataType: "json",
     url: "/api/account_currency_details/" + encodeURI(account),
-    success: function(data_currency) {
-      if (data_currency.iso_code != currency){
+    success(dataCurrency) {
+      if (dataCurrency.iso_code != currency){
         $(formId + " #exchange_rate_spinner").show();
         $.ajax({
           type: "GET",
           dataType: "text",
-          url: "/api/currency_rate/" + currency + "/" + data_currency.iso_code,
-          success: function(data_rate) {
+          url: "/api/currency_rate/" + currency + "/" + dataCurrency.iso_code,
+          success: function(dataRate) {
             $(formId + ' #exchange_rate_spinner').hide();
-            $(formId + ' #account_currency').text('Amount in ' + data_currency.iso_code);
+            $(formId + ' #account_currency').text('Amount in ' + dataCurrency.iso_code);
             $(formId + ' #currency-rate').show();
             $(formId + ' #currency-result').show();
-            $(formId + ' #currency-rate input').val(data_rate);
+            $(formId + ' #currency-rate input').val(dataRate);
 
             if ($(formId + ' #amount').is(":visible")){
-              result = $('#transactionform #amount input').val() * data_rate;
+              result = $('#transactionform #amount input').val() * dataRate;
             } else{
-              result = getTransactionTotalFromMultiple(formId) * data_rate;
+              result = getTransactionTotalFromMultiple(formId) * dataRate;
             }
 
-            $(formId + ' #currency-result input').val(Math.round(result * data_currency.subunit_to_unit) / data_currency.subunit_to_unit);
+            $(formId + ' #currency-result input').val(Math.round(result * dataCurrency.subunit_to_unit) / dataCurrency.subunit_to_unit);
           }
         });
 
@@ -327,7 +327,7 @@ function changeTransactionCurrency(obj, ignore=false, lockCurrency=true){
 function changeTransactionAccount(obj) {
   var formId, account, transactionType;
   
-  formId = getFormId(obj)
+  formId = getFormId(obj);
   account = $(obj).val();
   transactionType = getTransactionType(formId);
 
@@ -354,7 +354,7 @@ function changeTransactionAccount(obj) {
 }
 
 function changeTransactionToAccount(obj) {
-  var formId = getFormId(obj)
+  var formId = getFormId(obj);
   showTransferCurrencyRates(formId);
 }
 
