@@ -141,7 +141,7 @@ class Transaction < ApplicationRecord
     }
   end
 
-  def self.get_details(transactions, params, current_user)
+  def self.get_details(transactions, active_account, current_user)
     transaction_amounts_all = []
     account_ids_all = []
     transactions_parent = []
@@ -154,10 +154,10 @@ class Transaction < ApplicationRecord
 
       amount = 0
 
-      amount = get_account_currency_amount(t, params[:active_account])
+      amount = get_account_currency_amount(t, active_account)
       date = t.local_datetime.to_s.split[0]
 
-      if params[:active_account].nil? || params[:active_account] == t.account.name
+      if active_account.nil? || active_account.id == t.account.id
         update_day_total = true
 
         unless t.parent_id
@@ -181,8 +181,8 @@ class Transaction < ApplicationRecord
     }
   end
 
-  def self.get_account_currency_amount(transaction, account_name)
-    return transaction.user_currency_amount if account_name == ''
+  def self.get_account_currency_amount(transaction, active_account)
+    return transaction.user_currency_amount if active_account.nil?
     return transaction.account_currency_amount
   end
 
