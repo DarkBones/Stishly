@@ -295,28 +295,28 @@ function changeTransactionCurrency(obj, ignore=false, lockCurrency=true){
           type: "GET",
           dataType: "text",
           url: "/api/currency_rate/" + currency + "/" + dataCurrency.iso_code,
-          success: function(dataRate) {
-            $(formId + ' #exchange_rate_spinner').hide();
-            $(formId + ' #account_currency').text('Amount in ' + dataCurrency.iso_code);
-            $(formId + ' #currency-rate').show();
-            $(formId + ' #currency-result').show();
-            $(formId + ' #currency-rate input').val(dataRate);
+          success(dataRate) {
+            $(formId + " #exchange_rate_spinner").hide();
+            $(formId + " #account_currency").text("Amount in " + dataCurrency.iso_code);
+            $(formId + " #currency-rate").show();
+            $(formId + " #currency-result").show();
+            $(formId + " #currency-rate input").val(dataRate);
 
-            if ($(formId + ' #amount').is(":visible")){
-              result = $('#transactionform #amount input').val() * dataRate;
+            if ($(formId + " #amount").is(":visible")){
+              result = $("#transactionform #amount input").val() * dataRate;
             } else{
               result = getTransactionTotalFromMultiple(formId) * dataRate;
             }
 
-            $(formId + ' #currency-result input').val(Math.round(result * dataCurrency.subunit_to_unit) / dataCurrency.subunit_to_unit);
+            $(formId + " #currency-result input").val(Math.round(result * dataCurrency.subunit_to_unit) / dataCurrency.subunit_to_unit);
           }
         });
 
       } else {
-        $(formId + ' #currency-rate').hide();
-        $(formId + ' #currency-result').hide();
-        $(formId + ' #currency-rate input').val('');
-        $(formId + ' #currency-result input').val('');
+        $(formId + " #currency-rate").hide();
+        $(formId + " #currency-result").hide();
+        $(formId + " #currency-rate input").val("");
+        $(formId + " #currency-result input").val("");
       }
     }
   });
