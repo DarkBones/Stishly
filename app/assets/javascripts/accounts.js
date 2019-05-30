@@ -1,3 +1,5 @@
+//"use strict";
+
 // if there is less than two accounts, don't show the summary accounts
 function displaySummaryAccount() {
   if ($("#accounts_list li").length < 3) {
@@ -17,22 +19,6 @@ function displaySummaryAccount() {
 $(document).on("turbolinks:load", () => {
   displaySummaryAccount();
 });
-
-function updateAccountNameInput(inputObject) {
-  var $accountform = $();
-  var $input = $();
-  var inputValue = "";
-
-  $input = $("#" + inputObject.id);
-  $accountform = $input.closest("#accountform");
-  inputValue = $input.val();
-
-  // don't allow dots in input field
-  $input.val(inputValue.replace(/\./g, ""));
-
-  // don't allow question marks in input field
-  $input.val(inputValue.replace(/\?/g, ""));
-}
 
 function goToAccount(object) {
   var linkName, url, $accountButton;
