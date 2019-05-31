@@ -29,7 +29,7 @@ class Transaction < ApplicationRecord
   has_many :children, :class_name => 'Transaction', :foreign_key => 'parent_id'
   has_and_belongs_to_many :schedules
 
-  attr_reader :rate, :account_currency, :rate_from_to, :to_account_currency, :date, :time, :active_account
+  attr_reader :rate, :account_currency, :rate_from_to, :to_account_currency, :date, :time, :active_account, :schedule_id
 
   filterrific(
     default_filter_params: { sorted_by: 'created_at_desc', include_children: 1, is_scheduled: 0 },
@@ -204,8 +204,9 @@ class Transaction < ApplicationRecord
   def self.create(params, current_user)
     transactions = CreateFromForm.new(params, current_user).perform
     transactions = SaveTransactions.new(transactions, current_user).perform
+
     transactions.each do |t|
-      Account.add(current_user, t.account_id, t.account_currency_amount) if t.parent_id.nil?
+      Account.add(current_user, t.account_id, t.account_currency_amount) if t.parent_id.nil? && !t.is_scheduled
     end
   end
 

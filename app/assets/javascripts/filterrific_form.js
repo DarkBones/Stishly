@@ -1,3 +1,5 @@
+//= require jquery-ui.min
+
 var submitted = false;
 
 $(document).on("turbolinks:load", () => {

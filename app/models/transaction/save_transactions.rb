@@ -67,6 +67,7 @@ private
       t.transfer_account_id = transfer_account_id
       t.user_currency_amount = transaction[:user_currency_amount]
       t.local_datetime = transaction[:local_datetime]
+      t.is_scheduled = transaction[:is_scheduled]
 
       t.save!
 

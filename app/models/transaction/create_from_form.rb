@@ -36,7 +36,7 @@ private
         timezone: params[:timezone],
         category_id: params[:category_id],
         local_datetime: parse_datetime(params[:date], params[:time]),
-        schedule_id: params[:schedule_id],
+        #schedule_id: params[:schedule_id],
         is_scheduled: !params[:schedule_id].nil?
       }
       transactions.push(current_transaction)
@@ -203,6 +203,8 @@ private
     end
 
     def parse_datetime(date, time)
+      return if date.nil?
+
       months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
 
       date_arr = date.split('-')
