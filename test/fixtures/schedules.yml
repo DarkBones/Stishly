@@ -146,3 +146,59 @@ bas: {
   is_active: 1,
   next_occurrence: '2018-03-28'
 }
+
+overlap_main: {
+  id: 1101,
+  name: 'Payday',
+  user_id: 11,
+  start_date: '2019-03-25',
+  period: 'months',
+  period_num: 1,
+  days: 268435456,
+  days_month: 'specific',
+  days_month_day: 0,
+  days_exclude: 65,
+  exclusion_met: 'previous',
+  exclusion_met_day: 5,
+  timezone: 'Europe/London',
+  created_at: '<%= Time.now %>',
+  updated_at: '<%= Time.now %>',
+  is_active: 1,
+  next_occurrence: '2018-03-28'
+}
+
+overlap_every_day: {
+  id: 1102,
+  name: 'Every day',
+  user_id: 11,
+  start_date: '2019-03-25',
+  period: 'days',
+  period_num: 1,
+  days: 0,
+  days_month_day: 0,
+  days_exclude: 0,
+  exclusion_met_day: 0,
+  timezone: 'Europe/London',
+  created_at: '<%= Time.now %>',
+  updated_at: '<%= Time.now %>',
+  is_active: 1,
+  next_occurrence: '2018-03-28'
+}
+
+overlap_every_2_days: {
+  id: 1103,
+  name: 'Every two days',
+  user_id: 11,
+  start_date: '2019-03-25',
+  period: 'days',
+  period_num: 2,
+  days: 0,
+  days_month_day: 0,
+  days_exclude: 0,
+  exclusion_met_day: 0,
+  timezone: 'Europe/London',
+  created_at: '<%= Time.now %>',
+  updated_at: '<%= Time.now %>',
+  is_active: 1,
+  next_occurrence: '2018-03-28'
+}

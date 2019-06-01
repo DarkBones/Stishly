@@ -224,3 +224,12 @@ schedule_2: {
   currency: EUR,
   position: 2
 }
+
+overlap_1: {
+  id: 1101,
+  balance: 0,
+  user_id: 11,
+  name: Current,
+  currency: EUR,
+  position: 1
+}

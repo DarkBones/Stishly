@@ -527,3 +527,60 @@ sch_transaction_3_to: {
   timezone: "Europe/London",
   transfer_transaction_id: 1003
 }
+
+sch_overlap_1: {
+  id: 11011,
+  user_id: 11,
+  amount: 10000,
+  account_currency_amount: 10000,
+  user_currency_amount: 10000,
+  direction: 1,
+  description: One,
+  account_id: 1101,
+  currency: EUR,
+  category_id: 0,
+  parent_id: null,
+  transfer_account_id: null,
+  transfer_transaction_id: null,
+  local_datetime: null,
+  timezone: null,
+  is_scheduled: true
+}
+
+sch_overlap_2: {
+  id: 11012,
+  user_id: 11,
+  amount: 20000,
+  account_currency_amount: 20000,
+  user_currency_amount: 20000,
+  direction: 1,
+  description: Two,
+  account_id: 1101,
+  currency: EUR,
+  category_id: 0,
+  parent_id: null,
+  transfer_account_id: null,
+  transfer_transaction_id: null,
+  local_datetime: null,
+  timezone: null,
+  is_scheduled: true
+}
+
+sch_overlap_3: {
+  id: 11013,
+  user_id: 11,
+  amount: 30000,
+  account_currency_amount: 30000,
+  user_currency_amount: 30000,
+  direction: 1,
+  description: Three,
+  account_id: 1101,
+  currency: EUR,
+  category_id: 0,
+  parent_id: null,
+  transfer_account_id: null,
+  transfer_transaction_id: null,
+  local_datetime: null,
+  timezone: null,
+  is_scheduled: true
+}

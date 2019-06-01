@@ -46,3 +46,18 @@ eight: {
   transaction_id: 1004,
   schedule_id: 2
 }
+
+overlap_1: {
+  transaction_id: 11011,
+  schedule_id: 1101
+}
+
+overlap_2: {
+  transaction_id: 11012,
+  schedule_id: 1102
+}
+
+overlap_3: {
+  transaction_id: 11013,
+  schedule_id: 1103
+}
