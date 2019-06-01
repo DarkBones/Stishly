@@ -3,11 +3,11 @@
 # Table name: schedules
 #
 #  id                  :bigint(8)        not null, primary key
-#  name                :string(255)      not null
+#  name                :string(255)
 #  user_id             :bigint(8)
-#  start_date          :date             not null
+#  start_date          :date
 #  end_date            :date
-#  period              :string(255)      not null
+#  period              :string(255)
 #  period_num          :integer          default(0)
 #  days                :integer          default(0)
 #  days_month          :string(255)
@@ -15,7 +15,7 @@
 #  days_exclude        :integer
 #  exclusion_met       :string(255)
 #  exclusion_met_day   :integer
-#  timezone            :string(255)      not null
+#  timezone            :string(255)
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  is_active           :boolean          default(TRUE)
