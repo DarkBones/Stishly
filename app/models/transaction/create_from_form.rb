@@ -36,7 +36,7 @@ private
         timezone: params[:timezone],
         category_id: params[:category_id],
         local_datetime: parse_datetime(params[:date], params[:time]),
-        #schedule_id: params[:schedule_id],
+        schedule_id: params[:schedule_id],
         is_scheduled: !params[:schedule_id].nil?
       }
       transactions.push(current_transaction)

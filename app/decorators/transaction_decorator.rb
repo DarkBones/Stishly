@@ -48,7 +48,7 @@ class TransactionDecorator < ApplicationDecorator
   end
 
   def amount_multiple
-    return 0 if model.currency.nil?
+    return "" if model.currency.nil?
 
     currency = Money::Currency.new(model.currency)
 
@@ -59,6 +59,7 @@ class TransactionDecorator < ApplicationDecorator
         amount = ct.amount * model.direction
         result += "#{ct.description} #{format_amount(amount, currency)}\n"
       end
+
       return result
     else
       return ""

@@ -38,6 +38,7 @@ function updateTransactionsTotal(formId) {
   $targetCurrency = $(formId + " #transaction_currency");
 
   total = getTransactionTotalFromMultiple(formId);
+  //alert(total);
 
   if(typeof(total) === "undefined") {
     return;

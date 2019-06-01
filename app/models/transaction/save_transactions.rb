@@ -51,6 +51,13 @@ class Transaction
 
 private
 
+    def link_schedule(t, transaction, current_user)
+      schedule = current_user.schedules.find(transaction[:schedule_id].to_i)
+      return if schedule.nil?
+
+      t.schedules << schedule
+    end
+
     def save_transaction(transaction, current_user, transfer_account_id, parent_id)
       t = current_user.transactions.new
 
@@ -70,6 +77,8 @@ private
       t.is_scheduled = transaction[:is_scheduled]
 
       t.save!
+
+      link_schedule(t, transaction, current_user) unless transaction[:schedule_id].nil?
 
       return t
     end

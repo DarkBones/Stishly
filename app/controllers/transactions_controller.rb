@@ -31,6 +31,8 @@ class TransactionsController < ApplicationController
     @date = transaction_details[:date]
     @update_day_total = transaction_details[:update_day_total]
     @total_amount = transaction_details[:total_amount].to_s
+
+    redirect_back fallback_location: root_path if transactions[0].is_scheduled
   end
 
   def update

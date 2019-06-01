@@ -37,6 +37,7 @@ class SchTransactionDecorator < ApplicationDecorator
         amount = ct.amount * model.direction
         result += "#{ct.description} #{format_amount(amount, currency)}\n"
       end
+
       return result
     else
       return ""
