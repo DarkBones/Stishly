@@ -1,3 +1,5 @@
+//"use strict";
+
 function getFormId(obj) {
   return "#" + $(obj).parents(".transactionform").attr("id");
 }
@@ -371,6 +373,8 @@ function changeTransactionToAccount(obj) {
 }
 
 function resetAccountOptions(formId) {
+  var activeAccount;
+
   activeAccount = getActiveAccountName();
   if (activeAccount) {
     $(formId + "#transaction_account").val(activeAccount);
@@ -433,6 +437,8 @@ function resetAccountAndCurrencyDropdowns(formId) {
 }
 
 function resetCategoryDropdown(formId) {
+  var optionHtml;
+
   $(formId + " #transaction_category_id").val(0);
   optionHtml = $(formId + " [id^=categoriesDropdownOptions]").find("li").first().html();
   $(formId + " button#categories-dropdown").html(optionHtml);
