@@ -389,7 +389,9 @@ function resetButtonGroups(formId) {
 
 function resetTextInputs(formId) {
   $(formId + " input.form-control, " + formId + " textarea.form-control").each(function(index){
-    $(this).val("");
+    if($(this).hasClass("ignoreReset") === false){
+      $(this).val("");
+    }
   });
 }
 

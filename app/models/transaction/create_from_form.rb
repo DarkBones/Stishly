@@ -10,6 +10,7 @@ class Transaction
     def perform
       base_transactions = get_base_transactions(@params)
       base_transactions = link_transferred_transactions(@params, base_transactions)
+
       transactions = process_base_transactions(base_transactions)
 
       return transactions
@@ -43,7 +44,7 @@ private
 
 
       if params[:multiple] == 'multiple'
-        transactions_string = params[:transactions].split("\n")
+        transactions_string = params[:transactions].split(/\r?\n/)
         transactions_string.each do |t_name_amount|
           if /#{@reg}/.match(t_name_amount)
             name_amount = t_name_amount.split(' ')
@@ -141,7 +142,7 @@ private
       end
 
       unless params[:transactions].nil?
-        transactions = params[:transactions].split("\n")
+        transactions = params[:transactions].split(/\r?\n/)
         transactions.each do |t_name_amount|
           if /#{@reg}/.match(t_name_amount)
             amount = t_name_amount.split(' ')[-1]
