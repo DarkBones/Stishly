@@ -1,11 +1,12 @@
 class Schedule
   class NextOccurrence
 
-    def initialize(schedule, date=nil, testing=false, return_datetime=false)
+    def initialize(schedule, date=nil, testing=false, return_datetime=false, ignore_expired=false)
       @schedule = schedule
       @date = date
       @testing = testing
       @return_datetime = return_datetime
+      @ignore_expired = ignore_expired
     end
 
     def perform
@@ -17,8 +18,10 @@ class Schedule
 
       @date = tz.utc_to_local(Time.now).to_date if @date < Time.now.to_date && !@testing
 
-      if schedule_expired
-        return nil
+      unless @ignore_expired
+        if schedule_expired
+          return nil
+        end
       end
 
       next_date = find_next_date

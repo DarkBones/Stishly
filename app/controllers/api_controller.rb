@@ -76,7 +76,7 @@ class ApiController < ApplicationController
     if schedule.is_a?(ActiveRecord::Base)
       next_occurrence = params[:start_date].to_date
       params[:occurrence_count].to_i.times do
-        next_occurrence = Schedule.next_occurrence(schedule, next_occurrence)
+        next_occurrence = Schedule.next_occurrence(schedule, next_occurrence, false, false, true)
 
         unless next_occurrence.nil?
           occurrences.push(("<li>"+User.format_date(next_occurrence, true)+"</li>").html_safe)
