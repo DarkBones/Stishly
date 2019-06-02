@@ -58,10 +58,7 @@ class Schedule < ApplicationRecord
 
   # returns the start and end period of a given schedule
   def self.period_range(schedule, date=nil)
-    require 'date'
-
-    date ||= Date.today
-    puts date
+    return PreviousOccurrence.new(schedule, date).perform
   end
 
 end
