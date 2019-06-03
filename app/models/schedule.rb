@@ -56,6 +56,10 @@ class Schedule < ApplicationRecord
     return NextOccurrence.new(schedule, date, testing, return_datetime).perform if schedule.valid? || ignore_valid
   end
 
+  def self.previous_occurrence(schedule, date=nil)
+    return PreviousOccurrence.new(schedule, date).perform
+  end
+
   # returns the start and end period of a given schedule
   def self.period_range(schedule, date=nil)
     return PreviousOccurrence.new(schedule, date).perform
