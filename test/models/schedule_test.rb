@@ -625,7 +625,13 @@ class ScheduleTest < ActiveSupport::TestCase
       '2019-05-08',
       '2019-05-10'
     ]
-    assert_dates(schedule, dates, start_date, params, message)
+    previous_dates = [
+      '2019-03-08',
+      '2019-03-06',
+      '2019-02-15',
+      '2019-02-13'
+    ]
+    assert_dates(schedule, dates, start_date, params, message, previous_dates)
 
     message = "12. advanced every four weeks on Fridays and Wednesdays"
     params[:run_every] = '4'
@@ -636,7 +642,13 @@ class ScheduleTest < ActiveSupport::TestCase
       '2019-04-24',
       '2019-04-26'
     ]
-    assert_dates(schedule, dates, start_date, params, message)
+    previous_dates = [
+      '2019-03-01',
+      '2019-02-27',
+      '2019-02-01',
+      '2019-01-30'
+    ]
+    assert_dates(schedule, dates, start_date, params, message, previous_dates)
 
     message = "13. advanced every five weeks on Fridays and Wednesdays"
     params[:run_every] = '5'
@@ -666,7 +678,17 @@ class ScheduleTest < ActiveSupport::TestCase
       '2019-12-25',
       '2020-01-25'
     ]
-    assert_dates(schedule, dates, start_date, params, message)
+    previous_dates = [
+      '2019-02-25',
+      '2019-01-25',
+      '2018-12-25',
+      '2018-11-25',
+      '2018-10-25',
+      '2018-09-25',
+      '2018-08-25',
+      '2018-07-25',
+    ]
+    assert_dates(schedule, dates, start_date, params, message, previous_dates)
 
     message = "15. simple monthly every two months"
     params[:run_every] = '2'
