@@ -2,6 +2,11 @@ class Schedule
   class NextOccurrence
 
     def initialize(schedule, date=nil, testing=false, return_datetime=false, ignore_expired=false)
+      tt = "fruit"
+      ta = tt || "banana"
+      puts ta
+      puts true.class
+
       @schedule = schedule
       @date = date
       @testing = testing
