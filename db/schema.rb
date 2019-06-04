@@ -83,9 +83,8 @@ ActiveRecord::Schema.define(version: 2019_06_04_183801) do
 
   create_table "schedule_occurrences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "schedule_id"
-    t.date "occurrence_local_datetime"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "occurrence_utc"
+    t.datetime "occurrence_local"
     t.index ["schedule_id"], name: "index_schedule_occurrences_on_schedule_id"
   end
 
