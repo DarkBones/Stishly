@@ -46,14 +46,10 @@ private
         date = @date - ((@date.wday - @schedule.start_date.wday) % 7) - (7 * ((@date - @schedule.start_date) % @schedule.period_num))
         return date
       else
-        #puts "#{@date} - #{find_next_in_bitmask(@schedule.days, @date.wday, 7, true)}"
-        date = @date - find_next_in_bitmask(@schedule.days, ((@date.wday + 1) % 7), 7, true)
+        date = @date - (find_next_in_bitmask(@schedule.days, @date.wday, 7, true)+1)
 
-        #puts ((@date.wday + 1) % 7)
-        if ((@date.wday + 1) % 7) < first_in_bitmask(@schedule.days)
-          puts "#{@date} - #{periods_to_add} = #{@date - (periods_to_add * 7)}"
-          date -= periods_to_add * 7
-          puts date
+        if date.wday >= bitmask(@schedule.days).length - 1
+          date -= ((@schedule.period_num-1) * 7)
         end
 
         return date
