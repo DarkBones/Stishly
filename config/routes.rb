@@ -56,5 +56,8 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'transactions/:id', to: 'transactions#show'
 
+  # TODO: FOR TESTING ONLY
+  get 'run_schedules_test', to: 'schedules#run_schedules'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

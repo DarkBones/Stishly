@@ -10,9 +10,14 @@ class SchedulesController < ApplicationController
   end
 
   def run_schedules
-    #schedules_to_run = Schedule.where(:next_occurrence_utc >= Time.now, :is_active => true)
+    require "time"
+    schedules_to_run = Schedule.where("next_occurrence_utc <= ? AND is_active = ?", Time.now, true)
 
-    #TODO: run the schedules
+    schedules_to_run.each do |s|
+      puts s.name
+    end
+
+    render plain: schedules_to_run.length
   end
 
 private
