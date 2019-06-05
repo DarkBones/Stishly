@@ -14,7 +14,7 @@ class SchedulesController < ApplicationController
     schedules_to_run = Schedule.where("next_occurrence_utc <= ? AND is_active = ?", Time.now, true)
 
     schedules_to_run.each do |s|
-      puts s.name
+      Schedule.run(schedule)
     end
 
     render plain: schedules_to_run.length
