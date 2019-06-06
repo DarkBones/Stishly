@@ -178,6 +178,7 @@ class TransactionsTest < ApplicationSystemTestCase
     }
 
     create_transaction(params)
+    sleep 1
     assert_selector "#transactions_list", text: "Today\n€-1,000.00"
 
     assert_selector ".child_transactions", visible: :hidden
