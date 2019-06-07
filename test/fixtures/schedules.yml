@@ -47,7 +47,8 @@ payday: {
   created_at: '<%= Time.now %>',
   updated_at: '<%= Time.now %>',
   is_active: 1,
-  next_occurrence: '2018-03-28'
+  next_occurrence: '2018-03-28',
+  next_occurrence_utc: '2018-03-28 00:00'
 }
 
 bonus_day: {
@@ -67,7 +68,8 @@ bonus_day: {
   created_at: '<%= Time.now %>',
   updated_at: '<%= Time.now %>',
   is_active: 1,
-  next_occurrence: '2018-04-28'
+  next_occurrence: '2018-04-28',
+  next_occurrence_utc: '2018-04-28 00:00'
 }
 
 payday_cvg: {
@@ -86,7 +88,8 @@ payday_cvg: {
   created_at: '<%= Time.now %>',
   updated_at: '<%= Time.now %>',
   is_active: 1,
-  next_occurrence: '2018-03-29'
+  next_occurrence: '2018-03-29',
+  next_occurrence_utc: '2018-03-29 00:00'
 }
 
 bonus_day_cvg: {
@@ -105,7 +108,8 @@ bonus_day_cvg: {
   created_at: '<%= Time.now %>',
   updated_at: '<%= Time.now %>',
   is_active: 1,
-  next_occurrence: '2018-05-31'
+  next_occurrence: '2018-05-31',
+  next_occurrence_utc: '2018-05-31 00:00'
 }
 
 innactive: {
@@ -124,7 +128,8 @@ innactive: {
   created_at: '<%= Time.now %>',
   updated_at: '<%= Time.now %>',
   is_active: 0,
-  last_occurrence: '2018-05-31'
+  last_occurrence: '2018-05-31',
+  next_occurrence_utc: '2018-05-31 00:00'
 }
 
 bas: {
@@ -144,7 +149,8 @@ bas: {
   created_at: '<%= Time.now %>',
   updated_at: '<%= Time.now %>',
   is_active: 1,
-  next_occurrence: '2018-03-28'
+  next_occurrence: '2018-03-28',
+  next_occurrence_utc: '2018-03-28 00:00'
 }
 
 overlap_main: {
@@ -164,7 +170,8 @@ overlap_main: {
   created_at: '<%= Time.now %>',
   updated_at: '<%= Time.now %>',
   is_active: 1,
-  next_occurrence: '2018-03-28'
+  next_occurrence: '2018-03-28',
+  next_occurrence_utc: '2018-03-28 00:00'
 }
 
 overlap_every_day: {
@@ -182,7 +189,8 @@ overlap_every_day: {
   created_at: '<%= Time.now %>',
   updated_at: '<%= Time.now %>',
   is_active: 1,
-  next_occurrence: '2018-03-28'
+  next_occurrence: '2018-03-28',
+  next_occurrence_utc: '2018-03-28 00:00'
 }
 
 overlap_every_2_days: {
@@ -200,5 +208,6 @@ overlap_every_2_days: {
   created_at: '<%= Time.now %>',
   updated_at: '<%= Time.now %>',
   is_active: 1,
-  next_occurrence: '2018-03-28'
+  next_occurrence: '2018-03-28',
+  next_occurrence_utc: '2018-03-28 00:00'
 }

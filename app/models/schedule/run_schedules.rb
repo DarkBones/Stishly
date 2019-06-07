@@ -9,9 +9,12 @@ class Schedule
     end
 
     def perform
+      transactions = []
       @schedules.each do |s|
 
       end
+
+      return transactions
     end
 
 private

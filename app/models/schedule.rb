@@ -60,6 +60,10 @@ class Schedule < ApplicationRecord
     return PreviousOccurrence.new(schedule, date).perform
   end
 
+  def self.run_schedules(datetime=nil, schedules=nil)
+    return RunSchedules.new(datetime, schedules).perform
+  end
+
 end
 
 

@@ -9,15 +9,9 @@ class SchedulesController < ApplicationController
     @schedule.save if @schedule.is_a?(ActiveRecord::Base)
   end
 
-  def run_schedules
-    require "time"
-    schedules_to_run = Schedule.where("next_occurrence_utc <= ? AND is_active = ?", Time.now, true)
-
-    schedules_to_run.each do |s|
-      Schedule.run(schedule)
-    end
-
-    render plain: schedules_to_run.length
+  def run_schedules(datetime=nil, schedules=nil)
+    transactions = Schedule.run_schedules(date, schedules)
+    return transactions
   end
 
 private
