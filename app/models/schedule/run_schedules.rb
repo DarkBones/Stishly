@@ -11,16 +11,21 @@ class Schedule
     def perform
       transactions = []
       @schedules.each do |s|
-
+        transactions += run_schedule(s)
       end
 
-      return transactions
+      return nil
     end
 
 private
 
     def run_schedule(schedule)
+      transactions = schedule.user_transactions
+      transactions.each do |t|
+        puts t.description
+      end
 
+      return transactions
     end
 
   end
