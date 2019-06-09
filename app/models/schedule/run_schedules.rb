@@ -20,9 +20,10 @@ class Schedule
 private
 
     def run_schedule(schedule)
-      transactions = schedule.user_transactions
-      transactions.each do |t|
-        puts t.description
+      sch_transactions = schedule.user_transactions
+      transactions = []
+      sch_transactions.each do |st|
+        transaction = Transactions.create_from_schedule(st, schedule)
       end
 
       return transactions
