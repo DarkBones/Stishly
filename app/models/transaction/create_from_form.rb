@@ -192,15 +192,25 @@ private
         account_id: bt[:account].id,
         timezone: bt[:timezone],
         currency: bt[:currency],
-        account_currency_amount: amount_float_int((bt[:amount].to_f * bt[:account_rate].to_f), bt[:account].currency),
+        account_currency_amount: get_account_currency_amount(bt),
         category_id: bt[:category_id],
         local_datetime: bt[:local_datetime],
         transfer_account_id: bt[:transfer_account_id],
-        user_currency_amount: amount_float_int((bt[:amount].to_f * bt[:user_rate].to_f), @current_user.currency),
+        user_currency_amount: get_user_currency_amount(bt),
         transfer_transaction_id: bt[:transfer_transaction_id],
         schedule_id: bt[:schedule_id],
         is_scheduled: bt[:is_scheduled]
       }
+    end
+
+    def get_account_currency_amount(bt)
+      #return if @params[:schedule_id].nil?
+      return amount_float_int((bt[:amount].to_f * bt[:account_rate].to_f), bt[:account].currency)
+    end
+
+    def get_user_currency_amount(bt)
+      #return if @params[:schedule_id].nil?
+      amount_float_int((bt[:amount].to_f * bt[:user_rate].to_f), @current_user.currency)
     end
 
     def parse_datetime(date, time)

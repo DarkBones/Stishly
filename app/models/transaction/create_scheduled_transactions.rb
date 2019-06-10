@@ -2,9 +2,11 @@ class Transaction
 
   class CreateScheduledTransactions
 
-    def initialize(transaction, current_user)
+    def initialize(transaction, current_user, is_scheduled=true, timezone=nil)
       @transaction = transaction
       @current_user = current_user
+      @is_scheduled = is_scheduled
+      @timezone = timezone
     end
 
     def perform
@@ -17,6 +19,7 @@ private
       transaction = @current_user.transactions.find(transfer_transaction) unless transfer_transaction.nil?
 
       t = @current_user.transactions.find(transaction.id)
+      t = t.dup unless t.nil?
       t ||= @current_user.transactions.new
       t.amount = transaction.amount
       t.direction = transaction.direction
@@ -26,7 +29,17 @@ private
       t.category_id = transaction.category_id
       t.parent_id = parent_id
       t.transfer_account_id = transaction.transfer_account_id
-      t.is_scheduled = true
+      t.is_scheduled = @is_scheduled
+      t.account_currency_amount = nil
+      t.user_currency_amount = nil
+      t.timezone = nil
+      t.local_datetime = nil
+
+      unless @is_scheduled
+        t.timezone = @current_user.timezone
+        t.local_datetime = get_local_datetime
+      else
+      end
 
       t.save
 
@@ -58,6 +71,11 @@ private
 
       return transactions
 
+    end
+
+    def get_local_datetime
+      tz = TZInfo::Timezone.get(@timezone)
+      return tz.utc_to_local(Time.now)
     end
 
   end

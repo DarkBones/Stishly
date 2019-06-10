@@ -184,6 +184,7 @@ class Transaction < ApplicationRecord
   end
 
   def self.get_account_currency_amount(transaction, active_account)
+    #return 0 if transaction.account_currency_amount.nil?
     return transaction.user_currency_amount if active_account.nil?
     return transaction.account_currency_amount
   end
@@ -210,6 +211,11 @@ class Transaction < ApplicationRecord
     transactions.each do |t|
       Account.add(current_user, t.account_id, t.account_currency_amount) if t.parent_id.nil? && !t.is_scheduled
     end
+  end
+
+  def self.create_from_schedule(transaction, schedule)
+    transaction = CreateScheduledTransactions.new(transaction, schedule.user, false, schedule.timezone).perform
+    puts transaction.id
   end
 
 end

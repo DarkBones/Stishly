@@ -223,6 +223,8 @@ class Account < ApplicationRecord
   end
 
   def self.add(current_user, id, amount)
+    return if amount.nil?
+    
     account = current_user.accounts.find_by_id(id)
 
     balance = account.balance

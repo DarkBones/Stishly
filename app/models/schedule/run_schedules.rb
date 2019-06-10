@@ -23,7 +23,7 @@ private
       sch_transactions = schedule.user_transactions
       transactions = []
       sch_transactions.each do |st|
-        transaction = Transactions.create_from_schedule(st, schedule)
+        transaction = Transaction.create_from_schedule(st, schedule)
       end
 
       return transactions
