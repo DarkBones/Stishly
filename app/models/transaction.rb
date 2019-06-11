@@ -214,8 +214,10 @@ class Transaction < ApplicationRecord
   end
 
   def self.create_from_schedule(transaction, schedule)
-    transaction = CreateScheduledTransactions.new(transaction, schedule.user, false, schedule.timezone).perform
-    puts transaction.id
+    transactions = CreateScheduledTransactions.new(transaction, schedule.user, false, schedule.timezone).perform
+    transactions.each do |t|
+      puts t.id
+    end
   end
 
 end
