@@ -128,7 +128,8 @@ innactive: {
   created_at: '<%= Time.now %>',
   updated_at: '<%= Time.now %>',
   is_active: 0,
-  last_occurrence: '2018-05-31',
+  next_occurrence: '2018-05-31',
+  #last_occurrence: '2018-05-31',
   next_occurrence_utc: '2018-05-31 00:00'
 }
 
