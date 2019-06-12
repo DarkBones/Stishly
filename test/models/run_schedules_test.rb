@@ -16,7 +16,14 @@ class RunSchedulesTest < ActiveSupport::TestCase
     schedules.push(schedules(:overlap_every_2_days))
 
     transactions = Schedule.run_schedules(datetime, schedules)
-    puts transactions.to_yaml
+    
+    assert transactions.length == 14, format_error("Unexpected scheduled transactions amount", 14, transactions.length)
+
+    transactions.each do |t|
+    	assert t.is_scheduled == false, format_error("Transaction must not be scheduled")
+    end
+
+    
 
   end
 

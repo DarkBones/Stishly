@@ -14,7 +14,7 @@ class Schedule
         transactions += run_schedule(s)
       end
 
-      return nil
+      return transactions
     end
 
 private
@@ -24,6 +24,7 @@ private
       transactions = []
       sch_transactions.each do |st|
         transaction = Transaction.create_from_schedule(st, schedule)
+        transactions += transaction
       end
 
       return transactions

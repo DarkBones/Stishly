@@ -2,11 +2,12 @@ class Transaction
 
   class CreateScheduledTransactions
 
-    def initialize(transaction, current_user, is_scheduled=true, timezone=nil)
+    def initialize(transaction, current_user, schedule=nil, is_scheduled=true, timezone=nil)
       @transaction = transaction
       @current_user = current_user
       @is_scheduled = is_scheduled
       @timezone = timezone
+      @schedule = schedule
     end
 
     def perform
@@ -16,9 +17,22 @@ class Transaction
 private
 
     def make_transactions(transaction, transfer_transaction=nil, parent_id=nil, transactions=[])
-      transaction = @current_user.transactions.find(transfer_transaction) unless transfer_transaction.nil?
+      unless @is_scheduled
+        if transaction.direction == 1
+          main_transaction = transaction
+          main_transaction = @current_user.transactions.find(transaction.parent_id) if transaction.parent_id
+          return transactions unless main_transaction.transfer_transaction_id.nil?
+        end
+      end
 
-      t = @current_user.transactions.find(transaction.id)
+      schedule_id = nil
+      unless @schedule.nil?
+        schedule_id = @schedule.id
+        #puts schedule_id
+      end
+
+      transaction = @current_user.transactions.find(transfer_transaction) unless transfer_transaction.nil?
+      
       t = t.dup unless t.nil?
       t ||= @current_user.transactions.new
       t.amount = transaction.amount
@@ -34,6 +48,7 @@ private
       t.user_currency_amount = nil
       t.timezone = nil
       t.local_datetime = nil
+      t.schedule_id = schedule_id
 
       unless @is_scheduled
         t.timezone = @current_user.timezone

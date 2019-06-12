@@ -40,6 +40,7 @@ private
         schedule_id: params[:schedule_id],
         is_scheduled: !params[:schedule_id].nil?
       }
+
       transactions.push(current_transaction)
 
 

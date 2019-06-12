@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_04_183801) do
+ActiveRecord::Schema.define(version: 2019_06_12_162833) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -163,9 +163,11 @@ ActiveRecord::Schema.define(version: 2019_06_04_183801) do
     t.integer "transfer_transaction_id"
     t.integer "scheduled_transaction_id"
     t.boolean "is_scheduled", default: false
+    t.bigint "schedule_id"
     t.index ["account_id"], name: "index_transactions_on_account_id"
     t.index ["category_id"], name: "index_transactions_on_category_id"
     t.index ["parent_id"], name: "index_transactions_on_parent_id"
+    t.index ["schedule_id"], name: "index_transactions_on_schedule_id"
     t.index ["transfer_account_id"], name: "index_transactions_on_transfer_account_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
@@ -206,4 +208,5 @@ ActiveRecord::Schema.define(version: 2019_06_04_183801) do
   end
 
   add_foreign_key "schedules", "users"
+  add_foreign_key "transactions", "schedules"
 end

@@ -27,6 +27,7 @@ class Transaction < ApplicationRecord
   belongs_to :account
   has_one :user, through: :account
   belongs_to :category, optional: true
+  belongs_to :schedule, optional: true
   has_one :parent, :class_name => 'Transaction'
   has_many :children, :class_name => 'Transaction', :foreign_key => 'parent_id'
   has_and_belongs_to_many :schedules
@@ -214,10 +215,8 @@ class Transaction < ApplicationRecord
   end
 
   def self.create_from_schedule(transaction, schedule)
-    transactions = CreateScheduledTransactions.new(transaction, schedule.user, false, schedule.timezone).perform
-    transactions.each do |t|
-      puts t.id
-    end
+    transactions = CreateScheduledTransactions.new(transaction, schedule.user, schedule, false, schedule.timezone).perform
+    return transactions
   end
 
 end
