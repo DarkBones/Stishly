@@ -23,8 +23,6 @@ class RunSchedulesTest < ActiveSupport::TestCase
     	assert t.is_scheduled == false, format_error("Transaction must not be scheduled")
     end
 
-    
-
   end
 
 end

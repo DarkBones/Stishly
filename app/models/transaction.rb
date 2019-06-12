@@ -21,6 +21,7 @@
 #  transfer_transaction_id  :integer
 #  scheduled_transaction_id :integer
 #  is_scheduled             :boolean          default(FALSE)
+#  schedule_id              :bigint(8)
 #
 
 class Transaction < ApplicationRecord
