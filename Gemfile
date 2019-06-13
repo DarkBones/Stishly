@@ -59,7 +59,7 @@ group :development do
   gem 'rails_best_practices'
   gem 'peek'
   gem 'ruby-growl'
-  gem 'bullet'
+  gem 'bullet', require: false
 end
 
 group :test do
