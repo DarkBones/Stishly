@@ -14,7 +14,7 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password: password
+  password: <%= Rails.application.credentials.db[:password_development] %>
   socket: /var/run/mysqld/mysqld.sock
 
 development:
@@ -57,5 +57,7 @@ test:
 production:
   adapter: postgresql
   database: money_manager_production
+  username: stishly
+  password: <%= Rails.application.credentials.db[:password_production] %>
   pool: 5
   timeout: 5000
