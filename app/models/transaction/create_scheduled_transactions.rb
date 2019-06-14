@@ -32,13 +32,16 @@ private
       end
 
       transaction = @current_user.transactions.find(transfer_transaction) unless transfer_transaction.nil?
+
+      account = transaction.account
       
       t = t.dup unless t.nil?
       t ||= @current_user.transactions.new
+      t.user_id = @current_user.id
       t.amount = transaction.amount
       t.direction = transaction.direction
       t.description = transaction.description
-      t.account_id = transaction.account_id
+      t.account_id = account.id
       t.currency = transaction.currency
       t.category_id = transaction.category_id
       t.parent_id = parent_id
@@ -51,9 +54,10 @@ private
       t.schedule_id = schedule_id
 
       unless @is_scheduled
-        t.timezone = @current_user.timezone
+        t.timezone = @schedule.timezone
         t.local_datetime = get_local_datetime
-      else
+        t.account_currency_amount = get_currency_amount(transaction.amount, transaction.currency, account.currency)
+        t.user_currency_amount = get_currency_amount(transaction.amount, transaction.currency, @current_user.currency)
       end
 
       t.save
@@ -91,6 +95,10 @@ private
     def get_local_datetime
       tz = TZInfo::Timezone.get(@timezone)
       return tz.utc_to_local(Time.now)
+    end
+
+    def get_currency_amount(amount, from, to)
+      return CurrencyRate.convert(amount, from, to)
     end
 
   end

@@ -51,11 +51,16 @@ class CurrencyRate < ApplicationRecord
   end
 
   def self.convert(amount, from, to, rate=nil)
+    from = Money::Currency.new(from) if from.class == String
+    to = Money::Currency.new(to) if to.class == String
+
     rate ||= self.get_rate(from.to_s, to.to_s)
 
-    amount = amount.to_f / from.subunit_to_unit
-    new_amount = amount * rate
+    amount_float = amount
+    amount_float = amount.to_f / from.subunit_to_unit if amount.class == Integer
+    new_amount = amount_float * rate
 
-    return (new_amount * to.subunit_to_unit).round.to_i
+    return (new_amount * to.subunit_to_unit).round.to_i if amount.class == Integer
+    return amount
   end
 end

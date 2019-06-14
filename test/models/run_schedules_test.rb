@@ -21,6 +21,9 @@ class RunSchedulesTest < ActiveSupport::TestCase
 
     transactions.each do |t|
     	assert t.is_scheduled == false, format_error("Transaction must not be scheduled")
+        assert_not t.user_id.nil?, format_error("User ID is nul")
+        assert_not t.account_currency_amount.nil?, format_error("Account currency amount is nul")
+        assert_not t.user_currency_amount.nil?, format_error("User currency amount is nul")
     end
 
   end

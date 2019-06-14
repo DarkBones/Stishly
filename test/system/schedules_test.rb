@@ -68,7 +68,7 @@ class SchedulesTest < ApplicationSystemTestCase
     login_as_blank
     visit "/schedules"
     click_on "New Schedule"
-
+    
     select 'Daily', from: "schedule[schedule]"
     period_indicator = page.find('#scheduleform #period').text
     assert period_indicator == 'Days', format_error('unexpected period indicator', 'Days', period_indicator)
