@@ -61,3 +61,28 @@ overlap_3: {
   transaction_id: 11013,
   schedule_id: 1103
 }
+
+mutiple_main: {
+  transaction_id: 2002,
+  schedule_id: 2102
+}
+
+mutiple_child_1: {
+  transaction_id: 2101,
+  schedule_id: 2102
+}
+
+mutiple_child_2: {
+  transaction_id: 2102,
+  schedule_id: 2102
+}
+
+mutiple_child_3: {
+  transaction_id: 2103,
+  schedule_id: 2102
+}
+
+mutiple_child_4: {
+  transaction_id: 2104,
+  schedule_id: 2102
+}

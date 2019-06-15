@@ -31,4 +31,15 @@ class RunSchedulesTest < ActiveSupport::TestCase
 
   end
 
+  test "multiple transactions" do
+    datetime = Time.local(2019, 4, 30, 1, 0, 0).to_date
+
+    schedules = []
+    schedules.push(schedules(:overlap_every_day_2))
+
+    transactions = Schedule.run_schedules(datetime, schedules)
+
+    assert transactions.length == 5, format_error("Unexpected amount of transactions", 5, transactions.length)
+  end
+
 end

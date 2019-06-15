@@ -212,3 +212,22 @@ overlap_every_2_days: {
   next_occurrence: '2018-03-28',
   next_occurrence_utc: '2018-03-28 00:00'
 }
+
+overlap_every_day_2: {
+  id: 2102,
+  name: 'Every day',
+  user_id: 11,
+  start_date: '2019-03-25',
+  period: 'days',
+  period_num: 1,
+  days: 0,
+  days_month_day: 0,
+  days_exclude: 0,
+  exclusion_met_day: 0,
+  timezone: 'Europe/London',
+  created_at: '<%= Time.now %>',
+  updated_at: '<%= Time.now %>',
+  is_active: 1,
+  next_occurrence: '2018-03-28',
+  next_occurrence_utc: '2018-03-28 00:00'
+}

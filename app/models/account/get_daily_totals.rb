@@ -13,6 +13,8 @@ class Account
       days = {}
 
       @transactions.each do |t|
+        next if t.is_scheduled == true
+
         day = t.local_datetime.to_date
 
         if @account_id != 0

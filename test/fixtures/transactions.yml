@@ -585,3 +585,100 @@ sch_overlap_3: {
   timezone: null,
   is_scheduled: true
 }
+
+sch_transaction_multiple_main: {
+  id: 2002,
+  user_id: 11,
+  amount: -1000,
+  account_currency_amount: -1000,
+  user_currency_amount: -1000,
+  direction: -1,
+  description: Main,
+  account_id: 1101,
+  currency: EUR,
+  category_id: 0,
+  parent_id: null,
+  transfer_account_id: null,
+  created_at: "<%= Time.now %>",
+  updated_at: "<%= Time.now %>",
+  local_datetime: "<%= Time.now %>",
+  timezone: "Europe/London",
+  transfer_account_id: null
+}
+
+sch_transaction_multiple_child_1: {
+  id: 2101,
+  user_id: 11,
+  amount: -100,
+  account_currency_amount: -100,
+  user_currency_amount: -100,
+  direction: -1,
+  description: Child one,
+  account_id: 1101,
+  currency: EUR,
+  category_id: 0,
+  parent_id: 2002,
+  transfer_account_id: null,
+  created_at: "<%= Time.now %>",
+  updated_at: "<%= Time.now %>",
+  local_datetime: "<%= Time.now %>",
+  timezone: "Europe/London",
+  transfer_account_id: null
+}
+sch_transaction_multiple_child_2: {
+  id: 2102,
+  user_id: 11,
+  amount: -200,
+  account_currency_amount: -200,
+  user_currency_amount: -200,
+  direction: -1,
+  description: Child two,
+  account_id: 1101,
+  currency: EUR,
+  category_id: 0,
+  parent_id: 2002,
+  transfer_account_id: null,
+  created_at: "<%= Time.now %>",
+  updated_at: "<%= Time.now %>",
+  local_datetime: "<%= Time.now %>",
+  timezone: "Europe/London",
+  transfer_account_id: null
+}
+sch_transaction_multiple_child_3: {
+  id: 2103,
+  user_id: 11,
+  amount: -300,
+  account_currency_amount: -300,
+  user_currency_amount: -300,
+  direction: -1,
+  description: Child three,
+  account_id: 1101,
+  currency: EUR,
+  category_id: 0,
+  parent_id: 2002,
+  transfer_account_id: null,
+  created_at: "<%= Time.now %>",
+  updated_at: "<%= Time.now %>",
+  local_datetime: "<%= Time.now %>",
+  timezone: "Europe/London",
+  transfer_account_id: null
+}
+sch_transaction_multiple_child_4: {
+  id: 2104,
+  user_id: 11,
+  amount: -400,
+  account_currency_amount: -400,
+  user_currency_amount: -400,
+  direction: -1,
+  description: Child four,
+  account_id: 1101,
+  currency: EUR,
+  category_id: 0,
+  parent_id: 2002,
+  transfer_account_id: null,
+  created_at: "<%= Time.now %>",
+  updated_at: "<%= Time.now %>",
+  local_datetime: "<%= Time.now %>",
+  timezone: "Europe/London",
+  transfer_account_id: null
+}
