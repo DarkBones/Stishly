@@ -24,6 +24,9 @@ class RunSchedulesTest < ActiveSupport::TestCase
         assert_not t.user_id.nil?, format_error("User ID is nul")
         assert_not t.account_currency_amount.nil?, format_error("Account currency amount is nul")
         assert_not t.user_currency_amount.nil?, format_error("User currency amount is nul")
+
+        assert t.account_currency_amount != 0, format_error("Unexpected account currency amount", "!0", t.account_currency_amount)
+        assert t.user_currency_amount != 0, format_error("Unexpected user currency amount", "!0", t.user_currency_amount)
     end
 
   end
