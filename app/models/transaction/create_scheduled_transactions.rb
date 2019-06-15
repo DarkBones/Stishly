@@ -11,7 +11,8 @@ class Transaction
     end
 
     def perform
-      return make_transactions(@transaction)
+      transactions = make_transactions(@transaction)
+      return transactions
     end
 
 private

@@ -33,8 +33,10 @@ private
       sch_transactions = schedule.user_transactions
       transactions = []
       sch_transactions.each do |st|
-        transaction = Transaction.create_from_schedule(st, schedule)
-        transactions += transaction
+        if st.parent_id.nil?
+          transaction = Transaction.create_from_schedule(st, schedule)
+          transactions += transaction
+        end
       end
 
       return transactions

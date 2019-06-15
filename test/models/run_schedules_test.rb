@@ -17,7 +17,7 @@ class RunSchedulesTest < ActiveSupport::TestCase
 
     transactions = Schedule.run_schedules(datetime, schedules)
     
-    assert transactions.length == 14, format_error("Unexpected scheduled transactions amount", 14, transactions.length)
+    assert transactions.length == 10, format_error("Unexpected scheduled transactions amount", 10, transactions.length)
 
     transactions.each do |t|
     	assert t.is_scheduled == false, format_error("Transaction must not be scheduled")
