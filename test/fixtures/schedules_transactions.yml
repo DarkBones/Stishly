@@ -42,11 +42,6 @@ seven: {
   schedule_id: 2
 }
 
-eight: {
-  transaction_id: 1004,
-  schedule_id: 2
-}
-
 overlap_1: {
   transaction_id: 11011,
   schedule_id: 1101
@@ -85,4 +80,29 @@ mutiple_child_3: {
 mutiple_child_4: {
   transaction_id: 2104,
   schedule_id: 2102
+}
+
+multiple_transfer_1: {
+  transaction_id: 3002,
+  schedule_id: 3102
+}
+
+multiple_transfer_2: {
+  transaction_id: 3101,
+  schedule_id: 3102
+}
+
+multiple_transfer_3: {
+  transaction_id: 3105,
+  schedule_id: 3102
+}
+
+multiple_transfer_4: {
+  transaction_id: 3103,
+  schedule_id: 3102
+}
+
+multiple_transfer_5: {
+  transaction_id: 3104,
+  schedule_id: 3102
 }

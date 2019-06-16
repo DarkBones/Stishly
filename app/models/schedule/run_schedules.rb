@@ -4,7 +4,8 @@ class Schedule
     def initialize(datetime=nil, schedules=nil)
       @datetime = datetime
       @datetime ||= Time.now
-      schedules ||= Schedule.where("next_occurrence_utc <= ?", @datetime)
+      #schedules ||= Schedule.where("next_occurrence_utc <= ?", @datetime)
+      schedules ||= Schedule.all
 
       @schedules = schedules
     end
@@ -53,11 +54,11 @@ private
       })
       occurrence.save
 
-      next_occurrence = Schedule.next_occurrence(schedule, @datetime.to_date, false, true)
+      next_occurrence = Schedule.next_occurrence(schedule, @datetime.to_date + 1, false, true)
       schedule.next_occurrence = tz.utc_to_local(next_occurrence).to_date unless next_occurrence.nil?
       schedule.next_occurrence_utc = next_occurrence
 
-
+      schedule.save!
     end
 
   end

@@ -55,7 +55,7 @@ private
       schedule = current_user.schedules.find(transaction[:schedule_id].to_i)
       return if schedule.nil?
 
-      t.schedules << schedule
+      Transaction.join_to_schedule(t, schedule)
     end
 
     def save_transaction(transaction, current_user, transfer_account_id, parent_id)

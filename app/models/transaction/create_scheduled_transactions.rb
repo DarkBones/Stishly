@@ -18,18 +18,9 @@ class Transaction
 private
 
     def make_transactions(transaction, transfer_transaction=nil, parent_id=nil, transactions=[])
-      unless @is_scheduled
-        if transaction.direction == 1
-          main_transaction = transaction
-          main_transaction = @current_user.transactions.find(transaction.parent_id) if transaction.parent_id
-          return transactions unless main_transaction.transfer_transaction_id.nil?
-        end
-      end
-
       schedule_id = nil
       unless @schedule.nil?
         schedule_id = @schedule.id
-        #puts schedule_id
       end
 
       transaction = @current_user.transactions.find(transfer_transaction) unless transfer_transaction.nil?

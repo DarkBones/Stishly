@@ -22,7 +22,7 @@ class SchedulesTransaction < ApplicationRecord
       add = true
       t = current_user.transactions.find(t_id)
 
-      next if t.nil?
+      next if t.nil? || (!t.transfer_transaction_id.nil? && t.direction == 1)
 
       add = t.parent_id.nil?
 
@@ -39,7 +39,7 @@ class SchedulesTransaction < ApplicationRecord
     transactions.each do |t|
       scheduled_transactions = Transaction.create_scheduled_transactions(t, current_user)
       scheduled_transactions.each do |st|
-        st.schedules << schedule
+        Transaction.join_to_schedule(st, schedule)
       end
 
     end
