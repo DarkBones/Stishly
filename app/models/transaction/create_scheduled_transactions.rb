@@ -87,7 +87,7 @@ private
 
     def get_local_datetime
       tz = TZInfo::Timezone.get(@timezone)
-      return tz.utc_to_local(Time.now)
+      return tz.utc_to_local(Time.now.utc)
     end
 
     def get_currency_amount(amount, from, to)

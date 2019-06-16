@@ -236,7 +236,7 @@ private
       time_arr = time.split(':')
       hours = time_arr[0]
       minutes = time_arr[1]
-      seconds = Time.now.strftime('%S')
+      seconds = Time.now.utc.strftime('%S')
 
       return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds
     end

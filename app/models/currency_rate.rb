@@ -13,7 +13,7 @@
 
 class CurrencyRate < ApplicationRecord
   def self.get_rate(from, to)
-    currency_rate_record = self.where(from_currency: from, to_currency: to, updated_at: 1.days.ago..Time.now).take
+    currency_rate_record = self.where(from_currency: from, to_currency: to, updated_at: 1.days.ago..Time.now.utc).take
     if currency_rate_record
       return currency_rate_record.rate
     end

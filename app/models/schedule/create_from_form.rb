@@ -7,6 +7,17 @@ class Schedule
 
       @excluding = false
       @testing = testing
+
+      @tz = TZInfo::Timezone.get(params[:timezone])
+
+      @start_date = @params[:start_date].to_datetime
+      if !testing && @tz.local_to_utc(@start_date.to_datetime) < Time.now.utc
+        @start_date += 1
+      end
+
+      @start_date = @start_date.to_date unless @start_date.nil?
+
+
     end
 
     def perform
@@ -14,7 +25,7 @@ class Schedule
 
       schedule_params = {
         name: @params[:name],
-        start_date: @params[:start_date].to_date,
+        start_date: @start_date,
         end_date: get_end_date,
         period: get_period,
         period_num: @params[:run_every],
@@ -160,7 +171,7 @@ private
 
     # validates of the schedule is currently active (hasn't expired)
     def get_is_active
-      return Time.now.to_date < @params[:end_date].to_date if @params[:end_date].length >= 11
+      return @tz.utc_to_local(Time.now.utc) < @params[:end_date].to_date if @params[:end_date].length >= 11
       return true
     end
 

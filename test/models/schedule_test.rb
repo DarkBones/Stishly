@@ -33,7 +33,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
     params = {
       name: "test schedule",
-      start_date: Time.now,
+      start_date: Time.now.utc,
       period: "month",
       period_num: 1,
       days: 0b0 | (1 << 28),
@@ -993,10 +993,6 @@ class ScheduleTest < ActiveSupport::TestCase
   end
 
   def assert_dates(schedule, dates, start_date, _params, message)
-    #puts ''
-    #puts '---------------'
-    #puts message
-    #puts dates.to_s
     next_occurrence = start_date
     for i in 0...dates.length do
       date = dates[i]

@@ -39,7 +39,7 @@ conversion_test_1: {
   account_currency_amount: 100,
   user_currency_amount: 100,
   currency: "EUR",
-  local_datetime: "<%= Time.now %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London"
 }
 
@@ -51,7 +51,7 @@ conversion_test_2: {
   account_currency_amount: 100,
   user_currency_amount: 100,
   currency: "EUR",
-  local_datetime: "<%= Time.now %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London"
 }
 
@@ -65,7 +65,7 @@ conversion_test_3: {
   currency: "EUR",
   created_at: "2018-01-01 00:00",
   updated_at: "2018-01-01 00:00",
-  local_datetime: "<%= Time.now %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London"
 }
 
@@ -79,7 +79,7 @@ conversion_test_4: {
   currency: "EUR",
   created_at: "2018-01-01 00:00",
   updated_at: "2018-01-01 00:00",
-  local_datetime: "<%= Time.now %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London"
 }
 
@@ -93,7 +93,7 @@ transaction_<%= i %>_<%= x %>: {
   account_currency_amount: <%= x * 100 %>,
   user_currency_amount: <%= x * 100 %>,
   currency: "EUR",
-  local_datetime: "<%= Time.now %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London"
 }
   <% end %>
@@ -124,7 +124,7 @@ destroy_1: {
   currency: "EUR",
   created_at: "2018-01-01 00:00",
   updated_at: "2018-01-01 00:00",
-  local_datetime: "<%= Time.now %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   category_id: 83
 }
@@ -139,7 +139,7 @@ destroy_2: {
   currency: "EUR",
   created_at: "2018-01-01 00:00",
   updated_at: "2018-01-01 00:00",
-  local_datetime: "<%= Time.now %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   category_id: 83
 }
@@ -156,7 +156,7 @@ search_<%= i %>: {
   currency: "EUR",
   created_at: "2018-01-01 00:00",
   updated_at: "2018-01-01 00:00",
-  local_datetime: "<%= Time.now - (200 - i).months %>",
+  local_datetime: "<%= Time.now.utc - (200 - i).months %>",
   timezone: "Europe/London",
   category_id: 84
 }
@@ -172,7 +172,7 @@ search_201: {
   currency: "EUR",
   created_at: "2018-01-01 00:00",
   updated_at: "2018-01-01 00:00",
-  local_datetime: "<%= Time.now %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   category_id: 84
 }
@@ -187,7 +187,7 @@ search_203: {
   currency: "JPY",
   created_at: "2018-01-01 00:00",
   updated_at: "2018-01-01 00:00",
-  local_datetime: "<%= Time.now %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   category_id: 84
 }
@@ -202,7 +202,7 @@ search_202: {
   currency: EUR,
   created_at: "2018-01-01 00:00",
   updated_at: "2018-01-01 00:00",
-  local_datetime: "<%= Time.now %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   category_id: 85
 }
@@ -386,9 +386,9 @@ sch_transaction_1: {
   category_id: 0,
   parent_id: null,
   transfer_account_id: null,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null
 }
@@ -406,9 +406,9 @@ sch_transaction_2_main: {
   category_id: 0,
   parent_id: null,
   transfer_account_id: null,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null
 }
@@ -426,9 +426,9 @@ sch_transaction_2_child_1: {
   category_id: 0,
   parent_id: 1002,
   transfer_account_id: null,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null
 }
@@ -445,9 +445,9 @@ sch_transaction_2_child_2: {
   category_id: 0,
   parent_id: 2,
   transfer_account_id: null,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null
 }
@@ -464,9 +464,9 @@ sch_transaction_2_child_3: {
   category_id: 0,
   parent_id: 1002,
   transfer_account_id: null,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null
 }
@@ -483,9 +483,9 @@ sch_transaction_2_child_4: {
   category_id: 0,
   parent_id: 1002,
   transfer_account_id: null,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null
 }
@@ -503,9 +503,9 @@ sch_transaction_3_from: {
   category_id: 0,
   parent_id: null,
   transfer_account_id: 22,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_transaction_id: 1004
 }
@@ -522,9 +522,9 @@ sch_transaction_3_to: {
   category_id: 0,
   parent_id: null,
   transfer_account_id: 21,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_transaction_id: 1003
 }
@@ -599,9 +599,9 @@ sch_transaction_multiple_main: {
   category_id: 0,
   parent_id: null,
   transfer_account_id: null,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null
 }
@@ -619,9 +619,9 @@ sch_transaction_multiple_child_1: {
   category_id: 0,
   parent_id: 2002,
   transfer_account_id: null,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null
 }
@@ -638,9 +638,9 @@ sch_transaction_multiple_child_2: {
   category_id: 0,
   parent_id: 2002,
   transfer_account_id: null,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null
 }
@@ -657,9 +657,9 @@ sch_transaction_multiple_child_3: {
   category_id: 0,
   parent_id: 2002,
   transfer_account_id: null,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null
 }
@@ -676,9 +676,9 @@ sch_transaction_multiple_child_4: {
   category_id: 0,
   parent_id: 2002,
   transfer_account_id: null,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null
 }
@@ -696,9 +696,9 @@ sch_transaction_multiple_transfer_main: {
   category_id: 0,
   parent_id: null,
   transfer_account_id: 1102,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null,
   transfer_transaction_id: 3102
@@ -717,9 +717,9 @@ sch_transaction_multiple_transfer_child_1: {
   category_id: 0,
   parent_id: 3002,
   transfer_account_id: 1102,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null
 }
@@ -736,9 +736,9 @@ sch_transaction_multiple_transfer_child_2: {
   category_id: 0,
   parent_id: 3002,
   transfer_account_id: 1102,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null
 }
@@ -755,9 +755,9 @@ sch_transaction_multiple_transfer_child_3: {
   category_id: 0,
   parent_id: 3002,
   transfer_account_id: 1102,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null
 }
@@ -774,9 +774,9 @@ sch_transaction_multiple_transfer_child_4: {
   category_id: 0,
   parent_id: 3002,
   transfer_account_id: 1102,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null
 }
@@ -794,9 +794,9 @@ sch_transaction_multiple_transfer_main_transferred: {
   category_id: 0,
   parent_id: null,
   transfer_account_id: 1101,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null,
   transfer_transaction_id: 3002
@@ -815,9 +815,9 @@ sch_transaction_multiple_transfer_child_1_transferred: {
   category_id: 0,
   parent_id: 3002,
   transfer_account_id: 1101,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null
 }
@@ -834,9 +834,9 @@ sch_transaction_multiple_transfer_child_2_transferred: {
   category_id: 0,
   parent_id: 3002,
   transfer_account_id: 1101,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null
 }
@@ -853,9 +853,9 @@ sch_transaction_multiple_transfer_child_3_transferred: {
   category_id: 0,
   parent_id: 3002,
   transfer_account_id: 1101,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null
 }
@@ -872,9 +872,9 @@ sch_transaction_multiple_transfer_child_4_transferred: {
   category_id: 0,
   parent_id: 3002,
   transfer_account_id: 1101,
-  created_at: "<%= Time.now %>",
-  updated_at: "<%= Time.now %>",
-  local_datetime: "<%= Time.now %>",
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null
 }

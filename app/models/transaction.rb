@@ -224,7 +224,7 @@ class Transaction < ApplicationRecord
     main_transaction = transaction
     main_transaction = Transaction.find(transaction.parent_id) unless transaction.parent_id.nil?
 
-    return unless main_transaction.transfer_transaction_id.nil? && main_transaction.direction == -1
+    return if !main_transaction.transfer_transaction_id.nil? && main_transaction.direction == 1
 
     transaction.schedules << schedule
   end

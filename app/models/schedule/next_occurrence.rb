@@ -14,9 +14,9 @@ class Schedule
       tz = TZInfo::Timezone.get(@schedule.timezone)
 
       # if no date given, set date to today
-      @date ||= tz.utc_to_local(Time.now).to_date
+      @date ||= [tz.utc_to_local(Time.now.utc).to_date, tz.local_to_utc(@schedule.start_date.to_datetime)].max
 
-      @date = tz.utc_to_local(Time.now).to_date if @date < Time.now.to_date && !@testing
+      @date = tz.utc_to_local(Time.now.utc).to_date if @date < Time.now.utc.to_date && !@testing
 
       unless @ignore_expired
         if schedule_expired

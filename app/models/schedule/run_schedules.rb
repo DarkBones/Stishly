@@ -3,7 +3,7 @@ class Schedule
 
     def initialize(datetime=nil, schedules=nil)
       @datetime = datetime
-      @datetime ||= Time.now
+      @datetime ||= Time.now.utc
       schedules ||= Schedule.where("next_occurrence_utc <= ?", @datetime)
       #schedules ||= Schedule.all
 

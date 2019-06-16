@@ -58,9 +58,9 @@ class User < ApplicationRecord
 
   def self.format_date(d, include_weekday=false)
     tz = TZInfo::Timezone.get(@current_user.timezone)
-    today = tz.utc_to_local(Time.now).to_date
-    yesterday = tz.utc_to_local(Time.now).to_date - 1.day
-    tomorrow = tz.utc_to_local(Time.now).to_date + 1.day
+    today = tz.utc_to_local(Time.now.utc).to_date
+    yesterday = tz.utc_to_local(Time.now.utc).to_date - 1.day
+    tomorrow = tz.utc_to_local(Time.now.utc).to_date + 1.day
 
     if d == today
       return I18n.t('dates.today')
