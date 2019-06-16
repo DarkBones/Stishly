@@ -53,6 +53,7 @@ private
       end
 
       t.save
+      Account.add(t.user, t.account.id, t.account_currency_amount) if t.parent_id.nil?
 
       transactions.push(t)
 
