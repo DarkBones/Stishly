@@ -4,8 +4,8 @@ class Schedule
     def initialize(datetime=nil, schedules=nil)
       @datetime = datetime
       @datetime ||= Time.now
-      #schedules ||= Schedule.where("next_occurrence_utc <= ?", @datetime)
-      schedules ||= Schedule.all
+      schedules ||= Schedule.where("next_occurrence_utc <= ?", @datetime)
+      #schedules ||= Schedule.all
 
       @schedules = schedules
     end
