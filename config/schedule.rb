@@ -19,6 +19,10 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every :day do
-  runner "Money.default_bank.refresh_rates"
+every :minute do
+  runner "Schedule.run_schedules"
+end
+
+every :minute do
+  runner "puts 'hello'"
 end

@@ -122,3 +122,5 @@ gem 'rails-assets-jsTimezoneDetect', source: 'https://rails-assets.org'
 gem 'filterrific'
 
 gem 'bootstrap-slider-rails'
+
+gem 'whenever', require: false
