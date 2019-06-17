@@ -12,7 +12,7 @@ class Account
     def perform
       days = {}
 
-      puts @transactions.class.name
+      puts "TRANSACTIONS CLASS = #{@transactions.class.name}"
       @transactions.each do |t|
         puts "h"
         #next if t.is_scheduled == true
