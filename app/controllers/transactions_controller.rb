@@ -63,7 +63,8 @@ private
       :active_account,
       :account_currency,
       :to_account_currency,
-      :schedule_id
+      :schedule_id,
+      :schedule_type
       )
   end
 

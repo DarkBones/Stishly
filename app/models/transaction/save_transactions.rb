@@ -75,6 +75,7 @@ private
       t.user_currency_amount = transaction[:user_currency_amount]
       t.local_datetime = transaction[:local_datetime]
       t.is_scheduled = transaction[:is_scheduled]
+      t.queue_scheduled = transaction[:queue_scheduled]
 
       t.save!
 

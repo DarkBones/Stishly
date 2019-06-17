@@ -24,6 +24,8 @@ private
       account = get_account(params, transferred)
       currency = get_currency(params)
       user_rate = get_user_rate(currency, @current_user)
+      queue_scheduled = 0
+      queue_scheduled = params[:schedule_type].to_i unless params[:schedule_type].nil?
 
       current_transaction = {
         direction: get_direction(params, transferred),
@@ -38,7 +40,8 @@ private
         category_id: params[:category_id],
         local_datetime: parse_datetime(params[:date], params[:time]),
         schedule_id: params[:schedule_id],
-        is_scheduled: !params[:schedule_id].nil?
+        is_scheduled: !params[:schedule_id].nil?,
+        queue_scheduled: queue_scheduled
       }
 
       transactions.push(current_transaction)
@@ -200,7 +203,8 @@ private
         user_currency_amount: get_user_currency_amount(bt),
         transfer_transaction_id: bt[:transfer_transaction_id],
         schedule_id: bt[:schedule_id],
-        is_scheduled: bt[:is_scheduled]
+        is_scheduled: bt[:is_scheduled],
+        queue_scheduled: bt[:queue_scheduled]
       }
     end
 

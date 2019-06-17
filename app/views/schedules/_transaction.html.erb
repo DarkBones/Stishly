@@ -21,7 +21,7 @@
       <div class="container" id="transaction_<%= transaction.id %>">
         <%= form_for transaction, url: edit_transaction_path(transaction.id), :method => "put" do |f| %>
 
-          <%= render partial: "transactions/transaction_form_fields", :locals => {:transaction => transaction, :f => f, :base_only => true, :form_id_prefix => "schedule_", :form_id_suffix => "_" + transaction.id.to_s } %>
+          <%= render partial: "transactions/transaction_form_fields", :locals => {:transaction => transaction, :f => f, :base_only => true, :form_id_prefix => "schedule_", :form_id_suffix => "_" + transaction.id.to_s, :schedule_id => true } %>
           
           <div class="col-12">
             <%= f.submit 'Save', :class => 'btn btn-primary' %>

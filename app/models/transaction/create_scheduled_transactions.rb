@@ -44,6 +44,7 @@ private
       t.timezone = nil
       t.local_datetime = nil
       t.schedule_id = schedule_id
+      t.queue_scheduled = transaction.queue_scheduled
 
       unless @is_scheduled
         t.timezone = @schedule.timezone
