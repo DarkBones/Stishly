@@ -12,6 +12,7 @@ class Account
     def perform
       days = {}
 
+      puts @transactions.to_yaml
       @transactions.each do |t|
         puts "h"
         #next if t.is_scheduled == true
