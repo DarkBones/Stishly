@@ -12,6 +12,8 @@ class Account
     def perform
       days = {}
 
+      #return days if @transactions.nil?
+
       @transactions.each do |t|
         next if t.is_scheduled == true
 
