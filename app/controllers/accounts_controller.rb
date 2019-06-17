@@ -14,7 +14,6 @@ class AccountsController < ApplicationController
     ) or return
 
     @transactions = @filterrific.find.page(params[:page]).includes(:category, :children).decorate
-    puts @transactions.length
 
     @daily_totals = Account.get_daily_totals(@active_account.id, @transactions, current_user)
     @account_currency = Account.get_currency(@active_account)
@@ -31,12 +30,15 @@ class AccountsController < ApplicationController
   def index
     @active_account = Account.create_summary_account(current_user, true)
 
+    unless params.keys.include? "filterrific"
+      params[:filterrific] = { sorted_by: 'created_at_desc' }
+    end
+    
     @filterrific = initialize_filterrific(
       current_user.transactions,
       params[:filterrific]
     ) or return
     @transactions = @filterrific.find.page(params[:page]).includes(:category, :children).decorate
-    puts @transactions.length
 
     @daily_totals = Account.get_daily_totals(@active_account.id, @transactions, current_user)
     @account_currency = Account.get_currency(@active_account)
