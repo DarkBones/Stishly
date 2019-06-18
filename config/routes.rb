@@ -46,6 +46,8 @@ Rails.application.routes.draw do
   get 'api/next_occurrences/:type/:name/:start_date/:timezone/:schedule/:run_every/:days/:days2/:dates_picked/:weekday_mon/:weekday_tue/:weekday_wed/:weekday_thu/:weekday_fri/:weekday_sat/:weekday_sun/:end_date/:weekday_exclude_mon/:weekday_exclude_tue/:weekday_exclude_wed/:weekday_exclude_thu/:weekday_exclude_fri/:weekday_exclude_sat/:weekday_exclude_sun/:dates_picked_exclude/:exclusion_met1/:exclusion_met2/:occurrence_count', to: 'api#get_next_schedule_occurrences'
   get 'api/transfer_accounts/:from/:to', to: 'api#transfer_accounts'
 
+  get 'queued_transactions', to: 'transactions#queued'
+
   get 'app', to: 'app#index'
   get 'accounts/:id', to: 'accounts#show', as: :show_account
   post 'accounts/create_account', to: 'accounts#create_quick'

@@ -1,0 +1,6 @@
+<h2>Queued Transactions</h2>
+<ul class="list-unstyled">
+	<% @transactions.each do |transaction| %>
+		<%= render partial: 'queued_transaction', :locals => {:transaction => transaction} %>
+	<% end %>
+</ul>

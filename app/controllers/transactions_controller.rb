@@ -40,6 +40,10 @@ class TransactionsController < ApplicationController
     redirect_back fallback_location: root_path
   end
 
+  def queued
+    @transactions = current_user.transactions.where("is_queued = true").decorate
+  end
+
 private
   
   def transaction_params
