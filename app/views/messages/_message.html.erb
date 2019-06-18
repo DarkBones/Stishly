@@ -1,1 +1,6 @@
-HELLO I AM A MESSAGE <br />
+<a href="/<%= message.link %>">
+	<li class="nav-item">
+		<span class="title"><%= message.title %></span><br />
+		<p><%= message.body.truncate(50, separator: ' ') %></p>
+	</li>
+</a>
