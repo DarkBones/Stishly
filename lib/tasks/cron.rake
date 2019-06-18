@@ -1,4 +1,4 @@
-task :cron => :environment do
+task :schedule => :environment do
 	puts "Running schedules"
 	Schedule.run_schedules
 	puts "Finished running schedules"

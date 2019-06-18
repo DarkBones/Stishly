@@ -47,6 +47,7 @@ class User < ApplicationRecord
   has_many :account_histories, through: :accounts
   has_many :sch_transactions
   belongs_to :country, optional: :true
+  has_many :messages
 
   validates :country_code, :first_name, :last_name, presence: true
 
