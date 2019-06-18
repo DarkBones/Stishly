@@ -50,7 +50,8 @@ class Transaction < ApplicationRecord
       :period,
       #:in_the_last,
       :sorted_by,
-      :is_scheduled
+      :is_scheduled,
+      :is_queued
     ]
   )
 
@@ -67,6 +68,7 @@ class Transaction < ApplicationRecord
   scope :to_amount, ->(to_amount) { where("user_currency_amount >= ?", to_amount) }
   scope :account, ->(account_name) { joins(:account).where("accounts.name = ?", account_name) }
   scope :is_scheduled, ->(scheduled) { where("is_scheduled = 0") }
+  scope :is_queued, ->(queued) { where "is_queued = 0" }
   
   scope :period, ->(range){
     

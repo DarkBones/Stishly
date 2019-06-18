@@ -104,6 +104,11 @@ module TransactionHelper
       params[:transactions_class] = "default-hide"
     end
 
+    params[:schedule_type] = 0
+    if transaction.queue_scheduled
+      params[:schedule_type] = 1
+    end
+
     return params
   end
 

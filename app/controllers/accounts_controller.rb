@@ -4,7 +4,10 @@ class AccountsController < ApplicationController
     @active_account = current_user.accounts.where(name: params[:id]).take.decorate
 
     unless params.keys.include? "filterrific"
-      params[:filterrific] = { sorted_by: 'created_at_desc' }
+      params[:filterrific] = {
+        sorted_by: 'created_at_desc' ,
+        is_queued: '0'
+      }
     end
     params[:filterrific][:account] = params[:id]
 
@@ -22,6 +25,7 @@ class AccountsController < ApplicationController
     filter_keys = params[:filterrific].keys.dup if params[:filterrific]
     filter_keys.delete("account")
     filter_keys.delete("sorted_by")
+    filter_keys.delete("is_queued")
     
     @filtered = filter_keys.length > 0
 
@@ -31,7 +35,10 @@ class AccountsController < ApplicationController
     @active_account = Account.create_summary_account(current_user, true)
 
     unless params.keys.include? "filterrific"
-      params[:filterrific] = { sorted_by: 'created_at_desc' }
+      params[:filterrific] = {
+        sorted_by: 'created_at_desc' ,
+        is_queued: '0'
+      }
     end
     
     @filterrific = initialize_filterrific(
@@ -49,6 +56,7 @@ class AccountsController < ApplicationController
     filter_keys = params[:filterrific].keys.dup if params[:filterrific]
     filter_keys.delete("account")
     filter_keys.delete("sorted_by")
+    filter_keys.delete("is_queued")
     
     @filtered = filter_keys.length > 0
 

@@ -26,6 +26,8 @@ private
       transaction = @current_user.transactions.find(transfer_transaction) unless transfer_transaction.nil?
 
       account = transaction.account
+      is_queued = transaction.queue_scheduled
+      is_queued ||= false
       
       t = t.dup unless t.nil?
       t ||= @current_user.transactions.new
@@ -45,6 +47,7 @@ private
       t.local_datetime = nil
       t.schedule_id = schedule_id
       t.queue_scheduled = transaction.queue_scheduled
+      t.is_queued = is_queued
 
       unless @is_scheduled
         t.timezone = @schedule.timezone
