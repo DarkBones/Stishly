@@ -1,0 +1,1 @@
+USER_MESSAGES = YAML.load_file(Rails.root.join('config/user_messages.yml'))

@@ -58,6 +58,7 @@ private
 
       t.save
       Account.add(t.user, t.account.id, t.account_currency_amount) if t.parent_id.nil?
+      Message.create_message(USER_MESSAGES['new_queued_transaction'], @current_user, true)
 
       transactions.push(t)
 
