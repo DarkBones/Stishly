@@ -233,4 +233,10 @@ class Transaction < ApplicationRecord
     transaction.schedules << schedule
   end
 
+  def self.approve_transaction(transaction)
+    transaction.is_queued = false
+    transaction.save!
+    Account.add(transaction.user, transaction.account.id, transaction.account_currency_amount)
+  end
+
 end

@@ -44,6 +44,22 @@ class TransactionsController < ApplicationController
     @transactions = current_user.transactions.where("is_queued = true").decorate
   end
 
+  def discard
+    transaction = current_user.transactions.find(params[:id])
+    transaction.destroy unless transaction.nil?
+    redirect_back fallback_location: root_path
+  end
+
+  def approve
+    transaction = current_user.transactions.find(params[:id])
+
+    unless transaction.nil?
+      Transaction.approve_transaction(transaction)
+    end
+
+    redirect_back fallback_location: root_path
+  end
+
 private
   
   def transaction_params

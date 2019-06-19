@@ -1,5 +1,21 @@
-<li>
-	<%= transaction.description %>
-	<%= transaction.account.name %>
-	
-</li>
+<tr>
+	<td>
+		<%= User.format_date(transaction.local_datetime.to_date) %>
+	</td>
+	<td>
+		<%= transaction.description %>
+	</td>
+	<td>
+		<%= transaction.account.name %>
+	</td>
+	<td>
+		<%= transaction.currency %>
+	</td>
+	<td>
+		<%= transaction.amount_formatted %>
+	</td>
+	<td>
+		<%= link_to "Discard", :controller => "transactions", :action => "discard", :id => transaction.id %>
+		<%= link_to "Approve", :controller => "transactions", :action => "approve", :id => transaction.id %>
+	</td>
+</tr>

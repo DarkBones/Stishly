@@ -29,6 +29,14 @@ class TransactionDecorator < ApplicationDecorator
     return 0
   end
 
+  def amount_formatted
+    if model.children.any?
+      return amount_multiple
+    else
+      return amount_single
+    end
+  end
+
   def amount_single
     return 0 if model.currency.nil?
 
@@ -96,6 +104,8 @@ class TransactionDecorator < ApplicationDecorator
 private
 
   def format_amount(amount, currency)
+    currency = Money::Currency.new(currency) if currency.class == String
+
     amount = (amount.to_f / currency.subunit_to_unit)
 
     if currency.subunit_to_unit > 1

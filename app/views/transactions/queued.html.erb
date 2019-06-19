@@ -1,6 +1,29 @@
 <h2>Queued Transactions</h2>
-<ul class="list-unstyled">
-	<% @transactions.each do |transaction| %>
-		<%= render partial: 'queued_transaction', :locals => {:transaction => transaction} %>
-	<% end %>
-</ul>
+<% if @transactions.length == 0 %>
+	<p>No queued transactions</p>
+<% else %>
+	<table>
+		<tr>
+			<th>
+				Date
+			</th>
+			<th>
+				Description
+			</th>
+			<th>
+				Account
+			</th>
+			<th>
+				Currency
+			</th>
+			<th>
+				Amount
+			</th>
+			<th>
+			</th>
+		</tr>
+		<% @transactions.each do |transaction| %>
+			<%= render partial: 'queued_transaction', :locals => {:transaction => transaction} %>
+		<% end %>
+	</table>
+<% end %>
