@@ -193,7 +193,7 @@ function changeTransactionType(type, obj, formId=null) {
       $(formId + " #type").removeClass("bg-danger");
       $(formId + " #type").addClass("bg-warning");
       $(formId + " #type").removeClass("bg-success");
-      $(formId + ' #transaction-currency-options').hide();
+      $(formId + " #transaction-currency-options").hide();
       $(formId + " #transaction_type_transfer").prop("checked", true);
       break;
     case "income":
@@ -203,7 +203,7 @@ function changeTransactionType(type, obj, formId=null) {
       $(formId + " #type").removeClass("bg-danger");
       $(formId + " #type").removeClass("bg-warning");
       $(formId + " #type").addClass("bg-success");
-      $(formId + ' #transaction-currency-options').show();
+      $(formId + " #transaction-currency-options").show();
       $(formId + " #transaction_type_income").prop("checked", true);
       break;
     default:
@@ -213,7 +213,7 @@ function changeTransactionType(type, obj, formId=null) {
       $(formId + " #type").addClass("bg-danger");
       $(formId + " #type").removeClass("bg-warning");
       $(formId + " #type").removeClass("bg-success");
-      $(formId + ' #transaction-currency-options').show();
+      $(formId + " #transaction-currency-options").show();
       $(formId + " #transaction_type_expense").prop("checked", true);
   }
 

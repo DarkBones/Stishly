@@ -35,7 +35,7 @@ $(document).ajaxComplete(function() {
 });
 
 // gets the currently active account by checking the URL of the current page
-function getActiveAccountName(){
+window.getActiveAccountName = function (){
   var urlArr = [];
 
   urlArr = window.location.pathname.split("/");

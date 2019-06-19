@@ -42,9 +42,7 @@ class TransactionDecorator < ApplicationDecorator
 
     currency = Money::Currency.new(model.currency)
 
-    amount = format_amount(model.amount.abs, currency)
-
-    return amount
+    return format_amount(model.amount.abs, currency)
   end
 
   def amount_neg
@@ -52,7 +50,7 @@ class TransactionDecorator < ApplicationDecorator
 
     currency = Money::Currency.new(model.currency)
 
-    amount = format_amount(model.amount, currency)
+    return format_amount(model.amount, currency)
   end
 
   def amount_account
@@ -60,7 +58,7 @@ class TransactionDecorator < ApplicationDecorator
 
     currency = Money::Currency.new(model.account.currency)
 
-    amount = format_amount(model.account_currency_amount.abs, currency)
+    return format_amount(model.account_currency_amount.abs, currency)
   end
 
   def amount_multiple

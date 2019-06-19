@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="transactionsToScheduleLabel">Add Transactions To Schedule</h5>
+        <h5 class="modal-title" id="transactionsToScheduleLabel">Add Transactions to Schedule</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -19,7 +19,7 @@
               </div>
             </div>
 
-            <%= f.text_field :transactions, value:"" %>
+            <%= f.hidden_field :transactions, value:"" %>
 
             <div class="row py-2">
               <div class="col-12">

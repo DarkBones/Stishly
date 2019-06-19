@@ -69,8 +69,8 @@ class Transaction < ApplicationRecord
   scope :from_amount, ->(from_amount) { where("user_currency_amount >= ?", from_amount) }
   scope :to_amount, ->(to_amount) { where("user_currency_amount >= ?", to_amount) }
   scope :account, ->(account_name) { joins(:account).where("accounts.name = ?", account_name) }
-  scope :is_scheduled, ->(scheduled) { where("is_scheduled = 0") }
-  scope :is_queued, ->(queued) { where "is_queued = 0" }
+  scope :is_scheduled, ->(scheduled) { where("is_scheduled = ?", scheduled) }
+  scope :is_queued, ->(queued) { where("is_queued = ?", queued) }
   
   scope :period, ->(range){
     
@@ -246,7 +246,6 @@ class Transaction < ApplicationRecord
   end
 
 private
-
   def self.convert_float_to_i_amount(amount, currency)
     currency = Money::Currency.new(currency) if currency.class == String
 

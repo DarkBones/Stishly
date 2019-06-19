@@ -35,7 +35,7 @@ $(document).on('turbolinks:load', ()=> {
 
 });
 
-function getDate() {
+window.getDate = function () {
   var dt = new Date(),
       h = dt.getHours(),
       m = dt.getMinutes();
@@ -63,7 +63,7 @@ function getDate() {
   return d + '-' + month[mm] + '-' + y;
 }
 
-function getTime() {
+window.getTime = function () {
   var dt = new Date(),
       h = dt.getHours(),
       m = dt.getMinutes();
