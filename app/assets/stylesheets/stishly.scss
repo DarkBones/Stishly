@@ -42,6 +42,13 @@ input, select, textarea {
   position: absolute;
 }
 
+.navbar .dropdown-menu_messages {
+  width: 400px;
+  max-height: 500px;
+  height: calc(100vh - 100px);
+  overflow: scroll;
+}
+
 #sidebar {
   -webkit-transition: width 0.2s ease;
   -moz-transition: width 0.2s ease;
