@@ -233,10 +233,25 @@ class Transaction < ApplicationRecord
     transaction.schedules << schedule
   end
 
-  def self.approve_transaction(transaction)
+  def self.approve_transaction(transaction, params)
+    transaction.description = params[:description]
+    transaction.amount = convert_float_to_i_amount(params[:amount], transaction.currency)
+    params[:account_currency_amount].nil? ? transaction.account_currency_amount = convert_float_to_i_amount(params[:amount], transaction.currency) : transaction.account_currency_amount = convert_float_to_i_amount(params[:account_currency_amount], transaction.account.currency)
+    params[:user_currency_amount].nil? ? transaction.user_currency_amount = convert_float_to_i_amount(params[:amount], transaction.currency) : transaction.user_currency_amount = convert_float_to_i_amount(params[:user_currency_amount], transaction.user.currency)
+
     transaction.is_queued = false
     transaction.save!
+
     Account.add(transaction.user, transaction.account.id, transaction.account_currency_amount)
+  end
+
+private
+
+  def self.convert_float_to_i_amount(amount, currency)
+    currency = Money::Currency.new(currency) if currency.class == String
+
+    amount = amount.to_f
+    return (amount * currency.subunit_to_unit).round.to_i
   end
 
 end

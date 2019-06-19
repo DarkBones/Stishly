@@ -47,6 +47,14 @@ class TransactionDecorator < ApplicationDecorator
     return amount
   end
 
+  def amount_neg
+    return 0 if model.currency.nil?
+
+    currency = Money::Currency.new(model.currency)
+
+    amount = format_amount(model.amount, currency)
+  end
+
   def amount_account
     return "" if model.account.nil?
 

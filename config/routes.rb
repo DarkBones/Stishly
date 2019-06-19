@@ -22,8 +22,8 @@ Rails.application.routes.draw do
   #patch 'schedules', to: 'sch_transactions#update'
 
   put '/transaction/:id/edit', to: 'transactions#update', as: :edit_transaction
+  put '/transaction/:id/approve', to: 'transactions#approve', as: :approve_transaction
   get '/transaction/discard/:id' => 'transactions#discard'
-  get '/transaction/approve/:id' => 'transactions#approve'
 
   get 'api/accounts/:id/details', to: 'api#account_details', as: :account_details
   get 'api/accounts/details', to: 'api#all_accounts_details', as: :account_all_details

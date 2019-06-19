@@ -54,13 +54,17 @@ class TransactionsController < ApplicationController
     transaction = current_user.transactions.find(params[:id])
 
     unless transaction.nil?
-      Transaction.approve_transaction(transaction)
+      Transaction.approve_transaction(transaction, approve_params)
     end
 
     redirect_back fallback_location: root_path
   end
 
 private
+
+  def approve_params
+    params.require(:transaction).permit(:amount, :account_currency_amount, :user_currency_amount, :description)
+  end
   
   def transaction_params
     params.require(:transaction).permit(
