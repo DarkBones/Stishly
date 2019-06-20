@@ -33,8 +33,6 @@ class Schedule < ApplicationRecord
   validates :period_num, numericality: { greater_than: 0, message: "'Run every' must be greater than zero" }
   validates :name, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('schedule.failure.already_exists') }
 
-  #validates_numericality_of :period_num, :greater_than => 0
-
   belongs_to :user
   has_and_belongs_to_many :user_transactions, foreign_key: "schedule_id", class_name: "Transaction"
 

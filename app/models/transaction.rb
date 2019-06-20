@@ -60,8 +60,6 @@ class Transaction < ApplicationRecord
   delegate :name, :to => :account, :prefix => true, :allow_nil => false
 
   delegate :name, :to => :category, :prefix => true, :allow_nil => true
-  #delegate :symbol, :to => :category, :prefix => true, :allow_nil => true
-  #delegate :color, :to => :category, :prefix => true, :allow_nil => true
 
   scope :description, ->(description) { where("UPPER(transactions.description) LIKE ?", "%#{description.upcase}%") }
   scope :from_date, ->(from_date) { where("DATE(local_datetime) >= DATE(?)", from_date.to_date) }
@@ -190,7 +188,6 @@ class Transaction < ApplicationRecord
   end
 
   def self.get_account_currency_amount(transaction, active_account)
-    #return 0 if transaction.account_currency_amount.nil?
     return transaction.user_currency_amount if active_account.nil?
     return transaction.account_currency_amount
   end

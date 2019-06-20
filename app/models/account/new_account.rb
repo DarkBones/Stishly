@@ -9,13 +9,6 @@ class Account
     end
 
     def perform()
-      if @name.length == 0
-        #return I18n.t('account.failure.invalid_name')
-      end
-
-      if @name.include? "."
-        #return I18n.t('account.failure.invalid_name_dot')
-      end
 
       account_details = {
         :name => @name,

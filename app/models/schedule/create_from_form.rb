@@ -21,8 +21,6 @@ class Schedule
     end
 
     def perform
-      #@params[:run_every] = sanitise_period_num(@params[:run_every])
-
       schedule_params = {
         name: @params[:name],
         start_date: @start_date,
@@ -39,7 +37,6 @@ class Schedule
         is_active: get_is_active
       }
 
-      #schedule = Schedule.new(schedule_params)
       schedule = @current_user.schedules.new(schedule_params)
       return schedule
     end

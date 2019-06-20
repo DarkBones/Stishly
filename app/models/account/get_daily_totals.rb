@@ -40,25 +40,7 @@ class Account
 
       rate = CurrencyRate.get_rate(t_currency.iso_code, @user_currency.iso_code)
 
-      return (transaction.amount * rate)# * @user_currency.subunit_to_unit
-    end
-
-    def perform_OLD
-      days = {}
-      @transactions.each do |t|
-        day = t.local_datetime.to_date
-
-        unless days.keys.include? day
-          if @account_id == 0
-            days[day] = @current_user.transactions.where("DATE(transactions.local_datetime) = DATE(?) AND parent_id IS NULL", day).sum(:account_currency_amount)
-
-          else
-            days[day] = @current_user.transactions.where("DATE(transactions.local_datetime) = DATE(?) AND parent_id IS NULL AND account_id = ?", day, @account_id).sum(:account_currency_amount)
-          end
-        end
-      end
-
-      return days
+      return (transaction.amount * rate)
     end
 
   end

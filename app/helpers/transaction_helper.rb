@@ -29,13 +29,10 @@ module TransactionHelper
     end
     params[:type] = type
 
-    #params[:single_account_style] = "display: block;"
-    #params[:transfer_account_style] = "display: none;"
     if type == "transfer"
       params[:type_bg_color] = "bg-warning"
       params[:type_transfer_class] = "active"
       params[:single_account_style] = "display: none;"
-      #params[:transfer_account_style] = "display: block;"
       params[:currency_style] = "display: none;"
       params[:category_class] = "default-hide"
       params[:category_style] = "display: none;"

@@ -180,10 +180,6 @@ class Account < ApplicationRecord
   def self.create(params, current_user)
     user_currency = User.get_currency(current_user)
 
-    #existing_accounts = current_user.accounts.where("LOWER(name) = ?", params[:name].downcase)
-    #existing_accounts = current_user.accounts.where("LOWER(accounts.name) LIKE LOWER('" + params[:name] + "')")
-    #existing_accounts = current_user.accounts.where("LOWER(accounts.name) LIKE LOWER(?)", params[:name])
-
     default_account = current_user.accounts.where('is_default' => true)
     if default_account.length > 0
       params[:is_default] = false
@@ -211,15 +207,6 @@ class Account < ApplicationRecord
     account.save
 
     return account
-
-    #if existing_accounts.length == 0
-    #  account = current_user.accounts.build(params)
-    #  account.save
-
-    #  return account
-    #else
-    #  return I18n.t('account.failure.already_exists')
-    #end
   end
 
   def self.add(current_user, id, amount)
@@ -242,25 +229,5 @@ class Account < ApplicationRecord
     histories.local_datetime = local_datetime
     histories.save
   end
-
-  #def self.convert_currency(account, new_currency, current_user)
-  #  old_currency = self.get_currency(account.id, current_user)
-  #  balance = self.get_float_balance(account, old_currency)
-
-  #  new_balance = Concurrency.convert(balance, old_currency.iso_code, new_currency)
-  #  account.balance = self.get_int_balance(new_balance, Money::Currency.new(new_currency))
-  #  account.save
-  #end
-
-  #def self.get_float_balance(account, currency)
-  #  balance = account.balance.to_f
-  #  balance = balance / currency.subunit_to_unit if currency.subunit_to_unit != 0
-  #  return balance
-  #end
-
-  #def self.get_int_balance(balance, currency)
-  #  balance = (balance * currency.subunit_to_unit).round.to_i
-  #  return balance
-  #end
 
 end

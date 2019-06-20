@@ -5,7 +5,6 @@ class Schedule
       @datetime = datetime
       @datetime ||= Time.now.utc
       schedules ||= Schedule.where("next_occurrence_utc <= ?", @datetime)
-      #schedules ||= Schedule.all
 
       @schedules = schedules
     end

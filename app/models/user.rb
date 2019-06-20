@@ -90,7 +90,6 @@ class User < ApplicationRecord
       date_format = "%a, " + date_format
     end
 
-    #return d.strftime("%d %b %Y")
     return d.strftime(date_format)
   end
 

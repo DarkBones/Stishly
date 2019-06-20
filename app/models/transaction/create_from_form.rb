@@ -209,12 +209,10 @@ private
     end
 
     def get_account_currency_amount(bt)
-      #return if @params[:schedule_id].nil?
       return amount_float_int((bt[:amount].to_f * bt[:account_rate].to_f), bt[:account].currency)
     end
 
     def get_user_currency_amount(bt)
-      #return if @params[:schedule_id].nil?
       amount_float_int((bt[:amount].to_f * bt[:user_rate].to_f), @current_user.currency)
     end
 
