@@ -12,7 +12,6 @@ class Account
     def perform
       days = {}
 
-=begin
       @transactions.each do |t|
         next if t.is_scheduled == true
 
@@ -24,7 +23,6 @@ class Account
           days[day] = @current_user.transactions.where("DATE(transactions.local_datetime) = DATE(?) AND parent_id IS NULL AND is_scheduled = 0", day).sum(:user_currency_amount) unless days.keys.include? day
         end
       end
-=end
       return days
     end
 
