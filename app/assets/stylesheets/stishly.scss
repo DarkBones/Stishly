@@ -45,7 +45,7 @@ input, select, textarea {
 .navbar .dropdown-menu_messages {
   width: 400px;
   max-height: 500px;
-  height: calc(100vh - 100px);
+  //height: calc(100vh - 100px);
   overflow: scroll;
 }
 
