@@ -205,12 +205,12 @@ class SchedulesTest < ApplicationSystemTestCase
   end
 
   test "transaction category" do
-     login_user(users(:schedules), 'SomePassword123^!')
+     #login_user(users(:schedules), 'SomePassword123^!')
 
-     visit "/schedules"
-     page.find("#schedule-transactions-button_1").click
-     click_on "New Transaction"
-     take_screenshot
+     #visit "/schedules"
+     #page.find("#schedule-transactions-button_1").click
+     #click_on "New Transaction"
+     #take_screenshot
   end
   
 end

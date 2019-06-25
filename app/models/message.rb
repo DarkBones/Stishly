@@ -18,11 +18,8 @@ class Message < ApplicationRecord
 	belongs_to :user
 
 	def self.create_message(params, current_user, restrict_to_one_per_day)
-		puts params["title"]
-
 		tz = get_timezone(current_user)
 		if restrict_to_one_per_day
-			puts "message already created today" if messaged_today(current_user, params["title"], tz)
 			return if messaged_today(current_user, params["title"], tz)
 		end
 
