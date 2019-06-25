@@ -16,7 +16,7 @@ class ChildTransactionsTest < ApplicationSystemTestCase
 
     fill_in "Description", with: "Multiple transactions"
     page.find("#transactionform #multiple-multiple").click
-    fill_in "Transactions", with: "one 1\r\ntwo 2\r\nthree 3\r\nfour 4\r\n"
+    fill_in "Transactions", with: "one 1\ntwo 2\nthree 3\nfour 4\n"
     click_on "Create Transaction"
     sleep 2
 

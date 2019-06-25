@@ -445,9 +445,11 @@ function resetCategoryDropdown(formId) {
 }
 
 function resetTransactionMenu(formId){
-  setTimeout(function(){ 
-    $(formId + " #transaction_description").trigger("focus");
-  }, 500);
+  /*setTimeout(function(){ 
+    console.log("FOCUS");
+    $("#transaction_description").focus();
+  }, 500);*/
+
 
   changeTransactionType("expense", null, formId);
   resetAccountOptions(formId);
@@ -461,4 +463,11 @@ function resetTransactionMenu(formId){
   // show & hide default fields
   $(formId + " div.default-show").show();
   $(formId + " div.default-hide").hide();
+  
+  /*$("#transaction_description").get(0).focus();
+
+  setTimeout(function(){ 
+    console.log("FOCUS");
+    $("#transaction_description").focus();
+  }, 500);*/
 }

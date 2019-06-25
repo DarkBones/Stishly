@@ -203,5 +203,14 @@ class SchedulesTest < ApplicationSystemTestCase
     assert_selector '#scheduleform #weekday-exclude', visible: :hidden
     assert_selector '#scheduleform #daypicker-exclude', visible: :hidden
   end
+
+  test "transaction category" do
+     login_user(users(:schedules), 'SomePassword123^!')
+
+     visit "/schedules"
+     page.find("#schedule-transactions-button_1").click
+     click_on "New Transaction"
+     take_screenshot
+  end
   
 end
