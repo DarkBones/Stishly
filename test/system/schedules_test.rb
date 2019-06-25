@@ -205,12 +205,19 @@ class SchedulesTest < ApplicationSystemTestCase
   end
 
   test "transaction category" do
-     #login_user(users(:schedules), 'SomePassword123^!')
+     login_user(users(:schedules), 'SomePassword123^!')
 
-     #visit "/schedules"
-     #page.find("#schedule-transactions-button_1").click
-     #click_on "New Transaction"
-     #take_screenshot
+     visit "/schedules"
+     page.find("#schedule-transactions-button_1").click
+     page.find("#new-scheduled-transaction").click
+     
+     assert_selector "#new_schedule_transactionform #categories-dropdown", text: "Uncategorised"
+
+     page.find("#new_schedule_transactionform #categories-dropdown").click
+     sleep 3
+     page.find("#new_schedule_transactionform #search-categories_").fill_in with: "fue"
+     sleep 2
+     take_screenshot
   end
   
 end
