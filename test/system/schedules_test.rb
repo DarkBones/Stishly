@@ -214,10 +214,10 @@ class SchedulesTest < ApplicationSystemTestCase
      assert_selector "#new_schedule_transactionform #categories-dropdown", text: "Uncategorised"
 
      page.find("#new_schedule_transactionform #categories-dropdown").click
-     sleep 3
-     page.find("#new_schedule_transactionform #search-categories_").fill_in with: "fue"
-     sleep 2
-     take_screenshot
+     page.find("#new_schedule_transactionform #search-categories_1").fill_in with: "fue"
+     
+     assert_selector "#new_schedule_transactionform .category_86", visible: :hidden
+     assert_selector "#new_schedule_transactionform .category_87", visible: :visible
   end
   
 end
