@@ -7,7 +7,6 @@
 <% dates.each do |d| %>
   <% d_formatted = User.format_date(d) %>
   <script type="text/javascript">
-
     if ( $("#transactions_list").hasClass("populated") == false ) {
       if ( $("#" + "<%= d %>").length > 0 ) {
         $("#" + "<%= d %> ul.parent_transactions").append("<%= j yield d %>");
