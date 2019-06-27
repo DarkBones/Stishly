@@ -43,11 +43,6 @@ function InsertTransactions() {
 
     t_date = '<%= t.local_datetime.to_s.split[0] %>';
 
-    <% if params[:filterrific] && /^created_at_/.match(params[:filterrific][:sorted_by]) %>
-      $dayDiv = $('#transactions_list div#' + t_date);
-    <% else %>
-      $dayDiv = $("#transactions_list");
-    <% end %>
     $dayDiv = $('#transactions_list div#' + t_date);
 
     if ($dayDiv.length > 0) {

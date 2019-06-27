@@ -242,3 +242,21 @@ overlap_2: {
   currency: EUR,
   position: 1
 }
+
+duplicate_transactions_1: {
+  id: 1201,
+  balance: 0,
+  user_id: 12,
+  name: Current Account,
+  currency: EUR,
+  position: 1
+}
+
+duplicate_transactions_2: {
+  id: 1202,
+  balance: 0,
+  user_id: 12,
+  name: Savings,
+  currency: EUR,
+  position: 1
+}

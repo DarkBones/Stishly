@@ -197,6 +197,15 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector "#transactions_list", text: "€-400.00"
   end
 
+  test "duplicate transactions in gui" do
+    login_user(users(:duplicate_transactions), 'SomePassword123^!')
+    page.find("#account_0").click
+
+    create_transaction
+
+    assert_selector('#transactions_list li', count: 2)
+  end
+
   def create_transaction(params={})
     params = create_params(params)
     

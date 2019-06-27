@@ -179,3 +179,16 @@ schedules_overlap: {
   confirmed_at: '2018-11-14 19:54:40',
   currency: 'EUR'
 }
+
+duplicate_transactions: {
+  id: 12,
+  first_name: 'Duplicate',
+  last_name: 'Transactions',
+  email: 'duplicate@transactions.com',
+  country_code: 'IE',
+  country_id: 1,
+  timezone: 'Europe/London',
+  encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
+  confirmed_at: '2018-11-14 19:54:40',
+  currency: 'EUR'
+}
