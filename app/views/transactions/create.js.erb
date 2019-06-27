@@ -21,7 +21,6 @@ $('#transactions_list div').each(function(index){
 
 var dayDivCreated = false;
 var $dayDiv = $('#transactions_list div#' + t_date);
-console.log("divvey = " + $dayDiv.attr("id"));
 
 if ($dayDiv.length) {
   dayDivCreated = true
@@ -106,7 +105,6 @@ function UpdateBalance($target, current_balance, currency, add) {
 
 // inserts a transaction
 function InsertTransaction($dayDiv, time, id, account) {
-  console.log("DAYDIV = " + $dayDiv.attr("id"));
   var $entries = $dayDiv.find('ul li');
   var pageLength = <%= APP_CONFIG['ui']['transactions']['page_length'] %>;
 
@@ -129,11 +127,6 @@ function InsertTransaction($dayDiv, time, id, account) {
 }
 
 function GenerateTransaction($target, type, id, account) {
-  console.log($target.attr("id"));
-  console.log(id.toString());
-  console.log(account);
-
-  //$target = $("#transactions_2019-06-26");
   $.ajax({
     type: 'GET',
     dataType: 'text',
