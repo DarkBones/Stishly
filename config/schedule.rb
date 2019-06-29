@@ -20,18 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 
 every :minute do
-	echo "SCHEDULES"
-	echo "SCHEDULES"
-	echo "SCHEDULES"
-	echo "SCHEDULES"
-	echo "SCHEDULES"
-	echo "SCHEDULES"
-	echo "SCHEDULES"
-	echo "SCHEDULES"
-	echo "SCHEDULES"
-	echo "SCHEDULES"
-	echo "SCHEDULES"
-	echo "SCHEDULES"
-	echo "SCHEDULES"
   runner "Schedule.run_schedules"
 end
