@@ -28,8 +28,6 @@
 
 class Transaction < ApplicationRecord
 
-  validates :description, length: {minimum: 5, maximum: 5}, allow_blank: true
-
   belongs_to :account
   has_one :user, through: :account
   belongs_to :category, optional: true

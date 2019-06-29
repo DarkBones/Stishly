@@ -129,7 +129,7 @@ class ApiController < ApplicationController
 
   # renders the transaction date section
   def transaction_date_ul
-    date_formatted = User.format_date(params[:date].to_date)
+    date_formatted = User.format_date(params[:date].to_date, false, false)
     render partial: 'accounts/transactions_date', :locals => { :d => params[:date], :account_currency => params[:account_currency], :day_total => params[:day_total], :d_formatted => date_formatted }
   end
 
