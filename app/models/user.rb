@@ -57,7 +57,7 @@ class User < ApplicationRecord
     @current_user = current_user
   end
 
-  def self.format_date(d, include_weekday=false, today_names=true)
+  def self.format_date(d, include_weekday=false, today_names=false)
     tz = TZInfo::Timezone.get(@current_user.timezone)
 
     if today_names
