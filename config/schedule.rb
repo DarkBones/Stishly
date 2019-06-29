@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.hours, :roles => [:stishly] do
+every :hour do
   runner "Schedule.run_schedules"
 end
