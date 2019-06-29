@@ -1,13 +1,7 @@
 <ul class="nav navbar-nav ml-auto">
   <% if user_signed_in? %>
 
-    <li class="nav-item my-auto mx-2">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#transactionform" onclick="resetTransactionMenu('#transactionform');" id="new-transaction-button">
-        New Transaction
-      </button>
-    </li>
-
-    <li class="nav-item dropdown">
+    <li class="nav-item dropdown d-none d-sm-block">
       <a class="nav-link dropdown-toggle no-caret" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <div class="navbar-messages bg-primary rounded-circle">
           <%= image_tag 'message.svg' %>
@@ -18,7 +12,7 @@
       </div>
     </li>
 
-    <li class="nav-item dropdown">
+    <li class="nav-item dropdown d-none d-sm-block">
       <a class="nav-link dropdown-toggle no-caret" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <div class="navbar-gear bg-primary rounded-circle">
           <%= image_tag 'gear.svg' %>
