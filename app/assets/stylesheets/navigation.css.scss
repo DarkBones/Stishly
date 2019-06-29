@@ -1,0 +1,8 @@
+.navbar-link {
+	width: 30px;
+	height: 30px;
+}
+
+.no-caret::after {
+  display:none;
+}

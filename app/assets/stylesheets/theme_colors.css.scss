@@ -1,7 +1,7 @@
 $primaryColor:  hsl(0, 99%, 58%);
 
 [class$="-primary"] {
-  background-color: $primaryColor;
+  background-color: $primaryColor!important;
   border-color: $primaryColor;
   //border-color: darken($primaryColor, 10%);
   //border-width: 10px;
