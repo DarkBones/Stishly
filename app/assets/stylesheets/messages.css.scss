@@ -1,0 +1,12 @@
+.alert {
+  z-index: 2000;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  margin-left: -250px;
+  width: 500px;
+  text-align: center;
+  font-weight: bolder;
+  padding: 25px;
+  background-color: #ededed;
+}
