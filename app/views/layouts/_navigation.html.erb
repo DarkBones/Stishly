@@ -1,8 +1,8 @@
-<nav class="navbar navbar-dark bg-dark fixed-top py-0 navbar-expand-sm">
+<nav class="navbar navbar-light bg-light fixed-top py-0 navbar-expand-sm" id="navbar-top">
   <button class="navbar-toggler" type="button" data-toggle="toggle" data-target="#sidebar" aria-controls="sidebar" aria-expanded="true" aria-label="Toggle navigation" id="sidebarCollapse">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <%= link_to image_tag("logo_std_white.svg", :class => "navbar__logo", 'height' => '45'), root_path %>
+  <%= link_to image_tag("logo_std_blue.svg", :class => "navbar__logo", 'height' => '35'), root_path %>
   
   <%= render partial: 'layouts/navigation_links', :locals => { :show_on_small => false } %>
 	
