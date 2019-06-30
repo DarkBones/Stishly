@@ -12,6 +12,7 @@ $primaryColor:  hsl(0, 99%, 58%);
   border-color: lighten($primaryColor, 5%);
 }
 
+
 .no-caret::after {
   display:none;
 }
