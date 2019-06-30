@@ -7,9 +7,9 @@ $primaryColor:  hsl(0, 99%, 58%);
   //border-width: 10px;
 }
 
-[class$="-primary"]:hover {
-  background-color: lighten($primaryColor, 5%);;
-  border-color: lighten($primaryColor, 5%);
+.btn-primary:hover {
+  background-color: lighten($primaryColor, 5%)!important;
+  border-color: lighten($primaryColor, 5%)!important;
 }
 
 
