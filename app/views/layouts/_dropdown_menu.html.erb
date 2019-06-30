@@ -12,8 +12,10 @@ else
 end
 %>
 
+<ul class="list-unstyled">
 <%= li_pref.html_safe %><%= link_to 'Edit account', edit_user_registration_path, { :class=> cl } %><%= li_suff.html_safe %>
 <%= li_pref.html_safe %><%= link_to 'Settings', settings_url, { :class=> cl } %><%= li_suff.html_safe %>
 <%= li_pref.html_safe %><%= link_to 'Schedules', schedules_url, { :class => cl } %><%= li_suff.html_safe %>
 <%= divider.html_safe %>
 <%= li_pref.html_safe %><%= link_to 'Sign out', destroy_user_session_path, { :class=> cl } %><%= li_suff.html_safe %>
+</ul>

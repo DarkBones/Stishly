@@ -4,7 +4,7 @@
   </button>
   <%= link_to image_tag("logo_std_blue.svg", :class => "navbar__logo", 'height' => '35'), root_path %>
   
-  <%= render partial: 'layouts/navigation_links', :locals => { :show_on_small => false } %>
+  <%= render 'layouts/navigation_links' %>
 	
 </nav>
 

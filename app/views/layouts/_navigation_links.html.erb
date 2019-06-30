@@ -1,11 +1,7 @@
-<%
-  small_class = "d-none d-sm-block"
-  small_class = "d-block d-sm-none" if show_on_small
-%>
 <ul class="nav navbar-nav ml-auto">
   <% if user_signed_in? %>
 
-    <li class="nav-item dropdown <%= small_class %>">
+    <li class="nav-item dropdown d-none d-sm-block">
       <a class="nav-link dropdown-toggle no-caret" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <div class="navbar-link rounded-circle bg-primary">
           <%= image_tag 'message.svg' %>
@@ -16,7 +12,7 @@
       </div>
     </li>
 
-    <li class="nav-item dropdown <%= small_class %>">
+    <li class="nav-item dropdown d-none d-sm-block">
       <a class="nav-link dropdown-toggle no-caret" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <div class="navbar-link rounded-circle bg-primary">
           <%= image_tag 'gear.svg' %>

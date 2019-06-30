@@ -3,7 +3,9 @@
     New Transaction
   </button>
 
-  <%= render partial: 'layouts/navigation_links', :locals => { :show_on_small => true } %>
+  <div class="d-block d-sm-none">
+    <%= render partial: 'layouts/dropdown_menu', :locals => { :is_dropdown => false } %>
+  </div>
 
   <div id="menu-container" class="px-4 text-light">
     <%= render partial: "left_menu/section", locals: {
