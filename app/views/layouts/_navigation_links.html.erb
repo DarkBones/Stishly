@@ -24,10 +24,10 @@
     </li>
 
   <% else %>
-    <li class="nav-item">
+    <li class="nav-item d-none d-sm-block">
       <%= link_to 'Sign in', new_user_session_path, { :class=>"nav-link" } %>
     </li>
-    <li class="nav-item">
+    <li class="nav-item d-none d-sm-block">
       <%= link_to 'Sign up', new_user_registration_path, { :class=>"nav-link" } %>
     </li>
   <% end %>

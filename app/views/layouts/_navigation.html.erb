@@ -1,7 +1,9 @@
 <nav class="navbar navbar-light bg-light fixed-top py-0 navbar-expand-sm" id="navbar-top">
-  <button class="navbar-toggler" type="button" data-toggle="toggle" data-target="#sidebar" aria-controls="sidebar" aria-expanded="true" aria-label="Toggle navigation" id="sidebarCollapse">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+	<% if user_signed_in? %>
+	  <button class="navbar-toggler" type="button" data-toggle="toggle" data-target="#sidebar" aria-controls="sidebar" aria-expanded="true" aria-label="Toggle navigation" id="sidebarCollapse">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+  <% end %>
   <%= link_to image_tag("logo_std_blue.svg", :class => "navbar__logo", 'height' => '35'), root_path %>
   
   <%= render 'layouts/navigation_links' %>

@@ -25,7 +25,7 @@
   <% end %>
 
 
-  <a href="<%= transactions_path + "/" + transaction.id.to_s %>" class="text-light">
+  <a href="<%= transactions_path + "/" + transaction.id.to_s %>">
     <li time="<%= transaction.time_num %>" id="transaction_<%= transaction.id %>">
 
       <%= image_tag "categories/" + transaction.category.symbol + ".svg",
