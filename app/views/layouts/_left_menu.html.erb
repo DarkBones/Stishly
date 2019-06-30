@@ -2,10 +2,12 @@
 
   <div id="menu-container" class="px-4 text-light">
     <%= render "layouts/left_menu_account_dropdown" %>
-    
+
   	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#transactionform" onclick="resetTransactionMenu('#transactionform');" id="new-transaction-button">
       New Transaction
     </button>
+
+    <hr />
 
     <%= render partial: "left_menu/section", locals: {
       title: "Accounts <span id=\"create-account-button\" class=\"float-right\"><button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#accountform\" onclick=\"resetAccountMenu();\" id=\"new-account-button\">+</button></span>".html_safe,

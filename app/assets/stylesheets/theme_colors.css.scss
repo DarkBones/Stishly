@@ -1,4 +1,9 @@
 $primaryColor:  hsl(0, 99%, 58%);
+$textColor: black;
+
+html, body, div {
+	color: $textColor;
+}
 
 [class$="-primary"] {
   background-color: $primaryColor!important;
@@ -37,4 +42,8 @@ $primaryColor:  hsl(0, 99%, 58%);
 
 .sortable:hover .sort-handle:hover{
   opacity: 1;
+}
+
+.clickable:hover {
+	cursor: pointer;
 }

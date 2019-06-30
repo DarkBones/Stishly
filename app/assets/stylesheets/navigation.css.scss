@@ -19,14 +19,40 @@ $sidebarWidth: 350px;
 }
 
 #sidebar {
+	-webkit-transition: width 0.2s ease;
+  -moz-transition: width 0.2s ease;
+  -o-transition: width 0.2s ease;
+  transition: width 0.2s ease;
+
 	height: calc(100vh - 40px);
 	margin-top: 40px;
 	padding-top: 50px;
 	overflow: scroll;
   overflow-y: hidden;
   overflow-x: hidden;
-  width: $sidebarWidth;
-  .bg-parent {
-  	background-color: #F00;
+  
+  z-index: 1000;
+
+  width:0;
+  &.in {
+    width: $sidebarWidth;
+  }
+
+  #menu-container {
+    min-width: $sidebarWidth;
+    height: calc(100vh - 50px);
+    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+#content {
+	width: 100%;
+  padding-top: 80px;
+  padding-left: $sidebarWidth;
+  min-height: 100vh;
+  &.in {
+    padding-left: 0;
   }
 }

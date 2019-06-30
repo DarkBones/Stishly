@@ -1,6 +1,6 @@
 <% @account = account if account.is_a? AccountDecorator %>
 
-<% li_c = "account-button clickable bg-parent hover-highlight" %>
+<% li_c = "account-button clickable bg-light hover-highlight" %>
 <% li_c += " sortable" if account.persisted? %>
 <% li_c += " no-sorting" if !account.persisted? %>
 <% li_c += " active" if @active_account && account.id == @active_account.id %>
