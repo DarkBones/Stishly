@@ -1,29 +1,53 @@
-<div class="authform">
-  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
-    <h3>Sign in</h3>
-    <%= devise_error_messages! %>
-    <div class="form-group">
-      <%- if devise_mapping.registerable? %>
-        <%= link_to 'Sign up', new_registration_path(resource_name), class: 'right'  %>
-      <% end -%>
-      <%= f.label :email %>
-      <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
+  
+  <div class="container">
+
+    <div class="row">
+      <div class="col-12 py-2">
+        <h3>Sign in</h3>
+      </div>
     </div>
-    <div class="form-group">
-      <%- if devise_mapping.recoverable? %>
-        <%= link_to "Forgot password?", new_password_path(resource_name), class: 'right' %>
-      <% end -%>
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
+
+    <div class="row">
+      <div class="col-12 py-2">
+        <%= devise_error_messages! %>
+      </div>
     </div>
-      <%= f.hidden_field :timezone, id: 'timezone_input' %>
-      <%= f.submit 'Sign in', :class => 'button right' %>
-      <% if devise_mapping.rememberable? -%>
-        <div class="checkbox" style="width:150px">
+
+    <div class="row">
+      <div class="col-12 py-2">
+        <%= f.label :email %>
+        <%= f.email_field :email, :autofocus => true, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 py-2">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-6 py-2">
+        <div class="checkbox">
           <label>
             <%= f.check_box :remember_me %> Remember me
           </label>
         </div>
-      <% end -%>
-  <% end %>
-</div>
+      </div>
+      <div class="col-6 py-2">
+        <%= link_to "Forgot password?", new_password_path(resource_name), class: 'float-right' %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 py-2">
+        <%= f.submit 'Sign in', :class => 'btn btn-primary' %>
+      </div>
+    </div>
+
+  </div>
+
+<% end %>
