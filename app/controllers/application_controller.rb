@@ -52,7 +52,17 @@ class ApplicationController < ActionController::Base
   private
 
   def after_sign_in_path_for(_resource_or_scope)
-    User.update(current_user.id, :timezone => params[:user][:timezone])
+    if valid_timezone(params[:user][:timezone])
+      User.update(current_user.id, :timezone => params[:user][:timezone])
+    elsif !valid_timezone(current_user.timezone)
+      User.update(current_user.id, :timezone => "Europe/London")
+    end
     root_path
   end
+
+  def valid_timezone(tz)
+    return !tz.nil? && ActiveSupport::TimeZone[tz].present?
+
+  end
+
 end

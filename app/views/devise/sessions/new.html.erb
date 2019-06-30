@@ -9,11 +9,11 @@
     </div>
 
     <% if devise_error_messages!.length > 0 %>
-    <div class="row">
-      <div class="col-12 py-2 bg-danger rounded">
-        <%= devise_error_messages! %>
+      <div class="row">
+        <div class="col-12 py-2 bg-danger rounded">
+          <%= devise_error_messages! %>
+        </div>
       </div>
-    </div>
     <% end %>
 
     <div class="row">
@@ -43,6 +43,8 @@
         <%= link_to "Forgot password?", new_password_path(resource_name), class: 'float-right' %>
       </div>
     </div>
+
+    <%= f.text_field :timezone, id: 'timezone_input' %>
 
     <div class="row">
       <div class="col-12 py-2">
