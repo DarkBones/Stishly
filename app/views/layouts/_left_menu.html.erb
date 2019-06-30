@@ -3,25 +3,7 @@
     New Transaction
   </button>
 
-  <div id="accountDropdownAccordion" class="d-block d-sm-none">
-    <div class="card">
-
-      <div class="card-header" id="accountDropdown">
-        <a class="btn btn-link collapsed col-12 clickable" data-toggle="collapse" data-target="#collapseAccuntDropdown" id="accountDropdownToggle">
-          <span class="float-left">
-            <h5>Account</h5>
-          </span>
-        </a>
-      </div>
-
-      <div id="collapseAccuntDropdown" class="collapse" aria-labelledby="accountDropdown" data-parent="#accountDropdownAccordion">
-        <div class="card-body">
-          <%= render partial: 'layouts/dropdown_menu', :locals => { :is_dropdown => false } %>
-        </div>
-      </div>
-
-    </div>
-  </div>
+  <%= render "layouts/left_menu_account_dropdown" %>
 
   <div id="menu-container" class="px-4 text-light">
     <%= render partial: "left_menu/section", locals: {
