@@ -1,6 +1,4 @@
-$darkTheme: false;
-$primaryColor:  hsl(216, 100%, 34%);
-$textColor: black;
+@import "variables";
 
 html, body, div {
 	color: $textColor;
@@ -16,6 +14,16 @@ html, body, div {
 .btn-primary:hover {
   background-color: lighten($primaryColor, 5%)!important;
   border-color: lighten($primaryColor, 5%)!important;
+}
+
+[class$="-secondary"] {
+  background-color: $secondaryColor!important;
+  border-color: $secondaryColor;
+}
+
+.btn-secondary:hover {
+  background-color: darken($secondaryColor, 10%)!important;
+  border-color: darken($secondaryColor, 10%)!important;
 }
 
 
