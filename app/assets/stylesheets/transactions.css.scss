@@ -1,0 +1,25 @@
+@import "variables";
+
+.selected-row {
+	background-color: lighten($primaryColor, 60%);
+	border-left: 2px solid lighten($primaryColor, 40%)!important;
+	&:hover {
+		border-left: 2px solid $primaryColor!important;
+	}
+}
+
+.select-item-container {
+	padding: 20px 10px 0 10px;
+	margin-top: -20px;
+	margin-bottom: 0;
+	border-left: 2px solid lighten($primaryColor, 100%);
+}
+
+.transactions-daydiv {
+	margin-bottom: 40px;
+}
+
+#select_all_transactions {
+	margin-bottom: 40px;
+	padding-left: 10px;
+}
