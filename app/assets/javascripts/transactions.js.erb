@@ -1,3 +1,5 @@
+//"use strict";
+
 function set_currency(account_name, currency_changed, $currency_field) {
   if(!currency_changed) {
     var currency;
@@ -52,8 +54,10 @@ function enableMassActionButtons() {
 
 function selectTransaction(obj) {
   if (obj.checked) {
+    $(obj).parents(".select-item-container").addClass("selected-row");
     addTransaction(obj.value);
   } else {
+    $(obj).parents(".select-item-container").removeClass("selected-row");
     removeTransaction(obj.value);
   }
 
@@ -75,6 +79,7 @@ function addAllTransactions() {
 
   $transactions = $(".transaction-checkbox-input");
   $transactions.each(function(index, value){
+    $(value).parents(".select-item-container").addClass("selected-row");
     value.checked = true;
     addTransaction(value.value);
   });
@@ -85,6 +90,7 @@ function removeAllTransactions() {
 
   $transactions = $(".transaction-checkbox-input");
   $transactions.each(function(index, value){
+    $(value).parents(".select-item-container").removeClass("selected-row");
     value.checked = false;
     removeTransaction(value.value);
   });

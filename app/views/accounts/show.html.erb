@@ -38,7 +38,7 @@
       <%= render :partial => "add_transactions_to_schedule" %>
       <%= render :partial => "mass_transaction_actions" %>
 
-      <div class="transaction-checkbox mx-4">
+      <div class="transaction-checkbox mx-4" id="select_all_transactions">
         <label class="checkbox-container">
           <%= check_box_tag "select_all", "all_visible_transactions", false, class: 'checkbox-inline', 'onchange' => 'selectAllTransactions(this);'%>
           <span class="checkmark"></span>
