@@ -39,7 +39,10 @@
       <%= render :partial => "mass_transaction_actions" %>
 
       <div class="transaction-checkbox mx-4">
-        <%= check_box_tag "select_all", "all_visible_transactions", false, class: 'checkbox-inline', 'onchange' => 'selectAllTransactions(this);'%>
+        <label class="checkbox-container">
+          <%= check_box_tag "select_all", "all_visible_transactions", false, class: 'checkbox-inline', 'onchange' => 'selectAllTransactions(this);'%>
+          <span class="checkmark"></span>
+        </label>
       </div>
 
       <div id="transactions_list" class="py-4 px-4 <%= "border border-warning rounded-bottom border-3" if @filtered %>">

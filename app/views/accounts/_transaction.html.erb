@@ -11,8 +11,10 @@
 
 <div class="transaction-checkbox float-left">
 
-  <%#= check_box_tag("delete[#{transaction.id}]",1, class: 'checkbox-inline') %>
-  <%= check_box_tag "select[#{transaction.id}]", transaction.id, false, class: 'checkbox-inline transaction-checkbox-input', 'onchange' => 'selectTransaction(this);'%>
+  <label class="checkbox-container">
+    <%= check_box_tag "select[#{transaction.id}]", transaction.id, false, class: 'checkbox-inline transaction-checkbox-input styled-checkbox', 'onchange' => 'selectTransaction(this);'%>
+    <span class="checkmark"></span>
+  </label>
 
 </div>
 
