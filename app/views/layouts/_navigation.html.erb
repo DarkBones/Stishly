@@ -6,7 +6,12 @@
   <% end %>
   <%= link_to image_tag("logo_std_blue.svg", :class => "navbar__logo", 'height' => '35'), root_path %>
 
-  <input class="form-control" style="max-width: 300px;">
+  <div class="navbar searchbar">
+    <input type="text" placeholder="Search" class="form-control">
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+    </span>
+  </div>
   
   <%= render 'layouts/navigation_links' %>
 	
