@@ -6,11 +6,15 @@
   <% end %>
   <%= link_to image_tag("logo_std_blue.svg", :class => "navbar__logo", 'height' => '35'), root_path %>
 
-  <div class="navbar searchbar">
-    <input type="text" placeholder="Search" class="form-control">
-    <span class="input-group-btn">
-      <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-    </span>
+  <div class="navbar searchbar mx-auto" id="navbar_search">
+    <div class="input-group">
+      <%= form_for_filterrific @filterrific, html: { id: 'filter-form' } do |f| %>
+        <%= f.text_field(:description, class: 'form-control', placeholder: "Search") %>
+      <% end %>
+      <div class="input-group-append">
+        <button class="btn btn-secondary" type="button"><%= image_tag 'search.svg', height: "20px" %></button>
+      </div>
+    </div>
   </div>
   
   <%= render 'layouts/navigation_links' %>

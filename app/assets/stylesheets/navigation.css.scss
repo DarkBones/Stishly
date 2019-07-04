@@ -17,6 +17,14 @@
 	height: 30px;
 }
 
+#navbar_search {
+  width: calc(100% - 300px);
+  max-width: 600px;
+  form {
+    width: calc(100% - 45px);
+  }
+}
+
 #sidebar {
 	-webkit-transition: width 0.2s ease;
   -moz-transition: width 0.2s ease;
@@ -53,5 +61,13 @@
   min-height: 100vh;
   &.in {
     padding-left: 0;
+  }
+}
+
+@media (max-width: 575px) {
+  #navbar_search {
+    position: absolute;
+    left: 230px;
+    width: calc(100% - 250px);
   }
 }
