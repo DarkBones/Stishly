@@ -2,7 +2,7 @@
   <div id="<%= d %>">
     <h3 id="day_<%= d %>" currency="<%= account_currency %>" balance="<%= day_total %>" class="transactions-daydiv"><%= d_formatted %>
       <span class="float-right" currency="<%= account_currency %>" balance="<%= day_total %>">
-        <%= balance(day_total, Money::Currency.new(account_currency)) %>
+        <%= balance(day_total, Money::Currency.new(account_currency), "cents") %>
       </span>
     </h3>
     <ul id="transactions_<%= d %>" class="parent_transactions list-unstyled">
