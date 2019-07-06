@@ -1,0 +1,11 @@
+<div class="navbar searchbar mx-auto" id="navbar_search">
+  <%= form_for_filterrific @filterrific, html: { id: 'filter-form' } do |f| %>
+    <div class="input-group">
+      <%= f.text_field(:description, class: 'form-control', placeholder: "Search") %>
+      <div class="input-group-append">
+        
+        <%= image_submit_tag("search.svg", height: "38px", width: "50px", class: "btn btn-secondary") %>
+      </div>
+    </div>
+  <% end %>
+</div>
