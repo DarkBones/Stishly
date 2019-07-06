@@ -1,6 +1,6 @@
 <a href="/<%= notification.link %>">
 	<li class="nav-item">
 		<span class="title"><%= notification.title %></span><br />
-		<p><%= notification.body.truncate(50, separator: ' ') %></p>
+		<p><%= notification.body.truncate(50, separator: ' ') unless notification.body.nil? %></p>
 	</li>
 </a>
