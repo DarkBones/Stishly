@@ -24,3 +24,15 @@
 	margin-bottom: 60px;
 	padding-left: 10px;
 }
+
+.child_transactions {
+  display: none;
+}
+.show-child-transactions {
+  display: inline-block;
+  position: relative;
+  width: 15px;
+  height: 15px;
+  margin-left: -65px;
+  margin-top: 0;
+}

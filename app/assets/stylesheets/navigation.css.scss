@@ -64,10 +64,28 @@
   }
 }
 
+@media (max-width: 992px) {
+  #sidebar.in {
+    width: 0;
+  }
+  #sidebar {
+    width: $sidebarWidth;
+  }
+  #content.in {
+    padding-left: 0;
+  }
+  #content {
+    padding-left: 0;
+  }
+}
+
 @media (max-width: 575px) {
   #navbar_search {
     position: absolute;
     left: 230px;
     width: calc(100% - 250px);
+  }
+  #sidebar {
+    width: 100%;
   }
 }
