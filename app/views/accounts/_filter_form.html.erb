@@ -5,13 +5,16 @@
 
       <% user_currency = Money::Currency.new(current_user.currency) %>
 
-      <div class = "row">
-
+      <div class="row">
         <div class="col-12">
-          <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
-          <%= f.text_field(:description, class: 'form-control', placeholder: "Search") %>
+          <div class="input-group">
+            <%= f.text_field(:description, class: 'form-control', placeholder: "Search") %>
+            <div class="input-group-append">
+              
+              <%= image_submit_tag("search.svg", height: "38px", width: "50px", class: "btn btn-secondary") %>
+            </div>
+          </div>
         </div>
-
       </div>
 
       <div class="row">
@@ -23,14 +26,15 @@
       <div class="filter-advanced" style="display: none;">
 
         <div class="row">
-          <div class="col-12">
+          <div class="col-12 py-2">
+            <%= f.label :period %>
             <%= f.select(:period, [
               ["Any", "any"],
               ["Today", "today"],
               ["Past 7 days", "7days"],
               ["Past 30 days", "30days"],
               #["Current period", "period"],
-              ["Custom range", "custom"]
+              ["Custom range ...", "custom"]
               ], {}, { :class => "form-control", "onchange" => "changeFilterPeriod(this.value)" }) %>
           </div>
         </div>
@@ -41,11 +45,11 @@
         %>
         <div class="row" style="display: <%= display_custom_range %>;" id="custom_range">
 
-          <div class="col-6">
+          <div class="col-6 py-2">
             <%= f.label :from_date %>
             <%= f.text_field(:from_date, class: 'datepicker datepicker-null form-control') %>
           </div>
-          <div class="col-6">
+          <div class="col-6 py-2">
             <%= f.label :to_date %>
             <%= f.text_field(:to_date, class: 'datepicker datepicker-null form-control') %>
           </div>
@@ -54,7 +58,7 @@
 
         <div class="row">
 
-          <div class="col-12">
+          <div class="col-12 py-2">
             <%= f.label :account %>
             <%= f.select(:account, user_accounts_array, { :include_blank => "- any -" }, { :class => 'form-control' }) %>
           </div>
@@ -63,7 +67,7 @@
         
         <div class="row">
 
-          <div class="col-12">
+          <div class="col-12 py-2">
             <%= f.label :category %><br />
             <%= render partial: "/shared/custom_dropdown_categories", locals: {
               selected: nil,
@@ -95,17 +99,21 @@
         %>
 
         <div class="row">
-          <div class="col-12">
+          <div class="col-12 py-2">
             <%= f.label :amount %><br />
             <%# TODO: Find a better color for the slider; %>
-            <b><%= balance(0, user_currency, "none") %></b>
+            <div class="slider-left">
+              <b><%= balance(0, user_currency, "none") %></b>
+            </div>
             <%= f.text_field(:amount_range,
               "data-slider-min" => "0",
               "data-slider-max" => max_amount,
               "data-slider-step" => "5",
               "data-slider-value" => "[#{from_amount}, #{to_amount}]"
-              ) %><b>
-                <%= balance((max_amount * user_currency.subunit_to_unit), user_currency, "none") %></b>
+              ) %>
+            <div class="slider-right">
+              <b><%= balance((max_amount * user_currency.subunit_to_unit), user_currency, "none") %></b>
+            </div>
           </div>
         </div>
 
@@ -117,19 +125,18 @@
         %>
 
         <div class="row">
-          <div class="col-12">
+          <div class="col-12 py-2">
             <%= f.label :granularity %><br />
-            <%= f.text_field(:include_children,
-            "data-provide" => "slider",
-            "data-slider-ticks" => "[1, 2, 3]",
-            "data-slider-ticks-labels" => '["Parents", "Children", "Parents AND Children"]',
-            "data-slider-min" => "1",
-            "data-slider-max" => "3",
-            "data-slider-step" => "1",
-            "data-slider-tooltip" => "hide",
-            "data-slider-value" => include_children_slider_value
-            ) %>
-            
+            <div id="granularity-slider">
+              <%= f.text_field(:include_children,
+              "data-provide" => "slider",
+              "data-slider-ticks" => "[1, 2, 3]",
+              "data-slider-ticks-labels" => '["Parent", "Child", "All"]',
+              "data-slider-ticks-snap-bounds" => "30",
+              "data-slider-tooltip" => "hide",
+              "data-slider-value" => include_children_slider_value
+              ) %>
+            </div>
           </div>
         </div>
 
@@ -151,17 +158,15 @@
       </div>
 
       <div class="row">
-        <%= link_to(
-          'Reset filters',
-          reset_filterrific_url,
-          "onclick" => "reloadPageAfterClearFilters();"
-        ) %>
+        <div class="col-12">
+          <%= link_to(
+            'Reset filters',
+            reset_filterrific_url,
+            "onclick" => "reloadPageAfterClearFilters();"
+          ) %>
+        </div>
       </div>
 
-  </div>
-
-  <div class="span2">
-    <%= f.submit 'Search', :class => 'btn btn-block btn-primary' %>
   </div>
 
   <% end %>
