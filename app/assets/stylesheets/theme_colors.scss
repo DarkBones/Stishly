@@ -56,3 +56,9 @@ html, body, div {
 .clickable:hover {
 	cursor: pointer;
 }
+
+.dropshadow {
+-webkit-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.22);
+-moz-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.22);
+box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.22);
+}
