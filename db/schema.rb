@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_18_090457) do
+ActiveRecord::Schema.define(version: 2019_07_06_173935) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 2019_06_18_090457) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.string "title"
     t.text "body"
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 2019_06_18_090457) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "created_at_local_datetime"
-    t.index ["user_id"], name: "index_messages_on_user_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "schedule_occurrences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

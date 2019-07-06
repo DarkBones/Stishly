@@ -13,32 +13,32 @@
 #  updated_at :datetime         not null
 #
 
-class Message < ApplicationRecord
+class Notification < ApplicationRecord
 
 	belongs_to :user
 
-	def self.create_message(params, current_user, restrict_to_one_per_day)
+	def self.create(params, current_user, restrict_to_one_per_day)
 		tz = get_timezone(current_user)
 		if restrict_to_one_per_day
-			return if messaged_today(current_user, params["title"], tz)
+			return if notified_today(current_user, params["title"], tz)
 		end
 
 		params[:created_at_local_datetime] = tz.utc_to_local(Time.now.utc)
 
-		message = current_user.messages.new(params)
-		message.save!
+		notification = current_user.notifications.new(params)
+		notification.save!
 
 	end
 
 private
 	
 	# returns true if an unread message with the same title has been issued today (local time)
-	def self.messaged_today(current_user, title, tz)
+	def self.notified_today(current_user, title, tz)
 		today = tz.utc_to_local(Time.now.utc).to_date
 
-		message = current_user.messages.where("title = ? AND DATE(created_at_local_datetime) = DATE(?) AND is_read = FALSE", title, today)
+		notification = current_user.notifications.where("title = ? AND DATE(created_at_local_datetime) = DATE(?) AND is_read = FALSE", title, today)
 
-		return message.length > 0
+		return notification.length > 0
 	end
 
 	def self.get_timezone(current_user)

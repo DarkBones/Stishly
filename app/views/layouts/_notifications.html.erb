@@ -1,0 +1,4 @@
+<% notifications = current_user.notifications.limit(30)	%>
+<ul class="list-unstyled">
+	<%= render notifications %>
+</ul>
