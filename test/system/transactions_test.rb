@@ -117,7 +117,7 @@ class TransactionsTest < ApplicationSystemTestCase
 
     create_transaction
 
-    assert_selector "#transactions_list", text: "Today\n€0.00"
+    assert_selector "#transactions_list", text: "#{Time.now.strftime("%d/%m/%Y")}\n€0.00"
     assert_selector "#transactions_list", text: "test\n€0.00"
   end
 
@@ -161,7 +161,7 @@ class TransactionsTest < ApplicationSystemTestCase
 
     create_transaction(params)
 
-    assert_selector "#transactions_list", text: "Today\n€0.00"
+    assert_selector "#transactions_list", text: "#{Time.now.strftime("%d/%m/%Y")}\n€0.00"
     assert_selector "#transactions_list", text: "€500.05"
     assert_selector "#transactions_list", text: "€-500.05"
     assert_selector "#transactions_list", text: "Transferred from Current Account"
@@ -179,7 +179,7 @@ class TransactionsTest < ApplicationSystemTestCase
 
     create_transaction(params)
     sleep 1
-    assert_selector "#transactions_list", text: "Today\n€-1,000.00"
+    assert_selector "#transactions_list", text: "#{Time.now.strftime("%d/%m/%Y")}\n€-1,000.00"
 
     assert_selector ".child_transactions", visible: :hidden
 
