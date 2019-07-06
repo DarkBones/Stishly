@@ -71,7 +71,7 @@ group :test do
   #gem 'bootstrap', '~> 4.3.1'
 end
 
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 3.4.1'
 
 # Adds user authentication
 gem 'devise'
