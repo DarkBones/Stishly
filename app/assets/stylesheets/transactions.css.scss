@@ -36,32 +36,3 @@
   margin-left: -65px;
   margin-top: 0;
 }
-
-.tooltip.in {
-  opacity: 1;
-}
-
-.slider-left, .slider-right {
-	display: inline-block;
-}
-
-.slider-left {
-	margin-right: 20px;
-}
-
-.slider-right {
-	margin-left: 20px;
-}
-
-#granularity-slider {
-	margin-left: 25px;
-	.slider-horizontal {
-		margin-bottom: 33px!important;
-	}
-	.slider-tick-label-container {
-		margin-left: -52.5px!important;
-		.slider-tick-label {
-			width: 105px!important;
-		}
-	}
-}
