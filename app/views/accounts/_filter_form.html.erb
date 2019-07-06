@@ -157,15 +157,17 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-12">
-          <%= link_to(
-            'Reset filters',
-            reset_filterrific_url,
-            "onclick" => "reloadPageAfterClearFilters();"
-          ) %>
+      <% if @filtered %>
+        <div class="row">
+          <div class="col-12">
+            <%= link_to(
+              'Reset filters',
+              reset_filterrific_url,
+              "onclick" => "reloadPageAfterClearFilters();"
+            ) %>
+          </div>
         </div>
-      </div>
+      <% end %>
 
   </div>
 

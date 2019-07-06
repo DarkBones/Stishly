@@ -24,15 +24,6 @@
     </div>
   </div>
 
-  <% if @filtered %>
-    <div class="row">
-      <div class="px-3">
-          <div class="filtered_warning bg-warning rounded-top px-3 py-1 border-warning border-3">
-            Filtered
-          </div>
-      </div>
-    </div>
-  <% end %>
   <div class="row">
     <div class="col-12">
       <%= render :partial => "add_transactions_to_schedule" %>
@@ -45,7 +36,7 @@
         </label>
       </div>
 
-      <div id="transactions_list" class="py-4 px-4 <%= "border border-warning rounded-bottom border-3" if @filtered %>">
+      <div id="transactions_list" class="py-4 px-4">
         <%# TODO: Find better color for filtered border %>
         <%= render partial: "transactions" %>
 
