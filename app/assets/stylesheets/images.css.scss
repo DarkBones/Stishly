@@ -1,11 +1,11 @@
 img.rotated {
-	-webkit-transition: transform 0.1s; /* Safari prior 6.1 */
+	-webkit-transition: transform 0.1s;
   transition: transform 0.1s;
 	transform: rotate(90deg);
 }
 
 img.rotated-back {
-	-webkit-transition: transform 0.1s; /* Safari prior 6.1 */
+	-webkit-transition: transform 0.1s;
   transition: transform 0.1s;
 	transform: rotate(0deg);
 }
