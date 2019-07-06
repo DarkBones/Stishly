@@ -1,0 +1,84 @@
+@import "variables";
+
+.tooltip.in {
+  opacity: 1;
+}
+
+.slider-left, .slider-right {
+	display: inline-block;
+}
+
+.slider-left {
+	margin-right: 20px;
+}
+
+.slider-right {
+	margin-left: 20px;
+}
+
+#granularity-slider {
+	margin-left: 25px;
+	.slider-horizontal {
+		margin-bottom: 33px!important;
+	}
+	.slider-tick-label-container {
+		margin-left: -52.5px!important;
+		.slider-tick-label {
+			width: 105px!important;
+		}
+	}
+}
+
+.slider-handle {
+	background: $secondaryColor!important;
+}
+
+.slider-selection {
+	background: lighten($secondaryColor, 35%)!important;
+}
+
+.slider-tick.in-selection {
+	background: lighten($secondaryColor, 15%)!important;
+}
+
+.btn-group {
+	width: 100%;
+}
+
+.grey-out {
+  opacity: 0.6;
+}
+
+[id^=categoriesDropdownOptions] {
+  height: 350px;
+  width: 300px;
+  overflow-y: scroll;
+  li {
+    margin-left: -30px;
+  }
+}
+
+#categories-dropdown {
+	width: 100%;
+}
+
+#scheduleform #daypicker, #scheduleform #daypicker-exclude {
+  table {
+  	margin-top: 10px;
+    width: 100%;
+    text-align: center;
+    td {
+      height: 50px;
+      border: 1px solid $secondaryColor;
+      &:hover {
+        background-color: lighten($secondaryColor, 35%);
+      }
+      &.active {
+        background-color: lighten($secondaryColor, 25%);
+        &:hover{
+          background-color: lighten($secondaryColor, 15%);
+        }
+      }
+    }
+  }
+}
