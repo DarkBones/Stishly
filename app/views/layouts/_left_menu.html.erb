@@ -1,20 +1,23 @@
-<div id="sidebar" class="position-fixed collapse in width show bg-light" aria-expanded="true">
+<div id="sidebar" class="position-fixed collapse width show bg-light <%= "in" if current_user.finished_setup %>" aria-expanded="true">
 
   <div id="menu-container" class="px-4 text-light">
 
     <%= render "layouts/left_menu_account_dropdown" %>
 
-  	<button type="button" class="btn btn-rounded dropshadow py-3 btn-light" data-toggle="modal" data-target="#transactionform" onclick="resetTransactionMenu('#transactionform');" id="new-transaction-button">
-      <%= image_tag "plus.svg", height: "30px", class: "px-2" %><span class="px-2">New Transaction</span>
-    </button>
+    <% if current_user.finished_setup %>
+    	<button type="button" class="btn btn-rounded dropshadow py-3 btn-light" data-toggle="modal" data-target="#transactionform" onclick="resetTransactionMenu('#transactionform');" id="new-transaction-button">
+        <%= image_tag "plus.svg", height: "30px", class: "px-2" %><span class="px-2">New Transaction</span>
+      </button>
 
-    <hr />
+      <hr />
 
-    <%= render partial: "left_menu/section", locals: {
-      title: "Accounts <span id=\"create-account-button\" class=\"float-right\"><button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#accountform\" onclick=\"resetAccountMenu();\" id=\"new-account-button\">+</button></span>".html_safe,
-      section_layout: "left_menu/user_accounts",
-      locals: { accounts: user_accounts, active_account: locals[:active_account] }
-    } %>
+      <%= render partial: "left_menu/section", locals: {
+        title: "Accounts <span id=\"create-account-button\" class=\"float-right\"><button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#accountform\" onclick=\"resetAccountMenu();\" id=\"new-account-button\">+</button></span>".html_safe,
+        section_layout: "left_menu/user_accounts",
+        locals: { accounts: user_accounts, active_account: locals[:active_account] }
+      } %>
+    <% end %>
+    
   </div>
   
 </div>

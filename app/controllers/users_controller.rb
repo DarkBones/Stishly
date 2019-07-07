@@ -19,6 +19,9 @@ class UsersController < ApplicationController
   def settings
   end
 
+  def welcome
+  end
+
   def edit
     User.change_setting(current_user, params)
 

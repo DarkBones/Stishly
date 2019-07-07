@@ -1,8 +1,16 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!, :except => [:country_currency]
-  before_action :set_current_user
+  before_action :set_current_user, :setup_wizzard
 
   helper_method :user_accounts, :user_accounts_array, :user_categories_array, :user_schedules_array
+
+  def setup_wizzard
+    if user_signed_in?
+      unless current_user.finished_setup
+        redirect_to user_welcome_path unless request.original_fullpath.start_with?('/users/')
+      end
+    end
+  end
 
   def get_accounts_currencies
     @accounts_currencies = Account.get_accounts_with_currencies(current_user)
