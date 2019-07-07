@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_07_090400) do
+ActiveRecord::Schema.define(version: 2019_07_07_130314) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -220,6 +220,7 @@ ActiveRecord::Schema.define(version: 2019_07_07_090400) do
     t.string "country_code"
     t.bigint "country_id"
     t.string "currency", null: false
+    t.boolean "finished_setup", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["country_id"], name: "index_users_on_country_id"
     t.index ["email"], name: "index_users_on_email", unique: true
