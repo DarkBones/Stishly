@@ -21,4 +21,5 @@
 
 every '0 0 * ? * *' do
   runner "Schedule.run_schedules"
+  runner "CurrencyRate.update_rates"
 end

@@ -12,7 +12,24 @@
 #
 
 class CurrencyRate < ApplicationRecord
+
+  def self.update_rates(currency=nil)
+    UpdateRates.new(currency).perform
+  end
+
   def self.get_rate(from, to)
+    currency_rate_record = self.where(from_currency: from, to_currency: to).order(:created_at).reverse_order().take
+    if currency_rate_record.nil?
+      self.update_rates(to)
+    end
+
+    currency_rate_record = self.where(from_currency: from, to_currency: to).order(:created_at).reverse_order().take
+    return 0 if currency_rate_record.nil?
+
+    return currency_rate_record.rate
+  end
+
+  def self.get_rate_OLD(from, to)
     currency_rate_record = self.where(from_currency: from, to_currency: to, updated_at: 1.days.ago..Time.now.utc).take
     if currency_rate_record
       return currency_rate_record.rate

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_06_173935) do
+ActiveRecord::Schema.define(version: 2019_07_07_090400) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -68,6 +68,12 @@ ActiveRecord::Schema.define(version: 2019_07_06_173935) do
     t.string "symbol"
     t.string "iso_code"
     t.integer "number_to_basic"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "currency_rate_updates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "currency"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

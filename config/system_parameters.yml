@@ -3,3 +3,6 @@ ui:
     page_length: 30
   dates:
     regex: ^[0-9]{2}-(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)-[0-9]{4}$
+
+currency_rates:
+  retention: 43386 # retention rate in seconds
