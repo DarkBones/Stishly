@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  #layout :primary_background, :only => :welcome
+
   def index
     @users = User.all
   end
@@ -20,6 +22,8 @@ class UsersController < ApplicationController
   end
 
   def welcome
+    @layout_bg = "bg-primary"
+    @hide_sidebar = true
   end
 
   def edit
@@ -32,4 +36,9 @@ class UsersController < ApplicationController
   def secure_params
     params.require(:user).permit(:role)
   end
+
+  def primary_background
+    'application_primary_color'
+  end
+
 end

@@ -15,7 +15,7 @@
     <%= csrf_meta_tags %>
     
   </head>
-  <body>
+  <body class="<%= @layout_bg %>">
     <header>
       <%= render 'layouts/navigation' %>
     </header>
@@ -29,11 +29,12 @@
           <%= render "card_forms/new_transaction_form" %>
           <%= render 'layouts/left_menu', locals: {active_account: @active_account} %>
         <% end %>
-        <div id="content" class="<%= "in" unless user_signed_in? && current_user.finished_setup %>">
+        <div id="content" class="<%= "in" if !user_signed_in? || @hide_sidebar %>">
           <%= yield %>
         </div>
       </div>
     </main>
+
     <footer>
       
     </footer>

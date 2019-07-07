@@ -1,9 +1,40 @@
 <div class="container">
+  
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 col-lg-8 mx-auto">
 
-    	<h2>Welcome to Stishly</h2>
+    	<div class="row">
+    		<div class="col-12">
+    			<h1 class="text-light text-center">Welcome to Stishly</h1>
+    		</div>
+    	</div>
+
+    	<div class="row my-5 py-3 px-3">
+		  	<div class="col-12">
+		  		<form id="userwizzard">
+
+		  			<%# progressbar %>
+		  			<ul id="wizzard-progressbar">
+		  				<li class="active">Accounts</li>
+		  				<li>Income</li>
+		  				<li>Categories</li>
+		  				<li>Expenses</li>
+		  			</ul>
+
+		  			<%# fieldsets %>
+		  			<fieldset class="rounded dropshadow bg-light py-2 px-5">
+		  				<h3 class="fs-title">Accounts</h3>
+		  				<h4 class="fs-subtitle">Set up your accounts (you can add more later)</h4>
+
+		  				<input type="text" name="account_0_name" placeholder="Current Account" class="form-control">
+
+		  			</fieldset>
+
+		  		</form>
+		  	</div>
+		  </div>
 
     </div>
   </div>
+
 </div>
