@@ -16,6 +16,7 @@
 		float: left;
 		position: relative;
 		letter-spacing: 1px;
+		font-size: 14px;
 		&:before {
 			content: counter(step);
 			counter-increment: step;

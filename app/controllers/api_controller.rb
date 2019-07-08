@@ -183,6 +183,16 @@ class ApiController < ApplicationController
     render json: Transaction.prepare_new(prepare_transaction_params, current_user)
   end
 
+  # returns user details
+  def user_details
+    render json: current_user
+  end
+
+  # return the details of the current user's subscription plan
+  def user_subscription_details
+    render json: current_user.subscription_tier
+  end
+
 private
 
   def account_display_balance_params

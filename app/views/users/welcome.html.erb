@@ -1,7 +1,7 @@
 <div class="container">
   
   <div class="row">
-    <div class="col-12 col-lg-8 mx-auto">
+    <div class="col-12">
 
     	<div class="row">
     		<div class="col-12">
@@ -22,11 +22,28 @@
 		  			</ul>
 
 		  			<%# fieldsets %>
-		  			<fieldset class="rounded dropshadow bg-light py-2 px-5">
+		  			<fieldset class="rounded dropshadow bg-light py-2 px-2">
 		  				<h3 class="fs-title">Accounts</h3>
-		  				<h4 class="fs-subtitle">Set up your accounts (you can add more later)</h4>
+		  				<h4 class="fs-subtitle">Set up your accounts</h4>
 
-		  				<input type="text" name="account_0_name" placeholder="Current Account" class="form-control">
+		  				<div class="row">
+		  					<div class="col-5 col-sm-6">
+		  						<label>Name</label>
+		  					</div>
+		  					<div class="col-3 px-0">
+		  						<label>Balance</label>
+		  					</div>
+		  					<div class="col-4 col-sm-3">
+		  						<label>Currency</label>
+		  					</div>
+		  				</div>
+
+		  				<div id="account_rows">
+		  					<%= render partial: "account_row" %>
+		  				</div>
+
+		  				<button class="btn btn-secondary float-right my-3" data-toggle="tooltip" data-placement="top" title="Add additional account" onclick="insertAccountRow(); return false;">+</button>
+		  				<button id="remove_account_row" class="btn btn-secondary float-right my-3 mx-2 disabled"  data-toggle="tooltip" data-placement="top" title="Remove account" onclick="removeAccountRow(); return false;">-</button>
 
 		  			</fieldset>
 
@@ -38,3 +55,31 @@
   </div>
 
 </div>
+
+<script>
+	function insertAccountRow() {
+		$.ajax({
+	    type: "GET",
+	    dataType: "json",
+	    url: "/api/get_user_subscription_details",
+	    success(data) {
+	      if ($(".account_row").length < data.max_accounts){
+	      	$("#account_rows").append("<%= j render :partial => 'account_row' %>");
+	      	$("#remove_account_row").removeClass("disabled");
+	      } else {
+	      	triggerNotice("Upgrade to permium for more accounts", true);
+	      }
+	    }
+	  });
+	}
+
+	function removeAccountRow() {
+		if ($(".account_row").length > 1) {
+			$(".account_row").last().remove();
+		}
+		
+		if ($(".account_row").length === 1) {
+			$("#remove_account_row").addClass("disabled");
+		}
+	}
+</script>
