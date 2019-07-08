@@ -63,7 +63,7 @@
 	    dataType: "json",
 	    url: "/api/get_user_subscription_details",
 	    success(data) {
-	      if ($(".account_row").length < data.max_accounts){
+	      if ($(".account_row").length < data.max_accounts || data.max_accounts < 0){
 	      	$("#account_rows").append("<%= j render :partial => 'account_row' %>");
 	      	$("#remove_account_row").removeClass("disabled");
 	      } else {
