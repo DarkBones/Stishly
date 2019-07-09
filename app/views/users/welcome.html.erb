@@ -68,6 +68,10 @@
 </div>
 
 <script>
+	var current_fs, next_fs, previous_fs;
+	var left, opacity, scale;
+	var animating;
+
 	function insertAccountRow() {
 		$.ajax({
 	    type: "GET",
@@ -93,4 +97,38 @@
 			$("#remove_account_row").addClass("disabled");
 		}
 	}
+
+	$(".next").click(function(){
+		if (animating) return false;
+		animating = true;
+
+		current_fs = $(this).parent();
+		next_fs = $(this).parent().next();
+
+		// progress the progressbar
+		$("#wizzard-progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+		// show the next fieldset
+		next_fs.show();
+
+		// hide the current fieldset
+		current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+				scale = 1 - (1 - now) * 0.2;
+				left = (now * 50) + "%";
+				opacity = 1 - now;
+				current_fs.css({
+					'transform': 'scale('+scale+')',
+					'position': 'absolute'
+				});
+				next_fs.css({'opacity': opacity});
+			},
+			duration: 8000,
+			complete: function(){
+				current_fs.hide();
+				animating = false;
+			},
+			easing: 'easeInOutBack'
+		})
+	});
 </script>

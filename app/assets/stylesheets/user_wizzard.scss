@@ -44,9 +44,15 @@
 		&:first-child:after {
 			content: none;
 		}
-		.active:before, .active:after {
-			background: $primaryColor;
-			color: white;
-		}
 	}
+}
+
+#wizzard-progressbar li.active:before, #wizzard-progressbar li.active:after {
+	background: $complementaryColor!important;
+	color: white!important;
+}
+
+#userwizzard fieldset {
+	position: absolute;
+	left: 50%;
 }
