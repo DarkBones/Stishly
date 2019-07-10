@@ -46,6 +46,7 @@ Rails.application.routes.draw do
   get 'api/get_user_details', to: 'api#user_details'
   get 'api/get_user_subscription_details', to: 'api#user_subscription_details'
   #get 'api/account_currency/:from_currency/:to_currency/:amount/'
+  get 'api/get_simplified_schedule_form', to: 'api#get_simplified_schedule_form'
 
   get 'api/next_occurrences/:type/:name/:start_date/:timezone/:schedule/:run_every/:days/:days2/:dates_picked/:weekday_mon/:weekday_tue/:weekday_wed/:weekday_thu/:weekday_fri/:weekday_sat/:weekday_sun/:end_date/:weekday_exclude_mon/:weekday_exclude_tue/:weekday_exclude_wed/:weekday_exclude_thu/:weekday_exclude_fri/:weekday_exclude_sat/:weekday_exclude_sun/:dates_picked_exclude/:exclusion_met1/:exclusion_met2/:occurrence_count', to: 'api#get_next_schedule_occurrences'
   get 'api/transfer_accounts/:from/:to', to: 'api#transfer_accounts'

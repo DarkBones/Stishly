@@ -193,6 +193,11 @@ class ApiController < ApplicationController
     render json: current_user.subscription_tier
   end
 
+  def get_simplified_schedule_form
+    @@data = File.read("#{Rails.root}/app/views/schedules/simplified_form.json")
+    render json: @@data
+  end
+
 private
 
   def account_display_balance_params
