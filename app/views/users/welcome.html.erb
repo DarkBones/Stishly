@@ -122,7 +122,24 @@
 
 		  										<div class="children">
 		  											<div class="child path-regular-months-except-wday">
-		  												<p>except on wday</p>
+		  												<select name="month_exclude_wday">
+		  													<option value="none">without exceptions</option>
+		  													<option value="weekends" children=".path-regular-months-except-met">except on weekends</option>
+		  													<option value="except-sun" children=".path-regular-months-except-met">except on Sunday</option>
+		  													<option value="except-mon" children=".path-regular-months-except-met">except on Monday</option>
+		  													<option value="except-tue" children=".path-regular-months-except-met">except on Tuesday</option>
+		  													<option value="except-wed" children=".path-regular-months-except-met">except on Wednesday</option>
+		  													<option value="except-thu" children=".path-regular-months-except-met">except on Thursday</option>
+		  													<option value="except-fri" children=".path-regular-months-except-met">except on Friday</option>
+		  													<option value="except-sat" children=".path-regular-months-except-met">except on Saturday</option>
+		  												</select>
+
+		  												<div class="children">
+		  													<div class="child path-regular-months-except-met">
+		  														exception met
+		  													</div>
+		  												</div>
+
 		  											</div>
 		  											<div class="child path-regular-months-except-day">
 		  												<p>except on day</p>
