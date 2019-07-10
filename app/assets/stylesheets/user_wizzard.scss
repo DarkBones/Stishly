@@ -3,6 +3,12 @@
 #userwizzard {
 	text-align: center;
 	position: relative;
+	[class^="col-"] {
+		padding: 0 5px;
+	}
+	.row {
+		padding: 8px;
+	}
 }
 
 #wizzard-progressbar {
@@ -53,6 +59,15 @@
 }
 
 #userwizzard fieldset {
-	position: absolute;
-	left: 50%;
+	position: relative;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	&:not(:first-of-type) {
+		/*display: none;*/
+	}
+}
+
+.wizzard-segment {
+	width: 100%;
 }

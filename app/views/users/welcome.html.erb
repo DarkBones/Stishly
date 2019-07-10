@@ -46,16 +46,55 @@
 		  				<button id="remove_account_row" class="btn btn-secondary float-right my-3 mx-2 disabled"  data-toggle="tooltip" data-placement="top" title="Remove account" onclick="removeAccountRow(); return false;">-</button>
 
 		  				<input type="button" name="next" class="next action-button" value="Next"/>
+
 		  			</fieldset>
 		  			<fieldset class="rounded dropshadow bg-light py-2 px-2">
 		  				<h3 class="fs-title">Income</h3>
 		  				<h4 class="fs-subtitle">Describe your income</h4>
 
 		  				<div class="row">
-		  					<div class="col-12">
-
+		  					<div class="col-12 py-2">
+		  						<select name="incomeFrequency" class="form-control">
+		  							<option disabled selected value> -- select an option -- </option>
+		  							<option value="steady">I get paid on regular intervals</option>
+		  							<option value="sporadic">I get paid irregularly</option>
+		  							<option value="none">I don't have an income</option>
+		  						</select>
 		  					</div>
 		  				</div>
+
+		  				<div class="row">
+		  					<div id="steady" class="wizzard-segment">
+		  						<div class="col-12 py-2">
+		  							<label>I get paid every</label>
+		  							<div class="row">
+		  								<div class="col-3 col-sm-2">
+				  							<input type="number" name="steadyFrequency" class="form-control" id="steadyFrequency" value="1">
+				  						</div>
+				  						<div class="col-5 col-sm-3 col-md-2">
+				  							<select name="steadyFrequencyPeriod" class="form-control">
+				  								<option value="month">months</option>
+				  								<option value="week">weeks</option>
+				  								<option value="day">days</option>
+				  							</select>
+				  						</div>
+				  						<div class="col-1" style="background: blue;">
+				  							<label>on</label>
+				  						</div>
+				  						<div class="col-3">
+				  							<select name="steadyFrequencyNum" class="form-control">
+				  								<option value="first">First</option>
+				  								<option value="2nd">2nd</option>
+
+				  							</select>
+				  						</div>
+		  							</div>
+		  						</div>
+		  					</div>
+		  				</div>
+
+		  				<input type="button" name="previous" class="previous action-button" value="Previous"/>
+		  				<input type="button" name="next" class="next action-button" value="Next"/>
 		  			</fieldset>
 
 		  		</form>
@@ -115,7 +154,7 @@
 		current_fs.animate({opacity: 0}, {
 			step: function(now, mx) {
 				scale = 1 - (1 - now) * 0.2;
-				left = (now * 50) + "%";
+				//left = (now * 50) + "%";
 				opacity = 1 - now;
 				current_fs.css({
 					'transform': 'scale('+scale+')',
@@ -123,12 +162,47 @@
 				});
 				next_fs.css({'opacity': opacity});
 			},
-			duration: 8000,
+			duration: 800,
 			complete: function(){
 				current_fs.hide();
 				animating = false;
 			},
 			easing: 'easeInOutBack'
 		})
+	});
+
+	$(".previous").click(function(){
+		if(animating) return false;
+		animating = true;
+
+		current_fs = $(this).parent();
+		previous_fs = $(this).parent().prev();
+
+		$("#wizzard-progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+		previous_fs.show();
+		current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+				scale = 0.8 + (1 - now) * 0.2;
+				//left = ((1 - now) * 50)+"%";
+				opacity = 1 - now;
+				current_fs.css({'left': left});
+				previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			},
+			duration: 800,
+			complete: function() {
+				current_fs.hide();
+				animating = false;
+			},
+			easing: 'easeInOutBack'
+		})
+	});
+
+	$("#steadyFrequency").change(function(){
+		$("#steadyFrequency").val(parseInt($("#steadyFrequency").val()));
+
+		if($("#steadyFrequency").val() < 1) {
+			$("#steadyFrequency").val(1);
+		}
 	});
 </script>
