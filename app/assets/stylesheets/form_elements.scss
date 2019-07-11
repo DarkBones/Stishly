@@ -86,3 +86,14 @@
 .btn-rounded {
   border-radius: 500px;
 }
+
+#simple_schedule_form select,
+#simple_schedule_form input,
+#simple_schedule_form p
+{
+  width: auto;
+  display: inline-block;
+  &#steadyFrequency {
+    width: 70px!important;
+  }
+}

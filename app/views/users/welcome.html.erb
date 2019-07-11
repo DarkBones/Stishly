@@ -55,7 +55,7 @@
               <div id="simple_schedule_form">
                 <div class="root">
 
-                  <select name="regularity">
+                  <select name="regularity" class="form-control">
                     <option disabled selected value> -- </option>
                     <option value="regular" children=".path-regular">I get paid on regular intervals</option>
                     <option value="sporadic" children=".path-sporadic">I get paid sporadically</option>
@@ -65,8 +65,8 @@
                   <div class="children">
                     <div class="child path-regular">
                       <p>every</p>
-                      <input type="number" id="steadyFrequency" value="1" name="periodNum">
-                      <select name="period">
+                      <input type="number" class="form-control" id="steadyFrequency" value="1" name="periodNum">
+                      <select name="period" class="form-control">
                         <option disabled selected value>months / weeks /days</option>
                         <option value="months" children=".path-regular-months">months</option>
                         <option value="weeks" children=".path-regular-weeks">weeks</option>
@@ -76,7 +76,7 @@
                       <div class="children">
                         <div class="child path-regular-months">
                           <p>on the</p>
-                          <select name="month_day" id="month_day">
+                          <select name="month_day" class="form-control" id="month_day">
                             <option disabled selected value> -- </option>
                             <option value="1">first</option>
                             <option value="last">last</option>
@@ -108,7 +108,7 @@
                             <option value="27">27th</option>
                             <option value="28">28th</option>
                           </select>
-                          <select name="month_day2" id="month_day2">
+                          <select name="month_day2" class="form-control" id="month_day2">
                             <option disabled selected value> -- </option>
                             <option value="day" children=".child .path-regular-months-except-wday">day</option>
                             <option value="sun">Sunday</option>
@@ -122,27 +122,27 @@
 
                           <div class="children">
                             <div class="child path-regular-months-except-wday">
-                              <select name="month_exclude_wday">
+                              <select name="month_exclude_wday" class="form-control">
                                 <option disabled selected value> -- </option>
                                 <option value="none">without exceptions</option>
                                 <option value="weekends" children=".path-regular-months-except-met">except on weekends</option>
-                                <option value="except-sun" children=".path-regular-months-except-met">except on Sunday</option>
-                                <option value="except-mon" children=".path-regular-months-except-met">except on Monday</option>
-                                <option value="except-tue" children=".path-regular-months-except-met">except on Tuesday</option>
-                                <option value="except-wed" children=".path-regular-months-except-met">except on Wednesday</option>
-                                <option value="except-thu" children=".path-regular-months-except-met">except on Thursday</option>
-                                <option value="except-fri" children=".path-regular-months-except-met">except on Friday</option>
-                                <option value="except-sat" children=".path-regular-months-except-met">except on Saturday</option>
+                                <option value="except-sun" children=".path-regular-months-except-met">except on Sundays</option>
+                                <option value="except-mon" children=".path-regular-months-except-met">except on Mondays</option>
+                                <option value="except-tue" children=".path-regular-months-except-met">except on Tuesdays</option>
+                                <option value="except-wed" children=".path-regular-months-except-met">except on Wednesdays</option>
+                                <option value="except-thu" children=".path-regular-months-except-met">except on Thursdays</option>
+                                <option value="except-fri" children=".path-regular-months-except-met">except on Fridays</option>
+                                <option value="except-sat" children=".path-regular-months-except-met">except on Saturdays</option>
                               </select>
 
                               <div class="children">
                                 <div class="child path-regular-months-except-met">
                                   <p>, then I get paid on the</p>
-                                  <select name="month_exclude_met">
+                                  <select name="month_exclude_met" class="form-control">
                                     <option value="previous">previous</option>
                                     <option value="next">next</option>
                                   </select>
-                                  <select name="month_exclude_met_day">
+                                  <select name="month_exclude_met_day" class="form-control">
                                     <option value="sun">Sunday</option>
                                     <option value="mon">Monday</option>
                                     <option value="tue">Tuesday</option>
@@ -160,7 +160,7 @@
                         </div>
                         <div class="child path-regular-weeks">
                           <p>on</p>
-                          <select name="week_day">
+                          <select name="week_day" class="form-control">
                             <option disabled selected value> -- </option>
                             <option value="sun">Sunday</option>
                             <option value="mon">Monday</option>
@@ -173,7 +173,7 @@
                         </div>
                         <div class="child path-regular-days">
                           <p>starting on</p>
-                          <input name="day_date" class="datepicker">
+                          <input name="day_date" class="form-control datepicker">
                         </div>
                       </div>
 
