@@ -1,315 +1,333 @@
 <div class="container">
 
-    <div class="row">
-      <div class="col-12">
+  <div class="row">
+    <div class="col-12">
 
-        <div class="row">
-          <div class="col-12">
-            <h1 class="text-light text-center">Welcome</h1>
-          </div>
+      <div class="row">
+        <div class="col-12">
+          <h1 class="text-light text-center">Welcome</h1>
         </div>
+      </div>
 
-        <div class="row my-5 py-3 px-3">
-          <div class="col-12">
-            <form id="userwizzard">
+      <div class="row my-5 py-3 px-3">
+        <div class="col-12">
+          <form id="userwizzard">
 
-              <%# progressbar %>
-              <ul id="wizzard-progressbar">
-                <li class="active">Accounts</li>
-                <li>Income</li>
-                <li>Categories</li>
-                <li>Expenses</li>
-              </ul>
+            <%# progressbar %>
+            <ul id="wizzard-progressbar">
+              <li class="active">Accounts</li>
+              <li>Income</li>
+              <li>Categories</li>
+              <li>Expenses</li>
+            </ul>
 
-              <%# fieldsets %>
-              <fieldset class="rounded dropshadow bg-light py-2 px-2">
-                <h3 class="fs-title">Accounts</h3>
-                <h4 class="fs-subtitle">Set up your accounts</h4>
+            <%# fieldsets %>
+            <fieldset class="rounded dropshadow bg-light py-2 px-2">
+              <h3 class="fs-title">Accounts</h3>
+              <h4 class="fs-subtitle">Set up your accounts</h4>
 
-                <div class="row">
-                  <div class="col-5 col-sm-6">
-                    <label>Name</label>
-                  </div>
-                  <div class="col-3 px-0">
-                    <label>Balance</label>
-                  </div>
-                  <div class="col-4 col-sm-3">
-                    <label>Currency</label>
-                  </div>
+              <div class="row">
+                <div class="col-5 col-sm-6">
+                  <label>Name</label>
                 </div>
-
-                <div id="account_rows">
-                  <%= render partial: "account_row" %>
+                <div class="col-3 px-0">
+                  <label>Balance</label>
                 </div>
+                <div class="col-4 col-sm-3">
+                  <label>Currency</label>
+                </div>
+              </div>
 
-                <button class="btn btn-secondary float-right my-3" data-toggle="tooltip" data-placement="top" title="Add additional account" onclick="insertAccountRow(); return false;">+</button>
-                <button id="remove_account_row" class="btn btn-secondary float-right my-3 mx-2 disabled"  data-toggle="tooltip" data-placement="top" title="Remove account" onclick="removeAccountRow(); return false;">-</button>
+              <div id="account_rows">
+                <%= render partial: "account_row" %>
+              </div>
 
-                <input type="button" name="next" class="next action-button" value="Next"/>
+              <button class="btn btn-secondary float-right my-3" data-toggle="tooltip" data-placement="top" title="Add additional account" onclick="insertAccountRow(); return false;">+</button>
+              <button id="remove_account_row" class="btn btn-secondary float-right my-3 mx-2 disabled"  data-toggle="tooltip" data-placement="top" title="Remove account" onclick="removeAccountRow(); return false;">-</button>
 
-              </fieldset>
-              <fieldset class="rounded dropshadow bg-light py-2 px-2">
-                <h3 class="fs-title">Income</h3>
-                <h4 class="fs-subtitle">Describe your income</h4>
+              <input type="button" name="next" class="next action-button" value="Next"/>
 
-                <div id="simple_schedule_form">
-                  <div class="root">
+            </fieldset>
+            <fieldset class="rounded dropshadow bg-light py-2 px-2">
+              <h3 class="fs-title">Income</h3>
+              <h4 class="fs-subtitle">Describe your income</h4>
 
-                    <select name="regularity">
-                      <option disabled selected value> -- </option>
-                      <option value="regular" children=".path-regular">I get paid on regular intervals</option>
-                      <option value="sporadic" children=".path-sporadic">I get paid sporadically</option>
-                      <option value="none" children=".path-none">I don't have an income</option>
-                    </select>
+              <div id="simple_schedule_form">
+                <div class="root">
 
-                    <div class="children">
-                      <div class="child path-regular">
-                        <p>every</p>
-                        <input type="number" id="steadyFrequency" value="1" name="periodNum">
-                        <select name="period">
-                          <option disabled selected value> -- </option>
-                          <option value="months" children=".path-regular-months">months</option>
-                          <option value="weeks" children=".path-regular-weeks">weeks</option>
-                          <option value="days" children=".path-regular-days">days</option>
-                        </select>
+                  <select name="regularity">
+                    <option disabled selected value> -- </option>
+                    <option value="regular" children=".path-regular">I get paid on regular intervals</option>
+                    <option value="sporadic" children=".path-sporadic">I get paid sporadically</option>
+                    <option value="none" children=".path-none">I don't have an income</option>
+                  </select>
 
-                        <div class="children">
-                          <div class="child path-regular-months">
-                            <p>on the</p>
-                            <select name="month_day">
-                              <option disabled selected value> -- </option>
-                              <option value="1">first</option>
-                              <option value="last">last</option>
-                              <option value="2">2nd</option>
-                              <option value="3">3rd</option>
-                              <option value="4">4th</option>
-                              <option value="5">5th</option>
-                              <option value="6">6th</option>
-                              <option value="7">7th</option>
-                              <option value="8">8th</option>
-                              <option value="9">9th</option>
-                              <option value="10">10th</option>
-                              <option value="11">11th</option>
-                              <option value="12">12th</option>
-                              <option value="13">13th</option>
-                              <option value="14">14th</option>
-                              <option value="15">15th</option>
-                              <option value="16">16th</option>
-                              <option value="17">17th</option>
-                              <option value="18">18th</option>
-                              <option value="19">19th</option>
-                              <option value="20">20th</option>
-                              <option value="21">21st</option>
-                              <option value="22">22nd</option>
-                              <option value="23">23rd</option>
-                              <option value="24">24th</option>
-                              <option value="25">25th</option>
-                              <option value="26">26th</option>
-                              <option value="27">27th</option>
-                              <option value="28">28th</option>
-                            </select>
-                            <select name="month_day2">
-                              <option disabled selected value> -- </option>
-                              <option value="day" children=".child .path-regular-months-except-wday">day</option>
-                              <option value="sun">Sunday</option>
-                              <option value="mon">Monday</option>
-                              <option value="tue">Tuesday</option>
-                              <option value="wed">Wednesday</option>
-                              <option value="thu">Thursday</option>
-                              <option value="fri">Friday</option>
-                              <option value="sat">Saturday</option>
-                            </select>
+                  <div class="children">
+                    <div class="child path-regular">
+                      <p>every</p>
+                      <input type="number" id="steadyFrequency" value="1" name="periodNum">
+                      <select name="period">
+                        <option disabled selected value>months / weeks /days</option>
+                        <option value="months" children=".path-regular-months">months</option>
+                        <option value="weeks" children=".path-regular-weeks">weeks</option>
+                        <option value="days" children=".path-regular-days">days</option>
+                      </select>
 
-                            <div class="children">
-                              <div class="child path-regular-months-except-wday">
-                                <select name="month_exclude_wday">
-                                  <option disabled selected value> -- </option>
-                                  <option value="none">without exceptions</option>
-                                  <option value="weekends" children=".path-regular-months-except-met">except on weekends</option>
-                                  <option value="except-sun" children=".path-regular-months-except-met">except on Sunday</option>
-                                  <option value="except-mon" children=".path-regular-months-except-met">except on Monday</option>
-                                  <option value="except-tue" children=".path-regular-months-except-met">except on Tuesday</option>
-                                  <option value="except-wed" children=".path-regular-months-except-met">except on Wednesday</option>
-                                  <option value="except-thu" children=".path-regular-months-except-met">except on Thursday</option>
-                                  <option value="except-fri" children=".path-regular-months-except-met">except on Friday</option>
-                                  <option value="except-sat" children=".path-regular-months-except-met">except on Saturday</option>
-                                </select>
+                      <div class="children">
+                        <div class="child path-regular-months">
+                          <p>on the</p>
+                          <select name="month_day" id="month_day">
+                            <option disabled selected value> -- </option>
+                            <option value="1">first</option>
+                            <option value="last">last</option>
+                            <option value="2">2nd</option>
+                            <option value="3">3rd</option>
+                            <option value="4">4th</option>
+                            <option value="5">5th</option>
+                            <option value="6">6th</option>
+                            <option value="7">7th</option>
+                            <option value="8">8th</option>
+                            <option value="9">9th</option>
+                            <option value="10">10th</option>
+                            <option value="11">11th</option>
+                            <option value="12">12th</option>
+                            <option value="13">13th</option>
+                            <option value="14">14th</option>
+                            <option value="15">15th</option>
+                            <option value="16">16th</option>
+                            <option value="17">17th</option>
+                            <option value="18">18th</option>
+                            <option value="19">19th</option>
+                            <option value="20">20th</option>
+                            <option value="21">21st</option>
+                            <option value="22">22nd</option>
+                            <option value="23">23rd</option>
+                            <option value="24">24th</option>
+                            <option value="25">25th</option>
+                            <option value="26">26th</option>
+                            <option value="27">27th</option>
+                            <option value="28">28th</option>
+                          </select>
+                          <select name="month_day2" id="month_day2">
+                            <option disabled selected value> -- </option>
+                            <option value="day" children=".child .path-regular-months-except-wday">day</option>
+                            <option value="sun">Sunday</option>
+                            <option value="mon">Monday</option>
+                            <option value="tue">Tuesday</option>
+                            <option value="wed">Wednesday</option>
+                            <option value="thu">Thursday</option>
+                            <option value="fri">Friday</option>
+                            <option value="sat">Saturday</option>
+                          </select>
 
-                                <div class="children">
-                                  <div class="child path-regular-months-except-met">
-                                    <p>, then I get paid on the</p>
-                                    <select name="month_exclude_met">
-                                      <option value="previous">previous</option>
-                                      <option value="next">next</option>
-                                    </select>
-                                    <select name="month_exclude_met_day">
-                                      <option value="sun">Sunday</option>
-                                      <option value="mon">Monday</option>
-                                      <option value="tue">Tuesday</option>
-                                      <option value="wed">Wednesday</option>
-                                      <option value="thu">Thursday</option>
-                                      <option value="fri">Friday</option>
-                                      <option value="sat">Saturday</option>
-                                    </select>
-                                  </div>
+                          <div class="children">
+                            <div class="child path-regular-months-except-wday">
+                              <select name="month_exclude_wday">
+                                <option disabled selected value> -- </option>
+                                <option value="none">without exceptions</option>
+                                <option value="weekends" children=".path-regular-months-except-met">except on weekends</option>
+                                <option value="except-sun" children=".path-regular-months-except-met">except on Sunday</option>
+                                <option value="except-mon" children=".path-regular-months-except-met">except on Monday</option>
+                                <option value="except-tue" children=".path-regular-months-except-met">except on Tuesday</option>
+                                <option value="except-wed" children=".path-regular-months-except-met">except on Wednesday</option>
+                                <option value="except-thu" children=".path-regular-months-except-met">except on Thursday</option>
+                                <option value="except-fri" children=".path-regular-months-except-met">except on Friday</option>
+                                <option value="except-sat" children=".path-regular-months-except-met">except on Saturday</option>
+                              </select>
+
+                              <div class="children">
+                                <div class="child path-regular-months-except-met">
+                                  <p>, then I get paid on the</p>
+                                  <select name="month_exclude_met">
+                                    <option value="previous">previous</option>
+                                    <option value="next">next</option>
+                                  </select>
+                                  <select name="month_exclude_met_day">
+                                    <option value="sun">Sunday</option>
+                                    <option value="mon">Monday</option>
+                                    <option value="tue">Tuesday</option>
+                                    <option value="wed">Wednesday</option>
+                                    <option value="thu">Thursday</option>
+                                    <option value="fri">Friday</option>
+                                    <option value="sat">Saturday</option>
+                                  </select>
                                 </div>
-
                               </div>
+
                             </div>
+                          </div>
 
-                          </div>
-                          <div class="child path-regular-weeks">
-                            <p>on</p>
-                            <select name="week_day">
-                              <option disabled selected value> -- </option>
-                              <option value="sun">Sunday</option>
-                              <option value="mon">Monday</option>
-                              <option value="tue">Tuesday</option>
-                              <option value="wed">Wednesday</option>
-                              <option value="thu">Thursday</option>
-                              <option value="fri">Friday</option>
-                              <option value="sat">Saturday</option>
-                            </select>
-                          </div>
-                          <div class="child path-regular-days">
-                            <p>starting on</p>
-                            <input name="day_date" class="datepicker">
-                          </div>
                         </div>
-
-                      </div>
-
-                      <div class="child path-sporadic">
-                        
-                      </div>
-
-                      <div class="child path-none">
-                        
+                        <div class="child path-regular-weeks">
+                          <p>on</p>
+                          <select name="week_day">
+                            <option disabled selected value> -- </option>
+                            <option value="sun">Sunday</option>
+                            <option value="mon">Monday</option>
+                            <option value="tue">Tuesday</option>
+                            <option value="wed">Wednesday</option>
+                            <option value="thu">Thursday</option>
+                            <option value="fri">Friday</option>
+                            <option value="sat">Saturday</option>
+                          </select>
+                        </div>
+                        <div class="child path-regular-days">
+                          <p>starting on</p>
+                          <input name="day_date" class="datepicker">
+                        </div>
                       </div>
 
                     </div>
 
+                    <div class="child path-sporadic">
+                      
+                    </div>
+
+                    <div class="child path-none">
+                      
+                    </div>
+
                   </div>
+
                 </div>
+              </div>
 
-                <input type="button" name="previous" class="previous action-button" value="Previous"/>
-                <input type="button" name="next" class="next action-button" value="Next"/>
-              </fieldset>
+              <input type="button" name="previous" class="previous action-button" value="Previous"/>
+              <input type="button" name="next" class="next action-button" value="Next"/>
+            </fieldset>
 
-            </form>
-          </div>
+          </form>
         </div>
-
       </div>
-    </div>
 
+    </div>
   </div>
 
-  <script>
-    var current_fs, next_fs, previous_fs;
-    var left, opacity, scale;
-    var animating;
-    $("#simple_schedule_form").change(function(e){
-      console.log(JSON.stringify($(e.target)));
-      showHideFields($(e.target));
-    });
-    function showHideFields($target) {
-      var children;
-      var selectedValue;
-      if ($target.is("select")) {
-        selectedValue = $target.val();
-        $target.children("option").each(function(){
-          if ($(this).attr("value") === selectedValue) {
-            children = $(this).attr("children");
-          }
-        });
-        $target.next(".children").children(children).show();
-        $target.next(".children").children().not(children).hide()
-      }
+</div>
+
+<script>
+  "use strict";
+
+  var current_fs, next_fs, previous_fs;
+  var left, opacity, scale;
+  var animating;
+  $("#simple_schedule_form").change(function(e){
+    showHideFields($(e.target));
+  });
+
+  $("#month_day").change(function(){
+    let n = parseInt($(this).val());
+    if (Number.isNaN(n)) {
+      n = 1
     }
-    $("#simple_schedule_form .root").find(".child").each(function(){
-      $(this).hide();
-    });
-    function insertAccountRow() {
-      $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: "/api/get_user_subscription_details",
-        success(data) {
-          if ($(".account_row").length < data.max_accounts || data.max_accounts < 0){
-            $("#account_rows").append("<%= j render :partial => 'account_row' %>");
-            $("#remove_account_row").removeClass("disabled");
-          } else {
-            triggerNotice("Upgrade to permium for more accounts", true);
-          }
+
+    if (n > 4) {
+      $("#month_day2").val("day");
+      $("#month_day2 option").slice(2).attr('disabled','disabled');
+      showHideFields($("#month_day2"));
+    } else {
+      $("#month_day2 option").slice(2).removeAttr('disabled');
+      showHideFields($("#month_day2"));
+    }
+  });
+
+  function showHideFields($target) {
+    var children;
+    var selectedValue;
+    if ($target.is("select")) {
+      selectedValue = $target.val();
+      $target.children("option").each(function(){
+        if ($(this).attr("value") === selectedValue) {
+          children = $(this).attr("children");
         }
       });
+      $target.next(".children").children(children).show();
+      $target.next(".children").children().not(children).hide()
     }
-    function removeAccountRow() {
-      if ($(".account_row").length > 1) {
-        $(".account_row").last().remove();
+  }
+  $("#simple_schedule_form .root").find(".child").each(function(){
+    $(this).hide();
+  });
+  function insertAccountRow() {
+    $.ajax({
+      type: "GET",
+      dataType: "json",
+      url: "/api/get_user_subscription_details",
+      success(data) {
+        if ($(".account_row").length < data.max_accounts || data.max_accounts < 0){
+          $("#account_rows").append("<%= j render :partial => 'account_row' %>");
+          $("#remove_account_row").removeClass("disabled");
+        } else {
+          triggerNotice("Upgrade to permium for more accounts", true);
+        }
       }
-      
-      if ($(".account_row").length === 1) {
-        $("#remove_account_row").addClass("disabled");
-      }
+    });
+  }
+  function removeAccountRow() {
+    if ($(".account_row").length > 1) {
+      $(".account_row").last().remove();
     }
-    $(".next").click(function(){
-      if (animating) return false;
-      animating = true;
-      current_fs = $(this).parent();
-      next_fs = $(this).parent().next();
-      // progress the progressbar
-      $("#wizzard-progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-      // show the next fieldset
-      next_fs.show();
-      // hide the current fieldset
-      current_fs.animate({opacity: 0}, {
-        step: function(now, mx) {
-          scale = 1 - (1 - now) * 0.2;
-          //left = (now * 50) + "%";
-          opacity = 1 - now;
-          current_fs.css({
-            'transform': 'scale('+scale+')',
-            'position': 'absolute'
-          });
-          next_fs.css({'opacity': opacity});
-        },
-        duration: 800,
-        complete: function(){
-          current_fs.hide();
-          animating = false;
-        },
-        easing: 'easeInOutBack'
-      })
-    });
-    $(".previous").click(function(){
-      if(animating) return false;
-      animating = true;
-      current_fs = $(this).parent();
-      previous_fs = $(this).parent().prev();
-      $("#wizzard-progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-      previous_fs.show();
-      current_fs.animate({opacity: 0}, {
-        step: function(now, mx) {
-          scale = 0.8 + (1 - now) * 0.2;
-          //left = ((1 - now) * 50)+"%";
-          opacity = 1 - now;
-          current_fs.css({'left': left});
-          previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
-        },
-        duration: 800,
-        complete: function() {
-          current_fs.hide();
-          animating = false;
-        },
-        easing: 'easeInOutBack'
-      })
-    });
-    $("#steadyFrequency").change(function(){
-      $("#steadyFrequency").val(parseInt($("#steadyFrequency").val()));
-      if($("#steadyFrequency").val() < 1) {
-        $("#steadyFrequency").val(1);
-      }
-    });
-  </script>
+    
+    if ($(".account_row").length === 1) {
+      $("#remove_account_row").addClass("disabled");
+    }
+  }
+  $(".next").click(function(){
+    if (animating) return false;
+    animating = true;
+    current_fs = $(this).parent();
+    next_fs = $(this).parent().next();
+    // progress the progressbar
+    $("#wizzard-progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+    // show the next fieldset
+    next_fs.show();
+    // hide the current fieldset
+    current_fs.animate({opacity: 0}, {
+      step: function(now, mx) {
+        scale = 1 - (1 - now) * 0.2;
+        //left = (now * 50) + "%";
+        opacity = 1 - now;
+        current_fs.css({
+          'transform': 'scale('+scale+')',
+          'position': 'absolute'
+        });
+        next_fs.css({'opacity': opacity});
+      },
+      duration: 800,
+      complete: function(){
+        current_fs.hide();
+        animating = false;
+      },
+      easing: 'easeInOutBack'
+    })
+  });
+  $(".previous").click(function(){
+    if(animating) return false;
+    animating = true;
+    current_fs = $(this).parent();
+    previous_fs = $(this).parent().prev();
+    $("#wizzard-progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+    previous_fs.show();
+    current_fs.animate({opacity: 0}, {
+      step: function(now, mx) {
+        scale = 0.8 + (1 - now) * 0.2;
+        //left = ((1 - now) * 50)+"%";
+        opacity = 1 - now;
+        current_fs.css({'left': left});
+        previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+      },
+      duration: 800,
+      complete: function() {
+        current_fs.hide();
+        animating = false;
+      },
+      easing: 'easeInOutBack'
+    })
+  });
+  $("#steadyFrequency").change(function(){
+    $("#steadyFrequency").val(parseInt($("#steadyFrequency").val()));
+    if($("#steadyFrequency").val() < 1) {
+      $("#steadyFrequency").val(1);
+    }
+  });
+</script>
