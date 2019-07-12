@@ -114,6 +114,20 @@
     <input name="day_date" class="form-control datepicker">
   </div>
 
+  <div class="path-amount">
+    <select name="fixed_amount" class="form-control">
+      <option disabled selected value> -- </option>
+      <option children=".path-fixed-amount">Fixed amount</option>
+      <option>the amount varies</option>
+    </select>
+
+    <div class="children">
+      <div class="child path-fixed-amount">
+        <input type="number" class="form-control">
+      </div>
+    </div>
+  </div>
+
 <% unless paid %>
   </div>
 <% end %>
