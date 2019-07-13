@@ -5,14 +5,13 @@
 <p>every</p>
 <input type="number" class="form-control" id="steadyFrequency" value="1" name="periodNum">
 <select name="period" class="form-control">
-  <option disabled selected value>months / weeks /days</option>
   <option value="months" children=".path-months">months</option>
   <option value="weeks" children=".path-weeks">weeks</option>
   <option value="days" children=".path-days">days</option>
 </select>
 
 <div class="children">
-  <div class="child path-months">
+  <div class="path-months">
     <p>on the</p>
     <select name="month_day" class="form-control" id="month_day">
       <option disabled selected value> -- </option>
@@ -116,14 +115,14 @@
 
   <div class="path-amount">
     <select name="fixed_amount" class="form-control">
-      <option disabled selected value> -- </option>
-      <option children=".path-fixed-amount">Fixed amount</option>
-      <option>the amount varies</option>
+      <option value="fixed" children=".path-fixed-amount">Fixed amount</option>
+      <option value="varied">the amount varies</option>
     </select>
 
     <div class="children">
-      <div class="child path-fixed-amount">
-        <input type="number" class="form-control">
+      <div class="path-fixed-amount">
+        <%= select_tag "account_currency", options_for_select(all_currencies(Money::Currency.table), :selected => current_user.currency), {:class => "form-control"} %>
+        <input type="number" class="form-control" placeholder="amount">
       </div>
     </div>
   </div>
