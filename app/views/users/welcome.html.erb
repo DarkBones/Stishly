@@ -11,7 +11,8 @@
 
       <div class="row my-5 py-3 px-3">
         <div class="col-12">
-          <form id="userwizzard" action="/users/submit_setup.html" method="post">
+          
+          <%= form_tag("/users/submit_setup", id: "userwizzard")  do |f| %>
 
             <!-- progressbar -->
             <ul id="wizzard-progressbar">
@@ -93,7 +94,7 @@
             	<input type="submit" class="btn px-4 py-2 my-2 btn-rounded btn-primary" style="font-size: 1.5em;">
             </fieldset>
 
-          </form>
+          <% end %>
         </div>
       </div>
 
