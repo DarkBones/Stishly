@@ -65,6 +65,8 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'transactions/:id', to: 'transactions#show'
 
+  post 'users/submit_setup', to: 'users#submit_setup'
+
   # TODO: FOR TESTING ONLY
   get 'run_schedules_test', to: 'schedules#run_schedules'
 

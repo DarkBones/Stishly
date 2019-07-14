@@ -18,7 +18,7 @@
 		list-style-type: none;
 		color: white;
 		text-transform: uppercase;
-		width: 25%;
+		width: 33.33%;
 		float: left;
 		position: relative;
 		letter-spacing: 1px;
@@ -65,7 +65,7 @@
 	margin: 0 auto;
 	padding-bottom: 1000px;
 	&:not(:first-of-type) {
-		/*display: none;*/
+		display: none;
 	}
 }
 

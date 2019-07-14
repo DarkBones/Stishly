@@ -11,13 +11,12 @@
 
       <div class="row my-5 py-3 px-3">
         <div class="col-12">
-          <form id="userwizzard">
+          <form id="userwizzard" action="/users/submit_setup.html" method="post">
 
             <!-- progressbar -->
             <ul id="wizzard-progressbar">
               <li class="active">Accounts</li>
               <li>Income</li>
-              <li>Categories</li>
               <li>Expenses</li>
             </ul>
 
@@ -46,8 +45,8 @@
               <button class="btn btn-secondary btn-fieldset" data-toggle="tooltip" data-placement="top" title="Add additional account" onclick="insertAccountRow(); return false;">+</button>
               <button id="remove_account_row" class="btn btn-secondary disabled btn-fieldset"  data-toggle="tooltip" data-placement="top" title="Remove account" onclick="removeAccountRow(); return false;" style="right: 50px;">-</button>
 
-              <input type="button" name="next" class="next action-button" value="Next"/><br />
-              <div style="height: 40px; width: 100%"></div>
+              <input type="button" name="next" class="btn next action-button px-4 py-2 my-5 btn-rounded btn-secondary" value="Next"/><br />
+              
 
             </fieldset>
 
@@ -75,8 +74,8 @@
 
               </div>
 
-	            <input type="button" name="previous" class="previous action-button" value="Previous"/>
-	            <input type="button" name="next" class="next action-button" value="Next"/>
+	            <input type="button" name="previous" class="btn previous action-button px-4 py-2 my-2 btn-rounded btn-secondary" value="Previous"/>
+	            <input type="button" name="next" class="btn next action-button px-4 py-2 my-5 btn-rounded btn-secondary" value="Next"/>
             </fieldset>
 
             <!-- EXPENSES -->
@@ -90,8 +89,8 @@
 
             	<button class="btn btn-secondary btn-fieldset" data-toggle="tooltip" data-placement="top" title="Add fixed expense" onclick="insertExpenseRow(); return false;">+</button>
 
-            	<input type="button" name="previous" class="previous action-button" value="Previous"/>
-            	<div style="height: 40px; width: 100%"></div>
+            	<input type="button" name="previous" class="btn previous action-button px-4 py-2 my-2 btn-rounded btn-secondary" value="Previous"/><br />
+            	<input type="submit" class="btn px-4 py-2 my-2 btn-rounded btn-primary" style="font-size: 1.5em;">
             </fieldset>
 
           </form>
@@ -110,11 +109,29 @@
   var left, opacity, scale;
   var animating;
 
-  function insertExpenseRow() {
+  function insertExpenseRowOLD() {
   	$("#expenseRows").append("<%= j render :partial => 'expense_row' %>");
   	numberExpenseRow();
   	//setExpensePlaceholder();
   	addLadderformListeners();
+  }
+
+  function insertExpenseRow(){
+  	$.ajax({
+      type: "GET",
+      dataType: "json",
+      url: "/api/get_user_subscription_details",
+      success(data) {
+        if ($(".expenseRow").length < data.max_fixed_expenses || data.max_fixed_expenses < 0){
+          $("#expenseRows").append("<%= j render :partial => 'expense_row' %>");
+			  	numberExpenseRow();
+			  	//setExpensePlaceholder();
+			  	addLadderformListeners();
+        } else {
+          triggerNotice("Upgrade to permium for more fixed expenses", true);
+        }
+      }
+    });
   }
 
   /*function setExpensePlaceholder(){

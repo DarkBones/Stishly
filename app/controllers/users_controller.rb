@@ -32,6 +32,11 @@ class UsersController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def submit_setup
+    puts params.to_yaml
+    puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+  end
+
   private
   def secure_params
     params.require(:user).permit(:role)
