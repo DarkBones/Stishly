@@ -13,7 +13,7 @@
         <div class="col-12">
           <form id="userwizzard">
 
-            <%# progressbar %>
+            <!-- progressbar -->
             <ul id="wizzard-progressbar">
               <li class="active">Accounts</li>
               <li>Income</li>
@@ -21,7 +21,8 @@
               <li>Expenses</li>
             </ul>
 
-            <%# fieldsets %>
+            <!--fieldsets -->
+            <!-- ACCOUNTS -->
             <fieldset class="rounded dropshadow bg-light py-2 px-2" id="setup_accounts">
               <h3 class="fs-title">Accounts</h3>
               <h4 class="fs-subtitle">Set up your accounts</h4>
@@ -48,6 +49,8 @@
               <input type="button" name="next" class="next action-button" value="Next"/>
 
             </fieldset>
+
+            <!-- INCOME -->
             <fieldset class="rounded dropshadow bg-light py-2 px-2">
               <h3 class="fs-title">Income</h3>
               <h4 class="fs-subtitle">Describe your income</h4>
@@ -56,15 +59,14 @@
                 <div class="root">
 
                   <select name="regularity" class="form-control">
-                    <option disabled selected value> -- </option>
+                    <option value="none">I don't have an income</option>
                     <option value="regular" children=".path-regular">I get paid on regular intervals</option>
                     <option value="sporadic">I get paid sporadically</option>
-                    <option value="none">I don't have an income</option>
                   </select>
 
                   <div class="children py-2">
                     <div class="hidden path-regular">
-                      <%= render partial: "schedules/simplified_form", :locals => {:paid => true} %>
+                      <%= render partial: "schedules/simplified_form", :locals => {:type => "income", :id => "income"} %>
                     </div>
                   </div>
 
@@ -74,6 +76,20 @@
 
 	            <input type="button" name="previous" class="previous action-button" value="Previous"/>
 	            <input type="button" name="next" class="next action-button" value="Next"/>
+            </fieldset>
+
+            <!-- EXPENSES -->
+            <fieldset class="rounded dropshadow bg-light py-2 px-2">
+            	<h3>Expenses</h3>
+            	<h4>Add your fixed expenses</h4>
+
+            	<div id="expenseRows">
+	            	<%= render partial: "expense_row" %>
+	            </div>
+
+            	<button class="btn btn-secondary float-right my-3" data-toggle="tooltip" data-placement="top" title="Add fixed expense" onclick="insertExpenseRow(); return false;">+</button>
+
+            	<input type="button" name="previous" class="previous action-button" value="Previous"/>
             </fieldset>
 
           </form>
@@ -91,25 +107,39 @@
   var current_fs, next_fs, previous_fs;
   var left, opacity, scale;
   var animating;
-  $("#simple_schedule_form").change(function(e){
-    showHideFields($(e.target));
-  });
 
-  $("#month_day").change(function(){
-    let n = parseInt($(this).val());
-    if (Number.isNaN(n)) {
-      n = 1
-    }
+  function insertExpenseRow() {
+  	$("#expenseRows").append("<%= j render :partial => 'expense_row' %>");
+  	numberExpenseRow();
+  	//setExpensePlaceholder();
+  	addLadderformListeners();
+  }
 
-    if (n > 4) {
-      $("#month_day2").val("day");
-      $("#month_day2 option").slice(2).attr('disabled','disabled');
-      showHideFields($("#month_day2"));
-    } else {
-      $("#month_day2 option").slice(2).removeAttr('disabled');
-      showHideFields($("#month_day2"));
-    }
-  });
+  /*function setExpensePlaceholder(){
+  	var num = $(".simple_schedule_form").length - 1;
+  	var row = $(".simple_schedule_form").last().find(".form-control").first();
+  	var placeholders = ["Rent", "Electricity", "Phone", "Netflix", "Gym membership"];
+
+  	if (num < placeholders.length){
+  		row.attr("placeholder", placeholders[num]);
+  	}
+  }*/
+
+  function numberExpenseRow() {
+  	var num = $(".simple_schedule_form").length - 1;
+  	var row = $(".simple_schedule_form").last();
+
+  	row.find("[name]").each(function(){
+  		$(this).attr("name", $(this).attr("name") + "_" + num.toString());
+  	});
+  	row.find("[id]").each(function(){
+  		$(this).attr("id", $(this).attr("id") + "_" + num.toString());
+  	});
+  }
+
+  function removeExpenseRow(e) {
+  	$(e).parent().remove();
+  }
 
   function numberAccountRow(){
   	var num = $(".account_row").length - 1;
@@ -190,6 +220,8 @@
   		}
   		values.push(e);
   	});
+
+  	return true;
   }
 
   $(".next").click(function(){

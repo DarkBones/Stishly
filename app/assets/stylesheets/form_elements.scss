@@ -87,13 +87,13 @@
   border-radius: 500px;
 }
 
-#simple_schedule_form select,
-#simple_schedule_form input,
-#simple_schedule_form p
+[id^=simple_schedule_form] select,
+[id^=simple_schedule_form] input,
+[id^=simple_schedule_form] p
 {
   width: auto;
   display: inline-block;
-  &#steadyFrequency {
+  &[id^=periodNum] {
     width: 70px!important;
   }
 }

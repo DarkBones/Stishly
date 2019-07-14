@@ -1,6 +1,21 @@
-$(".ladderform").change(function(e){
+/*$(".ladderform").change(function(e){
+  alert("e");
   showHideFields($(e.target));
 });
+
+$("#simple_schedule_form").change(function(e){
+  showHideFields($(e.target));
+});*/
+
+$(document).on("turbolinks:load", () => {
+  addLadderformListeners();
+});
+
+function addLadderformListeners(){
+  $(".ladderform").change(function(e){
+    showHideFields($(e.target));
+  });
+}
 
 function showHideFields($target) {
   var children;
@@ -16,7 +31,9 @@ function showHideFields($target) {
     });
 
     if(typeof(children) !== "undefined"){
-      $target.next(".children").children(children).slideDown("fast");
+      if(children.length > 0){
+        $target.next(".children").children(children).slideDown("fast");
+      }
       $target.next(".children").children().not(children).slideUp("fast");
     }
   }

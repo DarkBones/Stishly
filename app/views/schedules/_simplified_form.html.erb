@@ -1,9 +1,49 @@
-<% unless paid %>
-  <div id="simple_schedule_form" class="ladderform">
+<% 
+  type ||= ""
+  suff = ""
+  if defined?(id)
+    suff = "_#{id}"
+  end
+%>
+
+<% if type != "income" %>
+  <div id="simple_schedule_form<%= suff %>" class="ladderform simple_schedule_form">
+    <% if type != "fixed_expense" %>
+      <div class="py-2">
+        <input type="text" class="form-control py-2" placeholder="Schedule name" name="name<%= suff %>">
+      </div>
+    <% else %>
+      <select name="category<%= suff %>" class="form-control">
+        <option disabled selected value> -- </option>
+        <option value="rent" children=".path-schedule">Rent</option>
+        <option value="mortgage" children=".path-schedule">Mortgage</option>
+        <option value="electricity" children=".path-schedule">Electricity</option>
+        <option value="water" children=".path-schedule">Water</option>
+        <option value="vehicle" children=".path-schedule">Car loan</option>
+        <option value="vehicle_insurance" children=".path-schedule">Car Insurance</option>
+        <option value="health_insurance" children=".path-schedule">Health Insurance</option>
+        <option value="house_insurance" children=".path-schedule">Property Insurance</option>
+        <option value="phone" children=".path-schedule">Phone</option>
+        <option value="internet" children=".path-schedule">Internet</option>
+        <option value="subscription" children=".path-schedule">Subscriptions</option>
+        <option value="tv" children=".path-schedule">Cable</option>
+        <option value="lending" children=".path-schedule">Debt payments</option>
+        <option value="other" children=".path-schedule, .path-other-category">Other ...</option>
+      </select>
+
+      <div class="children py-2">
+        <div class="hidden path-other-category">
+          <input type="text" name="category_name" class="form-control" placeholder="Fixed expense name">
+        </div>
+
+        <div class="hidden path-schedule py-2">
+
+    <% end %>
 <% end %>
+
 <p>every</p>
-<input type="number" class="form-control pos_n" id="steadyFrequency" value="1" name="periodNum">
-<select name="period" class="form-control">
+<input type="number" class="form-control pos_n" id="periodNum<%= suff %>" value="1" name="periodNum<%= suff %>">
+<select name="period<%= suff %>" class="form-control">
   <option value="months" children=".path-months, .path-amount">months</option>
   <option value="weeks" children=".path-weeks, .path-amount">weeks</option>
   <option value="days" children=".path-days, .path-amount">days</option>
@@ -12,8 +52,7 @@
 <div class="children">
   <div class="path-months">
     <p>on the</p>
-    <select name="month_day" class="form-control" id="month_day">
-      <option disabled selected value> -- </option>
+    <select name="month_day<%= suff %>" class="form-control" id="month_day<%= suff %>">
       <option value="1">first</option>
       <option value="last">last</option>
       <option value="2">2nd</option>
@@ -44,7 +83,7 @@
       <option value="27">27th</option>
       <option value="28">28th</option>
     </select>
-    <select name="month_day2" class="form-control" id="month_day2">
+    <select name="month_day2<%= suff %>" class="form-control" id="month_day2<%= suff %>">
       <option disabled selected value> -- </option>
       <option value="day" children=".path-months-except-wday, .path-amount">day</option>
       <option value="sun" children="">Sunday</option>
@@ -58,8 +97,7 @@
 
     <div class="children">
       <div class="hidden path-months-except-wday">
-        <select name="month_exclude_wday" class="form-control">
-          <option disabled selected value> -- </option>
+        <select name="month_exclude_wday<%= suff %>" class="form-control">
           <option value="none" children=".path-amount">without exceptions</option>
           <option value="weekends" children=".path-months-except-met, .path-amount">except on weekends</option>
           <option value="except-sun" children=".path-months-except-met, .path-amount">except on Sundays</option>
@@ -73,12 +111,12 @@
 
         <div class="children py-2">
           <div class="hidden path-months-except-met">
-            <p>, then <%= paid ? "I get paid" : "run" %> on the</p>
-            <select name="month_exclude_met" class="form-control">
+            <p>, then <%= type == "income" ? "I get paid" : "run" %> on the</p>
+            <select name="month_exclude_met<%= suff %>" class="form-control">
               <option value="previous">previous</option>
               <option value="next">next</option>
             </select>
-            <select name="month_exclude_met_day" class="form-control">
+            <select name="month_exclude_met_day<%= suff %>" class="form-control">
               <option value="sun">Sunday</option>
               <option value="mon">Monday</option>
               <option value="tue">Tuesday</option>
@@ -97,7 +135,7 @@
 
   <div class="hidden path-weeks">
     <p>on</p>
-    <select name="week_day" class="form-control">
+    <select name="week_day<%= suff %>" class="form-control">
       <option disabled selected value> -- </option>
       <option value="sun">Sunday</option>
       <option value="mon">Monday</option>
@@ -110,24 +148,55 @@
   </div>
   <div class="hidden path-days">
     <p>starting on</p>
-    <input name="day_date" class="form-control datepicker">
+    <input name="day_date<%= suff %>" class="form-control datepicker">
   </div>
 
-  <div class="path-amount py-2">
-    <select name="fixed_amount" class="form-control">
-      <option value="fixed" children=".path-fixed-amount">Fixed amount</option>
-      <option value="varied" children="">the amount varies</option>
-    </select>
+  <% if type == "income" || type == "fixed_expense" %>
+    <div class="path-amount py-2">
+      <select name="fixed_amount<%= suff %>" class="form-control">
+        <option value="fixed" children=".path-fixed-amount">Fixed amount</option>
+        <option value="varied" children=".path-varied-amount">the amount varies</option>
+      </select>
 
-    <div class="children py-2">
-      <div class="path-fixed-amount">
-        <%= select_tag "account_currency", options_for_select(all_currencies(Money::Currency.table), :selected => current_user.currency), {:class => "form-control"} %>
-        <input type="number" class="form-control" placeholder="amount">
+      <div class="children py-2">
+        <div class="path-fixed-amount">
+          <%= select_tag "currency", options_for_select(all_currencies(Money::Currency.table), :selected => current_user.currency), {:class => "form-control"} %>
+          <input type="number" class="form-control" placeholder="amount" name="amount<%= suff %>">
+        </div>
+        <% if type == "fixed_expense" %>
+          <div class="hidden path-varied-amount">
+            <%= select_tag "currency", options_for_select(all_currencies(Money::Currency.table), :selected => current_user.currency), {:class => "form-control"} %>
+            <input type="number" class="form-control" placeholder="Average amount" name="average_amount<%= suff %>">
+          </div>
+        <% end %>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>
 
-<% unless paid %>
+<% if type != "income" %>
   </div>
 <% end %>
+
+<% if type == "fixed_expense" %>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  $("[id^=month_day]").change(function(){
+    let n = parseInt($(this).val());
+    if (Number.isNaN(n)) {
+      n = 1
+    }
+
+    if (n > 4) {
+      $(this).next().val("day");
+      $(this).next().find("option").slice(2).attr("disabled", "disabled");
+      showHideFields($(this).next());
+    } else {
+      $(this).next().find("option").slice(2).removeAttr('disabled');
+      showHideFields($(this).next());
+    }
+  });
+</script>
