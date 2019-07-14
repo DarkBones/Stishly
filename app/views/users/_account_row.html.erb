@@ -1,13 +1,15 @@
+<%# n = 0 %>
+
 <div class="account_row">
 	<div class="row py-2">
 		<div class="col-5 col-sm-6">
-			<input type="text" name="account_name" placeholder="Account name" class="form-control">
+			<input type="text" name="account_name_" placeholder="Account name" class="form-control account_name">
 		</div>
 		<div class="col-3 px-0">
-			<input type="number" name="account_balance" placeholder="123.45" class="form-control">
+			<input type="number" name="account_balance_" placeholder="123.45" class="form-control">
 		</div>
 		<div class="col-4 col-sm-3">
-			<%= select_tag "account_currency", options_for_select(all_currencies(Money::Currency.table), :selected => current_user.currency), {:class => "form-control"} %>
+			<%= select_tag "account_currency_", options_for_select(all_currencies(Money::Currency.table), :selected => current_user.currency), {:class => "form-control"} %>
 		</div>
 	</div>
 </div>

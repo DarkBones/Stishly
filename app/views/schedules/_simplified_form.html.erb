@@ -1,13 +1,12 @@
 <% unless paid %>
-  <div id="simple_schedule_form">
+  <div id="simple_schedule_form" class="ladderform">
 <% end %>
-
 <p>every</p>
-<input type="number" class="form-control" id="steadyFrequency" value="1" name="periodNum">
+<input type="number" class="form-control pos_n" id="steadyFrequency" value="1" name="periodNum">
 <select name="period" class="form-control">
-  <option value="months" children=".path-months">months</option>
-  <option value="weeks" children=".path-weeks">weeks</option>
-  <option value="days" children=".path-days">days</option>
+  <option value="months" children=".path-months, .path-amount">months</option>
+  <option value="weeks" children=".path-weeks, .path-amount">weeks</option>
+  <option value="days" children=".path-days, .path-amount">days</option>
 </select>
 
 <div class="children">
@@ -47,33 +46,33 @@
     </select>
     <select name="month_day2" class="form-control" id="month_day2">
       <option disabled selected value> -- </option>
-      <option value="day" children=".child .path-months-except-wday">day</option>
-      <option value="sun">Sunday</option>
-      <option value="mon">Monday</option>
-      <option value="tue">Tuesday</option>
-      <option value="wed">Wednesday</option>
-      <option value="thu">Thursday</option>
-      <option value="fri">Friday</option>
-      <option value="sat">Saturday</option>
+      <option value="day" children=".path-months-except-wday, .path-amount">day</option>
+      <option value="sun" children="">Sunday</option>
+      <option value="mon" children="">Monday</option>
+      <option value="tue" children="">Tuesday</option>
+      <option value="wed" children="">Wednesday</option>
+      <option value="thu" children="">Thursday</option>
+      <option value="fri" children="">Friday</option>
+      <option value="sat" children="">Saturday</option>
     </select>
 
     <div class="children">
-      <div class="child path-months-except-wday">
+      <div class="hidden path-months-except-wday">
         <select name="month_exclude_wday" class="form-control">
           <option disabled selected value> -- </option>
-          <option value="none">without exceptions</option>
-          <option value="weekends" children=".path-months-except-met">except on weekends</option>
-          <option value="except-sun" children=".path-months-except-met">except on Sundays</option>
-          <option value="except-mon" children=".path-months-except-met">except on Mondays</option>
-          <option value="except-tue" children=".path-months-except-met">except on Tuesdays</option>
-          <option value="except-wed" children=".path-months-except-met">except on Wednesdays</option>
-          <option value="except-thu" children=".path-months-except-met">except on Thursdays</option>
-          <option value="except-fri" children=".path-months-except-met">except on Fridays</option>
-          <option value="except-sat" children=".path-months-except-met">except on Saturdays</option>
+          <option value="none" children=".path-amount">without exceptions</option>
+          <option value="weekends" children=".path-months-except-met, .path-amount">except on weekends</option>
+          <option value="except-sun" children=".path-months-except-met, .path-amount">except on Sundays</option>
+          <option value="except-mon" children=".path-months-except-met, .path-amount">except on Mondays</option>
+          <option value="except-tue" children=".path-months-except-met, .path-amount">except on Tuesdays</option>
+          <option value="except-wed" children=".path-months-except-met, .path-amount">except on Wednesdays</option>
+          <option value="except-thu" children=".path-months-except-met, .path-amount">except on Thursdays</option>
+          <option value="except-fri" children=".path-months-except-met, .path-amount">except on Fridays</option>
+          <option value="except-sat" children=".path-months-except-met, .path-amount">except on Saturdays</option>
         </select>
 
-        <div class="children">
-          <div class="child path-months-except-met">
+        <div class="children py-2">
+          <div class="hidden path-months-except-met">
             <p>, then <%= paid ? "I get paid" : "run" %> on the</p>
             <select name="month_exclude_met" class="form-control">
               <option value="previous">previous</option>
@@ -95,7 +94,8 @@
     </div>
 
   </div>
-  <div class="child path-weeks">
+
+  <div class="hidden path-weeks">
     <p>on</p>
     <select name="week_day" class="form-control">
       <option disabled selected value> -- </option>
@@ -108,24 +108,25 @@
       <option value="sat">Saturday</option>
     </select>
   </div>
-  <div class="child path-days">
+  <div class="hidden path-days">
     <p>starting on</p>
     <input name="day_date" class="form-control datepicker">
   </div>
 
-  <div class="path-amount">
+  <div class="path-amount py-2">
     <select name="fixed_amount" class="form-control">
       <option value="fixed" children=".path-fixed-amount">Fixed amount</option>
-      <option value="varied">the amount varies</option>
+      <option value="varied" children="">the amount varies</option>
     </select>
 
-    <div class="children">
+    <div class="children py-2">
       <div class="path-fixed-amount">
         <%= select_tag "account_currency", options_for_select(all_currencies(Money::Currency.table), :selected => current_user.currency), {:class => "form-control"} %>
         <input type="number" class="form-control" placeholder="amount">
       </div>
     </div>
   </div>
+</div>
 
 <% unless paid %>
   </div>

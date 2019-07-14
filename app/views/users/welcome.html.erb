@@ -22,7 +22,7 @@
             </ul>
 
             <%# fieldsets %>
-            <fieldset class="rounded dropshadow bg-light py-2 px-2">
+            <fieldset class="rounded dropshadow bg-light py-2 px-2" id="setup_accounts">
               <h3 class="fs-title">Accounts</h3>
               <h4 class="fs-subtitle">Set up your accounts</h4>
 
@@ -52,38 +52,28 @@
               <h3 class="fs-title">Income</h3>
               <h4 class="fs-subtitle">Describe your income</h4>
 
-              <div id="simple_schedule_form">
+              <div id="simple_schedule_form" class="ladderform">
                 <div class="root">
 
                   <select name="regularity" class="form-control">
                     <option disabled selected value> -- </option>
                     <option value="regular" children=".path-regular">I get paid on regular intervals</option>
-                    <option value="sporadic" children=".path-sporadic">I get paid sporadically</option>
-                    <option value="none" children=".path-none">I don't have an income</option>
+                    <option value="sporadic">I get paid sporadically</option>
+                    <option value="none">I don't have an income</option>
                   </select>
 
-                  <div class="children">
-                    <div class="child path-regular">
+                  <div class="children py-2">
+                    <div class="hidden path-regular">
                       <%= render partial: "schedules/simplified_form", :locals => {:paid => true} %>
-                      </div>
-
                     </div>
-
-                    <div class="child path-sporadic">
-                      
-                    </div>
-
-                    <div class="child path-none">
-                      
-                    </div>
-
                   </div>
 
                 </div>
+
               </div>
 
-              <input type="button" name="previous" class="previous action-button" value="Previous"/>
-              <input type="button" name="next" class="next action-button" value="Next"/>
+	            <input type="button" name="previous" class="previous action-button" value="Previous"/>
+	            <input type="button" name="next" class="next action-button" value="Next"/>
             </fieldset>
 
           </form>
@@ -121,23 +111,25 @@
     }
   });
 
-  function showHideFields($target) {
-    var children;
-    var selectedValue;
-    if ($target.is("select")) {
-      selectedValue = $target.val();
-      $target.children("option").each(function(){
-        if ($(this).attr("value") === selectedValue) {
-          children = $(this).attr("children");
-        }
-      });
-      $target.next(".children").children(children).show();
-      $target.next(".children").children().not(children).hide()
-    }
+  function numberAccountRow(){
+  	var num = $(".account_row").length - 1;
+  	var row = $(".account_row").last();
+  	
+  	row.find(".form-control").each(function(){
+  		$(this).attr("name", $(this).attr("name") + num.toString());
+  	});
   }
-  $("#simple_schedule_form .root").find(".child").each(function(){
-    $(this).hide();
-  });
+
+  function setAccountPlaceholder(){
+  	var num = $(".account_row").length - 1;
+  	var row = $(".account_row").last().find(".form-control").first();
+  	var placeholders = ["Current Account", "Savings Account", "Cash"];
+
+  	if (num < placeholders.length){
+  		row.attr("placeholder", placeholders[num]);
+  	}
+  }
+
   function insertAccountRow() {
     $.ajax({
       type: "GET",
@@ -147,12 +139,15 @@
         if ($(".account_row").length < data.max_accounts || data.max_accounts < 0){
           $("#account_rows").append("<%= j render :partial => 'account_row' %>");
           $("#remove_account_row").removeClass("disabled");
+          numberAccountRow();
+          setAccountPlaceholder();
         } else {
           triggerNotice("Upgrade to permium for more accounts", true);
         }
       }
     });
   }
+
   function removeAccountRow() {
     if ($(".account_row").length > 1) {
       $(".account_row").last().remove();
@@ -162,8 +157,52 @@
       $("#remove_account_row").addClass("disabled");
     }
   }
+
+  function validateAccounts(fs){
+  	// get the account names
+  	var names = [];
+  	fs.find(".account_name").each(function(){
+  		if($(this).val().length > 0){
+  			names.push($(this).val())
+  		}
+  	});
+
+  	// check if any accounts have been filled in
+  	if (names.length === 0) {
+  		triggerNotice("Create at least one account", true);
+  		return false;
+  	}
+
+  	// check for special characters
+  	names.forEach(function(e){
+  		if (/[-\._~:\/\?#\[\]@!\$&'\(\)\*\+,;={}"]/.test(e)) {
+  			triggerNotice("Special characters are not allowed in account names", true);
+  			return false;
+  		}
+  	});
+
+  	// check for duplicates
+  	var values = []
+  	names.forEach(function(e){
+  		if (values.includes(e)) {
+  			triggerNotice("No duplicate account names allowed", true);
+  			return false
+  		}
+  		values.push(e);
+  	});
+  }
+
   $(".next").click(function(){
     if (animating) return false;
+
+    // form validation
+    if ($(this).parent().attr("id") === "setup_accounts") {
+    	if(!validateAccounts($(this).parent())) {
+    		return
+    	}
+    }
+
+
     animating = true;
     current_fs = $(this).parent();
     next_fs = $(this).parent().next();
@@ -214,10 +253,8 @@
       easing: 'easeInOutBack'
     })
   });
-  $("#steadyFrequency").change(function(){
-    $("#steadyFrequency").val(parseInt($("#steadyFrequency").val()));
-    if($("#steadyFrequency").val() < 1) {
-      $("#steadyFrequency").val(1);
-    }
-  });
+
+  numberAccountRow();
+  setAccountPlaceholder();
+
 </script>
