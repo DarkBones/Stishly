@@ -63,6 +63,7 @@
 	left: 0;
 	right: 0;
 	margin: 0 auto;
+	padding-bottom: 1000px;
 	&:not(:first-of-type) {
 		/*display: none;*/
 	}
@@ -70,4 +71,9 @@
 
 .wizzard-segment {
 	width: 100%;
+}
+
+#userwizzard fieldset .btn-fieldset {
+	position: absolute;
+	right: 10px;
 }

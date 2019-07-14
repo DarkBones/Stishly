@@ -43,10 +43,11 @@
                 <%= render partial: "account_row" %>
               </div>
 
-              <button class="btn btn-secondary float-right my-3" data-toggle="tooltip" data-placement="top" title="Add additional account" onclick="insertAccountRow(); return false;">+</button>
-              <button id="remove_account_row" class="btn btn-secondary float-right my-3 mx-2 disabled"  data-toggle="tooltip" data-placement="top" title="Remove account" onclick="removeAccountRow(); return false;">-</button>
+              <button class="btn btn-secondary btn-fieldset" data-toggle="tooltip" data-placement="top" title="Add additional account" onclick="insertAccountRow(); return false;">+</button>
+              <button id="remove_account_row" class="btn btn-secondary disabled btn-fieldset"  data-toggle="tooltip" data-placement="top" title="Remove account" onclick="removeAccountRow(); return false;" style="right: 50px;">-</button>
 
-              <input type="button" name="next" class="next action-button" value="Next"/>
+              <input type="button" name="next" class="next action-button" value="Next"/><br />
+              <div style="height: 40px; width: 100%"></div>
 
             </fieldset>
 
@@ -87,9 +88,10 @@
 	            	<%= render partial: "expense_row" %>
 	            </div>
 
-            	<button class="btn btn-secondary float-right my-3" data-toggle="tooltip" data-placement="top" title="Add fixed expense" onclick="insertExpenseRow(); return false;">+</button>
+            	<button class="btn btn-secondary btn-fieldset" data-toggle="tooltip" data-placement="top" title="Add fixed expense" onclick="insertExpenseRow(); return false;">+</button>
 
             	<input type="button" name="previous" class="previous action-button" value="Previous"/>
+            	<div style="height: 40px; width: 100%"></div>
             </fieldset>
 
           </form>
