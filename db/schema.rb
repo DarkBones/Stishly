@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_08_172944) do
+ActiveRecord::Schema.define(version: 2019_07_14_152355) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 2019_07_08_172944) do
     t.date "next_occurrence"
     t.date "last_occurrence"
     t.datetime "next_occurrence_utc"
+    t.string "type", default: "schedule"
     t.index ["name"], name: "index_schedules_on_name"
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
@@ -162,6 +163,7 @@ ActiveRecord::Schema.define(version: 2019_07_08_172944) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "max_accounts", default: 3
+    t.integer "max_fixed_expenses", default: 10
   end
 
   create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
