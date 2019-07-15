@@ -61,6 +61,12 @@ class User < ApplicationRecord
     SetupUserData.new(current_user, params).perform
   end
 
+  def self.current_time
+    tz = TZInfo::Timezone.get(@current_user.timezone)
+
+    return tz.utc_to_local(Time.now.utc)
+  end
+
   def self.format_date(d, include_weekday=false, today_names=false)
     tz = TZInfo::Timezone.get(@current_user.timezone)
 

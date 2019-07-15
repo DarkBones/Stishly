@@ -42,7 +42,7 @@
 <% end %>
 
 <p>every</p>
-<input type="number" class="form-control pos_n" id="periodNum<%= suff %>" value="1" name="periodNum<%= suff %>">
+<input type="number" class="form-control pos_n" id="periodNum<%= suff %>" value="1" step="1" name="periodNum<%= suff %>">
 <select name="period<%= suff %>" class="form-control">
   <option value="months" children=".path-months, .path-amount">months</option>
   <option value="weeks" children=".path-weeks, .path-amount">weeks</option>
@@ -161,12 +161,12 @@
       <div class="children py-2">
         <div class="path-fixed-amount">
           <%= select_tag "currency", options_for_select(all_currencies(Money::Currency.table), :selected => current_user.currency), {:class => "form-control"} %>
-          <input type="number" class="form-control" placeholder="amount" name="amount<%= suff %>">
+          <input type="number" step="any" class="form-control" placeholder="amount" name="amount<%= suff %>">
         </div>
         <% if type == "fixed_expense" %>
           <div class="hidden path-varied-amount">
-            <%= select_tag "currency", options_for_select(all_currencies(Money::Currency.table), :selected => current_user.currency), {:class => "form-control"} %>
-            <input type="number" class="form-control" placeholder="Average amount" name="average_amount<%= suff %>">
+            <%= select_tag "currency#{suff}", options_for_select(all_currencies(Money::Currency.table), :selected => current_user.currency), {:class => "form-control"} %>
+            <input type="number" step="any" class="form-control" placeholder="Average amount" name="average_amount<%= suff %>">
           </div>
         <% end %>
       </div>

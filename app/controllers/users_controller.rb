@@ -33,6 +33,7 @@ class UsersController < ApplicationController
   end
 
   def submit_setup
+    #puts params.to_yaml
     User.setup_user(current_user, params)
   end
 
