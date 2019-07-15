@@ -13,4 +13,12 @@
 
 class Currency < ApplicationRecord
   has_many :countries
+
+  def self.float_to_int(amount, currency)
+  	currency = Money::Currency.new(currency)
+  	amount = amount.to_f
+
+  	return (amount * currency.subunit_to_unit).round().to_i
+  end
+
 end
