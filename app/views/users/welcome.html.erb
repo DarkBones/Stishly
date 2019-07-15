@@ -135,6 +135,28 @@
     });
   }
 
+  function populateAccountSelect() {
+  	var html, option, name, currency;
+
+  	$(".account_row").each(function(){
+  		name = $(this).find(".account_name").val().toString();
+  		currency = $(this).find(".account_currency").val();
+
+  		if (name.length > 0) {
+  			option = "<option value=\"" + name + "\">";
+  			option += name + " (" + currency + ")";
+  			option += "</option>";
+  		}
+
+  		html += option;
+
+  	});
+
+  	$(".account_select").each(function(){
+  		$(this).html(html);
+  	});
+  }
+
   /*function setExpensePlaceholder(){
   	var num = $(".simple_schedule_form").length - 1;
   	var row = $(".simple_schedule_form").last().find(".form-control").first();

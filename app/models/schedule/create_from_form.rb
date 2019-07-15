@@ -1,12 +1,14 @@
 class Schedule
   class CreateFromForm
     
-    def initialize(params, current_user, testing=false)
+    def initialize(params, current_user, testing=false, type="schedule")
       @params = params
       @current_user = current_user
 
       @excluding = false
       @testing = testing
+
+      @type = type
 
       @tz = TZInfo::Timezone.get(params[:timezone])
 
@@ -34,9 +36,11 @@ class Schedule
         exclusion_met: get_exclusion_met,
         exclusion_met_day: get_exclusion_met_day,
         timezone: @params[:timezone],
-        is_active: get_is_active
+        is_active: get_is_active,
+        type_of: @type
       }
 
+      puts schedule_params.to_yaml
       schedule = @current_user.schedules.new(schedule_params)
       return schedule
     end

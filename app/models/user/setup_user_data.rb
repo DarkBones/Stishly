@@ -10,7 +10,10 @@ class User
   		account_params = get_account_params(@params)
   		income_params = get_income_params(@params)
   		expense_params = get_expense_params(@params)
-  		puts expense_params.to_yaml
+  		#puts expense_params.to_yaml
+  		puts income_params.to_yaml
+  		puts "--------------------"
+  		schedule = Schedule.create_income(@current_user, income_params)
   	end
 
 private
@@ -45,16 +48,15 @@ private
 				month_day: params["month_day_#{idx}"],
 				month_day2: params["month_day2_#{idx}"],
 				month_exclude_wday: params["month_exclude_wday_#{idx}"],
-				month_exlude_met: params["month_exclude_met_#{idx}"],
-				month_exlude_met_day: params["month_exclude_met_day_#{idx}"],
+				month_exclude_met: params["month_exclude_met_#{idx}"],
+				month_exclude_met_day: params["month_exclude_met_day_#{idx}"],
+				week_day: params["week_day_#{idx}"],
 				day_date: params["day_date_#{idx}"],
-				transaction: {
-					fixed_amount: params["fixed_amount_#{idx}"],
-					currency: params["currency_#{idx}"],
-					fixed_amount: params["fixed_amount_#{idx}"],
-					amount: params["amount_#{idx}"],
-					average_amount: params["average_amount_#{idx}"]
-				}
+				fixed_amount: params["fixed_amount_#{idx}"],
+				currency: params["currency_#{idx}"],
+				fixed_amount: params["fixed_amount_#{idx}"],
+				amount: params["amount_#{idx}"],
+				average_amount: params["average_amount_#{idx}"]
 			}
 		end
 

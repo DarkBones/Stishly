@@ -36,8 +36,8 @@ class Schedule < ApplicationRecord
   belongs_to :user
   has_and_belongs_to_many :user_transactions, foreign_key: "schedule_id", class_name: "Transaction"
 
-  def self.create_from_form(params, current_user, testing=false)
-    schedule = CreateFromForm.new(params, current_user, testing).perform()
+  def self.create_from_form(params, current_user, testing=false, type="Schedule")
+    schedule = CreateFromForm.new(params, current_user, testing, type).perform()
 
     if schedule.is_a?(ActiveRecord::Base)
       tz = TZInfo::Timezone.get(schedule.timezone)
@@ -60,6 +60,10 @@ class Schedule < ApplicationRecord
 
   def self.run_schedules(datetime=nil, schedules=nil)
     return RunSchedules.new(datetime, schedules).perform
+  end
+
+  def self.create_income(current_user, params)
+    schedule = CreateFromSimpleForm.new(current_user, params, "income", "main").perform()
   end
 
 end
