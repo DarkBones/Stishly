@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   def setup_wizzard
     if user_signed_in?
       unless current_user.finished_setup
-        redirect_to user_welcome_path unless request.original_fullpath.start_with?('/users/') || request.original_fullpath.start_with?('/api/')
+        redirect_to user_welcome_path unless request.original_fullpath.start_with?('/users/') || request.original_fullpath.start_with?('/api/') || request.original_fullpath.start_with?('/registrations/')
       end
     end
   end
