@@ -63,11 +63,11 @@ class Schedule < ApplicationRecord
   end
 
   def self.create_income(current_user, params)
-    schedule = CreateFromSimpleForm.new(current_user, params, "main", "income", false).perform()
+    CreateFromSimpleForm.new(current_user, params, "main", "income", false).perform()
   end
 
   def self.create_expense(current_user, params)
-    schedule = CreateFromSimpleForm.new(current_user, params, "fixed_expense").perform()
+    CreateFromSimpleForm.new(current_user, params, "fixed_expense").perform()
   end
 
 end
