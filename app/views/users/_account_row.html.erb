@@ -3,13 +3,13 @@
 <div class="account_row">
 	<div class="row py-2">
 		<div class="col-5 col-sm-6">
-			<input type="text" name="account_name_" placeholder="Account name" class="form-control account_name" onkeyup="populateAccountSelect();">
+			<input type="text" name="account_name_" placeholder="Account name" class="form-control account_name" onkeyup="populateAccountSelect(this);">
 		</div>
 		<div class="col-3 px-0">
 			<input type="number" name="account_balance_" step="any" placeholder="1234.56" class="form-control">
 		</div>
 		<div class="col-4 col-sm-3">
-			<%= select_tag "account_currency_", options_for_select(all_currencies(Money::Currency.table), :selected => current_user.currency), {:class => "form-control account_currency", "onchange" => "populateAccountSelect();"} %>
+			<%= select_tag "account_currency_", options_for_select(all_currencies(Money::Currency.table), :selected => current_user.currency), {:class => "form-control account_currency", "onchange" => "populateAccountSelect(this);"} %>
 		</div>
 	</div>
 </div>

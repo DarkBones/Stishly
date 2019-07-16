@@ -164,13 +164,11 @@
           <input type="number" step="any" class="form-control" placeholder="amount" name="amount<%= suff %>"><br />
           <%= select_tag "account#{suff}", options_for_select(user_accounts_array),{:class => "form-control account_select my-2"} %>
         </div>
-        <% if type == "fixed_expense" %>
-          <div class="hidden path-varied-amount">
-            <%= select_tag "currency#{suff}", options_for_select(all_currencies(Money::Currency.table), :selected => current_user.currency), {:class => "form-control"} %>
-            <input type="number" step="any" class="form-control" placeholder="Average amount" name="average_amount<%= suff %>"><br />
-            <%= select_tag "account_average#{suff}", options_for_select(user_accounts_array),{:class => "form-control account_select my-2"} %>
-          </div>
-        <% end %>
+        <div class="hidden path-varied-amount">
+          <%= select_tag "currency#{suff}", options_for_select(all_currencies(Money::Currency.table), :selected => current_user.currency), {:class => "form-control"} %>
+          <input type="number" step="any" class="form-control" placeholder="Average amount" name="average_amount<%= suff %>"><br />
+          <%= select_tag "account_average#{suff}", options_for_select(user_accounts_array),{:class => "form-control account_select my-2"} %>
+        </div>
       </div>
     </div>
   <% end %>
