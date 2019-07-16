@@ -35,6 +35,9 @@ class UsersController < ApplicationController
   def submit_setup
     #puts params.to_yaml
     User.setup_user(current_user, params)
+    current_user.finished_setup = 1
+    current_user.save!
+    redirect_to root_path, :notice => "You're all set up now"
   end
 
   private

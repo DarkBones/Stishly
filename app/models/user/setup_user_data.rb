@@ -10,10 +10,20 @@ class User
   		account_params = get_account_params(@params)
   		income_params = get_income_params(@params)
   		expense_params = get_expense_params(@params)
-  		#puts expense_params.to_yaml
-  		puts income_params.to_yaml
-  		puts "--------------------"
-  		schedule = Schedule.create_income(@current_user, income_params)
+
+  		# save the accounts
+  		account_params.each do |a|
+  			account = @current_user.accounts.new(a)
+  			account.save
+  		end
+
+  		# save income schedule
+  		Schedule.create_income(@current_user, income_params)
+
+  		# save the fixed expenses
+  		expense_params.each do |e|
+  			Schedule.create_expense(@current_user, e)
+  		end
   	end
 
 private
@@ -52,11 +62,12 @@ private
 				month_exclude_met_day: params["month_exclude_met_day_#{idx}"],
 				week_day: params["week_day_#{idx}"],
 				day_date: params["day_date_#{idx}"],
-				fixed_amount: params["fixed_amount_#{idx}"],
 				currency: params["currency_#{idx}"],
 				fixed_amount: params["fixed_amount_#{idx}"],
 				amount: params["amount_#{idx}"],
-				average_amount: params["average_amount_#{idx}"]
+				average_amount: params["average_amount_#{idx}"],
+				account: params["account_#{idx}"],
+				account_average: params["account_average_#{idx}"]
 			}
 		end
 
@@ -73,12 +84,10 @@ private
 						is_default: idx == "0"
 					}
 					accounts.push(account)
-				else
-					break
 				end
 			end
 
-			return accounts.to_yaml
+			return accounts
 		end
 
   end

@@ -31,7 +31,7 @@ class Schedule < ApplicationRecord
   validates :period_num, numericality: true
   validates :period_num, numericality: { only_integer: true }
   validates :period_num, numericality: { greater_than: 0, message: "'Run every' must be greater than zero" }
-  validates :name, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('schedule.failure.already_exists') }
+  #validates :name, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('schedule.failure.already_exists') }
 
   belongs_to :user
   has_and_belongs_to_many :user_transactions, foreign_key: "schedule_id", class_name: "Transaction"
@@ -63,7 +63,11 @@ class Schedule < ApplicationRecord
   end
 
   def self.create_income(current_user, params)
-    schedule = CreateFromSimpleForm.new(current_user, params, "income", "main").perform()
+    schedule = CreateFromSimpleForm.new(current_user, params, "main", "income", false).perform()
+  end
+
+  def self.create_expense(current_user, params)
+    schedule = CreateFromSimpleForm.new(current_user, params, "fixed_expense").perform()
   end
 
 end

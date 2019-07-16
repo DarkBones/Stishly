@@ -1,25 +1,74 @@
 class Schedule
   class CreateFromSimpleForm
 
-  	def initialize(current_user, params, schedule_name=nil, type="Schedule")
+  	def initialize(current_user, params, type="Schedule", schedule_name=nil, invert_amount=true)
   		@current_user = current_user
   		@params = params
   		@schedule_name = schedule_name
   		@type = type
+  		@invert_amount = invert_amount
   	end
 
   	def perform
+  		return if @params.nil?
+  		
   		schedule_params = parse_simple_params(@params, @schedule_name)
   		schedule = Schedule.create_from_form(schedule_params, @current_user, false, @type)
-  		schedule.save!
+  		schedule.save
 
   		transaction_params = parse_transaction_params(@params, schedule)
+
+  		transaction = @current_user.transactions.new(transaction_params)
+  		transaction.save
+
+  		Transaction.join_to_schedule(transaction, schedule)
   	end
 
 private
 
 		def parse_transaction_params(params, schedule)
-			# TODO
+			return if params.key?("amount")
+			puts params.to_yaml
+
+			amount = get_amount(params)
+			direction = 1
+			direction = -1 if amount < 0
+			account = Account.get_from_name(params[:account], @current_user)
+			queue = 0
+			queue = 1 unless params[:fixed_amount] == "fixed"
+
+			transaction = {
+				user_id: @current_user.id,
+				amount: amount,
+				direction: direction,
+				description: get_description(params),
+				account_id: account.id,
+				currency: params[:currency],
+				category_id: -1,
+				is_scheduled: 1,
+				schedule_id: schedule.id,
+				queue_scheduled: queue
+			}
+
+			return transaction
+		end
+
+		def get_description(params)
+			return params[:category_name] if params[:category] == "other"
+			return params[:category]
+		end
+
+		def get_amount(params)
+			if params[:fixed_amount] == "fixed"
+				amount = params[:amount].to_f
+			else
+				amount = params[:average_amount].to_f
+			end
+
+			amount = Currency.float_to_int(amount, params[:currency])
+			amount *= -1 if @invert_amount
+
+			return amount
 		end
 
 		def parse_simple_params(params, schedule_name)
@@ -42,6 +91,7 @@ private
 				run_every: params[:periodNum].to_i,
 				days: get_days(params),
 				day2: params[:month_day2],
+				days2: params[:month_day2],
 				dates_picked: get_dates_picked(params),
 				weekday_mon: get_weekday(params, "mon"),
 				weekday_tue: get_weekday(params, "tue"),
