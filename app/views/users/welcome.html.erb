@@ -43,8 +43,8 @@
                 <%= render partial: "account_row" %>
               </div>
 
-              <button class="btn btn-secondary btn-fieldset" data-toggle="tooltip" data-placement="top" title="Add additional account" onclick="insertAccountRow(); return false;">+</button>
-              <button id="remove_account_row" class="btn btn-secondary disabled btn-fieldset"  data-toggle="tooltip" data-placement="top" title="Remove account" onclick="removeAccountRow(); return false;" style="right: 50px;">-</button>
+              <button type="button" class="btn btn-secondary btn-fieldset plusmin" data-toggle="tooltip" data-placement="top" title="Add additional account" onclick="insertAccountRow(); return false;">+</button>
+              <button type="button" id="remove_account_row" class="btn btn-secondary disabled btn-fieldset plusmin"  data-toggle="tooltip" data-placement="top" title="Remove account" onclick="removeAccountRow();" style="right: 90px;">-</button>
 
               <input type="button" name="next" class="btn next action-button px-4 py-2 my-5 btn-rounded btn-secondary" value="Next"/><br />
               
@@ -88,9 +88,9 @@
 	            	<%#= render partial: "expense_row" %>
 	            </div>
 
-            	<button class="btn btn-secondary btn-fieldset" data-toggle="tooltip" data-placement="top" title="Add fixed expense" onclick="insertExpenseRow(); return false;">+</button>
+            	<button class="btn btn-secondary btn-fieldset plusmin" data-toggle="tooltip" data-placement="top" title="Add fixed expense" onclick="insertExpenseRow(); return false;">+</button>
 
-            	<input type="button" name="previous" class="btn previous action-button px-4 py-2 my-2 btn-rounded btn-secondary" value="Previous"/><br />
+            	<input type="button" name="previous" class="btn previous action-button px-4 py-2 my-2 btn-rounded btn-secondary" style="margin-top: 100px!important;" value="Previous"/><br />
             	<input type="submit" class="btn px-4 py-2 my-2 btn-rounded btn-primary" style="font-size: 1.5em;">
             </fieldset>
 
@@ -110,13 +110,6 @@
   var left, opacity, scale;
   var animating;
 
-  function insertExpenseRowOLD() {
-  	$("#expenseRows").append("<%= j render :partial => 'expense_row' %>");
-  	numberExpenseRow();
-  	//setExpensePlaceholder();
-  	addLadderformListeners();
-  }
-
   function insertExpenseRow(){
   	$.ajax({
       type: "GET",
@@ -126,8 +119,8 @@
         if ($(".expenseRow").length < data.max_fixed_expenses || data.max_fixed_expenses < 0){
           $("#expenseRows").append("<%= j render :partial => 'expense_row' %>");
 			  	numberExpenseRow();
-			  	//setExpensePlaceholder();
 			  	addLadderformListeners();
+			  	populateAccountSelect();
         } else {
           triggerNotice("Upgrade to permium for more fixed expenses", true);
         }
@@ -135,7 +128,53 @@
     });
   }
 
-  function populateAccountSelect(e){
+  function populateAccountSelect(){
+  	var values, texts, idx, value, $option;
+
+  	$(".account_select").each(function(){
+  		values = getAccountValues();
+
+  		// remove options that are no longer there
+  		while ($(this).children("option").length > values.length) {
+  			$(this).find("option").last().remove();
+  		}
+
+  		// add options that are missing
+  		while ($(this).children("option").length < values.length) {
+  			$(this).append("<option value=\"\"></option>");
+  		}
+
+  		// populate the options
+  		value = values.pop();
+  		idx = values.length;
+  		while (value) {
+  			$option = $(this).find("option:eq(" + idx.toString() + ")");
+  			$option.attr("value", value.name);
+  			$option.text(getAccountOptionText(value));
+
+  			value = values.pop();
+  			idx -= 1;
+  		}
+
+  	});
+  }
+
+  function getAccountOptionText(value){
+  	return value.name.toString() + " (" + value.currency.toString() + ")";
+  }
+
+  function getAccountValues(){
+  	var values = [];
+  	$(".account_row").each(function(){
+  		values.push({
+  			"name": $(this).find(".account_name").val(),
+  			"currency": $(this).find(".account_currency").val()
+  		});
+  	});
+  	return values;
+  }
+
+  function editAccountSelect(e){
   	var nameArr, idx, accountName, currency, rowcount, $option;
 
   	nameArr = $(e).attr("name").split("_");
@@ -220,6 +259,9 @@
     if ($(".account_row").length === 1) {
       $("#remove_account_row").addClass("disabled");
     }
+
+    populateAccountSelect();
+
   }
 
   function validateAccounts(fs){

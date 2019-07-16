@@ -76,4 +76,9 @@
 #userwizzard fieldset .btn-fieldset {
 	position: absolute;
 	right: 10px;
+	&.plusmin {
+		width: 70px;
+		height: 45px;
+		font-size: 1.3em;
+	}
 }
