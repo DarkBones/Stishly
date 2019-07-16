@@ -12,24 +12,6 @@ class User
 private
     
     def create_categories
-      user_currency = User.get_currency(@current_user).iso_code
-
-      @current_user.accounts.create([
-        {
-          balance: 100000,
-          name: "Current account",
-          currency: user_currency,
-          is_default: 1,
-          position: 1
-        },
-        {
-          balance: 50000,
-          name: "Savings account",
-          currency: user_currency,
-          is_default: 0,
-          position: 2
-        }
-      ])
 
       entertainment = @current_user.categories.create({
         name: "Entertainment",
