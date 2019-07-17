@@ -43,6 +43,8 @@ end
 
 group :development, :production do
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'kms_rails'
+  gem 'msgpack'
 end
 
 group :development do

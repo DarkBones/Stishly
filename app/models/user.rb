@@ -32,6 +32,10 @@
 #
 
 class User < ApplicationRecord
+  kms_attr :first_name, key_id: Rails.application.credentials.aws[:kms_key_id]
+  kms_attr :last_name, key_id: Rails.application.credentials.aws[:kms_key_id]
+  kms_attr :email, key_id: Rails.application.credentials.aws[:kms_key_id]
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -51,7 +55,25 @@ class User < ApplicationRecord
 
   validates :country_code, :first_name, :last_name, presence: true
 
+  around_create :escape_chars
   after_create :initialize_user_data
+
+  def will_save_change_to_email?
+  end
+
+  def escape_chars
+    puts "---------------------------------"
+    puts "---------------------------------"
+    #puts self.to_yaml
+    puts self.first_name_enc.to_msgpack
+    puts self.last_name_enc.to_msgpack
+    puts MessagePack.unpack(self.email_enc.to_msgpack)
+    self.first_name_enc = self.first_name_enc.sub "'", "''"
+    self.last_name_enc = self.last_name_enc.sub "'", "''"
+    self.email_enc = self.email_enc.sub "'", "''"
+    puts "---------------------------------"
+    puts "---------------------------------"
+  end
 
   def self.set_current_user(current_user)
     @current_user = current_user
