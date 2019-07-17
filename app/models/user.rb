@@ -55,7 +55,7 @@ class User < ApplicationRecord
 
   validates :country_code, :first_name, :last_name, presence: true
 
-  around_create :escape_chars
+  before_create :escape_chars
   after_create :initialize_user_data
 
   def will_save_change_to_email?
@@ -65,12 +65,12 @@ class User < ApplicationRecord
     puts "---------------------------------"
     puts "---------------------------------"
     #puts self.to_yaml
-    puts self.first_name_enc.to_msgpack
-    puts self.last_name_enc.to_msgpack
-    puts MessagePack.unpack(self.email_enc.to_msgpack)
-    self.first_name_enc = self.first_name_enc.sub "'", "''"
-    self.last_name_enc = self.last_name_enc.sub "'", "''"
-    self.email_enc = self.email_enc.sub "'", "''"
+    #puts self.first_name_enc.to_msgpack
+    #puts self.last_name_enc.to_msgpack
+    #puts MessagePack.unpack(self.email_enc.to_msgpack)
+    #self.first_name_enc = "peppa pig".to_msgpack
+    #self.last_name_enc = "peppa pig".to_msgpack
+    #self.email_enc = "peppa pig".to_msgpack
     puts "---------------------------------"
     puts "---------------------------------"
   end
