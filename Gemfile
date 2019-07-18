@@ -43,8 +43,6 @@ end
 
 group :development, :production do
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'kms_rails'
-  gem 'msgpack'
 end
 
 group :development do
@@ -126,3 +124,5 @@ gem 'filterrific'
 gem 'bootstrap-slider-rails'
 
 gem 'whenever', require: false
+gem 'kms_rails'
+gem 'msgpack'

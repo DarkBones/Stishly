@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_17_075744) do
+ActiveRecord::Schema.define(version: 2019_07_17_112427) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -197,12 +197,12 @@ ActiveRecord::Schema.define(version: 2019_07_17_075744) do
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.text "first_name_enc"
-    t.text "last_name_enc"
+    t.binary "first_name_enc"
+    t.binary "last_name_enc"
     t.bigint "subscription_tier_id", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "email_enc"
+    t.binary "email_enc"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
