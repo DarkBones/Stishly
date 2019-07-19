@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_19_081618) do
+ActiveRecord::Schema.define(version: 2019_07_19_090127) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -202,7 +202,6 @@ ActiveRecord::Schema.define(version: 2019_07_19_081618) do
     t.bigint "subscription_tier_id", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "email"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -224,8 +223,13 @@ ActiveRecord::Schema.define(version: 2019_07_19_081618) do
     t.bigint "country_id"
     t.string "currency", null: false
     t.boolean "finished_setup", default: false
+    t.string "encrypted_email"
+    t.string "encrypted_email_iv"
+    t.string "email_bidx"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["country_id"], name: "index_users_on_country_id"
+    t.index ["email_bidx"], name: "index_users_on_email_bidx"
+    t.index ["encrypted_email_iv"], name: "index_users_on_encrypted_email_iv", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["subscription_tier_id"], name: "index_users_on_subscription_tier_id"
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true

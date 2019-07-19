@@ -34,161 +34,174 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 # This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
+# model remove the ',
+#finished_setup: true{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
 bas: {
   id: 1,
-  first_name: 'Bas',
-  last_name: 'Donker',
-  email: 'bassiedoinker@example.com',
+  first_name_enc: Bas,
+  last_name_enc: Donker,
+  email_bidx: <%= User.generate_email_bidx("bassiedoinker@example.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
-  currency: 'EUR'
+  currency: EUR,
+  finished_setup: true
 }
 
 sab: {
   id: 2,
-  first_name: 'Sab',
-  last_name: 'Reknod',
-  email: 'rekniodeissab@example.com',
+  first_name_enc: Sab,
+  last_name_enc: Reknod,
+  email_bidx: <%= User.generate_email_bidx("rekniodeissab@example.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
-  currency: 'EUR'
+  currency: EUR,
+  finished_setup: true
 }
 
 new: {
   id: 3,
-  first_name: 'New',
-  last_name: 'User',
-  email: 'new_user@example.com',
+  first_name_enc: New,
+  last_name_enc: User,
+  email_bidx: <%= User.generate_email_bidx("new_user@example.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
-  currency: 'EUR'
+  currency: EUR,
+  finished_setup: true
 }
 
 transactions_test: {
   id: 4,
-  first_name: 'Transactions',
-  last_name: 'Test',
-  email: 'transactions@test.com',
+  first_name_enc: Transactions,
+  last_name_enc: Test,
+  email_bidx: <%= User.generate_email_bidx("transactions@test.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
-  currency: 'EUR'
+  currency: EUR,
+  finished_setup: true
 }
 
 currency_test: {
   id: 5,
-  first_name: 'Currency',
-  last_name: 'Test',
-  email: 'currency@test.com',
+  first_name_enc: Currency,
+  last_name_enc: Test,
+  email_bidx: <%= User.generate_email_bidx("currency@test.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
-  currency: 'EUR'
+  currency: EUR,
+  finished_setup: true
 }
 
 endless_page: {
   id: 6,
-  first_name: 'Endless',
-  last_name: 'Page',
-  email: 'endless@page.com',
+  first_name_enc: Endless,
+  last_name_enc: Page,
+  email_bidx: <%= User.generate_email_bidx("endless@page.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
-  currency: 'EUR'
+  currency: EUR,
+  finished_setup: true
 }
 
 destroy: {
   id: 7,
-  first_name: 'Destroy',
-  last_name: 'Me',
-  email: 'destroy@me.com',
+  first_name_enc: Destroy,
+  last_name_enc: Me,
+  email_bidx: <%= User.generate_email_bidx("destroy@me.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
-  currency: 'EUR'
+  currency: EUR,
+  finished_setup: true
 }
 
 transactions: {
   id: 8,
-  first_name: 'Transactions',
-  last_name: 'Creating',
-  email: 'transactions@creator.com',
+  first_name_enc: Transactions,
+  last_name_enc: Creating,
+  email_bidx: <%= User.generate_email_bidx("transactions@creator.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
-  currency: 'EUR'
+  currency: EUR,
+  finished_setup: true
 }
 
 schedules: {
   id: 9,
-  first_name: 'Schedules',
-  last_name: 'Test',
-  email: 'schedules@test.com',
+  first_name_enc: Schedules,
+  last_name_enc: Test,
+  email_bidx: <%= User.generate_email_bidx("schedules@test.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
-  currency: 'EUR'
+  currency: EUR,
+  finished_setup: true
 }
 
 transaction_search: {
   id: 10,
-  first_name: 'Transaction',
-  last_name: 'Search',
-  email: 'transaction@search.com',
+  first_name_enc: Transaction,
+  last_name_enc: Search,
+  email_bidx: <%= User.generate_email_bidx("transaction@search.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
-  currency: 'EUR'
+  currency: EUR,
+  finished_setup: true
 }
 
 schedules_overlap: {
   id: 11,
-  first_name: 'Schedule',
-  last_name: 'Overlap',
-  email: 'schedule@overlap.com',
+  first_name_enc: Schedule,
+  last_name_enc: Overlap,
+  email_bidx: <%= User.generate_email_bidx("schedule@overlap.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
-  currency: 'EUR'
+  currency: EUR,
+  finished_setup: true
 }
 
 duplicate_transactions: {
   id: 12,
-  first_name: 'Duplicate',
-  last_name: 'Transactions',
-  email: 'duplicate@transactions.com',
+  first_name_enc: Duplicate,
+  last_name_enc: Transactions,
+  email_bidx: <%= User.generate_email_bidx("duplicate@transactions.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
-  currency: 'EUR'
+  currency: EUR,
+  finished_setup: true
 }

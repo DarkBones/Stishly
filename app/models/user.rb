@@ -35,6 +35,9 @@ class User < ApplicationRecord
   kms_attr :first_name, key_id: Rails.application.credentials.aws[:kms_key_id]
   kms_attr :last_name, key_id: Rails.application.credentials.aws[:kms_key_id]
 
+  attr_encrypted :email, key: [ENV["EMAIL_ENCRYPTION_KEY"]].pack("H*")
+  blind_index :email
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -53,6 +56,7 @@ class User < ApplicationRecord
   has_many :notifications
 
   validates :country_code, :first_name, :last_name, presence: true
+  validates :email, uniqueness: true
 
   after_create :initialize_user_data
 

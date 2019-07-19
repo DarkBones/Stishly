@@ -28,7 +28,6 @@ private
 
 		def parse_transaction_params(params, schedule)
 			return if params.key?("amount")
-			puts params.to_yaml
 
 			amount = get_amount(params)
 			direction = 1

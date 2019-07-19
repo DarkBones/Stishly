@@ -40,7 +40,7 @@ class Schedule
         type_of: @type
       }
 
-      puts schedule_params.to_yaml
+      #puts schedule_params.to_yaml
       schedule = @current_user.schedules.new(schedule_params)
       return schedule
     end
@@ -98,7 +98,7 @@ private
     def get_unspecific_days
       if @params[:schedule] == 'monthly' && @params[:days] != 'specific' && @params[:days2] != 'day'
         weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
-        puts @params.to_yaml
+        #puts @params.to_yaml
         return 0b0 | (1 << weekdays.index(@params[:days2]))
       end
 

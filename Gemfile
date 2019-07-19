@@ -126,3 +126,6 @@ gem 'bootstrap-slider-rails'
 gem 'whenever', require: false
 gem 'kms_rails'
 gem 'msgpack'
+
+gem 'attr_encrypted', '~> 3.1.0'
+gem 'blind_index'
