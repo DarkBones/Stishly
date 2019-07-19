@@ -35,7 +35,7 @@ class User < ApplicationRecord
   kms_attr :first_name, key_id: Rails.application.credentials.aws[:kms_key_id]
   kms_attr :last_name, key_id: Rails.application.credentials.aws[:kms_key_id]
 
-  attr_encrypted :email, key: [ENV["EMAIL_ENCRYPTION_KEY"]].pack("H*")
+  attr_encrypted :email, key: [ENV["EMAIL_ENCRYPTION_KEY"]].pack("H*") if Rails.env.test? == false
   blind_index :email
 
   # Include default devise modules. Others available are:
