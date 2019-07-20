@@ -3,9 +3,9 @@ require 'active_record/fixtures'
 src_yml = 'test/fixtures/users.yml.noenc'
 dest_yml = 'test/fixtures/users.yml'
 
-File.delete(Rails.root + dest_yml) if File.exist?(Rails.root + dest_yml)
 
 task 'fixt' => dest_yml
+#File.delete(Rails.root + dest_yml) if File.exist?(Rails.root + dest_yml)
 
 namespace :Stishly do
 	desc "generate encrypted fixture"
