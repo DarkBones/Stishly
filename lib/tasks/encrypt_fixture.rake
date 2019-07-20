@@ -15,10 +15,13 @@ namespace :Stishly do
 		encrypted_hash = {}
 		for k, v in YAML.load(ERB.new(File.read(Rails.root + src_yml)).result) do
 			user = User.new(v)
-
 			encrypted_hash[k] = {}
+
+			encrypted_hash[k][:first_name_enc] = user.first_name_enc.to_msgpack
+			encrypted_hash[k][:last_name_enc] = user.last_name_enc.to_msgpack
+
 			v.each do |key, value|
-				encrypted_hash[k][key] = value unless key == "email"
+				encrypted_hash[k][key] = value unless key == "email" || key.include?("_name")
 			end
 			encrypted_hash[k][:encrypted_email] = user.encrypted_email.strip!
 			encrypted_hash[k][:encrypted_email_iv] = user.encrypted_email_iv.strip!

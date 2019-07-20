@@ -1,0 +1,214 @@
+#----------------------------------------------------------------------
+# DO NOT MODIFY THIS FILE!!
+#
+# This file is generated from test/fixtures/users.yml.noenc by:
+#
+#   (edit test/fixtures/users.yml.noenc)
+#   $ rake fixt, or
+#   $ rake
+#----------------------------------------------------------------------
+---
+bas:
+  :first_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnRTcvU2VXZnRDUUZHd0pSYUZGS0RkTUFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTTRGc0JUSDZjbEhuck52cG5BZ0VRZ0Rzdk5qK3d2WVhrT0RRRVBXSGVvRmlsK1JnL1RUN3NNcFg0eVg1MXE3L2s3RkpwdUNFeGNrOUdWRzNWa25tSkhWWndmQUVwc1p4YWVVdGphQT09oml2uHc1YTJ4ZzFWTjhvVk4rYVY2SkJsc3c9PaRibG9iuDBKQjZrZmZkOWEzY2lvQlRJVE1kSFE9PQ==
+  :last_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnSFlrcTd1bFFHQTNGQlBYR2tTSHNWb0FBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTWh0MVdadGoxSGZVTGs1ZGZBZ0VRZ0RzdHkwbzl5SllrOG9ZSTBuK1F6NTVOektYTW43UUVpYnV5Z3JiK0tIRHNaamI2THhoTjdDa2d4Q2YvUys3dlgySXIyR3VYU3hEeW1EWEVoQT09oml2uHFkQ0IwTCtQa0dpblcxTGExVEkzWVE9PaRibG9iuHN0RjN4dTN6ZHNKRDNST0VkVjBMRHc9PQ==
+  id: 1
+  email_bidx: YbGzYHMz4QCGMGyDdAoyxY8Y0Q5vJfFFUq72hpXM4bI=
+  country_code: IE
+  country_id: 1
+  timezone: Europe/London
+  encrypted_password: "$2a$11$kW2W8xddNC279.ghaBIz7uUUlpmNHR/9YZxkRQmckKHoLKgCnoODW"
+  confirmed_at: '2018-11-14 19:54:40'
+  currency: EUR
+  finished_setup: true
+  unconfirmed_email: bassiedoinker@example.com
+  :encrypted_email: E97p7T59JdIEcQOxaGUvYzej9Gie+RuwS2RKOJ8NjmynOsnGFrNcp7g=
+  :encrypted_email_iv: Cut5xb/P53V33iBK
+sab:
+  :first_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnR3d3c0NuOW41S0N5bVZXMHorZG0yWkFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTVJRRDY3LzlyZkRHblJyU2JBZ0VRZ0R1WXVYS0loWW9lcUZQdldydjJPR1RuN2pXUU1TSUd1N1hmRytoaE4vU01vRGE0NFVXeGVjNFZwWm05STlkU3MrMmF6WmpURDU2ejI2ZVNvdz09oml2uC9SWFpQL0RRSmcrZFE3SWUzbnFzWnc9PaRibG9iuGRlUU1KazVEVHJ3b1hSYTFsVEpiR2c9PQ==
+  :last_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnRjl5Nng0OFp1bFJkZjFCQVFTQkdLREFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTWxXMEFwcnpoNmJFN1RvSmJBZ0VRZ0Rzc2Z6MkZxTldDb3VlZXN3WC9uTytzRjg1U2xnWU80WnlpY1k3OFJOcWZyQS85cXBGdjNFZlBTdXBmSTgvdUlXOHF2bGhlQldtUWM3NEpTQT09oml2uG5ydTNQUkhDbmxLRXZScXZJcHVNcHc9PaRibG9iuGZHSis1MlpSVlRKbEdoN3RSRFl4UlE9PQ==
+  id: 2
+  email_bidx: RF5e9IqESq7dcIX6YJqsNr/qK+fOM/L1Pvjqk9+T1DQ=
+  country_code: IE
+  country_id: 1
+  timezone: Europe/London
+  encrypted_password: "$2a$11$JBsrJCtlNUCOxJYK3xbX.u29BhpUmoXnm0DEX3uIJPZWUBn6FW/qa"
+  confirmed_at: '2018-11-14 19:54:40'
+  currency: EUR
+  finished_setup: true
+  unconfirmed_email: rekniodeissab@example.com
+  :encrypted_email: PztjdKrTW5+IrgyCnyekh2XPjHyTtisNLzO2n5QRgYzHGGT5LFwn3T8=
+  :encrypted_email_iv: twimwzvlhI2px6gb
+new:
+  :first_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnRTZVQ3Rld3Zqa3Nud2FndjQxdlZnZ0FBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTWVNRmhWRkNNajJxa0xrV2tBZ0VRZ0R2UnRqNnRTYmozOHVHUytEaVVFQ2RkbjV0TlhQb2VIUzdFQU85K1hSSnNVUENnSUtYRnZxMm95VkJoUEU3Uzd1aWFhVk44OUNwaFR1aGJOdz09oml2uG5RWlVBeURtR0xnb3FrMjJnNWdRVGc9PaRibG9iuDEwcTBLTWY4Ry9QbTkzYUVKNFBHTlE9PQ==
+  :last_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnSHdtK2RWcG1YeUdvMndZWmxkRmZobEFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTWRLSk5qMzhNRDA0SWRKL2xBZ0VRZ0RzYUhtOHU1MXZid09oWGtlOW11TjNRaE9zVWdOOGl5Y1NDS1lEd0E1UDhZZllNUWR3SkJHZmE0Y1BJM1JldDA5UkFLRjJ2eDBoR0FtY0JWZz09oml2uFZUL2hjNXNVY2NJZlBtd3FYWVFVVUE9PaRibG9iuFZRcFl2NXFndjF1SjY4NVZhSFdDc2c9PQ==
+  id: 3
+  email_bidx: R5520bCGdCeHU7O4wNpzeTA08YUyLSrrx2yjyEEyQpg=
+  country_code: IE
+  country_id: 1
+  timezone: Europe/London
+  encrypted_password: "$2a$11$PUwIxvYOk8mLapF7QGBol.jXKBQGkdvXjxh69GIBZgTEAQS3f99dm"
+  confirmed_at: '2018-11-14 19:54:40'
+  currency: EUR
+  finished_setup: true
+  unconfirmed_email: new_user@example.com
+  :encrypted_email: 4DWQ5C8PZPDTRW8eGOv1nBxC5YcZBZG/0W6YDDY5eeTbZiW7
+  :encrypted_email_iv: SARbEG46ihm0q5sH
+transactions_test:
+  :first_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnRmpiWElrV2Y1WjF0UEdpTHdpWFdZQ0FBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTTlzOWdzNHlUTk5OZGpVV0RBZ0VRZ0RzS1I1MlU3L2g2b3UwNko2ODBVSmtVM1NjM0x2K0Z6WHZQWk1mY1Z6ZDBjRHJxZFU1NXRINnNBNVJJaDZnSXlNaEQ4NUVzejJGcmM4SW1PQT09oml2uEFRQ0R2MWFvd1J3REU1MEtRMGxwVlE9PaRibG9iuFMxUEJyQ08zT3lnNkdMMVpkMDNWSmc9PQ==
+  :last_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnRkVqK3lpc3k3d3ZvTURhREo1RWxMOUFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTVlSa1FDSTZEZ2g1WFQyd3BBZ0VRZ0RzK0xBWXJsOFNJWlRMcjR3RnBEcTU2QjdIbDNGWEw4ZG9ra2JwWTRad2lxNUlIZUEyZVBCd2pxVXhpYzJPRmVXd3E5WTg1VWo5V2VjViszUT09oml2uG5OakV1cnFQS3VyeEJYN214b1AxaUE9PaRibG9iuFMvN3NxcWl1bkxhMisrOWNwT1FEVEE9PQ==
+  id: 4
+  email_bidx: 6a9Y+iDXdOxCOtUoCqAj1AT3TM7nDEEpJ8V3ZoszZTY=
+  country_code: IE
+  country_id: 1
+  timezone: Europe/London
+  encrypted_password: "$2a$11$EXdEe3dmARLDFTWlnmgWh.YiyqkmkziawMx48.MMnS2ks.ov0jit2"
+  confirmed_at: '2018-11-14 19:54:40'
+  currency: EUR
+  finished_setup: true
+  unconfirmed_email: transactions@test.com
+  :encrypted_email: Xz8OErgU1qagvdA+sP6nUhqyQcK2k0s7kUm2PyLE4kZtI0i4Mg==
+  :encrypted_email_iv: 20iKBkw//WTa0uD6
+currency_test:
+  :first_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnRjNOb3V3OWlVS3VJQ09FQmFyNU5GMUFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTVh0YnZZT2ErQUhyUFdGdzBBZ0VRZ0R1WHRFazUxczFDdDMvZkxYMTQxRUQ4VGp2K3B4ek5rWWwzbFNkNW4wL09RSUFuck1ReDhxNnNiTEpybHBXZThWdmZjbjhOeU45SFdDKzh3dz09oml2uHdQM25NbDJqeG5JTHdTMWRaTFpBalE9PaRibG9iuEYrM0NKcXI4ME5KcW9yYjJ4NWtneXc9PQ==
+  :last_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnSFoxVGsxQWRGV0lFRWRJM2VJWUt1OEFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTUd0ZE4rdkc0bXR3ckJlcWtBZ0VRZ0R2VmF0ejU1MC9aanBJRWd6andSR1dIWC9nY1hwTTNsK3VxUjI0MzdCVmZja3J6cWpQajRmc1l5OWd4cSs0bW1KdktaMW9vcXA3Y2tkNkx6QT09oml2uG5tYWkrUnB1bE1OZjR0NnNreFdiYmc9PaRibG9iuDBWSTJ3cXdEajJENWVSU1pBUXc0cHc9PQ==
+  id: 5
+  email_bidx: GkQamsfIg/V9IP5zTOMFFiZRuZzePwZ9bHYzpl7yAOM=
+  country_code: IE
+  country_id: 1
+  timezone: Europe/London
+  encrypted_password: "$2a$11$vqFlSaLv/yBSL9M4cSmyUu96ilOBf2oXDteInyPIvPsiGRqOeYhiS"
+  confirmed_at: '2018-11-14 19:54:40'
+  currency: EUR
+  finished_setup: true
+  unconfirmed_email: currency@test.com
+  :encrypted_email: qMR1BJf9cJU3Wh7xva+Zp71QdoZtr0yobOPocHM4Y3JQ
+  :encrypted_email_iv: f0NQwLEnZ9BEjIO5
+endless_page:
+  :first_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnRTFXYnpjWXowY0U3OEtFYnBaYlN6d0FBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTWwvcldXYi9qRnhVSUpUdGRBZ0VRZ0RzTXlrdUZoSUc0VEVtS2x0RG9ZQm56a29vcmJoL0x2ZEtaUVhoUU1IUmJYelVxTmxYOUNOcW1neHJIQzhPYjFNMjdpd254WWcwL3J6RzF6UT09oml2uEhQTDhVZDVwc3N5YXBVNElKbzV3TlE9PaRibG9iuHVMZk5lZHNTUXlaejFrWmZjbm45aWc9PQ==
+  :last_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnR3U2ejVHMHZHM055ajlXT1BnMnZwaEFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTVJtd3dkYzlKT3RjeUdPWHdBZ0VRZ0R2QzBHUWRIRlZsMDBSWFB2VE5sSHduYWVtZjNHVnhxRnYvMGk4K3BCdlYwTjRaaS9YckNORWJxUGlzbERURjJHZXZRaml5Z1N4MmNCZHR6QT09oml2uFI2RUtaQVVNSVBYS2N0RkN5UURUU1E9PaRibG9iuFNKNmp0dFYvTm8vYUFTZzFzeHRteHc9PQ==
+  id: 6
+  email_bidx: Veunt+LWSkIyU8ec7vt/m9xBXTiQ/6nCp7JYiwWX93s=
+  country_code: IE
+  country_id: 1
+  timezone: Europe/London
+  encrypted_password: "$2a$11$8IEcJzzGU24VhuDPyz/8o.4/Q7rlc0qno.CBWpMYJOa5OaDOMv5Hy"
+  confirmed_at: '2018-11-14 19:54:40'
+  currency: EUR
+  finished_setup: true
+  unconfirmed_email: endless@page.com
+  :encrypted_email: 4nmaRHhlFMCE0lZayvftb3bGyFJWye9MasdkyuIpEUg=
+  :encrypted_email_iv: PB/x6V0MlrA0cvgn
+destroy:
+  :first_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnRUEvOHlnU1k3aitaZGwxUERYN2liSUFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTStOejVySkZDcnhuenQ0Y2VBZ0VRZ0R2VTA1SitOMEpyWFJoRVlHZFMxVithaW9Fb3BSaGZwK1dhUlRUOE5BQkZESFVIcG1ieVVTSFBWd3VpdlgwM0RMeDJoeW52eGN4Y21CeTZ4QT09oml2uHhsY2hQN25lU0lzeUQvN25MR1Bqenc9PaRibG9iuG9oQWl5YUJzanJ0cmx1VHhTNnVMc0E9PQ==
+  :last_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnRXpCY09sTk0wSDVnQTE4MUsyOVF4N0FBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTWpXbFpwVzdoMGYwUmJZQ0ZBZ0VRZ0R1KzZrclZpU2tQeWhvS1h6SDZDSWgzRU1DaU1neUFpaHRUYVJTQzNzWkhiR29JV3R1OC9lM1lDODV4bGRKZVlUR0M4eVUrdndweGJVenNEdz09oml2uE5UNlBqWis1eVBGcjJ0NHk2MmNHSmc9PaRibG9iuGRqYmlQeXloYlliMG5ubkJRZ29OQXc9PQ==
+  id: 7
+  email_bidx: gg7Jp+I/61yhltABfy7Sw99eTpFODMz8tyanL6zmqqA=
+  country_code: IE
+  country_id: 1
+  timezone: Europe/London
+  encrypted_password: "$2a$11$CBJTPLzghhzM0WFg3.8Yd.Ht4SOuM1pGI6s5fThyCFylTVWxaAP7u"
+  confirmed_at: '2018-11-14 19:54:40'
+  currency: EUR
+  finished_setup: true
+  unconfirmed_email: destroy@me.com
+  :encrypted_email: TIUu3tNfz47/ZvkWFac7BEmRI/1sWpUofeYniDmK
+  :encrypted_email_iv: lUN3k8AOrGPF6bdF
+transactions:
+  :first_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnRTJpeE41MzIrQmorMWVlbXVDZXA5R0FBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTVZOUkdvVjVUYlF6N21ibHpBZ0VRZ0R1STdUVGhoNHdoRDFaTVU5cjRweEJ6ZnhZSGFqNDhhNjYvRTdkdkV1aG5XelM2TmNkVldrY1B0Z1JBdDB5cDYreHVUK2QrdGVHekQrRmorZz09oml2uEtTUGJwYXAwWmc0aHBpYVRlOFY2dHc9PaRibG9iuDhJSlplYlg5elJvWGU3TGU3RE1YbUE9PQ==
+  :last_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnSHdGL3NYT0NIdTdNNVcxREgzWGZSK0FBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTVFqcjJSQVNCb1NFcFQzdzZBZ0VRZ0R1UXJLYnNUVStzVWlMVCt5Ykk4emYxYyszOTBQRWZsZy9TbVNyUUtWcmE3RmlHekxZejgvZ3JJdWZna2prbWJSSGltNG1wbUJScU9zRkZXQT09oml2uFAyT3NNVWplZlltNFgyb3YyQ3JqYXc9PaRibG9iuFg3NzJ0Y1pvYUU1T0hMM3A2M1RPSVE9PQ==
+  id: 8
+  email_bidx: "+aSUiitucGksfHrxHCzY+a9QLZp5t57bdUc/0/c4+GU="
+  country_code: IE
+  country_id: 1
+  timezone: Europe/London
+  encrypted_password: "$2a$11$b1d8nQr/Y6KYiM5DblJFu.xf3E/gkr8Rsp1IGGbdT0iZ73vvHIXHm"
+  confirmed_at: '2018-11-14 19:54:40'
+  currency: EUR
+  finished_setup: true
+  unconfirmed_email: transactions@creator.com
+  :encrypted_email: 7os8Vzv9hJUHzQm3yTUJ+hNRiKkHH9lQTJEmgjCP5bWQ+WzVkL61Bg==
+  :encrypted_email_iv: M23yU1hTJ6hzqlCD
+schedules:
+  :first_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnRVRFaC9CSEZJbnMzQllHeFRqaG5tYUFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTURyL1pHdHhybFQ1eG9FNFVBZ0VRZ0R2aGtzSUhYR3psSnhjb09xQ3hQcUs3Z3VzbWZNNDlOTVp2ZGpjSFJFUitZZ0hwOEN1RlpTYXVqeVhRSE5uQkpyQlQ1SEY4N0ZoQ0JyZEJrUT09oml2uHV1a3lTMlNxVVE3WkxPc2VrbGoxeVE9PaRibG9iuHZZcWVaSVQwY2lMcXFXNFRmd28wNnc9PQ==
+  :last_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnSDZiQ3d4MlE5RGtqaDJPK1JlOTNFZUFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTVViNkVMaGxMM09IL0lRaWRBZ0VRZ0R2RFpEUjhCU01qRTd3UUpnVHU1MmphL3E4M3JVSFlhVmlCTDNma1BBbzhoS2JJN1hRWWhwVmNsMG1WZy92STB2eit4bGYyMEJTV0wrWXpjUT09oml2uE1wZWxMbHRrQ0dOYURPNjNDNnlzd3c9PaRibG9iuHp2K3hxOXo5KzQ2a055MzJ1bUhJTGc9PQ==
+  id: 9
+  email_bidx: C2jklqWpet/xpZcMTjI5LrLSQkhIZ2ajQ6FinGnCpTo=
+  country_code: IE
+  country_id: 1
+  timezone: Europe/London
+  encrypted_password: "$2a$11$LwT2jkuR2.z5LVMz9CzDgO/Ac2bKzTlV0HM8mRzc9pU3McgOkPvFS"
+  confirmed_at: '2018-11-14 19:54:40'
+  currency: EUR
+  finished_setup: true
+  unconfirmed_email: schedules@test.com
+  :encrypted_email: aMbJldXkhBVHygHBcnQbMWYbz/oyY/FkhYLMiA7f7PYKPw==
+  :encrypted_email_iv: O/FUK+z5h3PTFZ78
+transaction_search:
+  :first_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnRWhqbUFHZUp1TW5meTJ6L2h3V2lqZ0FBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTW5RUkdxb3NscnplNHgwRnBBZ0VRZ0R0aG43emJzRkJsOHNWY1FyUTZEK3plMk5GZWVlWXh4ZVVIM0JPMzR3dlo2dDBQdFoxUk1YcVdWOHpNWDlUdDdEckxOY0M4bTRZL1V5RktmUT09oml2uHQzaXlqUHZhNExjUktCcDhMRFd3bEE9PaRibG9iuDd5cmI5K01wMHZlNG9hcU5VSFI2S0E9PQ==
+  :last_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnRlpWWTdyNXNsbDQrdFBPRE5mTys5REFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTU5JRE0xaE8wYzI1akthNWFBZ0VRZ0R1b0FOSFV4VysxOUgwYkl6THpUK00yWVlPUzY5Z3dPaC8xaEhVK0dUbXBJZ29kb1J5ZW45QzRkUDh0Q1VHN0hpTDNlazZRd1RuMHh6REVpUT09oml2uDZCVTJKT3U4d0p1ODVTS3FKcUJ4eUE9PaRibG9iuGxFdS94eU9CSXdvUDdKQm04UEVuZkE9PQ==
+  id: 10
+  email_bidx: W1RTsERtmOOInhpIGqyoHUq8NRjmgMWG4HoQOdpIt3I=
+  country_code: IE
+  country_id: 1
+  timezone: Europe/London
+  encrypted_password: "$2a$11$qzR0.Tv5kKRbGQqC9bazh.yUWgTFRO2dhoF.7ZqaAd3MfvInX9WGi"
+  confirmed_at: '2018-11-14 19:54:40'
+  currency: EUR
+  finished_setup: true
+  unconfirmed_email: transaction@search.com
+  :encrypted_email: VfGFpKd1WFnu2h8GMGQzsxBjDqoN5ECb6Sm+hO47vEtGOoXRkpA=
+  :encrypted_email_iv: 12iNqfGQjY045rlL
+schedules_overlap:
+  :first_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnRW1LTjNaeUIrQ250T01pdmF0Y1dPQkFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTUtJVnJ3MmNrMkpMdWNtYStBZ0VRZ0R1Yzg2MDVUaDI2MWxUMDk4VEkxc0I3QTF0UTczcEpZM0pWQkpMUUxXUElGamRRVUVXaWkvbzNZSGxsY3g5ZVZkVkQ4UGMyNjg5WHZWSFNjUT09oml2uHB0WnJ2Z3RwZVRBY2pOV1hua0pzNWc9PaRibG9iuFg3UHE4Vnl0TUxaUjNJOG1idWtnd0E9PQ==
+  :last_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnRjlXaWR0d0d6eFNncEhsVE1XOWQzNkFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTUdHQnJELzRZS3d6YUpVMktBZ0VRZ0R1L1ZVNnBrT2JCWU5hSEVvNlI5NU5GRTVHRjNQbjhDVk9RVGJHdllPQ0JpeXJrQkZmNUVLdmsrSDhyNXRPTXE5UkhKRG5Za2dEYUk2Y1F2dz09oml2uHlCQjh3L0RKdHBNWXlSZVJPdUtYa2c9PaRibG9iuDRzWGNwa2hmVTFaV1M5MGRDcDcycGc9PQ==
+  id: 11
+  email_bidx: dSaKUPrdi3VYJXDOtbDkn2yoU3OyD/V762ZyfpUwRj4=
+  country_code: IE
+  country_id: 1
+  timezone: Europe/London
+  encrypted_password: "$2a$11$HLE6OyeOv902h7drc4UF4.SLO6QKMRbNiaUAvp9ynTail3xUzNlqi"
+  confirmed_at: '2018-11-14 19:54:40'
+  currency: EUR
+  finished_setup: true
+  unconfirmed_email: schedule@overlap.com
+  :encrypted_email: UKV5l1YJPY2UbDU5YszWSgah7WewYKdzXesFpx+MyBZWALYX
+  :encrypted_email_iv: jK1hA056K/1gUfTG
+duplicate_transactions:
+  :first_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnSG8wZGxnMlFGaVdNcllMWWkrM0J3akFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTStEWlQ2T1RGcDdxYW9TVFNBZ0VRZ0R0ODZqY1BYdGp2bWJoenBZZjFoeHRydHBuRXhtV29PZEpNVEpmNGRPaHBvR2N6Z3hrek1pQWJQNVV5blUwV0pWU3BYTEJrb1F4V2VibTUzUT09oml2uGZIbEZDNDVCcnNrbnFGUHA0VG9ERnc9PaRibG9iuDlpbjBVUkN5cFo0dE5taXduT2huS2c9PQ==
+  :last_name_enc: !binary |-
+    g6NrZXnZ+EFRSURBSGlsNW95SldjOEg0VnM2VStXVDhJU2s1UHhKOEFyeittYW1Ea0VKcmxwZDRnSE1nck1uL29BMlFqKzgzZnFtQ0xmcUFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTWdaUVZScFpQMkFsRENRVzBBZ0VRZ0R0ZE5GeW00akJXZkZGbjgxNzBsNXBIcEFpTExKUTFWYVQ0dHJnbVZHQmVpa1lDajNiejBCaGdhWC9xb1hBZDE2QUhpNndOYkFndWJyYjVBdz09oml2uFdsU1kxb2Q0R0VpazZpbHVKTGwwZEE9PaRibG9iuEg2TWhIUXYyMGp6TzdjVUp5cGt3OWc9PQ==
+  id: 12
+  email_bidx: NsA/DkS+1r3OxnUu7UD4wIUa4bJFPRGjhulkHMZzR3c=
+  country_code: IE
+  country_id: 1
+  timezone: Europe/London
+  encrypted_password: "$2a$11$XhdaLNG4UU0ERSRzH1wA6uXlw29sCOR80scALTdPwHKRhQzClt0fy"
+  confirmed_at: '2018-11-14 19:54:40'
+  currency: EUR
+  finished_setup: true
+  unconfirmed_email: duplicate@transactions.com
+  :encrypted_email: wJZ8LjH3+G9BpK8cso1WllG5DGxYZkjajtm3wxWOl+MvMSjojm+BztXZ
+  :encrypted_email_iv: tjxXCjXH78e3N1L1

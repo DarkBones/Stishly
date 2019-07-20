@@ -1,6 +1,8 @@
 require "test_helper"
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
+  include Devise::Controllers::Helpers
+
   driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
 
   def login_user(user, password)
@@ -8,7 +10,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
     click_on "Sign in"
 
-    fill_in "Email", with: user.email
+    fill_in "Email", with: user.unconfirmed_email
     fill_in "Password", with: password
 
     page.execute_script("$('input[name=\"commit\"]').click()")

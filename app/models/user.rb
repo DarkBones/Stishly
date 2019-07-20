@@ -60,6 +60,8 @@ class User < ApplicationRecord
 
   after_create :initialize_user_data
 
+  attr_reader :email
+
   def will_save_change_to_email?
   end
 

@@ -40,8 +40,8 @@
 #
 bas: {
   id: 1,
-  first_name_enc: Bas,
-  last_name_enc: Donker,
+  first_name: Bas,
+  last_name: Donker,
   email_bidx: <%= User.generate_email_bidx("bassiedoinker@example.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
@@ -50,13 +50,14 @@ bas: {
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
   finished_setup: true,
-  email: bassiedoinker@example.com
+  email: bassiedoinker@example.com,
+  unconfirmed_email: bassiedoinker@example.com
 }
 
 sab: {
   id: 2,
-  first_name_enc: Sab,
-  last_name_enc: Reknod,
+  first_name: Sab,
+  last_name: Reknod,
   email_bidx: <%= User.generate_email_bidx("rekniodeissab@example.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
@@ -65,13 +66,14 @@ sab: {
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
   finished_setup: true,
-  email: rekniodeissab@example.com
+  email: rekniodeissab@example.com,
+  unconfirmed_email: rekniodeissab@example.com
 }
 
 new: {
   id: 3,
-  first_name_enc: New,
-  last_name_enc: User,
+  first_name: New,
+  last_name: User,
   email_bidx: <%= User.generate_email_bidx("new_user@example.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
@@ -80,13 +82,14 @@ new: {
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
   finished_setup: true,
-  email: new_user@example.com
+  email: new_user@example.com,
+  unconfirmed_email: new_user@example.com
 }
 
 transactions_test: {
   id: 4,
-  first_name_enc: Transactions,
-  last_name_enc: Test,
+  first_name: Transactions,
+  last_name: Test,
   email_bidx: <%= User.generate_email_bidx("transactions@test.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
@@ -95,13 +98,14 @@ transactions_test: {
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
   finished_setup: true,
-  email: transactions@test.com
+  email: transactions@test.com,
+  unconfirmed_email: transactions@test.com,
 }
 
 currency_test: {
   id: 5,
-  first_name_enc: Currency,
-  last_name_enc: Test,
+  first_name: Currency,
+  last_name: Test,
   email_bidx: <%= User.generate_email_bidx("currency@test.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
@@ -110,13 +114,14 @@ currency_test: {
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
   finished_setup: true,
-  email: currency@test.com
+  email: currency@test.com,
+  unconfirmed_email: currency@test.com
 }
 
 endless_page: {
   id: 6,
-  first_name_enc: Endless,
-  last_name_enc: Page,
+  first_name: Endless,
+  last_name: Page,
   email_bidx: <%= User.generate_email_bidx("endless@page.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
@@ -125,13 +130,14 @@ endless_page: {
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
   finished_setup: true,
-  email: endless@page.com
+  email: endless@page.com,
+  unconfirmed_email: endless@page.com
 }
 
 destroy: {
   id: 7,
-  first_name_enc: Destroy,
-  last_name_enc: Me,
+  first_name: Destroy,
+  last_name: Me,
   email_bidx: <%= User.generate_email_bidx("destroy@me.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
@@ -140,13 +146,14 @@ destroy: {
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
   finished_setup: true,
-  email: destroy@me.com
+  email: destroy@me.com,
+  unconfirmed_email: destroy@me.com
 }
 
 transactions: {
   id: 8,
-  first_name_enc: Transactions,
-  last_name_enc: Creating,
+  first_name: Transactions,
+  last_name: Creating,
   email_bidx: <%= User.generate_email_bidx("transactions@creator.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
@@ -155,13 +162,14 @@ transactions: {
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
   finished_setup: true,
-  email: transactions@creator.com
+  email: transactions@creator.com,
+  unconfirmed_email: transactions@creator.com
 }
 
 schedules: {
   id: 9,
-  first_name_enc: Schedules,
-  last_name_enc: Test,
+  first_name: Schedules,
+  last_name: Test,
   email_bidx: <%= User.generate_email_bidx("schedules@test.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
@@ -170,13 +178,14 @@ schedules: {
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
   finished_setup: true,
-  email: schedules@test.com
+  email: schedules@test.com,
+  unconfirmed_email: schedules@test.com
 }
 
 transaction_search: {
   id: 10,
-  first_name_enc: Transaction,
-  last_name_enc: Search,
+  first_name: Transaction,
+  last_name: Search,
   email_bidx: <%= User.generate_email_bidx("transaction@search.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
@@ -185,13 +194,14 @@ transaction_search: {
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
   finished_setup: true,
-  email: transaction@search.com
+  email: transaction@search.com,
+  unconfirmed_email: transaction@search.com
 }
 
 schedules_overlap: {
   id: 11,
-  first_name_enc: Schedule,
-  last_name_enc: Overlap,
+  first_name: Schedule,
+  last_name: Overlap,
   email_bidx: <%= User.generate_email_bidx("schedule@overlap.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
@@ -200,13 +210,14 @@ schedules_overlap: {
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
   finished_setup: true,
-  email: schedule@overlap.com
+  email: schedule@overlap.com,
+  unconfirmed_email: schedule@overlap.com
 }
 
 duplicate_transactions: {
   id: 12,
-  first_name_enc: Duplicate,
-  last_name_enc: Transactions,
+  first_name: Duplicate,
+  last_name: Transactions,
   email_bidx: <%= User.generate_email_bidx("duplicate@transactions.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
@@ -215,5 +226,6 @@ duplicate_transactions: {
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
   finished_setup: true,
-  email: duplicate@transactions.com
+  email: duplicate@transactions.com,
+  unconfirmed_email: duplicate@transactions.com
 }

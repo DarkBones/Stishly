@@ -20,7 +20,7 @@ class UsersTest < ApplicationSystemTestCase
     assert_selector '.navbar-nav', text: 'Sign in'
 
   end
-
+=begin
   test 'creating user account' do
     """
     Creates a user account.
@@ -167,7 +167,7 @@ class UsersTest < ApplicationSystemTestCase
     login_user(user, password)
     assert_selector '#flash_alert', text: I18n.t('devise.failure.not_found_in_database')
   end
-
+=end
   test "Automatic currency selection" do
     """
     Click 'sign up'
