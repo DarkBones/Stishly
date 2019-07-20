@@ -49,7 +49,8 @@ bas: {
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
-  finished_setup: true
+  finished_setup: true,
+  email: bassiedoinker@example.com
 }
 
 sab: {
@@ -63,7 +64,8 @@ sab: {
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
-  finished_setup: true
+  finished_setup: true,
+  email: rekniodeissab@example.com
 }
 
 new: {
@@ -77,7 +79,8 @@ new: {
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
-  finished_setup: true
+  finished_setup: true,
+  email: new_user@example.com
 }
 
 transactions_test: {
@@ -91,7 +94,8 @@ transactions_test: {
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
-  finished_setup: true
+  finished_setup: true,
+  email: transactions@test.com
 }
 
 currency_test: {
@@ -105,7 +109,8 @@ currency_test: {
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
-  finished_setup: true
+  finished_setup: true,
+  email: currency@test.com
 }
 
 endless_page: {
@@ -119,7 +124,8 @@ endless_page: {
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
-  finished_setup: true
+  finished_setup: true,
+  email: endless@page.com
 }
 
 destroy: {
@@ -133,7 +139,8 @@ destroy: {
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
-  finished_setup: true
+  finished_setup: true,
+  email: destroy@me.com
 }
 
 transactions: {
@@ -147,7 +154,8 @@ transactions: {
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
-  finished_setup: true
+  finished_setup: true,
+  email: transactions@creator.com
 }
 
 schedules: {
@@ -161,7 +169,8 @@ schedules: {
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
-  finished_setup: true
+  finished_setup: true,
+  email: schedules@test.com
 }
 
 transaction_search: {
@@ -175,7 +184,8 @@ transaction_search: {
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
-  finished_setup: true
+  finished_setup: true,
+  email: transaction@search.com
 }
 
 schedules_overlap: {
@@ -189,7 +199,8 @@ schedules_overlap: {
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
-  finished_setup: true
+  finished_setup: true,
+  email: schedule@overlap.com
 }
 
 duplicate_transactions: {
@@ -203,5 +214,6 @@ duplicate_transactions: {
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
-  finished_setup: true
+  finished_setup: true,
+  email: duplicate@transactions.com
 }
