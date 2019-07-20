@@ -160,7 +160,7 @@
 
       <div class="children py-2">
         <div class="path-fixed-amount">
-          <%= select_tag "currency", options_for_select(all_currencies(Money::Currency.table), :selected => current_user.currency), {:class => "form-control"} %>
+          <%= select_tag "currency#{suff}", options_for_select(all_currencies(Money::Currency.table), :selected => current_user.currency), {:class => "form-control"} %>
           <input type="number" step="any" class="form-control" placeholder="amount" name="amount<%= suff %>"><br />
           <%= select_tag "account#{suff}", options_for_select(user_accounts_array),{:class => "form-control account_select my-2"} %>
         </div>
