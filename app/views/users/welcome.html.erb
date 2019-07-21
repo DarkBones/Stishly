@@ -110,6 +110,12 @@
   var left, opacity, scale;
   var animating;
 
+  $(".account_row").first().find(".form-control").first().focus();
+
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+  })
+
   function insertExpenseRow(){
   	$.ajax({
       type: "GET",
@@ -121,6 +127,7 @@
 			  	numberExpenseRow();
 			  	addLadderformListeners();
 			  	populateAccountSelect();
+          setDatepickers();
         } else {
           triggerNotice("Upgrade to permium for more fixed expenses", true);
         }
@@ -244,6 +251,7 @@
           $("#remove_account_row").removeClass("disabled");
           numberAccountRow();
           setAccountPlaceholder();
+          $(".account_row").last().find(".form-control").first().focus();
         } else {
           triggerNotice("Upgrade to permium for more accounts", true);
         }
@@ -322,7 +330,6 @@
     // form validation
     if ($(this).parent().attr("id") === "setup_accounts") {
     	if(!validateAccounts($(this).parent())) {
-    		alert("FALSE");
     		return;
     	}
     }

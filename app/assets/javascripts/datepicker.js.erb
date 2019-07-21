@@ -1,5 +1,10 @@
 $(document).on('turbolinks:load', ()=> {
 
+  setDatepickers();
+
+});
+
+function setDatepickers(){
   if ($(".datepicker").length > 0){
     $.ajax({
       type: "GET",
@@ -32,8 +37,7 @@ $(document).on('turbolinks:load', ()=> {
       $(this).attr({'value': getTime});
     });
   }
-
-});
+}
 
 window.getDate = function () {
   var dt = new Date(),

@@ -9,7 +9,17 @@ $("#simple_schedule_form").change(function(e){
 
 $(document).on("turbolinks:load", () => {
   addLadderformListeners();
+  $(".ladderform").each(function(){
+    showHideInitialfields($(this));
+  });
 });
+
+// show the correct fields in case the user navigates to a different website and then click the back button in the browser
+function showHideInitialfields($target){
+  $target.find("select").each(function(){
+    showHideFields($(this));
+  });
+}
 
 function addLadderformListeners(){
   $(".ladderform").change(function(e){

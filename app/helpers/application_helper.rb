@@ -34,4 +34,14 @@ module ApplicationHelper
 
     return result.html_safe.to_s
   end
+
+  def hint(title, content)
+    result = "<button type=\"button\" class=\"btn btn-hint\" data-toggle=\"popover\" "
+    result += "title=\"#{title}\" "
+    result += "data-content=\"#{content}\""
+    result += ">?</button>"
+
+    return result.html_safe.to_s
+  end
+
 end
