@@ -33,7 +33,6 @@ class UsersController < ApplicationController
   end
 
   def submit_setup
-    #puts params.to_yaml
     User.setup_user(current_user, params)
     current_user.finished_setup = 1
     current_user.save!

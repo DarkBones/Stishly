@@ -35,7 +35,7 @@ class User < ApplicationRecord
   kms_attr :first_name, key_id: Rails.application.credentials.aws[:kms_key_id]
   kms_attr :last_name, key_id: Rails.application.credentials.aws[:kms_key_id]
 
-  attr_encrypted :email, key: [ENV["EMAIL_ENCRYPTION_KEY"]].pack("H*") if Rails.env.test? == false
+  attr_encrypted :email, key: [ENV["EMAIL_ENCRYPTION_KEY"]].pack("H*")
   blind_index :email
 
   # Include default devise modules. Others available are:
@@ -59,8 +59,6 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
 
   after_create :initialize_user_data
-
-  attr_reader :email
 
   def will_save_change_to_email?
   end
