@@ -1,5 +1,6 @@
 class Schedule
   class CreateFromForm
+    include TimezoneMethods
     
     def initialize(params, current_user, testing=false, type="schedule")
       @params = params
@@ -10,7 +11,7 @@ class Schedule
 
       @type = type
 
-      @tz = TZInfo::Timezone.get(params[:timezone])
+      @tz = TZInfo::Timezone.get(validate_timezone(params[:timezone]))
 
       @start_date = @params[:start_date].to_datetime
       if !testing && @tz.local_to_utc(@start_date.to_datetime) < Time.now.utc
@@ -35,7 +36,7 @@ class Schedule
         days_exclude: get_days_exclude,
         exclusion_met: get_exclusion_met,
         exclusion_met_day: get_exclusion_met_day,
-        timezone: @params[:timezone],
+        timezone: validate_timezone(@params[:timezone]),
         is_active: get_is_active,
         type_of: @type
       }

@@ -1,5 +1,6 @@
 class Transaction
   class CreateFromForm
+    include TimezoneMethods
 
     def initialize(params, current_user)
       @params = params
@@ -36,7 +37,7 @@ private
         user_currency: @current_user.currency,
         account_rate: get_account_rate(params, account, currency, transferred),
         user_rate: user_rate,
-        timezone: params[:timezone],
+        timezone: validate_timezone(params[:timezone]),
         category_id: params[:category_id],
         local_datetime: parse_datetime(params[:date], params[:time]),
         schedule_id: params[:schedule_id],
