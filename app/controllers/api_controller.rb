@@ -1,5 +1,9 @@
 class ApiController < ApplicationController
 
+  def get_user_notifications
+    render partial: "layouts/notifications"
+  end
+
   # renders the details of a given account name
   def account_details
     @account = current_user.accounts.where(name: params[:id]).take

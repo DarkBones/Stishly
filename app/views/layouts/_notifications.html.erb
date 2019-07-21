@@ -1,4 +1,8 @@
 <% notifications = current_user.notifications.limit(30)	%>
 <ul class="list-unstyled">
-	<%= render notifications %>
+	<% if notifications.length > 0 %>
+		<%= render notifications %>
+	<% else %>
+		<p class="px-2">No notifications</p>
+	<% end %>
 </ul>
