@@ -112,10 +112,7 @@
 
   $(".account_row").first().find(".form-control").first().focus();
 
-  $(function () {
-    $('[data-toggle="popover"]').popover()
-  })
-
+  
   function insertExpenseRow(){
   	$.ajax({
       type: "GET",
@@ -128,6 +125,7 @@
 			  	addLadderformListeners();
 			  	populateAccountSelect();
           setDatepickers();
+          setPopovers();
         } else {
           triggerNotice("Upgrade to permium for more fixed expenses", true);
         }

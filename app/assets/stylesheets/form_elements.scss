@@ -101,3 +101,14 @@
 .hidden {
   display: none;
 }
+
+.btn-hint {
+  background: white;
+  border: 7px solid $secondaryColor;
+  color: $primaryColor;
+  padding: 0px 23px;
+  font-size: 50px;
+  transform: scale(0.3);
+  margin-right: -20px;
+  margin-left: -20px;
+}

@@ -65,3 +65,8 @@ en:
     confirmations:
       confirmed: "Added {num} {transactions} to {schedule}"
       updated: "Successfully updated transaction"
+
+  hints:
+    fixed_amount:
+      title: "Fixed / Varied amounts"
+      body: "Transactions with fixed amounts get logged immidiately. For transactions with varying amounts, you will be asked to review them before they are logged."
