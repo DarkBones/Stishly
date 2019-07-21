@@ -2,8 +2,8 @@
 #
 # Table name: transactions
 #
-#  id                       :bigint(8)        not null, primary key
-#  user_id                  :bigint(8)
+#  id                       :bigint           not null, primary key
+#  user_id                  :bigint
 #  amount                   :integer
 #  direction                :integer
 #  description              :string(100)
@@ -13,15 +13,15 @@
 #  timezone                 :string(255)
 #  currency                 :string(255)
 #  account_currency_amount  :integer
-#  category_id              :bigint(8)
-#  parent_id                :bigint(8)
+#  category_id              :bigint
+#  parent_id                :bigint
 #  local_datetime           :datetime
-#  transfer_account_id      :bigint(8)
+#  transfer_account_id      :bigint
 #  user_currency_amount     :integer
 #  transfer_transaction_id  :integer
 #  scheduled_transaction_id :integer
 #  is_scheduled             :boolean          default(FALSE)
-#  schedule_id              :bigint(8)
+#  schedule_id              :bigint
 #  queue_scheduled          :boolean          default(FALSE)
 #  is_queued                :boolean          default(FALSE)
 #

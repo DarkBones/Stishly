@@ -2,9 +2,9 @@
 #
 # Table name: schedules_transactions
 #
-#  id             :bigint(8)        not null, primary key
-#  schedule_id    :bigint(8)
-#  transaction_id :bigint(8)
+#  id             :bigint           not null, primary key
+#  schedule_id    :bigint
+#  transaction_id :bigint
 #
 
 class SchedulesTransaction < ApplicationRecord

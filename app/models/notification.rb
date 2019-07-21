@@ -1,16 +1,17 @@
 # == Schema Information
 #
-# Table name: messages
+# Table name: notifications
 #
-#  id         :bigint(8)        not null, primary key
-#  user_id    :bigint(8)
-#  title      :string(255)
-#  body       :text(65535)
-#  read       :boolean          default(FALSE)
-#  read_at    :datetime
-#  link       :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                        :bigint           not null, primary key
+#  user_id                   :bigint
+#  title                     :string(255)
+#  body                      :text(65535)
+#  is_read                   :boolean          default(FALSE)
+#  read_at                   :datetime
+#  link                      :string(255)
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#  created_at_local_datetime :datetime
 #
 
 class Notification < ApplicationRecord

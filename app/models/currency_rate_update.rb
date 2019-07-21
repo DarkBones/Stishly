@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: currency_rate_updates
+#
+#  id         :bigint           not null, primary key
+#  currency   :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class CurrencyRateUpdate < ApplicationRecord
 
 	validates :currency, uniqueness: true

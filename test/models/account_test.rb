@@ -2,10 +2,10 @@
 #
 # Table name: accounts
 #
-#  id          :bigint(8)        not null, primary key
+#  id          :bigint           not null, primary key
 #  balance     :integer          default(0)
-#  currency_id :bigint(8)
-#  user_id     :bigint(8)
+#  currency_id :bigint
+#  user_id     :bigint
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  name        :string(255)      not null

@@ -2,7 +2,7 @@
 #
 # Table name: countries
 #
-#  id           :bigint(8)        not null, primary key
+#  id           :bigint           not null, primary key
 #  name         :string(255)
 #  date_format  :string(255)
 #  week_start   :integer

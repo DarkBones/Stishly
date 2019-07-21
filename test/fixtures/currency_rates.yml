@@ -2,7 +2,7 @@
 #
 # Table name: currency_rates
 #
-#  id            :bigint(8)        not null, primary key
+#  id            :bigint           not null, primary key
 #  from_currency :string(255)
 #  to_currency   :string(255)
 #  rate          :float(24)

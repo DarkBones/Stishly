@@ -2,9 +2,9 @@
 #
 # Table name: setting_values
 #
-#  id          :bigint(8)        not null, primary key
-#  entity_id   :bigint(8)
-#  setting_id  :bigint(8)
+#  id          :bigint           not null, primary key
+#  entity_id   :bigint
+#  setting_id  :bigint
 #  value       :string(255)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

@@ -2,7 +2,7 @@
 #
 # Table name: currencies
 #
-#  id              :bigint(8)        not null, primary key
+#  id              :bigint           not null, primary key
 #  name            :string(255)
 #  symbol          :string(255)
 #  iso_code        :string(255)
