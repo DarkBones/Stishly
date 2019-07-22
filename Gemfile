@@ -129,3 +129,5 @@ gem 'msgpack'
 
 gem 'attr_encrypted', '~> 3.1.0'
 gem 'blind_index'
+
+gem 'sendgrid-ruby'
