@@ -7,7 +7,7 @@
           <%= image_tag 'message.svg' %>
         </div>
       </a>
-      <div class="dropdown-menu dropdown-menu_notifications dropdown-menu-right" aria-labelledby="notificationsDropdown">
+      <div class="dropdown-menu dropdown-menu_notifications dropdown-menu-right dropshadow-light" aria-labelledby="notificationsDropdown">
         <div id="user_notifications">
           <%#= render partial: 'layouts/notifications' %>
         </div>
@@ -20,7 +20,7 @@
           <%= image_tag 'gear.svg' %>
         </div>
       </a>
-      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+      <div class="dropdown-menu dropdown-menu-right dropshadow-light" aria-labelledby="navbarDropdown">
         <%= render partial: 'layouts/dropdown_menu', :locals => { :is_dropdown => true } %>
       </div>
     </li>

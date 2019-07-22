@@ -1,6 +1,17 @@
+<%
+truncate = true
+if defined?(@truncate)
+	truncate = @truncate
+end
+%>
+
 <a href="/<%= notification.link %>">
 	<li class="nav-item">
 		<span class="title"><%= notification.title %></span><br />
-		<p><%= notification.body.truncate(50, separator: ' ') unless notification.body.nil? %></p>
+		<% if truncate %>
+			<p><%= notification.body.truncate(50, separator: ' ') unless notification.body.nil? %></p>
+		<% else %>
+			<p><%= notification.body unless notification.body.nil? %></p>
+		<% end %>
 	</li>
 </a>

@@ -1,8 +1,13 @@
-<% notifications = current_user.notifications.limit(30)	%>
+<% notifications = current_user.notifications.reverse_order.limit(APP_CONFIG['ui']['notifications']['page_length'])	%>
 <ul class="list-unstyled">
 	<% if notifications.length > 0 %>
 		<%= render notifications %>
 	<% else %>
 		<p class="px-2">No notifications</p>
+	<% end %>
+	<% if current_user.notifications.length > APP_CONFIG['ui']['notifications']['page_length'] %>
+		<li class="nav-item">
+			<%= link_to "View all", notifications_path %>
+		</li>
 	<% end %>
 </ul>

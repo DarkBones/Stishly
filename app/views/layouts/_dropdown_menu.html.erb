@@ -17,6 +17,7 @@ end
 	<% if current_user.finished_setup %>
 		<%= li_pref.html_safe %><%= link_to 'Settings', settings_url, { :class=> cl } %><%= li_suff.html_safe %>
 		<%= li_pref.html_safe %><%= link_to 'Schedules', schedules_url, { :class => cl } %><%= li_suff.html_safe %>
+    <%= li_pref.html_safe %><%= link_to 'Notifications', notifications_path, { :class => cl } %><%= li_suff.html_safe %>
 		<%= divider.html_safe %>
 	<% end %>
 	<%= li_pref.html_safe %><%= link_to 'Sign out', destroy_user_session_path, { :class=> cl } %><%= li_suff.html_safe %>

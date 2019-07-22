@@ -36,5 +36,5 @@
 
   setInterval(function(){
       reloadNotifications()
-  }, 600 * 1000); // every 10 minutes
+  }, <%= APP_CONFIG['ui']['notifications']['refresh_rate'] %>); // every 10 minutes
 </script>

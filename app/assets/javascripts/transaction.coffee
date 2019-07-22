@@ -2,14 +2,14 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
-  $('.pagination').hide()
-  if $('.pagination').length
+  $('.hide-pagination .pagination').hide()
+  if $('.hide-pagination .pagination').length
     $(window).scroll ->
-      $('.pagination').hide()
-      url = $('.pagination .next_page').attr('href')
+      $('.hide-pagination .pagination').hide()
+      url = $('.hide-pagination .pagination .next_page').attr('href')
       if url
         url = window.location.pathname + "?" + url.split("?")[1]
       if url && $(window).scrollTop() > $(document).height() - $(window).height() - 50
-        $('.pagination').text("")
+        $('.hide-pagination .pagination').text("")
         $.getScript(url)
     $(window).scroll()

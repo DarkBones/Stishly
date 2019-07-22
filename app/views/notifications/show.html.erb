@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+  	<div class="col-12">
+  		<h2>Notifications</h2>
+	  	<ul class="notifications list-unstyled">
+	  		<% if @notifications.length > 0 %>
+	  			<%= render @notifications, :locals => {:truncate => false} %>
+	  		<% else %>
+	  			<p>You have no notifications</p>
+	  		<% end %>
+	  	</div>
+	  </ul>
+  </div>
+</div>
+
+<%= will_paginate @notifications %>
