@@ -101,18 +101,28 @@
         <div class="row">
           <div class="col-12 py-2">
             <%= f.label :amount %><br />
-            <%# TODO: Find a better color for the slider; %>
-            <div class="slider-left">
-              <b><%= balance(0, user_currency, "none") %></b>
+            <div class="row">
+              <div class="col-12">
+                <div class="slider-left">
+                  <b><%= user_currency.symbol %><span class="slider_min-amount">0</span></b>
+                </div>
+                to
+                <div class="slider-right">
+                  <b><%= user_currency.symbol %><span class="slider_max-amount"><%= max_amount %></span></b>
+                </div>
+              </div>
             </div>
-            <%= f.text_field(:amount_range,
-              "data-slider-min" => "0",
-              "data-slider-max" => max_amount,
-              "data-slider-step" => "5",
-              "data-slider-value" => "[#{from_amount}, #{to_amount}]"
-              ) %>
-            <div class="slider-right">
-              <b><%= balance((max_amount * user_currency.subunit_to_unit), user_currency, "none") %></b>
+
+            <div class="row">
+              <div class="col-12">
+                <%= f.text_field(:amount_range,
+                  "data-slider-min" => "0",
+                  "data-slider-max" => max_amount,
+                  "data-slider-step" => "5",
+                  "data-slider-value" => "[#{from_amount}, #{to_amount}]",
+                  "onchange" => "setSliderValues(this);"
+                  ) %>
+              </div>
             </div>
           </div>
         </div>
@@ -173,3 +183,13 @@
 
   <% end %>
 </div>
+
+<script type="text/javascript">
+  function setSliderValues(e) {
+    console.log($(".slider-left .slider_max-amount").text());
+    let min = $(e).val().split(",")[0];
+    let max = $(e).val().split(",")[1];
+    $(".slider-left .slider_min-amount").text(min);
+    $(".slider-right .slider_max-amount").text(max);
+  }
+</script>
