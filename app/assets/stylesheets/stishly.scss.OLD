@@ -76,9 +76,8 @@ input, select, textarea {
   }
 }
 
-.sort-handle{
+.sort-handle {
   display: inline-block;
-  cursor: move;
   position: relative;
   width: 12px;
   height: 20px;
@@ -88,6 +87,10 @@ input, select, textarea {
   top: 4px;
   opacity: 0;
   background-image: image-url("sort-handle-black.svg")
+}
+
+.move-cursor {
+  //cursor: move;
 }
 
 .sortable:hover .sort-handle{

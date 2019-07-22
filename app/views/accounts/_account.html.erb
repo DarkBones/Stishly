@@ -7,7 +7,7 @@
 
 
 <li class="<%= li_c %> py-2" name="accounts_<%= account.link %>" id="account_<%= account.id.to_s %>" onclick="goToAccount(this)">
-  <div class="sort-handle"></div>
+  <div class="sort-handle<%= " move-cursor" if account.persisted? %>"></div>
   <% acc_curency = Account.get_currency(@account) %>
   <%= @account.short_name %>
   <span class="balance float-right" balance="<%= account.balance %>" currency="<%= account.currency %>">
