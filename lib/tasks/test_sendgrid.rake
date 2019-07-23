@@ -15,8 +15,8 @@ task :test_sendgrid => :environment do
 	req = Net::HTTP::Post.new(url.path)
 	req["Authorization"] = "Bearer #{Rails.application.credentials.sendgrid[:api_key]}"
 	req["Content-Type"] = "application/json"
-	req["data"] = "[{\"email\": \"donkerbc@gmail.com\"}]"
-	#req.data = "[{\"email\": \"donkerbc@gmail.com\"}]"
+	req["data"] = "[{\"email\": \"test@stishly.com\"}]"
+	#req.data = "[{\"email\": \"test@stishly\"}]"
 
 	response = http.request(req)
 
@@ -39,7 +39,7 @@ task :test_list => :environment do
 	req = Net::HTTP::Get.new(url.path)
 	req["Authorization"] = "Bearer #{Rails.application.credentials.sendgrid[:api_key]}"
 	req["Content-Type"] = "application/json"
-	#req["data"] = "[{\"email\": \"donkerbc@gmail.com\"}]"
+	#req["data"] = "[{\"email\": \"test@stishly\"}]"
 
 	response = http.request(req)
 	puts response.to_yaml
