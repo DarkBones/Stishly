@@ -449,6 +449,9 @@ function renderTransactionMenu(formId){
     type: "GET",
     dataType: "html",
     url: "/api/render_transactionform",
+    beforeSend(){
+      insertAjaxSpinner($("#new_transactions_form"));
+    },
     success(data) {
       $("#new_transactions_form").html(data);
       setDatepickers();

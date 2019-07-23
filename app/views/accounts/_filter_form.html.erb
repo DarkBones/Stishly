@@ -185,11 +185,13 @@
 </div>
 
 <script type="text/javascript">
+  "user strict";
+
   function setSliderValues(e) {
-    console.log($(".slider-left .slider_max-amount").text());
     let min = $(e).val().split(",")[0];
     let max = $(e).val().split(",")[1];
     $(".slider-left .slider_min-amount").text(min);
     $(".slider-right .slider_max-amount").text(max);
   }
+
 </script>

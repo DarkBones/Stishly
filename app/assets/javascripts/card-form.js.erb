@@ -31,6 +31,9 @@ function renderAccountMenu(){
     type: "GET",
     dataType: "html",
     url: "/api/render_accountform",
+    beforeSend(){
+      insertAjaxSpinner($("#new_account_form"));
+    },
     success(data) {
       $("#new_account_form").html(data);
     }

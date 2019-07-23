@@ -1,5 +1,7 @@
 class ApiController < ApplicationController
 
+  before_action -> { 1e8.to_i.times {} if Rails.env == 'development' } # simulate slow response times
+
   def get_user_notifications
     render partial: "layouts/notifications"
   end

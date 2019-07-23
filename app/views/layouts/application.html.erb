@@ -42,6 +42,11 @@
         <% end %>
         <div id="content" class="<%= "in" if !user_signed_in? || @hide_sidebar %>">
           <%= yield %>
+          <div id="ajax_spinner_template" class="hidden">
+            <div class="ajax_spinner">
+              <%= image_tag "ajax_spinner.svg" %>
+            </div>
+          </div>
         </div>
       </div>
     </main>
@@ -49,5 +54,30 @@
     <footer>
       
     </footer>
+
+    <script>
+      function setDatepickers(){
+        if ($(".datepicker").length > 0) {
+          $(".datepicker").datepicker({
+            format: "dd-M-yyyy",
+            todayHighlight: true,
+            weekStart: <%= current_user.country.week_start %>,
+            autoclose: true
+          });
+
+          $('.datepicker').each(function(){
+            if (!$(this).hasClass('datepicker-null')){
+              $(this).attr({'value': getDate});
+            }
+          });
+
+          $('input[type="time"][value="now"]').each(function(){
+            $(this).attr({'value': getTime});
+          });
+        }
+      }
+      setDatepickers();
+    </script>
+
   </body>
 </html>
