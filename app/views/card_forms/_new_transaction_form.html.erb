@@ -15,21 +15,12 @@ formId = "#transactionform"
         </button>
       </div>
 
-      <% transaction = Transaction.new.decorate %>
-      <%= form_with(model: transaction) do |f| %>
-        <div class="modal-body">
-          <div class="container">
+      <div id="new_transactions_form">
 
-            <%= render partial: "transactions/transaction_form_fields", :locals => {:transaction => transaction, :f => f, :base_only => false, :form_id_prefix => "", :form_id_suffix => "" } %>
+        <%#= render partial: "transactions/new_transactions_form" %>
 
-          </div>
-        </div>
+      </div>
 
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <%= f.submit 'Create Transaction', :class => 'btn btn-primary' %>
-        </div>
-      <% end %>
     </div>
   </div>
 </div>

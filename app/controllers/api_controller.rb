@@ -4,6 +4,18 @@ class ApiController < ApplicationController
     render partial: "layouts/notifications"
   end
 
+  def render_transactionform
+    render partial: "transactions/new_transactions_form"
+  end
+
+  def render_accountform
+    render partial: "accounts/new_account_form"
+  end
+
+  def render_scheduleform
+    render partial: "schedules/new_schedule_form"
+  end
+
   # renders the details of a given account name
   def account_details
     @account = current_user.accounts.where(name: params[:id]).take

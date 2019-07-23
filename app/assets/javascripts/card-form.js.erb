@@ -25,3 +25,14 @@ function resetAccountMenu(){
   $currencyTarget = $("#accountform").find("#account_currency");
   $currencyTarget.val($currencyTarget.attr("default_option"));
 }
+
+function renderAccountMenu(){
+  $.ajax({
+    type: "GET",
+    dataType: "html",
+    url: "/api/render_accountform",
+    success(data) {
+      $("#new_account_form").html(data);
+    }
+  });
+}

@@ -444,6 +444,19 @@ function resetCategoryDropdown(formId) {
   $(formId + " button#categories-dropdown").html(optionHtml);
 }
 
+function renderTransactionMenu(formId){
+  $.ajax({
+    type: "GET",
+    dataType: "html",
+    url: "/api/render_transactionform",
+    success(data) {
+      $("#new_transactions_form").html(data);
+      setDatepickers();
+      resetTransactionMenu(formId);
+    }
+  });
+}
+
 function resetTransactionMenu(formId){
   /*setTimeout(function(){ 
     console.log("FOCUS");
@@ -463,11 +476,4 @@ function resetTransactionMenu(formId){
   // show & hide default fields
   $(formId + " div.default-show").show();
   $(formId + " div.default-hide").hide();
-  
-  /*$("#transaction_description").get(0).focus();
-
-  setTimeout(function(){ 
-    console.log("FOCUS");
-    $("#transaction_description").focus();
-  }, 500);*/
 }

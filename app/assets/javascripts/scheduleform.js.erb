@@ -284,3 +284,16 @@ function resetScheduleMenu(){
 
   getScheduleNextOccurrences();
 }
+
+function renderScheduleMenu() {
+  $.ajax({
+    type: "GET",
+    dataType: "html",
+    url: "/api/render_scheduleform",
+    success(data) {
+      $("#new_schedule_form").html(data);
+      resetScheduleMenu();
+      setDatepickers();
+    }
+  });
+}

@@ -8,43 +8,12 @@
         </button>
       </div>
 
-      <%= form_with(model: Account.new) do |f| %>
-        <div class="modal-body">
-          <div class="container">
+      <div id="new_account_form">
 
-            <div class="row py-2">
-              <div class="col-12">
-                <%= f.label :name %><br />
-                <%= f.text_field :name, placeholder: "Current account", class: 'form-control' %>
-              </div>
-            </div>
+        <%#= render partial: "accounts/new_account_form" %>
 
-            <div class="row py-2">
-              <div class="col-12 col-sm-9">
-                <%= f.label :balance %><br />
-                <%= f.number_field :balance, placeholder: "1000.00", class: 'form-control', step: :any %>
-              </div>
-              <div class="col-12 col-sm-3">
-                <%= f.label :currency %><br />
-                <%= f.select(:currency, all_currencies(Money::Currency.table), {selected: current_user.currency}, { :class => 'form-control', "default_option" => current_user.currency }) %>
-              </div>
-            </div>
+      </div>
 
-            <div class="row py-2">
-              <div class="col-12">
-                <%= f.label :description %><br />
-                <%= f.text_area :description, class: 'form-control' %>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <%= f.submit 'Create Account', :class => 'btn btn-primary' %>
-        </div>
-      <% end %>
     </div>
   </div>
 </div>
