@@ -10,8 +10,10 @@
           <div class="input-group">
             <%= f.text_field(:description, class: 'form-control', placeholder: "Search") %>
             <div class="input-group-append">
-              
               <%= image_submit_tag("search.svg", height: "38px", width: "50px", class: "btn btn-secondary") %>
+              <div style="position: relative;">
+                <div id="search_ajax_spinner" style="width: 38px; height: 38px; position: absolute; left: 15px;"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -185,13 +187,10 @@
 </div>
 
 <script type="text/javascript">
-  "user strict";
-
   function setSliderValues(e) {
     let min = $(e).val().split(",")[0];
     let max = $(e).val().split(",")[1];
     $(".slider-left .slider_min-amount").text(min);
     $(".slider-right .slider_max-amount").text(max);
   }
-
 </script>

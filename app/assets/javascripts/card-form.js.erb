@@ -27,15 +27,17 @@ function resetAccountMenu(){
 }
 
 function renderAccountMenu(){
-  $.ajax({
-    type: "GET",
-    dataType: "html",
-    url: "/api/render_accountform",
-    beforeSend(){
-      insertAjaxSpinner($("#new_account_form"));
-    },
-    success(data) {
-      $("#new_account_form").html(data);
-    }
-  });
+  if ($("#new_account_form form").length === 0) {
+    $.ajax({
+      type: "GET",
+      dataType: "html",
+      url: "/api/render_accountform",
+      beforeSend(){
+        insertAjaxSpinner($("#new_account_form"));
+      },
+      success(data) {
+        $("#new_account_form").html(data);
+      }
+    });
+  }
 }

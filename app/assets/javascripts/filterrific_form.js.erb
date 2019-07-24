@@ -61,6 +61,12 @@ $(document).on("turbolinks:load", () => {
         type: "GET",
         dataType: "json",
         url: "/api/user_currency/detailed",
+        beforeSend() {
+          insertAjaxSpinner($("#search_ajax_spinner"), 38);
+        },
+        complete() {
+          removeAjaxSpinner($("#search_ajax_spinner"));
+        },
         success(data) {
           submitted = true;
 

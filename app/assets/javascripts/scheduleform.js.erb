@@ -16,7 +16,7 @@ function sanitize(val) {
 
 function getScheduleNextOccurrences(){
 
-  $("#scheduleform #next_occurrences").text("");
+  //$("#scheduleform #next_occurrences").text("");
   //var url;
   var name = sanitize($("#scheduleform #schedule_name").val());
   var startDate = sanitize($("#scheduleform #schedule_start_date").val());
@@ -50,6 +50,13 @@ function getScheduleNextOccurrences(){
     type: "GET",
     dataType: "json",
     url: "api/next_occurrences" + "/" + type + "/" + name + "/" + startDate + "/" + timezone + "/" + schedule + "/" + runEvery + "/" + days + "/" + days2 + "/" + datesPicked + "/" + weekdayMon + "/" + weekdayTue + "/" + weekdayWed + "/" + weekdayThu + "/" + weekdayFri + "/" + weekdaySat + "/" + weekdaySun + "/" + endDate + "/" + weekdayExcludeMon + "/" + weekdayExcludeTue + "/" + weekdayExcludeWed + "/" + weekdayExcludeThu + "/" + weekdayExcludeFri + "/" + weekdayExcludeSat + "/" + weekdayExcludeSun + "/" + datesPickedExclude + "/" + exclusionMet1 + "/" + exclusionMet2 + "/" + occurrenceCount,
+    beforeSend() {
+      $("#scheduleform #next_occurrences").html("");
+      //insertAjaxSpinner($("#scheduleform #next_occurrences"));
+    },
+    complete() {
+      //removeAjaxSpinner($("#scheduleform #next_occurrences"));
+    },
     success(data) {
       $("#scheduleform #next_occurrences").html("<ul>");
       data.forEach(function(d) {
@@ -286,14 +293,21 @@ function resetScheduleMenu(){
 }
 
 function renderScheduleMenu() {
-  $.ajax({
-    type: "GET",
-    dataType: "html",
-    url: "/api/render_scheduleform",
-    success(data) {
-      $("#new_schedule_form").html(data);
-      resetScheduleMenu();
-      setDatepickers();
-    }
-  });
+  if ($("#new_schedule_form form").length === 0) {
+    $.ajax({
+      type: "GET",
+      dataType: "html",
+      url: "/api/render_scheduleform",
+      beforeSend(){
+        insertAjaxSpinner($("#new_schedule_form"));
+      },
+      success(data) {
+        $("#new_schedule_form").html(data);
+        resetScheduleMenu();
+        setDatepickers();
+      }
+    });
+  } else {
+    resetScheduleMenu();
+  }
 }

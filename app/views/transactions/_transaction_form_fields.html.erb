@@ -117,8 +117,11 @@ formId = form_id_prefix.to_s + "transactionform" + form_id_suffix.to_s
     <div class="row py-2 <%= params[:transactions_class] %>" id="transactions" style="<%= params[:transactions_style] %>">
       <div class="col-12 py-2">
         <%= f.label :transactions %>
-        <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: "form-control", value: transaction.amount_multiple, "onkeyup" => "updateTransactionResult('#" + formId + "');", "rows" => "6" %>
-        <p id="transaction_total">Total: <span id="transactions-total"><%= params[:transactions_total] %></span></p>
+        <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: "form-control", value: transaction.amount_multiple, "onkeyup" => "updateTransactionResult('#" + formId + "', null, event);", "rows" => "6" %>
+        <div style="position: relative;" id="transaction_total_indicator">
+          <p id="transaction_total">Total: <span id="transactions-total"><%= params[:transactions_total] %></span></p>
+          <div style="width: 38px; height: 38px; position: absolute; top: 0; left: 45px;" id="total_ajax_spinner"></div>
+        </div>
       </div>
     </div>
 
@@ -127,6 +130,13 @@ formId = form_id_prefix.to_s + "transactionform" + form_id_suffix.to_s
       <div class="col-12 col-xl-3 py-2">
         <%= f.label :currency %>
         <%= f.select(:currency, all_currencies(Money::Currency.table), {}, { :class => "form-control", 'onchange' => 'changeTransactionCurrency(this, ' + base_only.to_s + ', true)' }) %>
+      </div>
+
+      <div id="currency_conversion_ajax_spinner_container" style="display: none;">
+        <div class="col-12 col-xl-9 py-2">
+          <div id="currency_conversion_ajax_spinner" style="height: 38px; width: 100%; margin-top: 32px;">
+          </div>
+        </div>
       </div>
 
       <%# CURRENCY CONVERSION %>
