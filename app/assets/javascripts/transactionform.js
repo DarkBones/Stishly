@@ -34,7 +34,7 @@ function getTransactionTotalFromMultiple(formId) {
   return total;
 }
 
-function updateTransactionsTotal(formId, event) {
+function updateTransactionsTotal(formId, force=false) {
   var currency, total, $targetTotal, $targetTransactions, $targetCurrency;
 
   $targetTotal = $(formId + " #transactions-total");
@@ -48,7 +48,7 @@ function updateTransactionsTotal(formId, event) {
     return;
   }
 
-  if(total === newTransactionsFormTotalAmount) {
+  if(total === newTransactionsFormTotalAmount && !force) {
     return;
   }
 
@@ -108,6 +108,7 @@ function updateTransactionResult(formId, multipleTransactions=null) {
   $rateTarget = $(formId + " #transaction_rate");
   $resultTarget = $(formId + " #transaction_account_currency");
   $amountTarget = $(formId + " #transaction_amount");
+  $spinnerTarget = $(formId + " #transaction_account_currency_spinner")
   type = getTransactionType(formId);
   
   if (multipleTransactions == null) {
@@ -140,9 +141,11 @@ function updateTransactionResult(formId, multipleTransactions=null) {
       url: "/api/account_currency_details/" + encodeURI($accountTarget.val()),
       beforeSend() {
         $resultTarget.hide();
+        $spinnerTarget.show();
       },
       complete() {
         $resultTarget.show();
+        $spinnerTarget.hide();
       },
       success(data) {
         result = Math.round((amount * rate) * data.subunit_to_unit) / data.subunit_to_unit;
@@ -171,7 +174,7 @@ function updateTransactionResult(formId, multipleTransactions=null) {
     });
   } else {
     if (multipleTransactions) {
-      updateTransactionsTotal(formId, event);
+      updateTransactionsTotal(formId);
     }
   }
 
@@ -379,7 +382,7 @@ function changeTransactionCurrency(obj, ignore=false, lockCurrency=true){
       }
     }
   });
-  updateTransactionsTotal(formId);
+  updateTransactionsTotal(formId, true);
   updateTransactionResult(formId);
 }
 
