@@ -387,43 +387,48 @@ function changeTransactionCurrency(obj, ignore=false, lockCurrency=true){
 }
 
 function changeTransactionAccount(obj) {
-  var formId, account, transactionType;
-  
+  var formId, account, transactionType, accountArr, currency;
+
   formId = getFormId(obj);
-  account = $(obj).val();
+  account = $(obj).text();
   transactionType = getTransactionType(formId);
 
-  if ($(obj).attr("id") !== "transaction_to_account") {
-    $(formId + " #transaction_account").val(account);
-    $(formId + " #transaction_from_account").val(account);
+  $currencyTarget = $(formId + " #transaction_currency");
+
+  currency = getCurrencyFromAccount($(formId + " #transaction_account option:selected").text());
+
+  if ($currencyTarget.hasClass("changed")){
+    if (currency == $currencyTarget.val()){
+      $(formId + " #currency-rate").hide();
+      $(formId + " #currency-result").hide();
+    } else {
+      //$(formId + " #currency-rate").show();
+      //$(formId + " #currency-result").show();
+      changeTransactionCurrency($(formId + " #currency-result"));
+    }
+    return;
   }
 
   if (transactionType !== "transfer") {
-    if ($(formId + " #transaction_currency").hasClass("changed") === false) {
-      $.ajax({
-        type: "GET",
-        dataType: "text",
-        url: "/api/account_currency/" + encodeURI(account),
-        
-        success(data) {
-          $(formId + " #transaction_currency").val(data);
-          changeTransactionCurrency($(formId + " #transaction_currency"), false, false);
-        }
-      });
+    if (!$currencyTarget.hasClass("changed")){
+      $currencyTarget.val(currency);
     }
   } else if ($(obj).attr("id") === "transaction_from_account") {
-    $.ajax({
-      type: "GET",
-      dataType: "json",
-      url: "/api/account_currency_details/" + encodeURI(account),
-      success(data) {
-        $(formId + " #transaction_currency").val(data.iso_code);
-        updateTransactionsTotal(formId);
-      }
-    });
-  }
+    $(formId + " #transaction_currency").val(currency);
+  }  
 
-  showTransferCurrencyRates(formId);
+  updateTransactionsTotal(formId, true)
+}
+
+function getCurrencyFromAccount(account) {
+  var currency;
+
+  account = account.split(" ")
+  currency = account[account.length - 1]
+  currency = currency.replace("(", "");
+  currency = currency.replace(")", "");
+
+  return currency;
 }
 
 function changeTransactionToAccount(obj) {
@@ -475,7 +480,7 @@ function resetDateAndTime(formId) {
 }
 
 function resetAccountAndCurrencyDropdowns(formId) {
-  var account;
+  var account, accountSelect;
 
   account = getActiveAccountName();
   if (account == null) {
@@ -485,14 +490,11 @@ function resetAccountAndCurrencyDropdowns(formId) {
   $(formId + " #transaction_account").val(account);
   $(formId + " #transaction_from_account").val(account);
 
-  $.ajax({
-    type: "GET",
-    dataType: "text",
-    url: "/api/account_currency/" + encodeURI(account),
-    success(data) {
-      $(formId + " #transaction_currency").val(data);
-    }
-  });
+  accountSelect = $(formId + " #transaction_account option:selected").text();
+
+  $(formId + " #transaction_currency").val(getCurrencyFromAccount(accountSelect))
+  $(formId + " #transaction_currency").removeClass("changed");
+  
 }
 
 function resetCategoryDropdown(formId) {
