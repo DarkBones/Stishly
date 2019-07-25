@@ -48,4 +48,4 @@ window.getActiveAccountName = function (){
   }
 
   return null;
-}
+};

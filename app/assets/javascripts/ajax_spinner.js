@@ -10,8 +10,8 @@ window.insertAjaxSpinner = function($target, size=75) {
 		$target.find(".ajax_spinner img").css("height", size.toString() + "px");
 		$target.find(".ajax_spinner").show();
 	}
-}
+};
 
 window.removeAjaxSpinner = function($target) {
 	$target.find(".ajax_spinner").remove();
-}
+};

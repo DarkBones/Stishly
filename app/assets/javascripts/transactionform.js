@@ -35,7 +35,7 @@ function getTransactionTotalFromMultiple(formId) {
 }
 
 function updateTransactionsTotal(formId, force=false) {
-  var currency, total, $targetTotal, $targetTransactions, $targetCurrency;
+  var currency, total, $targetTotal, $targetTransactions, $targetCurrency, totalStr;
 
   $targetTotal = $(formId + " #transactions-total");
   $targetTransactions = $(formId + " #transaction_transactions");
@@ -100,7 +100,7 @@ function getTransactionType(formId) {
 }
 
 function updateTransactionResult(formId, multipleTransactions=null) {
-  var type, multipleTransactions, rate, amount, $accountTarget, $rateTarget, $resultTarget, $amountTarget, result, subunitDigits;
+  var type, multipleTransactions, rate, amount, $accountTarget, $rateTarget, $resultTarget, $amountTarget, result, subunitDigits, $spinnerTarget;
   var main, cents;
 
   rate = 1;
@@ -108,7 +108,7 @@ function updateTransactionResult(formId, multipleTransactions=null) {
   $rateTarget = $(formId + " #transaction_rate");
   $resultTarget = $(formId + " #transaction_account_currency");
   $amountTarget = $(formId + " #transaction_amount");
-  $spinnerTarget = $(formId + " #transaction_account_currency_spinner")
+  $spinnerTarget = $(formId + " #transaction_account_currency_spinner");
   type = getTransactionType(formId);
   
   if (multipleTransactions == null) {
@@ -161,9 +161,9 @@ function updateTransactionResult(formId, multipleTransactions=null) {
           main = result.split(".")[0];
           cents = result.split(".")[1];
           while (cents.length < subunitDigits) {
-            cents += "0"
+            cents += "0";
           }
-          result = main + "." + cents
+          result = main + "." + cents;
         }
 
         $resultTarget.val(result);
@@ -273,7 +273,7 @@ function changeTransactionType(type, obj, formId=null) {
 }
 
 function changeTransactionMultiple(type, obj){
-  var formId = getFormId(obj)
+  var formId = getFormId(obj);
   switch (type) {
     case "single":
       $(formId + " #amount").show();
