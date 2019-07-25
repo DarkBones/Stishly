@@ -123,6 +123,7 @@ function updateTransactionResult(formId, multipleTransactions=null) {
     $rateTarget = $(formId + " #transaction_rate_from_to");
     $resultTarget = $(formId + " #transaction_to_account_currency");
     $accountTarget = $(formId + " #transaction_to_account");
+    $spinnerTarget = $(formId + " #transaction_transfer_currency_spinner");
   } else {
     $accountTarget = $(formId + " #transaction_account");
   }
@@ -180,9 +181,9 @@ function updateTransactionResult(formId, multipleTransactions=null) {
 
 }
 
-// handles whether the transfer currency rates should be shown
+// whether the transfer currency rate should be shown
 function showTransferCurrencyRates(formId, type=null) {
-  var from, to;
+  var from, to, fromCurrency, toCurrency, $submitButton;
 
   if (type == null) {
     type = getTransactionType(formId);
@@ -190,36 +191,45 @@ function showTransferCurrencyRates(formId, type=null) {
 
   if (type === "transfer") {
     $(formId + " #transfer-currency-options").hide();
-    
+
+    fromCurrency = getCurrencyFromAccount($(formId + " #transaction_from_account option:selected").text());
+    toCurrency = getCurrencyFromAccount($(formId + " #transaction_to_account option:selected").text());
+
     from = encodeURI($(formId + " #transaction_from_account").val());
     to = encodeURI($(formId + " #transaction_to_account").val());
 
-    $.ajax({
-      type: "GET",
-      dataType: "json",
-      url: "/api/transfer_accounts/" + from + "/" + to,
-      success(data) {
-        if (data.from_account.currency !== data.to_account.currency){
+    $submitButton = $(formId + " input[type='submit']");
+
+    if (fromCurrency !== toCurrency) {
+      $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "/api/transfer_accounts/" + from + "/" + to,
+        beforeSend() {
+          $submitButton.attr("disabled", true);
+          $(formId +  " #transfer_conversion_spinner").show();
+        },
+        complete() {
+          $(formId + " #transfer_conversion_spinner").hide();
+        },
+        success(data) {
+          $submitButton.removeAttr("disabled");
           $(formId + " #to_account_currency").text("Amount in " + data.to_account.currency);
           $(formId + " #transfer-currencies").show();
           $(formId + " #rate_from_to").text("Rate " + data.from_account.currency + " to " + data.to_account.currency);
           $(formId + " #transaction_rate_from_to").val(data.currency_rate);
-        } else {
-          $(formId + " #transaction_rate_from_to").val(data.currency_rate);
-          $(formId + " #transfer-currencies").hide();
-        }
 
-        updateTransactionResult(formId);
-      }
-    });
+          updateTransactionResult(formId);
+        }
+      });
+    } else {
+      $(formId + " #transaction_rate_from_to").val(1);
+      $(formId + " #transfer-currencies").hide();
+    }
   } else {
-    $(formId + " #transaction_rate_from_to").val(1);
-    $(formId + " #transaction-currencies").hide();
     $(formId + " #transfer-currencies").hide();
-    $(formId + " #transaction-currency-options").show();
   }
 
-  updateTransactionResult(formId);
 }
 
 function changeTransactionType(type, obj, formId=null) {
@@ -310,11 +320,11 @@ function updateTransactionRate(obj) {
 
 function changeTransactionCurrency(obj, ignore=false, lockCurrency=true){
   // return if the form only uses base transaction fields
+  var formId, result, currency, account, $submitButton;
+
   if (ignore) {
     return;
   }
-
-  var formId, result, currency, account;
 
   if(lockCurrency){
     $(obj).addClass("changed");
@@ -333,21 +343,26 @@ function changeTransactionCurrency(obj, ignore=false, lockCurrency=true){
   $spinnerContainer = $(formId + " #currency_conversion_ajax_spinner_container");
   $spinner = $(formId + " #currency_conversion_ajax_spinner_container #currency_conversion_ajax_spinner")
 
+  $submitButton = $(formId + " input[type='submit']");
+
   $.ajax({
     type: "GET",
     dataType: "json",
     url: "/api/account_currency_details/" + encodeURI(account),
     beforeSend() {
+      $submitButton.attr("disabled", true);
       $spinnerContainer.show();
       insertAjaxSpinner($spinner, 38);
     },
     success(dataCurrency) {
+      $submitButton.removeAttr("disabled");
       if (dataCurrency.iso_code != currency){
         $.ajax({
           type: "GET",
           dataType: "text",
           url: "/api/currency_rate/" + currency + "/" + dataCurrency.iso_code,
           beforeSend() {
+            $submitButton.attr("disabled", true);
             $spinnerContainer.show();
             insertAjaxSpinner($spinner, 38);
           },
@@ -368,6 +383,7 @@ function changeTransactionCurrency(obj, ignore=false, lockCurrency=true){
             }
 
             $(formId + " #currency-result input").val(Math.round(result * dataCurrency.subunit_to_unit) / dataCurrency.subunit_to_unit);
+            $submitButton.removeAttr("disabled");
           }
         });
 
@@ -398,23 +414,30 @@ function changeTransactionAccount(obj) {
   currency = getCurrencyFromAccount($(formId + " #transaction_account option:selected").text());
 
   if ($currencyTarget.hasClass("changed")){
-    if (currency == $currencyTarget.val()){
-      $(formId + " #currency-rate").hide();
-      $(formId + " #currency-result").hide();
+    if (transactionType !== "transfer") {
+      if (currency == $currencyTarget.val()){
+        $(formId + " #currency-rate").hide();
+        $(formId + " #currency-result").hide();
+      } else {
+        changeTransactionCurrency($(formId + " #currency-result"));
+      }
     } else {
-      //$(formId + " #currency-rate").show();
-      //$(formId + " #currency-result").show();
-      changeTransactionCurrency($(formId + " #currency-result"));
+      $(formId + " #currency-rate").show();
+      $(formId + " #currency-result").show();
     }
-    return;
+
+    //return;
   }
 
   if (transactionType !== "transfer") {
     if (!$currencyTarget.hasClass("changed")){
       $currencyTarget.val(currency);
     }
-  } else if ($(obj).attr("id") === "transaction_from_account") {
-    $(formId + " #transaction_currency").val(currency);
+  } else {
+    if ($(obj).attr("id") === "transaction_from_account") {
+      $(formId + " #transaction_currency").val(currency);
+    }
+    showTransferCurrencyRates(formId);
   }  
 
   updateTransactionsTotal(formId, true)
