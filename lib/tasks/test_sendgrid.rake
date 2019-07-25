@@ -65,3 +65,11 @@ task :test_example => :environment do
 	puts response.headers
 
 end
+
+task :lib => :environment do
+	require 'sendgrid-ruby'
+	include SendGrid
+
+	sg = SendGrid::API.new(api_key: "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")
+	
+end
