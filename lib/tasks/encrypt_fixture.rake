@@ -13,7 +13,7 @@ namespace :Stishly do
 		require Rails.root + "config/environment"
 
 		encrypted_hash = {}
-		for k, v in YAML.load(ERB.new(File.read(Rails.root + src_yml)).result) do
+		for k, v in YAML.safe_load(ERB.new(File.read(Rails.root + src_yml)).result) do
 			user = User.new(v)
 			encrypted_hash[k] = {}
 
