@@ -55,29 +55,32 @@
       
     </footer>
 
-    <script>
-      function setDatepickers(){
-        if ($(".datepicker").length > 0) {
-          $(".datepicker").datepicker({
-            format: "dd-M-yyyy",
-            todayHighlight: true,
-            weekStart: <%= current_user.country.week_start %>,
-            autoclose: true
-          });
+    <% if user_signed_in? %>
+      <script>
+        function setDatepickers(){
 
-          $('.datepicker').each(function(){
-            if (!$(this).hasClass('datepicker-null')){
-              $(this).attr({'value': getDate});
-            }
-          });
+          if ($(".datepicker").length > 0) {
+            $(".datepicker").datepicker({
+              format: "dd-M-yyyy",
+              todayHighlight: true,
+              weekStart: <%= current_user.country.week_start %>,
+              autoclose: true
+            });
 
-          $('input[type="time"][value="now"]').each(function(){
-            $(this).attr({'value': getTime});
-          });
+            $('.datepicker').each(function(){
+              if (!$(this).hasClass('datepicker-null')){
+                $(this).attr({'value': getDate});
+              }
+            });
+
+            $('input[type="time"][value="now"]').each(function(){
+              $(this).attr({'value': getTime});
+            });
+          }
         }
-      }
-      setDatepickers();
-    </script>
+        setDatepickers();
+      </script>
+    <% end %>
 
   </body>
 </html>

@@ -8,7 +8,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def login_user(user, password)
     visit root_path
 
-    click_on "Sign in"
+    all('a', :text => 'Sign in')[0].click
 
     fill_in "Email", with: user.unconfirmed_email
     fill_in "Password", with: password

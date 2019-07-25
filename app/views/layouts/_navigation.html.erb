@@ -21,20 +21,22 @@
       $('#content').toggleClass('in');
   });
 
-  function reloadNotifications() {
-    $.ajax({
-      type: "GET",
-      dataType: "html",
-      url: "/api/get_user_notifications",
-      success(data) {
-        $(".navbar #user_notifications").html(data);
-      }
-    });
-  }
+  <% if user_signed_in? %>
+    function reloadNotifications() {
+      $.ajax({
+        type: "GET",
+        dataType: "html",
+        url: "/api/get_user_notifications",
+        success(data) {
+          $(".navbar #user_notifications").html(data);
+        }
+      });
+    }
 
-  reloadNotifications();
+    reloadNotifications();
 
-  setInterval(function(){
-      reloadNotifications()
-  }, <%= APP_CONFIG['ui']['notifications']['refresh_rate'] %>); // every 10 minutes
+    setInterval(function(){
+        reloadNotifications()
+    }, <%= APP_CONFIG['ui']['notifications']['refresh_rate'] %>); // every 10 minutes
+  <% end %>
 </script>

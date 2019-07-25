@@ -17,7 +17,7 @@ formId = "#transactionform"
 
       <div id="new_transactions_form">
 
-        <%#= render partial: "transactions/new_transactions_form" %>
+        <%= render partial: "transactions/new_transactions_form" if Rails.env.test? %>
 
       </div>
 
