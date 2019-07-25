@@ -7,31 +7,26 @@ function getFormId(obj) {
 }
 
 function getTransactionTotalFromMultiple(formId) {
-  var text, lines, total, words, i, $target, line;
   total = 0;
 
-  $target = $(formId + " #transaction_transactions");
+  let $target = $(formId + " #transaction_transactions");
+  let text = $target.val();
+  let lines = text.split("\n");
 
-  text = $target.val();
-  lines = text.split("\n");
+  let line = lines.pop();
+  let words = [];
+  while (typeof(line) !== "undefined") {
+    words = line.split(" ");
 
-  line = "";
-  while (typeof(line) !== "undefined"){
+    if (!isNaN(parseFloat(words[words.length - 1]))) {
+      total += parseFloat(words[words.length - 1]);
+    }
+
     line = lines.pop();
-    if (typeof(line) === "undefined"){
-      break;
-    }
-    if (line.length > 0) {
-      words = line.split(" ");
-      if(words.length > 0) {
-        if (!isNaN(words[words.length - 1]) && words[words.length - 1].length > 0) {
-          total += parseFloat(words[words.length - 1]);
-        }
-      }
-    }
   }
 
   return total;
+
 }
 
 function updateTransactionsTotal(formId, force=false) {
