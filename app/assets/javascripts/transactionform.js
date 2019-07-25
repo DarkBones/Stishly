@@ -34,10 +34,10 @@ function updateTransactionsTotal(formId, force=false) {
 
   $targetTotal = $(formId + " #transactions-total");
   $targetTransactions = $(formId + " #transaction_transactions");
+
   $targetCurrency = $(formId + " #transaction_currency");
 
   total = getTransactionTotalFromMultiple(formId);
-  //alert(total);
 
   if(typeof(total) === "undefined") {
     return;
@@ -94,43 +94,32 @@ function getTransactionType(formId) {
 
 }
 
-function updateTransactionResult(formId, multipleTransactions=null) {
-  var type, rate, amount, $accountTarget, $rateTarget, $resultTarget, $amountTarget, result, subunitDigits, $spinnerTarget;
-  var main, cents;
+function updateTransactionResult(formId) {
+  let isMultiple = isTransactionMultiple(formId);
+  let rate = 1;
+  let amount = 0
+  let type = getTransactionType(formId);
 
-  rate = 1;
-  amount = 0;
-  $rateTarget = $(formId + " #transaction_rate");
-  $resultTarget = $(formId + " #transaction_account_currency");
-  $amountTarget = $(formId + " #transaction_amount");
-  $spinnerTarget = $(formId + " #transaction_account_currency_spinner");
-  type = getTransactionType(formId);
-  
-  if (multipleTransactions == null) {
-    multipleTransactions = isTransactionMultiple(formId);
-  }
-
-  if (multipleTransactions) {
-    $amountTarget = $(formId + " #transaction_transactions");
-  }
-
+  let $rateTarget = $(formId + " #transaction_rate");
+  let $resultTarget = $(formId + " #transaction_account_currency");
+  let $amountTarget = $(formId + " #transaction_amount");
+  let $accountTarget = $(formId + " #transaction_to_account");
+  let $spinnerTarget = $(formId + " #transaction_account_currency_spinner");
   if (type === "transfer") {
     $rateTarget = $(formId + " #transaction_rate_from_to");
-    $resultTarget = $(formId + " #transaction_to_account_currency");
+    $resultTarget = $(formId + " #transaction_account_currency");
     $accountTarget = $(formId + " #transaction_to_account");
     $spinnerTarget = $(formId + " #transaction_transfer_currency_spinner");
-  } else {
-    $accountTarget = $(formId + " #transaction_account");
   }
-
 
   if ($resultTarget.is(":visible")) {
     rate = $rateTarget.val();
-    if (multipleTransactions) {
-      amount = getTransactionTotalFromMultiple(formId, event);
+    if (isMultiple) {
+      amount = getTransactionTotalFromMultiple(formId);
     } else {
       amount = $amountTarget.val();
     }
+
     $.ajax({
       type: "GET",
       dataType: "json",
@@ -147,18 +136,13 @@ function updateTransactionResult(formId, multipleTransactions=null) {
         result = Math.round((amount * rate) * data.subunit_to_unit) / data.subunit_to_unit;
         subunitDigits = Math.floor(Math.log10(data.subunit_to_unit));
         $resultTarget.val(result.toFixed(subunitDigits));
-
-        if (multipleTransactions){
-          updateTransactionsTotal(formId);
-        }
       }
     });
-  } else {
-    if (multipleTransactions) {
-      updateTransactionsTotal(formId);
-    }
   }
 
+  if(isMultiple){
+    updateTransactionsTotal(formId);
+  }
 }
 
 // whether the transfer currency rate should be shown
@@ -258,13 +242,15 @@ function changeTransactionMultiple(type, obj){
     case "single":
       $(formId + " #amount").show();
       $(formId + " #transactions").hide();
-      updateTransactionResult(formId, false);
       break;
     default:
       $(formId + " #amount").hide();
       $(formId + " #transactions").show();
-      updateTransactionResult(formId, true);
   }
+
+  setTimeout(function(){
+    updateTransactionResult(formId);
+  }, 1000);
 }
 
 
@@ -547,4 +533,6 @@ function resetTransactionMenu(formId){
   // show & hide default fields
   $(formId + " div.default-show").show();
   $(formId + " div.default-hide").hide();
+
+  newTransactionsFormTotalAmount = 0;
 }
