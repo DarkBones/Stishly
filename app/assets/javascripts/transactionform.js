@@ -100,7 +100,7 @@ function getTransactionType(formId) {
 }
 
 function updateTransactionResult(formId, multipleTransactions=null) {
-  var type, multipleTransactions, rate, amount, $accountTarget, $rateTarget, $resultTarget, $amountTarget, result, subunitDigits, $spinnerTarget;
+  var type, rate, amount, $accountTarget, $rateTarget, $resultTarget, $amountTarget, result, subunitDigits, $spinnerTarget;
   var main, cents;
 
   rate = 1;
@@ -150,23 +150,8 @@ function updateTransactionResult(formId, multipleTransactions=null) {
       },
       success(data) {
         result = Math.round((amount * rate) * data.subunit_to_unit) / data.subunit_to_unit;
-        result = result.toString();
-        
-        if (data.subunit_to_unit > 1) {
-          if(result.includes(".") == false){
-            result += ".";
-          }
-
-          subunitDigits = Math.floor(Math.log10(data.subunit_to_unit));
-          main = result.split(".")[0];
-          cents = result.split(".")[1];
-          while (cents.length < subunitDigits) {
-            cents += "0";
-          }
-          result = main + "." + cents;
-        }
-
-        $resultTarget.val(result);
+        subunitDigits = Math.floor(Math.log10(data.subunit_to_unit));
+        $resultTarget.val(result.toFixed(subunitDigits));
 
         if (multipleTransactions){
           updateTransactionsTotal(formId);
