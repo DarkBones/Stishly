@@ -6,6 +6,17 @@ function getFormId(obj) {
   return "#" + $(obj).parents(".transactionform").attr("id");
 }
 
+function getCurrencyFromAccount(account) {
+  var currency;
+
+  account = account.split(" ")
+  currency = account[account.length - 1]
+  currency = currency.replace("(", "");
+  currency = currency.replace(")", "");
+
+  return currency;
+}
+
 function getTransactionTotalFromMultiple(formId) {
   total = 0;
 
@@ -198,7 +209,7 @@ function showTransferCurrencyRates(formId, type=null) {
 
 function changeTransactionType(type, obj, formId=null) {
   if (formId == null){
-    var formId = getFormId(obj)
+    formId = getFormId(obj);
   }
 
   switch(type) {
@@ -286,7 +297,7 @@ function updateTransactionRate(obj) {
 
 function changeTransactionCurrency(obj, ignore=false, lockCurrency=true){
   // return if the form only uses base transaction fields
-  var formId, result, currency, account, $submitButton;
+  var formId, result, currency, account, $submitButton, $spinnerContainer, $spinner;
 
   if (ignore) {
     return;
@@ -307,7 +318,7 @@ function changeTransactionCurrency(obj, ignore=false, lockCurrency=true){
   account = $(formId + " #single-account select").val();
 
   $spinnerContainer = $(formId + " #currency_conversion_ajax_spinner_container");
-  $spinner = $(formId + " #currency_conversion_ajax_spinner_container #currency_conversion_ajax_spinner")
+  $spinner = $(formId + " #currency_conversion_ajax_spinner_container #currency_conversion_ajax_spinner");
 
   $submitButton = $(formId + " input[type='submit']");
 
@@ -322,7 +333,7 @@ function changeTransactionCurrency(obj, ignore=false, lockCurrency=true){
     },
     success(dataCurrency) {
       $submitButton.removeAttr("disabled");
-      if (dataCurrency.iso_code != currency){
+      if (dataCurrency.iso_code !== currency){
         $.ajax({
           type: "GET",
           dataType: "text",
@@ -369,7 +380,7 @@ function changeTransactionCurrency(obj, ignore=false, lockCurrency=true){
 }
 
 function changeTransactionAccount(obj) {
-  var formId, account, transactionType, accountArr, currency;
+  var formId, account, transactionType, currency, $currencyTarget;
 
   formId = getFormId(obj);
   account = $(obj).text();
@@ -381,7 +392,7 @@ function changeTransactionAccount(obj) {
 
   if ($currencyTarget.hasClass("changed")){
     if (transactionType !== "transfer") {
-      if (currency == $currencyTarget.val()){
+      if (currency === $currencyTarget.val()){
         $(formId + " #currency-rate").hide();
         $(formId + " #currency-result").hide();
       } else {
@@ -409,17 +420,6 @@ function changeTransactionAccount(obj) {
   updateTransactionsTotal(formId, true)
 }
 
-function getCurrencyFromAccount(account) {
-  var currency;
-
-  account = account.split(" ")
-  currency = account[account.length - 1]
-  currency = currency.replace("(", "");
-  currency = currency.replace(")", "");
-
-  return currency;
-}
-
 function changeTransactionToAccount(obj) {
   var formId = getFormId(obj);
   showTransferCurrencyRates(formId);
@@ -443,10 +443,10 @@ function resetAccountOptions(formId) {
 function resetButtonGroups(formId) {
   $(formId + " #button-group").each(function(index){
     $(this).find("input").each(function(i){
-      $(this).prop("checked", i==0);
+      $(this).prop("checked", i===0);
     });
     $(this).find("label").each(function(i){
-      if(i == 0){
+      if(i === 0){
         $(this).addClass("active");
       } else {
         $(this).removeClass("active");
@@ -494,26 +494,6 @@ function resetCategoryDropdown(formId) {
   $(formId + " button#categories-dropdown").html(optionHtml);
 }
 
-function renderTransactionMenu(formId){
-  if ($("#new_transactions_form form").length === 0) {
-    $.ajax({
-      type: "GET",
-      dataType: "html",
-      url: "/api/render_transactionform",
-      beforeSend(){
-        insertAjaxSpinner($("#new_transactions_form"));
-      },
-      success(data) {
-        $("#new_transactions_form").html(data);
-        setDatepickers();
-        resetTransactionMenu(formId);
-      }
-    });
-  } else {
-    resetTransactionMenu(formId);
-  }
-}
-
 function resetTransactionMenu(formId){
   /*setTimeout(function(){ 
     console.log("FOCUS");
@@ -535,4 +515,24 @@ function resetTransactionMenu(formId){
   $(formId + " div.default-hide").hide();
 
   newTransactionsFormTotalAmount = 0;
+}
+
+function renderTransactionMenu(formId){
+  if ($("#new_transactions_form form").length === 0) {
+    $.ajax({
+      type: "GET",
+      dataType: "html",
+      url: "/api/render_transactionform",
+      beforeSend(){
+        insertAjaxSpinner($("#new_transactions_form"));
+      },
+      success(data) {
+        $("#new_transactions_form").html(data);
+        setDatepickers();
+        resetTransactionMenu(formId);
+      }
+    });
+  } else {
+    resetTransactionMenu(formId);
+  }
 }
