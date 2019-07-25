@@ -14,7 +14,7 @@ task :test_sendgrid => :environment do
 	http.use_ssl = true
 
 	req = Net::HTTP::Post.new(url.path)
-	req["Authorization"] = "Bearer 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"
+	req["Authorization"] = "Bearer #{Rails.application.credentials.sendgrid[:api_key]}"
 	req["Content-Type"] = "application/json"
 	req["data"] = "[{\"email\": \"test@stishly.com\"}]"
 	#req.data = "[{\"email\": \"test@stishly\"}]"
@@ -38,7 +38,7 @@ task :test_list => :environment do
 	http.use_ssl = true
 
 	req = Net::HTTP::Get.new(url.path)
-	req["Authorization"] = "Bearer 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"
+	req["Authorization"] = "Bearer #{Rails.application.credentials.sendgrid[:api_key]}"
 	req["Content-Type"] = "application/json"
 	#req["data"] = "[{\"email\": \"test@stishly\"}]"
 
@@ -58,7 +58,7 @@ task :test_example => :environment do
 	content = Content.new(type: 'text/plain', value: 'and easy to do anywhere, even with Ruby')
 	mail = Mail.new(from, subject, to, content)
 
-	sg = SendGrid::API.new(api_key: "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")
+	sg = SendGrid::API.new(api_key: Rails.application.credentials.sendgrid[:api_key])
 	response = sg.client.mail._('send').post(request_body: mail.to_json)
 	puts response.status_code
 	puts response.body
@@ -70,6 +70,6 @@ task :lib => :environment do
 	require 'sendgrid-ruby'
 	include SendGrid
 
-	sg = SendGrid::API.new(api_key: "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")
+	sg = SendGrid::API.new(api_key: Rails.application.credentials.sendgrid[:api_key])
 	
 end
