@@ -72,4 +72,5 @@ task :lib => :environment do
 
 	sg = SendGrid::API.new(api_key: Rails.application.credentials.sendgrid[:api_key])
 	
+	response = sg.lists('send')
 end
