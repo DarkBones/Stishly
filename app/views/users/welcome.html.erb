@@ -176,6 +176,7 @@
       success(data) {
         if ($(".expenseRow").length < data.max_fixed_expenses || data.max_fixed_expenses < 0){
           $("#expenseRows").append("<%= j render :partial => 'expense_row' %>");
+          $(".expenseRow").last().find(".currency").val(currency);
 			  	numberExpenseRow();
 			  	addLadderformListeners();
 			  	populateAccountSelect();

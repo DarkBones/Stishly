@@ -36,7 +36,7 @@ module ApplicationHelper
   end
 
   def hint(title, content, classSuff="")
-    result = "<a tabindex=\"0\" role=\"button\" class=\"btn btn-hint rounded-circle #{classSuff}\" data-toggle=\"popover\" data-trigger=\"focus\" data-placement=\"left\" "
+    result = "<a tabindex=\"0\" role=\"button\" class=\"btn btn-hint rounded-circle clickable #{classSuff}\" data-toggle=\"popover\" data-trigger=\"focus\" data-placement=\"left\" "
     result += "title=\"#{title}\" "
     result += "data-content=\"#{content}\""
     result += ">?</a>"

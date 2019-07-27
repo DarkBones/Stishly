@@ -7,6 +7,8 @@ class User
   	end
 
   	def perform
+  		update_user
+
   		account_params = get_account_params(@params)
   		income_params = get_income_params(@params)
   		expense_params = get_expense_params(@params)
@@ -27,6 +29,24 @@ class User
   	end
 
 private
+
+		def update_user
+			country = Country.where(country_code: @params[:user][:country]).take()
+  		unless country
+  			country = Country.where(country_code: "US").take()
+  		end
+
+  		currency = Money::Currency.new("USD")
+  		begin
+  			currency = Money::Currency.new(@params[:user_currency])
+  		rescue
+  			currency = Money::Currency.new("USD")
+  		end
+  		@current_user.currency = currency.iso_code
+  		@current_user.country_code = country.country_code
+  		@current_user.country_id = country.id
+  		@current_user.save!
+		end
 
 		def get_expense_params(params)
 			expenses = []

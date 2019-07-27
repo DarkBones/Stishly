@@ -64,8 +64,8 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
 
   # password requirements
-  validates :password, password_strength: true
-  validates :password, password_strength: {use_dictionary: true}
+  validates :password, password_strength: true, :on => :create
+  validates :password, password_strength: {use_dictionary: true}, :on => :create
 
   after_create :initialize_user_data
 
