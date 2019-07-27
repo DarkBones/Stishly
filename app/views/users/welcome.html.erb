@@ -16,12 +16,35 @@
 
             <!-- progressbar -->
             <ul id="wizzard-progressbar">
-              <li class="active">Accounts</li>
+              <li class="active">Country</li>
+              <li>Accounts</li>
               <li>Income</li>
               <li>Expenses</li>
             </ul>
 
             <!--fieldsets -->
+            <!-- COUNTRY AND CURRENCY -->
+            <fieldset class="rounded dropshadow bg-light py-2 px-2" id="setup_country">
+              <h3>Country</h3>
+              <h4>Fill in your country and preferred currency</h4>
+
+              <div class="row">
+                <div class="col-12 col-sm-9 col-lg-6 py-2">
+                  <label>Country</label>
+                  <%#= f.country_select(:country_code , {:include_blank => true}, {:class => 'form-control', 'onchange' => 'changeUserCountry(this.value);'}) %>
+                  <%#= select_tag "account_currency_", options_for_select(all_currencies(Money::Currency.table), :include_blank => true), {:class => "form-control account_currency", "onchange" => "editAccountSelect(this); return false"} %>
+                  <%= country_select("user", "country", { include_blank: 'Select your country' }, { class: 'form-control', 'onchange' => 'changeUserCountry(this);' }) %>
+                </div>
+                <div class="col-12 col-sm-3 col-lg-6 py-2">
+                  <label>Base Currency</label>
+                  <%= select_tag "user_currency", options_for_select(all_currencies(Money::Currency.table)), {:class => "form-control currency", :include_blank => true} %>
+                </div>
+              </div>
+
+              <input type="button" name="next" class="btn next action-button px-4 py-2 my-5 btn-rounded btn-secondary" value="Next"/><br />
+
+            </fieldset>
+
             <!-- ACCOUNTS -->
             <fieldset class="rounded dropshadow bg-light py-2 px-2" id="setup_accounts">
               <h3 class="fs-title">Accounts</h3>
@@ -46,8 +69,8 @@
               <button type="button" class="btn btn-secondary btn-fieldset plusmin" data-toggle="tooltip" data-placement="top" title="Add additional account" onclick="insertAccountRow(); return false;">+</button>
               <button type="button" id="remove_account_row" class="btn btn-secondary disabled btn-fieldset plusmin"  data-toggle="tooltip" data-placement="top" title="Remove account" onclick="removeAccountRow();" style="right: 90px;">-</button>
 
-              <input type="button" name="next" class="btn next action-button px-4 py-2 my-5 btn-rounded btn-secondary" value="Next"/><br />
-              
+              <input type="button" name="previous" class="btn previous action-button px-4 py-2 my-2 btn-rounded btn-secondary" value="Previous"/>
+              <input type="button" name="next" class="btn next action-button px-4 py-2 my-5 btn-rounded btn-secondary" value="Next"/>
 
             </fieldset>
 
@@ -109,9 +132,41 @@
   var current_fs, next_fs, previous_fs;
   var left, opacity, scale;
   var animating;
+  var currency = $("#user_currency").val();
 
   $(".account_row").first().find(".form-control").first().focus();
 
+  function changeUserCountry(obj) {
+    let $currencyTarget = $(obj).next();
+    $.ajax({
+      type: "GET",
+      dataType: "text",
+      url: "/api/country_currency/" + $(obj).val(),
+      success(data) {
+        if (!$("#user_currency").is("[changed]")) {
+          currency = data;
+        }
+
+        $("select.currency").each(function(){
+          if (!$(this).is("[changed]")) {
+            $(this).val(data);
+          }
+        });
+      }
+    });
+  }
+
+  $("#user_currency").change(function(e){
+    currency = $(e.target).val();
+    $("select.currency").each(function(){
+      if (!$(this).is("[changed]")) {
+        $(this).val(currency);
+        if($(this).attr("id").startsWith("account_currency_")) {
+          editAccountSelect($(this));
+        }
+      }
+    });
+  });
   
   function insertExpenseRow(){
   	$.ajax({
@@ -126,6 +181,7 @@
 			  	populateAccountSelect();
           setDatepickers();
           setPopovers();
+          setCurrencyListeners();
         } else {
           triggerNotice("Upgrade to permium for more fixed expenses", true);
         }
@@ -249,7 +305,9 @@
           $("#remove_account_row").removeClass("disabled");
           numberAccountRow();
           setAccountPlaceholder();
+          setCurrencyListeners();
           $(".account_row").last().find(".form-control").first().focus();
+          $(".account_row").last().find(".currency").val(currency);
         } else {
           triggerNotice("Upgrade to permium for more accounts", true);
         }
@@ -267,6 +325,24 @@
     }
 
     populateAccountSelect();
+
+  }
+
+  function validateCountry(fs){
+    var valid = true;
+
+    // get the country value
+    if($("#user_country").val().length === 0) {
+      triggerNotice("No country selected", true);
+      return false
+    }
+
+    if($("#user_currency").val().length === 0) {
+      triggerNotice("No currency selected", true);
+      return false;
+    }
+
+    return true;
 
   }
 
@@ -332,6 +408,12 @@
     	}
     }
 
+    if ($(this).parent().attr("id") === "setup_country") {
+      if(!validateCountry($(this).parent())) {
+        return;
+      }
+    }
+
 
     animating = true;
     current_fs = $(this).parent();
@@ -386,5 +468,6 @@
 
   numberAccountRow();
   setAccountPlaceholder();
+  setCurrencyListeners();
 
 </script>

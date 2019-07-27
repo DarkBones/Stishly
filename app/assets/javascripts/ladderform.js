@@ -49,6 +49,12 @@ function showHideFields($target) {
   }
 }
 
+window.setCurrencyListeners = function() {
+  $("select.currency").change(function(e){
+    $(e.target).attr("changed", true);
+  });
+}
+
 $(".pos_n").change(function(e){
   if($(e.target).val() <= 0){
     $(e.target).val(1);

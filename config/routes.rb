@@ -66,7 +66,7 @@ Rails.application.routes.draw do
   post 'accounts/create_account', to: 'accounts#create_quick'
   post 'transactions', to: 'transactions#create'
   post 'schedules', to: 'schedules#create'
-  devise_for :users, :controllers => { registrations: 'registrations' }
+  devise_for :users, :controllers => { registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
   resources :users, :only => [:create, :destroy, :edit]
   root 'welcome#index'
   get 'transactions/:id', to: 'transactions#show'

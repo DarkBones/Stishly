@@ -38,6 +38,8 @@ class User < ApplicationRecord
   kms_attr :first_name, key_id: Rails.application.credentials.aws[:kms_key_id]
   kms_attr :last_name, key_id: Rails.application.credentials.aws[:kms_key_id]
 
+  devise :omniauthable, omniauth_providers: %i[facebook]
+
   attr_encrypted :email, key: [ENV["EMAIL_ENCRYPTION_KEY"]].pack("H*")
   blind_index :email
 
@@ -49,7 +51,7 @@ class User < ApplicationRecord
   has_many :accounts, dependent: :destroy
   has_many :setting_values, :as => :entity
   has_many :settings, through: :setting_values
-  belongs_to :subscription_tier
+  belongs_to :subscription_tier, optional: :true
   has_many :schedules, dependent: :destroy
   has_many :categories, dependent: :destroy
   has_many :transactions, through: :accounts
@@ -58,7 +60,7 @@ class User < ApplicationRecord
   belongs_to :country, optional: :true
   has_many :notifications
 
-  validates :country_code, :first_name, :last_name, presence: true
+  validates :first_name, :last_name, presence: true
   validates :email, uniqueness: true
 
   # password requirements
@@ -68,6 +70,19 @@ class User < ApplicationRecord
   after_create :initialize_user_data
 
   def will_save_change_to_email?
+  end
+
+  def self.from_omniauth(auth)
+    puts auth.to_yaml
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+      user.first_name = auth.info.name   # assuming the user model has a name
+      #user.image = auth.info.image # assuming the user model has an image
+      # If you are using confirmable and the provider(s) you use validate emails, 
+      # uncomment the line below to skip the confirmation emails.
+      # user.skip_confirmation!
+    end
   end
 
   def self.set_current_user(current_user)

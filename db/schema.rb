@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_21_133303) do
+ActiveRecord::Schema.define(version: 2019_07_27_140730) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -199,7 +199,7 @@ ActiveRecord::Schema.define(version: 2019_07_21_133303) do
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.binary "first_name_enc"
     t.binary "last_name_enc"
-    t.bigint "subscription_tier_id", default: 1
+    t.bigint "subscription_tier_id", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "encrypted_password", default: "", null: false
@@ -221,11 +221,13 @@ ActiveRecord::Schema.define(version: 2019_07_21_133303) do
     t.string "timezone"
     t.string "country_code"
     t.bigint "country_id"
-    t.string "currency", null: false
+    t.string "currency", default: "USD"
     t.boolean "finished_setup", default: false
     t.string "encrypted_email"
     t.string "encrypted_email_iv"
     t.string "email_bidx"
+    t.string "provider"
+    t.string "uid"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["country_id"], name: "index_users_on_country_id"
     t.index ["email_bidx"], name: "index_users_on_email_bidx"

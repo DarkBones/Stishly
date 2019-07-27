@@ -133,3 +133,5 @@ gem 'blind_index'
 gem 'sendgrid-ruby'
 
 gem 'strong_password', '~> 0.0.8'
+
+gem 'omniauth-facebook'

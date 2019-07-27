@@ -64,7 +64,7 @@
             $(".datepicker").datepicker({
               format: "dd-M-yyyy",
               todayHighlight: true,
-              weekStart: <%= current_user.country.week_start %>,
+              weekStart: <%= current_user.country.nil? ? 0 : current_user.country.week_start %>,
               autoclose: true
             });
 

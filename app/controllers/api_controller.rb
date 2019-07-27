@@ -208,7 +208,13 @@ class ApiController < ApplicationController
 
   # return the details of the current user's subscription plan
   def user_subscription_details
-    render json: current_user.subscription_tier
+    if current_user.subscription_tier_id > 0
+      tier = current_user.subscription_tier
+    else
+      tier = SubscriptionTier.where(name: "Free").take()
+    end
+
+    render json: tier
   end
 
 private
