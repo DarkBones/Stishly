@@ -44,9 +44,22 @@
     </div>
 
     <div class="row">
-      <div class="col-12 py-2">
+      <div class="col-12 py-2" style="margin-bottom: -16px;">
         <%= f.label :password %>
         <%= f.password_field :password, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 py-2" style="margin-top: 0;">
+        <meter max="4" id="password-strength-meter">
+        </meter>
+        <p>
+          <strong>
+            Password strength: <span id="password-strength-score"></span><br />
+            <span id="password-strength-warning"></span>
+          </strong>
+        </p>
       </div>
     </div>
 
@@ -67,3 +80,29 @@
 
   </div>
 <% end %>
+
+<script>
+  var strength = {
+    0: "Worst",
+    1: "Bad",
+    2: "Weak",
+    3: "Good",
+    4: "Strong"
+  }
+
+  var password = $("#user_password");
+  var meter = $("#password-strength-meter");
+
+  password.on("keyup", function(){
+    var val = password.val();
+    var result = zxcvbn(val);
+
+    meter.val(result.score);
+
+    $("#password-strength-score").text(strength[result.score]);
+    $("#password-strength-warning").text(result.feedback.warning);
+
+
+  });
+
+</script>
