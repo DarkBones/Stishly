@@ -27,6 +27,7 @@ class AccountsController < ApplicationController
     filter_keys.delete("account")
     filter_keys.delete("sorted_by")
     filter_keys.delete("is_queued")
+    filter_keys.delete("include_children")
     
     @filtered = filter_keys.length > 0
 
@@ -57,6 +58,7 @@ class AccountsController < ApplicationController
     filter_keys.delete("account")
     filter_keys.delete("sorted_by")
     filter_keys.delete("is_queued")
+    filter_keys.delete("include_children")
     
     @filtered = filter_keys.length > 0
 
