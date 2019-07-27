@@ -61,6 +61,10 @@ class User < ApplicationRecord
   validates :country_code, :first_name, :last_name, presence: true
   validates :email, uniqueness: true
 
+  # password requirements
+  validates :password, password_strength: true
+  validates :password, password_strength: {use_dictionary: true}
+
   after_create :initialize_user_data
 
   def will_save_change_to_email?
@@ -150,6 +154,7 @@ class User < ApplicationRecord
       self.save
     end
     InitializeUserData.new(self).perform
-    Sendgrid.new(self).add_to_marketing
+
+    Sendgrid.new(self).add_to_marketing if Rails.env.production?
   end
 end

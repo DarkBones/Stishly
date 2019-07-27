@@ -70,3 +70,8 @@ en:
     fixed_amount:
       title: "Fixed / Varied amounts"
       body: "Transactions with fixed amounts get logged immidiately. For transactions with varying amounts, you will be asked to review them before they are logged."
+
+  errors:
+    messages:
+      password:
+        password_strength: "Password too week! Combine at least uppercase letters, lowercase letters, and numbers"

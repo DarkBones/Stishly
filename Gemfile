@@ -131,3 +131,5 @@ gem 'attr_encrypted', '~> 3.1.0'
 gem 'blind_index'
 
 gem 'sendgrid-ruby'
+
+gem 'strong_password', '~> 0.0.8'
