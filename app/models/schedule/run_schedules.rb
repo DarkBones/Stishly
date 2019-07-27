@@ -34,6 +34,10 @@ private
       transactions = []
       sch_transactions.each do |st|
         if st.parent_id.nil?
+          if !st.transfer_transaction_id.nil? && st.direction == -1
+            next
+          end
+          #puts st.description
           transaction = Transaction.create_from_schedule(st, schedule)
           transactions += transaction
         end
@@ -53,11 +57,11 @@ private
       })
       occurrence.save
 
-      next_occurrence = Schedule.next_occurrence(schedule, @datetime.to_date + 1, false, true)
-      schedule.next_occurrence = tz.utc_to_local(next_occurrence).to_date unless next_occurrence.nil?
-      schedule.next_occurrence_utc = next_occurrence
+      #next_occurrence = Schedule.next_occurrence(schedule, @datetime.to_date + 1, false, true)
+      #schedule.next_occurrence = tz.utc_to_local(next_occurrence).to_date unless next_occurrence.nil?
+      #schedule.next_occurrence_utc = next_occurrence
 
-      schedule.save!
+      #schedule.save!
     end
 
   end
