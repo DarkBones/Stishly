@@ -9,8 +9,8 @@ function getFormId(obj) {
 function getCurrencyFromAccount(account) {
   var currency;
 
-  account = account.split(" ")
-  currency = account[account.length - 1]
+  account = account.split(" ");
+  currency = account[account.length - 1];
   currency = currency.replace("(", "");
   currency = currency.replace(")", "");
 
@@ -18,7 +18,7 @@ function getCurrencyFromAccount(account) {
 }
 
 function getTransactionTotalFromMultiple(formId) {
-  total = 0;
+  let total = 0;
 
   let $target = $(formId + " #transaction_transactions");
   let text = $target.val();
@@ -108,7 +108,7 @@ function getTransactionType(formId) {
 function updateTransactionResult(formId) {
   let isMultiple = isTransactionMultiple(formId);
   let rate = 1;
-  let amount = 0
+  let amount = 0;
   let type = getTransactionType(formId);
 
   let $rateTarget = $(formId + " #transaction_rate");
@@ -144,8 +144,8 @@ function updateTransactionResult(formId) {
         $spinnerTarget.hide();
       },
       success(data) {
-        result = Math.round((amount * rate) * data.subunit_to_unit) / data.subunit_to_unit;
-        subunitDigits = Math.floor(Math.log10(data.subunit_to_unit));
+        let result = Math.round((amount * rate) * data.subunit_to_unit) / data.subunit_to_unit;
+        let subunitDigits = Math.floor(Math.log10(data.subunit_to_unit));
         $resultTarget.val(result.toFixed(subunitDigits));
       }
     });
@@ -417,7 +417,7 @@ function changeTransactionAccount(obj) {
     showTransferCurrencyRates(formId);
   }  
 
-  updateTransactionsTotal(formId, true)
+  updateTransactionsTotal(formId, true);
 }
 
 function changeTransactionToAccount(obj) {
@@ -481,7 +481,7 @@ function resetAccountAndCurrencyDropdowns(formId) {
 
   accountSelect = $(formId + " #transaction_account option:selected").text();
 
-  $(formId + " #transaction_currency").val(getCurrencyFromAccount(accountSelect))
+  $(formId + " #transaction_currency").val(getCurrencyFromAccount(accountSelect));
   $(formId + " #transaction_currency").removeClass("changed");
   
 }
