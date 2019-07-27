@@ -118,7 +118,7 @@ function updateTransactionResult(formId) {
   let $spinnerTarget = $(formId + " #transaction_account_currency_spinner");
   if (type === "transfer") {
     $rateTarget = $(formId + " #transaction_rate_from_to");
-    $resultTarget = $(formId + " #transaction_account_currency");
+    $resultTarget = $(formId + " #transaction_to_account_currency");
     $accountTarget = $(formId + " #transaction_to_account");
     $spinnerTarget = $(formId + " #transaction_transfer_currency_spinner");
   }
