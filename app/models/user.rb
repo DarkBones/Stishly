@@ -150,5 +150,6 @@ class User < ApplicationRecord
       self.save
     end
     InitializeUserData.new(self).perform
+    Sendgrid.new(self).add_to_marketing
   end
 end
