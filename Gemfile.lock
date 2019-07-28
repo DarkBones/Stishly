@@ -248,6 +248,9 @@ GEM
       rack (>= 1.6.2, < 3)
     omniauth-facebook (5.0.0)
       omniauth-oauth2 (~> 1.2)
+    omniauth-google-oauth2 (0.2.6)
+      omniauth (> 1.0)
+      omniauth-oauth2 (~> 1.1)
     omniauth-oauth2 (1.6.0)
       oauth2 (~> 1.1)
       omniauth (~> 1.9)
@@ -450,6 +453,7 @@ DEPENDENCIES
   msgpack
   mysql2 (>= 0.4.4, < 0.6.0)
   omniauth-facebook
+  omniauth-google-oauth2 (~> 0.2.2)
   peek
   pg
   puma (~> 3.11)

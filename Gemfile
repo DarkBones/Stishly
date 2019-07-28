@@ -123,7 +123,6 @@ gem 'filterrific'
 
 gem 'bootstrap-slider-rails'
 
-gem 'whenever', require: false
 gem 'kms_rails'
 gem 'msgpack'
 
@@ -135,3 +134,4 @@ gem 'sendgrid-ruby'
 gem 'strong_password', '~> 0.0.8'
 
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2', '~> 0.2.2'
