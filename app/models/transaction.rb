@@ -212,9 +212,17 @@ class Transaction < ApplicationRecord
     transactions = CreateFromForm.new(params, current_user).perform
     transactions = SaveTransactions.new(transactions, current_user).perform
 
+    timezone = transactions[0].timezone if transactions.length > 0
+
+    if timezone != current_user.timezone
+      current_user.timezone = timezone
+      current_user.save
+    end
+
     transactions.each do |t|
       Account.add(current_user, t.account_id, t.account_currency_amount) if t.parent_id.nil? && !t.is_scheduled
     end
+    
   end
 
   def self.create_from_schedule(transaction, schedule)
