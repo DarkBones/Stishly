@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_27_140730) do
+ActiveRecord::Schema.define(version: 2019_07_28_064423) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -218,7 +218,7 @@ ActiveRecord::Schema.define(version: 2019_07_27_140730) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
-    t.string "timezone"
+    t.string "timezone", default: "Europe/London"
     t.string "country_code"
     t.bigint "country_id"
     t.string "currency", default: "USD"
