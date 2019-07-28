@@ -133,5 +133,6 @@ gem 'sendgrid-ruby'
 
 gem 'strong_password', '~> 0.0.8'
 
+gem 'omniauth-oauth2', '~> 1.6.0'
 gem 'omniauth-facebook'
-gem 'omniauth-google-oauth2', '~> 0.2.2'
+gem 'omniauth-google-oauth2'

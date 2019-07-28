@@ -268,7 +268,7 @@ Devise.setup do |config|
                   Rails.application.credentials.omniauth[:google][:client_id],
                   Rails.application.credentials.omniauth[:google][:client_secret],
                   {
-                    scope: "userinfo"
+                    scope: "userinfo.profile,userinfo.email"
                   }
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
