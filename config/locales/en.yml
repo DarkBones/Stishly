@@ -72,6 +72,7 @@ en:
       body: "Transactions with fixed amounts get logged immidiately. For transactions with varying amounts, you will be asked to review them before they are logged."
 
   errors:
+    form: Please fix the below errors
     messages:
       password:
-        password_strength: "Password too weak! Combine at least uppercase letters, lowercase letters, and numbers"
+        password_strength: "too weak! Combine at least uppercase letters, lowercase letters, and numbers"
