@@ -1,61 +1,78 @@
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
   
   <div class="container">
-
     <div class="row">
       <div class="col-12 py-2">
         <h3>Sign in</h3>
       </div>
     </div>
 
-    <% if devise_error_messages!.length > 0 %>
-      <div class="row">
-        <div class="col-12 py-2 bg-danger rounded">
-          <%= devise_error_messages! %>
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-8">
+
+        <% if devise_error_messages!.length > 0 %>
+          <div class="row">
+            <div class="col-12 py-2 bg-danger rounded">
+              <%= devise_error_messages! %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="row">
+          <div class="col-12 py-2">
+            <%= f.label :email %>
+            <%= f.email_field :email, :autofocus => true, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 py-2">
+            <%= f.label :password %>
+            <%= f.password_field :password, class: "form-control" %>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-6 py-2">
+            <div class="checkbox">
+              <label class="checkbox-container"> Remember me
+                <%= f.check_box :remember_me %>
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-6 py-2">
+            <%= link_to "Forgot password?", new_password_path(resource_name), class: 'float-right' %>
+          </div>
+        </div>
+
+        <%= f.hidden_field :timezone, id: 'timezone_input' %>
+
+        <div class="row">
+          <div class="col-12 py-2">
+            <%= f.submit 'Sign in', :class => 'btn btn-primary' %>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="row">
+          <div class="col-12 py-2">
+            <label>&#8203</label>
+            <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-block btn-social btn-facebook" do %>
+               <span class="fa fa-facebook"></span> Sign in with Facebook
+            <% end %>
+            <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-block btn-social btn-google" do %>
+               <span class="fa fa-google"></span> Sign in with Facebook
+            <% end %>
+          </div>
         </div>
       </div>
-    <% end %>
 
-    <div class="row">
-      <div class="col-12 py-2">
-        <%= f.label :email %>
-        <%= f.email_field :email, :autofocus => true, class: "form-control" %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-12 py-2">
-        <%= f.label :password %>
-        <%= f.password_field :password, class: "form-control" %>
-      </div>
-
-    </div>
-
-    <div class="row">
-      <div class="col-6 py-2">
-        <div class="checkbox">
-          <label class="checkbox-container"> Remember me
-            <%= f.check_box :remember_me %>
-            <span class="checkmark"></span>
-          </label>
-        </div>
-      </div>
-      <div class="col-6 py-2">
-        <%= link_to "Forgot password?", new_password_path(resource_name), class: 'float-right' %>
-      </div>
-    </div>
-
-    <%= f.hidden_field :timezone, id: 'timezone_input' %>
-
-    <div class="row">
-      <div class="col-12 py-2">
-        <%= f.submit 'Sign in', :class => 'btn btn-primary' %>
-      </div>
     </div>
 
   </div>
 
 <% end %>
-
-<%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
-<%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path %>
