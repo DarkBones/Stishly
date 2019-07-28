@@ -38,7 +38,7 @@ class User < ApplicationRecord
   kms_attr :first_name, key_id: Rails.application.credentials.aws[:kms_key_id]
   kms_attr :last_name, key_id: Rails.application.credentials.aws[:kms_key_id]
 
-  devise :omniauthable, omniauth_providers: %i[facebook]
+  devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
   attr_encrypted :email, key: [ENV["EMAIL_ENCRYPTION_KEY"]].pack("H*")
   blind_index :email

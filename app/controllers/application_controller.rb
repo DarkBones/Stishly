@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!, :except => [:country_currency]
+  before_action :authenticate_user!, :except => [:country_currency, :privacy_policy]
   before_action :set_current_user, :setup_wizzard
 
   helper_method :user_accounts, :user_accounts_array, :user_categories_array, :user_schedules_array
@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
         redirect_to user_welcome_path unless request.original_fullpath.start_with?('/users') || request.original_fullpath.start_with?('/api') || request.original_fullpath.start_with?('/registrations')
       end
     end
+  end
+
+  def privacy_policy
+    render "application/privacy"
   end
 
   def get_accounts_currencies
