@@ -20,7 +20,7 @@ class UsersTest < ApplicationSystemTestCase
     assert_selector '.navbar-nav', text: 'Sign in'
 
   end
-=begin
+
   test 'creating user account' do
     """
     Creates a user account.
@@ -47,19 +47,14 @@ class UsersTest < ApplicationSystemTestCase
         value: 'system_test@example.com'
       },
       {
-        type: 'select',
-        name: 'user_country_code',
-        value: 'Ireland'
-      },
-      {
         type: 'text',
         name: 'Password',
-        value: 'Somepassword123^'
+        value: 'Fallout76IsAGem^!'
       },
       {
         type: 'text',
         name: 'Password confirmation',
-        value: 'Somepassword123^'
+        value: 'Fallout76IsAGem^!'
       }
     ]
 
@@ -105,7 +100,6 @@ class UsersTest < ApplicationSystemTestCase
     login_user(user, password)
 
     assert_selector '#flash_notice', text: I18n.t('devise.sessions.signed_in')
-    assert_selector '#sidebar', text: I18n.t('account.instructions.create')
   end
 
   test 'log out' do
@@ -166,38 +160,6 @@ class UsersTest < ApplicationSystemTestCase
 
     login_user(user, password)
     assert_selector '#flash_alert', text: I18n.t('devise.failure.not_found_in_database')
-  end
-=end
-  test "Automatic currency selection" do
-    """
-    Click 'sign up'
-    Select Ireland as country
-    Expected result: Currency is set to 'EUR'
-    Select Canada as country
-    Expected result: Currency is set to 'CAD'
-    Select Japan as country
-    Expected result: Currency is set to 'JPY'
-    Select USD as currency
-    Select Netherlands as country
-    Expected result: Currency is set to 'USD'
-    """
-
-    visit root_path
-
-    all('a', :text => 'Sign up')[0].click
-
-    select "Ireland", from: "user_country_code"
-    assert_selector "#user_currency", text: "EUR"
-
-    select "Canada", from: "user_country_code"
-    assert_selector "#user_currency", text: "CAD"
-
-    select "Japan", from: "user_country_code"
-    assert_selector "#user_currency", text: "JPY"
-
-    select "USD", from: "user_currency"
-    select "Netherlands", from: "user_country_code"
-    assert_selector "#user_currency", text: "USD"
   end
 
 end

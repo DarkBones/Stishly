@@ -37,12 +37,10 @@ private
           if !st.transfer_transaction_id.nil? && st.direction == -1
             next
           end
-          #puts st.description
           transaction = Transaction.create_from_schedule(st, schedule)
           transactions += transaction
         end
       end
-
       return transactions
     end
 

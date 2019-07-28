@@ -8,13 +8,13 @@ class SchTransactionsTest < ApplicationSystemTestCase
 
     page.find("#account_0").click
     
-    page.find("#select_801").click
-    page.find("#select_804").click
-    page.find("#select_806").click
+    page.find("#select_1801").click
+    page.find("#select_1804").click
+    page.find("#select_1806").click
 
     click_on "assign to schedule"
 
-    assert page.find("#schedules_transaction_transactions", visible: :all).value == "801 804 806"
+    assert page.find("#schedules_transaction_transactions", visible: :all).value == "1801 1804 1806"
 
     #select "Payday", from: "Schedule"
     page.find("#schedules_transaction_schedules").select("Payday")

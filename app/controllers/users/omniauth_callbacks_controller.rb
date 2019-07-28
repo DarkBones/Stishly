@@ -28,7 +28,7 @@ private
       else
         message = ""
         @user.errors.messages.each do |key, val|
-          messages += "#{key} #{val[0]} "
+          message += "#{key} #{val[0]} "
         end
         redirect_to new_user_session_path, :alert => message
       end
