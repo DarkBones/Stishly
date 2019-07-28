@@ -1,5 +1,6 @@
 class User
   class SetupUserData
+  	include TimezoneMethods
 
   	def initialize(current_user, params)
   		@current_user = current_user
@@ -45,6 +46,7 @@ private
   		@current_user.currency = currency.iso_code
   		@current_user.country_code = country.country_code
   		@current_user.country_id = country.id
+  		@current_user.timezone = validate_timezone(@params[:timezone])
   		@current_user.save!
 		end
 
