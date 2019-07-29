@@ -6,6 +6,7 @@ class Account
       @balance = params[:balance].to_f
       @currency = Money::Currency.new(params[:currency])
       @current_user = current_user
+      @account_type = params[:account_type]
     end
 
     def perform()
@@ -14,10 +15,14 @@ class Account
         :name => @name,
         :balance => (@balance * @currency.subunit_to_unit).to_f.round.to_i,
         :description => @description,
-        :currency => @currency.iso_code
+        :currency => @currency.iso_code,
+        :account_type => @account_type
       }
 
       return Account.create(account_details, @current_user)
     end
+
+private
+
   end
 end

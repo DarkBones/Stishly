@@ -3,18 +3,22 @@
     <div class="container">
 
       <div class="row py-2">
-        <div class="col-12">
+        <div class="col-12 col-sm-7">
           <%= f.label :name %><br />
           <%= f.text_field :name, placeholder: "Current account", class: 'form-control' %>
+        </div>
+        <div class="col-12 col-sm-5">
+          <%= f.label :type %><br />
+          <%= f.select(:account_type, [["Spending", "spend"], ["Saving", "save"]], {selected: "spend"}, {:class => "form-control"}) %>
         </div>
       </div>
 
       <div class="row py-2">
-        <div class="col-12 col-sm-9">
+        <div class="col-12 col-sm-7">
           <%= f.label :balance %><br />
           <%= f.number_field :balance, placeholder: "1000.00", class: 'form-control', step: :any %>
         </div>
-        <div class="col-12 col-sm-3">
+        <div class="col-12 col-sm-5">
           <%= f.label :currency %><br />
           <%= f.select(:currency, all_currencies(Money::Currency.table), {selected: current_user.currency}, { :class => 'form-control', "default_option" => current_user.currency }) %>
         </div>

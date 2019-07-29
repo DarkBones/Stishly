@@ -136,7 +136,7 @@ class AccountsController < ApplicationController
   private
 
   def new_account_params
-    params.require(:account).permit(:name, :balance, :currency, :description)
+    params.require(:account).permit(:name, :balance, :currency, :description, :account_type)
   end
 
   def account_settings_params
