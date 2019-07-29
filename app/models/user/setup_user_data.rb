@@ -16,8 +16,8 @@ class User
 
   		# save the accounts
   		account_params.each do |a|
-  			account = @current_user.accounts.new(a)
-  			account.save
+  			#account = @current_user.accounts.new(a)
+  			Account.create(a, @current_user)
   		end
 
   		# save income schedule
@@ -103,7 +103,8 @@ private
 						name: params["account_name_#{idx}"],
 						balance: Currency.float_to_int(params["account_balance_#{idx}"], params["account_currency_#{idx}"]),
 						currency: params["account_currency_#{idx}"],
-						is_default: idx == "0"
+						is_default: idx == "0",
+						account_type: params["account_type_#{idx}"]
 					}
 					accounts.push(account)
 				end

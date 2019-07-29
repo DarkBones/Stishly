@@ -31,9 +31,7 @@
               <div class="row">
                 <div class="col-12 col-sm-9 col-lg-6 py-2">
                   <label>Country</label>
-                  <%#= f.country_select(:country_code , {:include_blank => true}, {:class => 'form-control', 'onchange' => 'changeUserCountry(this.value);'}) %>
-                  <%#= select_tag "account_currency_", options_for_select(all_currencies(Money::Currency.table), :include_blank => true), {:class => "form-control account_currency", "onchange" => "editAccountSelect(this); return false"} %>
-                  <%= country_select("user", "country", { include_blank: 'Select your country' }, { class: 'form-control', 'onchange' => 'changeUserCountry(this);' }) %>
+                  <%= country_select("user", "country", { include_blank: 'Select your country' }, { class: 'form-control', 'onchange' => 'changeUserCountry(this);', :autofocus => true }) %>
                 </div>
                 <div class="col-12 col-sm-3 col-lg-6 py-2">
                   <label>Base Currency</label>
@@ -52,14 +50,17 @@
               <h4 class="fs-subtitle">Set up your accounts</h4>
 
               <div class="row">
-                <div class="col-5 col-sm-6">
+                <div class="col-4 px-0 d-none d-md-block">
                   <label>Name</label>
                 </div>
-                <div class="col-3 px-0">
+                <div class="col-3 px-0 d-none d-md-block">
                   <label>Balance</label>
                 </div>
-                <div class="col-4 col-sm-3">
+                <div class="col-2 px-0 d-none d-md-block">
                   <label>Currency</label>
+                </div>
+                <div class="col-3 px-0 d-none d-md-block">
+                  <label>Type</label>
                 </div>
               </div>
 
@@ -289,7 +290,7 @@
   function setAccountPlaceholder(){
   	var num = $(".account_row").length - 1;
   	var row = $(".account_row").last().find(".form-control").first();
-  	var placeholders = ["Current Account", "Savings Account", "Cash"];
+  	var placeholders = ["Current Account", "Cash", "Savings Account"];
 
   	if (num < placeholders.length){
   		row.attr("placeholder", placeholders[num]);
@@ -310,8 +311,38 @@
           setCurrencyListeners();
           $(".account_row").last().find(".form-control").first().focus();
           $(".account_row").last().find(".currency").val(currency);
+          editAccountType($(".account_row").last().find(".account_type"), false);
         } else {
           triggerNotice("Upgrade to permium for more accounts", true);
+        }
+      }
+    });
+  }
+
+  function editAccountType(obj, showNotice=true) {
+    if ($(obj).val() !== "spend") {
+      return;
+    }
+
+    // count the spending accounts
+    let spendingAccounts = 0;
+    $(".account_type").each(function(){
+      if($(this).val() === "spend") {
+        spendingAccounts += 1;
+      }
+    });
+
+    // check if it exceeds the maximum allowed
+    $.ajax({
+      type: "GET",
+      dataType: "json",
+      url: "/api/get_user_subscription_details",
+      success(data) {
+        if(spendingAccounts > data.max_spending_accounts) {
+          if(showNotice){
+            triggerNotice("Upgrade to permium for spending accounts", true);
+          }
+          $(obj).val("save");
         }
       }
     });
