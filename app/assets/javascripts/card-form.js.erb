@@ -27,7 +27,8 @@ function resetAccountMenu(){
 }
 
 function renderAccountMenu(){
-  if ($("#new_account_form form").length === 0) {
+  //if ($("#new_account_form form").length === 0) {
+    $("#new_account_form form").html("");
     $.ajax({
       type: "GET",
       dataType: "html",
@@ -39,5 +40,5 @@ function renderAccountMenu(){
         $("#new_account_form").html(data);
       }
     });
-  }
+  //}
 }
