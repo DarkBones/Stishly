@@ -174,7 +174,7 @@ class Account < ApplicationRecord
   end
 
   def self.create_new(params, current_user)
-    NewAccount.new(params, current_user).perform
+    account = NewAccount.new(params, current_user).perform
   end
 
   def self.create(params, current_user)
@@ -204,12 +204,21 @@ class Account < ApplicationRecord
     end
 
     account = current_user.accounts.build(params)
-    account.save
+
+    if account.save
+      tz = TZInfo::Timezone.get(current_user.timezone)
+      local_datetime = tz.utc_to_local(Time.now.utc)
+
+      account.account_histories.create({
+        local_datetime: local_datetime,
+        balance: account.balance
+      })
+    end
 
     return account
   end
 
-  def self.add(current_user, id, amount)
+  def self.add(current_user, id, amount, local_datetime)
     return if amount.nil?
     
     account = current_user.accounts.find_by_id(id)
@@ -218,6 +227,12 @@ class Account < ApplicationRecord
     balance += amount
 
     Account.update(id, :balance => balance)
+
+    history = account.account_histories.create({
+      local_datetime: local_datetime,
+      balance: account.balance
+    })
+    history.save
   end
 
   def self.record_history(current_user, id, local_datetime)

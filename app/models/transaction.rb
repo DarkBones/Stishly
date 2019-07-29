@@ -220,7 +220,7 @@ class Transaction < ApplicationRecord
     end
 
     transactions.each do |t|
-      Account.add(current_user, t.account_id, t.account_currency_amount) if t.parent_id.nil? && !t.is_scheduled
+      Account.add(current_user, t.account_id, t.account_currency_amount, t.local_datetime) if t.parent_id.nil? && !t.is_scheduled
     end
     
   end
@@ -248,7 +248,7 @@ class Transaction < ApplicationRecord
     transaction.is_queued = false
     transaction.save!
 
-    Account.add(transaction.user, transaction.account.id, transaction.account_currency_amount)
+    Account.add(transaction.user, transaction.account.id, transaction.account_currency_amount, transaction.local_datetime)
   end
 
 private
