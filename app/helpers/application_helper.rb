@@ -36,10 +36,10 @@ module ApplicationHelper
   end
 
   def hint(title, content, classSuff="")
-    result = "<a tabindex=\"0\" role=\"button\" class=\"btn btn-hint rounded-circle clickable #{classSuff}\" data-toggle=\"popover\" data-trigger=\"focus\" data-placement=\"left\" "
+    result = "<a tabindex=\"0\" role=\"button\" class=\"fa fa-question-circle clickable #{classSuff}\" data-toggle=\"popover\" data-trigger=\"focus\" data-placement=\"left\" "
     result += "title=\"#{title}\" "
     result += "data-content=\"#{content}\""
-    result += ">?</a>"
+    result += "></a>"
 
     return result.html_safe.to_s
   end
