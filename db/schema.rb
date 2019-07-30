@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_29_161502) do
+ActiveRecord::Schema.define(version: 2019_07_30_155159) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(version: 2019_07_29_161502) do
     t.integer "max_accounts", default: 3
     t.integer "max_fixed_expenses", default: 10
     t.integer "max_spending_accounts", default: 2
+    t.integer "max_schedules", default: 3
   end
 
   create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

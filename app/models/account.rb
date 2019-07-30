@@ -20,7 +20,7 @@ class Account < ApplicationRecord
   validates :name, format: { without: /[-\._~:\/\?#\[\]@!\$&'\(\)\*\+,;={}"]/, message: "Special characters not allowed" }
   validates :name, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('account.failure.already_exists') }
   validates :currency, presence: true
-  #validate :subscription
+  validate :subscription
 
 
   belongs_to :user

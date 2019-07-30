@@ -32,7 +32,7 @@ class Schedule < ApplicationRecord
   validates :period_num, numericality: true
   validates :period_num, numericality: { only_integer: true }
   validates :period_num, numericality: { greater_than: 0, message: "'Run every' must be greater than zero" }
-  #validates :name, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('schedule.failure.already_exists') }
+  validate :subscription
 
   belongs_to :user
   has_and_belongs_to_many :user_transactions, foreign_key: "schedule_id", class_name: "Transaction"
@@ -71,15 +71,28 @@ class Schedule < ApplicationRecord
     CreateFromSimpleForm.new(current_user, params, "fixed_expense").perform()
   end
 
+private
+  
+  def subscription
+    subscription_tier = user.subscription_tier if user.subscription_tier_id > 0
+    subscription_tier ||= SubscriptionTier.where(name: "Free").take()
+    return unless subscription_tier
+
+    max = 0
+    schedules = user.schedules.where(type_of: type_of)
+
+    if type_of.downcase == "schedule"
+      max = subscription_tier.max_schedules
+      message = "Upgrade to premium for more schedules"
+    elsif type_of.downcase == "fixed_expense"
+      max = subscription_tier.max_fixed_expenses
+      message = "Upgrade to premium for more fixed expenses"
+    end
+    
+    if schedules.length >= max
+      errors.add(:schedule, message)
+    end
+
+  end
+
 end
-
-
-
-
-
-
-
-
-
-
-
