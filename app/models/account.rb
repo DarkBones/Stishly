@@ -176,7 +176,7 @@ class Account < ApplicationRecord
   end
 
   def self.create_new(params, current_user)
-    account = NewAccount.new(params, current_user).perform
+    return NewAccount.new(params, current_user).perform
   end
 
   def self.create(params, current_user)
