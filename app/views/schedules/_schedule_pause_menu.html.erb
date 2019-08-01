@@ -1,0 +1,40 @@
+<div class="modal schedulePause_form <%= 'fade' if Rails.env.test? == false %>" id="schedule_pause_form" tabindex="-1" role="dialog" aria-labelledby="schedule-pause-formLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="schedulepauseformLabel">Pause <span id="schedulename">Schedule</span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <%= form_with(model: Schedule.new, :url => pause_schedule_path) do |f| %>
+
+        <div class="modal-body">
+          <div class="container">
+
+            <div class="row">
+              <%= f.hidden_field :id %>
+              <div class="col-12 col-sm-3 py-2">
+                Pause until
+              </div>
+              <div class="col-6 col-sm-9 py-2">
+                <%= f.text_field :pause_until, class: 'datepicker datepicker-null form-control', id: "schedule_pause_input" %>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="schedule_close_form">Close</button>
+          <%= f.submit 'Pause', :class => 'btn btn-primary' %>
+        </div>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>

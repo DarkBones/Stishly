@@ -23,6 +23,8 @@
 #  last_occurrence     :date
 #  next_occurrence_utc :datetime
 #  type_of             :string(255)      default("schedule")
+#  pause_until         :date
+#  pause_until_utc     :datetime
 #
 
 class Schedule < ApplicationRecord
@@ -32,7 +34,7 @@ class Schedule < ApplicationRecord
   validates :period_num, numericality: true
   validates :period_num, numericality: { only_integer: true }
   validates :period_num, numericality: { greater_than: 0, message: "'Run every' must be greater than zero" }
-  validate :subscription
+  #validate :subscription
 
   belongs_to :user
   has_and_belongs_to_many :user_transactions, foreign_key: "schedule_id", class_name: "Transaction"
@@ -49,6 +51,18 @@ class Schedule < ApplicationRecord
     end
 
     return schedule
+  end
+
+  def self.pause(params, current_user)
+    schedule = current_user.schedules.find_by_id(params[:id])
+    return if schedule.nil?
+    
+    tz = TZInfo::Timezone.get(current_user.timezone)
+    d = params[:pause_until].to_date
+    schedule.pause_until = d
+    schedule.pause_until_utc = tz.local_to_utc(d.to_datetime)
+    schedule.save
+
   end
 
   def self.next_occurrence(schedule, date=nil, testing=false, return_datetime=false, ignore_valid=false)

@@ -61,6 +61,7 @@ en:
   schedules:
     no_active_schedules: "There are no active schedules"
     no_inactive_schedules: "There are no inactive schedules"
+    no_paused_schedules: "There are no paused schedules"
   sch_transactions:
     confirmations:
       confirmed: "Added {num} {transactions} to {schedule}"

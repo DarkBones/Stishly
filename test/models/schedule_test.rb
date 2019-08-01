@@ -23,6 +23,8 @@
 #  last_occurrence     :date
 #  next_occurrence_utc :datetime
 #  type_of             :string(255)      default("schedule")
+#  pause_until         :date
+#  pause_until_utc     :datetime
 #
 
 require 'test_helper'

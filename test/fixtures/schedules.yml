@@ -23,6 +23,8 @@
 #  last_occurrence     :date
 #  next_occurrence_utc :datetime
 #  type_of             :string(255)      default("schedule")
+#  pause_until         :date
+#  pause_until_utc     :datetime
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
@@ -250,4 +252,46 @@ overlap_every_day_3: {
   is_active: 1,
   next_occurrence: '2018-03-28',
   next_occurrence_utc: '2018-03-28 00:00'
+}
+
+pause_paused: {
+  id: 1301,
+  name: 'Paused',
+  user_id: 13,
+  start_date: '2019-03-25',
+  period: 'days',
+  period_num: 1,
+  days: 0,
+  days_month_day: 0,
+  days_exclude: 0,
+  exclusion_met_day: 0,
+  timezone: 'Europe/London',
+  created_at: '<%= Time.now.utc %>',
+  updated_at: '<%= Time.now.utc %>',
+  is_active: 1,
+  next_occurrence: '2018-03-28',
+  next_occurrence_utc: '2018-03-28 00:00',
+  pause_until: '<%= 7.days.from_now.to_date %>',
+  pause_until_utc: '<%= 7.days.from_now.to_datetime %>'
+}
+
+pause_unpaused: {
+  id: 1302,
+  name: 'Unpaused',
+  user_id: 13,
+  start_date: '2019-03-25',
+  period: 'days',
+  period_num: 1,
+  days: 0,
+  days_month_day: 0,
+  days_exclude: 0,
+  exclusion_met_day: 0,
+  timezone: 'Europe/London',
+  created_at: '<%= Time.now.utc %>',
+  updated_at: '<%= Time.now.utc %>',
+  is_active: 1,
+  next_occurrence: '2018-03-28',
+  next_occurrence_utc: '2018-03-28 00:00',
+  pause_until: '<%= 7.days.ago.to_date %>',
+  pause_until_utc: '<%= 7.days.ago.to_datetime %>'
 }

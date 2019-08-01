@@ -949,3 +949,37 @@ schedule_5_to: {
   transfer_account_id: 21,
   transfer_transaction_id: 805
 }
+
+paused_scheduled: {
+  id: 1301,
+  direction: -1,
+  user_id: 13,
+  description: This is paused,
+  account_id: 1301,
+  amount: -50001,
+  account_currency_amount: -50000,
+  user_currency_amount: -50000,
+  currency: EUR,
+  created_at: "2018-01-01 00:00",
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= 97.seconds.ago %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+not_paused_scheduled: {
+  id: 1302,
+  direction: -1,
+  user_id: 13,
+  description: This no longer paused,
+  account_id: 1301,
+  amount: -50001,
+  account_currency_amount: -50000,
+  user_currency_amount: -50000,
+  currency: EUR,
+  created_at: "2018-01-01 00:00",
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= 97.seconds.ago %>",
+  category_id: 0,
+  is_scheduled: true
+}

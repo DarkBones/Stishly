@@ -24,7 +24,7 @@ class Schedule
         end
       end
 
-      next_date = find_next_date
+      next_date = find_next_date.to_date
 
       if @return_datetime
         next_date = next_date.to_datetime

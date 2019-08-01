@@ -12,6 +12,17 @@ class Schedule
     def perform
       transactions = []
       @schedules.each do |s|
+        # check if the schedule is paused
+        unless s.pause_until_utc.nil?
+          if s.pause_until_utc <= Time.now.utc
+            s.pause_until_utc = nil
+            s.pause_until = nil
+            s.save
+          else
+            next
+          end
+        end
+
         transactions += run_schedule(s)
 
       end

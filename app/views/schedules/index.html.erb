@@ -2,6 +2,7 @@
 
 <%= render 'schedule_menu' %>
 <%= render 'schedule_transactions_menu' %>
+<%= render 'schedule_pause_menu' %>
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#scheduleform" id="new-schedule-button" onclick="renderScheduleMenu();">
   New Schedule
@@ -16,6 +17,19 @@
       </p>
     <% else %>
       <%= render 'schedules_table', :active => true %>
+    <% end %>
+  </ul>
+</div>
+
+<h3>Paused Schedules</h3>
+<div id="active-schedules">
+  <ul>
+    <% if @paused_schedules.length == 0 %>
+      <p>
+        <%= I18n.t('schedules.no_paused_schedules') %>
+      </p>
+    <% else %>
+      <%= render 'schedules_table', :active => true, :paused => true %>
     <% end %>
   </ul>
 </div>

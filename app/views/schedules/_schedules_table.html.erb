@@ -1,7 +1,13 @@
 <% if active %>
-  <% table_id = 'schedules_active' %>
-  <% schedules = @schedules %>
-  <% th_run_date = 'Next run date' %>
+  <% if defined?(paused) && paused == true %>
+    <% table_id = 'schedules_paused' %>
+    <% schedules = @paused_schedules %>
+    <% th_run_date = 'Paused until' %>
+  <% else %>
+    <% table_id = 'schedules_active' %>
+    <% schedules = @schedules %>
+    <% th_run_date = 'Next run date' %>
+  <% end %>
 <% else %>
   <% table_id = 'schedules_inactive' %>
   <% schedules = @inactive_schedules %>

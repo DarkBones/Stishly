@@ -33,3 +33,7 @@ function changeSchedule(schId) {
     }
   });
 }
+
+function schedulePauseForm(schId) {
+  $("#schedule_pause_form #schedule_id").val(schId);
+}

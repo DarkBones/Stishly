@@ -1,17 +1,24 @@
 class SchedulesController < ApplicationController
   def index
-    @schedules = current_user.schedules.where(:is_active => 1).order(:next_occurrence).decorate
+    @schedules = current_user.schedules.where(:is_active => 1, :pause_until_utc => nil).order(:next_occurrence).decorate
+    @paused_schedules = current_user.schedules.where("is_active = 1 AND pause_until_utc IS NOT NULL").order(:pause_until_utc).decorate
     @inactive_schedules = current_user.schedules.where(:is_active => 0).order(:next_occurrence).decorate
   end
 
   def create
     @schedule = Schedule.create_from_form(schedule_params, current_user)
     @schedule.save if @schedule.is_a?(ActiveRecord::Base)
+    redirect_back(fallback_location: root_path)
   end
 
   def run_schedules(datetime=nil, schedules=nil)
     transactions = Schedule.run_schedules(date, schedules)
     return transactions
+  end
+
+  def pause
+    Schedule.pause(pause_params, current_user)
+    redirect_back(fallback_location: root_path)
   end
 
 private
@@ -47,6 +54,10 @@ private
       :exclusion_met2,
       :occurrence_count
       )
+  end
+
+  def pause_params
+    params.require(:schedule).permit(:id, :pause_until)
   end
 
 end

@@ -2,17 +2,18 @@
 #
 # Table name: accounts
 #
-#  id          :bigint           not null, primary key
-#  balance     :integer          default(0)
-#  currency_id :bigint
-#  user_id     :bigint
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  name        :string(255)      not null
-#  description :string(255)
-#  position    :integer
-#  currency    :string(255)      not null
-#  is_default  :boolean
+#  id           :bigint           not null, primary key
+#  balance      :integer          default(0)
+#  currency_id  :bigint
+#  user_id      :bigint
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  name         :string(255)      not null
+#  description  :string(255)
+#  position     :integer
+#  currency     :string(255)      not null
+#  is_default   :boolean
+#  account_type :string(255)      default("spend")
 #
 
 class Account < ApplicationRecord
