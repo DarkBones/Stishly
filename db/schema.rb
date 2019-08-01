@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_01_162733) do
+ActiveRecord::Schema.define(version: 2019_08_01_173919) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 2019_08_01_162733) do
     t.string "type_of", default: "schedule"
     t.date "pause_until"
     t.datetime "pause_until_utc"
+    t.integer "current_period_id", default: 0
     t.index ["name"], name: "index_schedules_on_name"
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
@@ -193,6 +194,7 @@ ActiveRecord::Schema.define(version: 2019_08_01_162733) do
     t.bigint "schedule_id"
     t.boolean "queue_scheduled", default: false
     t.boolean "is_queued", default: false
+    t.integer "schedule_period_id"
     t.index ["account_id"], name: "index_transactions_on_account_id"
     t.index ["category_id"], name: "index_transactions_on_category_id"
     t.index ["parent_id"], name: "index_transactions_on_parent_id"
