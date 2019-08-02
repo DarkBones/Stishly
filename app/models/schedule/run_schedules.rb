@@ -48,8 +48,15 @@ private
           if !st.transfer_transaction_id.nil? && st.direction == -1
             next
           end
-          transaction = Transaction.create_from_schedule(st, schedule)
-          transactions += transaction
+
+          # check if the transaction wasn't already ran manually
+          ran_transaction = st.user.transactions.where(:schedule_id => schedule.id, :schedule_period_id => schedule.current_period_id, :scheduled_transaction_id => st.id).take
+          unless ran_transaction
+            transaction = Transaction.create_from_schedule(st, schedule, st.id)
+            transactions += transaction
+          else
+            puts ran_transaction.description
+          end
         end
       end
       return transactions

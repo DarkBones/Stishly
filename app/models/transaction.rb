@@ -225,8 +225,8 @@ class Transaction < ApplicationRecord
     
   end
 
-  def self.create_from_schedule(transaction, schedule)
-    transactions = CreateScheduledTransactions.new(transaction, schedule.user, schedule, false, schedule.timezone).perform
+  def self.create_from_schedule(transaction, schedule, scheduled_transaction_id)
+    transactions = CreateScheduledTransactions.new(transaction, schedule.user, scheduled_transaction_id, schedule, false, schedule.timezone).perform
     return transactions
   end
 

@@ -2,12 +2,13 @@ class Transaction
 
   class CreateScheduledTransactions
 
-    def initialize(transaction, current_user, schedule=nil, is_scheduled=true, timezone=nil)
+    def initialize(transaction, current_user, scheduled_transaction_id, schedule=nil, is_scheduled=true, timezone=nil)
       @transaction = transaction
       @current_user = current_user
       @is_scheduled = is_scheduled
       @timezone = timezone
       @schedule = schedule
+      @scheduled_transaction_id = scheduled_transaction_id
     end
 
     def perform
@@ -48,6 +49,7 @@ private
       t.schedule_id = schedule_id
       t.queue_scheduled = transaction.queue_scheduled
       t.is_queued = is_queued
+      t.scheduled_transaction_id = @scheduled_transaction_id
 
       unless @is_scheduled
         t.timezone = @schedule.timezone

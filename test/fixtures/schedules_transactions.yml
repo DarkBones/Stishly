@@ -116,3 +116,16 @@ pause_1: {
   transaction_id: 1302,
   schedule_id: 1302
 }
+
+period_1: {
+  transaction_id: 1401,
+  schedule_id: 1401
+}
+period_2: {
+  transaction_id: 1402,
+  schedule_id: 1401
+}
+period_3: {
+  transaction_id: 1403,
+  schedule_id: 1401
+}

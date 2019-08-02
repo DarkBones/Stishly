@@ -983,3 +983,74 @@ not_paused_scheduled: {
   category_id: 0,
   is_scheduled: true
 }
+
+period_ids_1: {
+  id: 1401,
+  direction: -1,
+  user_id: 14,
+  description: This was not run yet,
+  account_id: 1401,
+  amount: -50001,
+  account_currency_amount: -50000,
+  user_currency_amount: -50000,
+  currency: EUR,
+  created_at: "2018-01-01 00:00",
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= 97.seconds.ago %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+period_ids_2_sch: {
+  id: 1402,
+  direction: -1,
+  user_id: 14,
+  description: This ran already,
+  account_id: 1401,
+  amount: -50001,
+  account_currency_amount: -50000,
+  user_currency_amount: -50000,
+  currency: EUR,
+  created_at: "2018-01-01 00:00",
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= 97.seconds.ago %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+period_ids_3: {
+  id: 1403,
+  direction: -1,
+  user_id: 14,
+  description: This was not run yet,
+  account_id: 1401,
+  amount: -50001,
+  account_currency_amount: -50000,
+  user_currency_amount: -50000,
+  currency: EUR,
+  created_at: "2018-01-01 00:00",
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= 97.seconds.ago %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+period_ids_1_unsch: {
+  id: 1404,
+  direction: -1,
+  user_id: 14,
+  description: This ran already,
+  account_id: 1401,
+  amount: -50001,
+  account_currency_amount: -50000,
+  user_currency_amount: -50000,
+  currency: EUR,
+  created_at: "2018-01-01 00:00",
+  updated_at: "2018-01-01 00:00",
+  local_datetime: "<%= 97.seconds.ago %>",
+  category_id: 0,
+  is_scheduled: false,
+  schedule_id: 1401,
+  schedule_period_id: 0,
+  scheduled_transaction_id: 1402
+}

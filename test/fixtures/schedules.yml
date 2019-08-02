@@ -295,3 +295,22 @@ pause_unpaused: {
   pause_until: '<%= 7.days.ago.to_date %>',
   pause_until_utc: '<%= 7.days.ago.to_datetime %>'
 }
+
+period_ids: {
+  id: 1401,
+  name: 'Period',
+  user_id: 14,
+  start_date: '2019-03-25',
+  period: 'days',
+  period_num: 1,
+  days: 0,
+  days_month_day: 0,
+  days_exclude: 0,
+  exclusion_met_day: 0,
+  timezone: 'Europe/London',
+  created_at: '<%= Time.now.utc %>',
+  updated_at: '<%= Time.now.utc %>',
+  is_active: 1,
+  next_occurrence: '2018-03-28',
+  next_occurrence_utc: '2018-03-28 00:00'
+}

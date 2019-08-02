@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TransactionTest < ActiveSupport::TestCase
+class PauseSchedules < ActiveSupport::TestCase
   test "Paused schedules" do
     current_user = users(:pause_schedule)
     

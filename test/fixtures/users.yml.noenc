@@ -245,3 +245,18 @@ pause_schedule: {
   email: pause@schedules.com,
   unconfirmed_email: duplicate@transactions.com
 }
+
+schedule_period_ids: {
+  id: 14,
+  first_name: Period,
+  last_name: Ids,
+  email_bidx: <%= User.generate_email_bidx("period@ids.com").inspect %>,
+  country_code: 'IE',
+  country_id: 1,
+  timezone: 'Europe/London',
+  encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
+  confirmed_at: '2018-11-14 19:54:40',
+  currency: EUR,
+  finished_setup: true,
+  email: period@ids.com
+}
