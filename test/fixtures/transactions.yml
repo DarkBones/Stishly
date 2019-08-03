@@ -1054,3 +1054,88 @@ period_ids_1_unsch: {
   schedule_period_id: 0,
   scheduled_transaction_id: 1402
 }
+
+upcoming_transactions_income: {
+  id: 1501,
+  direction: 1,
+  user_id: 15,
+  description: Salary,
+  account_id: 1501,
+  amount: 149400,
+  account_currency_amount: 149400,
+  user_currency_amount: 149400,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+upcoming_transactions_rent: {
+  id: 1502,
+  direction: -1,
+  user_id: 15,
+  description: Rent,
+  account_id: 1501,
+  amount: -80000,
+  account_currency_amount: -80000,
+  user_currency_amount: -80000,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+upcoming_transactions_electric: {
+  id: 1504,
+  direction: -1,
+  user_id: 15,
+  description: Rent,
+  account_id: 1501,
+  amount: -45000,
+  account_currency_amount: -45000,
+  user_currency_amount: -45000,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+upcoming_transactions_daily: {
+  id: 1505,
+  direction: -1,
+  user_id: 15,
+  description: Daily,
+  account_id: 1501,
+  amount: -550,
+  account_currency_amount: -550,
+  user_currency_amount: -550,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+upcoming_transactions_netmetube: {
+  id: 1506,
+  direction: -1,
+  user_id: 15,
+  description: netmetube,
+  account_id: 1501,
+  amount: -1999,
+  account_currency_amount: -1999,
+  user_currency_amount: -1999,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}

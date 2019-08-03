@@ -84,6 +84,8 @@ class ScheduleTest < ActiveSupport::TestCase
     }
 
     schedule = Schedule.create_from_form(params, current_user)
+
+    assert schedule.start_date.to_s == '2019-03-17', format_error("Unexpected start date", "2019-03-17", schedule.start_date)
     assert_not schedule.save, "Saved schedule without name"
   end
 

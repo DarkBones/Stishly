@@ -279,3 +279,13 @@ schedules_ids: {
   currency: EUR,
   position: 1
 }
+
+upcoming_transactions: {
+  id: 1501,
+  balance: 0,
+  user_id: 15,
+  name: Upcoming,
+  currency: EUR,
+  position: 1,
+  account_type: spend
+}

@@ -260,3 +260,18 @@ schedule_period_ids: {
   finished_setup: true,
   email: period@ids.com
 }
+
+upcoming_transactions: {
+  id: 15,
+  first_name: Upcoming,
+  last_name: Transactions,
+  email_bidx: <%= User.generate_email_bidx("upcoming@transactions.com").inspect %>,
+  country_code: 'IE',
+  country_id: 1,
+  timezone: 'Europe/London',
+  encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
+  confirmed_at: '2018-11-14 19:54:40',
+  currency: EUR,
+  finished_setup: true,
+  email: upcoming@transactions.com
+}

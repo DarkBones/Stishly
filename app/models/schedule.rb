@@ -39,6 +39,10 @@ class Schedule < ApplicationRecord
   belongs_to :user
   has_and_belongs_to_many :user_transactions, foreign_key: "schedule_id", class_name: "Transaction"
 
+  def self.get_all_transactions_until_date(user, until_date, current_date=nil)
+    
+  end
+
   def self.create_from_form(params, current_user, testing=false, type="Schedule")
     schedule = CreateFromForm.new(params, current_user, testing, type).perform()
 
