@@ -256,10 +256,11 @@ private
     return unless subscription_tier
 
     if user.accounts.length >= subscription_tier.max_accounts
-      errors.add(:account, "Upgrade to premium for more accounts")
+      
+      errors.add(:account, "Upgrade to premium for more accounts") unless subscription_tier.max_accounts < 0
     elsif account_type == "spend"
       if user.accounts.where(account_type: "spend").length >= subscription_tier.max_spending_accounts
-        errors.add(:account, "Upgrade to premium for more spending accounts") 
+        errors.add(:account, "Upgrade to premium for more spending accounts") unless subscription_tier.max_accounts < 0
       end
     end
 

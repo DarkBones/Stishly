@@ -54,8 +54,6 @@ private
           unless ran_transaction
             transaction = Transaction.create_from_schedule(st, schedule, st.id)
             transactions += transaction
-          else
-            puts ran_transaction.description
           end
         end
       end

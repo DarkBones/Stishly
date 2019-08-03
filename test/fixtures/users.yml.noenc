@@ -51,7 +51,8 @@ bas: {
   currency: EUR,
   finished_setup: true,
   email: bassiedoinker@example.com,
-  unconfirmed_email: bassiedoinker@example.com
+  unconfirmed_email: bassiedoinker@example.com,
+  subscription_tier_id: 2
 }
 
 sab: {
@@ -67,7 +68,8 @@ sab: {
   currency: EUR,
   finished_setup: true,
   email: rekniodeissab@example.com,
-  unconfirmed_email: rekniodeissab@example.com
+  unconfirmed_email: rekniodeissab@example.com,
+  subscription_tier_id: 2
 }
 
 new: {
@@ -83,7 +85,8 @@ new: {
   currency: EUR,
   finished_setup: true,
   email: new_user@example.com,
-  unconfirmed_email: new_user@example.com
+  unconfirmed_email: new_user@example.com,
+  subscription_tier_id: 2
 }
 
 transactions_test: {
@@ -100,6 +103,7 @@ transactions_test: {
   finished_setup: true,
   email: transactions@test.com,
   unconfirmed_email: transactions@test.com,
+  subscription_tier_id: 2
 }
 
 currency_test: {
@@ -115,7 +119,8 @@ currency_test: {
   currency: EUR,
   finished_setup: true,
   email: currency@test.com,
-  unconfirmed_email: currency@test.com
+  unconfirmed_email: currency@test.com,
+  subscription_tier_id: 2
 }
 
 endless_page: {
@@ -131,7 +136,8 @@ endless_page: {
   currency: EUR,
   finished_setup: true,
   email: endless@page.com,
-  unconfirmed_email: endless@page.com
+  unconfirmed_email: endless@page.com,
+  subscription_tier_id: 2
 }
 
 destroy: {
@@ -147,7 +153,8 @@ destroy: {
   currency: EUR,
   finished_setup: true,
   email: destroy@me.com,
-  unconfirmed_email: destroy@me.com
+  unconfirmed_email: destroy@me.com,
+  subscription_tier_id: 2
 }
 
 transactions: {
@@ -163,7 +170,8 @@ transactions: {
   currency: EUR,
   finished_setup: true,
   email: transactions@creator.com,
-  unconfirmed_email: transactions@creator.com
+  unconfirmed_email: transactions@creator.com,
+  subscription_tier_id: 2
 }
 
 schedules: {
@@ -179,7 +187,8 @@ schedules: {
   currency: EUR,
   finished_setup: true,
   email: schedules@test.com,
-  unconfirmed_email: schedules@test.com
+  unconfirmed_email: schedules@test.com,
+  subscription_tier_id: 2
 }
 
 transaction_search: {
@@ -195,7 +204,8 @@ transaction_search: {
   currency: EUR,
   finished_setup: true,
   email: transaction@search.com,
-  unconfirmed_email: transaction@search.com
+  unconfirmed_email: transaction@search.com,
+  subscription_tier_id: 2
 }
 
 schedules_overlap: {
@@ -211,7 +221,8 @@ schedules_overlap: {
   currency: EUR,
   finished_setup: true,
   email: schedule@overlap.com,
-  unconfirmed_email: schedule@overlap.com
+  unconfirmed_email: schedule@overlap.com,
+  subscription_tier_id: 2
 }
 
 duplicate_transactions: {
@@ -227,7 +238,8 @@ duplicate_transactions: {
   currency: EUR,
   finished_setup: true,
   email: duplicate@transactions.com,
-  unconfirmed_email: duplicate@transactions.com
+  unconfirmed_email: duplicate@transactions.com,
+  subscription_tier_id: 2
 }
 
 pause_schedule: {

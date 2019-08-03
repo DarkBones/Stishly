@@ -77,7 +77,8 @@ class Schedule < ApplicationRecord
     if schedule.is_a?(ActiveRecord::Base)
       tz = TZInfo::Timezone.get(schedule.timezone)
 
-      date = [schedule.start_date, tz.utc_to_local(Time.now.utc).to_date + 1].max
+      date = [schedule.start_date, tz.utc_to_local(Time.now.utc).to_date + 1].max unless schedule.start_date.nil?
+      date ||= tz.utc_to_local(Time.now.utc).to_date
 
       next_occurrence = self.next_occurrence(schedule, date, false, true)
       schedule.next_occurrence = tz.utc_to_local(next_occurrence).to_date unless next_occurrence.nil?
@@ -138,7 +139,7 @@ private
     end
     
     if schedules.length >= max
-      errors.add(:schedule, message)
+      errors.add(:schedule, message) unless max < 0
     end
 
   end

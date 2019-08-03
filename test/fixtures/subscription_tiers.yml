@@ -30,8 +30,12 @@ one: {
 #
 two: {
   id: 2,
-  name: Free,
-  cost: 0,
-  month_billing_cycle: 0,
+  name: Monthly,
+  cost: 500,
+  month_billing_cycle: 1,
+  max_accounts: -1,
+  max_fixed_expenses: -1,
+  max_spending_accounts: -1,
+  max_schedules: -1
 }
 # column: value

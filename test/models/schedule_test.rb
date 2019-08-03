@@ -89,7 +89,7 @@ class ScheduleTest < ActiveSupport::TestCase
     assert_not schedule.save, "Saved schedule without name"
   end
 
-  test "Schedule with dangeroud characters in the name" do
+  test "Schedule with dangerous characters in the name" do
     current_user = users(:bas)
 
     params = {
