@@ -208,7 +208,7 @@ class SchedulesTest < ApplicationSystemTestCase
      login_user(users(:schedules), 'SomePassword123^!')
 
      visit "/schedules"
-     page.find("#schedule-transactions-button_1").click
+     page.find("#schedule-transactions-button_1:first-of-type").click
      page.find("#new-scheduled-transaction").click
      
      assert_selector "#new_schedule_transactionform #categories-dropdown", text: "Uncategorised"

@@ -5,6 +5,16 @@ class SchedulesController < ApplicationController
     @inactive_schedules = current_user.schedules.where(:is_active => 0).order(:next_occurrence).decorate
   end
 
+  def upcoming_transactions
+    @date = Time.now.utc + 7.days
+    
+    schedule = current_user.schedules.where(type_of: "main", pause_until: nil).take
+    @date = schedule.next_occurrence_utc if schedule
+
+    @transactions = Schedule.get_all_transactions_until_date(current_user, @date).sort_by &:local_datetime
+    @schedule = schedule
+  end
+
   def create
     @schedule = Schedule.create_from_form(schedule_params, current_user)
     @schedule.save if @schedule.is_a?(ActiveRecord::Base)

@@ -21,4 +21,11 @@ class Currency < ApplicationRecord
   	return (amount * currency.subunit_to_unit).round().to_i
   end
 
+  def self.int_to_float(amount, currency)
+  	currency = Money::Currency.new(currency)
+  	amount = amount.to_f
+
+  	return amount / currency.subunit_to_unit
+  end
+
 end

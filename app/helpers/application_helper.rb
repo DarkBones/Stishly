@@ -1,5 +1,9 @@
 module ApplicationHelper
   def balance(b, currency, span_class="", id="")
+    if currency.class == String
+      currency = Money::Currency.new(currency)
+    end
+    
     Money.locale_backend = :i18n
 
     balance = Money.new(b, currency.iso_code).format

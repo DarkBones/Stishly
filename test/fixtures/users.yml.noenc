@@ -285,7 +285,8 @@ upcoming_transactions: {
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
   finished_setup: true,
-  email: upcoming@transactions.com
+  email: upcoming@transactions.com,
+  unconfirmed_email: upcoming@transactions.com,
 }
 
 upcoming_transactions_dst: {

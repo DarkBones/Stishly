@@ -34,7 +34,7 @@ class Schedule < ApplicationRecord
   validates :period_num, numericality: true
   validates :period_num, numericality: { only_integer: true }
   validates :period_num, numericality: { greater_than: 0, message: "'Run every' must be greater than zero" }
-  validate :subscription
+  #validate :subscription, :on => :create
 
   belongs_to :user
   has_and_belongs_to_many :user_transactions, foreign_key: "schedule_id", class_name: "Transaction"
@@ -49,18 +49,23 @@ class Schedule < ApplicationRecord
 
     schedules.each do |s|
       next_occurrence = s.next_occurrence_utc
-      #puts next_occurrence
+      period_id = s.current_period_id
       while next_occurrence < until_date do
 
         next_occurrence = tz.utc_to_local(next_occurrence)
         next_occurrence = self.next_occurrence(s, next_occurrence.to_date, true, true)
+        period_id += 1
         break if next_occurrence >= until_date
 
-        s.user_transactions.each do |transaction|
+        s.user_transactions.where(parent_id: nil).each do |transaction|
           t = transaction.dup
-          t.schedule = s
-          t.local_datetime = tz.utc_to_local(next_occurrence).to_date
-          transactions.push(t)
+          if t.transfer_transaction_id.nil? || (!t.transfer_transaction_id.nil? && t.direction == 1)
+            t.schedule = s
+            t.local_datetime = tz.utc_to_local(next_occurrence).to_date
+            t.schedule_period_id = period_id
+            t.id = transaction.id
+            transactions.push(t)
+          end
         end
 
         next_occurrence += 1.day

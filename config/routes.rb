@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get '/transaction/discard/:id' => 'transactions#discard'
 
   get '/privacy', to: 'application#privacy_policy', as: :privacy_policy
+  get 'schedules/upcoming_transactions', to: 'schedules#upcoming_transactions', as: :upcoming_transactions
 
   get 'api/accounts/:id/details', to: 'api#account_details', as: :account_details
   get 'api/accounts/details', to: 'api#all_accounts_details', as: :account_all_details
