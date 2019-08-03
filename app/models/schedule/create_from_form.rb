@@ -14,10 +14,6 @@ class Schedule
       @tz = TZInfo::Timezone.get(validate_timezone(params[:timezone]))
 
       @start_date = @params[:start_date].to_datetime
-  
-      #if !testing && @tz.local_to_utc(@start_date.to_datetime) < Time.now.utc
-      #  @start_date += 1
-      #end
 
       @start_date = @start_date.to_date unless @start_date.nil?
 

@@ -289,3 +289,13 @@ upcoming_transactions: {
   position: 1,
   account_type: spend
 }
+
+upcoming_transactions_dst: {
+  id: 1601,
+  balance: 0,
+  user_id: 16,
+  name: Upcoming,
+  currency: EUR,
+  position: 1,
+  account_type: spend
+}

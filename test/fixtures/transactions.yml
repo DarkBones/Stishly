@@ -1139,3 +1139,88 @@ upcoming_transactions_netmetube: {
   category_id: 0,
   is_scheduled: true
 }
+
+upcoming_transactions_income_dst: {
+  id: 1601,
+  direction: 1,
+  user_id: 16,
+  description: Salary,
+  account_id: 1601,
+  amount: 149400,
+  account_currency_amount: 149400,
+  user_currency_amount: 149400,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+upcoming_transactions_rent_dst: {
+  id: 1602,
+  direction: -1,
+  user_id: 16,
+  description: Rent,
+  account_id: 1601,
+  amount: -80000,
+  account_currency_amount: -80000,
+  user_currency_amount: -80000,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+upcoming_transactions_electric_dst: {
+  id: 1604,
+  direction: -1,
+  user_id: 16,
+  description: Rent,
+  account_id: 1601,
+  amount: -45000,
+  account_currency_amount: -45000,
+  user_currency_amount: -45000,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+upcoming_transactions_daily_dst: {
+  id: 1605,
+  direction: -1,
+  user_id: 16,
+  description: Daily,
+  account_id: 1601,
+  amount: -550,
+  account_currency_amount: -550,
+  user_currency_amount: -550,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+upcoming_transactions_netmetube_dst: {
+  id: 1606,
+  direction: -1,
+  user_id: 16,
+  description: netmetube,
+  account_id: 1601,
+  amount: -1999,
+  account_currency_amount: -1999,
+  user_currency_amount: -1999,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}

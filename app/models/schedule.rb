@@ -39,8 +39,36 @@ class Schedule < ApplicationRecord
   belongs_to :user
   has_and_belongs_to_many :user_transactions, foreign_key: "schedule_id", class_name: "Transaction"
 
-  def self.get_all_transactions_until_date(user, until_date, current_date=nil)
-    
+  def self.get_all_transactions_until_date(user, until_date, start_date=nil)
+    # if start_date is nil, set it to today
+    start_date ||= Time.now.utc
+
+    schedules = user.schedules.where("next_occurrence_utc > ? AND next_occurrence_utc < ? AND is_active = true AND pause_until IS NULL", start_date, until_date)
+    tz = TZInfo::Timezone.get(user.timezone)
+    transactions = []
+
+    schedules.each do |s|
+      next_occurrence = s.next_occurrence_utc
+      #puts next_occurrence
+      while next_occurrence < until_date do
+
+        next_occurrence = tz.utc_to_local(next_occurrence)
+        next_occurrence = self.next_occurrence(s, next_occurrence.to_date, true, true)
+        break if next_occurrence >= until_date
+
+        s.user_transactions.each do |transaction|
+          t = transaction.dup
+          t.schedule = s
+          t.local_datetime = tz.utc_to_local(next_occurrence).to_date
+          transactions.push(t)
+        end
+
+        next_occurrence += 1.day
+        break if next_occurrence >= until_date
+      end
+    end
+
+    return transactions
   end
 
   def self.create_from_form(params, current_user, testing=false, type="Schedule")
@@ -49,7 +77,9 @@ class Schedule < ApplicationRecord
     if schedule.is_a?(ActiveRecord::Base)
       tz = TZInfo::Timezone.get(schedule.timezone)
 
-      next_occurrence = self.next_occurrence(schedule, nil, false, true)
+      date = [schedule.start_date, tz.utc_to_local(Time.now.utc).to_date + 1].max
+
+      next_occurrence = self.next_occurrence(schedule, date, false, true)
       schedule.next_occurrence = tz.utc_to_local(next_occurrence).to_date unless next_occurrence.nil?
       schedule.next_occurrence_utc = next_occurrence
     end

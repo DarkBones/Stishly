@@ -335,7 +335,7 @@ upcoming_transactions_main: {
   updated_at: '<%= Time.now.utc %>',
   is_active: 1,
   next_occurrence: '2019-03-28',
-  next_occurrence_utc: '2019-03-27 23:00',
+  next_occurrence_utc: '2019-03-28 00:00',
   type_of: main
 }
 
@@ -402,11 +402,11 @@ upcoming_transactions_daily: {
   updated_at: '<%= Time.now.utc %>',
   is_active: 1,
   next_occurrence: '2019-03-02',
-  next_occurrence_utc: '2019-03-01 23:00'
+  next_occurrence_utc: '2019-03-02 00:00'
 }
 
 # runs every year, so 1/12th should be considered in monthly cycle
-upcoming_transactions_daily: {
+upcoming_transactions_yearly: {
   id: 1505,
   name: 'yearly',
   user_id: 15,
@@ -433,7 +433,51 @@ upcoming_transactions_netmetube: {
   period: 'months',
   period_num: 1,
   days: 0,
-  days_month: null,
+  days_month: "specific",
+  days_month_day: 0,
+  days_exclude: 0,
+  exclusion_met: "",
+  exclusion_met_day: 0,
+  timezone: 'Europe/London',
+  created_at: '<%= Time.now.utc %>',
+  updated_at: '<%= Time.now.utc %>',
+  is_active: 1,
+  next_occurrence: '2019-03-15',
+  next_occurrence_utc: '2019-03-15 00:00',
+  type_of: fixed_expense
+}
+
+upcoming_transactions_main_dst: {
+  id: 1601,
+  name: 'Payday',
+  user_id: 16,
+  start_date: '2019-03-25',
+  period: 'months',
+  period_num: 1,
+  days: 268435456,
+  days_month: 'specific',
+  days_month_day: 0,
+  days_exclude: 65,
+  exclusion_met: 'previous',
+  exclusion_met_day: 5,
+  timezone: 'Europe/London',
+  created_at: '<%= Time.now.utc %>',
+  updated_at: '<%= Time.now.utc %>',
+  is_active: 1,
+  next_occurrence: '2019-04-26',
+  next_occurrence_utc: '2019-04-25 23:00',
+  type_of: main
+}
+
+upcoming_transactions_rent_dst: {
+  id: 1602,
+  name: 'rent',
+  user_id: 16,
+  start_date: '2019-03-01',
+  period: 'months',
+  period_num: 1,
+  days: 0,
+  days_month: "",
   days_month_day: 0,
   days_exclude: 0,
   exclusion_met: null,
@@ -442,7 +486,92 @@ upcoming_transactions_netmetube: {
   created_at: '<%= Time.now.utc %>',
   updated_at: '<%= Time.now.utc %>',
   is_active: 1,
-  next_occurrence: '2019-03-15',
-  next_occurrence_utc: '2019-03-15 00:00',
+  next_occurrence: '2019-04-01',
+  next_occurrence_utc: '2019-03-31 23:00',
+  type_of: fixed_expense
+}
+
+# runs every 2 months, so half the amount should be considered in monthly cycle
+upcoming_transactions_electric_dst: {
+  id: 1603,
+  name: 'electric bill',
+  user_id: 16,
+  start_date: '2019-03-01',
+  period: 'months',
+  period_num: 2,
+  days: 0,
+  days_month: "",
+  days_month_day: 0,
+  days_exclude: 0,
+  exclusion_met: null,
+  exclusion_met_day: 0,
+  timezone: 'Europe/London',
+  created_at: '<%= Time.now.utc %>',
+  updated_at: '<%= Time.now.utc %>',
+  is_active: 1,
+  next_occurrence: '2019-05-01',
+  next_occurrence_utc: '2019-04-30 23:00',
+  type_of: fixed_expense
+}
+
+# runs every day, so 26 times until the income schedule fires
+upcoming_transactions_daily_dst: {
+  id: 1604,
+  name: 'daily',
+  user_id: 16,
+  start_date: '2019-01-25',
+  period: 'days',
+  period_num: 1,
+  days: 0,
+  days_month_day: 0,
+  days_exclude: 0,
+  exclusion_met_day: 0,
+  timezone: 'Europe/London',
+  created_at: '<%= Time.now.utc %>',
+  updated_at: '<%= Time.now.utc %>',
+  is_active: 1,
+  next_occurrence: '2019-03-29',
+  next_occurrence_utc: '2019-03-29 00:00'
+}
+
+# runs every year, so 1/12th should be considered in monthly cycle
+upcoming_transactions_yearly_dst: {
+  id: 1605,
+  name: 'yearly',
+  user_id: 16,
+  start_date: '2019-01-25',
+  period: 'years',
+  period_num: 1,
+  days: 0,
+  days_month_day: 0,
+  days_exclude: 0,
+  exclusion_met_day: 0,
+  timezone: 'Europe/London',
+  created_at: '<%= Time.now.utc %>',
+  updated_at: '<%= Time.now.utc %>',
+  is_active: 1,
+  next_occurrence: '2020-01-01',
+  next_occurrence_utc: '2020-01-01 00:00'
+}
+
+upcoming_transactions_netmetube_dst: {
+  id: 1606,
+  name: 'netmetube',
+  user_id: 16,
+  start_date: '2019-02-15',
+  period: 'months',
+  period_num: 1,
+  days: 0,
+  days_month: "specific",
+  days_month_day: 0,
+  days_exclude: 0,
+  exclusion_met: "",
+  exclusion_met_day: 0,
+  timezone: 'Europe/London',
+  created_at: '<%= Time.now.utc %>',
+  updated_at: '<%= Time.now.utc %>',
+  is_active: 1,
+  next_occurrence: '2019-04-15',
+  next_occurrence_utc: '2019-04-14 23:00',
   type_of: fixed_expense
 }

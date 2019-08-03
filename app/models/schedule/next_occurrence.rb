@@ -86,7 +86,7 @@ class Schedule
 
     # finds the next run date if period is 'days'
     def find_next_day
-      day = @date + ((@schedule.start_date - @date) % @schedule.period_num)
+      day = @date.to_date + ((@schedule.start_date - @date.to_date) % @schedule.period_num)
       return day
     end
 
