@@ -34,7 +34,7 @@ class Schedule < ApplicationRecord
   validates :period_num, numericality: true
   validates :period_num, numericality: { only_integer: true }
   validates :period_num, numericality: { greater_than: 0, message: "'Run every' must be greater than zero" }
-  #validate :subscription
+  validate :subscription
 
   belongs_to :user
   has_and_belongs_to_many :user_transactions, foreign_key: "schedule_id", class_name: "Transaction"
