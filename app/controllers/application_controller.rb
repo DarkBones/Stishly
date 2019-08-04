@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!, :except => [:country_currency, :privacy_policy]
+  before_action :authenticate_user!, :except => [:country_currency, :privacy_policy, :api]
   before_action :set_current_user, :setup_wizzard
 
   helper_method :user_accounts, :user_accounts_array, :user_categories_array, :user_schedules_array

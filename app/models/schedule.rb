@@ -25,6 +25,7 @@
 #  type_of             :string(255)      default("schedule")
 #  pause_until         :date
 #  pause_until_utc     :datetime
+#  current_period_id   :integer          default(0)
 #
 
 class Schedule < ApplicationRecord

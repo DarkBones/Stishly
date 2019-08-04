@@ -60,7 +60,44 @@ Rails.application.routes.draw do
   end
 
   scope '/api' do
+    scope '/v1' do
 
+      scope '/accounts' do
+        get '/', to: 'api_accounts#index'
+
+        scope '/:account' do
+          get '/', to: 'api_accounts#show'
+          scope '/currency' do
+            get '/', to: 'api_accounts#currency'
+          end
+          scope '/display_balance/:amount/:from/:to/:add' do
+            get '/', to: 'api_gui#account_display_balance'
+          end
+        end
+
+      end
+
+      scope '/currencies' do
+
+        get '/', to: 'api_currencies#index'
+
+        scope '/:currency' do
+          get '/', to: 'api_currencies#show'
+
+          scope '/convert/:amount/:to_currency' do
+            get '/', to: 'api_currencies#convert'
+          end
+          scope '/rate/:to_currency' do
+            get '/', to: 'api_currencies#rate'
+          end
+          scope '/format/:amount' do
+            get '/(:float)', to: 'api_currencies#format'
+          end
+        end
+
+      end
+
+    end
   end
 
   resource :transactions, only: [:index, :show]

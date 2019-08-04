@@ -24,6 +24,7 @@
 #  schedule_id              :bigint
 #  queue_scheduled          :boolean          default(FALSE)
 #  is_queued                :boolean          default(FALSE)
+#  schedule_period_id       :integer
 #
 
 class Transaction < ApplicationRecord

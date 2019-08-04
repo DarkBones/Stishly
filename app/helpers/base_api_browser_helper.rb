@@ -1,0 +1,2 @@
+module BaseApiBrowserHelper
+end

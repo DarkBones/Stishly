@@ -4,7 +4,6 @@
 #
 #  id           :bigint           not null, primary key
 #  balance      :integer          default(0)
-#  currency_id  :bigint
 #  user_id      :bigint
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

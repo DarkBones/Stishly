@@ -79,5 +79,7 @@ class CurrencyRate < ApplicationRecord
 
     return (new_amount * to.subunit_to_unit).round.to_i if amount.class == Integer
     return amount
+
+    #return amount.class.name
   end
 end
