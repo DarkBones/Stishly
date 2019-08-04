@@ -5,6 +5,16 @@ class TransactionsController < ApplicationController
     @active_account = @active_transaction.account
   end
 
+  def upcoming_transactions
+    @date = Time.now.utc + 7.days
+    
+    schedule = current_user.schedules.where(type_of: "main", pause_until: nil).take
+    @date = schedule.next_occurrence_utc if schedule
+
+    @transactions = Schedule.get_all_transactions_until_date(current_user, @date).sort_by &:local_datetime
+    @schedule = schedule
+  end
+
   def create
     @params = params[:transaction]
     all_transactions = Transaction.create(transaction_params, current_user)

@@ -15,7 +15,7 @@ end
 <ul class="list-unstyled">
 	<%= li_pref.html_safe %><%= link_to 'Edit account', edit_user_registration_path, { :class=> cl } %><%= li_suff.html_safe %>
 	<% if current_user.finished_setup %>
-		<%= li_pref.html_safe %><%= link_to 'Settings', settings_url, { :class=> cl } %><%= li_suff.html_safe %>
+		<%= li_pref.html_safe %><%= link_to 'Settings', user_settings_path, { :class=> cl } %><%= li_suff.html_safe %>
 		<%= li_pref.html_safe %><%= link_to 'Schedules', schedules_url, { :class => cl } %><%= li_suff.html_safe %>
     <%= li_pref.html_safe %><%= link_to 'Notifications', notifications_path, { :class => cl } %><%= li_suff.html_safe %>
     <%= li_pref.html_safe %><%= link_to 'Upcoming Transactions', upcoming_transactions_path, { :class => cl } %><%= li_suff.html_safe %>
