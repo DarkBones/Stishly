@@ -1,6 +1,13 @@
-<% currency = active_account.id == 0 ? current_user.currency : active_account.currency %>
-<% amount = active_account.id == 0 ? transaction.user_currency_amount : transaction.account_currency_amount %>
-<% amount = balance(amount.to_f, Money::Currency.new(currency), "cents") %>
+<% 
+  if defined?(active_account) && !active_account.nil? && active_account.id != 0
+    currency = active_account.currency
+    amount = transaction.account_currency_amount
+  else
+    currency = current_user.currency
+    amount = transaction.user_currency_amount
+  end
+  amount = balance(amount.to_f, Money::Currency.new(currency), "cents")
+%>
 
 <% conversion_message = nil %>
 <%

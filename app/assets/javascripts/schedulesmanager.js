@@ -3,7 +3,7 @@ function scheduleTransactionsForm(scheduleId) {
   $.ajax({
     type: "GET",
     dataType: "html",
-    url: "/api/schedule_transactions/" + scheduleId,
+    url: "/api/v1/forms/schedules/transactions/" + scheduleId,
     beforeSend() {
       insertAjaxSpinner($("#sch_transactions_list"));
     },

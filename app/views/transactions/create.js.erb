@@ -126,7 +126,7 @@ $("[data-dismiss=modal]").trigger({ type: "click" });
     $.ajax({
       type: 'GET',
       dataType: 'text',
-      url: '/api/render_transaction/' + id.toString() + '/' + account,
+      url: '/api/v1/render/transaction/' + id.toString() + '?account=' + account,
       success: function(data) {
         switch (type) {
           case 'prepend':

@@ -26,7 +26,7 @@
       $.ajax({
         type: "GET",
         dataType: "html",
-        url: "/api/get_user_notifications",
+        url: "/api/v1/notifications/render",
         success(data) {
           $(".navbar #user_notifications").html(data);
         }

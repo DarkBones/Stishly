@@ -522,7 +522,7 @@ function renderTransactionMenu(formId){
     $.ajax({
       type: "GET",
       dataType: "html",
-      url: "/api/render_transactionform",
+      url: "/api/v1/forms/transactions/new",
       beforeSend(){
         insertAjaxSpinner($("#new_transactions_form"));
       },

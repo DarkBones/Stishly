@@ -294,7 +294,7 @@ function renderScheduleMenu() {
     $.ajax({
       type: "GET",
       dataType: "html",
-      url: "/api/render_scheduleform",
+      url: "/api/v1/forms/schedules/new",
       beforeSend(){
         insertAjaxSpinner($("#new_schedule_form"));
       },

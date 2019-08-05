@@ -29,6 +29,20 @@ class ApiGuiController < BaseApiBrowserController
 		render partial: "layouts/notifications"
 	end
 
+	def render_transaction
+    active_account = Account.get_from_name(params[:account], current_user)
+    transaction = current_user.transactions.find(params[:transaction]).decorate
+
+    render partial: 'accounts/transaction', :locals => { :active_account => active_account, :transaction => transaction }
+  end
+
+  def render_schedule_transactions
+    schedule = current_user.schedules.find(params[:schedule])
+    transactions = schedule.user_transactions.where("parent_id is null AND (transfer_transaction_id is null OR (transfer_transaction_id is not null AND direction = -1))").order(:description).decorate
+    
+    render partial: "schedules/transactionlist", :locals => {:transactions => transactions, :schedule_id => params[:schedule]}
+  end
+
 private
 	
 	def display_balance_params
