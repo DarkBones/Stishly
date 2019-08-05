@@ -15,9 +15,6 @@ function sanitize(val) {
 }
 
 function getScheduleNextOccurrences(){
-
-  //$("#scheduleform #next_occurrences").text("");
-  //var url;
   var name = sanitize($("#scheduleform #schedule_name").val());
   var startDate = sanitize($("#scheduleform #schedule_start_date").val());
   var timezone = sanitize($("#scheduleform #timezone_input").val());
@@ -49,7 +46,7 @@ function getScheduleNextOccurrences(){
   $.ajax({
     type: "GET",
     dataType: "json",
-    url: "api/next_occurrences" + "/" + type + "/" + name + "/" + startDate + "/" + timezone + "/" + schedule + "/" + runEvery + "/" + days + "/" + days2 + "/" + datesPicked + "/" + weekdayMon + "/" + weekdayTue + "/" + weekdayWed + "/" + weekdayThu + "/" + weekdayFri + "/" + weekdaySat + "/" + weekdaySun + "/" + endDate + "/" + weekdayExcludeMon + "/" + weekdayExcludeTue + "/" + weekdayExcludeWed + "/" + weekdayExcludeThu + "/" + weekdayExcludeFri + "/" + weekdayExcludeSat + "/" + weekdayExcludeSun + "/" + datesPickedExclude + "/" + exclusionMet1 + "/" + exclusionMet2 + "/" + occurrenceCount,
+    url: "api/v1/next_schedule_occurrence" + "/" + occurrenceCount.toString() + "/" + type + "/" + startDate + "/" + timezone + "/" + schedule + "/" + runEvery + "/" + days + "/" + days2 + "/" + datesPicked + "/" + weekdayMon + "/" + weekdayTue + "/" + weekdayWed + "/" + weekdayThu + "/" + weekdayFri + "/" + weekdaySat + "/" + weekdaySun + "/" + endDate + "/" + weekdayExcludeMon + "/" + weekdayExcludeTue + "/" + weekdayExcludeWed + "/" + weekdayExcludeThu + "/" + weekdayExcludeFri + "/" + weekdayExcludeSat + "/" + weekdayExcludeSun + "/" + datesPickedExclude + "/" + exclusionMet1 + "/" + exclusionMet2,
     beforeSend() {
       $("#scheduleform #next_occurrences").html("");
       //insertAjaxSpinner($("#scheduleform #next_occurrences"));
@@ -60,7 +57,7 @@ function getScheduleNextOccurrences(){
     success(data) {
       $("#scheduleform #next_occurrences").html("<ul>");
       data.forEach(function(d) {
-        $("#scheduleform #next_occurrences").append("" + d + "");
+        $("#scheduleform #next_occurrences").append("<li>" + d + "</li>");
       });
       $("#scheduleform #next_occurrences").append("</ul>");
     }

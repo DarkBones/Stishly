@@ -65,7 +65,7 @@ function updateTransactionsTotal(formId, force=false) {
   $.ajax({
     type: "GET",
     dataType: "text",
-    url: "/api/format_currency/" + totalStr + "/" + currency + "/true",
+    url: "/api/v1/currencies/" + currency + "/format/" + totalStr + "/?float=true",
     beforeSend(){
       $targetTotal.hide();
       insertAjaxSpinner($targetTotal.parent().parent().find("#total_ajax_spinner"), 38);
@@ -134,7 +134,7 @@ function updateTransactionResult(formId) {
     $.ajax({
       type: "GET",
       dataType: "json",
-      url: "/api/account_currency_details/" + encodeURI($accountTarget.val()),
+      url: "/api/v1/accounts/" + encodeURI($accountTarget.val()) + "/currency",
       beforeSend() {
         $resultTarget.hide();
         $spinnerTarget.show();
@@ -325,7 +325,7 @@ function changeTransactionCurrency(obj, ignore=false, lockCurrency=true){
   $.ajax({
     type: "GET",
     dataType: "json",
-    url: "/api/account_currency_details/" + encodeURI(account),
+    url: "/api/v1/accounts/" + encodeURI(account) + "/currency",
     beforeSend() {
       $submitButton.attr("disabled", true);
       $spinnerContainer.show();
@@ -337,7 +337,7 @@ function changeTransactionCurrency(obj, ignore=false, lockCurrency=true){
         $.ajax({
           type: "GET",
           dataType: "text",
-          url: "/api/currency_rate/" + currency + "/" + dataCurrency.iso_code,
+          url: "/api/v1/currencies/" + currency + "/rate/" + dataCurrency.iso_code,
           beforeSend() {
             $submitButton.attr("disabled", true);
             $spinnerContainer.show();

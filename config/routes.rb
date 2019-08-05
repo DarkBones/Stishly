@@ -64,26 +64,20 @@ Rails.application.routes.draw do
 
       scope '/accounts' do
         get '/', to: 'api_accounts#index'
-
         scope '/:account' do
           get '/', to: 'api_accounts#show'
           scope '/currency' do
             get '/', to: 'api_accounts#currency'
           end
-          scope '/display_balance/:amount/:from/:to/:add' do
-            get '/', to: 'api_gui#account_display_balance'
-          end
         end
-
       end
-
+      scope '/account_display_balance/:amount/:from/:to/:add' do
+        get '/', to: 'api_gui#account_display_balance'
+      end
       scope '/currencies' do
-
         get '/', to: 'api_currencies#index'
-
         scope '/:currency' do
           get '/', to: 'api_currencies#show'
-
           scope '/convert/:amount/:to_currency' do
             get '/', to: 'api_currencies#convert'
           end
@@ -91,10 +85,60 @@ Rails.application.routes.draw do
             get '/', to: 'api_currencies#rate'
           end
           scope '/format/:amount' do
-            get '/(:float)', to: 'api_currencies#format'
+            get '/', to: 'api_currencies#format'
           end
         end
-
+      end
+      scope '/countries' do
+        get '/', to: 'api_countries#index'
+        scope '/:country' do
+          get '/', to: 'api_countries#show'
+          scope '/currency' do
+            get '/', to: 'api_countries#currency'
+          end
+        end
+      end
+      scope '/schedules' do
+        get '/', to: 'api_schedules#index'
+        scope '/:schedule' do
+          get '/', to: 'api_schedules#show'
+          scope '/transactions' do
+            get '/', to: 'api_schedules#transactions'
+          end
+          scope '/next_occurrence' do
+            get '/', to: 'api_schedules#next_occurrence'
+            scope '/:count' do
+              get '/', to: 'api_schedules#next_occurrences'
+            end
+          end
+        end
+      end
+      scope '/next_schedule_occurrence' do
+        scope '/:count/:type/:start_date/:timezone/:schedule/:run_every/:days/:days2/:dates_picked/:weekday_mon/:weekday_tue/:weekday_wed/:weekday_thu/:weekday_fri/:weekday_sat/:weekday_sun/:end_date/:weekday_exclude_mon/:weekday_exclude_tue/:weekday_exclude_wed/:weekday_exclude_thu/:weekday_exclude_fri/:weekday_exclude_sat/:weekday_exclude_sun/:dates_picked_exclude/:exclusion_met1/:exclusion_met2/' do
+          get '/', to: 'api_schedules#next_occurrences_from_form'
+        end
+      end
+      scope '/notifications' do
+        scope '/render' do
+          get '/', to: 'api_notifications#index'
+        end
+      end
+      scope '/forms' do
+        scope '/accounts' do
+          scope '/new' do
+            get '/', to: 'api_gui#new_account_form'
+          end
+        end
+        scope '/transactions' do
+          scope '/new' do
+            get '/', to: 'api_gui#new_transaction_form'
+          end
+        end
+        scope '/schedules' do
+          scope '/new' do
+            get '/', to: 'api_gui#new_schedule_form'
+          end
+        end
       end
 
     end
@@ -110,17 +154,17 @@ Rails.application.routes.draw do
 
   get '/privacy', to: 'application#privacy_policy', as: :privacy_policy
 
-  get 'api/account_currency(/:account)', to: 'api#get_account_currency'
-  get 'api/account_currency_details/:account_name', to: 'api#account_currency_details'
-  get 'api/account_display_balance/:amount/:from/:to/:add', to: 'api#account_display_balance'
-  get 'api/accounts/:id/details', to: 'api#account_details', as: :account_details
-  get 'api/accounts/details', to: 'api#all_accounts_details', as: :account_all_details
-  get 'api/convert_currency/:amount/:from/:to', to: 'api#convert_currency'
-  get 'api/country_currency/:country_code', to: 'api#country_currency', as: :country_currency
-  get 'api/currency_details/:currency', to: 'api#currency_details'
-  get 'api/currency_rate/:from/:to', to: 'api#get_currency_rate'
-  get 'api/format_currency/:amount(/:currency/:float)', to: 'api#format_currency'
-  get 'api/get_next_schedule_date/:schedule_id', to: 'api#next_schedule_date'
+  #get 'api/account_currency(/:account)', to: 'api#get_account_currency'
+  #get 'api/account_currency_details/:account_name', to: 'api#account_currency_details'
+  #get 'api/account_display_balance/:amount/:from/:to/:add', to: 'api#account_display_balance'
+  #get 'api/accounts/:id/details', to: 'api#account_details', as: :account_details
+  #get 'api/accounts/details', to: 'api#all_accounts_details', as: :account_all_details
+  #get 'api/convert_currency/:amount/:from/:to', to: 'api#convert_currency'
+  #get 'api/country_currency/:country_code', to: 'api#country_currency', as: :country_currency
+  #get 'api/currency_details/:currency', to: 'api#currency_details'
+  #get 'api/currency_rate/:from/:to', to: 'api#get_currency_rate'
+  #get 'api/format_currency/:amount(/:currency/:float)', to: 'api#format_currency'
+  #get 'api/get_next_schedule_date/:schedule_id', to: 'api#next_schedule_date'
   get 'api/get_simplified_schedule_form', to: 'api#get_simplified_schedule_form'
   get 'api/get_user_details', to: 'api#user_details'
   get 'api/get_user_notifications', to: 'api#get_user_notifications'

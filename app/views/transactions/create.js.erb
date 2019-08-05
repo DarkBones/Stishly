@@ -2,7 +2,7 @@
 
 $("[data-dismiss=modal]").trigger({ type: "click" });
 
-if($("#transactions_list").length > 0){
+//if($("#transactions_list").length > 0){
   var active_account = '<%= @params[:active_account] %>';
   var active_account_currency = '<%= Account.get_account_or_user_currency(@params[:active_account], current_user) %>';
 
@@ -91,7 +91,7 @@ if($("#transactions_list").length > 0){
     $.ajax({
       type: 'GET',
       dataType: 'json',
-      url: '/api/account_display_balance/' + current_balance + '/' + currency + '/' + currency + '/' + add,
+      url: '/api/v1/account_display_balance/' + current_balance + '/' + currency + '/' + currency + '/' + add,
       success: function(data) {
         $target.attr('balance', current_balance + add);
         $target.html(data.html);
@@ -198,7 +198,7 @@ if($("#transactions_list").length > 0){
     var num = str.replace(/-/g, "");
     return parseInt(num);
   }
-}
+//}
 
 
 triggerNotice('<%= I18n.t("transaction.confirmations.confirmed") %>', false);

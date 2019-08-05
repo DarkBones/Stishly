@@ -142,16 +142,16 @@
     let $currencyTarget = $(obj).next();
     $.ajax({
       type: "GET",
-      dataType: "text",
-      url: "/api/country_currency/" + $(obj).val(),
+      dataType: "json",
+      url: "/api/v1/countries/" + $(obj).val() + "/currency",
       success(data) {
         if (!$("#user_currency").is("[changed]")) {
-          currency = data;
+          currency = data.iso_code;
         }
 
         $("select.currency").each(function(){
           if (!$(this).is("[changed]")) {
-            $(this).val(data);
+            $(this).val(data.iso_code);
           }
         });
       }

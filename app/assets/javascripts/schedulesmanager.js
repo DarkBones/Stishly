@@ -21,7 +21,7 @@ function changeSchedule(schId) {
   $.ajax({
     type: "GET",
     dataType: "text",
-    url: "/api/get_next_schedule_date/" + schId,
+    url: "/api/v1/schedules/" + schId + "/next_occurrence?user_format=true&include_weekday=true",
     beforeSend() {
       insertAjaxSpinner($("#next_run_date"), 38);
     },
