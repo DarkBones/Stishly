@@ -60,4 +60,28 @@ class ApiCurrenciesController < BaseApiController
     end
   end
 
+  # gets the currency rates between two given accounts, for transferring purposes
+  def transfer_rate
+    from_account = Account.get_from_name(params[:from], current_user)
+    to_account = Account.get_from_name(params[:to], current_user)
+
+    render json: "not found", status: :not_found and return if from_account.nil? || to_account.nil?
+
+    currency_rate = 1
+
+    if from_account.currency != to_account.currency
+      currency_rate = CurrencyRate.get_rate(from_account.currency, to_account.currency)
+    end
+
+    render json: {
+      from_account: {
+        currency: from_account.currency
+      },
+      to_account: {
+        currency: to_account.currency
+      },
+      currency_rate: currency_rate
+    }
+  end
+
 end

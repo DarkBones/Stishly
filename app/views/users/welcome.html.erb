@@ -174,7 +174,7 @@
   	$.ajax({
       type: "GET",
       dataType: "json",
-      url: "/api/get_user_subscription_details",
+      url: "/api/v1/users/subscription",
       success(data) {
         if ($(".expenseRow").length < data.max_fixed_expenses || data.max_fixed_expenses < 0){
           $("#expenseRows").append("<%= j render :partial => 'expense_row' %>");
@@ -301,7 +301,7 @@
     $.ajax({
       type: "GET",
       dataType: "json",
-      url: "/api/get_user_subscription_details",
+      url: "/api/v1/users/subscription",
       success(data) {
         if ($(".account_row").length < data.max_accounts || data.max_accounts < 0){
           $("#account_rows").append("<%= j render :partial => 'account_row' %>");
@@ -336,7 +336,7 @@
     $.ajax({
       type: "GET",
       dataType: "json",
-      url: "/api/get_user_subscription_details",
+      url: "/api/v1/users/subscription",
       success(data) {
         if(spendingAccounts > data.max_spending_accounts) {
           if(showNotice){

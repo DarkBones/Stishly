@@ -43,6 +43,11 @@ class ApiGuiController < BaseApiBrowserController
     render partial: "schedules/transactionlist", :locals => {:transactions => transactions, :schedule_id => params[:schedule]}
   end
 
+  def render_transaction_date
+  	date_formatted = User.format_date(params[:date].to_date, false, false)
+    render partial: 'accounts/transactions_date', :locals => { :d => params[:date], :account_currency => params[:account_currency], :day_total => params[:day_total], :d_formatted => date_formatted }
+  end
+
 private
 	
 	def display_balance_params

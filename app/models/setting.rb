@@ -21,4 +21,5 @@ class Setting < ApplicationRecord
       return sett
     end
   end
+
 end

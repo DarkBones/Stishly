@@ -53,10 +53,13 @@ private
 
 	end
 
-	def filter_fields(json)
+	def filter_fields(json, additional_fields=[])
 		#json.each {|k,v| json[k] = @user.email if k == "user_id"}
 		
 		json = reject_key(json, "user_id")
+		additional_fields.each do |f|
+			json = reject_key(json, f)
+		end
 
 		return json
 	end
@@ -73,8 +76,8 @@ private
 		return h
 	end
 
-	def prepare_json(json)
-		json = filter_fields(json)
+	def prepare_json(json, filter_fields=[])
+		json = filter_fields(json, filter_fields)
 		json = expand_fields(json)
 
 		return json

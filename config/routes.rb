@@ -89,6 +89,11 @@ Rails.application.routes.draw do
           end
         end
       end
+      scope 'currencies_transfer_rate' do
+        scope '/:from/:to' do
+          get '/', to: 'api_currencies#transfer_rate'
+        end
+      end
       scope '/countries' do
         get '/', to: 'api_countries#index'
         scope '/:country' do
@@ -111,6 +116,17 @@ Rails.application.routes.draw do
               get '/', to: 'api_schedules#next_occurrences'
             end
           end
+        end
+      end
+      scope '/users' do
+        scope '/subscription' do
+          get '/', to: 'api_users#subscription'
+        end
+        scope '/currency' do
+          get '/', to: 'api_users#currency'
+        end
+        scope '/week_start' do
+          get '/', to: 'api_users#week_start'
         end
       end
       scope '/next_schedule_occurrence' do
@@ -149,6 +165,11 @@ Rails.application.routes.draw do
             get '/', to: 'api_gui#render_transaction'
           end
         end
+        scope '/transaction_date' do
+          scope '/:date/:day_total/:account_currency' do
+            get '/', to: 'api_gui#render_transaction_date'
+          end
+        end
       end
 
     end
@@ -178,7 +199,7 @@ Rails.application.routes.draw do
   #get 'api/get_simplified_schedule_form', to: 'api#get_simplified_schedule_form'
   #get 'api/get_user_details', to: 'api#user_details'
   #get 'api/get_user_notifications', to: 'api#get_user_notifications'
-  get 'api/get_user_subscription_details', to: 'api#user_subscription_details'
+  #get 'api/get_user_subscription_details', to: 'api#user_subscription_details'
   #get 'api/next_occurrences/:type/:name/:start_date/:timezone/:schedule/:run_every/:days/:days2/:dates_picked/:weekday_mon/:weekday_tue/:weekday_wed/:weekday_thu/:weekday_fri/:weekday_sat/:weekday_sun/:end_date/:weekday_exclude_mon/:weekday_exclude_tue/:weekday_exclude_wed/:weekday_exclude_thu/:weekday_exclude_fri/:weekday_exclude_sat/:weekday_exclude_sun/:dates_picked_exclude/:exclusion_met1/:exclusion_met2/:occurrence_count', to: 'api#get_next_schedule_occurrences'
   #get 'api/render_accountform', to: 'api#render_accountform'
   #get 'api/render_scheduleform', to: 'api#render_scheduleform'
@@ -186,11 +207,11 @@ Rails.application.routes.draw do
   #get 'api/render_transactionform', to: 'api#render_transactionform'
   #get 'api/render_transactionsmenu(/:account)', to: 'api#render_transactionsmenu'
   #get 'api/schedule_transactions/:schedule_id', to: 'api#schedule_transactions'
-  get 'api/transaction_date_ul/:date/:day_total/:account_currency', to: 'api#transaction_date_ul'
+  #get 'api/transaction_date_ul/:date/:day_total/:account_currency', to: 'api#transaction_date_ul'
   #get 'api/transactions/prepare_new/:date(/:account)', to: 'api#prepare_new_transaction'
-  get 'api/transfer_accounts/:from/:to', to: 'api#transfer_accounts'
-  get 'api/user_currency(/:detailed)', to: 'api#get_user_currency'
-  get 'api/week_start', to: 'api#get_week_start', as: :week_start
+  #get 'api/transfer_accounts/:from/:to', to: 'api#transfer_accounts'
+  #get 'api/user_currency(/:detailed)', to: 'api#get_user_currency'
+  #get 'api/week_start', to: 'api#get_week_start', as: :week_start
 
   get 'app', to: 'app#index'
 

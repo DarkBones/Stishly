@@ -176,7 +176,7 @@ $("[data-dismiss=modal]").trigger({ type: "click" });
     $.ajax({
       type: 'GET',
       dataType: 'text',
-      url: '/api/transaction_date_ul/' + date + '/0/' + currency,
+      url: '/api/v1/render/transaction_date/' + date + '/0/' + currency,
       success: function(data) {
         switch (type) {
           case 'prepend':

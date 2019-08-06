@@ -90,47 +90,6 @@ class ScheduleTest < ActiveSupport::TestCase
     assert_not schedule.save, "Saved schedule without name"
   end
 
-  test "Schedule with dangerous characters in the name" do
-    current_user = users(:bas)
-
-    params = {
-      type: 'advanced',
-      name: '',
-      start_date: '17-Mar-2019',
-      timezone: 'Europe/London',
-      schedule: 'monthly',
-      run_every: '1',
-      days: 'specific',
-      days2: 'day',
-      dates_picked: ' 28',
-      weekday_mon: '0',
-      weekday_tue: '0',
-      weekday_wed: '0',
-      weekday_thu: '0',
-      weekday_fri: '0',
-      weekday_sat: '0',
-      weekday_sun: '0',
-      end_date: '02-feb-2020',
-      weekday_exclude_mon: '0',
-      weekday_exclude_tue: '0',
-      weekday_exclude_wed: '0',
-      weekday_exclude_thu: '0',
-      weekday_exclude_fri: '0',
-      weekday_exclude_sat: '1',
-      weekday_exclude_sun: '1',
-      dates_picked_exclude: '',
-      exclusion_met1: 'previous',
-      exclusion_met2: 'fri'
-    }
-
-    unsafe_chars = ["-", ".", "_", "~", ":", "/", "?", "#", "[", "]", "@", "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "=", "{", "}", "\""]
-    unsafe_chars.each do |c|
-      params[:name] = "test #{c} char"
-      schedule = Schedule.create_from_form(params, current_user, true)
-      assert_not schedule.save, format_error("Created schedule with special character #{c}")
-    end
-  end
-
   test "Schedule without start date" do
     current_user = users(:bas)
 

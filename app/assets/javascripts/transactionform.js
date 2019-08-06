@@ -179,7 +179,7 @@ function showTransferCurrencyRates(formId, type=null) {
       $.ajax({
         type: "GET",
         dataType: "json",
-        url: "/api/transfer_accounts/" + from + "/" + to,
+        url: "/api/v1/currencies_transfer_rate/" + from + "/" + to,
         beforeSend() {
           $submitButton.attr("disabled", true);
           $(formId +  " #transfer_conversion_spinner").show();
