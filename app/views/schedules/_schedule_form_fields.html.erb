@@ -1,0 +1,104 @@
+<% form_params = Schedule.get_form_params(schedule) %>
+
+<div class="row ladderform" id="ladder-root">
+
+	<%= f.hidden_field :timezone, id: 'timezone_input' %>
+
+	<!-- COLUMN ONE -->
+	<div class="col-12 col-lg-7 col-xl-7 px-3 px-xl-5 border-right">
+		<div class="row py-2">
+			<!-- SIMPLE / ADVANCED -->
+			<div class="col-12 py-5 bg-primary rounded parent" id="type" children-id="path-simple-advanced">
+				<div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
+
+					<label class="btn btn-outline-light <%= 'active' if form_params[:type] == 'simple' %> py-3" id="type-simple" children=".path-simple" onclick="showHideFields($(this))">
+						<%= f.radio_button :type, 'simple', :checked => (form_params[:type] == 'simple') %>Simple
+					</label>
+					<label class="btn btn-outline-light <%= 'active' if form_params[:type] == 'advanced' %> py-3" id="type-advanced" children=".path-advanced" onclick="showHideFields($(this))">
+						<%= f.radio_button :type, 'advanced', :checked => (form_params[:type] == 'advanced') %>Advanced
+					</label>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="row py-2">
+			<div class="col-12">
+				<%= f.label :name %>
+				<%= f.text_field :name, class: 'form-control', placeholder: "Payday" %>
+			</div>
+		</div>
+
+		<div class="row py-2">
+			<div class="col-12 col-sm-6">
+				<%= f.label :schedule %>
+    		<%= f.select(:schedule, [
+          ["Daily", "daily", "children" => ".path-day"], 
+          ["Weekly", "weekly", "children" => ".path-week"], 
+          ["Monthly", "monthly", "children" => ".path-month"], 
+          ["Annually", "annually", "children" => ".path-year"]
+          ], { :selected => form_params[:schedule] }, { :class => 'form-control parent', 'children-id' => 'path-period', 'onchange' => 'changeSchedulePeriod(this);' }) %>
+			</div>
+			<div class="col-12 col-sm-6">
+				<%= f.label :start_date %>
+				<%= f.text_field :start_date, class: 'datepicker datepicker-null form-control', value: form_params[:start_date] %>
+			</div>
+		</div>
+
+		<div class="row py-2">
+			<div class="col-12">
+				<%= f.label :run_every %>
+			</div>
+		</div>
+		<div class="row py-0">
+			<div class="col-6">
+				<%= f.number_field :run_every, class: "form-control", value: form_params[:run_every], min: "1", 'onchange' => 'changeRunsEvery(this)' %>
+			</div>
+		</div>
+
+		<div class="children" id="path-simple-advanced">
+			<div class="path-simple">
+				SIMPLE
+			</div>
+			<div class="path-advanced">
+				<div class="children" id="path-period">
+					<div class="path-month">
+						MONTH
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<script>
+	function changeSchedulePeriod(obj) {
+		var txt;
+    switch($(obj).val()) {
+      case "daily":
+        txt = "Days";
+        break;
+      case "weekly":
+        txt = "Weeks";
+        break;
+      case "monthly":
+        txt = "Months";
+        break
+      default:
+        txt = "Years";
+    }
+    $(obj).parents(".row").next(".row").find("#periodTxt").text(txt);
+	}
+
+	// don't allow values less than one in the 'run_every' field
+	function changeRunsEvery(obj) {
+	  var val = 0;
+	  val = $(obj).val();
+	  if (val < 1){
+	    $(obj).val("1");
+	  }
+	  //getScheduleNextOccurrences();
+	}
+</script>

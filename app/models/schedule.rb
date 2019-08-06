@@ -77,6 +77,10 @@ class Schedule < ApplicationRecord
     return transactions
   end
 
+  def self.get_form_params(schedule)
+    return GetFormParams.new(schedule).perform
+  end
+
   def self.create_from_form(params, current_user, testing=false, type="Schedule")
     schedule = CreateFromForm.new(params, current_user, testing, type).perform()
 

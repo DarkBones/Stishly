@@ -6,8 +6,12 @@ $(document).on("turbolinks:load", () => {
     $("#timezone_input").setTimezone();
   });
 
-  $("#timezone_input").each(function(){
-    $(this).setTimezone();
-  });
+  setTimezones();
   
 });
+
+window.setTimezones = function() {
+	$("#timezone_input").each(function(){
+    $(this).setTimezone();
+  });
+}

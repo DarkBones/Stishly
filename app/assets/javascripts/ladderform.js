@@ -1,12 +1,3 @@
-/*$(".ladderform").change(function(e){
-  alert("e");
-  showHideFields($(e.target));
-});
-
-$("#simple_schedule_form").change(function(e){
-  showHideFields($(e.target));
-});*/
-
 $(document).on("turbolinks:load", () => {
   addLadderformListeners();
   $(".ladderform").each(function(){
@@ -14,38 +5,64 @@ $(document).on("turbolinks:load", () => {
   });
 });
 
+
 // show the correct fields in case the user navigates to a different website and then click the back button in the browser
 function showHideInitialfields($target){
   $target.find("select").each(function(){
     showHideFields($(this));
   });
+  $target.find(".active[children]").each(function(){
+    showHideFields($(this));
+  });
 }
+
+addLadderformListeners();
 
 function addLadderformListeners(){
   $(".ladderform").change(function(e){
     showHideFields($(e.target));
   });
+  $(".ladderform").each(function(){
+    showHideInitialfields($(this));
+  });
 }
 
 function showHideFields($target) {
-  var children;
-  var selectedValue;
+  var $children, children;
 
-  if ($target.is("select")) {
-    selectedValue = $target.val();
+  $children = findLadderChildren($target);
+
+  if ( $target.is("select") ){
+    let selectedValue = $target.val();
     $target.children("option").each(function(){
-
       if ($(this).attr("value") === selectedValue) {
         children = $(this).attr("children");
       }
     });
+  } else {
+    children = $target.attr("children");
+  }
 
-    if(typeof(children) !== "undefined"){
-      if(children.length > 0){
-        $target.next(".children").children(children).slideDown("fast");
-      }
-      $target.next(".children").children().not(children).slideUp("fast");
-    }
+  if ( typeof(children) === "undefined" ) {
+    return;
+  }
+
+  if (children.length > 0) {
+    $children.children(children).slideDown("fast");
+  }
+  $children.children().not(children).slideUp("fast");
+
+}
+
+function findLadderChildren($target) {
+  if ( $target.is("[children-id]") ) {
+    return $target.parents("#ladder-root").find("#" + $target.attr("children-id"));
+  } else if ( $target.parents(".parent").is("[children-id]")) {
+    return $("#" + $target.parents(".parent").attr("children-id"));
+  } else if ( $target.next(".children").length > 0 ) {
+    return $target.next(".children");
+  } else {
+    return $target.parents(".parent").next("children");
   }
 }
 

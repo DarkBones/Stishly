@@ -64,7 +64,7 @@ function getScheduleNextOccurrences(){
   });
 }
 
-function updateScheduleNameInput(inputObject) {
+/*function updateScheduleNameInput(inputObject) {
   var $scheduleform = $();
   var $input = $();
   var inputValue = "";
@@ -78,7 +78,7 @@ function updateScheduleNameInput(inputObject) {
 
   // don't allow question marks in input field
   //$input.val(inputValue.replace(/\?/g, ""));
-}
+}*/
 
 // don't allow values less than one in the 'run_every' field
 function changeRunsEvery() {
@@ -90,7 +90,7 @@ function changeRunsEvery() {
   getScheduleNextOccurrences();
 }
 
-function changeSchedulePeriod(val) {
+/*function changeSchedulePeriod(val) {
   $("#scheduleform .daily").hide();
   $("#scheduleform .weekly").hide();
   $("#scheduleform .monthly").hide();
@@ -113,7 +113,7 @@ function changeSchedulePeriod(val) {
       $("#scheduleform p#period").text("Years");
       $("#scheduleform .annually").show();
   }
-}
+}*/
 
 function changeScheduleExclusionMet(val){
   var $exlusionMet2 = $("#scheduleform #schedule_exclusion_met2");
@@ -290,7 +290,7 @@ function resetScheduleMenu(){
 }
 
 function renderScheduleMenu() {
-  if ($("#new_schedule_form form").length === 0) {
+  //if ($("#new_schedule_form form").length === 0) {
     $.ajax({
       type: "GET",
       dataType: "html",
@@ -300,11 +300,13 @@ function renderScheduleMenu() {
       },
       success(data) {
         $("#new_schedule_form").html(data);
-        resetScheduleMenu();
+        //resetScheduleMenu();
         setDatepickers();
+        addLadderformListeners();
+        setTimezones();
       }
     });
-  } else {
+  /*} else {
     resetScheduleMenu();
-  }
+  }*/
 }
