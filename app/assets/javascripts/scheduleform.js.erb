@@ -14,7 +14,7 @@ function sanitize(val) {
   return val;
 }
 
-function getScheduleNextOccurrences(){
+function getScheduleNextOccurrences(obj){
   var name = sanitize($("#scheduleform #schedule_name").val());
   var startDate = sanitize($("#scheduleform #schedule_start_date").val());
   var timezone = sanitize($("#scheduleform #timezone_input").val());
@@ -48,7 +48,7 @@ function getScheduleNextOccurrences(){
     dataType: "json",
     url: "api/v1/next_schedule_occurrence" + "/" + occurrenceCount.toString() + "/" + type + "/" + startDate + "/" + timezone + "/" + schedule + "/" + runEvery + "/" + days + "/" + days2 + "/" + datesPicked + "/" + weekdayMon + "/" + weekdayTue + "/" + weekdayWed + "/" + weekdayThu + "/" + weekdayFri + "/" + weekdaySat + "/" + weekdaySun + "/" + endDate + "/" + weekdayExcludeMon + "/" + weekdayExcludeTue + "/" + weekdayExcludeWed + "/" + weekdayExcludeThu + "/" + weekdayExcludeFri + "/" + weekdayExcludeSat + "/" + weekdayExcludeSun + "/" + datesPickedExclude + "/" + exclusionMet1 + "/" + exclusionMet2,
     beforeSend() {
-      $("#scheduleform #next_occurrences").html("");
+      $(obj).parents("#schedule-form-root").find("#next_occurrences").html("");
       //insertAjaxSpinner($("#scheduleform #next_occurrences"));
     },
     complete() {
@@ -64,59 +64,43 @@ function getScheduleNextOccurrences(){
   });
 }
 
-/*function updateScheduleNameInput(inputObject) {
-  var $scheduleform = $();
-  var $input = $();
-  var inputValue = "";
-
-  $input = $("#" + inputObject.id);
-  $scheduleform = $input.closest("#scheduleform");
-  inputValue = $input.val();
-
-  // don't allow dots in input field
-  //$input.val(inputValue.replace(/\./g, ""));
-
-  // don't allow question marks in input field
-  //$input.val(inputValue.replace(/\?/g, ""));
-}*/
-
 // don't allow values less than one in the 'run_every' field
-/*function changeRunsEvery() {
+function changeRunsEvery(obj) {
   var val = 0;
-  val = $("#scheduleform #schedule_run_every").val();
+  val = $(obj).parents("#schedule-form-root").find("#schedule_run_every").val();
   if (val < 1){
-    $("#scheduleform #schedule_run_every").val("1");
+    $(obj).parents("#schedule-form-root").find("#schedule_run_every").val("1");
   }
   getScheduleNextOccurrences();
-}*/
+}
 
-/*function changeSchedulePeriod(val) {
-  $("#scheduleform .daily").hide();
-  $("#scheduleform .weekly").hide();
-  $("#scheduleform .monthly").hide();
-  $("#scheduleform .annually").hide();
+function changeSchedulePeriod(val, obj) {
+  $(obj).parents("schedule-form-root").find(".daily").hide();
+  $(obj).parents("schedule-form-root").find(".weekly").hide();
+  $(obj).parents("schedule-form-root").find(".monthly").hide();
+  $(obj).parents("schedule-form-root").find(".annually").hide();
 
   switch (val.toLowerCase()) {
     case "daily":
-      $("#scheduleform p#period").text("Days");
-      $("#scheduleform .daily").show();
+      $(obj).parents("schedule-form-root").find("p#period").text("Days");
+      $(obj).parents("schedule-form-root").find(".daily").show();
       break;
     case "weekly":
-      $("#scheduleform p#period").text("Weeks");
-      $("#scheduleform .weekly").show();
+      $(obj).parents("schedule-form-root").find("p#period").text("Weeks");
+      $(obj).parents("schedule-form-root").find(".weekly").show();
       break;
     case "monthly":
-      $("#scheduleform p#period").text("Months");
-      $("#scheduleform .monthly").show();
+      $(obj).parents("schedule-form-root").find("p#period").text("Months");
+      $(obj).parents("schedule-form-root").find(".monthly").show();
       break;
     case "annually":
-      $("#scheduleform p#period").text("Years");
-      $("#scheduleform .annually").show();
+      $(obj).parents("schedule-form-root").find("p#period").text("Years");
+      $(obj).parents("schedule-form-root").find(".annually").show();
   }
-}*/
+}
 
-function changeScheduleExclusionMet(val){
-  var $exlusionMet2 = $("#scheduleform #schedule_exclusion_met2");
+function changeScheduleExclusionMet(val, obj){
+  var $exlusionMet2 = $(obj).parents("schedule-form-root").find("#schedule_exclusion_met2");
 
   switch (val.toLowerCase()) {
     case "cancel":
@@ -127,10 +111,10 @@ function changeScheduleExclusionMet(val){
   }
 }
 
-/*function showDaypicker(){
-  var $daypicker = $("#scheduleform #daypicker");
-  var $daypickerExclude = $("#scheduleform #daypicker-exclude");
-  var $weekdayExclude = $("#scheduleform #weekday-exclude");
+function showDaypicker(obj){
+  var $daypicker = $(obj).parents("schedule-form-root").find("#daypicker");
+  var $daypickerExclude = $(obj).parents("schedule-form-root").find("#daypicker-exclude");
+  var $weekdayExclude = $(obj).parents("schedule-form-root").find("#weekday-exclude");
 
   $daypicker.show();
   $daypickerExclude.hide();
@@ -144,17 +128,17 @@ function hideDaypicker(){
   $daypicker.hide();
   $daypickerExclude.show();
   $weekdayExclude.hide();
-}*/
+}
 
-/*function changeScheduleDays(val){
-  var $scheduleDays2 = $("#scheduleform #schedule_days2");
-  var $daypickerExclude = $("#scheduleform #daypicker-exclude");
-  var $weekdayExclude = $("#scheduleform #weekday-exclude");
-  var $daypicker = $("#scheduleform #daypicker");
+function changeScheduleDays(val, obj){
+  var $scheduleDays2 = $(obj).parents("#schedule-form-root").find("#schedule_days2");
+  var $daypickerExclude = $(obj).parents("#schedule-form-root").find("#daypicker-exclude");
+  var $weekdayExclude = $(obj).parents("#schedule-form-root").find("#weekday-exclude");
+  var $daypicker = $(obj).parents("#schedule-form-root").find("#daypicker");
 
   switch (val.toLowerCase()) {
     case "specific":
-      showDaypicker();
+      showDaypicker(obj);
       $scheduleDays2.hide();
       break;
     default:
@@ -170,9 +154,9 @@ function hideDaypicker(){
           $daypickerExclude.show();
       }
   }
-}*/
+}
 
-function showWeekday(){
+/*function showWeekday(){
   $("#scheduleform .schedule-simple-period").hide();
   $("#scheduleform #weekday").show();
 }
@@ -180,11 +164,11 @@ function showWeekday(){
 function hideWeekday(){
   $("#scheduleform .schedule-simple-period").show();
   $("#scheduleform #weekday").hide();
-}
+}*/
 
-/*function advancedScheduleOptions(force=0){
-  var $advancedOptions = $("#scheduleform #schedule_advanced");
-  var $advancedOptionsToggle = $("#scheduleform #schedule_advanced_toggle");
+function advancedScheduleOptions(force=0, obj){
+  var $advancedOptions = $(obj).parents("#schedule-form-root").find("#schedule_advanced");
+  var $advancedOptionsToggle = $(obj).parents("#schedule-form-root").find("#schedule_advanced_toggle");
 
   if ($advancedOptions.is(":visible") || force === -1){
     $advancedOptions.slideUp(200);
@@ -193,11 +177,11 @@ function hideWeekday(){
     $advancedOptions.slideDown(200);
     $advancedOptionsToggle.text("hide advanced options");
   }
-}*/
+}
 
-function schedulePickDate(date, $datesPicked) {
+function schedulePickDate(date, datesTarget) {
   var isActive = false;
-  //var $datesPicked = $("#scheduleform #schedule_dates_picked");
+  var $datesPicked = $(date).parents("#schedule-form-root").find(datesTarget);
   var dates = $datesPicked.val().split(" ");
   var index = -1;
   var value = $(date).text();
@@ -219,12 +203,12 @@ function schedulePickDate(date, $datesPicked) {
   getScheduleNextOccurrences();
 }
 
-function changeScheduleType(sType){
+function changeScheduleType(sType, obj){
   type = sType;
   if (sType === "simple"){
-    $("#scheduleform .schedule-advanced").hide();
+    $(obj).parents("#schedule-form-root").find(".schedule-advanced").hide();
   } else {
-    $("#scheduleform .schedule-advanced").show();
+    $(obj).parents("#schedule-form-root").find(".schedule-advanced").show();
   }
 }
 

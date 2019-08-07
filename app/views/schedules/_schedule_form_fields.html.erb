@@ -1,227 +1,198 @@
-<% form_params = Schedule.get_form_params(schedule) %>
+<div class = "row" id="schedule-form-root">
+  <div class = "col-12 col-lg-7 col-xl-7 px-3 px-xl-5 border-right", onchange="getScheduleNextOccurrences(this)">
 
-<div class="row ladderform" id="ladder-root">
+    <div class="row py-2">
+      <div class="col-12 py-5 bg-primary rounded" id="type">
 
-	<%= f.hidden_field :timezone, id: 'timezone_input' %>
-	<%= f.hidden_field :dates_picked, class: 'form-control' %>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
+          <label class="btn btn-outline-light active py-3" onclick="changeScheduleType('simple', this)" id="type-simple">
+            <%= f.radio_button :type, 'simple' %>Simple
+          </label>
+          <label class="btn btn-outline-light py-3" onclick="changeScheduleType('advanced', this)" id="type-advanced">
+            <%= f.radio_button :type, 'advanced' %>Advanced
+          </label>
+        </div>
 
-	<!-- COLUMN ONE -->
-	<div class="col-12 col-lg-7 col-xl-7 px-3 px-xl-5 border-right">
-		<div class="row py-2">
-			<!-- SIMPLE / ADVANCED -->
-			<div class="col-12 py-5 bg-primary rounded parent" id="type" children-id="path-simple-advanced">
-				<div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
+      </div>
 
-					<label class="btn btn-outline-light <%= 'active' if form_params[:type] == 'simple' %> py-3" id="type-simple" children=".path-simple" onclick="showHideFields($(this))">
-						<%= f.radio_button :type, 'simple', :checked => (form_params[:type] == 'simple') %>Simple
-					</label>
-					<label class="btn btn-outline-light <%= 'active' if form_params[:type] == 'advanced' %> py-3" id="type-advanced" children=".path-advanced" onclick="showHideFields($(this))">
-						<%= f.radio_button :type, 'advanced', :checked => (form_params[:type] == 'advanced') %>Advanced
-					</label>
+    </div>
 
-				</div>
-			</div>
-		</div>
+    <div class="row py-2">
+      <div class="col-12">
 
-		<div class="row py-2">
-			<div class="col-12">
-				<%= f.label :name %>
-				<%= f.text_field :name, class: 'form-control', placeholder: "Payday" %>
-			</div>
-		</div>
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control', placeholder: "Payday", 'onkeyup' => 'updateScheduleNameInput(this)' %>
 
-		<div class="row py-2">
-			<div class="col-12 col-sm-6">
-				<%= f.label :schedule %>
-    		<%= f.select(:schedule, [
-          ["Daily", "daily", "children" => ".path-day"], 
-          ["Weekly", "weekly", "children" => ".path-week"], 
-          ["Monthly", "monthly", "children" => ".path-month"], 
-          ["Annually", "annually", "children" => ".path-year"]
-          ], { :selected => form_params[:schedule] }, { :class => 'form-control parent', 'children-id' => 'path-period', 'onchange' => 'changeSchedulePeriod(this);' }) %>
-			</div>
-			<div class="col-12 col-sm-6">
-				<%= f.label :start_date %>
-				<%= f.text_field :start_date, class: 'datepicker datepicker-null form-control', value: form_params[:start_date] %>
-			</div>
-		</div>
+      </div>
+    </div>
 
-		<div class="row py-2">
-			<div class="col-12">
-				<%= f.label :run_every %>
-			</div>
-		</div>
-		<div class="row py-0">
-			<div class="col-6">
-				<%= f.number_field :run_every, class: "form-control", value: form_params[:run_every], min: "1", 'onchange' => 'changeSchedulePeriod(this)' %>
-			</div>
-			<div class="col-6 px-0 py-2">
-				<p id="periodTxt">
-					<%= form_params[:period_txt] %>
-				</p>
-			</div>
-		</div>
+    <div class="row py-2" id="start-date">
+      <div class="col-12 col-sm-6">
+        <%= f.label :schedule %>
+        <%= f.select(:schedule, [
+          ["Daily", "daily"], 
+          ["Weekly", "weekly"], 
+          ["Monthly", "monthly"], 
+          ["Annually", "annually"]
+          ], {}, { :class => 'form-control', 'onchange' => 'changeSchedulePeriod(this.value, this)' }) %>
+      </div>
+      <div class="col-12 col-sm-6">
+        <%= f.label :start_date %>
+        <%= f.text_field :start_date, class: 'datepicker form-control' %>
+        <%= f.hidden_field :timezone, id: 'timezone_input' %>
+      </div>
+    </div>
 
-		<div class="children" id="path-simple-advanced">
-			<div class="path-simple">
-				SIMPLE
-			</div>
-			<div class="path-advanced">
-				<div class="children" id="path-period">
-					<div class="path-month">
-						<div class="row parent">
-							<div class="col-6">
-								<%= f.label :days %>
-								<%= f.select(:days, [
-			            ["Specific dates", "specific"], 
-			            ["Every first ...", "first"], 
-			            ["Every last ...", "last"], 
-			            ["Every second ...", "second"], 
-			            ["Every third ...", "third"], 
-			            ["Every fourth ...", "fourth"]
-			            ], { :selected => form_params[:days] }, { :class => 'form-control', 'onchange' => 'changeScheduleDays(this)' }) %>
-							</div>
-									<div class="col-6 path-nonspecific parent", children-id="exclusion">
-										<%= f.label :days2, "&nbsp".html_safe %>
-										<% 
-											days2_style = ''
-											days2_style = 'display: none;' if form_params[:days] == 'specific'
-										%>
-										<%= f.select(:days2, [
-	                    ["Day", "day", "children" => ".path-exclude"], 
-	                    ["Monday", "mon", "children" => ""], 
-	                    ["Tuesday", "tue", "children" => ""], 
-	                    ["Wednesday", "wed", "children" => ""], 
-	                    ["Thursday", "thu", "children" => ""], 
-	                    ["Friday", "fri", "children" => ""], 
-	                    ["Saturday", "sat", "children" => ""], 
-	                    ["Sunday", "sun", "children" => ""]
-	                    ], { :selected => form_params[:days2] }, { :class => 'form-control', 'style' => days2_style}) %>
-							</div>
-						</div>
+    <div class="row py-2" class="schedule-simple-period">
+      <div class="col-12">
+        <%= f.label :run_every %>
+      </div>
+    </div>
+    <div class="row" class="schedule-simple-period">
+      <div class="col-6">
+        <%= f.number_field :run_every, class: 'form-control', value: "1", 'onchange' => 'changeRunsEvery(this)' %>
+      </div>
+      <div class="col-6 px-0 py-2">
+        <p id="period">
+          Days
+        </p>
+      </div>
+    </div>
 
-						<div class="row">
-							<div class="col-12" id="daypicker">
-								<%= render partial: 'schedules/date_picker', :locals => {:input_target => '#schedule_dates_picked'} %>
-							</div>
-						</div>
+    <div class="schedule-advanced">
+      <div class="row py-2 schedule-simple-period monthly">
+        <div class="col-12">
 
-					</div>
+          <%= f.label :days %>
+          <div class="row">
+            <div class="col-6">
+              <%= f.select(:days, [
+                ["Specific dates", "specific"], 
+                ["Every first ...", "first"], 
+                ["Every last ...", "last"], 
+                ["Every second ...", "second"], 
+                ["Every third ...", "third"], 
+                ["Every fourth ...", "fourth"]
+                ], {}, { :class => 'form-control', 'onchange' => 'changeScheduleDays(this.value, this)' }) %>
+            </div>
+            <div class="col-6">
+              <%= f.select(:days2, [
+                ["Day", "day"], 
+                ["Monday", "mon"], 
+                ["Tuesday", "tue"], 
+                ["Wednesday", "wed"], 
+                ["Thursday", "thu"], 
+                ["Friday", "fri"], 
+                ["Saturday", "sat"], 
+                ["Sunday", "sun"]
+                ], {}, { :class => 'form-control', :style => 'display:none;', 'onchange' => 'changeScheduleDays(this.value)' }) %>
+            </div>
+          </div>
 
-					<div class="path-week">
-						<div class="row">
-							<div class="col-12">
-								<%= f.label :days %>
-								<%= render partial: 'schedules/weekday_picker', :locals => {:id_prefix => 'weekday', :f => f} %>
-							</div>
-						</div>
-					</div>
+          <div id="daypicker">
+            <%= render partial: 'schedules/date_picker', :locals => {:input_target => '#schedule_dates_picked'} %>
+          </div>
 
-				</div>
+          <%= f.text_field :dates_picked, class: 'form-control' %>
+        </div>
+      </div>
+    </div>
 
-				<div class="row py-2">
-					<div class="col-12">
-						<button type="button" class="btn btn-link" id="schedule_advanced_toggle" onclick="showAdvancedScheduleOptions(this);"><%= form_params[:advanced] ? "hide" : "show" %> advanced options</button>
-					</div>
-				</div>
+    <div class="schedule-advanced">
+      <div class="row py-2 weekly" id="weekday" style="display: none;">
+        <div class="col-12 weekly">
 
-				<div id="schedule_advanced" style="<%= "display:none;" unless form_params[:advanced] %>">
-					
-				</div>
+          <%= render partial: 'schedules/weekday_picker', :locals => {:id_prefix => 'weekday', :f => f} %>
+        </div>
+      </div>
+    </div>
 
-			</div>
-		</div>
+    <div class="schedule-advanced">
+      <div class="row py-2">
+        <div class="col-12">
+          <button type="button" class="btn btn-link" id="schedule_advanced_toggle" onclick="advancedScheduleOptions(this);">show advanced options</button>
+        </div>
+      </div>
 
-	</div>
+      <div id="schedule_advanced" style="display: none;">
+        <div class="row py-2" id="end-date">
+          <div class="col-12">
+            <%= f.label :end_date %>
+            <%= f.text_field :end_date, class: 'datepicker datepicker-null form-control' %>
+          </div>
+        </div>
+        
 
-</div>
+        <div class="row py2 monthly">
+          <div class="col-12">
+            <%= f.label :exclude %>
+          </div>
+        </div>
 
-<script>
-	function showAdvancedScheduleOptions(obj, force=0){
-		return;
-	  var $advancedOptions = $("#schedule_advanced");
-	  var $advancedOptionsToggle = $("#schedule_advanced_toggle");
+        <div class="monthly">
+          <div class="row py-2" id="weekday-exclude">
+            <div class="col-12">
 
-	  if ($advancedOptions.is(":visible") || force === -1){
-	    $advancedOptions.slideUp(200);
-	    //$advancedOptionsToggle.text("show advanced options");
-	  } else {
-	    $advancedOptions.slideDown(200);
-	    //$advancedOptionsToggle.text("hide advanced options");
-	  }
-	}
+              <%= render partial: 'schedules/weekday_picker', :locals => {:id_prefix => 'weekday_exclude', :f => f} %>
 
-	function changeSchedulePeriod(obj) {
-		var txt;
-    switch($(obj).val()) {
-      case "daily":
-        txt = "days";
-        break;
-      case "weekly":
-        txt = "weeks";
-        break;
-      case "monthly":
-        txt = "months";
-        break
-      default:
-        txt = "years";
-    }
-    $(obj).parents(".row").find("#periodTxt").text(txt);
-	}
+            </div>
+          </div>
 
-	// don't allow values less than one in the 'run_every' field
-	function changeRunsEvery(obj) {
-	  var val = 0;
-	  val = $(obj).val();
-	  if (val < 1){
-	    $(obj).val("1");
-	  }
-	  //getScheduleNextOccurrences();
-	}
+          <div class="row py-2" id="daypicker-exclude" style="display: none">
+            <div class="col-12">
+              <%= render partial: 'schedules/date_picker', :locals => {:input_target => '#schedule_dates_picked_exclude'} %>
+            </div>
+            <%= f.hidden_field :dates_picked_exclude, class: 'form-control' %>
+          </div>
+        </div>
 
-	function changeScheduleDays(obj){
-	  var $scheduleDays2 = $(obj).parents("#ladder-root").find("#schedule_days2");
-	  var $daypickerExclude = $(obj).parents("#ladder-root").find("#daypicker-exclude");
-	  var $weekdayExclude = $(obj).parents("#ladder-root").find("#weekday-exclude");
-	  var $daypicker = $(obj).parents("#ladder-root").find("#daypicker");
+        <div class="row py-2 monthly">
+          <div class="col-12">
+            <%= f.label :if_exclusion_met %>
+          </div>
+        </div>
+        <div class="row monthly">
+          <div class="col-6">
+            <%= f.select(:exclusion_met1, [
+              ["Don't run", "cancel"], 
+              ["Run on the previous ...", "previous"], 
+              ["Run on the next ...", "next"]
+              ], {}, { :class => 'form-control', 'onchange' => 'changeScheduleExclusionMet(this.value, this)' }) %>
+          </div>
+          <div class="col-6">
+            <%= f.select(:exclusion_met2, [
+              ["Monday", "mon"], 
+              ["Tuesday", "tue"], 
+              ["Wednesday", "wed"], 
+              ["Thursday", "thu"], 
+              ["Friday", "fri"], 
+              ["Saturday", "sat"], 
+              ["Sunday", "sun"]
+              ], {}, { :class => 'form-control', :style => 'display:none;' }) %>
+          </div>
+        </div>
 
-	  console.log($(obj).parents("#ladder-root").attr("id"));
-	  switch ($(obj).val().toLowerCase()) {
-	    case "specific":
-	      showDaypicker();
-	      $scheduleDays2.slideUp("fast");
-	      break;
-	    default:
-	      $daypicker.slideUp("fast");
-	      $scheduleDays2.slideDown("fast");
-	      switch ($scheduleDays2.val()) {
-	        case "day":
-	          $weekdayExclude.slideDown("fast");
-	          $daypickerExclude.slideUp("fast");
-	          break;
-	        default:
-	          $weekdayExclude.slideUp("fast");
-	          $daypickerExclude.slideDown("fast");
-	      }
-	  }
-	}
+      </div>
+    </div>
 
-	function showDaypicker(){
-	  var $daypicker = $("#scheduleform #daypicker");
-	  var $daypickerExclude = $("#scheduleform #daypicker-exclude");
-	  var $weekdayExclude = $("#scheduleform #weekday-exclude");
+  </div>
+  <div class="col-12 col-lg-5 col-xl-5 px-2 px-sm-5 border-right">
+    <div class="row py2">
+      <div class="col-12 d-none d-lg-block" style="position: fixed; margin-bottom: 0; pointer-events: none;">
+        <p>Next occurrences</p>
+        <div id="next_occurrences" class="bottom-align-text">
+          
+        </div>
+      </div>
 
-	  $daypicker.show();
-	  $daypickerExclude.hide();
-	  $weekdayExclude.show();
-	}
-	function hideDaypicker(){
-	  var $daypicker = $("#scheduleform #daypicker");
-	  var $daypickerExclude = $("#scheduleform #daypicker-exclude");
-	  var $weekdayExclude = $("#scheduleform #weekday-exclude");
+      <div class="col-12 d-block d-lg-none">
+        <p>Next occurrences</p>
+        <div id="next_occurrences" class="bottom-align-text">
+          
+        </div>
+      </div>
 
-	  $daypicker.hide();
-	  $daypickerExclude.show();
-	  $weekdayExclude.hide();
-	}
-</script>
+    </div>
+        </div>
+
+      </div>

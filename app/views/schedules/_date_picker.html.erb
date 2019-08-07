@@ -4,7 +4,7 @@
       <% if (i-1) % 7 == 0 %>
         </tr><tr>
       <% end %>
-      <td onclick="schedulePickDate(this, $('#scheduleform <%= input_target %>'))"><%= i %></td>
+      <td onclick="schedulePickDate(this, '<%= input_target %>')"><%= i %></td>
     <% end %>
   </tr>
 </table>
