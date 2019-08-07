@@ -2,7 +2,7 @@
 
 <%= form_with(model: schedule) do |f| %>
   <div class="modal-body">
-    <div class="container">
+    <div class="container" id="scheduleform">
     	<%= render partial: "/schedules/schedule_form_fields", :locals => {:f => f, :schedule => schedule} %>
     </div>
   </div>

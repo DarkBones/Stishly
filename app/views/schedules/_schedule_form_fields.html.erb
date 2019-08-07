@@ -3,6 +3,7 @@
 <div class="row ladderform" id="ladder-root">
 
 	<%= f.hidden_field :timezone, id: 'timezone_input' %>
+	<%= f.hidden_field :dates_picked, class: 'form-control' %>
 
 	<!-- COLUMN ONE -->
 	<div class="col-12 col-lg-7 col-xl-7 px-3 px-xl-5 border-right">
@@ -52,7 +53,12 @@
 		</div>
 		<div class="row py-0">
 			<div class="col-6">
-				<%= f.number_field :run_every, class: "form-control", value: form_params[:run_every], min: "1", 'onchange' => 'changeRunsEvery(this)' %>
+				<%= f.number_field :run_every, class: "form-control", value: form_params[:run_every], min: "1", 'onchange' => 'changeSchedulePeriod(this)' %>
+			</div>
+			<div class="col-6 px-0 py-2">
+				<p id="periodTxt">
+					<%= form_params[:period_txt] %>
+				</p>
 			</div>
 		</div>
 
@@ -63,9 +69,66 @@
 			<div class="path-advanced">
 				<div class="children" id="path-period">
 					<div class="path-month">
-						MONTH
+						<div class="row parent">
+							<div class="col-6">
+								<%= f.label :days %>
+								<%= f.select(:days, [
+			            ["Specific dates", "specific"], 
+			            ["Every first ...", "first"], 
+			            ["Every last ...", "last"], 
+			            ["Every second ...", "second"], 
+			            ["Every third ...", "third"], 
+			            ["Every fourth ...", "fourth"]
+			            ], { :selected => form_params[:days] }, { :class => 'form-control', 'onchange' => 'changeScheduleDays(this)' }) %>
+							</div>
+									<div class="col-6 path-nonspecific parent", children-id="exclusion">
+										<%= f.label :days2, "&nbsp".html_safe %>
+										<% 
+											days2_style = ''
+											days2_style = 'display: none;' if form_params[:days] == 'specific'
+										%>
+										<%= f.select(:days2, [
+	                    ["Day", "day", "children" => ".path-exclude"], 
+	                    ["Monday", "mon", "children" => ""], 
+	                    ["Tuesday", "tue", "children" => ""], 
+	                    ["Wednesday", "wed", "children" => ""], 
+	                    ["Thursday", "thu", "children" => ""], 
+	                    ["Friday", "fri", "children" => ""], 
+	                    ["Saturday", "sat", "children" => ""], 
+	                    ["Sunday", "sun", "children" => ""]
+	                    ], { :selected => form_params[:days2] }, { :class => 'form-control', 'style' => days2_style}) %>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-12" id="daypicker">
+								<%= render partial: 'schedules/date_picker', :locals => {:input_target => '#schedule_dates_picked'} %>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="path-week">
+						<div class="row">
+							<div class="col-12">
+								<%= f.label :days %>
+								<%= render partial: 'schedules/weekday_picker', :locals => {:id_prefix => 'weekday', :f => f} %>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="row py-2">
+					<div class="col-12">
+						<button type="button" class="btn btn-link" id="schedule_advanced_toggle" onclick="showAdvancedScheduleOptions(this);"><%= form_params[:advanced] ? "hide" : "show" %> advanced options</button>
 					</div>
 				</div>
+
+				<div id="schedule_advanced" style="<%= "display:none;" unless form_params[:advanced] %>">
+					
+				</div>
+
 			</div>
 		</div>
 
@@ -74,22 +137,36 @@
 </div>
 
 <script>
+	function showAdvancedScheduleOptions(obj, force=0){
+		return;
+	  var $advancedOptions = $("#schedule_advanced");
+	  var $advancedOptionsToggle = $("#schedule_advanced_toggle");
+
+	  if ($advancedOptions.is(":visible") || force === -1){
+	    $advancedOptions.slideUp(200);
+	    //$advancedOptionsToggle.text("show advanced options");
+	  } else {
+	    $advancedOptions.slideDown(200);
+	    //$advancedOptionsToggle.text("hide advanced options");
+	  }
+	}
+
 	function changeSchedulePeriod(obj) {
 		var txt;
     switch($(obj).val()) {
       case "daily":
-        txt = "Days";
+        txt = "days";
         break;
       case "weekly":
-        txt = "Weeks";
+        txt = "weeks";
         break;
       case "monthly":
-        txt = "Months";
+        txt = "months";
         break
       default:
-        txt = "Years";
+        txt = "years";
     }
-    $(obj).parents(".row").next(".row").find("#periodTxt").text(txt);
+    $(obj).parents(".row").find("#periodTxt").text(txt);
 	}
 
 	// don't allow values less than one in the 'run_every' field
@@ -100,5 +177,51 @@
 	    $(obj).val("1");
 	  }
 	  //getScheduleNextOccurrences();
+	}
+
+	function changeScheduleDays(obj){
+	  var $scheduleDays2 = $(obj).parents("#ladder-root").find("#schedule_days2");
+	  var $daypickerExclude = $(obj).parents("#ladder-root").find("#daypicker-exclude");
+	  var $weekdayExclude = $(obj).parents("#ladder-root").find("#weekday-exclude");
+	  var $daypicker = $(obj).parents("#ladder-root").find("#daypicker");
+
+	  console.log($(obj).parents("#ladder-root").attr("id"));
+	  switch ($(obj).val().toLowerCase()) {
+	    case "specific":
+	      showDaypicker();
+	      $scheduleDays2.slideUp("fast");
+	      break;
+	    default:
+	      $daypicker.slideUp("fast");
+	      $scheduleDays2.slideDown("fast");
+	      switch ($scheduleDays2.val()) {
+	        case "day":
+	          $weekdayExclude.slideDown("fast");
+	          $daypickerExclude.slideUp("fast");
+	          break;
+	        default:
+	          $weekdayExclude.slideUp("fast");
+	          $daypickerExclude.slideDown("fast");
+	      }
+	  }
+	}
+
+	function showDaypicker(){
+	  var $daypicker = $("#scheduleform #daypicker");
+	  var $daypickerExclude = $("#scheduleform #daypicker-exclude");
+	  var $weekdayExclude = $("#scheduleform #weekday-exclude");
+
+	  $daypicker.show();
+	  $daypickerExclude.hide();
+	  $weekdayExclude.show();
+	}
+	function hideDaypicker(){
+	  var $daypicker = $("#scheduleform #daypicker");
+	  var $daypickerExclude = $("#scheduleform #daypicker-exclude");
+	  var $weekdayExclude = $("#scheduleform #weekday-exclude");
+
+	  $daypicker.hide();
+	  $daypickerExclude.show();
+	  $weekdayExclude.hide();
 	}
 </script>
