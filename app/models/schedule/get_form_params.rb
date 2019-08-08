@@ -8,6 +8,7 @@ class Schedule
 		def perform
 			schedule_period = schedule(@schedule)
 			type = determine_type(@schedule)
+			days = days(@schedule)
 			params = {
 				type: type,
 				run_every: run_every(@schedule),
@@ -15,10 +16,14 @@ class Schedule
 				schedule: schedule_period,
 				run_every: run_every(@schedule),
 				period_txt: period_txt(schedule_period),
-				days: days(@schedule),
+				days: days,
 				days2: days2(@schedule),
 				advanced: advanced(@schedule, type),
-				days_bitmask: days_bitmask(@schedule)
+				days_bitmask: days_bitmask(@schedule),
+				days_exclude_bitmask: days_exclude_bitmask(@schedule),
+				exclusion_met1: @schedule.exclusion_met,
+				exclusion_met2: exclusion_met2(@schedule),
+				show_datepicker: show_datepicker(days, schedule_period)
 			}
 		end
 
@@ -39,6 +44,7 @@ private
 		end
 
 		def advanced(schedule, type)
+			return true
 			return false if type != "advanced"
 			advanced_features = [
 				schedule.days_exclude.to_i,
@@ -98,6 +104,26 @@ private
 
 		def days_bitmask(schedule)
 			return schedule.days.to_s(2).reverse.split('')
+		end
+
+		def days_exclude_bitmask(schedule)
+			days = schedule.days_exclude
+			days ||= 0
+			return days.to_s(2).reverse.split('')
+		end
+
+		def exclusion_met2(schedule)
+			options = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+			bits = schedule.days.to_s(2).reverse.split('')
+			bits.each_with_index do |b, idx|
+				return options[idx % options.length] if b == '1'
+			end
+		end
+
+		def show_datepicker(type, schedule_period)
+			return false unless schedule_period == "months"
+			return false unless type == "specific"
+			return true
 		end
 
 	end

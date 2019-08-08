@@ -1,37 +1,37 @@
 <%= @dates %>
 <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group-weekdays">
-  <label class="btn btn-secondary py-3" id="<%= id_prefix %>-mon">
-    <%= f.check_box (id_prefix + "_mon").to_sym %>
+  <label class="btn btn-secondary <%= 'active' if @dates[1] == '1' %> py-3" id="<%= id_prefix %>-mon">
+    <%= f.check_box (id_prefix + "_mon").to_sym, {checked: @dates[1] == "1"} %>
     <span class="d-none d-sm-block">Mon</span>
     <span class="d-block d-sm-none">M</span>
   </label>
-  <label class="btn btn-secondary py-3" id="<%= id_prefix %>-tue">
-    <%= f.check_box (id_prefix + "_tue").to_sym %>
+  <label class="btn btn-secondary <%= 'active' if @dates[2] == '1' %> py-3" id="<%= id_prefix %>-tue">
+    <%= f.check_box (id_prefix + "_tue").to_sym, {checked: @dates[2] == "1"} %>
     <span class="d-none d-sm-block">Tue</span>
     <span class="d-block d-sm-none">T</span>
   </label>
-  <label class="btn btn-secondary py-3" id="<%= id_prefix %>-wed">
-    <%= f.check_box (id_prefix + "_wed").to_sym %>
+  <label class="btn btn-secondary <%= 'active' if @dates[3] == '1' %> py-3" id="<%= id_prefix %>-wed">
+    <%= f.check_box (id_prefix + "_wed").to_sym, {checked: @dates[3] == "1"} %>
     <span class="d-none d-sm-block">Wed</span>
     <span class="d-block d-sm-none">W</span>
   </label>
-  <label class="btn btn-secondary py-3" id="<%= id_prefix %>-thu">
-    <%= f.check_box (id_prefix + "_thu").to_sym %>
+  <label class="btn btn-secondary <%= 'active' if @dates[4] == '1' %> py-3" id="<%= id_prefix %>-thu">
+    <%= f.check_box (id_prefix + "_thu").to_sym, {checked: @dates[4] == "1"} %>
     <span class="d-none d-sm-block">Thu</span>
     <span class="d-block d-sm-none">T</span>
   </label>
-  <label class="btn btn-secondary py-3" id="<%= id_prefix %>-fri">
-    <%= f.check_box (id_prefix + "_fri").to_sym %>
+  <label class="btn btn-secondary <%= 'active' if @dates[5] == '1' %> py-3" id="<%= id_prefix %>-fri">
+    <%= f.check_box (id_prefix + "_fri").to_sym, {checked: @dates[5] == "1"} %>
     <span class="d-none d-sm-block">Fri</span>
     <span class="d-block d-sm-none">F</span>
   </label>
-  <label class="btn btn-secondary py-3" id="<%= id_prefix %>-sat">
-    <%= f.check_box (id_prefix + "_sat").to_sym %>
+  <label class="btn btn-secondary <%= 'active' if @dates[6] == '1' %> py-3" id="<%= id_prefix %>-sat">
+    <%= f.check_box (id_prefix + "_sat").to_sym, {checked: @dates[6] == "1"} %>
     <span class="d-none d-sm-block">Sat</span>
     <span class="d-block d-sm-none">S</span>
   </label>
-  <label class="btn btn-secondary py-3" id="<%= id_prefix %>-sun">
-    <%= f.check_box (id_prefix + "_sun").to_sym %>
+  <label class="btn btn-secondary <%= 'active' if @dates[0] == '1' %> py-3" id="<%= id_prefix %>-sun">
+    <%= f.check_box (id_prefix + "_sun").to_sym, {checked: @dates[0] == "1"} %>
     <span class="d-none d-sm-block">Sun</span>
     <span class="d-block d-sm-none">S</span>
   </label>

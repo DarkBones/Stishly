@@ -91,7 +91,7 @@
             </div>
           </div>
 
-          <div id="daypicker">
+          <div id="daypicker" style="<%= 'display: none;' unless form_params[:show_datepicker] %>">
             <%= render partial: 'schedules/date_picker', :locals => {:@dates => form_params[:days_bitmask], :input_target => '#schedule_dates_picked' } %>
           </div>
 
@@ -112,11 +112,11 @@
     <div class="schedule-advanced">
       <div class="row py-2">
         <div class="col-12">
-          <button type="button" class="btn btn-link" id="schedule_advanced_toggle" onclick="advancedScheduleOptions(this);">show advanced options</button>
+          <button type="button" class="btn btn-link" id="schedule_advanced_toggle" onclick="advancedScheduleOptions(this);"><%= form_params[:advanced] ? "hide" : "show" %> advanced options</button>
         </div>
       </div>
 
-      <div id="schedule_advanced" style="display: none;">
+      <div id="schedule_advanced" style="<%= 'display: none;' unless form_params[:advanced] %>">
         <div class="row py-2" id="end-date">
           <div class="col-12">
             <%= f.label :end_date %>
@@ -135,14 +135,14 @@
           <div class="row py-2" id="weekday-exclude">
             <div class="col-12">
 
-              <%= render partial: 'schedules/weekday_picker', :locals => {:id_prefix => 'weekday_exclude', :f => f} %>
+              <%= render partial: 'schedules/weekday_picker', :locals => {:id_prefix => 'weekday_exclude', :f => f, :@dates => form_params[:days_exclude_bitmask]} %>
 
             </div>
           </div>
 
           <div class="row py-2" id="daypicker-exclude" style="display: none">
             <div class="col-12">
-              <%= render partial: 'schedules/date_picker', :locals => {:input_target => '#schedule_dates_picked_exclude'} %>
+              <%= render partial: 'schedules/date_picker', :locals => {:input_target => '#schedule_dates_picked_exclude', :@dates => form_params[:days_exclude_bitmask]} %>
             </div>
             <%= f.hidden_field :dates_picked_exclude, class: 'form-control' %>
           </div>
@@ -159,7 +159,7 @@
               ["Don't run", "cancel"], 
               ["Run on the previous ...", "previous"], 
               ["Run on the next ...", "next"]
-              ], {}, { :class => 'form-control', 'onchange' => 'changeScheduleExclusionMet(this.value, this)' }) %>
+              ], { :selected => form_params[:exclusion_met1] }, { :class => 'form-control', 'onchange' => 'changeScheduleExclusionMet(this.value, this)' }) %>
           </div>
           <div class="col-6">
             <%= f.select(:exclusion_met2, [
@@ -170,7 +170,7 @@
               ["Friday", "fri"], 
               ["Saturday", "sat"], 
               ["Sunday", "sun"]
-              ], {}, { :class => 'form-control', :style => 'display:none;' }) %>
+              ], { :selected => form_params[:exclusion_met2] }, { :class => 'form-control', :style => 'display:none;' }) %>
           </div>
         </div>
 

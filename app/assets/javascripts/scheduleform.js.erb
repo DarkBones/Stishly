@@ -75,7 +75,6 @@ function changeRunsEvery(obj) {
 }
 
 function changeSchedulePeriod(val, obj) {
-  $(obj).parents("#schedule-form-root"),hide();
   $(obj).parents("#schedule-form-root").find(".daily").hide();
   $(obj).parents("#schedule-form-root").find(".weekly").hide();
   $(obj).parents("#schedule-form-root").find(".monthly").hide();
@@ -83,25 +82,25 @@ function changeSchedulePeriod(val, obj) {
 
   switch (val.toLowerCase()) {
     case "daily":
-      $(obj).parents("schedule-form-root").find("p#period").text("Days");
-      $(obj).parents("schedule-form-root").find(".daily").show();
+      $(obj).parents("#schedule-form-root").find("p#period").text("days");
+      $(obj).parents("#schedule-form-root").find(".daily").show();
       break;
     case "weekly":
-      $(obj).parents("schedule-form-root").find("p#period").text("Weeks");
-      $(obj).parents("schedule-form-root").find(".weekly").show();
+      $(obj).parents("#schedule-form-root").find("p#period").text("weeks");
+      $(obj).parents("#schedule-form-root").find(".weekly").show();
       break;
     case "monthly":
-      $(obj).parents("schedule-form-root").find("p#period").text("Months");
-      $(obj).parents("schedule-form-root").find(".monthly").show();
+      $(obj).parents("#schedule-form-root").find("p#period").text("months");
+      $(obj).parents("#schedule-form-root").find(".monthly").show();
       break;
     case "annually":
-      $(obj).parents("schedule-form-root").find("p#period").text("Years");
-      $(obj).parents("schedule-form-root").find(".annually").show();
+      $(obj).parents("#schedule-form-root").find("p#period").text("years");
+      $(obj).parents("#schedule-form-root").find(".annually").show();
   }
 }
 
 function changeScheduleExclusionMet(val, obj){
-  var $exlusionMet2 = $(obj).parents("schedule-form-root").find("#schedule_exclusion_met2");
+  var $exlusionMet2 = $(obj).parents("#schedule-form-root").find("#schedule_exclusion_met2");
 
   switch (val.toLowerCase()) {
     case "cancel":
@@ -113,9 +112,9 @@ function changeScheduleExclusionMet(val, obj){
 }
 
 function showDaypicker(obj){
-  var $daypicker = $(obj).parents("schedule-form-root").find("#daypicker");
-  var $daypickerExclude = $(obj).parents("schedule-form-root").find("#daypicker-exclude");
-  var $weekdayExclude = $(obj).parents("schedule-form-root").find("#weekday-exclude");
+  var $daypicker = $(obj).parents("#schedule-form-root").find("#daypicker");
+  var $daypickerExclude = $(obj).parents("#schedule-form-root").find("#daypicker-exclude");
+  var $weekdayExclude = $(obj).parents("#schedule-form-root").find("#weekday-exclude");
 
   $daypicker.show();
   $daypickerExclude.hide();
