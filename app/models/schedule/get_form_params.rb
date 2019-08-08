@@ -17,7 +17,8 @@ class Schedule
 				period_txt: period_txt(schedule_period),
 				days: days(@schedule),
 				days2: days2(@schedule),
-				advanced: advanced(@schedule, type)
+				advanced: advanced(@schedule, type),
+				days_bitmask: days_bitmask(@schedule)
 			}
 		end
 
@@ -34,7 +35,7 @@ private
 				schedule.exclusion_met_day.to_i
 			].sum
 			return "advanced" if advanced_features > 0
-			return "advanced"
+			return "simple"
 		end
 
 		def advanced(schedule, type)
@@ -93,6 +94,10 @@ private
 			bits.each_with_index do |b, idx|
 				return options[idx % options.length] if b == '1'
 			end
+		end
+
+		def days_bitmask(schedule)
+			return schedule.days.to_s(2).reverse.split('')
 		end
 
 	end

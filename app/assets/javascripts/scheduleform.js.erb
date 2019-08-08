@@ -75,10 +75,11 @@ function changeRunsEvery(obj) {
 }
 
 function changeSchedulePeriod(val, obj) {
-  $(obj).parents("schedule-form-root").find(".daily").hide();
-  $(obj).parents("schedule-form-root").find(".weekly").hide();
-  $(obj).parents("schedule-form-root").find(".monthly").hide();
-  $(obj).parents("schedule-form-root").find(".annually").hide();
+  $(obj).parents("#schedule-form-root"),hide();
+  $(obj).parents("#schedule-form-root").find(".daily").hide();
+  $(obj).parents("#schedule-form-root").find(".weekly").hide();
+  $(obj).parents("#schedule-form-root").find(".monthly").hide();
+  $(obj).parents("#schedule-form-root").find(".annually").hide();
 
   switch (val.toLowerCase()) {
     case "daily":
@@ -156,7 +157,7 @@ function changeScheduleDays(val, obj){
   }
 }
 
-/*function showWeekday(){
+function showWeekday(){
   $("#scheduleform .schedule-simple-period").hide();
   $("#scheduleform #weekday").show();
 }
@@ -164,7 +165,7 @@ function changeScheduleDays(val, obj){
 function hideWeekday(){
   $("#scheduleform .schedule-simple-period").show();
   $("#scheduleform #weekday").hide();
-}*/
+}
 
 function advancedScheduleOptions(force=0, obj){
   var $advancedOptions = $(obj).parents("#schedule-form-root").find("#schedule_advanced");
