@@ -1,130 +1,174 @@
 class Schedule
-	class GetFormParams
+  class GetFormParams
 
-		def initialize(schedule)
-			@schedule = schedule
-		end
+    def initialize(schedule)
+      @schedule = schedule
+    end
 
-		def perform
-			schedule_period = schedule(@schedule)
-			type = determine_type(@schedule)
-			days = days(@schedule)
-			params = {
-				type: type,
-				run_every: run_every(@schedule),
-				start_date: start_date(@schedue),
-				schedule: schedule_period,
-				run_every: run_every(@schedule),
-				period_txt: period_txt(schedule_period),
-				days: days,
-				days2: days2(@schedule),
-				advanced: advanced(@schedule, type),
-				days_bitmask: days_bitmask(@schedule),
-				days_exclude_bitmask: days_exclude_bitmask(@schedule),
-				exclusion_met1: @schedule.exclusion_met,
-				exclusion_met2: exclusion_met2(@schedule),
-				show_datepicker: show_datepicker(days, schedule_period)
-			}
-		end
+    def perform
+      return get_form_params(@schedule)
+    end
 
 private
 
-		def determine_type(schedule)
-			return "advanced" unless schedule.end_date.nil?
-			advanced_features = [
-				schedule.days.to_i,
-				schedule.days_month.to_s.length,
-				schedule.days_month_day.to_i,
-				schedule.days_exclude.to_i,
-				schedule.exclusion_met.to_s.length,
-				schedule.exclusion_met_day.to_i
-			].sum
-			return "advanced" if advanced_features > 0
-			return "simple"
-		end
+    def get_form_params(schedule)
+      type = determine_type(schedule) # advanced / simple
+      name = schedule.name
+      period = period(schedule) # monthly / weekly / etc
+      start_date = start_date(schedule)
+      period_num = period_num(schedule)
+      days_month1 = days_month1(schedule)
+      days_month2 = days_month2(schedule, days_month1)
+      days_picked = days_picked(schedule, period, days_month1) # an array of dates based on period: ['mon', 'fri'] or ['1', '14', '21']
+      advanced = advanced(schedule, type) # whether very advanced features were used
+      end_date = end_date(schedule)
+      exclude_days_picked = days_exclude_picked(schedule, period, days_month1)
+      exclusion_met1 = schedule.exclusion_met
+      exclusion_met2 = exclusion_met2(schedule)
 
-		def advanced(schedule, type)
-			return true
-			return false if type != "advanced"
-			advanced_features = [
-				schedule.days_exclude.to_i,
-				schedule.exclusion_met.to_s.length,
-				schedule.exclusion_met_day.to_i
-			].sum
-			return true if advanced_features > 0
-			return false
-		end
+      return {
+        type: type,
+        name: name,
+        schedule: period,
+        start_date: start_date,
+        timezone: schedule.timezone,
+        run_every: period_num,
+        days: days_month1,
+        days2: days_month2,
+        days_picked: days_picked,
+        advanced: advanced,
+        end_date: end_date,
+        exclude: exclude_days_picked,
+        exclusion_met1: exclusion_met1,
+        exclusion_met2: exclusion_met2
+      }
+    end
 
-		def run_every(schedule)
-			return 1 if schedule.period_num.nil? || schedule.period_num < 1
-			return schedule.period_num
-		end
+    # whether the advanced fields were used
+    def determine_type(schedule)
+      return "advanced" unless schedule.end_date.nil?
+      advanced_features = [
+        schedule.days.to_i,
+        schedule.days_month.to_s.length,
+        schedule.days_month_day.to_i
+      ].sum
+      return "advanced" if advanced_features > 0
+      return "simple"
+    end
 
-		def start_date(schedule)
-			start_date = schedule.start_date unless schedule.nil?
-			start_date ||= Time.now
-			return start_date.strftime("%d-%b-%Y")
-		end
+    # the schedule period (months / weeks / days etc)
+    def period(schedule)
+      return "monthly" if schedule.period.nil?
+      return schedule.period
+    end
 
-		def schedule(schedule)
-			return "weekly" if schedule.period.nil?
-			return schedule.period
-		end
+    # the start date of the schedule
+    def start_date(schedule)
+      start_date = schedule.start_date
+      start_date ||= Time.now
+      return date_to_string(start_date)
+    end
 
-		def run_every(schedule)
-			return 1 if schedule.nil? || schedule.period_num.nil? || schedule.period_num < 1
-			return schedule.period_num
-		end
+    def end_date(schedule)
+      end_date = schedule.end_date
+      return date_to_string(end_date) unless end_date.nil?
+    end
 
-		def period_txt(period)
-			case period
-			when "daily"
-				return "days"
-			when "weekly"
-				return "weeks"
-			when "monthly"
-				return "months"
-			when "anually"
-				return "years"
-			end
-		end
+    def period_num(schedule)
+      return 1 if schedule.period_num.nil?
+      return schedule.period_num
+    end
 
-		def days(schedule)
-			return "specific" if schedule.nil? || schedule.days_month.nil?
-			return schedule.days_month
-		end
+    # specific / first / last / second / etc
+    def days_month1(schedule)
+      return "specific" if schedule.nil?
+      return schedule.days_month
+    end
 
-		def days2(schedule)
-			options = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
-			bits = schedule.days.to_s(2).reverse.split('')
-			bits.each_with_index do |b, idx|
-				return options[idx % options.length] if b == '1'
-			end
-		end
+    # mon / tue / etc
+    def days_month2(schedule, type)
+      return if type.nil? || type.length == 0 || type == "specific"
+      days = weekdays_array
+      bits = bitmask(schedule.days)
+      bits.each_with_index do |b, idx|
+        return days[idx] if b == '1'
+      end
+    end
 
-		def days_bitmask(schedule)
-			return schedule.days.to_s(2).reverse.split('')
-		end
+    def days_picked(schedule, period, days_month1)
+      return if period == "monthly" && days_month1 != "specific"
+      return if schedule.days == 0
+      if period == "months"
+        return get_monthly_days_picked(schedule.days)
+      elsif period == "weeks"
+        return get_weekly_days_picked(schedule.days)
+      end
 
-		def days_exclude_bitmask(schedule)
-			days = schedule.days_exclude
-			days ||= 0
-			return days.to_s(2).reverse.split('')
-		end
+    end
 
-		def exclusion_met2(schedule)
-			options = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
-			bits = schedule.days.to_s(2).reverse.split('')
-			bits.each_with_index do |b, idx|
-				return options[idx % options.length] if b == '1'
-			end
-		end
+    def days_exclude_picked(schedule, period, days_month1)
+      return unless period == "months"
 
-		def show_datepicker(type, schedule_period)
-			return false unless schedule_period == "months"
-			return false unless type == "specific"
-			return true
-		end
+      if days_month1 == "specific"
+        return get_weekly_days_picked(schedule.days_exclude)
+      else
+        return get_monthly_days_picked(schedule.days_exclude)
+      end
+    end
 
-	end
+    def exclusion_met2(schedule)
+      days = weekdays_array
+      bits = bitmask(schedule.exclusion_met_day)
+      bits.each_with_index do |b, idx|
+        return days[idx] if b == '1'
+      end
+    end
+
+    def advanced(schedule, type)
+      return false unless type == "advanced"
+      advanced_features = [
+        schedule.days_exclude.to_i,
+        schedule.exclusion_met.to_s.length,
+        schedule.exclusion_met_day.to_i
+      ].sum
+      return true if advanced_features > 0
+      return false
+    end
+
+    def get_monthly_days_picked(days)
+      days_picked = []
+      bits = bitmask(days)
+      puts "bitmask.to_s"
+      bits.each_with_index do |b, idx|
+        days_picked.push(idx) if b == '1'
+      end
+      return days_picked
+    end
+
+    def get_weekly_days_picked(days)
+      days_picked = []
+      bits = bitmask(days)
+      weekdays = weekdays_array
+
+      bits.each_with_index do |b, idx|
+        days_picked.push(weekdays[idx]) if b == '1'
+      end
+
+      return days_picked
+    end
+
+    # parses a date object to a dd-mm-yyy string
+    def date_to_string(date)
+      return date.strftime("%d-%b-%Y")
+    end
+
+    def weekdays_array
+      return ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
+    end
+
+    def bitmask(bits)
+      return bits.to_s(2).reverse.split('')
+    end
+
+  end
 end
