@@ -82,7 +82,6 @@ private
 
     # returns the days bitmask
     def get_days
-
       return 0b0 if @params[:type] != 'advanced'
 
       return get_weekday_bitmask(['weekday_sun', 'weekday_mon', 'weekday_tue', 'weekday_wed', 'weekday_thu', 'weekday_fri', 'weekday_sat']) if @params[:schedule] == 'weekly'

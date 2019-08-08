@@ -109,7 +109,6 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     puts Schedule.get_form_params(schedule).to_yaml
   end
 
-=end
   test "Advanced monthly 28th" do
     current_user = users(:bas)
 
@@ -117,13 +116,12 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     params[:type] = 'advanced'
     params[:schedule] = 'monthly'
     params[:days] = 'specific'
-    params[:dates_picked] = '28',
+    params[:dates_picked] = '28'
 
     schedule = Schedule.create_from_form(params, current_user, true)
-    
+
     puts Schedule.get_form_params(schedule).to_yaml
   end
-=begin
 
   test "Advanced monthly 28th unless weekends" do
     current_user = users(:bas)
@@ -131,7 +129,8 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     params = reset_params
     params[:type] = 'advanced'
     params[:schedule] = 'monthly'
-    params[:dates_picked] = '28',
+    params[:days] = 'specific'
+    params[:dates_picked] = '28'
     params[:weekday_exclude_sat] = '1'
     params[:weekday_exclude_sun] = '1'
 
@@ -140,13 +139,15 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     puts Schedule.get_form_params(schedule).to_yaml
   end
 
+=end
   test "Advanced monthly 28th unless weekends, then previous Friday" do
     current_user = users(:bas)
 
     params = reset_params
     params[:type] = 'advanced'
     params[:schedule] = 'monthly'
-    params[:dates_picked] = '28',
+    params[:days] = 'specific'
+    params[:dates_picked] = '28'
     params[:weekday_exclude_sat] = '1'
     params[:weekday_exclude_sun] = '1'
     params[:exclusion_met] = 'previous'
@@ -156,6 +157,7 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     
     puts Schedule.get_form_params(schedule).to_yaml
   end
+=begin
 =end
   def reset_params(date='25-Mar-2019')
     return {

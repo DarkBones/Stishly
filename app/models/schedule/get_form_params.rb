@@ -23,7 +23,7 @@ private
       advanced = advanced(schedule, type) # whether very advanced features were used
       end_date = end_date(schedule)
       exclude_days_picked = days_exclude_picked(schedule, period, days_month1)
-      exclusion_met1 = schedule.exclusion_met
+      exclusion_met1 = exclusion_met1(schedule)
       exclusion_met2 = exclusion_met2(schedule)
 
       return {
@@ -116,6 +116,11 @@ private
       end
     end
 
+    def exclusion_met1(schedule)
+      return "previous" if schedule.nil? || schedule.exclusion_met.nil? || schedule.exclusion_met.length == 0
+      return schedule.exclusion_met
+    end
+
     def exclusion_met2(schedule)
       days = weekdays_array
       bits = bitmask(schedule.exclusion_met_day)
@@ -167,6 +172,7 @@ private
     end
 
     def bitmask(bits)
+      return [] unless bits.class == Integer
       return bits.to_s(2).reverse.split('')
     end
 
