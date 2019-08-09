@@ -3,6 +3,7 @@ class Schedule
 
     def initialize(schedule)
       @schedule = schedule
+      @hidden_fields = []
     end
 
     def perform
@@ -26,7 +27,7 @@ private
       exclusion_met1 = exclusion_met1(schedule)
       exclusion_met2 = exclusion_met2(schedule)
 
-      return {
+      values = {
         type: type,
         name: name,
         schedule: period,
@@ -40,7 +41,8 @@ private
         end_date: end_date,
         exclude: exclude_days_picked,
         exclusion_met1: exclusion_met1,
-        exclusion_met2: exclusion_met2
+        exclusion_met2: exclusion_met2,
+        hidden_fields: @hidden_fields
       }
     end
 
@@ -53,12 +55,24 @@ private
         schedule.days_month_day.to_i
       ].sum
       return "advanced" if advanced_features > 0
+
+      @hidden_fields.push("advanced")
       return "simple"
     end
 
     # the schedule period (months / weeks / days etc)
     def period(schedule)
-      return "monthly" if schedule.period.nil?
+      if schedule.period.nil?
+        @hidden_fields.push("daily")
+        @hidden_fields.push("weekly")
+        @hidden_fields.push("annually")
+        return "monthly"
+      end
+
+      @hidden_fields.push("daily") unless schedule.period == "days"
+      @hidden_fields.push("weekly") unless schedule.period == "weeks"
+      @hidden_fields.push("monthly") unless schedule.period == "months"
+      @hidden_fields.push("annually") unless schedule.period == "years"
       return schedule.period
     end
 
@@ -81,7 +95,11 @@ private
 
     # specific / first / last / second / etc
     def days_month1(schedule)
-      return "specific" if schedule.nil?
+      if schedule.nil? || schedule.days_month == "specific"
+        @hidden_fields.push("days2")
+        return "specific"
+      end
+
       return schedule.days_month
     end
 
@@ -93,6 +111,9 @@ private
       bits.each_with_index do |b, idx|
         return days[idx] if b == '1'
       end
+
+      @hidden_fields.push("days2")
+      return "day"
     end
 
     def days_picked(schedule, period, days_month1)
@@ -137,6 +158,8 @@ private
         schedule.exclusion_met_day.to_i
       ].sum
       return true if advanced_features > 0
+
+      @hidden_fields.push("advanced2")
       return false
     end
 
