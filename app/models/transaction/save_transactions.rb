@@ -1,9 +1,10 @@
 class Transaction
   class SaveTransactions
 
-    def initialize(transactions, current_user)
+    def initialize(transactions, current_user, link_to_schedule=true)
       @transactions = transactions
       @current_user = current_user
+      @link_to_schedule = link_to_schedule
     end
 
     def perform
@@ -76,10 +77,15 @@ private
       t.local_datetime = transaction[:local_datetime]
       t.is_scheduled = transaction[:is_scheduled]
       t.queue_scheduled = transaction[:queue_scheduled]
+      t.schedule_id = transaction[:schedule_id]
+      t.schedule_period_id = transaction[:schedule_period_id]
+      t.scheduled_transaction_id = transaction[:scheduled_transaction_id]
 
       t.save!
 
-      link_schedule(t, transaction, current_user) unless transaction[:schedule_id].nil?
+      if @link_to_schedule
+        link_schedule(t, transaction, current_user) unless transaction[:schedule_id].nil?
+      end
 
       return t
     end

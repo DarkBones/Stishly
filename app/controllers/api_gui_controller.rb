@@ -60,6 +60,11 @@ class ApiGuiController < BaseApiBrowserController
   	render partial: "schedules/schedule_pause_form", :locals => {:schedule => schedule}
   end
 
+  def edit_upcoming_transaction_occurrence_form
+  	transaction = current_user.transactions.find(params[:id]).decorate
+  	render partial: "transactions/edit_upcoming_transaction_occurrence", :locals => {:transaction => transaction, :schedule_id => params[:schedule_id], :schedule_period_id => params[:schedule_period_id]}
+  end
+
 private
 	
 	def display_balance_params

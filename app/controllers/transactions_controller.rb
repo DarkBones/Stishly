@@ -70,6 +70,12 @@ class TransactionsController < ApplicationController
     redirect_back fallback_location: root_path
   end
 
+  def update_upcoming_occurrence
+    transaction = current_user.transactions.find(params[:id])
+
+    @transactions = Transaction.update_upcoming_occurrence(transaction_params, current_user, transaction)
+  end
+
 private
 
   def approve_params
@@ -79,6 +85,7 @@ private
   def transaction_params
     params.require(:transaction).permit(
       :id,
+      :scheduled_transaction_id,
       :account,
       :from_account,
       :to_account,
@@ -98,7 +105,8 @@ private
       :account_currency,
       :to_account_currency,
       :schedule_id,
-      :schedule_type
+      :schedule_type,
+      :schedule_period_id
       )
   end
 

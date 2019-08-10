@@ -22,9 +22,16 @@ Rails.application.routes.draw do
     post '/', to: 'transactions#create'
     scope '/:id' do
       get '/', to: 'transactions#show'
-      put '/edit', to: 'transactions#update', as: :edit_transaction
       put '/approve', to: 'transactions#approve', as: :approve_transaction
       put '/discard', to: 'transactions#discard'
+      scope '/edit' do
+        put '/', to: 'transactions#update', as: :edit_transaction
+        scope '/upcoming' do
+          scope '/occurrence' do
+            patch '/', to: 'transactions#update_upcoming_occurrence', as: :edit_upcoming_transaction_occurrence
+          end
+        end
+      end
     end
   end
 
@@ -153,6 +160,13 @@ Rails.application.routes.draw do
         scope '/transactions' do
           scope '/new' do
             get '/', to: 'api_gui#new_transaction_form'
+          end
+          scope '/upcoming' do
+            scope '/edit_occurrence' do
+              scope '/:id/:schedule_id/:schedule_period_id' do
+                get '/', to: 'api_gui#edit_upcoming_transaction_occurrence_form'
+              end
+            end
           end
         end
         scope '/schedules' do

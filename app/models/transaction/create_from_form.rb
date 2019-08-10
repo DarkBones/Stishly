@@ -41,7 +41,9 @@ private
         category_id: params[:category_id],
         local_datetime: parse_datetime(params[:date], params[:time]),
         schedule_id: params[:schedule_id],
+        schedule_period_id: params[:schedule_period_id],
         is_scheduled: !params[:schedule_id].nil?,
+        scheduled_transaction_id: params[:scheduled_transaction_id],
         queue_scheduled: queue_scheduled
       }
 
@@ -205,7 +207,9 @@ private
         transfer_transaction_id: bt[:transfer_transaction_id],
         schedule_id: bt[:schedule_id],
         is_scheduled: bt[:is_scheduled],
-        queue_scheduled: bt[:queue_scheduled]
+        queue_scheduled: bt[:queue_scheduled],
+        schedule_period_id: bt[:schedule_period_id],
+        scheduled_transaction_id: bt[:scheduled_transaction_id]
       }
     end
 

@@ -1,0 +1,25 @@
+<div class="modal edit_upcoming_transaction_form <%= 'fade' if Rails.env.test? == false %>" id="edit_upcoming_transaction_form" tabindex="-1" role="dialog" aria-labelledby="edit_upcoming_transaction_form_label" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="edit_upcoming_transaction_form_label">Edit Transaction <span id="transaction_name"></span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div id="edit_upcoming_transaction_form_fields">
+
+        <%= render partial: "transactions/new_transactions_form" if Rails.env.test? %>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<% if Rails.env == 'test' %>
+  <script type="text/javascript">
+     disableEnter();
+  </script>
+<% end %>

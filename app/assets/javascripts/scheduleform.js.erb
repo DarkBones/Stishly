@@ -310,6 +310,14 @@ function editScheduleForm(scheduleId){
       addLadderformListeners();
       setTimezones();
       getScheduleNextOccurrences($("#edit_schedule_form").find("#type"));
+      $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "/api/v1/schedules/" + scheduleId,
+        success(data){
+          $("#editscheduleform span#schedule_name").text(data.name);
+        }
+      })
     }
   })
 }

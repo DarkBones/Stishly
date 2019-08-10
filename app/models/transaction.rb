@@ -130,6 +130,11 @@ class Transaction < ApplicationRecord
     @transactions = UpdateTransaction.new(transaction_id, params, current_user).perform
   end
 
+  def self.update_upcoming_occurrence(params, current_user, transaction)
+    transactions = CreateFromForm.new(params, current_user).perform
+    transactions = SaveTransactions.new(transactions, current_user, false).perform
+  end
+
   def self.create_scheduled_transactions(transaction, current_user)
     return CreateScheduledTransactions.new(transaction, current_user).perform
   end
@@ -223,7 +228,6 @@ class Transaction < ApplicationRecord
     transactions.each do |t|
       Account.add(current_user, t.account_id, t.account_currency_amount, t.local_datetime) if t.parent_id.nil? && !t.is_scheduled
     end
-    
   end
 
   def self.create_from_schedule(transaction, schedule, scheduled_transaction_id)

@@ -61,10 +61,27 @@ class Schedule < ApplicationRecord
         s.user_transactions.where(parent_id: nil).each do |transaction|
           t = transaction.dup
           if t.transfer_transaction_id.nil? || (!t.transfer_transaction_id.nil? && t.direction == 1)
+
+            # check if the transaction was edited
+            edited_transaction = user.transactions.where(schedule_id: s.id, schedule_period_id: period_id, scheduled_transaction_id: transaction.id).take
+            if edited_transaction
+              t = edited_transaction
+              t.id = edited_transaction.id
+              puts "#{edited_transaction.description} #{edited_transaction.schedule_period_id}"
+              puts "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+              puts "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+              puts ""
+              puts "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+              puts "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+            else
+              t.id = transaction.id
+              t.schedule_period_id = period_id
+              puts "#{t.description} #{t.schedule_period_id}"
+            end
+
             t.schedule = s
             t.local_datetime = tz.utc_to_local(next_occurrence).to_date
             t.schedule_period_id = period_id
-            t.id = transaction.id
             transactions.push(t)
           end
         end
@@ -129,7 +146,7 @@ class Schedule < ApplicationRecord
 
   def self.edit(params, schedule)
     schedule_params = CreateFromForm.new(params, schedule.user, false, schedule.type_of, true).perform()
-    schedule.update(schedule_params)
+    return schedule_params
   end
 
 private

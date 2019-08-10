@@ -23,8 +23,9 @@ class SchedulesController < ApplicationController
   end
 
   def edit
-    schedule = current_user.schedules.find(params[:id])
-    Schedule.edit(schedule_params, schedule)
+    @schedule = current_user.schedules.find(params[:id])
+    update_params = Schedule.edit(schedule_params, @schedule)
+    @schedule.update(update_params)
   end
 
 private
