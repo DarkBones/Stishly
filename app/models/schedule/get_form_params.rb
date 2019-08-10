@@ -23,11 +23,11 @@ private
       days_picked = days_picked(schedule, period, days_month1) # an array of dates based on period: ['mon', 'fri'] or ['1', '14', '21']
       advanced = advanced(schedule, type) # whether very advanced features were used
       end_date = end_date(schedule)
-      exclude_days_picked = days_exclude_picked(schedule, period, days_month1)
+      exclude_days_picked = days_exclude_picked(schedule, period, days_month1, days_month2)
       exclusion_met1 = exclusion_met1(schedule)
-      exclusion_met2 = exclusion_met2(schedule)
+      exclusion_met2 = exclusion_met2(schedule, type, period, exclude_days_picked)
 
-      values = {
+      return {
         type: type,
         name: name,
         schedule: period,
@@ -105,20 +105,21 @@ private
 
     # mon / tue / etc
     def days_month2(schedule, type)
-      return if type.nil? || type.length == 0 || type == "specific"
-      days = weekdays_array
-      bits = bitmask(schedule.days)
-      bits.each_with_index do |b, idx|
-        return days[idx] if b == '1'
+      if type.nil? || type.length == 0 || type == "specific"
+        @hidden_fields.push("days2") unless @hidden_fields.include?("days2")
+        return
       end
 
-      @hidden_fields.push("days2")
+      return weekdays_array[schedule.days_month_day] unless schedule.days_month_day.nil?
+
+      @hidden_fields.push("days2") if schedule.days_month == "specific"
       return "day"
     end
 
     def days_picked(schedule, period, days_month1)
-      return if period == "monthly" && days_month1 != "specific"
+      return if period == "months" && days_month1 != "specific"
       return if schedule.days == 0
+
       if period == "months"
         return get_monthly_days_picked(schedule.days)
       elsif period == "weeks"
@@ -127,10 +128,10 @@ private
 
     end
 
-    def days_exclude_picked(schedule, period, days_month1)
+    def days_exclude_picked(schedule, period, days_month1, days_month2)
       return unless period == "months"
 
-      if days_month1 == "specific"
+      if days_month1 == "specific" || (days_month1 != "specific" && days_month2 == "day")
         return get_weekly_days_picked(schedule.days_exclude)
       else
         return get_monthly_days_picked(schedule.days_exclude)
@@ -142,16 +143,21 @@ private
       return schedule.exclusion_met
     end
 
-    def exclusion_met2(schedule)
-      days = weekdays_array
-      bits = bitmask(schedule.exclusion_met_day)
-      bits.each_with_index do |b, idx|
-        return days[idx] if b == '1'
-      end
+    def exclusion_met2(schedule, type, period, days_exclude)
+      return if schedule.exclusion_met_day.nil?
+      return unless type == "advanced" && period == "months" && days_exclude.length > 0
+
+      return weekdays_array[schedule.exclusion_met_day]
     end
 
     def advanced(schedule, type)
-      return false unless type == "advanced"
+      unless type == "advanced"
+        @hidden_fields.push("advanced2")
+        return false
+      end
+
+      return true unless schedule.end_date.nil?
+
       advanced_features = [
         schedule.days_exclude.to_i,
         schedule.exclusion_met.to_s.length,
@@ -166,7 +172,6 @@ private
     def get_monthly_days_picked(days)
       days_picked = []
       bits = bitmask(days)
-      puts "bitmask.to_s"
       bits.each_with_index do |b, idx|
         days_picked.push(idx) if b == '1'
       end

@@ -31,7 +31,7 @@
 require 'test_helper'
 
 class ScheduleFormParamsTest < ActiveSupport::TestCase
-=begin
+
   test "Simple daily" do
     current_user = users(:bas)
 
@@ -40,7 +40,28 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
 
     schedule = Schedule.create_from_form(params, current_user, true)
     
-    puts Schedule.get_form_params(schedule).to_yaml
+    form_params = Schedule.get_form_params(schedule)
+    #puts form_params.to_yaml
+
+    assert form_params[:type] == "simple", format_error("Unexpected schedule type", "simple", form_params[:type])
+    assert form_params[:schedule] == "days", format_error("Unexpected schedule period", "days", form_params[:schedule])
+    assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
+    assert form_params[:days] == "", format_error("Unexpected schedule days", "", form_params[:days])
+    assert form_params[:days2].nil?, format_error("Unexpected schedule days2", "nil", form_params[:days2])
+    assert form_params[:days_picked].nil?, format_error("Unexpected schedule days picked", "nil", form_params[:days_picked])
+    assert form_params[:advanced] == false, format_error("Unexpected schedule advanced features", false, form_params[:advanced])
+    assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
+    assert form_params[:exclude].nil?, format_error("Unexpected schedule exclude", "nil", form_params[:exclude])
+    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
+
+    assert form_params[:hidden_fields].length == 6, format_error("Unexpected schedule hidden fields length", 6, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].include?("advanced2")
+    assert form_params[:hidden_fields].include?("days2")
+    assert form_params[:hidden_fields].include?("advanced")
+    assert form_params[:hidden_fields].include?("weekly")
+    assert form_params[:hidden_fields].include?("monthly")
+    assert form_params[:hidden_fields].include?("annually")
   end
 
   test "Simple weekly" do
@@ -51,7 +72,28 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
 
     schedule = Schedule.create_from_form(params, current_user, true)
     
-    puts Schedule.get_form_params(schedule).to_yaml
+    form_params = Schedule.get_form_params(schedule)
+    #puts form_params.to_yaml
+
+    assert form_params[:type] == "simple", format_error("Unexpected schedule type", "simple", form_params[:type])
+    assert form_params[:schedule] == "weeks", format_error("Unexpected schedule period", "weeks", form_params[:schedule])
+    assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
+    assert form_params[:days] == "", format_error("Unexpected schedule days", "", form_params[:days])
+    assert form_params[:days2].nil?, format_error("Unexpected schedule days2", "nil", form_params[:days2])
+    assert form_params[:days_picked].nil?, format_error("Unexpected schedule days picked", "nil", form_params[:days_picked])
+    assert form_params[:advanced] == false, format_error("Unexpected schedule advanced features", false, form_params[:advanced])
+    assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
+    assert form_params[:exclude].nil?, format_error("Unexpected schedule exclude", "nil", form_params[:exclude])
+    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
+
+    assert form_params[:hidden_fields].length == 6, format_error("Unexpected schedule hidden fields length", 6, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].include?("advanced2")
+    assert form_params[:hidden_fields].include?("days2")
+    assert form_params[:hidden_fields].include?("advanced")
+    assert form_params[:hidden_fields].include?("daily")
+    assert form_params[:hidden_fields].include?("monthly")
+    assert form_params[:hidden_fields].include?("annually")
   end
 
   test "Simple monthly" do
@@ -62,7 +104,28 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
 
     schedule = Schedule.create_from_form(params, current_user, true)
     
-    puts Schedule.get_form_params(schedule).to_yaml
+    form_params = Schedule.get_form_params(schedule)
+    #puts form_params.to_yaml
+
+    assert form_params[:type] == "simple", format_error("Unexpected schedule type", "simple", form_params[:type])
+    assert form_params[:schedule] == "months", format_error("Unexpected schedule period", "months", form_params[:schedule])
+    assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
+    assert form_params[:days] == "", format_error("Unexpected schedule days", "", form_params[:days])
+    assert form_params[:days2].nil?, format_error("Unexpected schedule days2", "nil", form_params[:days2])
+    assert form_params[:days_picked].nil?, format_error("Unexpected schedule days picked", "nil", form_params[:days_picked])
+    assert form_params[:advanced] == false, format_error("Unexpected schedule advanced features", false, form_params[:advanced])
+    assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
+    assert form_params[:exclude] == [], format_error("Unexpected schedule exclude", [], form_params[:exclude])
+    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
+
+    assert form_params[:hidden_fields].length == 6, format_error("Unexpected schedule hidden fields length", 6, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].include?("advanced2")
+    assert form_params[:hidden_fields].include?("days2")
+    assert form_params[:hidden_fields].include?("advanced")
+    assert form_params[:hidden_fields].include?("daily")
+    assert form_params[:hidden_fields].include?("weekly")
+    assert form_params[:hidden_fields].include?("annually")
   end
 
   test "Simple annually" do
@@ -73,7 +136,28 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
 
     schedule = Schedule.create_from_form(params, current_user, true)
     
-    puts Schedule.get_form_params(schedule).to_yaml
+    form_params = Schedule.get_form_params(schedule)
+    #puts form_params.to_yaml
+
+    assert form_params[:type] == "simple", format_error("Unexpected schedule type", "simple", form_params[:type])
+    assert form_params[:schedule] == "years", format_error("Unexpected schedule period", "years", form_params[:schedule])
+    assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
+    assert form_params[:days] == "", format_error("Unexpected schedule days", "", form_params[:days])
+    assert form_params[:days2].nil?, format_error("Unexpected schedule days2", "nil", form_params[:days2])
+    assert form_params[:days_picked].nil?, format_error("Unexpected schedule days picked", "nil", form_params[:days_picked])
+    assert form_params[:advanced] == false, format_error("Unexpected schedule advanced features", false, form_params[:advanced])
+    assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
+    assert form_params[:exclude].nil?, format_error("Unexpected schedule exclude", "nil", form_params[:exclude])
+    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
+
+    assert form_params[:hidden_fields].length == 6, format_error("Unexpected schedule hidden fields length", 6, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].include?("advanced2")
+    assert form_params[:hidden_fields].include?("days2")
+    assert form_params[:hidden_fields].include?("advanced")
+    assert form_params[:hidden_fields].include?("daily")
+    assert form_params[:hidden_fields].include?("monthly")
+    assert form_params[:hidden_fields].include?("weekly")
   end
 
   test "Advanced weekly Monday and Friday" do
@@ -87,7 +171,27 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
 
     schedule = Schedule.create_from_form(params, current_user, true)
     
-    puts Schedule.get_form_params(schedule).to_yaml
+    form_params = Schedule.get_form_params(schedule)
+    #puts form_params.to_yaml
+
+    assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
+    assert form_params[:schedule] == "weeks", format_error("Unexpected schedule period", "weeks", form_params[:schedule])
+    assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
+    assert form_params[:days] == "", format_error("Unexpected schedule days", "", form_params[:days])
+    assert form_params[:days2].nil?, format_error("Unexpected schedule days2", "nil", form_params[:days2])
+    assert form_params[:days_picked] == ["mon", "fri"], format_error("Unexpected schedule days picked", ["mon", "fri"], form_params[:days_picked])
+    assert form_params[:advanced] == false, format_error("Unexpected schedule advanced features", false, form_params[:advanced])
+    assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
+    assert form_params[:exclude].nil?, format_error("Unexpected schedule exclude", "nil", form_params[:exclude])
+    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
+
+    assert form_params[:hidden_fields].length == 5, format_error("Unexpected schedule hidden fields length", 5, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].include?("advanced2")
+    assert form_params[:hidden_fields].include?("days2")
+    assert form_params[:hidden_fields].include?("daily")
+    assert form_params[:hidden_fields].include?("monthly")
+    assert form_params[:hidden_fields].include?("annually")
   end
 
   test "Advanced weekly every day" do
@@ -106,7 +210,27 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
 
     schedule = Schedule.create_from_form(params, current_user, true)
     
-    puts Schedule.get_form_params(schedule).to_yaml
+    form_params = Schedule.get_form_params(schedule)
+    #puts form_params.to_yaml
+
+    assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
+    assert form_params[:schedule] == "weeks", format_error("Unexpected schedule period", "weeks", form_params[:schedule])
+    assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
+    assert form_params[:days] == "", format_error("Unexpected schedule days", "", form_params[:days])
+    assert form_params[:days2].nil?, format_error("Unexpected schedule days2", "nil", form_params[:days2])
+    assert form_params[:days_picked] == ["sun", "mon", "tue", "wed", "thu", "fri", "sat"], format_error("Unexpected schedule days picked", ["sun", "mon", "tue", "wed", "thu", "fri", "sat"], form_params[:days_picked])
+    assert form_params[:advanced] == false, format_error("Unexpected schedule advanced features", false, form_params[:advanced])
+    assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
+    assert form_params[:exclude].nil?, format_error("Unexpected schedule exclude", "nil", form_params[:exclude])
+    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
+
+    assert form_params[:hidden_fields].length == 5, format_error("Unexpected schedule hidden fields length", 5, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].include?("advanced2")
+    assert form_params[:hidden_fields].include?("days2")
+    assert form_params[:hidden_fields].include?("daily")
+    assert form_params[:hidden_fields].include?("monthly")
+    assert form_params[:hidden_fields].include?("annually")
   end
 
   test "Advanced monthly 28th" do
@@ -120,7 +244,27 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
 
     schedule = Schedule.create_from_form(params, current_user, true)
 
-    puts Schedule.get_form_params(schedule).to_yaml
+    form_params = Schedule.get_form_params(schedule)
+    #puts form_params.to_yaml
+
+    assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
+    assert form_params[:schedule] == "months", format_error("Unexpected schedule period", "months", form_params[:schedule])
+    assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
+    assert form_params[:days] == "specific", format_error("Unexpected schedule days", "specific", form_params[:days])
+    assert form_params[:days2].nil?, format_error("Unexpected schedule days2", "nil", form_params[:days2])
+    assert form_params[:days_picked] == [28], format_error("Unexpected schedule days picked", [28], form_params[:days_picked])
+    assert form_params[:advanced] == false, format_error("Unexpected schedule advanced features", false, form_params[:advanced])
+    assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
+    assert form_params[:exclude] == [], format_error("Unexpected schedule exclude", [], form_params[:exclude])
+    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
+
+    assert form_params[:hidden_fields].length == 5, format_error("Unexpected schedule hidden fields length", 5, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].include?("advanced2")
+    assert form_params[:hidden_fields].include?("days2")
+    assert form_params[:hidden_fields].include?("daily")
+    assert form_params[:hidden_fields].include?("weekly")
+    assert form_params[:hidden_fields].include?("annually")
   end
 
   test "Advanced monthly 28th unless weekends" do
@@ -136,10 +280,28 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
 
     schedule = Schedule.create_from_form(params, current_user, true)
     
-    puts Schedule.get_form_params(schedule).to_yaml
+    form_params = Schedule.get_form_params(schedule)
+    #puts form_params.to_yaml
+
+    assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
+    assert form_params[:schedule] == "months", format_error("Unexpected schedule period", "months", form_params[:schedule])
+    assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
+    assert form_params[:days] == "specific", format_error("Unexpected schedule days", "specific", form_params[:days])
+    assert form_params[:days2].nil?, format_error("Unexpected schedule days2", "nil", form_params[:days2])
+    assert form_params[:days_picked] == [28], format_error("Unexpected schedule days picked", [28], form_params[:days_picked])
+    assert form_params[:advanced] == true, format_error("Unexpected schedule advanced features", true, form_params[:advanced])
+    assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
+    assert form_params[:exclude] == ["sun", "sat"], format_error("Unexpected schedule exclude", ["sun", "sat"], form_params[:exclude])
+    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
+
+    assert form_params[:hidden_fields].length == 4, format_error("Unexpected schedule hidden fields length", 4, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].include?("days2")
+    assert form_params[:hidden_fields].include?("daily")
+    assert form_params[:hidden_fields].include?("weekly")
+    assert form_params[:hidden_fields].include?("annually")
   end
 
-=end
   test "Advanced monthly 28th unless weekends, then previous Friday" do
     current_user = users(:bas)
 
@@ -155,10 +317,194 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
 
     schedule = Schedule.create_from_form(params, current_user, true)
     
-    puts Schedule.get_form_params(schedule).to_yaml
+    form_params = Schedule.get_form_params(schedule)
+    #puts form_params.to_yaml
+
+    assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
+    assert form_params[:schedule] == "months", format_error("Unexpected schedule period", "months", form_params[:schedule])
+    assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
+    assert form_params[:days] == "specific", format_error("Unexpected schedule days", "specific", form_params[:days])
+    assert form_params[:days2].nil?, format_error("Unexpected schedule days2", "nil", form_params[:days2])
+    assert form_params[:days_picked] == [28], format_error("Unexpected schedule days picked", [28], form_params[:days_picked])
+    assert form_params[:advanced] == true, format_error("Unexpected schedule advanced features", true, form_params[:advanced])
+    assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
+    assert form_params[:exclude] == ["sun", "sat"], format_error("Unexpected schedule exclude", ["sun", "sat"], form_params[:exclude])
+    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met2] == "fri", format_error("Unexpected schedule exclusion_met2", "fri", form_params[:exclusion_met2])
+
+    assert form_params[:hidden_fields].length == 4, format_error("Unexpected schedule hidden fields length", 4, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].include?("days2")
+    assert form_params[:hidden_fields].include?("daily")
+    assert form_params[:hidden_fields].include?("weekly")
+    assert form_params[:hidden_fields].include?("annually")
   end
-=begin
-=end
+
+  test "Advanced monthly last friday" do
+    current_user = users(:bas)
+
+    params = reset_params
+    params[:type] = "advanced"
+    params[:schedule] = "monthly"
+    params[:days] = "last"
+    params[:days2] = "fri"
+
+    schedule = Schedule.create_from_form(params, current_user, true)
+
+    form_params = Schedule.get_form_params(schedule)
+    #puts form_params.to_yaml
+
+    assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
+    assert form_params[:schedule] == "months", format_error("Unexpected schedule period", "months", form_params[:schedule])
+    assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
+    assert form_params[:days] == "last", format_error("Unexpected schedule days", "last", form_params[:days])
+    assert form_params[:days2] == "fri", format_error("Unexpected schedule days2", "fri", form_params[:days2])
+    assert form_params[:days_picked].nil?, format_error("Unexpected schedule days picked", "nil", form_params[:days_picked])
+    assert form_params[:advanced] == false, format_error("Unexpected schedule advanced features", false, form_params[:advanced])
+    assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
+    assert form_params[:exclude] == [], format_error("Unexpected schedule exclude", [], form_params[:exclude])
+    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
+
+    assert form_params[:hidden_fields].length == 4, format_error("Unexpected schedule hidden fields length", 4, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].include?("advanced2")
+    assert form_params[:hidden_fields].include?("daily")
+    assert form_params[:hidden_fields].include?("weekly")
+    assert form_params[:hidden_fields].include?("annually")
+  end
+
+  test "Advanced monthly last day" do
+    current_user = users(:bas)
+
+    params = reset_params
+    params[:type] = "advanced"
+    params[:schedule] = "monthly"
+    params[:days] = "last"
+    params[:days2] = "day"
+
+    schedule = Schedule.create_from_form(params, current_user, true)
+    
+    form_params = Schedule.get_form_params(schedule)
+    #puts form_params.to_yaml
+    
+    assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
+    assert form_params[:schedule] == "months", format_error("Unexpected schedule period", "months", form_params[:schedule])
+    assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
+    assert form_params[:days] == "last", format_error("Unexpected schedule days", "last", form_params[:days])
+    assert form_params[:days2] == "day", format_error("Unexpected schedule days2", "day", form_params[:days2])
+    assert form_params[:days_picked].nil?, format_error("Unexpected schedule days picked", "nil", form_params[:days_picked])
+    assert form_params[:advanced] == false, format_error("Unexpected schedule advanced features", false, form_params[:advanced])
+    assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
+    assert form_params[:exclude] == [], format_error("Unexpected schedule exclude", [], form_params[:exclude])
+    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
+
+    assert form_params[:hidden_fields].length == 4, format_error("Unexpected schedule hidden fields length", 4, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].include?("advanced2")
+    assert form_params[:hidden_fields].include?("daily")
+    assert form_params[:hidden_fields].include?("weekly")
+    assert form_params[:hidden_fields].include?("annually")
+  end
+
+  test "Advanced monthly last day except on mondays and wednesdays" do
+    current_user = users(:bas)
+
+    params = reset_params
+    params[:type] = "advanced"
+    params[:schedule] = "monthly"
+    params[:days] = "last"
+    params[:days2] = "day"
+    params[:weekday_exclude_mon] = "1"
+    params[:weekday_exclude_wed] = "1"
+
+    schedule = Schedule.create_from_form(params, current_user, true)
+    
+    form_params = Schedule.get_form_params(schedule)
+    #puts form_params.to_yaml
+    
+    assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
+    assert form_params[:schedule] == "months", format_error("Unexpected schedule period", "months", form_params[:schedule])
+    assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
+    assert form_params[:days] == "last", format_error("Unexpected schedule days", "last", form_params[:days])
+    assert form_params[:days2] == "day", format_error("Unexpected schedule days2", "day", form_params[:days2])
+    assert form_params[:days_picked].nil?, format_error("Unexpected schedule days picked", "nil", form_params[:days_picked])
+    assert form_params[:advanced] == true, format_error("Unexpected schedule advanced features", true, form_params[:advanced])
+    assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
+    assert form_params[:exclude] == ["mon", "wed"], format_error("Unexpected schedule exclude", ["mon", "wed"], form_params[:exclude])
+    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
+
+    assert form_params[:hidden_fields].length == 3, format_error("Unexpected schedule hidden fields length", 3, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].include?("daily")
+    assert form_params[:hidden_fields].include?("weekly")
+    assert form_params[:hidden_fields].include?("annually")
+  end
+
+  test "Advanced monthly last Friday except on 1st and 28th" do
+    current_user = users(:bas)
+
+    params = reset_params
+    params[:type] = "advanced"
+    params[:schedule] = "monthly"
+    params[:days] = "last"
+    params[:days2] = "fri"
+    params[:dates_picked_exclude] = "1 28"
+
+    schedule = Schedule.create_from_form(params, current_user, true)
+    
+    form_params = Schedule.get_form_params(schedule)
+    #puts form_params.to_yaml
+    
+    assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
+    assert form_params[:schedule] == "months", format_error("Unexpected schedule period", "months", form_params[:schedule])
+    assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
+    assert form_params[:days] == "last", format_error("Unexpected schedule days", "last", form_params[:days])
+    assert form_params[:days2] == "fri", format_error("Unexpected schedule days2", "fri", form_params[:days2])
+    assert form_params[:days_picked].nil?, format_error("Unexpected schedule days picked", "nil", form_params[:days_picked])
+    assert form_params[:advanced] == true, format_error("Unexpected schedule advanced features", true, form_params[:advanced])
+    assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
+    assert form_params[:exclude] == [1, 28], format_error("Unexpected schedule exclude", [1, 28], form_params[:exclude])
+    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
+
+    assert form_params[:hidden_fields].length == 3, format_error("Unexpected schedule hidden fields length", 3, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].include?("daily")
+    assert form_params[:hidden_fields].include?("weekly")
+    assert form_params[:hidden_fields].include?("annually")
+  end
+
+  test "Advanced with end date" do
+    current_user = users(:bas)
+
+    params = reset_params
+    params[:type] = "advanced"
+    params[:schedule] = "monthly"
+    params[:days] = "last"
+    params[:days2] = "day"
+    params[:end_date] = "25-Jul-2019"
+
+    schedule = Schedule.create_from_form(params, current_user, true)
+    
+    form_params = Schedule.get_form_params(schedule)
+    #puts form_params.to_yaml
+    
+    assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
+    assert form_params[:schedule] == "months", format_error("Unexpected schedule period", "months", form_params[:schedule])
+    assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
+    assert form_params[:days] == "last", format_error("Unexpected schedule days", "last", form_params[:days])
+    assert form_params[:days2] == "day", format_error("Unexpected schedule days2", "day", form_params[:days2])
+    assert form_params[:days_picked].nil?, format_error("Unexpected schedule days picked", "nil", form_params[:days_picked])
+    assert form_params[:advanced] == true, format_error("Unexpected schedule advanced features", true, form_params[:advanced])
+    assert form_params[:end_date] == '25-Jul-2019', format_error("Unexpected schedule end date", "25-Jul-2019", form_params[:end_date])
+    assert form_params[:exclude] == [], format_error("Unexpected schedule exclude", [], form_params[:exclude])
+    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
+
+    assert form_params[:hidden_fields].length == 3, format_error("Unexpected schedule hidden fields length", 3, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].include?("daily")
+    assert form_params[:hidden_fields].include?("weekly")
+    assert form_params[:hidden_fields].include?("annually")
+  end
+
   def reset_params(date='25-Mar-2019')
     return {
       type: 'simple',

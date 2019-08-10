@@ -1,4 +1,4 @@
-<%= @dates %>
+<%= @dates ||= [] %>
 <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group-weekdays">
   <label class="btn btn-secondary <%= 'active' if @dates[1] == '1' %> py-3" id="<%= id_prefix %>-mon">
     <%= f.check_box (id_prefix + "_mon").to_sym, {checked: @dates[1] == "1"} %>

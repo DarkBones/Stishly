@@ -135,7 +135,7 @@ private
               'weekday_exclude_fri',
               'weekday_exclude_sat'])
           else
-            bitmask = get_month_bitmask(@params[:dates_picked_exclude])
+            bitmask = get_month_bitmask(@params[:dates_picked_exclude], true)
           end
 
         end
@@ -201,7 +201,7 @@ private
       return bitmask
     end
 
-    def get_month_bitmask(days)
+    def get_month_bitmask(days, exclude=false)
       days = days.strip
       days = days.split(' ')
 
@@ -210,7 +210,7 @@ private
         bitmask = bitmask | (1 << d.to_i)
       end
 
-      if bitmask == 0
+      if bitmask == 0 && !exclude
         bitmask = 0b0
         bitmask = bitmask | (1 << @params[:start_date].to_date.day)
       end
