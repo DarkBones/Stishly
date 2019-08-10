@@ -17,8 +17,9 @@ class SchedulesController < ApplicationController
   end
 
   def pause
-    Schedule.pause(pause_params, current_user)
-    redirect_back(fallback_location: root_path)
+    schedule = current_user.schedules.find(params[:id])
+    Schedule.pause(pause_params, schedule, current_user)
+    #redirect_back(fallback_location: root_path)
   end
 
 private

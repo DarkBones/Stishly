@@ -98,16 +98,13 @@ class Schedule < ApplicationRecord
     return schedule
   end
 
-  def self.pause(params, current_user)
-    schedule = current_user.schedules.find_by_id(params[:id])
-    return if schedule.nil?
-    
+  def self.pause(params, schedule, current_user)
     tz = TZInfo::Timezone.get(current_user.timezone)
     d = params[:pause_until].to_date
+
     schedule.pause_until = d
     schedule.pause_until_utc = tz.local_to_utc(d.to_datetime)
     schedule.save
-
   end
 
   def self.next_occurrence(schedule, date=nil, testing=false, return_datetime=false, ignore_valid=false)

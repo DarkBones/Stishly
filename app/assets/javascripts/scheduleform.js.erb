@@ -3,13 +3,15 @@ $.getScript("<%= asset_path "datepicker" %>");
 var type = "simple";
 
 function sanitize(val) {
-  val = val.toString();
-  val = val.replace(/\//g, "%2F");
-  if (val.length === 0) {
-    val = "%20";
-  }
+  if (typeof(val) !== "undefined"){
+    val = val.toString();
+    val = val.replace(/\//g, "%2F");
+    if (val.length === 0) {
+      val = "%20";
+    }
 
-  val = val.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+    val = val.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+  }
 
   return val;
 }
@@ -291,4 +293,23 @@ function renderScheduleMenu() {
       getScheduleNextOccurrences($("#new_schedule_form").find("#type"));
     }
   });
+}
+
+function editScheduleForm(scheduleId){
+  $("#edit_schedule_form").html("");
+  $.ajax({
+    type: "GET",
+    dataType: "html",
+    url: "/api/v1/forms/schedules/edit/" + scheduleId.toString(),
+    beforeSend() {
+      insertAjaxSpinner($("edit_schedule_form"));
+    },
+    success(data) {
+      $("#edit_schedule_form").html(data);
+      setDatepickers();
+      addLadderformListeners();
+      setTimezones();
+      getScheduleNextOccurrences($("#edit_schedule_form").find("#type"));
+    }
+  })
 }

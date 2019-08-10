@@ -8,32 +8,9 @@
         </button>
       </div>
 
-      <%= form_with(model: Schedule.new, :url => pause_schedule_path) do |f| %>
+      <div id="schedule_pause_form_fields">
 
-        <div class="modal-body">
-          <div class="container">
-
-            <div class="row">
-              <%= f.hidden_field :id %>
-              <div class="col-12 col-sm-3 py-2">
-                Pause until
-              </div>
-              <div class="col-6 col-sm-9 py-2">
-                <%= f.text_field :pause_until, class: 'datepicker datepicker-null form-control', id: "schedule_pause_input" %>
-              </div>
-            </div>
-
-
-
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="schedule_close_form">Close</button>
-          <%= f.submit 'Pause', :class => 'btn btn-primary' %>
-        </div>
-
-      <% end %>
+      </div>
 
     </div>
   </div>

@@ -78,7 +78,16 @@ private
       @hidden_fields.push("weekly") unless schedule.period == "weeks"
       @hidden_fields.push("monthly") unless schedule.period == "months"
       @hidden_fields.push("annually") unless schedule.period == "years"
-      return schedule.period
+      
+      if schedule.period == "days"
+        return "daily"
+      elsif schedule.period == "weeks"
+        return "weekly"
+      elsif schedule.period == "months"
+        return "monthly"
+      elsif schedule.period == "years"
+        return "annually"
+      end
     end
 
     # the start date of the schedule

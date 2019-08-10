@@ -48,6 +48,18 @@ class ApiGuiController < BaseApiBrowserController
     render partial: 'accounts/transactions_date', :locals => { :d => params[:date], :account_currency => params[:account_currency], :day_total => params[:day_total], :d_formatted => date_formatted }
   end
 
+  def edit_schedule_form
+  	schedule = current_user.schedules.find(params[:id])
+
+  	render partial: "schedules/edit_schedule_form", :locals => {:schedule => schedule}
+  end
+
+  def render_schedule_pauseform
+  	schedule = current_user.schedules.find(params[:id])
+
+  	render partial: "schedules/schedule_pause_form", :locals => {:schedule => schedule}
+  end
+
 private
 	
 	def display_balance_params

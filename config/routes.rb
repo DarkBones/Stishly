@@ -54,8 +54,13 @@ Rails.application.routes.draw do
   scope '/schedules' do
     get '/', to: 'schedules#index', as: :schedules
     post '/', to: 'schedules#create'
-    scope '/pause' do
-      post '/', to: 'schedules#pause', as: :pause_schedule
+    scope '/:id' do
+      scope '/pause' do
+        patch '/', to: 'schedules#pause', as: :pause_schedule
+      end
+      scope '/edit' do
+        patch '/', to: 'schedules#edit', as: :schedule
+      end
     end
   end
 
@@ -154,8 +159,14 @@ Rails.application.routes.draw do
           scope '/new' do
             get '/', to: 'api_gui#new_schedule_form'
           end
+          scope '/edit/:id' do
+            get '/', to: 'api_gui#edit_schedule_form'
+          end
           scope '/transactions' do
             get '/:schedule', to: 'api_gui#render_schedule_transactions'
+          end
+          scope '/pause/:id' do
+            get '/', to: 'api_gui#render_schedule_pauseform'
           end
         end
       end

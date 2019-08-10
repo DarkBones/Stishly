@@ -3,10 +3,15 @@
     <%= schedule.name %>
   </td>
   <td>
-    <%= User.format_date(schedule.run_date) if schedule.run_date %>
+    <% if schedule.pause_until.nil? %>
+      <%= User.format_date(schedule.run_date) if schedule.run_date %>
+    <% else %>
+      <%= User.format_date(schedule.pause_until) %>
+    <% end %>
   </td>
   <td>
     <i class="fa fa-list clickable fa-lg" data-toggle="modal" data-target="#schedule_transactions_form" id="schedule-transactions-button_<%= schedule.id %>" onclick="scheduleTransactionsForm(<%= schedule.id %>);"></i>
+    <i class="fa fa-edit clickable fa-lg" data-toggle="modal" data-target="#editscheduleform" id="schedule-edit-button_<%= schedule.id%>" onclick="editScheduleForm(<%= schedule.id %>);"></i>
     <% if schedule.pause_until_utc.nil? %>
       <i class="fa fa-pause-circle clickable fa-lg" data-toggle="modal" data-target="#schedule_pause_form" id="schedule-pause-button_<%= schedule.id %>" onclick="schedulePauseForm(<%= schedule.id %>);"></i>
     <% else %>

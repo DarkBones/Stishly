@@ -35,5 +35,16 @@ function changeSchedule(schId) {
 }
 
 function schedulePauseForm(schId) {
-  $("#schedule_pause_form #schedule_id").val(schId);
+  $("#schedule_pause_form_fields").html("");
+  $.ajax({
+    type: "GET",
+    dataType: "html",
+    url: "/api/v1/forms/schedules/pause/" + schId.toString(),
+    beforeSend() {
+      insertAjaxSpinner($("#schedule_pause_form_fields"));
+    },
+    success(data) {
+      $("#schedule_pause_form_fields").html(data);
+    }
+  });
 }
