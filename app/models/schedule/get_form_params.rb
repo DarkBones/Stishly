@@ -33,7 +33,6 @@ private
         name: name,
         schedule: period,
         start_date: start_date,
-        timezone: schedule.timezone,
         run_every: period_num,
         days: days_month1,
         days2: days_month2,
@@ -151,17 +150,17 @@ private
     end
 
     def exclusion_met2(schedule, type, period, days_exclude)
-      unless type == "advanced" && period == "months"
+      unless type == "advanced" && period == "months" && days_exclude.length > 0
         @hidden_fields.push("exclusion_met_day")
         return
       end
 
-      if schedule.exclusion_met.nil? || schedule.exclusion_met == "cancel"
+      if schedule.exclusion_met.nil? || schedule.exclusion_met == "cancel" || schedule.exclusion_met.length == 0
         @hidden_fields.push("exclusion_met_day")
         return
       end
 
-      return weekdays_array[schedule.exclusion_met_day]
+      return weekdays_array[schedule.exclusion_met_day] unless schedule.exclusion_met_day.nil?
     end
 
     def advanced(schedule, type)

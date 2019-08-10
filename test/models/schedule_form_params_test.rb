@@ -52,10 +52,10 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     assert form_params[:advanced] == false, format_error("Unexpected schedule advanced features", false, form_params[:advanced])
     assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
     assert form_params[:exclude].nil?, format_error("Unexpected schedule exclude", "nil", form_params[:exclude])
-    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met1] == "cancel", format_error("Unexpected schedule exclusion_met1", "cancel", form_params[:exclusion_met1])
     assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
 
-    assert form_params[:hidden_fields].length == 6, format_error("Unexpected schedule hidden fields length", 6, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].length == 7, format_error("Unexpected schedule hidden fields length", 7, form_params[:hidden_fields].length)
     assert form_params[:hidden_fields].include?("advanced2")
     assert form_params[:hidden_fields].include?("days2")
     assert form_params[:hidden_fields].include?("advanced")
@@ -63,7 +63,6 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     assert form_params[:hidden_fields].include?("monthly")
     assert form_params[:hidden_fields].include?("annually")
   end
-
   test "Simple weekly" do
     current_user = users(:bas)
 
@@ -84,10 +83,10 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     assert form_params[:advanced] == false, format_error("Unexpected schedule advanced features", false, form_params[:advanced])
     assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
     assert form_params[:exclude].nil?, format_error("Unexpected schedule exclude", "nil", form_params[:exclude])
-    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met1] == "cancel", format_error("Unexpected schedule exclusion_met1", "cancel", form_params[:exclusion_met1])
     assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
 
-    assert form_params[:hidden_fields].length == 6, format_error("Unexpected schedule hidden fields length", 6, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].length == 7, format_error("Unexpected schedule hidden fields length", 7, form_params[:hidden_fields].length)
     assert form_params[:hidden_fields].include?("advanced2")
     assert form_params[:hidden_fields].include?("days2")
     assert form_params[:hidden_fields].include?("advanced")
@@ -116,10 +115,10 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     assert form_params[:advanced] == false, format_error("Unexpected schedule advanced features", false, form_params[:advanced])
     assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
     assert form_params[:exclude] == [], format_error("Unexpected schedule exclude", [], form_params[:exclude])
-    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met1] == "cancel", format_error("Unexpected schedule exclusion_met1", "cancel", form_params[:exclusion_met1])
     assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
 
-    assert form_params[:hidden_fields].length == 6, format_error("Unexpected schedule hidden fields length", 6, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].length == 7, format_error("Unexpected schedule hidden fields length", 7, form_params[:hidden_fields].length)
     assert form_params[:hidden_fields].include?("advanced2")
     assert form_params[:hidden_fields].include?("days2")
     assert form_params[:hidden_fields].include?("advanced")
@@ -148,10 +147,10 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     assert form_params[:advanced] == false, format_error("Unexpected schedule advanced features", false, form_params[:advanced])
     assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
     assert form_params[:exclude].nil?, format_error("Unexpected schedule exclude", "nil", form_params[:exclude])
-    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met1] == "cancel", format_error("Unexpected schedule exclusion_met1", "cancel", form_params[:exclusion_met1])
     assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
 
-    assert form_params[:hidden_fields].length == 6, format_error("Unexpected schedule hidden fields length", 6, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].length == 7, format_error("Unexpected schedule hidden fields length", 7, form_params[:hidden_fields].length)
     assert form_params[:hidden_fields].include?("advanced2")
     assert form_params[:hidden_fields].include?("days2")
     assert form_params[:hidden_fields].include?("advanced")
@@ -183,10 +182,10 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     assert form_params[:advanced] == false, format_error("Unexpected schedule advanced features", false, form_params[:advanced])
     assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
     assert form_params[:exclude].nil?, format_error("Unexpected schedule exclude", "nil", form_params[:exclude])
-    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met1] == "cancel", format_error("Unexpected schedule exclusion_met1", "cancel", form_params[:exclusion_met1])
     assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
 
-    assert form_params[:hidden_fields].length == 5, format_error("Unexpected schedule hidden fields length", 5, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].length == 6, format_error("Unexpected schedule hidden fields length", 6, form_params[:hidden_fields].length)
     assert form_params[:hidden_fields].include?("advanced2")
     assert form_params[:hidden_fields].include?("days2")
     assert form_params[:hidden_fields].include?("daily")
@@ -222,10 +221,10 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     assert form_params[:advanced] == false, format_error("Unexpected schedule advanced features", false, form_params[:advanced])
     assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
     assert form_params[:exclude].nil?, format_error("Unexpected schedule exclude", "nil", form_params[:exclude])
-    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met1] == "cancel", format_error("Unexpected schedule exclusion_met1", "cancel", form_params[:exclusion_met1])
     assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
 
-    assert form_params[:hidden_fields].length == 5, format_error("Unexpected schedule hidden fields length", 5, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].length == 6, format_error("Unexpected schedule hidden fields length", 6, form_params[:hidden_fields].length)
     assert form_params[:hidden_fields].include?("advanced2")
     assert form_params[:hidden_fields].include?("days2")
     assert form_params[:hidden_fields].include?("daily")
@@ -256,10 +255,10 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     assert form_params[:advanced] == false, format_error("Unexpected schedule advanced features", false, form_params[:advanced])
     assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
     assert form_params[:exclude] == [], format_error("Unexpected schedule exclude", [], form_params[:exclude])
-    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met1] == "cancel", format_error("Unexpected schedule exclusion_met1", "cancel", form_params[:exclusion_met1])
     assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
 
-    assert form_params[:hidden_fields].length == 5, format_error("Unexpected schedule hidden fields length", 5, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].length == 6, format_error("Unexpected schedule hidden fields length", 6, form_params[:hidden_fields].length)
     assert form_params[:hidden_fields].include?("advanced2")
     assert form_params[:hidden_fields].include?("days2")
     assert form_params[:hidden_fields].include?("daily")
@@ -292,10 +291,10 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     assert form_params[:advanced] == true, format_error("Unexpected schedule advanced features", true, form_params[:advanced])
     assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
     assert form_params[:exclude] == ["sun", "sat"], format_error("Unexpected schedule exclude", ["sun", "sat"], form_params[:exclude])
-    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met1] == "cancel", format_error("Unexpected schedule exclusion_met1", "cancel", form_params[:exclusion_met1])
     assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
 
-    assert form_params[:hidden_fields].length == 4, format_error("Unexpected schedule hidden fields length", 4, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].length == 5, format_error("Unexpected schedule hidden fields length", 5, form_params[:hidden_fields].length)
     assert form_params[:hidden_fields].include?("days2")
     assert form_params[:hidden_fields].include?("daily")
     assert form_params[:hidden_fields].include?("weekly")
@@ -312,7 +311,7 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     params[:dates_picked] = '28'
     params[:weekday_exclude_sat] = '1'
     params[:weekday_exclude_sun] = '1'
-    params[:exclusion_met] = 'previous'
+    params[:exclusion_met1] = 'previous'
     params[:exclusion_met2] = 'fri'
 
     schedule = Schedule.create_from_form(params, current_user, true)
@@ -362,10 +361,10 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     assert form_params[:advanced] == false, format_error("Unexpected schedule advanced features", false, form_params[:advanced])
     assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
     assert form_params[:exclude] == [], format_error("Unexpected schedule exclude", [], form_params[:exclude])
-    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met1] == "cancel", format_error("Unexpected schedule exclusion_met1", "cancel", form_params[:exclusion_met1])
     assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
 
-    assert form_params[:hidden_fields].length == 4, format_error("Unexpected schedule hidden fields length", 4, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].length == 5, format_error("Unexpected schedule hidden fields length", 5, form_params[:hidden_fields].length)
     assert form_params[:hidden_fields].include?("advanced2")
     assert form_params[:hidden_fields].include?("daily")
     assert form_params[:hidden_fields].include?("weekly")
@@ -395,10 +394,10 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     assert form_params[:advanced] == false, format_error("Unexpected schedule advanced features", false, form_params[:advanced])
     assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
     assert form_params[:exclude] == [], format_error("Unexpected schedule exclude", [], form_params[:exclude])
-    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met1] == "cancel", format_error("Unexpected schedule exclusion_met1", "cancel", form_params[:exclusion_met1])
     assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
 
-    assert form_params[:hidden_fields].length == 4, format_error("Unexpected schedule hidden fields length", 4, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].length == 6, format_error("Unexpected schedule hidden fields length", 6, form_params[:hidden_fields].length)
     assert form_params[:hidden_fields].include?("advanced2")
     assert form_params[:hidden_fields].include?("daily")
     assert form_params[:hidden_fields].include?("weekly")
@@ -430,10 +429,10 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     assert form_params[:advanced] == true, format_error("Unexpected schedule advanced features", true, form_params[:advanced])
     assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
     assert form_params[:exclude] == ["mon", "wed"], format_error("Unexpected schedule exclude", ["mon", "wed"], form_params[:exclude])
-    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met1] == "cancel", format_error("Unexpected schedule exclusion_met1", "cancel", form_params[:exclusion_met1])
     assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
 
-    assert form_params[:hidden_fields].length == 3, format_error("Unexpected schedule hidden fields length", 3, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].length == 5, format_error("Unexpected schedule hidden fields length", 5, form_params[:hidden_fields].length)
     assert form_params[:hidden_fields].include?("daily")
     assert form_params[:hidden_fields].include?("weekly")
     assert form_params[:hidden_fields].include?("annually")
@@ -463,10 +462,10 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     assert form_params[:advanced] == true, format_error("Unexpected schedule advanced features", true, form_params[:advanced])
     assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
     assert form_params[:exclude] == [1, 28], format_error("Unexpected schedule exclude", [1, 28], form_params[:exclude])
-    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met1] == "cancel", format_error("Unexpected schedule exclusion_met1", "cancel", form_params[:exclusion_met1])
     assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
 
-    assert form_params[:hidden_fields].length == 3, format_error("Unexpected schedule hidden fields length", 3, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].length == 4, format_error("Unexpected schedule hidden fields length", 4, form_params[:hidden_fields].length)
     assert form_params[:hidden_fields].include?("daily")
     assert form_params[:hidden_fields].include?("weekly")
     assert form_params[:hidden_fields].include?("annually")
@@ -496,10 +495,10 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     assert form_params[:advanced] == true, format_error("Unexpected schedule advanced features", true, form_params[:advanced])
     assert form_params[:end_date] == '25-Jul-2019', format_error("Unexpected schedule end date", "25-Jul-2019", form_params[:end_date])
     assert form_params[:exclude] == [], format_error("Unexpected schedule exclude", [], form_params[:exclude])
-    assert form_params[:exclusion_met1] == "previous", format_error("Unexpected schedule exclusion_met1", "previous", form_params[:exclusion_met1])
+    assert form_params[:exclusion_met1] == "cancel", format_error("Unexpected schedule exclusion_met1", "cancel", form_params[:exclusion_met1])
     assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
 
-    assert form_params[:hidden_fields].length == 3, format_error("Unexpected schedule hidden fields length", 3, form_params[:hidden_fields].length)
+    assert form_params[:hidden_fields].length == 5, format_error("Unexpected schedule hidden fields length", 5, form_params[:hidden_fields].length)
     assert form_params[:hidden_fields].include?("daily")
     assert form_params[:hidden_fields].include?("weekly")
     assert form_params[:hidden_fields].include?("annually")

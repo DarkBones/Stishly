@@ -26,9 +26,9 @@
 <div class = "row" id="schedule-form-root">
 
   <div class = "col-12 col-lg-7 col-xl-7 px-3 px-xl-5 border-right", onchange="getScheduleNextOccurrences(this)">
-    <%= f.text_field :timezone, id: 'timezone_input', value: form_params[:timezone] %>
-    <%= f.text_field :dates_picked, class: 'form-control' %>
-    <%= f.text_field :dates_picked_exclude, class: 'form-control' %>
+    <%= f.hidden_field :timezone, id: 'timezone_input', value: form_params[:timezone] %>
+    <%= f.hidden_field :dates_picked, class: 'form-control' %>
+    <%= f.hidden_field :dates_picked_exclude, class: 'form-control' %>
 
     <div class="row py-2">
       <div class="col-12 py-5 bg-primary rounded" id="type">
@@ -134,7 +134,7 @@
       </div>
     </div>
 
-    <div class="schedule-advanced">
+    <div class="schedule-advanced" style="<%= advanced_style %>">
       <div class="row py-2">
         <div class="col-12">
           <button type="button" class="btn btn-link" id="schedule_advanced_toggle" onclick="advancedScheduleOptions(this);"><%= form_params[:advanced2] ? "hide" : "show" %> advanced options</button>
