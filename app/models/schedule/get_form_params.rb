@@ -26,6 +26,7 @@ private
       exclude_days_picked = days_exclude_picked(schedule, period, days_month1, days_month2)
       exclusion_met1 = exclusion_met1(schedule)
       exclusion_met2 = exclusion_met2(schedule, type, period, exclude_days_picked)
+      timezone = timezone(schedule)
 
       return {
         type: type,
@@ -42,8 +43,13 @@ private
         exclude: exclude_days_picked,
         exclusion_met1: exclusion_met1,
         exclusion_met2: exclusion_met2,
-        hidden_fields: @hidden_fields
+        hidden_fields: @hidden_fields,
+        timezone: timezone
       }
+    end
+
+    def timezone(schedule)
+      return schedule.timezone
     end
 
     # whether the advanced fields were used
@@ -89,7 +95,7 @@ private
     end
 
     def period_num(schedule)
-      return 1 if schedule.period_num.nil?
+      return 1 if schedule.period_num.nil? || schedule.period_num < 1
       return schedule.period_num
     end
 
@@ -113,6 +119,7 @@ private
       return weekdays_array[schedule.days_month_day] unless schedule.days_month_day.nil?
 
       @hidden_fields.push("days2") if schedule.days_month == "specific"
+      @hidden_fields.push("datepicker") if schedule.days_month != "specific" && schedule.days_month_day != "day"
       return "day"
     end
 
@@ -139,13 +146,20 @@ private
     end
 
     def exclusion_met1(schedule)
-      return "previous" if schedule.nil? || schedule.exclusion_met.nil? || schedule.exclusion_met.length == 0
+      return "cancel" if schedule.nil? || schedule.exclusion_met.nil? || schedule.exclusion_met.length == 0
       return schedule.exclusion_met
     end
 
     def exclusion_met2(schedule, type, period, days_exclude)
-      return if schedule.exclusion_met_day.nil?
-      return unless type == "advanced" && period == "months" && days_exclude.length > 0
+      unless type == "advanced" && period == "months"
+        @hidden_fields.push("exclusion_met_day")
+        return
+      end
+
+      if schedule.exclusion_met.nil? || schedule.exclusion_met == "cancel"
+        @hidden_fields.push("exclusion_met_day")
+        return
+      end
 
       return weekdays_array[schedule.exclusion_met_day]
     end

@@ -1,11 +1,21 @@
-<% @dates ||= [] %>
+<%
+	if !@dates.nil? && @dates.length > 0 && @dates[0].is_a?(String)
+		@dates = nil
+	end
+	@dates ||= []
+%>
+
+<script>
+	$("<%= input_target %>").val("<%= @dates.join(' ') %>");
+</script>
+
 <table>
   <tr>
     <% for i in 1..31 do %>
       <% if (i-1) % 7 == 0 %>
         </tr><tr>
       <% end %>
-      <td onclick="schedulePickDate(this, '<%= input_target %>')" class="<%= 'active' if @dates.length >= i && @dates[i-1] == '1' %>"><%= i %></td>
+      <td onclick="schedulePickDate(this, '<%= input_target %>')" class="<%= 'active' if @dates.include?(i) %>"><%= i %></td>
     <% end %>
   </tr>
 </table>

@@ -166,7 +166,7 @@ function hideWeekday(){
   $("#scheduleform #weekday").hide();
 }
 
-function advancedScheduleOptions(force=0, obj){
+function advancedScheduleOptions(obj, force=0){
   var $advancedOptions = $(obj).parents("#schedule-form-root").find("#schedule_advanced");
   var $advancedOptionsToggle = $(obj).parents("#schedule-form-root").find("#schedule_advanced_toggle");
 
@@ -274,6 +274,7 @@ function resetScheduleMenu(){
 }
 
 function renderScheduleMenu() {
+  $("#new_schedule_form").html("");
   //if ($("#new_schedule_form form").length === 0) {
     $.ajax({
       type: "GET",

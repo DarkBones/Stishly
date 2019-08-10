@@ -9,9 +9,10 @@
 (function( $ ){
 
   $.fn.setTimezone = (function(options) {
-      
-        this.val(this.getTimezone(options));      
-        return this;
+      	if(this.val().length === 0){
+	        this.val(this.getTimezone(options));      
+	        return this;
+      	}
     });
   
   $.fn.getTimezone = function(options) {
