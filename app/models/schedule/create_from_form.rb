@@ -2,7 +2,7 @@ class Schedule
   class CreateFromForm
     include TimezoneMethods
     
-    def initialize(params, current_user, testing=false, type="schedule")
+    def initialize(params, current_user, testing=false, type="schedule", params_only=false)
       @params = params
       @current_user = current_user
 
@@ -17,7 +17,7 @@ class Schedule
 
       @start_date = @start_date.to_date unless @start_date.nil?
 
-
+      @params_only = params_only
     end
 
     def perform
@@ -37,6 +37,8 @@ class Schedule
         is_active: get_is_active,
         type_of: @type
       }
+
+      return schedule_params if @params_only
 
       #puts schedule_params.to_yaml
       schedule = @current_user.schedules.new(schedule_params)

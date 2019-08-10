@@ -132,19 +132,19 @@ private
     end
 
     def days_picked(schedule, period, days_month1)
-      return if period == "months" && days_month1 != "specific"
+      return if period == "monthly" && days_month1 != "specific"
       return if schedule.days == 0
 
-      if period == "months"
+      if period == "monthly"
         return get_monthly_days_picked(schedule.days)
-      elsif period == "weeks"
+      elsif period == "weekly"
         return get_weekly_days_picked(schedule.days)
       end
 
     end
 
     def days_exclude_picked(schedule, period, days_month1, days_month2)
-      return unless period == "months"
+      return unless period == "monthly"
 
       if days_month1 == "specific" || (days_month1 != "specific" && days_month2 == "day")
         return get_weekly_days_picked(schedule.days_exclude)
@@ -159,7 +159,7 @@ private
     end
 
     def exclusion_met2(schedule, type, period, days_exclude)
-      unless type == "advanced" && period == "months" && days_exclude.length > 0
+      unless type == "advanced" && period == "monthly" && days_exclude.length > 0
         @hidden_fields.push("exclusion_met_day")
         return
       end

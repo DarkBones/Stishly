@@ -127,6 +127,11 @@ class Schedule < ApplicationRecord
     CreateFromSimpleForm.new(current_user, params, "fixed_expense").perform()
   end
 
+  def self.edit(params, schedule)
+    schedule_params = CreateFromForm.new(params, schedule.user, false, schedule.type_of, true).perform()
+    schedule.update(schedule_params)
+  end
+
 private
   
   def subscription

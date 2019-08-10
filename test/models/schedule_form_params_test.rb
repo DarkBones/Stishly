@@ -44,7 +44,7 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     #puts form_params.to_yaml
 
     assert form_params[:type] == "simple", format_error("Unexpected schedule type", "simple", form_params[:type])
-    assert form_params[:schedule] == "days", format_error("Unexpected schedule period", "days", form_params[:schedule])
+    assert form_params[:schedule] == "daily", format_error("Unexpected schedule period", "days", form_params[:schedule])
     assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
     assert form_params[:days] == "", format_error("Unexpected schedule days", "", form_params[:days])
     assert form_params[:days2].nil?, format_error("Unexpected schedule days2", "nil", form_params[:days2])
@@ -75,7 +75,7 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     #puts form_params.to_yaml
 
     assert form_params[:type] == "simple", format_error("Unexpected schedule type", "simple", form_params[:type])
-    assert form_params[:schedule] == "weeks", format_error("Unexpected schedule period", "weeks", form_params[:schedule])
+    assert form_params[:schedule] == "weekly", format_error("Unexpected schedule period", "weeks", form_params[:schedule])
     assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
     assert form_params[:days] == "", format_error("Unexpected schedule days", "", form_params[:days])
     assert form_params[:days2].nil?, format_error("Unexpected schedule days2", "nil", form_params[:days2])
@@ -107,14 +107,14 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     #puts form_params.to_yaml
 
     assert form_params[:type] == "simple", format_error("Unexpected schedule type", "simple", form_params[:type])
-    assert form_params[:schedule] == "months", format_error("Unexpected schedule period", "months", form_params[:schedule])
+    assert form_params[:schedule] == "monthly", format_error("Unexpected schedule period", "months", form_params[:schedule])
     assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
     assert form_params[:days] == "", format_error("Unexpected schedule days", "", form_params[:days])
     assert form_params[:days2].nil?, format_error("Unexpected schedule days2", "nil", form_params[:days2])
     assert form_params[:days_picked].nil?, format_error("Unexpected schedule days picked", "nil", form_params[:days_picked])
     assert form_params[:advanced] == false, format_error("Unexpected schedule advanced features", false, form_params[:advanced])
     assert form_params[:end_date].nil?, format_error("Unexpected schedule end date", "nil", form_params[:end_date])
-    assert form_params[:exclude] == [], format_error("Unexpected schedule exclude", [], form_params[:exclude])
+    assert form_params[:exclude] = [], format_error("Unexpected schedule exclude", [], form_params[:exclude])
     assert form_params[:exclusion_met1] == "cancel", format_error("Unexpected schedule exclusion_met1", "cancel", form_params[:exclusion_met1])
     assert form_params[:exclusion_met2].nil?, format_error("Unexpected schedule exclusion_met2", "nil", form_params[:exclusion_met2])
 
@@ -139,7 +139,7 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     #puts form_params.to_yaml
 
     assert form_params[:type] == "simple", format_error("Unexpected schedule type", "simple", form_params[:type])
-    assert form_params[:schedule] == "years", format_error("Unexpected schedule period", "years", form_params[:schedule])
+    assert form_params[:schedule] == "annually", format_error("Unexpected schedule period", "years", form_params[:schedule])
     assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
     assert form_params[:days] == "", format_error("Unexpected schedule days", "", form_params[:days])
     assert form_params[:days2].nil?, format_error("Unexpected schedule days2", "nil", form_params[:days2])
@@ -174,7 +174,7 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     #puts form_params.to_yaml
 
     assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
-    assert form_params[:schedule] == "weeks", format_error("Unexpected schedule period", "weeks", form_params[:schedule])
+    assert form_params[:schedule] == "weekly", format_error("Unexpected schedule period", "weeks", form_params[:schedule])
     assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
     assert form_params[:days] == "", format_error("Unexpected schedule days", "", form_params[:days])
     assert form_params[:days2].nil?, format_error("Unexpected schedule days2", "nil", form_params[:days2])
@@ -213,7 +213,7 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     #puts form_params.to_yaml
 
     assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
-    assert form_params[:schedule] == "weeks", format_error("Unexpected schedule period", "weeks", form_params[:schedule])
+    assert form_params[:schedule] == "weekly", format_error("Unexpected schedule period", "weeks", form_params[:schedule])
     assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
     assert form_params[:days] == "", format_error("Unexpected schedule days", "", form_params[:days])
     assert form_params[:days2].nil?, format_error("Unexpected schedule days2", "nil", form_params[:days2])
@@ -247,7 +247,7 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     #puts form_params.to_yaml
 
     assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
-    assert form_params[:schedule] == "months", format_error("Unexpected schedule period", "months", form_params[:schedule])
+    assert form_params[:schedule] == "monthly", format_error("Unexpected schedule period", "months", form_params[:schedule])
     assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
     assert form_params[:days] == "specific", format_error("Unexpected schedule days", "specific", form_params[:days])
     assert form_params[:days2].nil?, format_error("Unexpected schedule days2", "nil", form_params[:days2])
@@ -283,7 +283,7 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     #puts form_params.to_yaml
 
     assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
-    assert form_params[:schedule] == "months", format_error("Unexpected schedule period", "months", form_params[:schedule])
+    assert form_params[:schedule] == "monthly", format_error("Unexpected schedule period", "months", form_params[:schedule])
     assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
     assert form_params[:days] == "specific", format_error("Unexpected schedule days", "specific", form_params[:days])
     assert form_params[:days2].nil?, format_error("Unexpected schedule days2", "nil", form_params[:days2])
@@ -320,7 +320,7 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     #puts form_params.to_yaml
 
     assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
-    assert form_params[:schedule] == "months", format_error("Unexpected schedule period", "months", form_params[:schedule])
+    assert form_params[:schedule] == "monthly", format_error("Unexpected schedule period", "months", form_params[:schedule])
     assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
     assert form_params[:days] == "specific", format_error("Unexpected schedule days", "specific", form_params[:days])
     assert form_params[:days2].nil?, format_error("Unexpected schedule days2", "nil", form_params[:days2])
@@ -353,7 +353,7 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     #puts form_params.to_yaml
 
     assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
-    assert form_params[:schedule] == "months", format_error("Unexpected schedule period", "months", form_params[:schedule])
+    assert form_params[:schedule] == "monthly", format_error("Unexpected schedule period", "months", form_params[:schedule])
     assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
     assert form_params[:days] == "last", format_error("Unexpected schedule days", "last", form_params[:days])
     assert form_params[:days2] == "fri", format_error("Unexpected schedule days2", "fri", form_params[:days2])
@@ -386,7 +386,7 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     #puts form_params.to_yaml
     
     assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
-    assert form_params[:schedule] == "months", format_error("Unexpected schedule period", "months", form_params[:schedule])
+    assert form_params[:schedule] == "monthly", format_error("Unexpected schedule period", "months", form_params[:schedule])
     assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
     assert form_params[:days] == "last", format_error("Unexpected schedule days", "last", form_params[:days])
     assert form_params[:days2] == "day", format_error("Unexpected schedule days2", "day", form_params[:days2])
@@ -421,7 +421,7 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     #puts form_params.to_yaml
     
     assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
-    assert form_params[:schedule] == "months", format_error("Unexpected schedule period", "months", form_params[:schedule])
+    assert form_params[:schedule] == "monthly", format_error("Unexpected schedule period", "months", form_params[:schedule])
     assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
     assert form_params[:days] == "last", format_error("Unexpected schedule days", "last", form_params[:days])
     assert form_params[:days2] == "day", format_error("Unexpected schedule days2", "day", form_params[:days2])
@@ -454,7 +454,7 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     #puts form_params.to_yaml
     
     assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
-    assert form_params[:schedule] == "months", format_error("Unexpected schedule period", "months", form_params[:schedule])
+    assert form_params[:schedule] == "monthly", format_error("Unexpected schedule period", "months", form_params[:schedule])
     assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
     assert form_params[:days] == "last", format_error("Unexpected schedule days", "last", form_params[:days])
     assert form_params[:days2] == "fri", format_error("Unexpected schedule days2", "fri", form_params[:days2])
@@ -487,7 +487,7 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     #puts form_params.to_yaml
     
     assert form_params[:type] == "advanced", format_error("Unexpected schedule type", "advanced", form_params[:type])
-    assert form_params[:schedule] == "months", format_error("Unexpected schedule period", "months", form_params[:schedule])
+    assert form_params[:schedule] == "monthly", format_error("Unexpected schedule period", "months", form_params[:schedule])
     assert form_params[:run_every] == 1, format_error("Unexpected period num", 1, form_params[:run_every])
     assert form_params[:days] == "last", format_error("Unexpected schedule days", "last", form_params[:days])
     assert form_params[:days2] == "day", format_error("Unexpected schedule days2", "day", form_params[:days2])
