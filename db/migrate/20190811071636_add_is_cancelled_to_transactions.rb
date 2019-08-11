@@ -1,5 +1,5 @@
 class AddIsCancelledToTransactions < ActiveRecord::Migration[5.2]
   def change
-    add_column :transactions, :is_cancelled, :boolean
+    add_column :transactions, :is_cancelled, :boolean, default: false
   end
 end

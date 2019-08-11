@@ -193,7 +193,7 @@ ActiveRecord::Schema.define(version: 2019_08_11_071636) do
     t.boolean "queue_scheduled", default: false
     t.boolean "is_queued", default: false
     t.integer "schedule_period_id"
-    t.boolean "is_cancelled"
+    t.boolean "is_cancelled", default: false
     t.index ["account_id"], name: "index_transactions_on_account_id"
     t.index ["category_id"], name: "index_transactions_on_category_id"
     t.index ["parent_id"], name: "index_transactions_on_parent_id"
