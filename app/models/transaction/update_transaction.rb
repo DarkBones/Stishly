@@ -10,14 +10,30 @@ class Transaction
     def perform
       return if @transaction.nil?
 
-      transaction = create_transaction
+      transactions = create_transaction
+      update_scheduled_transaction_ids(transactions)
 
       destroy_original(@transaction, @current_user)
 
-      return transaction
+      return transactions
     end
 
 private
+
+    def update_scheduled_transaction_ids(transactions)
+      transactions.each do |t|
+        if t.parent_id.nil?
+          if t.transfer_transaction_id.nil? || (!t.transfer_transaction_id.nil? && t.direction == -1)
+            scheduled_transactions = @current_user.transactions.where(scheduled_transaction_id: @transaction.id)
+            scheduled_transactions.each do |st|
+              st.scheduled_transaction_id = t.id
+              st.save
+            end
+            return
+          end
+        end
+      end
+    end
 
     def destroy_original(transaction, current_user)
       transfer_transaction = current_user.sch_transactions.find(transaction.transfer_transaction_id) unless transaction.transfer_transaction_id.nil?
@@ -48,7 +64,11 @@ private
 
       new_transactions.each do |nt|
         @transaction.schedules.each do |sc|
-          nt.schedules << sc
+          if nt.parent_id.nil?
+            if nt.transfer_transaction_id.nil? || (!nt.transfer_transaction_id.nil? && nt.direction == -1)
+              nt.schedules << sc
+            end
+          end
         end
       end
 
