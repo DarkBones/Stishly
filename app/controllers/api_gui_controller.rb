@@ -70,6 +70,11 @@ class ApiGuiController < BaseApiBrowserController
   	render partial: "transactions/edit_upcoming_transaction_series", :locals => {:transaction => transaction}
   end
 
+  def render_schedule_table_row
+    schedule = current_user.schedules.find(params[:id]).decorate
+    render partial: "schedules/schedule", :locals => {:schedule => schedule}
+  end
+
 private
 	
 	def display_balance_params

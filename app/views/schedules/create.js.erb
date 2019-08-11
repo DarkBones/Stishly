@@ -1,7 +1,60 @@
+"use strict";
+
 <% if @schedule.invalid? %>
   triggerNotice("<%= format_form_errors("schedule", @schedule.errors) %>", true);
   $('#scheduleform').effect( "shake", { direction: "left", times: 4, distance: 6} );
 <% else %>
   $("[data-dismiss=modal]").trigger({ type: "click" });
   
+  var timeNum = <%= @schedule.time_num %>;
+  
+  // check if there is an active schedules table
+  var activeTableExists = $("table#schedules_active").length > 0;
+
+  var next_occurrence = 0
+  var insert = "" // whether to insert at the beginning, middle or end of the table
+  var $insertTarget = $("table#schedules_active") // the target for the insertion
+
+  // find where in the table to insert the schedule
+  $("table#schedules_active tr").each(function(){
+  	next_occurrence = parseInt($(this).attr("next_occurrence"));
+
+  	// if the next occurrence of the row is higher than the new schedule's next occurrence, insert the new schedule before it
+  	if (next_occurrence >= timeNum) {
+  		insert = "before";
+  		$insertTarget = $(this);
+  		return false;
+  	}
+  });
+
+  // if the end of the table is reached and no greater timenum has been found, insert at the end
+  if (insert.length === 0) {
+  	insert = "append";
+  }
+
+  $.ajax({
+  	type: "GET",
+  	dataType: "html",
+  	url: "api/v1/render/schedule/" + <%= @schedule.id %> + "/table_row",
+  	success(data) {
+  		if (insert == "before") {
+  			$(data).insertBefore("#" + $insertTarget.attr("id"));
+  		} else {
+  			$insertTarget.append(data);
+  		}
+
+  		$("#" + timeNum.toString() + "_" + "<%= @schedule.name %>").hide().fadeIn(500);;
+
+  	}
+  });
+
+  function insertBefore($target) {
+  	if (inserted) {
+  		return;
+  	}
+  	console.log("#" + $target.attr("id"));
+  	$( "<tr><td>TEST</td><td>TEST</td><td>TEST</td></tr>" ).insertBefore("#" + $target.attr("id"));
+  	inserted = true;
+  }
+
 <% end %>

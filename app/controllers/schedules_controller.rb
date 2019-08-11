@@ -6,9 +6,9 @@ class SchedulesController < ApplicationController
   end
 
   def create
-    @schedule = Schedule.create_from_form(schedule_params, current_user)
+    @schedule = Schedule.create_from_form(schedule_params, current_user).decorate
     @schedule.save if @schedule.is_a?(ActiveRecord::Base)
-    redirect_back(fallback_location: root_path)
+    #redirect_back(fallback_location: root_path)
   end
 
   def run_schedules(datetime=nil, schedules=nil)
