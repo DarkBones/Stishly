@@ -576,3 +576,22 @@ upcoming_transactions_netmetube_dst: {
   next_occurrence_utc: '2019-04-14 23:00',
   type_of: fixed_expense
 }
+
+upcoming_transactions_daily_run: {
+  id: 1701,
+  name: 'daily',
+  user_id: 17,
+  start_date: '2019-01-25',
+  period: 'days',
+  period_num: 1,
+  days: 0,
+  days_month_day: 0,
+  days_exclude: 0,
+  exclusion_met_day: 0,
+  timezone: 'Europe/London',
+  created_at: '<%= Time.now.utc %>',
+  updated_at: '<%= Time.now.utc %>',
+  is_active: 1,
+  next_occurrence: '2019-03-29',
+  next_occurrence_utc: '2019-03-29 00:00'
+}

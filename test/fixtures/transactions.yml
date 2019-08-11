@@ -1225,3 +1225,235 @@ upcoming_transactions_netmetube_dst: {
   category_id: 0,
   is_scheduled: true
 }
+
+# SCHEDULED TRANSACTIONS
+upcoming_transactions_run: {
+  id: 1701,
+  direction: -1,
+  user_id: 17,
+  description: "original one",
+  account_id: 1701,
+  amount: -1999,
+  account_currency_amount: -1999,
+  user_currency_amount: -1999,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+upcoming_transactions_run_2: {
+  id: 1702,
+  direction: -1,
+  user_id: 17,
+  description: original two,
+  account_id: 1701,
+  amount: -1999,
+  account_currency_amount: -1999,
+  user_currency_amount: -1999,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+upcoming_transactions_run_3: {
+  id: 1703,
+  direction: -1,
+  user_id: 17,
+  description: original three,
+  account_id: 1701,
+  amount: -1999,
+  account_currency_amount: -1999,
+  user_currency_amount: -1999,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+upcoming_transactions_run_4: {
+  id: 1704,
+  direction: -1,
+  user_id: 17,
+  description: original four,
+  account_id: 1701,
+  amount: -1999,
+  account_currency_amount: -1999,
+  user_currency_amount: -1999,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+upcoming_transactions_run_5: {
+  id: 1705,
+  direction: -1,
+  user_id: 17,
+  description: original five,
+  account_id: 1701,
+  amount: -1999,
+  account_currency_amount: -1999,
+  user_currency_amount: -1999,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+upcoming_transactions_run_6: {
+  id: 1706,
+  direction: -1,
+  user_id: 17,
+  description: original six,
+  account_id: 1701,
+  amount: -1999,
+  account_currency_amount: -1999,
+  user_currency_amount: -1999,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+upcoming_transactions_run_7: {
+  id: 1707,
+  direction: -1,
+  user_id: 17,
+  description: original seven,
+  account_id: 1701,
+  amount: -1999,
+  account_currency_amount: -1999,
+  user_currency_amount: -1999,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+upcoming_transactions_run_8: {
+  id: 1708,
+  direction: -1,
+  user_id: 17,
+  description: original eight,
+  account_id: 1701,
+  amount: -1999,
+  account_currency_amount: -1999,
+  user_currency_amount: -1999,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+upcoming_transactions_run_9: {
+  id: 1709,
+  direction: -1,
+  user_id: 17,
+  description: original nine,
+  account_id: 1701,
+  amount: -1999,
+  account_currency_amount: -1999,
+  user_currency_amount: -1999,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+upcoming_transactions_run_10: {
+  id: 1710,
+  direction: -1,
+  user_id: 17,
+  description: original ten,
+  account_id: 1701,
+  amount: -1999,
+  account_currency_amount: -1999,
+  user_currency_amount: -1999,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true
+}
+
+upcoming_transactions_run_6_edited: {
+  id: 1711,
+  direction: -1,
+  user_id: 17,
+  description: original six edited,
+  account_id: 1701,
+  amount: -1999,
+  account_currency_amount: -1999,
+  user_currency_amount: -1999,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true,
+  schedule_id: 1701,
+  schedule_period_id: 0,
+  scheduled_transaction_id: 1706
+}
+
+upcoming_transactions_run_8_ran_manually: {
+  id: 1712,
+  direction: -1,
+  user_id: 17,
+  description: original eight ran manually,
+  account_id: 1701,
+  amount: -1999,
+  account_currency_amount: -1999,
+  user_currency_amount: -1999,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: false,
+  schedule_id: 1701,
+  schedule_period_id: 0,
+  scheduled_transaction_id: 1708
+}
+
+upcoming_transactions_run_3_ran_manually: {
+  id: 1713,
+  direction: -1,
+  user_id: 17,
+  description: original three cancelled,
+  account_id: 1703,
+  amount: -1999,
+  account_currency_amount: -1999,
+  user_currency_amount: -1999,
+  currency: EUR,
+  created_at: "<%= Time.now.utc %>",
+  updated_at: "<%= Time.now.utc %>",
+  local_datetime: "<%= Time.now.utc %>",
+  category_id: 0,
+  is_scheduled: true,
+  schedule_id: 1701,
+  schedule_period_id: 0,
+  scheduled_transaction_id: 1703,
+  is_cancelled: true
+}

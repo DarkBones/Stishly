@@ -298,3 +298,35 @@ upcoming_transactions_dst: {
   position: 1,
   account_type: spend
 }
+
+upcoming_transactions_run_one: {
+  id: 1701,
+  balance: 0,
+  user_id: 17,
+  name: Current,
+  currency: EUR,
+  position: 1,
+  account_type: spend
+}
+
+upcoming_transactions_run_two: {
+  id: 1702,
+  balance: 0,
+  user_id: 17,
+  name: Saving,
+  currency: EUR,
+  position: 1,
+  account_type: save
+}
+
+upcoming_transactions_run_three: {
+  id: 1703,
+  balance: 0,
+  user_id: 17,
+  name: Cash,
+  currency: JPY,
+  position: 1,
+  account_type: save
+}
+
+

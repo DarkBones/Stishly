@@ -75,7 +75,7 @@ private
           unless edited_transactions.nil?
             edited_transactions.each do |et|
               if et.transfer_transaction_id.nil? || (!et.transfer_transaction_id.nil? && et.direction == -1)
-                st = edited_transaction
+                st = et
               end
             end
           end
