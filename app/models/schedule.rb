@@ -63,9 +63,19 @@ class Schedule < ApplicationRecord
           if t.transfer_transaction_id.nil? || (!t.transfer_transaction_id.nil? && t.direction == 1)
 
             # check if the transaction was edited
-            edited_transaction = user.transactions.where(schedule_id: s.id, schedule_period_id: period_id, scheduled_transaction_id: transaction.id).take
+            edited_transactions = user.transactions.where(schedule_id: s.id, schedule_period_id: period_id, scheduled_transaction_id: transaction.id, parent_id: nil)
+            edited_transaction = nil
+            unless edited_transactions.nil?
+              edited_transactions.each do |et|
+                if et.transfer_transaction_id.nil? || (!et.transfer_transaction_id.nil? && et.direction == -1)
+                  edited_transaction = et
+                end
+              end
+            end
             if edited_transaction
+              next if edited_transaction.is_scheduled == false
               t = edited_transaction
+              t.description = "_" + t.description
               t.id = edited_transaction.id
             else
               t.id = transaction.id

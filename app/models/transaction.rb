@@ -133,6 +133,38 @@ class Transaction < ApplicationRecord
   def self.update_upcoming_occurrence(params, current_user, transaction)
     transactions = CreateFromForm.new(params, current_user).perform
     transactions = SaveTransactions.new(transactions, current_user, false).perform
+
+    unless transaction.scheduled_transaction_id.nil?
+      transaction.destroy
+    end
+  end
+
+  def self.cancel_upcoming_occurrence(current_user, transaction, schedule_id, schedule_period_id)
+    # if the transaction already exists, it means that it was edited and is_cancelled can simply be set to true
+    unless transaction.scheduled_transaction_id.nil?
+      transaction.is_cancelled =  true
+      transaction.save
+      return
+    end
+
+    scheduled_transaction_id = transaction.id
+
+    transaction = transaction.dup
+
+    transaction.schedule_id = schedule_id
+    transaction.schedule_period_id = schedule_period_id
+    transaction.is_cancelled = true
+    transaction.scheduled_transaction_id = scheduled_transaction_id
+    transaction.save
+  end
+
+  def self.trigger_upcoming_occurrence(current_user, transaction, schedule, schedule_period_id)
+    scheduled_transaction_id = transaction.scheduled_transaction_id
+    scheduled_transaction_id ||= transaction.id
+    #scheduled_transaction_id ||= transaction.id
+
+    transactions = CreateScheduledTransactions.new(transaction, current_user, scheduled_transaction_id, schedule, false, current_user.timezone, schedule_period_id).perform
+    puts transactions.to_yaml
   end
 
   def self.create_scheduled_transactions(transaction, current_user)

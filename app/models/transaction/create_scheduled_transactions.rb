@@ -2,13 +2,15 @@ class Transaction
 
   class CreateScheduledTransactions
 
-    def initialize(transaction, current_user, scheduled_transaction_id, schedule=nil, is_scheduled=true, timezone=nil)
+    def initialize(transaction, current_user, scheduled_transaction_id, schedule=nil, is_scheduled=true, timezone=nil, schedule_period_id=nil)
       @transaction = transaction
       @current_user = current_user
       @is_scheduled = is_scheduled
       @timezone = timezone
       @schedule = schedule
       @scheduled_transaction_id = scheduled_transaction_id
+      @schedule_period_id = schedule_period_id
+      @schedule_period_id ||= schedule.current_period_id
     end
 
     def perform
@@ -50,6 +52,7 @@ private
       t.queue_scheduled = transaction.queue_scheduled
       t.is_queued = is_queued
       t.scheduled_transaction_id = @scheduled_transaction_id
+      t.schedule_period_id = @schedule_period_id
 
       unless @is_scheduled
         t.timezone = @schedule.timezone
@@ -60,7 +63,7 @@ private
 
       t.save
       Account.add(t.user, t.account.id, t.account_currency_amount, t.local_datetime) if t.parent_id.nil? && t.is_queued == false
-      Notification.create(NOTIFICATIONS['new_queued_transaction'], @current_user, true)
+      Notification.create(NOTIFICATIONS['new_queued_transaction'], @current_user, true) if t.is_queued
 
       transactions.push(t)
 

@@ -89,6 +89,16 @@ Rails.application.routes.draw do
       scope '/transactions' do
         scope '/:id' do
           get '/', to: 'api_transactions#show'
+          scope '/cancel_upcoming_occurrence' do
+            scope '/:schedule_id/:schedule_period_id' do
+              put '/', to: 'api_transactions#cancel_upcoming_occurrence'
+            end
+          end
+          scope '/trigger_upcoming_occurrence' do
+            scope '/:schedule_id/:schedule_period_id' do
+              put '/', to: 'api_transactions#trigger_upcoming_occurrence'
+            end
+          end
         end
       end
       scope '/account_display_balance/:amount/:from/:to/:add' do
@@ -171,7 +181,7 @@ Rails.application.routes.draw do
           end
           scope '/upcoming' do
             scope '/edit_occurrence' do
-              scope '/:id/:schedule_id/:schedule_period_id' do
+              scope '/:id/:schedule_id/:schedule_period_id/:scheduled_transaction_id' do
                 get '/', to: 'api_gui#edit_upcoming_transaction_occurrence_form'
               end
             end
