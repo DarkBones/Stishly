@@ -22,7 +22,7 @@
 			<div class="dropdown-menu dropdown-menu-right dropshadow-light" aria-labelledby="contextMenuLink_<%= transaction_id %>" style="width: 175px;">
 				<ul class="list-unstyled">
 					<li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#edit_upcoming_transaction_form" onclick="editUpcomingTransactionOccurrence(<%= transaction.id %>, <%= transaction.schedule.id %>, <%= transaction.schedule_period_id %>);">Edit occurrence</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">Edit series</a></li>
+					<li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#edit_upcoming_transaction_form" onclick="editUpcomingTransactionSeries(<%= transaction.id %>);">Edit series</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">Cancel occurrence</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">Trigger now</a></li>
 				</ul>

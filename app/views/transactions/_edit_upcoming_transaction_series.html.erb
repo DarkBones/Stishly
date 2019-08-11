@@ -1,0 +1,15 @@
+<%# transaction = Transaction.new.decorate %>
+<%= form_with(model: transaction, :url => edit_upcoming_transaction_series_path) do |f| %>
+  <div class="modal-body">
+    <div class="container">
+
+        <%= render partial: "transactions/transaction_form_fields", :locals => {:transaction => transaction, :f => f, :base_only => true, :form_id_prefix => "", :form_id_suffix => "", :scheduled_transaction_id => transaction.id } %>
+
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <%= f.submit 'Save Transaction', :class => 'btn btn-primary' %>
+  </div>
+<% end %>

@@ -67,16 +67,9 @@ class Schedule < ApplicationRecord
             if edited_transaction
               t = edited_transaction
               t.id = edited_transaction.id
-              puts "#{edited_transaction.description} #{edited_transaction.schedule_period_id}"
-              puts "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-              puts "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-              puts ""
-              puts "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-              puts "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
             else
               t.id = transaction.id
               t.schedule_period_id = period_id
-              puts "#{t.description} #{t.schedule_period_id}"
             end
 
             t.schedule = s

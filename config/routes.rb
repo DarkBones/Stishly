@@ -30,6 +30,9 @@ Rails.application.routes.draw do
           scope '/occurrence' do
             patch '/', to: 'transactions#update_upcoming_occurrence', as: :edit_upcoming_transaction_occurrence
           end
+          scope '/series' do
+            patch '/', to: 'transactions#update', as: :edit_upcoming_transaction_series
+          end
         end
       end
     end
@@ -81,6 +84,11 @@ Rails.application.routes.draw do
           scope '/currency' do
             get '/', to: 'api_accounts#currency'
           end
+        end
+      end
+      scope '/transactions' do
+        scope '/:id' do
+          get '/', to: 'api_transactions#show'
         end
       end
       scope '/account_display_balance/:amount/:from/:to/:add' do
@@ -165,6 +173,11 @@ Rails.application.routes.draw do
             scope '/edit_occurrence' do
               scope '/:id/:schedule_id/:schedule_period_id' do
                 get '/', to: 'api_gui#edit_upcoming_transaction_occurrence_form'
+              end
+            end
+            scope '/edit_series' do
+              scope '/:id' do
+                get '/', to: 'api_gui#edit_upcoming_transaction_series_form'
               end
             end
           end
