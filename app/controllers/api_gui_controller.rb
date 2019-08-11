@@ -73,6 +73,8 @@ class ApiGuiController < BaseApiBrowserController
   def render_schedules_table
     if params[:type] == "active"
       render partial: 'schedules/schedules_table', :locals => {:active => true}
+    elsif params[:type] == "paused"
+      render partial: 'schedules/schedules_table', :locals => {:active => true, :paused => true}
     end
   end
 

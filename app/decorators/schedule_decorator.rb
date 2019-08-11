@@ -9,6 +9,18 @@ class ScheduleDecorator < ApplicationDecorator
     else
       return 0
     end
+
+    if model.is_active
+      if model.pause_until.nil?
+        return model.next_occurrence.strftime("%Y%m%d").to_i
+      else
+        return model.pause_until.strftime("%Y%m%d").to_i
+      end
+    elsif model.last_occurrence
+      return model.last_occurrence.strftime("%Y%m%d").to_i
+    else
+      return 0
+    end
   end
 
   def run_date

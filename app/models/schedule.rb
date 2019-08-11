@@ -44,13 +44,16 @@ class Schedule < ApplicationRecord
     # if start_date is nil, set it to today
     start_date ||= Time.now.utc
 
-    schedules = user.schedules.where("next_occurrence_utc > ? AND next_occurrence_utc < ? AND is_active = true AND pause_until IS NULL", start_date, until_date)
+    schedules = user.schedules.where("next_occurrence_utc > ? AND next_occurrence_utc < ? AND is_active = true", start_date, until_date)
     tz = TZInfo::Timezone.get(user.timezone)
     transactions = []
 
     schedules.each do |s|
-      next_occurrence = s.next_occurrence_utc
+      # if a schedule is paused, it might unpause before the end date
+      next_occurrence = s.pause_until_utc
+      next_occurrence ||= s.next_occurrence_utc
       period_id = s.current_period_id
+      
       while next_occurrence < until_date do
 
         next_occurrence = tz.utc_to_local(next_occurrence)
@@ -125,6 +128,8 @@ class Schedule < ApplicationRecord
     schedule.pause_until = d
     schedule.pause_until_utc = tz.local_to_utc(d.to_datetime)
     schedule.save
+    
+    return schedule
   end
 
   def self.next_occurrence(schedule, date=nil, testing=false, return_datetime=false, ignore_valid=false)
