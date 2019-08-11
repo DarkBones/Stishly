@@ -1,7 +1,7 @@
 class SchedulesController < ApplicationController
   def index
     @schedules = current_user.schedules.where(:is_active => 1, :pause_until_utc => nil).order(:next_occurrence).decorate
-    @paused_schedules = current_user.schedules.where("is_active = 1 AND pause_until_utc IS NOT NULL").order(:pause_until_utc).decorate
+    @paused_schedules = current_user.schedules.where("is_active = true AND pause_until_utc IS NOT NULL").order(:pause_until_utc).decorate
     @inactive_schedules = current_user.schedules.where(:is_active => 0).order(:next_occurrence).decorate
   end
 
