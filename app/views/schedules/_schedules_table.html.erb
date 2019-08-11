@@ -18,5 +18,5 @@
   <th>Name</th>
   <th><%= th_run_date %></th>
   <th></th>
-  <%= render schedules %>
+  <%= render schedules if defined?(schedules) && !schedules.nil? %>
 </table>

@@ -45,6 +45,7 @@ function schedulePauseForm(schId) {
     },
     success(data) {
       $("#schedule_pause_form_fields").html(data);
+      setDatepickers();
     }
   });
 }

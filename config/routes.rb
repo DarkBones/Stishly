@@ -218,6 +218,11 @@ Rails.application.routes.draw do
             get '/', to: 'api_gui#render_transaction_date'
           end
         end
+        scope '/schedules_table' do
+          scope '/:type' do
+            get '/', to: 'api_gui#render_schedules_table'
+          end
+        end
         scope '/schedule' do
           scope '/:id' do
             scope '/table_row' do

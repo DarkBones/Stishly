@@ -70,6 +70,12 @@ class ApiGuiController < BaseApiBrowserController
   	render partial: "transactions/edit_upcoming_transaction_series", :locals => {:transaction => transaction}
   end
 
+  def render_schedules_table
+    if params[:type] == "active"
+      render partial: 'schedules/schedules_table', :locals => {:active => true}
+    end
+  end
+
   def render_schedule_table_row
     schedule = current_user.schedules.find(params[:id]).decorate
     render partial: "schedules/schedule", :locals => {:schedule => schedule}
