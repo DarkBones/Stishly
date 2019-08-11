@@ -50,11 +50,38 @@ private
           end
 
           # check if the transaction wasn't already ran manually
-          ran_transaction = st.user.transactions.where(:schedule_id => schedule.id, :schedule_period_id => schedule.current_period_id, :scheduled_transaction_id => st.id).take
-          unless ran_transaction
-            transaction = Transaction.create_from_schedule(st, schedule, st.id)
-            transactions += transaction
+          ran_transaction = st.user.transactions.where(
+            :schedule_id => schedule.id, 
+            :schedule_period_id => schedule.current_period_id, 
+            :scheduled_transaction_id => st.id,
+            :is_scheduled => false).take
+
+          next if ran_transaction
+
+          cancelled_transaction = st.user.transactions.where(
+            :schedule_id => schedule.id, 
+            :schedule_period_id => schedule.current_period_id, 
+            :scheduled_transaction_id => st.id,
+            :is_cancelled => true).take
+
+          next if cancelled_transaction
+
+          edited_transactions = st.user.transactions.where(
+            :schedule_id => schedule.id, 
+            :schedule_period_id => schedule.current_period_id, 
+            :scheduled_transaction_id => st.id,
+            :is_scheduled => true)
+          edited_transaction = nil
+          unless edited_transactions.nil?
+            edited_transactions.each do |et|
+              if et.transfer_transaction_id.nil? || (!et.transfer_transaction_id.nil? && et.direction == -1)
+                st = edited_transaction
+              end
+            end
           end
+
+          transaction = Transaction.create_from_schedule(st, schedule, st.id)
+          transactions += transaction
         end
       end
 
