@@ -2,6 +2,7 @@
 	transaction_id = transaction.schedule.id.to_s + transaction.id.to_s + transaction.schedule_period_id.to_s
 	scheduled_transaction_id = transaction.id
   scheduled_transaction_id = transaction.scheduled_transaction_id unless transaction.scheduled_transaction_id.nil?
+  schedule = transaction.schedule
 %>
 
 <tr>
@@ -9,7 +10,9 @@
 		<%= User.format_date(transaction.local_datetime) %>
 	</td>
 	<td><!-- schedule -->
-		<%= transaction.schedule.name %>
+		<a href="#" data-toggle="modal" data-target="#editscheduleform" id="schedule-edit-button_<%= schedule.id%>" onclick="editScheduleForm(<%= schedule.id %>);">
+			<%= transaction.schedule.name %>
+		</a>
 	</td>
 	<td><!-- description -->
 		<%= transaction.description %>

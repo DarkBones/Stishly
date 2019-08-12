@@ -26,6 +26,18 @@ class SchedulesController < ApplicationController
     @schedule = current_user.schedules.find(params[:id])
     update_params = Schedule.edit(schedule_params, @schedule)
     @schedule.update(update_params)
+
+    tz = validate_timezone(@schedule.timezone)
+    next_occurrence = Schedule.next_occurrence(@schedule, return_datetime: true)
+
+    next_occurrence_local = nil
+    next_occurrence_local = tz.utc_to_local(next_occurrence).to_date unless next_occurrence.nil?
+
+    @schedule.next_occurrence = next_occurrence_local
+    @schedule.next_occurrence_utc = next_occurrence
+    @schedule.save
+
+    @schedule = @schedule.decorate
   end
 
 private

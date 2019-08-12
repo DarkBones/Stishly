@@ -1,7 +1,7 @@
 <% if @schedule.invalid? %>
   triggerNotice("<%= format_form_errors("schedule", @schedule.errors) %>", true);
-  $('#scheduleform').effect( "shake", { direction: "left", times: 4, distance: 6} );
+  $('#editscheduleform').effect( "shake", { direction: "left", times: 4, distance: 6} );
 <% else %>
 	$("[data-dismiss=modal]").trigger({ type: "click" });
-	<%= render partial: "/schedules/insert_schedule_table", :locals => {:schedule => @schedule} %>
+	<%= render partial: "/schedules/update_schedule_table", :locals => {:schedule => @schedule} %>
 <% end %>

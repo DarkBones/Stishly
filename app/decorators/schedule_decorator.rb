@@ -8,20 +8,9 @@ class ScheduleDecorator < ApplicationDecorator
   end
 
   def time_num
+    return 0 if model.next_occurrence.nil?
     if model.is_active == true
       return model.next_occurrence.strftime("%Y%m%d").to_i
-    elsif last_occurrence
-      return last_occurrence.strftime("%Y%m%d").to_i
-    else
-      return 0
-    end
-
-    if model.is_active
-      if model.pause_until.nil?
-        return model.next_occurrence.strftime("%Y%m%d").to_i
-      else
-        return model.pause_until.strftime("%Y%m%d").to_i
-      end
     elsif last_occurrence
       return last_occurrence.strftime("%Y%m%d").to_i
     else

@@ -52,7 +52,7 @@ class ApiSchedulesController < BaseApiController
 		next_occurrences.push(next_occurrence)
 
 		count.times do
-			next_occurrence = Schedule.next_occurrence(schedule, next_occurrence + 1)
+			next_occurrence = Schedule.next_occurrence(schedule, date: next_occurrence + 1)
 			next_occurrences.push(next_occurrence)
 		end
 
@@ -76,7 +76,7 @@ class ApiSchedulesController < BaseApiController
 		occurrences = []
 		next_occurrence = params[:start_date].to_date
 		count.times do
-			next_occurrence = Schedule.next_occurrence(schedule, next_occurrence, false, false, true)
+			next_occurrence = Schedule.next_occurrence(schedule, date: next_occurrence, ignore_valid: true)
 
 			break if next_occurrence.nil?
 
@@ -94,7 +94,7 @@ class ApiSchedulesController < BaseApiController
     if schedule.is_a?(ActiveRecord::Base)
       next_occurrence = params[:start_date].to_date
       params[:occurrence_count].to_i.times do
-        next_occurrence = Schedule.next_occurrence(schedule, next_occurrence, false, false, true)
+        next_occurrence = Schedule.next_occurrence(schedule, date: next_occurrence, ignore_valid: true)
 
         unless next_occurrence.nil?
           occurrences.push(("<li>"+User.format_date(next_occurrence, true)+"</li>").html_safe)

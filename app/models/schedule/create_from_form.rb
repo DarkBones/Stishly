@@ -2,7 +2,7 @@ class Schedule
   class CreateFromForm
     include TimezoneMethods
     
-    def initialize(params, current_user, testing=false, type="schedule", params_only=false)
+    def initialize(params, current_user, testing=false, type="schedule", params_only=false, is_active=nil)
       @params = params
       @current_user = current_user
 
@@ -17,10 +17,13 @@ class Schedule
 
       @start_date = @start_date.to_date unless @start_date.nil?
 
+      @is_active = is_active
+
       @params_only = params_only
     end
 
     def perform
+      @is_active ||= get_is_active if @is_active.nil?
       schedule_params = {
         name: @params[:name],
         start_date: @start_date,
@@ -34,7 +37,7 @@ class Schedule
         exclusion_met: get_exclusion_met,
         exclusion_met_day: get_exclusion_met_day,
         timezone: validate_timezone(@params[:timezone]),
-        is_active: get_is_active,
+        is_active: @is_active,
         type_of: @type
       }
 

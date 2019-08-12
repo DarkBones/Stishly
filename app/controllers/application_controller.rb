@@ -61,6 +61,14 @@ class ApplicationController < ActionController::Base
     return categories
   end
 
+  def validate_timezone(tz)
+    if !tz.nil? && ActiveSupport::TimeZone[tz].present?
+      return TZInfo::Timezone.get(tz)
+    else
+      return TZInfo::Timezone.get("Europe/London")
+    end
+  end
+
   private
 
   def valid_timezone(tz)

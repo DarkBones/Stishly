@@ -57,7 +57,7 @@ class Schedule < ApplicationRecord
       while next_occurrence < until_date do
 
         next_occurrence = tz.utc_to_local(next_occurrence)
-        next_occurrence = self.next_occurrence(s, next_occurrence.to_date, true, true)
+        next_occurrence = self.next_occurrence(s, date: next_occurrence.to_date, testing: true, return_datetime: true)
         period_id += 1
         break if next_occurrence >= until_date
 
@@ -113,7 +113,7 @@ class Schedule < ApplicationRecord
       date = [schedule.start_date, tz.utc_to_local(Time.now.utc).to_date + 1].max unless schedule.start_date.nil?
       date ||= tz.utc_to_local(Time.now.utc).to_date
 
-      next_occurrence = self.next_occurrence(schedule, date, false, true)
+      next_occurrence = self.next_occurrence(schedule, date: date, return_datetime: true)
       schedule.next_occurrence = tz.utc_to_local(next_occurrence).to_date unless next_occurrence.nil?
       schedule.next_occurrence_utc = next_occurrence
     end
@@ -132,7 +132,7 @@ class Schedule < ApplicationRecord
     return schedule
   end
 
-  def self.next_occurrence(schedule, date=nil, testing=false, return_datetime=false, ignore_valid=false)
+  def self.next_occurrence(schedule, date: nil, testing: false, return_datetime: false, ignore_valid: false)
     return NextOccurrence.new(schedule, date, testing, return_datetime).perform if schedule.valid? || ignore_valid
   end
 
@@ -153,7 +153,7 @@ class Schedule < ApplicationRecord
   end
 
   def self.edit(params, schedule)
-    schedule_params = CreateFromForm.new(params, schedule.user, false, schedule.type_of, true).perform()
+    schedule_params = CreateFromForm.new(params, schedule.user, false, schedule.type_of, true, schedule.is_active).perform()
     return schedule_params
   end
 

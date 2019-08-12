@@ -917,7 +917,7 @@ class ScheduleTest < ActiveSupport::TestCase
     for i in 0...dates.length do
       date = dates[i]
 
-      next_occurrence = Schedule.next_occurrence(schedule, next_occurrence, true)
+      next_occurrence = Schedule.next_occurrence(schedule, date: next_occurrence, testing: true)
 
       assert date.to_s == next_occurrence.to_s, format_error("Unexpected next occurrence\n#{message}", date.to_s, next_occurrence.to_s)
 
