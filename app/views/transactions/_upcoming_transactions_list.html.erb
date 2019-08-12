@@ -5,14 +5,12 @@
   schedule = transaction.schedule
 %>
 
-<tr>
+<tr class="<%= 'bg-danger' if transaction.is_cancelled %>" id="transaction_<%= transaction_id %>">
 	<td><!-- date -->
 		<%= User.format_date(transaction.local_datetime) %>
 	</td>
 	<td><!-- schedule -->
-		<a href="#" data-toggle="modal" data-target="#editscheduleform" id="schedule-edit-button_<%= schedule.id%>" onclick="editScheduleForm(<%= schedule.id %>);">
-			<%= transaction.schedule.name %>
-		</a>
+		<%= transaction.schedule.name %>
 	</td>
 	<td><!-- description -->
 		<%= transaction.description %>
@@ -30,7 +28,11 @@
 				<ul class="list-unstyled">
 					<li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#edit_upcoming_transaction_form" onclick="editUpcomingTransactionOccurrence(<%= transaction.id %>, <%= transaction.schedule.id %>, <%= transaction.schedule_period_id %>, <%= scheduled_transaction_id %>);">Edit occurrence</a></li>
 					<li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#edit_upcoming_transaction_form" onclick="editUpcomingTransactionSeries(<%= transaction.id %>);">Edit series</a></li>
-					<li class="nav-item"><a href="#" class="nav-link" onclick="cancelUpcomingTransaction(<%= transaction.id %>, <%= transaction.schedule.id %>, <%= transaction.schedule_period_id %>)">Cancel occurrence</a></li>
+					<% unless transaction.is_cancelled %>
+						<li class="nav-item"><a href="#" class="nav-link" onclick="cancelUpcomingTransaction(<%= transaction.id %>, <%= transaction.schedule.id %>, <%= transaction.schedule_period_id %>, <%= transaction_id %>)">Cancel occurrence</a></li>
+					<% else %>
+						<li class="nav-item"><a href="#" class="nav-link" onclick="uncancelUpcomingTransaction(<%= transaction.id %>, <%= transaction.schedule.id %>, <%= transaction.schedule_period_id %>)">Uncancel occurrence</a></li>
+					<% end %>
 					<li class="nav-item"><a href="#" class="nav-link" onclick="triggerUpcomingTransaction(<%= transaction.id %>, <%= transaction.schedule.id %>, <%= transaction.schedule_period_id %>)">Trigger now</a></li>
 				</ul>
 			</div>

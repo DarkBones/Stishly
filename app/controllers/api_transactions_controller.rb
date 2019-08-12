@@ -13,24 +13,36 @@ class ApiTransactionsController < BaseApiController
 	end
 
 	def cancel_upcoming_occurrence
-    transaction = current_user.transactions.find(params[:id])
+    transaction = @user.transactions.find(params[:id])
 
     return if transaction.nil?
-    return if current_user.schedules.find(params[:schedule_id]).nil?
-    return unless current_user.transactions.where(scheduled_transaction_id: params[:id], schedule_id: params[:schedule_id], schedule_period_id: params[:schedule_period_id], is_cancelled: true).take.nil?
+    return if @user.schedules.find(params[:schedule_id]).nil?
+    return unless @user.transactions.where(scheduled_transaction_id: params[:id], schedule_id: params[:schedule_id], schedule_period_id: params[:schedule_period_id], is_cancelled: true).take.nil?
 
-    Transaction.cancel_upcoming_occurrence(current_user, transaction, params[:schedule_id], params[:schedule_period_id])
+    Transaction.cancel_upcoming_occurrence(@user, transaction, params[:schedule_id], params[:schedule_period_id])
+    redirect_back fallback_location: root_path
+  end
+
+  def uncancel_upcoming_occurrence
+    transaction = @user.transactions.find(params[:id])
+
+    return if transaction.nil?
+    return if @user.schedules.find(params[:schedule_id]).nil?
+    return unless @user.transactions.where(scheduled_transaction_id: params[:id], schedule_id: params[:schedule_id], schedule_period_id: params[:schedule_period_id], is_cancelled: true).take.nil?
+
+    Transaction.uncancel_upcoming_occurrence(@user, transaction, params[:schedule_id], params[:schedule_period_id])
+    redirect_back fallback_location: root_path
   end
 
   def trigger_upcoming_occurrence
-  	transaction = current_user.transactions.find(params[:id])
-    schedule = current_user.schedules.find(params[:schedule_id])
+  	transaction = @user.transactions.find(params[:id])
+    schedule = @user.schedules.find(params[:schedule_id])
 
 
     return if transaction.nil?
     return if schedule.nil?
 
-    Transaction.trigger_upcoming_occurrence(current_user, transaction, schedule, params[:schedule_period_id])
+    Transaction.trigger_upcoming_occurrence(@user, transaction, schedule, params[:schedule_period_id])
   end
 
 end

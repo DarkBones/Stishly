@@ -36,6 +36,7 @@ class Transaction < ApplicationRecord
   has_one :parent, :class_name => 'Transaction'
   has_many :children, :class_name => 'Transaction', :foreign_key => 'parent_id'
   has_and_belongs_to_many :schedules
+  has_one :transfer_transaction, :class_name => 'Transaction', :foreign_key => 'transfer_transaction_id'
 
   attr_reader :rate, :account_currency, :rate_from_to, :to_account_currency, :date, :time, :active_account, :schedule_id, :schedule_type
 
@@ -137,6 +138,23 @@ class Transaction < ApplicationRecord
     unless transaction.scheduled_transaction_id.nil?
       transaction.destroy
     end
+
+    return transactions
+  end
+
+  # takes a transaction and returns its main transaction (ie the parent and, if transfer, the outgoing one)
+  def self.find_main_transaction(transaction)
+    if transaction.class == Array
+      transaction = transaction[0]
+    end
+
+    transaction = transaction.parent unless transaction.parent_id.nil?
+    
+    unless transaction.transfer_transaction_id.nil?
+      transaction = transaction.transfer_transaction if transaction.direction == 1
+    end
+
+    return transaction
   end
 
   def self.cancel_upcoming_occurrence(current_user, transaction, schedule_id, schedule_period_id)
@@ -158,13 +176,18 @@ class Transaction < ApplicationRecord
     transaction.save
   end
 
+  def self.uncancel_upcoming_occurrence(current_user, transaction, schedule_id, schedule_period_id)
+    #puts "#{transaction.id} #{schedule_id} #{schedule_period_id}"
+    #transaction = Transaction.where(scheduled_transaction_id: transaction.id, schedule_id: schedule_id, schedule_period_id: schedule_period_id).take
+    transaction.is_cancelled = false
+    transaction.save
+  end
+
   def self.trigger_upcoming_occurrence(current_user, transaction, schedule, schedule_period_id)
     scheduled_transaction_id = transaction.scheduled_transaction_id
     scheduled_transaction_id ||= transaction.id
-    #scheduled_transaction_id ||= transaction.id
 
     transactions = CreateScheduledTransactions.new(transaction, current_user, scheduled_transaction_id, schedule, false, current_user.timezone, schedule_period_id).perform
-    puts transactions.to_yaml
   end
 
   def self.create_scheduled_transactions(transaction, current_user)

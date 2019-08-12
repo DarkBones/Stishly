@@ -78,7 +78,7 @@ class Schedule < ApplicationRecord
             if edited_transaction
               next if edited_transaction.is_scheduled == false
               t = edited_transaction
-              t.description = "_" + t.description
+              t.description = t.description
               t.id = edited_transaction.id
             else
               t.id = transaction.id

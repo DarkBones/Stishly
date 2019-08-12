@@ -94,6 +94,11 @@ Rails.application.routes.draw do
               put '/', to: 'api_transactions#cancel_upcoming_occurrence'
             end
           end
+          scope '/uncancel_upcoming_occurrence' do
+            scope '/:schedule_id/:schedule_period_id' do
+              put '/', to: 'api_transactions#uncancel_upcoming_occurrence'
+            end
+          end
           scope '/trigger_upcoming_occurrence' do
             scope '/:schedule_id/:schedule_period_id' do
               put '/', to: 'api_transactions#trigger_upcoming_occurrence'

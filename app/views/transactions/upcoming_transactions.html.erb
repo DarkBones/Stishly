@@ -1,5 +1,4 @@
 <%= render partial: "edit_upcoming_transaction" %>
-<%= render 'schedules/schedule_edit_menu' %>
 
 <div class="container hide-pagination">
   <div class="row">
@@ -80,15 +79,30 @@
     });
   }
 
-  function cancelUpcomingTransaction(transactionId, scheduleId, schedulePeriod) {
+  function cancelUpcomingTransaction(transactionId, scheduleId, schedulePeriod, tId) {
     $.ajax({
       type: "PUT",
       url: "/api/v1/transactions/" + transactionId.toString() + "/cancel_upcoming_occurrence/" + scheduleId.toString() + "/" + schedulePeriod.toString(),
       success(data) {
         triggerNotice("Transaction successfully cancelled", false);
+        $("#transaction_" + tId.toString()).addClass("bg-danger");
       },
       error(e) {
         triggerNotice("Unable to cancel transaction", true);
+      }
+    });
+  }
+
+  function uncancelUpcomingTransaction(transactionId, scheduleId, schedulePeriod, tId) {
+    $.ajax({
+      type: "PUT",
+      url: "/api/v1/transactions/" + transactionId.toString() + "/uncancel_upcoming_occurrence/" + scheduleId.toString() + "/" + schedulePeriod.toString(),
+      success(data) {
+        triggerNotice("Transaction no longer cancelled", false);
+        $("#transaction_" + tId.toString()).addClass("bg-danger");
+      },
+      error(e) {
+        triggerNotice("Unable to uncancel transaction", true);
       }
     });
   }
