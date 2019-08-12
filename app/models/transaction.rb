@@ -176,9 +176,7 @@ class Transaction < ApplicationRecord
     transaction.save
   end
 
-  def self.uncancel_upcoming_occurrence(current_user, transaction, schedule_id, schedule_period_id)
-    #puts "#{transaction.id} #{schedule_id} #{schedule_period_id}"
-    #transaction = Transaction.where(scheduled_transaction_id: transaction.id, schedule_id: schedule_id, schedule_period_id: schedule_period_id).take
+  def self.uncancel_upcoming_occurrence(transaction)
     transaction.is_cancelled = false
     transaction.save
   end
