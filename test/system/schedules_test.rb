@@ -19,8 +19,8 @@ class SchedulesTest < ApplicationSystemTestCase
     assert_selector 'h3', text: 'Active Schedules'
     assert_selector 'h3', text: 'Inactive Schedules'
 
-    assert_selector '#active-schedules ul', text: I18n.t('schedules.no_active_schedules')
-    assert_selector '#inactive-schedules ul', text: I18n.t('schedules.no_inactive_schedules')
+    assert_selector '#active-schedules', text: I18n.t('schedules.no_active_schedules')
+    assert_selector '#inactive-schedules', text: I18n.t('schedules.no_inactive_schedules')
 
     assert_selector 'button#new-schedule-button', text: "New Schedule"
   end
