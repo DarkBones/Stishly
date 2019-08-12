@@ -1,11 +1,5 @@
 $("[data-dismiss=modal]").trigger({ type: "click" });
 
-$("#schedule_" + "<%= @schedule.id %>").remove();
-
-console.log($("table#schedules_active tr").length);
-if ($("table#schedules_active tr").length == 1) {
-	$("table#schedules_active").remove();
-	$("#active-schedules").append("<p><%= I18n.t('schedules.no_active_schedules') %></p>");
-}
+<%= render partial: "/schedules/remove_schedule_table", :locals => {:schedule => @schedule, :remove_from => "active"} %>
 
 <%= render partial: "/schedules/insert_schedule_table", :locals => {:schedule => @schedule} %>

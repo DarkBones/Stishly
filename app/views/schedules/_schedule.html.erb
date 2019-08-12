@@ -12,11 +12,15 @@
   <td>
     <i class="fa fa-list clickable fa-lg" data-toggle="modal" data-target="#schedule_transactions_form" id="schedule-transactions-button_<%= schedule.id %>" onclick="scheduleTransactionsForm(<%= schedule.id %>);"></i>
     <i class="fa fa-edit clickable fa-lg" data-toggle="modal" data-target="#editscheduleform" id="schedule-edit-button_<%= schedule.id%>" onclick="editScheduleForm(<%= schedule.id %>);"></i>
-    <% if schedule.pause_until_utc.nil? %>
+    <% if schedule.pause_until_utc.nil? && schedule.is_active %>
       <i class="fa fa-pause-circle clickable fa-lg" data-toggle="modal" data-target="#schedule_pause_form" id="schedule-pause-button_<%= schedule.id %>" onclick="schedulePauseForm(<%= schedule.id %>);"></i>
-    <% else %>
-      <i class="fa fa-play-circle clickable fa-lg" data-toggle="modal" data-target="#schedule_pause_form" id="schedule-play-button_<%= schedule.id %>" onclick="unpauseSchedule(<%= schedule.id %>);"></i>
+    <% elsif !schedule.pause_until_utc.nil? && schedule.is_active %>
+      <i class="fa fa-play-circle clickable fa-lg" id="schedule-play-button_<%= schedule.id %>" onclick="unpauseSchedule(<%= schedule.id %>);"></i>
     <% end %>
-    <i class="fa fa-stop-circle clickable fa-lg" data-toggle="modal" data-target="#schedule_transactions_form" id="schedule-stop-button_<%= schedule.id %>" onclick="scheduleTransactionsForm(<%= schedule.id %>);"></i>
+    <% if schedule.is_active %>
+      <i class="fa fa-stop-circle clickable fa-lg" id="schedule-stop-button_<%= schedule.id %>" onclick="stopSchedule(<%= schedule.id %>, this);"></i>
+    <% else %>
+      <i class="fa fa-play-circle clickable fa-lg" id="schedule-activate-button_<%= schedule.id %>" onclick="activateSchedule(<%= schedule.id %>);"></i>
+    <% end %>
   </td>
 </tr>

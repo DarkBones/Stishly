@@ -88,7 +88,7 @@ class ApiSchedulesController < BaseApiController
 	end
 
 	def get_next_schedule_occurrences
-    schedule = Schedule.create_from_form(schedule_params, current_user)
+    schedule = Schedule.create_from_form(schedule_params, @user)
     
     occurrences = []
     if schedule.is_a?(ActiveRecord::Base)
@@ -109,6 +109,34 @@ class ApiSchedulesController < BaseApiController
     end
 
     render json: occurrences
+  end
+
+  def unpause
+  	schedule = @user.schedules.find(params[:schedule])
+  	render json: "not found", status: :not_found and return if schedule.nil?
+
+  	schedule.pause_until = nil
+  	schedule.pause_until_utc = nil
+
+  	schedule.save
+  end
+  
+  def stop
+  	schedule = @user.schedules.find(params[:schedule])
+  	render json: "not found", status: :not_found and return if schedule.nil?
+
+  	schedule.is_active = false
+  	
+  	schedule.save
+  end
+
+  def activate
+  	schedule = @user.schedules.find(params[:schedule])
+  	render json: "not found", status: :not_found and return if schedule.nil?
+
+  	schedule.is_active = true
+
+  	schedule.save
   end
 
 private

@@ -1,0 +1,68 @@
+<%
+	if schedule.is_active
+		if schedule.pause_until.nil?
+			type = "active"
+		else
+			type = "paused"
+		end
+	else
+		type = "inactive"
+	end
+%>
+
+var timeNum = <%= schedule.time_num %>;
+var next_occurrence = 0;
+var insert = "" // whether to insert at the beginning, middle or end of the table
+var $insertTarget = $("table#schedules_<%= type %>") // the target for the insertion
+
+// find where in the table to insert the schedule
+$("table#schedules_<%= type %> tr").each(function(){
+	next_occurrence = parseInt($(this).attr("next_occurrence"));
+
+	// if the next occurrence of the row is higher than the new schedule's next occurrence, insert the new schedule before it
+	if (next_occurrence >= timeNum) {
+		insert = "before";
+		$insertTarget = $(this);
+		return false;
+	}
+});
+
+// if the end of the table is reached and no greater timenum has been found, insert at the end
+if (insert.length === 0) {
+	insert = "append";
+}
+
+// check if there is an active schedules table
+if($("table#schedules_<%= type %>").length === 0) {
+	$.ajax({
+		type: "GET",
+		dataType: "html",
+		url: "api/v1/render/schedules_table/<%= type %>",
+		success(data) {
+			$("#<%= type %>-schedules p").remove();
+			$("#<%= type %>-schedules").append(data);
+			$insertTarget = $("table#schedules_<%= type %>");
+			insertSchedule();
+		}
+	});
+} else {
+	insertSchedule();
+}
+
+function insertSchedule() {
+	$.ajax({
+  	type: "GET",
+  	dataType: "html",
+  	url: "api/v1/render/schedule/" + <%= schedule.id %> + "/table_row",
+  	success(data) {
+  		if (insert == "before") {
+  			$(data).insertBefore("#" + $insertTarget.attr("id"));
+  		} else {
+  			$insertTarget.append(data);
+  		}
+
+  		$("#schedule_" + "<%= schedule.id %>").hide().fadeIn(500);;
+
+  	}
+  });
+}

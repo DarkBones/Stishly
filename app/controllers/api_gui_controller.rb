@@ -75,12 +75,19 @@ class ApiGuiController < BaseApiBrowserController
       render partial: 'schedules/schedules_table', :locals => {:active => true}
     elsif params[:type] == "paused"
       render partial: 'schedules/schedules_table', :locals => {:active => true, :paused => true}
+    elsif params[:type] == "inactive"
+      render partial: 'schedules/schedules_table', :locals => {:active => false}
     end
   end
 
   def render_schedule_table_row
     schedule = current_user.schedules.find(params[:id]).decorate
     render partial: "schedules/schedule", :locals => {:schedule => schedule}
+  end
+
+  def swap_schedules_table
+    schedule = current_user.schedules.find(params[:schedule]).decorate
+    render partial: "schedules/swap_table", :locals => {:schedule => schedule, :from => params[:from]}
   end
 
 private

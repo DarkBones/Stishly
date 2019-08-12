@@ -146,6 +146,15 @@ Rails.application.routes.draw do
               get '/', to: 'api_schedules#next_occurrences'
             end
           end
+          scope '/unpause' do
+            patch '/', to: 'api_schedules#unpause'
+          end
+          scope '/stop' do
+            patch '/', to: 'api_schedules#stop'
+          end
+          scope '/activate' do
+            patch '/', to: 'api_schedules#activate'
+          end
         end
       end
       scope '/users' do
@@ -221,6 +230,11 @@ Rails.application.routes.draw do
         scope '/schedules_table' do
           scope '/:type' do
             get '/', to: 'api_gui#render_schedules_table'
+          end
+        end
+        scope '/swap_schedules_table' do # removes a schedule from a table and puts it in another table
+          scope '/:schedule/:from' do
+            get '/', to: 'api_gui#swap_schedules_table'
           end
         end
         scope '/schedule' do

@@ -49,3 +49,36 @@ function schedulePauseForm(schId) {
     }
   });
 }
+
+function unpauseSchedule(scheduleId) {
+  $.ajax({
+    type: "PATCH",
+    url: "/api/v1/schedules/" + scheduleId.toString() + "/unpause",
+    success(data) {
+      $.getScript( "api/v1/render/swap_schedules_table/" + scheduleId.toString() + "/paused");
+    }
+  });
+}
+
+function stopSchedule(scheduleId, obj) {
+  var from;
+  from = $(obj).parents("table").attr("id").split("_")[1];
+  
+  $.ajax({
+    type: "PATCH",
+    url: "/api/v1/schedules/" + scheduleId.toString() + "/stop",
+    success(data) {
+      $.getScript("api/v1/render/swap_schedules_table/" + scheduleId.toString() + "/" + from);
+    }
+  });
+}
+
+function activateSchedule(scheduleId) {
+  $.ajax({
+    type: "PATCH",
+    url: "/api/v1/schedules/" + scheduleId.toString() + "/activate",
+    success(data) {
+      $.getScript("api/v1/render/swap_schedules_table/" + scheduleId.toString() + "/inactive");
+    }
+  })
+}
