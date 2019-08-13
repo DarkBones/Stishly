@@ -40,7 +40,9 @@
         <% if user_signed_in? %>
           <%= render "card_forms/new_account_form" %>
           <%= render "card_forms/new_transaction_form" %>
-          <%= render 'layouts/left_menu', locals: {active_account: @active_account} %>
+          <div id="page-left-menu">
+            <%= render 'layouts/left_menu', locals: {active_account: @active_account} %>
+          </div>
         <% end %>
         <div id="content" class="<%= "in" if !user_signed_in? || @hide_sidebar %>">
           <%= yield %>

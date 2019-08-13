@@ -1,3 +1,11 @@
+<%
+unless defined?(locals)
+  locals = {
+    active_account: -1
+  }
+end
+%>
+
 <% unless @hide_sidebar %>
   <div id="sidebar" class="position-fixed collapse width show bg-light in" aria-expanded="true">
 

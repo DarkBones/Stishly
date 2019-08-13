@@ -25,7 +25,11 @@
 </div>
 
 <script>
-  function editUpcomingTransactionOccurrence(transactionId, scheduleId, schedulePeriod, scheduledTransactionId) {
+  var originalTId; // the id of the transaction occurrence to be edited
+
+  function editUpcomingTransactionOccurrence(transactionId, scheduleId, schedulePeriod, scheduledTransactionId, tId) {
+    originalTId = tId;
+
     $("#edit_upcoming_transaction_form_fields").html("");
     $("#edit_upcoming_transaction_form #transaction_name").text("");
     $.ajax({
@@ -53,6 +57,8 @@
   }
 
   function editUpcomingTransactionSeries(transactionId) {
+    originalTId = transactionId;
+
     $("#edit_upcoming_transaction_form_fields").html("");
     $("#edit_upcoming_transaction_form #transaction_name").text("");
     $.ajax({
@@ -80,12 +86,28 @@
   }
 
   function cancelUpcomingTransaction(transactionId, scheduleId, schedulePeriod, tId) {
+    originalTId = tId;
+
     $.ajax({
       type: "PUT",
       url: "/api/v1/transactions/" + transactionId.toString() + "/cancel_upcoming_occurrence/" + scheduleId.toString() + "/" + schedulePeriod.toString(),
       success(data) {
         triggerNotice("Transaction successfully cancelled", false);
-        $("#transaction_" + tId.toString()).addClass("bg-danger");
+        $("#transaction_" + tId.toString()).addClass("upcoming-cancelled");
+        
+        $("#transaction_" + tId.toString() + " #upcoming-dropdown").html("");
+        $.ajax({
+          type: "GET",
+          dataType: "html",
+          url: "api/v1/render/upcoming_transaction/" + transactionId.toString() + "/dropdown",
+          success(data) {
+            console.log(data);
+            $("#transaction_" + tId.toString() + " #upcoming-dropdown").html(data);
+          },
+          error() {
+            location.reload();
+          }
+        });
       },
       error(e) {
         triggerNotice("Unable to cancel transaction", true);
@@ -94,12 +116,28 @@
   }
 
   function uncancelUpcomingTransaction(transactionId, scheduleId, schedulePeriod, tId) {
+    originalTId = tId;
+
     $.ajax({
       type: "PUT",
       url: "/api/v1/transactions/" + transactionId.toString() + "/uncancel_upcoming_occurrence/" + scheduleId.toString() + "/" + schedulePeriod.toString(),
       success(data) {
         triggerNotice("Transaction no longer cancelled", false);
-        $("#transaction_" + tId.toString()).addClass("bg-danger");
+        $("#transaction_" + tId.toString()).removeClass("upcoming-cancelled");
+
+        $("#transaction_" + tId.toString() + " #upcoming-dropdown").html("");
+        $.ajax({
+          type: "GET",
+          dataType: "html",
+          url: "api/v1/render/upcoming_transaction/" + transactionId.toString() + "/dropdown",
+          success(data) {
+            console.log(data);
+            $("#transaction_" + tId.toString() + " #upcoming-dropdown").html(data);
+          },
+          error() {
+            location.reload();
+          }
+        });
       },
       error(e) {
         triggerNotice("Unable to uncancel transaction", true);
@@ -107,12 +145,22 @@
     });
   }
 
-  function triggerUpcomingTransaction(transactionId, scheduleId, schedulePeriod) {
+  function triggerUpcomingTransaction(transactionId, scheduleId, schedulePeriod, tId) {
     $.ajax({
       type: "PUT",
       url: "/api/v1/transactions/" + transactionId.toString() + "/trigger_upcoming_occurrence/" + scheduleId.toString() + "/" + schedulePeriod.toString(),
       success(data) {
         triggerNotice("Transaction successfully triggered", false);
+        $("#transaction_" + tId.toString()).fadeOut(500);
+
+        $.ajax({
+          type: "GET",
+          dataType: "html",
+          url: "/api/v1/render/left_menu",
+          success(data) {
+            $("#page-left-menu").html(data);
+          }
+        });
       },
       error(e) {
         triggerNotice("Unable to trigger transaction", true);

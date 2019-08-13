@@ -74,8 +74,9 @@ class TransactionsController < ApplicationController
     transaction = current_user.transactions.find(params[:id])
 
     @transaction = Transaction.update_upcoming_occurrence(transaction_params, current_user, transaction)
+    @transaction = Transaction.find_main_transaction(@transaction)
     
-    redirect_back fallback_location: root_path
+    #redirect_back fallback_location: root_path
   end
 
 private

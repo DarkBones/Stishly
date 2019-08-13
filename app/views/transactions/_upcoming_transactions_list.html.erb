@@ -5,37 +5,26 @@
   schedule = transaction.schedule
 %>
 
-<tr class="<%= 'bg-danger' if transaction.is_cancelled %>" id="transaction_<%= transaction_id %>">
+<tr class="<%= 'upcoming-cancelled' if transaction.is_cancelled %>" id="transaction_<%= transaction_id %>">
 	<td><!-- date -->
 		<%= User.format_date(transaction.local_datetime) %>
 	</td>
 	<td><!-- schedule -->
-		<%= transaction.schedule.name %>
+		<%= schedule.name %>
 	</td>
-	<td><!-- description -->
+	<td id="upcoming-description"><!-- description -->
 		<%= transaction.description %>
 	</td>
-	<td><!-- amount -->
+	<td id="upcoming-amount"><!-- amount -->
 		<%= balance(transaction.amount, transaction.currency) %>
 	</td>
 	<td>
 		<div class="dropdown show">
-			<a href="#" role="button" id="contextMenuLink_<%= transaction_id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<i class="fa fa-ellipsis-v clickable fa-lg"></i>
-			</a>
-
-			<div class="dropdown-menu dropdown-menu-right dropshadow-light" aria-labelledby="contextMenuLink_<%= transaction_id %>" style="width: 175px;">
-				<ul class="list-unstyled">
-					<li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#edit_upcoming_transaction_form" onclick="editUpcomingTransactionOccurrence(<%= transaction.id %>, <%= transaction.schedule.id %>, <%= transaction.schedule_period_id %>, <%= scheduled_transaction_id %>);">Edit occurrence</a></li>
-					<li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#edit_upcoming_transaction_form" onclick="editUpcomingTransactionSeries(<%= transaction.id %>);">Edit series</a></li>
-					<% unless transaction.is_cancelled %>
-						<li class="nav-item"><a href="#" class="nav-link" onclick="cancelUpcomingTransaction(<%= transaction.id %>, <%= transaction.schedule.id %>, <%= transaction.schedule_period_id %>, <%= transaction_id %>)">Cancel occurrence</a></li>
-					<% else %>
-						<li class="nav-item"><a href="#" class="nav-link" onclick="uncancelUpcomingTransaction(<%= transaction.id %>, <%= transaction.schedule.id %>, <%= transaction.schedule_period_id %>)">Uncancel occurrence</a></li>
-					<% end %>
-					<li class="nav-item"><a href="#" class="nav-link" onclick="triggerUpcomingTransaction(<%= transaction.id %>, <%= transaction.schedule.id %>, <%= transaction.schedule_period_id %>)">Trigger now</a></li>
-				</ul>
+			
+			<div id="upcoming-dropdown">
+				<%= render partial: "transactions/upcoming_transaction_dropdown", :locals => {:transaction_id => transaction_id, :transaction => transaction, :scheduled_transaction_id => scheduled_transaction_id, :schedule => schedule} %>
 			</div>
+
 		</div>
 	</td>
 </tr>

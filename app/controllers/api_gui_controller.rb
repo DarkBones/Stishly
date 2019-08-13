@@ -90,6 +90,26 @@ class ApiGuiController < BaseApiBrowserController
     render partial: "schedules/swap_table", :locals => {:schedule => schedule, :from => params[:from]}
   end
 
+  def render_upcoming_transaction_dropdown
+    transaction = current_user.transactions.find(params[:id]).decorate
+    schedule = transaction.schedule
+    transaction_id = schedule.id.to_s + transaction.id.to_s + transaction.schedule_period_id.to_s
+
+    scheduled_transaction_id = transaction.id
+    scheduled_transaction_id = transaction.scheduled_transaction_id unless transaction.scheduled_transaction_id.nil?
+
+    render partial: "transactions/upcoming_transaction_dropdown", :locals => {
+      :transaction_id => transaction_id, 
+      :transaction => transaction, 
+      :scheduled_transaction_id => scheduled_transaction_id, 
+      :schedule => schedule}
+
+  end
+
+  def render_left_menu
+    render partial: 'layouts/left_menu', :locals => {active_account: 0}
+  end
+
 private
 	
 	def display_balance_params

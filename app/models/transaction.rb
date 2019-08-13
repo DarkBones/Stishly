@@ -186,6 +186,7 @@ class Transaction < ApplicationRecord
     scheduled_transaction_id ||= transaction.id
 
     transactions = CreateScheduledTransactions.new(transaction, current_user, scheduled_transaction_id, schedule, false, current_user.timezone, schedule_period_id).perform
+    return transactions
   end
 
   def self.create_scheduled_transactions(transaction, current_user)

@@ -1,0 +1,33 @@
+$("[data-dismiss=modal]").trigger({ type: "click" });
+
+<% new_transaction_id = @transaction.schedule.id.to_s + @transaction.id.to_s + @transaction.schedule_period_id.to_s %>
+
+$("#transaction_" + originalTId.toString() + " #upcoming-description").text("<%= @transaction.description %>");
+$.ajax({
+	type: "GET",
+	dataType: "text",
+	url: "api/v1/currencies/<%= @transaction.currency %>/format/<%= @transaction.amount %>",
+	success(data) {
+		$("#transaction_" + originalTId.toString() + " #upcoming-amount").text(data);
+
+		$("#transaction_" + originalTId.toString() + " #upcoming-dropdown").html("");
+		$.ajax({
+			type: "GET",
+			dataType: "html",
+			url: "api/v1/render/upcoming_transaction/<%= @transaction.id %>/dropdown",
+			success(data) {
+				console.log(data);
+				$("#transaction_" + originalTId.toString() + " #upcoming-dropdown").html(data);
+				
+				$("#transaction_" + originalTId.toString()).attr("id", "transaction_<%= new_transaction_id %>");
+			},
+			error() {
+				location.reload();
+			}
+		});
+
+	},
+	error() {
+		location.reload();
+	}
+});

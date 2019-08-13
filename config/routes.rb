@@ -222,9 +222,19 @@ Rails.application.routes.draw do
         end
       end
       scope '/render' do
+        scope '/left_menu' do
+          get '/', to: 'api_gui#render_left_menu'
+        end
         scope '/transaction' do
           scope '/:transaction' do
             get '/', to: 'api_gui#render_transaction'
+          end
+        end
+        scope '/upcoming_transaction' do
+          scope '/:id' do
+            scope '/dropdown' do
+              get '/', to: 'api_gui#render_upcoming_transaction_dropdown'
+            end
           end
         end
         scope '/transaction_date' do
