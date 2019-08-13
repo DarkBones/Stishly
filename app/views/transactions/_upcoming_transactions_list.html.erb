@@ -5,7 +5,7 @@
   schedule = transaction.schedule
 %>
 
-<tr class="<%= 'upcoming-cancelled' if transaction.is_cancelled %>" id="transaction_<%= transaction_id %>">
+<tr class="<%= 'upcoming-cancelled' if transaction.is_cancelled %>" id="transaction_<%= transaction_id %>" series-id="<%= transaction.id %>" schedule="<%= schedule.id %>" period="<%= transaction.schedule_period_id %>">
 	<td><!-- date -->
 		<%= User.format_date(transaction.local_datetime) %>
 	</td>
@@ -20,7 +20,7 @@
 	</td>
 	<td>
 		<div class="dropdown show">
-			
+
 			<div id="upcoming-dropdown">
 				<%= render partial: "transactions/upcoming_transaction_dropdown", :locals => {:transaction_id => transaction_id, :transaction => transaction, :scheduled_transaction_id => scheduled_transaction_id, :schedule => schedule} %>
 			</div>

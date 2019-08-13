@@ -45,9 +45,14 @@ class TransactionsController < ApplicationController
     redirect_back fallback_location: root_path if transactions[0].is_scheduled
   end
 
+  def update_series
+    @transaction = Transaction.update(params[:id], transaction_params, current_user)
+    @transaction = Transaction.find_main_transaction(@transaction)
+    #redirect_back fallback_location: root_path
+  end
+
   def update
     @transactions = Transaction.update(params[:id], transaction_params, current_user)
-    redirect_back fallback_location: root_path
   end
 
   def queued

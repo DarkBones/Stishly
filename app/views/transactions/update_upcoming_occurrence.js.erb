@@ -16,7 +16,6 @@ $.ajax({
 			dataType: "html",
 			url: "api/v1/render/upcoming_transaction/<%= @transaction.id %>/dropdown",
 			success(data) {
-				console.log(data);
 				$("#transaction_" + originalTId.toString() + " #upcoming-dropdown").html(data);
 				
 				$("#transaction_" + originalTId.toString()).attr("id", "transaction_<%= new_transaction_id %>");

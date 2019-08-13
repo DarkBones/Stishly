@@ -31,7 +31,7 @@ Rails.application.routes.draw do
             patch '/', to: 'transactions#update_upcoming_occurrence', as: :edit_upcoming_transaction_occurrence
           end
           scope '/series' do
-            patch '/', to: 'transactions#update', as: :edit_upcoming_transaction_series
+            patch '/', to: 'transactions#update_series', as: :edit_upcoming_transaction_series
           end
         end
       end

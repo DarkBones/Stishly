@@ -1,0 +1,20 @@
+$("[data-dismiss=modal]").trigger({ type: "click" });
+
+$.ajax({
+	type: "GET",
+	dataType: "text",
+	url: "api/v1/currencies/<%= @transaction.currency %>/format/<%= @transaction.amount %>",
+	success(data) {
+		$("[series-id='" + originalTId + "']").each(function() {
+			$(this).attr("series-id", "<%= @transaction.id %>");
+			$(this).find("#upcoming-description").text("<%= @transaction.description %>");
+			$(this).find("#upcoming-amount").text(data);
+
+			newTId = $(this).attr("schedule").toString() + $(this).attr("series-id").toString() + $(this).attr("period").toString();
+			$(this).attr("id", newTId);
+		});
+	},
+	error() {
+		location.reload();
+	}
+});
