@@ -20,7 +20,7 @@ class ApiTransactionsController < BaseApiController
     return unless @user.transactions.where(scheduled_transaction_id: params[:id], schedule_id: params[:schedule_id], schedule_period_id: params[:schedule_period_id], is_cancelled: true).take.nil?
 
     Transaction.cancel_upcoming_occurrence(@user, transaction, params[:schedule_id], params[:schedule_period_id])
-    redirect_back fallback_location: root_path
+    #redirect_back fallback_location: root_path
   end
 
   def uncancel_upcoming_occurrence
@@ -31,7 +31,7 @@ class ApiTransactionsController < BaseApiController
     return unless @user.transactions.where(scheduled_transaction_id: params[:id], schedule_id: params[:schedule_id], schedule_period_id: params[:schedule_period_id], is_cancelled: true).take.nil?
 
     Transaction.uncancel_upcoming_occurrence(transaction)
-    redirect_back fallback_location: root_path
+    #redirect_back fallback_location: root_path
   end
 
   def trigger_upcoming_occurrence
