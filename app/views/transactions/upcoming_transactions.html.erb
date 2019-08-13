@@ -27,7 +27,13 @@
 <script>
   var originalTId; // the id of the transaction occurrence to be edited
 
-  function editUpcomingTransactionOccurrence(transactionId, scheduleId, schedulePeriod, scheduledTransactionId, tId) {
+  function editUpcomingTransactionOccurrence(obj) {
+    var transactionId = $(obj).parents("tr").attr("series-id");
+    var scheduleId = $(obj).parents("tr").attr("schedule");
+    var schedulePeriod = $(obj).parents("tr").attr("period");
+    var tId = $(obj).parents("tr").attr("id").split("_")[1];
+    var scheduledTransactionId = $(obj).parents("tr").attr("scheduled-transaction")
+    
     originalTId = tId;
 
     $("#edit_upcoming_transaction_form_fields").html("");
@@ -56,7 +62,9 @@
     });
   }
 
-  function editUpcomingTransactionSeries(transactionId) {
+  function editUpcomingTransactionSeries(obj) {
+    var transactionId = $(obj).parents("tr").attr("series-id");
+
     originalTId = transactionId;
 
     $("#edit_upcoming_transaction_form_fields").html("");
@@ -85,7 +93,12 @@
     });
   }
 
-  function cancelUpcomingTransaction(transactionId, scheduleId, schedulePeriod, tId) {
+  function cancelUpcomingTransaction(obj) {
+    var transactionId = $(obj).parents("tr").attr("series-id");
+    var scheduleId = $(obj).parents("tr").attr("schedule");
+    var schedulePeriod = $(obj).parents("tr").attr("period");
+    var tId = $(obj).parents("tr").attr("id").split("_")[1];
+
     originalTId = tId;
 
     $.ajax({
@@ -115,7 +128,12 @@
     });
   }
 
-  function uncancelUpcomingTransaction(transactionId, scheduleId, schedulePeriod, tId) {
+  function uncancelUpcomingTransaction(obj) {
+    var transactionId = $(obj).parents("tr").attr("series-id");
+    var scheduleId = $(obj).parents("tr").attr("schedule");
+    var schedulePeriod = $(obj).parents("tr").attr("period");
+    var tId = $(obj).parents("tr").attr("id").split("_")[1];
+
     originalTId = tId;
 
     $.ajax({
@@ -145,7 +163,12 @@
     });
   }
 
-  function triggerUpcomingTransaction(transactionId, scheduleId, schedulePeriod, tId) {
+  function triggerUpcomingTransaction(obj) {
+    var transactionId = $(obj).parents("tr").attr("series-id");
+    var scheduleId = $(obj).parents("tr").attr("schedule");
+    var schedulePeriod = $(obj).parents("tr").attr("period");
+    var tId = $(obj).parents("tr").attr("id").split("_")[1];
+
     $.ajax({
       type: "PUT",
       url: "/api/v1/transactions/" + transactionId.toString() + "/trigger_upcoming_occurrence/" + scheduleId.toString() + "/" + schedulePeriod.toString(),

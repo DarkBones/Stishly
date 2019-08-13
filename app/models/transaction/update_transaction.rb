@@ -13,7 +13,8 @@ class Transaction
       transactions = create_transaction
       update_scheduled_transaction_ids(transactions)
 
-      destroy_original(@transaction, @current_user)
+      #destroy_original(@transaction, @current_user)
+      Transaction.destroy(@transaction)
 
       return transactions
     end
@@ -53,6 +54,8 @@ private
       new_transactions.each do |t|
         transfer_transactions.push(t) if t.parent_id.nil?
       end
+
+      
 
       if transfer_transactions.length == 2
         transfer_transactions[0].transfer_transaction_id = transfer_transactions[1].id

@@ -18,6 +18,7 @@ $.ajax({
 			success(data) {
 				$("#transaction_" + originalTId.toString() + " #upcoming-dropdown").html(data);
 				
+				$("#transaction_" + originalTId.toString()).attr("series-id", "<%= @transaction.id %>");
 				$("#transaction_" + originalTId.toString()).attr("id", "transaction_<%= new_transaction_id %>");
 			},
 			error() {

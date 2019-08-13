@@ -136,10 +136,20 @@ class Transaction < ApplicationRecord
     transactions = SaveTransactions.new(transactions, current_user, false).perform
 
     unless transaction.scheduled_transaction_id.nil?
-      transaction.destroy
+      self.destroy(transaction)
     end
 
     return transactions
+  end
+
+  def self.destroy(transaction)
+    transfer_transaction = transaction.transfer_transaction
+
+    transaction.children.destroy_all
+    transfer_transaction.children.destroy_all unless transfer_transaction.nil?
+
+    transaction.destroy
+    transfer_transaction.destroy unless transfer_transaction.nil?
   end
 
   # takes a transaction and returns its main transaction (ie the parent and, if transfer, the outgoing one)
