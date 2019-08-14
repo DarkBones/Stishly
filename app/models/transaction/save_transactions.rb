@@ -80,6 +80,7 @@ private
       t.schedule_id = transaction[:schedule_id]
       t.schedule_period_id = transaction[:schedule_period_id]
       t.scheduled_transaction_id = transaction[:scheduled_transaction_id]
+      t.scheduled_date = transaction[:scheduled_date]
 
       t.save!
 

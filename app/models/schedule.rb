@@ -138,7 +138,13 @@ class Schedule < ApplicationRecord
   end
 
   def self.run_schedules(datetime=nil, schedules=nil)
-    return RunSchedules.new(datetime, schedules).perform
+    transactions = RunSchedules.new(datetime, schedules).perform
+    transactions += self.run_scheduled_transactions
+    return transactions
+  end
+
+  def self.run_scheduled_transactions(transactions=nil)
+    return RunScheduledTransactions.new(transactions).perform
   end
 
   def self.create_income(current_user, params)

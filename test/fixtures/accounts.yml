@@ -346,3 +346,12 @@ update_transactions_two: {
   currency: EUR,
   position: 0
 }
+
+future_transactions_one: {
+  id: 1901,
+  balance: 0,
+  user_id: 19,
+  name: One,
+  currency: EUR,
+  position: 0
+}

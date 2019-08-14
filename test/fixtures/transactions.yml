@@ -1685,3 +1685,34 @@ update_transaction_multiple_expense_transfer_in_child4: {
   local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London"
 }
+
+future_transaction_future: {
+  id: 1901,
+  user_id: 19,
+  description: future,
+  account_id: 1901,
+  amount: -1000,
+  direction: -1,
+  account_currency_amount: -1000,
+  user_currency_amount: -1000,
+  currency: EUR,
+  local_datetime: "<%= 1.week.from_now %>",
+  timezone: "Europe/London",
+  is_scheduled: true,
+  scheduled_date: "<%= 1.week.from_now %>"
+}
+
+future_transaction_past: {
+  id: 1902,
+  user_id: 19,
+  description: past,
+  account_id: 1901,
+  amount: -1000,
+  direction: -1,
+  account_currency_amount: -1000,
+  user_currency_amount: -1000,
+  currency: EUR,
+  local_datetime: "<%= 1.week.ago %>",
+  timezone: "Europe/London",
+  is_scheduled: false
+}

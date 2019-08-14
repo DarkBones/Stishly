@@ -7,6 +7,7 @@ class Schedule
       schedules ||= Schedule.where("next_occurrence_utc <= ?", @datetime)
 
       @schedules = schedules
+      
     end
 
     def perform

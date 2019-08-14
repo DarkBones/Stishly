@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_084818) do
+ActiveRecord::Schema.define(version: 2019_08_14_160221) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -193,6 +193,7 @@ ActiveRecord::Schema.define(version: 2019_08_12_084818) do
     t.boolean "is_queued", default: false
     t.integer "schedule_period_id"
     t.boolean "is_cancelled", default: false
+    t.date "scheduled_date"
     t.index ["account_id"], name: "index_transactions_on_account_id"
     t.index ["category_id"], name: "index_transactions_on_category_id"
     t.index ["parent_id"], name: "index_transactions_on_parent_id"

@@ -27,6 +27,8 @@ private
       user_rate = get_user_rate(currency, @current_user)
       queue_scheduled = 0
       queue_scheduled = params[:schedule_type].to_i unless params[:schedule_type].nil?
+      local_datetime = parse_datetime(params[:date], params[:time])
+      is_scheduled = get_is_scheduled(params, params[:timezone], local_datetime)
 
       current_transaction = {
         direction: get_direction(params, transferred),
@@ -39,12 +41,13 @@ private
         user_rate: user_rate,
         timezone: validate_timezone(params[:timezone]),
         category_id: params[:category_id],
-        local_datetime: parse_datetime(params[:date], params[:time]),
+        local_datetime: local_datetime,
         schedule_id: params[:schedule_id],
         schedule_period_id: params[:schedule_period_id],
-        is_scheduled: !params[:schedule_id].nil?,
+        is_scheduled: is_scheduled,
         scheduled_transaction_id: params[:scheduled_transaction_id],
-        queue_scheduled: queue_scheduled
+        queue_scheduled: queue_scheduled,
+        scheduled_date: get_scheduled_date(is_scheduled, params[:timezone], local_datetime)
       }
 
       transactions.push(current_transaction)
@@ -78,6 +81,25 @@ private
       end
 
       return transactions
+
+    end
+
+    def get_scheduled_date(is_scheduled, timezone, local_datetime)
+      return unless is_scheduled
+
+      tz = TZInfo::Timezone.get(timezone)
+      date_utc = tz.local_to_utc(local_datetime.to_datetime).to_date
+
+      return date_utc
+    end
+
+    def get_is_scheduled(params, timezone, local_datetime)
+      return true unless params[:schedule_id].nil?
+
+      tz = TZInfo::Timezone.get(timezone)
+      date_utc = tz.local_to_utc(local_datetime.to_datetime).to_date
+
+      return Time.now.utc < date_utc
 
     end
 
@@ -209,7 +231,8 @@ private
         is_scheduled: bt[:is_scheduled],
         queue_scheduled: bt[:queue_scheduled],
         schedule_period_id: bt[:schedule_period_id],
-        scheduled_transaction_id: bt[:scheduled_transaction_id]
+        scheduled_transaction_id: bt[:scheduled_transaction_id],
+        scheduled_date: bt[:scheduled_date]
       }
     end
 
