@@ -127,17 +127,20 @@ class Transaction < ApplicationRecord
     end
   }
 
-  def self.update(transaction_id, params, current_user)
-    @transactions = UpdateTransaction.new(transaction_id, params, current_user).perform
+  def self.update(transaction, params, current_user)
+    if transaction.class == String || transaction.class == Integer
+      transaction = current_user.transactions.find(transaction)
+    end
+
+    return if transaction.nil?
+
+    transactions = UpdateTransaction.new(transaction, params, current_user).perform
+    return transactions
   end
 
   def self.update_upcoming_occurrence(params, current_user, transaction)
-    transactions = CreateFromForm.new(params, current_user).perform
-    transactions = SaveTransactions.new(transactions, current_user, false).perform
-
-    unless transaction.scheduled_transaction_id.nil?
-      self.destroy(transaction)
-    end
+    
+    transactions = self.update(current_user.transactions.find(params[:id]), params, current_user)
 
     return transactions
   end
@@ -158,7 +161,7 @@ class Transaction < ApplicationRecord
       transaction = transaction[0]
     end
 
-    transaction = transaction.parent unless transaction.parent_id.nil?
+    transaction = Transaction.find(transaction.parent_id) unless transaction.parent_id.nil?
     
     unless transaction.transfer_transaction_id.nil?
       transaction = transaction.transfer_transaction if transaction.direction == 1
@@ -278,8 +281,10 @@ class Transaction < ApplicationRecord
     CreateFromString.new(params, current_user).perform
   end
 
-  def self.create(params, current_user)
+  def self.create(params, current_user, save: true)
     transactions = CreateFromForm.new(params, current_user).perform
+    return transactions unless save
+
     transactions = SaveTransactions.new(transactions, current_user).perform
 
     timezone = transactions[0].timezone if transactions.length > 0
@@ -290,7 +295,7 @@ class Transaction < ApplicationRecord
     end
 
     transactions.each do |t|
-      Account.add(current_user, t.account_id, t.account_currency_amount, t.local_datetime) if t.parent_id.nil? && !t.is_scheduled
+      Account.add(current_user, t.account, t.account_currency_amount, t.local_datetime) if t.parent_id.nil? && !t.is_scheduled
     end
   end
 
@@ -317,7 +322,7 @@ class Transaction < ApplicationRecord
     transaction.is_queued = false
     transaction.save!
 
-    Account.add(transaction.user, transaction.account.id, transaction.account_currency_amount, transaction.local_datetime)
+    Account.add(transaction.user, transaction.account, transaction.account_currency_amount, transaction.local_datetime)
   end
 
 private

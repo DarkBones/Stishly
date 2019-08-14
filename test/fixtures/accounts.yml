@@ -329,4 +329,20 @@ upcoming_transactions_run_three: {
   account_type: save
 }
 
+update_transactions_one: {
+  id: 1801,
+  balance: 0,
+  user_id: 18,
+  name: One,
+  currency: EUR,
+  position: 0
+}
 
+update_transactions_two: {
+  id: 1802,
+  balance: 0,
+  user_id: 18,
+  name: Two,
+  currency: EUR,
+  position: 0
+}

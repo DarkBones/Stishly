@@ -1,239 +1,144 @@
 class Transaction
   class UpdateTransaction
 
-    def initialize(transaction_id, params, current_user)
-      @current_user = current_user
-      @params = params
-      @transaction = current_user.transactions.find(transaction_id)
-    end
+  	def initialize(transaction, params, user)
+  		@transaction = transaction
+  		@params = params
+  		@user = user
+  	end
 
-    def perform
-      return if @transaction.nil?
+  	def perform
+  		# TODO: collect the old amount and the new amount and add the difference to the transaction account
+  		original_transaction = @transaction
+  		new_transaction = update_transactions(@transaction, @params, @user)
 
-      transactions = create_transaction
-      update_scheduled_transaction_ids(transactions)
+  		update_account_balances(original_transaction, new_transaction, @user)
 
-      #destroy_original(@transaction, @current_user)
-      Transaction.destroy(@transaction)
-
-      return transactions
-    end
+  		return new_transaction
+  	end
 
 private
 
-    def update_scheduled_transaction_ids(transactions)
-      transactions.each do |t|
-        if t.parent_id.nil?
-          if t.transfer_transaction_id.nil? || (!t.transfer_transaction_id.nil? && t.direction == -1)
-            scheduled_transactions = @current_user.transactions.where(scheduled_transaction_id: @transaction.id)
-            scheduled_transactions.each do |st|
-              st.scheduled_transaction_id = t.id
-              st.save
-            end
-            return
-          end
-        end
-      end
-    end
+		def update_account_balances(original_transaction, new_transaction, user)
+			update_account_balance(original_transaction, new_transaction, user)
+			update_account_balance(original_transaction.transfer_transaction, new_transaction.transfer_transaction, user)
+		end
 
-    def destroy_original(transaction, current_user)
-      transfer_transaction = current_user.sch_transactions.find(transaction.transfer_transaction_id) unless transaction.transfer_transaction_id.nil?
+		def update_account_balance(original_transaction, new_transaction, user)
+			unless original_transaction.nil?
+				Account.subtract(user, original_transaction.account, original_transaction.account_currency_amount, original_transaction.local_datetime) unless original_transaction.is_scheduled
+			end
 
-      transaction.children.destroy_all
-      transfer_transaction.children.destroy_all unless transfer_transaction.nil?
+			unless new_transaction.nil?
+				Account.add(user, new_transaction.account, new_transaction.account_currency_amount, new_transaction.local_datetime) unless new_transaction.is_scheduled
+			end
+		end
+	
+		def update_transactions(transaction, params, user)
+			# ensure the transaction is the main one (no child, outgoing if transfer)
+			transaction = Transaction.find_main_transaction(transaction)
 
-      transaction.destroy
-      transfer_transaction.destroy unless transfer_transaction.nil?
-    end
+			# destroy existing child transactions
+			destroy_children(transaction)
 
-    def create_transaction
-      new_transactions = make_transactions(@params)
+			# get the new parameters
+			transaction_params = Transaction.create(params, user, save: false)
 
-      # find transfer ids
-      transfer_transactions = []
-      new_transactions.each do |t|
-        transfer_transactions.push(t) if t.parent_id.nil?
-      end
+			# update the parent transaction(s)
+			transaction_params = prepare_transaction_params(transaction, transaction_params, user)
 
-      
+			# update the main transactions
+			transaction.update!(transaction_params[:main])
+			transaction = user.transactions.find(transaction.id)
+			transaction.transfer_transaction.update!(transaction_params[:transfer]) unless transaction.transfer_transaction.nil?
 
-      if transfer_transactions.length == 2
-        transfer_transactions[0].transfer_transaction_id = transfer_transactions[1].id
-        transfer_transactions[1].transfer_transaction_id = transfer_transactions[0].id
+			transaction_params[:children_main].each do |child|
+				create_child(transaction, child)
+			end
+			transaction_params[:children_transfer].each do |child|
+				create_child(transaction.transfer_transaction, child)
+			end
 
-        transfer_transactions[0].save
-        transfer_transactions[1].save
-      end
+			return user.transactions.find(transaction.id)
 
-      new_transactions.each do |nt|
-        @transaction.schedules.each do |sc|
-          if nt.parent_id.nil?
-            if nt.transfer_transaction_id.nil? || (!nt.transfer_transaction_id.nil? && nt.direction == -1)
-              nt.schedules << sc
-            end
-          end
-        end
-      end
+		end
 
-      return new_transactions
+		def create_child(transaction, params)
+			transaction.children.new(params)
+			transaction.save!
+		end
 
-    end
+		# destroy child transactions
+		def destroy_children(transaction)
+			transaction.children.destroy_all
+			transaction.transfer_transaction.children.destroy_all unless transaction.transfer_transaction.nil?
+		end
 
-    def make_transactions(params, parent_id=nil, transferred=false)
-      return [] if @params[:is_child] && parent_id.nil?
+		# prepare the transaction parameters for the update
+		def prepare_transaction_params(transaction, transaction_params, user)
 
-      transactions = []
+			# prepare transfer transactions
+			transfer_transaction = transaction.transfer_transaction
+			if transaction_params[0][:transfer_transaction_id].nil?
+				unless transaction.transfer_transaction.nil?
+					# if no transfer transaction is in the new transaction, but the original transaction had one, destroy it
+					transaction.transfer_transaction.destroy
+				end
+			else
+				transaction_params[1][:transfer_transaction_id] = transaction.id
+				transaction_params[1][:transfer_account_id] = transaction.account.id
 
-      transaction = @current_user.transactions.new
+				if transfer_transaction.nil?
+					# if the new transaction has a transfer transaction, but the original transaction doesn't, instantiate it
+					transfer_transaction = user.transactions.new(remove_fields(transaction_params[1]))
+					transfer_transaction.user_id = user.id
+					transfer_transaction.save!
+				end
+				transaction_params[0][:transfer_transaction_id] = transfer_transaction.id
+				transaction_params[0][:transfer_account_id] = transfer_transaction.account.id
 
-      account = Account.get_from_name(params[:account], @current_user)
-      from_account = Account.get_from_name(params[:from_account], @current_user)
-      to_account = Account.get_from_name(params[:to_account], @current_user)
+				children_transfer = transaction_params[1][:children]
+			end
 
-      transaction.user_id = @current_user.id
-      transaction.account_id = get_account_id(params[:type], account, from_account, to_account, transferred)
-      transaction.direction = get_direction(params[:type], params[:amount].to_f, transferred)
-      transaction.amount = get_amount(params[:currency], params[:amount].to_f, params[:transactions], params[:multiple]) * transaction.direction
-      transaction.description = params[:description]
-      transaction.currency = get_currency(params[:type], params[:currency], from_account)
-      transaction.category_id = params[:category_id]
-      transaction.transfer_account_id = get_transfer_account_id(params[:type], from_account, to_account, transferred)
-      transaction.is_scheduled = @transaction.is_scheduled
-      transaction.parent_id = parent_id
-      transaction.local_datetime = get_local_datetime(params[:date], params[:time]) unless @transaction.is_scheduled
-      transaction.timezone = @transaction.timezone
-      transaction.account_currency_amount = get_account_currency_amount(params[:amount].to_f, transaction.account.currency, params[:currency], params[:rate].to_f) unless @transaction.is_scheduled
-      transaction.user_currency_amount = get_user_currency_amount(params[:amount].to_f, params[:currency], @current_user.currency) unless @transaction.is_scheduled
+			children_transfer ||= []
 
-      transaction.save
-      parent_id = transaction.id
+			children_main = transaction_params[0][:children]
+			children_main ||= []
 
-      if params[:type] == "transfer" && !transferred
-        transactions += make_transactions(params, nil, true)
-      end
+			transaction_params = remove_fields(transaction_params)
+			children_main = remove_fields(children_main)
+			children_transfer = remove_fields(children_transfer)
 
-      if params[:multiple] == "multiple"
-        transactions_str = params[:transactions].split("\n")
-        transactions_str.each do |ct|
-          ct.strip!
-          ct = ct.split
-          description = ""
-          amount = 0.0
-          if ct[-1].respond_to?("to_f")
-            description = ct[0..-2].join(" ")
-            amount = ct[-1].to_f
-          else
-            description = ct.join(" ")
-          end
+			return {
+				main: transaction_params[0],
+				transfer: transaction_params[1],
+				children_main: children_main,
+				children_transfer: children_transfer
+			}
+		end
 
-          child_params = params.dup
+		# remove fields that should not be updated
+		def remove_fields(params)
+			return if params.nil?
+			if params.class == Array
+				params.each do |p|
+					p = remove_fields_from_hash(p)
+				end
+			else
+				params = remove_fields_from_hash(params)
+			end
 
-          child_params[:description] = description
-          child_params[:amount] = amount
-          child_params[:parent_id] = parent_id
-          child_params[:multiple] = "single"
-          child_params[:is_child] = true
+			return params
+		end
 
-          transactions += make_transactions(child_params, parent_id, transferred)
+		def remove_fields_from_hash(params)
+			params.delete(:children)
+			params.delete(:schedule_id)
+			params.delete(:schedule_period_id)
+			params.delete(:scheduled_transaction_id)
+			return params
+		end
 
-        end
-      end
-
-      transactions.push(transaction)
-      return transactions
-
-    end
-
-    def get_user_currency_amount(amount, currency_transaction, currency_user)
-      currency_transaction = Money::Currency.new(currency_transaction)
-      currency_user = Money::Currency.new(currency_user)
-
-      amount *= currency_transaction.subunit_to_unit
-      amount = CurrencyRate.convert(amount, currency_transaction, currency_user)
-      return amount
-    end
-
-    def get_account_currency_amount(amount, currency_account, currency_transaction, rate)
-
-      currency_account = Money::Currency.new(currency_account)
-      currency_transaction = Money::Currency.new(currency_transaction)
-
-      amount *= currency_transaction.subunit_to_unit
-      amount = CurrencyRate.convert(amount, currency_transaction, currency_account, rate)
-
-      return amount
-    end
-
-    def get_local_datetime(date_str, time_str)
-      return if @transaction.is_scheduled || date_str.nil? || time_str.nil?
-
-      # get the time in seconds if there is a local_datetime stored
-      seconds = @transaction.local_datetime.strftime("%S")
-      datetime_str = "#{date_str} #{time_str}:#{seconds}"
-
-      return Date.parse(datetime_str)
-    end
-
-    def get_transfer_account_id(type, from_account, to_account, transferred)
-      return nil if type != "transfer"
-      return from_account.id if transferred
-      return to_account.id
-    end
-
-    def get_currency(type, currency, from_account)
-      if type != "transfer"
-        return currency
-      else
-        return from_account.currency
-      end
-    end
-
-    def get_amount(currency, amount, transactions, multiple)
-      currency = Money::Currency.new(currency)
-      if multiple == "multiple"
-        return get_multiple_total(transactions) * currency.subunit_to_unit
-      else
-        return amount * currency.subunit_to_unit
-      end
-    end
-
-    def get_multiple_total(transactions)
-      total = 0
-      transactions = transactions.split("\n")
-      transactions.each do |t|
-        t.strip!
-        amount_str = t.split[-1]
-        if amount_str.respond_to?("to_f")
-          total += amount_str.to_f
-        end
-      end
-
-      return total
-    end
-
-    def get_direction(type, amount, transferred)
-      direction = -1
-      direciton = 1 if type == "income"
-      direction *= -1 if transferred
-
-      amount *= direction
-
-      if amount >= 0
-        return 1
-      else
-        return -1
-      end
-    end
-
-    def get_account_id(type, account, from_account, to_account, transferred)
-      case type
-      when "transfer"
-        return from_account.id unless transferred
-        return to_account.id
-      else
-        return account.id
-      end
-    end
 
   end
 end

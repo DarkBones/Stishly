@@ -220,7 +220,7 @@ class Account < ApplicationRecord
     return account
   end
 
-  def self.add(current_user, id, amount, local_datetime)
+  def self.add_OLD(current_user, id, amount, local_datetime)
     return if amount.nil?
     
     account = current_user.accounts.find_by_id(id)
@@ -235,6 +235,40 @@ class Account < ApplicationRecord
       balance: account.balance
     })
     history.save
+  end
+
+  # TODO: Optimize add and subtract into a single function
+  def self.add(current_user, account, amount, local_datetime)
+    return if amount.nil?
+
+    balance = account.balance
+    balance += amount
+
+    Account.update(account.id, :balance => balance)
+
+    history = account.account_histories.create({
+      local_datetime: local_datetime,
+      balance: account.balance
+    })
+
+    account.account_histories.where("local_datetime >= ? AND id != ?", local_datetime, history.id).each do |history|
+      history.balance = history.balance + amount
+      history.save
+    end
+
+  end
+
+  def self.subtract(current_user, account, amount, local_datetime)
+    return if amount.nil?
+
+    balance = account.balance
+    balance -= amount
+    Account.update(account.id, :balance => balance)
+
+    account.account_histories.where("local_datetime >= ?", local_datetime).each do |history|
+      history.balance = history.balance - amount
+      history.save
+    end
   end
 
   def self.record_history(current_user, id, local_datetime)

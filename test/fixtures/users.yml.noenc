@@ -319,3 +319,19 @@ upcoming_transactions_run: {
   finished_setup: true,
   email: upcoming@transactionsrun.com
 }
+
+update_transactions: {
+  id: 18,
+  first_name: Update,
+  last_name: Transactions,
+  email_bidx: <%= User.generate_email_bidx("update@transactions.nl").inspect %>,
+  country_code: 'IE',
+  country_id: 1,
+  subscription_tier_id: 2,
+  timezone: 'Europe/London',
+  encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
+  confirmed_at: '2018-11-14 19:54:40',
+  currency: EUR,
+  finished_setup: true,
+  email: update@transactions.nl
+}

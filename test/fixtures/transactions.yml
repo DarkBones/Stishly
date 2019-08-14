@@ -1457,3 +1457,231 @@ upcoming_transactions_run_3_ran_manually: {
   scheduled_transaction_id: 1703,
   is_cancelled: true
 }
+
+update_transaction_simple_expense: {
+  id: 11801,
+  user_id: 18,
+  description: Simple expense,
+  account_id: 1801,
+  amount: -1000,
+  direction: -1,
+  account_currency_amount: -1000,
+  user_currency_amount: -1000,
+  currency: EUR,
+  local_datetime: "<%= Time.now.utc %>",
+  timezone: "Europe/London"
+}
+
+update_transaction_multiple_expense: {
+  id: 11802,
+  user_id: 18,
+  description: Multi expense,
+  account_id: 1801,
+  amount: -1000,
+  direction: -1,
+  account_currency_amount: -1000,
+  user_currency_amount: -1000,
+  currency: EUR,
+  local_datetime: "<%= Time.now.utc %>",
+  timezone: "Europe/London"
+}
+
+update_transaction_multiple_expense_child1: {
+  id: 1180201,
+  parent_id: 11802,
+  user_id: 18,
+  description: Child one,
+  account_id: 1801,
+  amount: -100,
+  direction: -1,
+  account_currency_amount: -100,
+  user_currency_amount: -100,
+  currency: EUR,
+  local_datetime: "<%= Time.now.utc %>",
+  timezone: "Europe/London"
+}
+update_transaction_multiple_expense_child2: {
+  id: 1180202,
+  parent_id: 11802,
+  user_id: 18,
+  description: Child two,
+  account_id: 1801,
+  amount: -200,
+  direction: -1,
+  account_currency_amount: -200,
+  user_currency_amount: -200,
+  currency: EUR,
+  local_datetime: "<%= Time.now.utc %>",
+  timezone: "Europe/London"
+}
+update_transaction_multiple_expense_child3: {
+  id: 1180203,
+  parent_id: 11802,
+  user_id: 18,
+  description: Child three,
+  account_id: 1801,
+  amount: -300,
+  direction: -1,
+  account_currency_amount: -300,
+  user_currency_amount: -300,
+  currency: EUR,
+  local_datetime: "<%= Time.now.utc %>",
+  timezone: "Europe/London"
+}
+update_transaction_multiple_expense_child4: {
+  id: 1180204,
+  parent_id: 11802,
+  user_id: 18,
+  description: Child four,
+  account_id: 1801,
+  amount: -400,
+  direction: -1,
+  account_currency_amount: -400,
+  user_currency_amount: -400,
+  currency: EUR,
+  local_datetime: "<%= Time.now.utc %>",
+  timezone: "Europe/London"
+}
+
+update_transaction_multiple_expense_transfer_out: {
+  id: 11803,
+  user_id: 18,
+  description: Multi expense transfer,
+  account_id: 1801,
+  amount: -1000,
+  direction: -1,
+  account_currency_amount: -1000,
+  user_currency_amount: -1000,
+  currency: EUR,
+  local_datetime: "<%= Time.now.utc %>",
+  timezone: "Europe/London",
+  transfer_account_id: 1802,
+  transfer_transaction_id: 11804
+}
+update_transaction_multiple_expense_transfer_in: {
+  id: 11804,
+  user_id: 18,
+  description: Multi expense transfer,
+  account_id: 1802,
+  amount: 1000,
+  direction: 1,
+  account_currency_amount: 1000,
+  user_currency_amount: 1000,
+  currency: EUR,
+  local_datetime: "<%= Time.now.utc %>",
+  timezone: "Europe/London",
+  transfer_account_id: 1801,
+  transfer_transaction_id: 11803
+}
+update_transaction_multiple_expense_transfer_out_child1: {
+  id: 1180301,
+  parent_id: 11803,
+  user_id: 18,
+  description: Child one,
+  account_id: 1801,
+  amount: -100,
+  direction: -1,
+  account_currency_amount: -100,
+  user_currency_amount: -100,
+  currency: EUR,
+  local_datetime: "<%= Time.now.utc %>",
+  timezone: "Europe/London"
+}
+update_transaction_multiple_expense_transfer_out_child2: {
+  id: 1180302,
+  parent_id: 11803,
+  user_id: 18,
+  description: Child two,
+  account_id: 1801,
+  amount: -200,
+  direction: -1,
+  account_currency_amount: -200,
+  user_currency_amount: -200,
+  currency: EUR,
+  local_datetime: "<%= Time.now.utc %>",
+  timezone: "Europe/London"
+}
+update_transaction_multiple_expense_transfer_out_child3: {
+  id: 1180303,
+  parent_id: 11803,
+  user_id: 18,
+  description: Child three,
+  account_id: 1801,
+  amount: -300,
+  direction: -1,
+  account_currency_amount: -300,
+  user_currency_amount: -300,
+  currency: EUR,
+  local_datetime: "<%= Time.now.utc %>",
+  timezone: "Europe/London"
+}
+update_transaction_multiple_expense_transfer_out_child4: {
+  id: 1180304,
+  parent_id: 11803,
+  user_id: 18,
+  description: Child four,
+  account_id: 1801,
+  amount: -400,
+  direction: -1,
+  account_currency_amount: -400,
+  user_currency_amount: -400,
+  currency: EUR,
+  local_datetime: "<%= Time.now.utc %>",
+  timezone: "Europe/London"
+}
+update_transaction_multiple_expense_transfer_in_child1: {
+  id: 1180401,
+  parent_id: 11804,
+  user_id: 18,
+  description: Child one,
+  account_id: 1801,
+  amount: 100,
+  direction: 1,
+  account_currency_amount: 100,
+  user_currency_amount: 100,
+  currency: EUR,
+  local_datetime: "<%= Time.now.utc %>",
+  timezone: "Europe/London"
+}
+update_transaction_multiple_expense_transfer_in_child2: {
+  id: 1180402,
+  parent_id: 11804,
+  user_id: 18,
+  description: Child two,
+  account_id: 1801,
+  amount: 200,
+  direction: 1,
+  account_currency_amount: 200,
+  user_currency_amount: 200,
+  currency: EUR,
+  local_datetime: "<%= Time.now.utc %>",
+  timezone: "Europe/London"
+}
+update_transaction_multiple_expense_transfer_in_child3: {
+  id: 1180403,
+  parent_id: 11804,
+  user_id: 18,
+  description: Child three,
+  account_id: 1801,
+  amount: 300,
+  direction: 1,
+  account_currency_amount: 300,
+  user_currency_amount: 300,
+  currency: EUR,
+  local_datetime: "<%= Time.now.utc %>",
+  timezone: "Europe/London"
+}
+update_transaction_multiple_expense_transfer_in_child4: {
+  id: 1180404,
+  parent_id: 11804,
+  user_id: 18,
+  description: Child four,
+  account_id: 1801,
+  amount: 400,
+  direction: 1,
+  account_currency_amount: 400,
+  user_currency_amount: 400,
+  currency: EUR,
+  local_datetime: "<%= Time.now.utc %>",
+  timezone: "Europe/London"
+}
