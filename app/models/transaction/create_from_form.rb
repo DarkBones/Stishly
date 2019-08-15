@@ -86,6 +86,7 @@ private
 
     def get_scheduled_date(is_scheduled, timezone, local_datetime)
       return unless is_scheduled
+      return unless @params[:schedule_id].nil?
 
       tz = TZInfo::Timezone.get(timezone)
       date_utc = tz.local_to_utc(local_datetime.to_datetime).to_date
