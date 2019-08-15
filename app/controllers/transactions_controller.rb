@@ -15,7 +15,7 @@ class TransactionsController < ApplicationController
     @schedule = schedule
   end
 
-  def create_OLD
+  def create
     @params = params[:transaction]
     all_transactions = Transaction.create(transaction_params, current_user)
 
@@ -42,13 +42,11 @@ class TransactionsController < ApplicationController
     @update_day_total = transaction_details[:update_day_total]
     @total_amount = transaction_details[:total_amount].to_s
 
-    #redirect_back fallback_location: root_path if transactions[0].is_scheduled
   end
 
-  def create
-    #puts "request.formats: #{request.formats.to_yaml}"
-    #puts 1/0
-    @transactions = Transaction.first
+  def create_scheduled
+    @transaction = Transaction.create(transaction_params, current_user)
+    @transaction = Transaction.find_main_transaction(@transaction)
   end
 
   def update_series

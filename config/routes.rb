@@ -71,6 +71,14 @@ Rails.application.routes.draw do
       scope '/edit' do
         patch '/', to: 'schedules#edit', as: :schedule
       end
+      scope '/transactions' do
+        scope '/create' do
+          post '/', to: 'transactions#create_scheduled', as: :create_scheduled_transaction
+        end
+        scope '/edit' do
+          put '/:transaction_id', to: 'transactions#update'
+        end
+      end
     end
   end
 
