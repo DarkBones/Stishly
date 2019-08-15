@@ -28,10 +28,21 @@ class Schedule
 
       end
 
+      deactivate_ending_schedules
+
       return transactions
     end
 
 private
+
+    def deactivate_ending_schedules
+      schedules = Schedule.where("is_active = true AND end_date <= ?", @datetime)
+      schedules.each do |schedule|
+        schedule.next_occurrence = nil
+        schedule.is_active = false
+        schedule.save!
+      end
+    end
 
     def run_schedule(schedule)
       transactions = get_scheduled_transactions(schedule)

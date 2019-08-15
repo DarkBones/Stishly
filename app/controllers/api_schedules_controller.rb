@@ -135,6 +135,8 @@ class ApiSchedulesController < BaseApiController
   	render json: "not found", status: :not_found and return if schedule.nil?
 
   	schedule.is_active = true
+    schedule.end_date = nil
+    schedule.next_occurrence = Schedule.next_occurrence(schedule)
 
   	schedule.save
   end

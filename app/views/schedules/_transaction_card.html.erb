@@ -1,0 +1,31 @@
+<div class="card-header" id="heading<%= transaction.id %>">
+  <a class="btn btn-link collapsed col-12 clickable" data-toggle="collapse" data-target="#collapse<%= transaction.id %>" aria-expanded="true" aria-controls="collapse<%= transaction.id %>">
+    <span class="float-left">
+      <%= image_tag "categories/" + transaction.category.symbol + ".svg",
+        :style => "background-color: hsl(" + transaction.category.color + ");",
+        :class => "rounded-circle",
+        "height" => "30" %>
+      <%= transaction.description %>
+    </span>
+    <span class="float-right">
+      <%= balance(transaction.amount.to_f.abs, Money::Currency.new(transaction.currency), "cents") %>
+    </span>
+  </a>
+</div>
+
+<div id="collapse<%= transaction.id %>" class="collapse" aria-labelledby="heading<%= transaction.id %>" data-parent="#accordion">
+  <div class="card-body">
+
+    <div class="container" id="transaction_<%= transaction.id %>">
+      <%= form_for transaction, url: edit_transaction_path(transaction.id), :method => "put" do |f| %>
+
+        <%= render partial: "transactions/transaction_form_fields", :locals => {:transaction => transaction, :f => f, :base_only => true, :form_id_prefix => "schedule_", :form_id_suffix => "_" + transaction.id.to_s, :schedule_id => true } %>
+        
+        <div class="col-12 py-4">
+          <%= f.submit 'Save', :class => 'float-right btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>
