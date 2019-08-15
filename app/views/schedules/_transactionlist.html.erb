@@ -1,6 +1,6 @@
-<%#= render partial: "schedules/transaction", collection: transactions %>
+<%= render partial: "schedules/transaction", collection: transactions %>
 
-<div class="card">
+<div class="card" id="new_transaction_card">
 
   <div class="card-header" id="headingnewtransaction">
     <a class="btn btn-link collapsed col-12 clickable" data-toggle="collapse" data-target="#collapsenewtransaction" aria-expanded="true" aria-controls="collapsenewtransaction" id="new-scheduled-transaction" onclick="resetTransactionMenu('#new_schedule_transactionform');">
@@ -10,7 +10,7 @@
     </a>
   </div>
 
-  <div id="collapsenewtransaction" class="collapse" aria-labelledby="headingnewtransaction" data-parent="#accordion">
+  <div id="collapsenewtransaction" class="collapse card-scheduled-transaction" aria-labelledby="headingnewtransaction" data-parent="#accordion">
     <div class="card-body">
       <% transaction = Transaction.new.decorate %>
       <%= form_with(model: transaction, :html => { :id => "new_schedule_transactionform" }, url: create_scheduled_transaction_path(schedule_id)) do |f| %>

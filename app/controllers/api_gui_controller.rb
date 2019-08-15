@@ -110,6 +110,11 @@ class ApiGuiController < BaseApiBrowserController
     render partial: 'layouts/left_menu', :locals => {active_account: 0}
   end
 
+  def render_scheduled_transaction
+    transaction = current_user.transactions.find(params[:id]).decorate
+    render partial: 'schedules/transaction', :locals => {:transaction => transaction}
+  end
+
 private
 	
 	def display_balance_params

@@ -1,1 +1,23 @@
-alert("<%= @transaction.description %>");
+if ( $("#sch_transactions_list").length > 0 ) {
+	insert_transaction();
+}
+
+function insert_transaction() {
+	$.ajax({
+		type: "GET",
+		dataType: "html",
+		url: "api/v1/render/scheduled_transaction/<%= @transaction.id %>",
+		success(data) {
+
+			$(".card-scheduled-transaction").each(function(){
+				if($(this).hasClass("show")) {
+					$(this).collapse("toggle");
+					$(this).removeClass("show");
+				}
+			});
+
+			$(data).insertBefore("#new_transaction_card");
+			$("#transaction_<%= @transaction.id %>").hide().fadeIn(500);
+		}
+	});
+}

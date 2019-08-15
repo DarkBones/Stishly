@@ -15,7 +15,7 @@ class ApiSchedulesController < BaseApiController
 		schedule = @user.schedules.find(params[:schedule])
 		render json: "not found", status: :not_found and return if schedule.nil?
 
-		render json: prepare_json(JSON.parse(schedule.user_transactions.to_json))
+		render json: prepare_json(JSON.parse(schedule.user_transactions.order(:description).to_json))
 	end
 
 	def next_occurrence

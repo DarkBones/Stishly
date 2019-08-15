@@ -513,6 +513,10 @@ function resetTransactionMenu(formId){
   // show & hide default fields
   $(formId + " div.default-show").show();
   $(formId + " div.default-hide").hide();
+  
+  if($(formId + " #transaction_schedule_type").length > 0) {
+    $(formId + " #transaction_schedule_type").val(0);
+  }  
 
   newTransactionsFormTotalAmount = 0;
 }

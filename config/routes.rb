@@ -267,6 +267,11 @@ Rails.application.routes.draw do
             end
           end
         end
+        scope '/scheduled_transaction' do
+          scope '/:id' do
+            get '/', to: 'api_gui#render_scheduled_transaction'
+          end
+        end
       end
 
     end
