@@ -103,8 +103,8 @@ class TransactionDecorator < ApplicationDecorator
   end
 
   def time_num
-
-    return model.local_datetime.strftime("%H%M%S").to_i
+    return model.local_datetime.strftime("%H%M%S").to_i unless model.local_datetime.nil?
+    return 0
   end
 
 private
