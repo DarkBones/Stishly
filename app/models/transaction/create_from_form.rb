@@ -216,6 +216,7 @@ private
 
     # returns a transaction object from a base transaction
     def base_transaction_to_transaction(bt)
+      bt[:transfer_transaction_id].nil? ? category_id = bt[:category_id] : 0
       transaction = {
         amount: amount_float_int(bt[:amount], bt[:currency]),
         direction: bt[:direction],
@@ -224,7 +225,7 @@ private
         timezone: bt[:timezone],
         currency: bt[:currency],
         account_currency_amount: get_account_currency_amount(bt),
-        category_id: bt[:category_id],
+        category_id: category_id,
         local_datetime: bt[:local_datetime],
         transfer_account_id: bt[:transfer_account_id],
         user_currency_amount: get_user_currency_amount(bt),
