@@ -446,7 +446,7 @@ sch_transaction_2_child_2: {
   account_id: 21,
   currency: EUR,
   category_id: 0,
-  parent_id: 2,
+  parent_id: 1002,
   transfer_account_id: null,
   created_at: "<%= Time.now.utc %>",
   updated_at: "<%= Time.now.utc %>",

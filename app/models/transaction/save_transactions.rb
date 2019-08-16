@@ -11,9 +11,12 @@ class Transaction
       transactions = []
       transfer_transactions = []
 
+      schedule = nil
       @transactions.each do |t|
         transfer_account_id = nil
         parent_id = nil
+
+        schedule ||= t[:schedule_id]
 
         unless t[:transfer_transaction_id].nil?
           transfer_account_id = @transactions[t[:transfer_transaction_id]][:transfer_account_id]
@@ -46,17 +49,23 @@ class Transaction
         transfer_transactions[1].save
       end
 
+      link_schedule(transactions, schedule)
+
       return transactions
 
     end
 
 private
 
-    def link_schedule(t, transaction, current_user)
-      schedule = current_user.schedules.find(transaction[:schedule_id].to_i)
+    def link_schedule(transactions, schedule)
+      return if schedule.nil? || !@link_to_schedule
+
+      schedule = @current_user.schedules.find(schedule.to_i)
+
       return if schedule.nil?
 
-      Transaction.join_to_schedule(t, schedule)
+      main_transaction = Transaction.find_main_transaction(transactions)
+      Transaction.join_to_schedule(main_transaction, schedule)
     end
 
     def save_transaction(transaction, current_user, transfer_account_id, parent_id)
@@ -83,10 +92,6 @@ private
       t.scheduled_date = transaction[:scheduled_date]
 
       t.save!
-
-      if @link_to_schedule
-        link_schedule(t, transaction, current_user) unless transaction[:schedule_id].nil?
-      end
 
       return t
     end

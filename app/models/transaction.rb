@@ -127,14 +127,14 @@ class Transaction < ApplicationRecord
     end
   }
 
-  def self.update(transaction, params, current_user)
+  def self.update(transaction, params, current_user, scheduled: false)
     if transaction.class == String || transaction.class == Integer
       transaction = current_user.transactions.find(transaction)
     end
 
     return if transaction.nil?
 
-    transactions = UpdateTransaction.new(transaction, params, current_user).perform
+    transactions = UpdateTransaction.new(transaction, params, current_user, scheduled: scheduled).perform
     return transactions
   end
 
@@ -281,8 +281,8 @@ class Transaction < ApplicationRecord
     CreateFromString.new(params, current_user).perform
   end
 
-  def self.create(params, current_user, save: true)
-    transactions = CreateFromForm.new(params, current_user).perform
+  def self.create(params, current_user, save: true, scheduled: false)
+    transactions = CreateFromForm.new(params, current_user, scheduled: scheduled).perform
     return transactions unless save
 
     transactions = SaveTransactions.new(transactions, current_user).perform
@@ -305,11 +305,7 @@ class Transaction < ApplicationRecord
   end
 
   def self.join_to_schedule(transaction, schedule)
-    main_transaction = transaction
-    main_transaction = Transaction.find(transaction.parent_id) unless transaction.parent_id.nil?
-
-    return if !main_transaction.transfer_transaction_id.nil? && main_transaction.direction == 1
-
+    main_transaction = self.find_main_transaction(transaction)
     transaction.schedules << schedule
   end
 

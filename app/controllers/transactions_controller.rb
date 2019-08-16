@@ -45,7 +45,7 @@ class TransactionsController < ApplicationController
   end
 
   def create_scheduled
-    @transaction = Transaction.create(transaction_params, current_user)
+    @transaction = Transaction.create(transaction_params, current_user, scheduled: true)
     @transaction = Transaction.find_main_transaction(@transaction)
   end
 
@@ -53,6 +53,11 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.update(params[:id], transaction_params, current_user)
     @transaction = Transaction.find_main_transaction(@transaction)
     #redirect_back fallback_location: root_path
+  end
+
+  def update_scheduled
+    @transaction = Transaction.update(params[:id], transaction_params, current_user, scheduled: true)
+    @transaction = Transaction.find_main_transaction(@transaction)
   end
 
   def update

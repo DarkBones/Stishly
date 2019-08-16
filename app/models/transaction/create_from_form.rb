@@ -2,10 +2,11 @@ class Transaction
   class CreateFromForm
     include TimezoneMethods
 
-    def initialize(params, current_user)
+    def initialize(params, current_user, scheduled: false)
       @params = params
       @current_user = current_user
       @reg = ".+\s+[\.,]*-?[0-9\.,]*$"
+      @scheduled = scheduled
     end
 
     def perform
@@ -238,10 +239,12 @@ private
     end
 
     def get_account_currency_amount(bt)
+      return if @scheduled
       return amount_float_int((bt[:amount].to_f * bt[:account_rate].to_f), bt[:account].currency)
     end
 
     def get_user_currency_amount(bt)
+      return if @scheduled
       amount_float_int((bt[:amount].to_f * bt[:user_rate].to_f), @current_user.currency)
     end
 

@@ -1,0 +1,23 @@
+if ( $("#sch_transactions_list #transaction_<%= @transaction.id %>").length > 0 ) {
+	update_transaction();
+}
+
+function update_transaction() {
+	$.ajax({
+		type: "GET",
+		dataType: "html",
+		url: "api/v1/render/scheduled_transaction/<%= @transaction.id %>",
+		success(data) {
+
+			$(".card-scheduled-transaction").each(function(){
+				if($(this).hasClass("show")) {
+					$(this).collapse("toggle");
+					$(this).removeClass("show");
+				}
+			});
+
+			$("#sch_transactions_list #transaction_<%= @transaction.id %>").html(data);
+			$("#transaction_<%= @transaction.id %>").hide().fadeIn(500);
+		}
+	});
+}

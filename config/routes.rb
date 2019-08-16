@@ -34,6 +34,9 @@ Rails.application.routes.draw do
             patch '/', to: 'transactions#update_series', as: :edit_upcoming_transaction_series
           end
         end
+        scope '/scheduled' do
+          patch '/', to: 'transactions#update_scheduled', as: :edit_scheduled_transaction
+        end
       end
     end
   end

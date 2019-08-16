@@ -1,14 +1,14 @@
 class Transaction
   class UpdateTransaction
 
-  	def initialize(transaction, params, user)
+  	def initialize(transaction, params, user, scheduled: false)
   		@transaction = transaction
   		@params = params
   		@user = user
+  		@scheduled = scheduled
   	end
 
   	def perform
-  		# TODO: collect the old amount and the new amount and add the difference to the transaction account
   		original_transaction = @transaction
   		new_transaction = update_transactions(@transaction, @params, @user)
 
@@ -26,11 +26,15 @@ private
 
 		def update_account_balance(original_transaction, new_transaction, user)
 			unless original_transaction.nil?
-				Account.subtract(user, original_transaction.account, original_transaction.account_currency_amount, original_transaction.local_datetime) unless original_transaction.is_scheduled
+				unless original_transaction.is_scheduled
+					Account.subtract(user, original_transaction.account, original_transaction.account_currency_amount, original_transaction.local_datetime)
+				end
 			end
 
 			unless new_transaction.nil?
-				Account.add(user, new_transaction.account, new_transaction.account_currency_amount, new_transaction.local_datetime) unless new_transaction.is_scheduled
+				unless new_transaction.is_scheduled
+					Account.add(user, new_transaction.account, new_transaction.account_currency_amount, new_transaction.local_datetime)
+				end
 			end
 		end
 	
@@ -136,6 +140,12 @@ private
 			params.delete(:schedule_id)
 			params.delete(:schedule_period_id)
 			params.delete(:scheduled_transaction_id)
+
+			if @scheduled
+				params.delete(:account_currency_amount)
+				params.delete(:user_currency_amount)
+			end
+
 			return params
 		end
 
