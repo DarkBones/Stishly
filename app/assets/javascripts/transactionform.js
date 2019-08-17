@@ -189,7 +189,7 @@ function showTransferCurrencyRates(formId, type=null) {
         },
         success(data) {
           $submitButton.removeAttr("disabled");
-          $(formId + " #to_account_currency").text("Amount in " + data.to_account.currency);
+          $(formId + " #to_account_currency").text(data.to_account.currency);
           $(formId + " #transfer-currencies").show();
           $(formId + " #rate_from_to").text("Rate " + data.from_account.currency + " to " + data.to_account.currency);
           $(formId + " #transaction_rate_from_to").val(data.currency_rate);
@@ -348,7 +348,7 @@ function changeTransactionCurrency(obj, ignore=false, lockCurrency=true){
             removeAjaxSpinner($spinner);
           },
           success(dataRate) {
-            $(formId + " #account_currency").text("Amount in " + dataCurrency.iso_code);
+            $(formId + " #account_currency").text(dataCurrency.iso_code);
             $(formId + " #currency-rate").show();
             $(formId + " #currency-result").show();
             $(formId + " #currency-rate input").val(dataRate);
@@ -396,7 +396,7 @@ function changeTransactionAccount(obj) {
         $(formId + " #currency-rate").hide();
         $(formId + " #currency-result").hide();
       } else {
-        changeTransactionCurrency($(formId + " #currency-result"));
+        changeTransactionCurrency($(formId + " #transaction_currency"));
       }
     } else {
       $(formId + " #currency-rate").show();
@@ -500,7 +500,6 @@ function resetTransactionMenu(formId){
     $("#transaction_description").focus();
   }, 500);*/
 
-
   changeTransactionType("expense", null, formId);
   resetAccountOptions(formId);
   resetButtonGroups(formId);
@@ -509,6 +508,7 @@ function resetTransactionMenu(formId){
   resetAccountAndCurrencyDropdowns(formId);
   resetCategoryDropdown(formId);
   showTransferCurrencyRates(formId);
+  setTimezones();
 
   // show & hide default fields
   $(formId + " div.default-show").show();
@@ -534,6 +534,7 @@ function renderTransactionMenu(formId){
         $("#new_transactions_form").html(data);
         setDatepickers();
         resetTransactionMenu(formId);
+        setTimezones();
       }
     });
   } else {

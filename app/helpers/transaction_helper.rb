@@ -18,6 +18,8 @@ module TransactionHelper
     params = {}
 
     params[:transactions_total] = 0
+    params[:transfer_conversion_class] = "default-hide"
+    params[:transfer_conversion_style] = "display: none;"
 
     type = ""
     if transaction.transfer_transaction_id
@@ -38,12 +40,14 @@ module TransactionHelper
       params[:category_style] = "display: none;"
 
       from_account_currency = transaction.account.currency
-      to_account_currency = current_user.accounts.find(transaction.transfer_account_id).currency
+      to_account_currency = transaction.transfer_transaction.account.currency unless transaction.transfer_transaction.nil?
+      to_account_currency ||= transaction.account.currency
 
       if from_account_currency != to_account_currency
         params[:transfer_conversion_class] = "default-show"
+        params[:transfer_conversion_style] = ""
       else
-        params[:transfer_conversion_class] = "default-hide"
+        params[:transfer_conversion_class] = "default-hide hidden"
       end
 
     elsif type == "income"

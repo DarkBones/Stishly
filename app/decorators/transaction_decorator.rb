@@ -107,6 +107,29 @@ class TransactionDecorator < ApplicationDecorator
     return 0
   end
 
+  def transfer_currency_amount
+    return if model.transfer_transaction.nil?
+
+    currency = Money::Currency.new(model.currency)
+
+    return format_amount(model.transfer_transaction.account_currency_amount.abs, currency)
+  end
+
+  def transfer_currency
+    return if model.transfer_transaction.nil?
+    return model.transfer_transaction.account.currency
+  end
+
+  def transfer_rate
+    return 1 if model.transfer_transaction.nil?
+    return 1 if model.transfer_transaction.account.currency == model.account.currency
+    return 1 if model.transfer_transaction.account_currency_amount == 0
+    return 1 if model.account_currency_amount.nil?
+    return 1 if model.transfer_transaction.account_currency_amount.nil?
+
+    return format_amount(model.account_currency_amount.abs, model.account.currency).to_f / format_amount(model.transfer_transaction.account_currency_amount.abs, model.account.currency).to_f
+  end
+
 private
 
   def format_amount(amount, currency)

@@ -11,6 +11,7 @@
       <%= balance(transaction.amount.to_f.abs, Money::Currency.new(transaction.currency), "cents") %>
     </span>
   </a>
+
 </div>
 
 <div id="collapse<%= transaction.id %>" class="collapse card-scheduled-transaction" aria-labelledby="heading<%= transaction.id %>" data-parent="#accordion">

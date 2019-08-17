@@ -6,12 +6,17 @@ class TransactionsController < ApplicationController
   end
 
   def upcoming_transactions
-    @date = Time.now.utc + 7.days
     
     schedule = current_user.schedules.where(type_of: "main", pause_until: nil).take
     @date = schedule.next_occurrence_utc if schedule
+    @date ||= Time.now.utc + 7.days
 
-    @transactions = Schedule.get_all_transactions_until_date(current_user, @date).sort_by &:local_datetime
+    @transactions = Schedule.get_all_transactions_until_date(current_user, @date)
+
+    puts @transactions.class.name
+    puts @transactions.length
+
+    #@transactions.sort_by &:local_datetime
     @schedule = schedule
   end
 

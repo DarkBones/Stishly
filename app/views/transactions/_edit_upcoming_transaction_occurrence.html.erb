@@ -1,9 +1,12 @@
 <%# transaction = Transaction.new.decorate %>
+<%
+	base_only = !transaction.schedule.nil?
+%>
 <%= form_with(model: transaction, :url => edit_upcoming_transaction_occurrence_path) do |f| %>
   <div class="modal-body">
     <div class="container">
 
-        <%= render partial: "transactions/transaction_form_fields", :locals => {:transaction => transaction, :f => f, :base_only => true, :form_id_prefix => "", :form_id_suffix => "", :schedule_id => schedule_id, :schedule_period_id => schedule_period_id, :scheduled_transaction_id => scheduled_transaction_id } %>
+        <%= render partial: "transactions/transaction_form_fields", :locals => {:transaction => transaction, :f => f, :base_only => base_only, :form_id_prefix => "", :form_id_suffix => "_edit_occurrence", :schedule_id => schedule_id, :schedule_period_id => schedule_period_id, :scheduled_transaction_id => scheduled_transaction_id } %>
 
     </div>
   </div>

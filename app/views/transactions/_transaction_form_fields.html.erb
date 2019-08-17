@@ -17,13 +17,13 @@ formId = form_id_prefix.to_s + "transactionform" + form_id_suffix.to_s
     <div class="row py-2">
       <%# SCHEDULE ID %>
       <% if defined?(schedule_period_id) %>
-        <%= f.text_field :schedule_period_id, value: schedule_period_id %>
+        <%= f.hidden_field :schedule_period_id, value: schedule_period_id %>
       <% end %>
       <% if defined?(scheduled_transaction_id) %>
-        <%= f.text_field :scheduled_transaction_id, value: scheduled_transaction_id %>
+        <%= f.hidden_field :scheduled_transaction_id, value: scheduled_transaction_id %>
       <% end %>
       <% if defined?(schedule_id) %>
-        <%= f.text_field :schedule_id, class: "form-control ignoreReset", value: schedule_id %>
+        <%= f.hidden_field :schedule_id, class: "form-control ignoreReset", value: schedule_id %>
       <% end %>
       
       <div class=" col-12 py-5 rounded <%= params[:type_bg_color] %>" id="type">
@@ -134,8 +134,15 @@ formId = form_id_prefix.to_s + "transactionform" + form_id_suffix.to_s
     <%# CURRENCY %>
     <div class="row py-2" id="transaction-currency-options" style="<%= params[:currency_style] %>">
       <div class="col-12 col-xl-3 py-2">
+        <%
+          if !transaction.account.nil? && transaction.currency == transaction.account.currency
+            currency_class = ""
+          else
+            currency_class = " changed"
+          end
+        %>
         <%= f.label :currency %>
-        <%= f.select(:currency, all_currencies(Money::Currency.table), {}, { :class => "form-control", 'onchange' => 'changeTransactionCurrency(this, ' + base_only.to_s + ', true)' }) %>
+        <%= f.select(:currency, all_currencies(Money::Currency.table), {}, { :class => "form-control" + currency_class, 'onchange' => 'changeTransactionCurrency(this, ' + base_only.to_s + ', true)' }) %>
       </div>
 
       <div id="currency_conversion_ajax_spinner_container" style="display: none;">
@@ -155,7 +162,7 @@ formId = form_id_prefix.to_s + "transactionform" + form_id_suffix.to_s
         </div>
 
         <div class="col-7 col-xl-6 py-2 <%= params[:currency_conversion_class] %>" id="currency-result" style="<%= params[:currency_conversion_style] %>">
-          <%= f.label :amount_in, id: 'account_currency' %>
+          <%= f.label :amount_in %> <span id="account_currency"><%= transaction.account.currency if transaction.account %></span>
           <%= f.number_field :account_currency, class: 'accountmenu__balance form-control', step: :any, 'default_value' => '', 'onkeyup' => 'updateTransactionRate(this)', 'onchange' => 'updateTransactionRate(this)', value: transaction.amount_account %>
           <div id="transaction_account_currency_spinner" class="col-7 col-xl-6 py-2 hidden" style="position: absolute;">
             <%= image_tag "ajax_spinner.svg", height: "38px" %>
@@ -171,15 +178,15 @@ formId = form_id_prefix.to_s + "transactionform" + form_id_suffix.to_s
           </div>
         </div>
 
-        <div class="row py-2 <%= params[:transfer_conversion_class] %>" id="transfer-currencies">
+        <div class="row py-2 <%= params[:transfer_conversion_class] %>" id="transfer-currencies" style="<%= params[:transfer_conversion_style] %>">
           <div class="col-6 default-show py-2" id="currency-rate">
             <%= f.label :rate_from_to, id: "rate_from_to" %>
-            <%= f.number_field :rate_from_to, class: "form-control", step: :any, "default_value" => "1", "onkeyup" => "updateTransactionResult('#" + formId + "');", "onchange" => "updateTransactionResult('#" + formId + "');" %>
+            <%= f.number_field :rate_from_to, class: "form-control", step: :any, "default_value" => "1", "onkeyup" => "updateTransactionResult('#" + formId + "');", "onchange" => "updateTransactionResult('#" + formId + "');", value: transaction.transfer_rate %>
           </div>
 
           <div class="col-6 default-show py-2" id="currency-result">
-            <%= f.label :amount_in, id: "to_account_currency" %>  
-            <%= f.number_field :to_account_currency, class: "form-control", step: :any, "default_value" => "", "onkeyup" => "updateTransactionRate(this);" %>
+            <%= f.label :amount_in %> <span id="to_account_currency"><%= transaction.transfer_currency %></span>
+            <%= f.number_field :to_account_currency, class: "form-control", step: :any, "default_value" => "", "onkeyup" => "updateTransactionRate(this);", value: transaction.transfer_currency_amount %>
             <div id="transaction_transfer_currency_spinner" class="col-7 col-xl-6 py-2 hidden" style="position: absolute;">
               <%= image_tag "ajax_spinner.svg", height: "38px" %>
             </div>
@@ -205,7 +212,7 @@ formId = form_id_prefix.to_s + "transactionform" + form_id_suffix.to_s
       <% end %>
 
       <%# SCHEDULE TYPE %>
-        <% if defined?(schedule_id) %> 
+        <% if defined?(schedule_id) && schedule_id.to_i > 0 %>
           <div class="row py-2">
             <div class="col-12">
 

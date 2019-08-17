@@ -94,6 +94,13 @@ class Schedule < ApplicationRecord
       end
     end
 
+    future_transactions = user.transactions.where("scheduled_transaction_id IS NULL AND scheduled_date IS NOT NULL AND parent_id IS NULL").decorate
+    future_transactions.each do |ft|
+      if ft.transfer_transaction_id.nil? || (!ft.transfer_transaction_id.nil? && ft.direction == -1)
+        transactions.push(ft)
+      end
+    end
+
     return transactions
   end
 

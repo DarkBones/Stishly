@@ -1,16 +1,27 @@
-<% 
-	transaction_id = transaction.schedule.id.to_s + transaction.id.to_s + transaction.schedule_period_id.to_s
+<%
+  schedule = transaction.schedule
+  if schedule.nil?
+  	schedule_id = 0
+  	period_id = 0
+  else
+  	schedule_id = transaction.schedule.id
+  	period_id = transaction.schedule_period_id
+  end
+	transaction_id = schedule_id.to_s + transaction.id.to_s + period_id.to_s
+
+
+	transaction.schedule.nil? ? schedule_name = "" : schedule_name = transaction.schedule.name
+
 	scheduled_transaction_id = transaction.id
   scheduled_transaction_id = transaction.scheduled_transaction_id unless transaction.scheduled_transaction_id.nil?
-  schedule = transaction.schedule
 %>
 
-<tr class="<%= 'upcoming-cancelled' if transaction.is_cancelled %>" id="transaction_<%= transaction_id %>" series-id="<%= transaction.id %>" schedule="<%= schedule.id %>" period="<%= transaction.schedule_period_id %>" scheduled-transaction="<%= scheduled_transaction_id %>">
+<tr class="<%= 'upcoming-cancelled' if transaction.is_cancelled %>" id="transaction_<%= transaction_id %>" series-id="<%= transaction.id %>" schedule="<%= schedule_id %>" period="<%= period_id %>" scheduled-transaction="<%= scheduled_transaction_id %>">
 	<td><!-- date -->
 		<%= User.format_date(transaction.local_datetime) %>
 	</td>
 	<td><!-- schedule -->
-		<%= schedule.name %>
+		<%= schedule_name %>
 	</td>
 	<td id="upcoming-description"><!-- description -->
 		<%= transaction.description %>
@@ -22,7 +33,7 @@
 		<div class="dropdown show">
 
 			<div id="upcoming-dropdown">
-				<%= render partial: "transactions/upcoming_transaction_dropdown", :locals => {:transaction_id => transaction_id, :transaction => transaction, :scheduled_transaction_id => scheduled_transaction_id, :schedule => schedule} %>
+				<%= render partial: "transactions/upcoming_transaction_dropdown", :locals => {:transaction_id => transaction_id, :transaction => transaction, :scheduled_transaction_id => scheduled_transaction_id, :schedule => schedule } %>
 			</div>
 
 		</div>
