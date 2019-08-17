@@ -288,8 +288,9 @@ private
     subscription_tier ||= SubscriptionTier.where(name: "Free").take()
     return unless subscription_tier
 
+    puts "subscription_tier.max_accounts #{subscription_tier.max_accounts}"
+    puts user.accounts.length
     if user.accounts.length >= subscription_tier.max_accounts
-      
       errors.add(:account, "Upgrade to premium for more accounts") unless subscription_tier.max_accounts < 0
     elsif account_type == "spend"
       if user.accounts.where(account_type: "spend").length >= subscription_tier.max_spending_accounts

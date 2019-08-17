@@ -174,7 +174,9 @@ private
     subscription_tier ||= SubscriptionTier.where(name: "Free").take()
     return unless subscription_tier
 
-    max = 0
+    puts subscription_tier.max_schedules
+
+    max = -1
     schedules = user.schedules.where(type_of: type_of)
 
     if type_of.downcase == "schedule"
@@ -184,7 +186,7 @@ private
       max = subscription_tier.max_fixed_expenses
       message = "Upgrade to premium for more fixed expenses"
     end
-    
+
     if schedules.length >= max
       errors.add(:schedule, message) unless max < 0
     end
