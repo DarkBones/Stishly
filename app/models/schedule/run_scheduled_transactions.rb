@@ -5,7 +5,7 @@ class Schedule
 			date = Time.now.utc.to_date
 
 			@transactions = transactions
-			@transactions ||= Transaction.where("scheduled_date <= ? AND is_scheduled = true", @date)
+			@transactions ||= Transaction.where("scheduled_date <= ? AND is_scheduled = true", date)
 		end
 
 		def perform

@@ -174,8 +174,6 @@ private
     subscription_tier ||= SubscriptionTier.where(name: "Free").take()
     return unless subscription_tier
 
-    puts subscription_tier.max_schedules
-
     max = -1
     schedules = user.schedules.where(type_of: type_of)
 

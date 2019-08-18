@@ -51,9 +51,6 @@ class UpcomingTransactionsTest < ActiveSupport::TestCase
 	end
 
 	def create_params(customised_params={}, current_user=nil, account=nil)
-    current_user ||= users(:bas)
-    account ||= accounts(:bas_1)
-
     params = {
       :account => "One",
       :from_account => "One",

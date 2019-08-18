@@ -43,6 +43,7 @@ class ApiTransactionsController < BaseApiController
     return if schedule.nil?
 
     transactions = Transaction.trigger_upcoming_occurrence(@user, transaction, schedule, params[:schedule_period_id])
+    return transactions
     
   end
 

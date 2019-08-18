@@ -306,7 +306,7 @@ class Transaction < ApplicationRecord
 
   def self.join_to_schedule(transaction, schedule)
     main_transaction = self.find_main_transaction(transaction)
-    transaction.schedules << schedule
+    main_transaction.schedules << schedule
   end
 
   def self.approve_transaction(transaction, params)
