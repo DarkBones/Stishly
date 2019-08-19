@@ -172,7 +172,7 @@ class Transaction < ApplicationRecord
 
   def self.cancel_upcoming_occurrence(current_user, transaction, schedule_id, schedule_period_id)
     # if the transaction already exists, it means that it was edited and is_cancelled can simply be set to true
-    unless transaction.scheduled_transaction_id.nil?
+    if !transaction.scheduled_transaction_id.nil? || !transaction.scheduled_date.nil?
       transaction.is_cancelled =  true
       transaction.save
       return
