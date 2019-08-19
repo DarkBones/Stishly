@@ -110,6 +110,17 @@ module TransactionHelper
       params[:schedule_type] = 1
     end
 
+    unless transaction.local_datetime.nil?
+      dateclass = "datepicker-null"
+      date = transaction.local_datetime.strftime("%d-%b-%y")
+    else
+      dateclass = ""
+      date = nil
+    end
+
+    params[:dateclass] = dateclass
+    params[:date] = date
+
     return params
   end
 

@@ -5,9 +5,12 @@ class ApiTransactionsController < BaseApiController
 
 		transaction = @user.transactions.find(params[:id])
 		render json: "not found", status: :not_found and return if transaction.nil?
+    user_date = User.format_date(transaction.local_datetime.to_date)
+
 
 		transaction = JSON.parse(transaction.to_json)
 		transaction = prepare_json(transaction)
+    transaction[:date_user_format] = user_date
 
 		render json: transaction
 	end
@@ -37,7 +40,6 @@ class ApiTransactionsController < BaseApiController
   def trigger_upcoming_occurrence
   	transaction = @user.transactions.find(params[:id])
     schedule = @user.schedules.find(params[:schedule_id])
-
 
     return if transaction.nil?
     return if schedule.nil?

@@ -199,13 +199,13 @@ formId = form_id_prefix.to_s + "transactionform" + form_id_suffix.to_s
         <div class="row py-2">
           <div class="col-6 py-2">
             <%= f.label :date %>
-            <%= f.text_field :date, class: 'datepicker form-control' %>
+            <%= f.text_field :date, class: 'datepicker form-control ' + params[:dateclass], value: params[:date] %>
           </div>
 
           <div class="col-6 py-2">
             <%= f.label :time %>
             <%= f.text_field :time, type: 'time', value:'now', class: 'form-control' %>
-            <%= f.hidden_field :timezone, id: 'timezone_input' %>
+            <%= f.text_field :timezone, id: 'timezone_input' %>
           </div>
         </div>
 

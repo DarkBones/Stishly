@@ -30,6 +30,7 @@ private
       queue_scheduled = params[:schedule_type].to_i unless params[:schedule_type].nil?
       local_datetime = parse_datetime(params[:date], params[:time])
       is_scheduled = get_is_scheduled(params, params[:timezone], local_datetime)
+      timezone = get_timezone
 
       current_transaction = {
         direction: get_direction(params, transferred),
@@ -40,7 +41,7 @@ private
         user_currency: @current_user.currency,
         account_rate: get_account_rate(params, account, currency, transferred),
         user_rate: user_rate,
-        timezone: validate_timezone(params[:timezone]),
+        timezone: validate_timezone(timezone),
         category_id: params[:category_id],
         local_datetime: local_datetime,
         schedule_id: params[:schedule_id],
@@ -48,7 +49,7 @@ private
         is_scheduled: is_scheduled,
         scheduled_transaction_id: params[:scheduled_transaction_id],
         queue_scheduled: queue_scheduled,
-        scheduled_date: get_scheduled_date(is_scheduled, params[:timezone], local_datetime)
+        scheduled_date: get_scheduled_date(is_scheduled, timezone, local_datetime)
       }
 
       transactions.push(current_transaction)
@@ -85,9 +86,19 @@ private
 
     end
 
+    def get_timezone
+      return @params[:timezone] unless @params[:timezone].nil?
+
+      unless @params[:schedule_id].nil?
+        return @current_user.schedules.find(@params[:schedule_id]).timezone if @params[:schedule_id].to_i > 0
+      end
+      return @current_user.timezone
+    end
+
     def get_scheduled_date(is_scheduled, timezone, local_datetime)
       return unless is_scheduled
-      return unless @params[:schedule_id].nil?
+      return if local_datetime.nil?
+      #return unless @params[:schedule_id].nil? || @params[:schedule_id] == 0
 
       tz = TZInfo::Timezone.get(timezone)
       date_utc = tz.local_to_utc(local_datetime.to_datetime).to_date

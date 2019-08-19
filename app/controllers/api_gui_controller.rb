@@ -93,7 +93,16 @@ class ApiGuiController < BaseApiBrowserController
   def render_upcoming_transaction_dropdown
     transaction = current_user.transactions.find(params[:id]).decorate
     schedule = transaction.schedule
-    transaction_id = schedule.id.to_s + transaction.id.to_s + transaction.schedule_period_id.to_s
+
+    if schedule.nil?
+      schedule_id = 0
+      period_id = 0
+    else
+      schedule_id = schedule.id
+      period_id = transaction.schedule_period_id
+    end
+
+    transaction_id = schedule_id.to_s + transaction.id.to_s + period_id.to_s
 
     scheduled_transaction_id = transaction.id
     scheduled_transaction_id = transaction.scheduled_transaction_id unless transaction.scheduled_transaction_id.nil?

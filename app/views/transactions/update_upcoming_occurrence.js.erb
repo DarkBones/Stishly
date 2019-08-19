@@ -1,6 +1,16 @@
 $("[data-dismiss=modal]").trigger({ type: "click" });
 
-<% new_transaction_id = @transaction.schedule.id.to_s + @transaction.id.to_s + @transaction.schedule_period_id.to_s %>
+<%
+	schedule = @transaction.schedule
+  if schedule.nil?
+  	schedule_id = 0
+  	period_id = 0
+  else
+  	schedule_id = @transaction.schedule.id
+  	period_id = @transaction.schedule_period_id
+  end
+	new_transaction_id = schedule_id.to_s + @transaction.id.to_s + period_id.to_s
+%>
 
 $("#transaction_" + originalTId.toString() + " #upcoming-description").text("<%= @transaction.description %>");
 $.ajax({
@@ -22,12 +32,21 @@ $.ajax({
 				$("#transaction_" + originalTId.toString()).attr("id", "transaction_<%= new_transaction_id %>");
 			},
 			error() {
-				location.reload();
+				//location.reload();
 			}
 		});
 
 	},
 	error() {
-		location.reload();
+		//location.reload();
+	}
+});
+
+$.ajax({
+	type: "GET",
+	dataType: "json",
+	url: "api/v1/transactions/<%= @transaction.id %>",
+	success(data) {
+		$("#transaction_" + originalTId.toString() + " #upcoming-date").text(data.date_user_format);
 	}
 });
