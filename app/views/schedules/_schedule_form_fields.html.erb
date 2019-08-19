@@ -123,16 +123,18 @@
 
         </div>
       </div>
-    </div>
 
-    <div class="schedule-advanced">
-      <div class="row py-2 weekly" id="weekday">
-        <div class="col-12 weekly" style="<%= weekdaypicker_style %>">
+      <div class="schedule-advanced">
+        <div class="row py-2 weekly" id="weekday">
+          <div class="col-12 weekly" style="<%= weekdaypicker_style %>">
 
-          <%= render partial: 'schedules/weekday_picker', :locals => {:id_prefix => 'weekday', :f => f, :@dates => form_params[:days_picked] } %>
+            <%= render partial: 'schedules/weekday_picker', :locals => {:id_prefix => 'weekday', :f => f, :@dates => form_params[:days_picked] } %>
+          </div>
         </div>
       </div>
+      
     </div>
+
 
     <div class="schedule-advanced" style="<%= advanced_style %>">
       <div class="row py-2">
