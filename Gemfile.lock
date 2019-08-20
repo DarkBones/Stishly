@@ -145,6 +145,8 @@ GEM
     currency_select (1.0.0)
       actionview (>= 4.2.0, < 6.0)
       money (~> 6.0)
+    data-confirm-modal (1.6.2)
+      railties (>= 3.0)
     debug_inspector (0.0.3)
     detect_timezone_rails (0.0.5)
       railties (>= 3.1)
@@ -444,6 +446,7 @@ DEPENDENCIES
   countries
   country_select (~> 3.1)
   currency_select
+  data-confirm-modal
   detect_timezone_rails
   devise
   devise_roles

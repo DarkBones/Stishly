@@ -139,3 +139,5 @@ gem 'omniauth-google-oauth2'
 gem 'bootstrap-social-rails'
 gem 'font-awesome-rails'
 gem 'omniauth-rails_csrf_protection'
+
+gem 'data-confirm-modal'
