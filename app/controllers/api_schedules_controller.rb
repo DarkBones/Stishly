@@ -36,6 +36,7 @@ class ApiSchedulesController < BaseApiController
 	end
 
 	def next_occurrences
+
 		schedule = @user.schedules.find(params[:schedule])
 		render json: "not found", status: :not_found and return if schedule.nil?
 

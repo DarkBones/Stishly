@@ -17,7 +17,12 @@ function sanitize(val) {
 }
 
 function getScheduleNextOccurrences(obj){
-  var $root = $(obj).parents("#schedule-form-root")
+  var $root = $(obj).parents("#schedule-form-root");
+
+  var schedule_type = "simple";
+  if ($root.find("#type-advanced").hasClass("active")) {
+    schedule_type = "advanced";
+  }
 
   var name = sanitize($root.find("#schedule_name").val());
   var startDate = sanitize($root.find("#schedule_start_date").val());
@@ -50,7 +55,7 @@ function getScheduleNextOccurrences(obj){
   $.ajax({
     type: "GET",
     dataType: "json",
-    url: "api/v1/next_schedule_occurrence" + "/" + occurrenceCount.toString() + "/" + type + "/" + startDate + "/" + timezone + "/" + schedule + "/" + runEvery + "/" + days + "/" + days2 + "/" + datesPicked + "/" + weekdayMon + "/" + weekdayTue + "/" + weekdayWed + "/" + weekdayThu + "/" + weekdayFri + "/" + weekdaySat + "/" + weekdaySun + "/" + endDate + "/" + weekdayExcludeMon + "/" + weekdayExcludeTue + "/" + weekdayExcludeWed + "/" + weekdayExcludeThu + "/" + weekdayExcludeFri + "/" + weekdayExcludeSat + "/" + weekdayExcludeSun + "/" + datesPickedExclude + "/" + exclusionMet1 + "/" + exclusionMet2,
+    url: "api/v1/next_schedule_occurrence" + "/" + occurrenceCount.toString() + "/" + schedule_type + "/" + startDate + "/" + timezone + "/" + schedule + "/" + runEvery + "/" + days + "/" + days2 + "/" + datesPicked + "/" + weekdayMon + "/" + weekdayTue + "/" + weekdayWed + "/" + weekdayThu + "/" + weekdayFri + "/" + weekdaySat + "/" + weekdaySun + "/" + endDate + "/" + weekdayExcludeMon + "/" + weekdayExcludeTue + "/" + weekdayExcludeWed + "/" + weekdayExcludeThu + "/" + weekdayExcludeFri + "/" + weekdayExcludeSat + "/" + weekdayExcludeSun + "/" + datesPickedExclude + "/" + exclusionMet1 + "/" + exclusionMet2,
     beforeSend() {
       $(obj).parents("#schedule-form-root").find("#next_occurrences").html("");
       //insertAjaxSpinner($("#scheduleform #next_occurrences"));

@@ -127,10 +127,10 @@ private
         return
       end
 
-      return weekdays_array[schedule.days_month_day] unless schedule.days_month_day.nil?
-
       @hidden_fields.push("days2") if schedule.days_month == "specific"
       @hidden_fields.push("datepicker") if schedule.days_month != "specific" && schedule.days_month_day != "day"
+      return weekdays_array[schedule.days_month_day] unless schedule.days_month_day.nil?
+
       return "day"
     end
 

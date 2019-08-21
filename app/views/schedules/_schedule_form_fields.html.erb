@@ -5,6 +5,7 @@
   hidden.include?("weekly") ? weekdaypicker_style = "display: none;" : ""
   hidden.include?("exclusion_met_day") ? exclusion_met_day_style = "display: none;" : ""
   hidden.include?("advanced2") ? advanced2_style = "display: none;" : ""
+  hidden.include?("monthly") ? monthly_style = "display: none;" : ""
 
   if form_params[:type] == "advanced"
     advanced_style = ""
@@ -88,7 +89,7 @@
     </div>
 
     <div class="schedule-advanced" style="<%= advanced_style %>">
-      <div class="row py-2 schedule-simple-period monthly">
+      <div class="row py-2 schedule-simple-period monthly" style="<%= monthly_style %>">
         <div class="col-12">
 
           <%= f.label :days %>
@@ -152,13 +153,13 @@
         </div>
         
 
-        <div class="row py2 monthly">
+        <div class="row py2 monthly" style="<%= monthly_style %>">
           <div class="col-12">
             <%= f.label :exclude %>
           </div>
         </div>
 
-        <div class="monthly">
+        <div class="monthly" style="<%= monthly_style %>">
           <div class="row py-2" id="weekday-exclude">
             <div class="col-12" style="<%= weekdaypicker_exclude_style %>">
 
@@ -174,12 +175,12 @@
           </div>
         </div>
 
-        <div class="row py-2 monthly">
+        <div class="row py-2 monthly" style="<%= monthly_style %>">
           <div class="col-12">
             <%= f.label :if_exclusion_met %>
           </div>
         </div>
-        <div class="row monthly">
+        <div class="row monthly" style="<%= monthly_style %>">
           <div class="col-6">
             <%= f.select(:exclusion_met1, [
               ["Don't run", "cancel"], 

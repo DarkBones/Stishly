@@ -162,7 +162,7 @@ private
 			return "specific" if params[:days2] == "day"
 			return "last" if params[:month_day] == "last"
 
-			idx = params[:month_day].to_i
+			idx = params[:month_day].to_i - 1
 			vals = ["first", "second", "third", "fourth"]
 
 			if idx < vals.length
