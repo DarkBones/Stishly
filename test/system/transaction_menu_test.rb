@@ -149,7 +149,9 @@ class TransactionMenuTest < ApplicationSystemTestCase
     assert page.find("#transaction_account_currency").value.to_f >= 8
 
     page.find("#transactionform #multiple-multiple").click
-    assert page.find("#transaction_account_currency").value == '0'
+    sleep 2
+    wait_for_ajax
+    assert page.find("#transaction_account_currency").value.to_i == 0
 
     while page.find("#transaction_transactions").value != "one 100000\n" do
         fill_in "Transactions", with: "one 100000\n"

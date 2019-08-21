@@ -18,7 +18,7 @@
 
 <div class="select-item-container">
 
-  <div class="transaction-checkbox float-left">
+  <div class="transaction-checkbox float-left" id="select_transaction_<%= transaction.id %>">
 
     <label class="checkbox-container">
       <%= check_box_tag "select[#{transaction.id}]", transaction.id, false, class: 'checkbox-inline transaction-checkbox-input styled-checkbox', 'onchange' => 'selectTransaction(this);'%>

@@ -36,8 +36,6 @@ class SchedulesTransaction < ApplicationRecord
 
     end
 
-    puts params.to_yaml
-
     transactions.each do |t|
       scheduled_transactions = Transaction.create_scheduled_transactions(t, current_user)
       scheduled_transactions.each do |st|

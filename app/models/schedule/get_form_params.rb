@@ -16,6 +16,8 @@ private
       type = determine_type(schedule) # advanced / simple
       name = schedule.name
       period = period(schedule) # monthly / weekly / etc
+      period_txt = schedule.period
+      period_txt ||= "months"
       start_date = start_date(schedule)
       period_num = period_num(schedule)
       days_month1 = days_month1(schedule)
@@ -32,6 +34,7 @@ private
         type: type,
         name: name,
         schedule: period,
+        period_txt: period_txt,
         start_date: start_date,
         run_every: period_num,
         days: days_month1,

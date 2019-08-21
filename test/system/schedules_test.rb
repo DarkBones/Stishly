@@ -24,7 +24,6 @@ class SchedulesTest < ApplicationSystemTestCase
 
     assert_selector 'button#new-schedule-button', text: "New Schedule"
   end
-
   test "open and close schedule form" do
     login_as_blank
     visit "/schedules"
@@ -59,7 +58,7 @@ class SchedulesTest < ApplicationSystemTestCase
     assert run_every == '1', format_error('unexpected schedule period num', '1', run_every)
 
     period_indicator = page.find('#scheduleform #period').text
-    assert period_indicator == 'Months', format_error('unexpected period indicator', 'Months', period_indicator)
+    assert period_indicator == 'months', format_error('unexpected period indicator', 'months', period_indicator)
 
     assert_selector '.schedule-advanced', visible: :hidden
   end
@@ -71,19 +70,19 @@ class SchedulesTest < ApplicationSystemTestCase
     
     select 'Daily', from: "schedule[schedule]"
     period_indicator = page.find('#scheduleform #period').text
-    assert period_indicator == 'Days', format_error('unexpected period indicator', 'Days', period_indicator)
+    assert period_indicator == 'days', format_error('unexpected period indicator', 'days', period_indicator)
 
     select 'Weekly', from: "schedule[schedule]"
     period_indicator = page.find('#scheduleform #period').text
-    assert period_indicator == 'Weeks', format_error('unexpected period indicator', 'Weeks', period_indicator)
+    assert period_indicator == 'weeks', format_error('unexpected period indicator', 'weeks', period_indicator)
 
     select 'Monthly', from: "schedule[schedule]"
     period_indicator = page.find('#scheduleform #period').text
-    assert period_indicator == 'Months', format_error('unexpected period indicator', 'Months', period_indicator)
+    assert period_indicator == 'months', format_error('unexpected period indicator', 'months', period_indicator)
 
     select 'Annually', from: "schedule[schedule]"
     period_indicator = page.find('#scheduleform #period').text
-    assert period_indicator == 'Years', format_error('unexpected period indicator', 'Years', period_indicator)
+    assert period_indicator == 'years', format_error('unexpected period indicator', 'years', period_indicator)
 
   end
 
@@ -219,5 +218,4 @@ class SchedulesTest < ApplicationSystemTestCase
      assert_selector "#new_schedule_transactionform .category_86", visible: :hidden
      assert_selector "#new_schedule_transactionform .category_87", visible: :visible
   end
-  
 end
