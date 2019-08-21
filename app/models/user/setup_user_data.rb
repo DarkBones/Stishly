@@ -83,7 +83,7 @@ private
 				month_exclude_met: params["month_exclude_met_#{idx}"],
 				month_exclude_met_day: params["month_exclude_met_day_#{idx}"],
 				week_day: params["week_day_#{idx}"],
-				day_date: params["day_date_#{idx}"],
+				start_date: params["start_date_#{idx}"],
 				currency: params["currency_#{idx}"],
 				fixed_amount: params["fixed_amount_#{idx}"],
 				amount: params["amount_#{idx}"],

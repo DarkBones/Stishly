@@ -51,7 +51,12 @@
     <option value="days" children=".path-days, .path-amount">days</option>
   </select>
 
+
   <div class="children">
+    <div class="hidden ignore-ladder path-months path-weeks path-days" id="start_date">
+      <p>starting on</p>
+      <input name="start_date<%= suff %>" class="form-control datepicker">
+    </div>
     <div class="path-months">
       <p>on the</p>
       <select name="month_day<%= suff %>" class="form-control" id="month_day<%= suff %>">
@@ -148,10 +153,6 @@
         <option value="sat">Saturday</option>
       </select>
     </div>
-    <div class="hidden path-days">
-      <p>starting on</p>
-      <input name="day_date<%= suff %>" class="form-control datepicker">
-    </div>
 
     <% if type == "income" || type == "fixed_expense" %>
       <div class="path-amount py-2">
@@ -239,7 +240,14 @@
     }
 
     if (n < 1) {
+      n = 1;
       $(this).val(1);
+    }
+
+    if (n == 1) {
+      $(this).parents("#simple_schedule_form").find("[id^=start_date]").slideUp("fast");
+    } else {
+      $(this).parents("#simple_schedule_form").find("[id^=start_date]").slideDown("fast");
     }
   });
 

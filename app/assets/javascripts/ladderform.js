@@ -48,7 +48,7 @@ function showHideFields($target) {
   }
 
   if (children.length > 0) {
-    $children.children(children).slideDown("fast");
+    $children.children(children).not(".ignore-ladder").slideDown("fast");
   }
   $children.children().not(children).slideUp("fast");
 

@@ -84,7 +84,7 @@ private
 			return {
 				type: "advanced",
 				name: schedule_name,
-				start_date: User.current_time.to_date,
+				start_date: params[:start_date].to_date,
 				timezone: @current_user.timezone,
 				schedule: schedule_period,
 				run_every: params[:periodNum].to_i,
