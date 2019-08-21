@@ -7,24 +7,26 @@ window.setDeleteConfirmTargets = function() {
 	});
 }
 
-window.setDeleteListeners = function() {
-	$(".delete-confirm").click(function(e) {
-		e.preventDefault();
+$(function() {
+	window.setDeleteListeners = function() {
+		$(".delete-confirm").click(function(e) {
+			e.preventDefault();
 
-		var message = "Are you sure?";
-		var messageAttr = $(this).attr("confirm-message");
+			var message = "Are you sure?";
+			var messageAttr = $(this).attr("confirm-message");
 
-		$("#confirmation_modal form").attr("action", $(this).attr("data-link"));
-		$("#confirmation_modal input[type='submit']").removeAttr("disabled");
+			$("#confirmation_modal form").attr("action", $(this).attr("data-link"));
+			$("#confirmation_modal input[type='submit']").removeAttr("disabled");
 
-		if(typeof(messageAttr) !== "undefined") {
-			message = messageAttr;
-		}
-		$("#confirmation_modal p").text(message);
-	});
+			if(typeof(messageAttr) !== "undefined") {
+				message = messageAttr;
+			}
+			$("#confirmation_modal p").text(message);
+		});
 
-	setDeleteConfirmTargets();
-}
+		setDeleteConfirmTargets();
+	}
+});
 
 $(document).on("turbolinks:load", () => {
 	setDeleteListeners();

@@ -42,7 +42,7 @@ class SchedulesController < ApplicationController
 
   def delete
     @schedule_id = params[:id]
-    if Schedule.exists?(@schedule_id)
+    if current_user.schedules.where("id = ?", @schedule_id).exists?
       schedule = current_user.schedules.find(@schedule_id)
       schedule.user_transactions.each do |transaction|
         transaction.destroy if transaction.schedules.length <= 1

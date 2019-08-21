@@ -17,32 +17,34 @@ function sanitize(val) {
 }
 
 function getScheduleNextOccurrences(obj){
-  var name = sanitize($(obj).parents("#schedule-form-root").find("#schedule_name").val());
-  var startDate = sanitize($(obj).parents("#schedule-form-root").find("#schedule_start_date").val());
-  var timezone = sanitize($(obj).parents("#schedule-form-root").find("#timezone_input").val());
-  var schedule = sanitize($(obj).parents("#schedule-form-root").find("#schedule_schedule").val());
-  var runEvery = sanitize($(obj).parents("#schedule-form-root").find("#schedule_run_every").val());
-  var days = sanitize($(obj).parents("#schedule-form-root").find("#schedule_days").val());
-  var days2 = sanitize($(obj).parents("#schedule-form-root").find("#schedule_days2").val());
-  var datesPicked = sanitize($(obj).parents("#schedule-form-root").find("#schedule_dates_picked").val());
-  var weekdayMon = sanitize($(obj).parents("#schedule-form-root").find("#schedule_weekday_mon").prop("checked")*1);
-  var weekdayTue = sanitize($(obj).parents("#schedule-form-root").find("#schedule_weekday_tue").prop("checked")*1);
-  var weekdayWed = sanitize($(obj).parents("#schedule-form-root").find("#schedule_weekday_wed").prop("checked")*1);
-  var weekdayThu = sanitize($(obj).parents("#schedule-form-root").find("#schedule_weekday_thu").prop("checked")*1);
-  var weekdayFri = sanitize($(obj).parents("#schedule-form-root").find("#schedule_weekday_fri").prop("checked")*1);
-  var weekdaySat = sanitize($(obj).parents("#schedule-form-root").find("#schedule_weekday_sat").prop("checked")*1);
-  var weekdaySun = sanitize($(obj).parents("#schedule-form-root").find("#schedule_weekday_sun").prop("checked")*1);
-  var endDate = sanitize($(obj).parents("#schedule-form-root").find("#schedule_end_date").val());
-  var weekdayExcludeMon = sanitize($(obj).parents("#schedule-form-root").find("#schedule_weekday_exclude_mon").prop("checked")*1);
-  var weekdayExcludeTue = sanitize($(obj).parents("#schedule-form-root").find("#schedule_weekday_exclude_tue").prop("checked")*1);
-  var weekdayExcludeWed = sanitize($(obj).parents("#schedule-form-root").find("#schedule_weekday_exclude_wed").prop("checked")*1);
-  var weekdayExcludeThu = sanitize($(obj).parents("#schedule-form-root").find("#schedule_weekday_exclude_thu").prop("checked")*1);
-  var weekdayExcludeFri = sanitize($(obj).parents("#schedule-form-root").find("#schedule_weekday_exclude_fri").prop("checked")*1);
-  var weekdayExcludeSat = sanitize($(obj).parents("#schedule-form-root").find("#schedule_weekday_exclude_sat").prop("checked")*1);
-  var weekdayExcludeSun = sanitize($(obj).parents("#schedule-form-root").find("#schedule_weekday_exclude_sun").prop("checked")*1);
-  var datesPickedExclude = sanitize($(obj).parents("#schedule-form-root").find("#schedule_dates_picked_exclude").val());
-  var exclusionMet1 = sanitize($(obj).parents("#schedule-form-root").find("#schedule_exclusion_met1").val());
-  var exclusionMet2 = sanitize($(obj).parents("#schedule-form-root").find("#schedule_exclusion_met2").val());
+  var $root = $(obj).parents("#schedule-form-root")
+
+  var name = sanitize($root.find("#schedule_name").val());
+  var startDate = sanitize($root.find("#schedule_start_date").val());
+  var timezone = sanitize($root.find("#timezone_input").val());
+  var schedule = sanitize($root.find("#schedule_schedule").val());
+  var runEvery = sanitize($root.find("#schedule_run_every").val());
+  var days = sanitize($root.find("#schedule_days").val());
+  var days2 = sanitize($root.find("#schedule_days2").val());
+  var datesPicked = sanitize($root.find("#schedule_dates_picked").val());
+  var weekdayMon = sanitize($root.find("#schedule_weekday_mon").prop("checked")*1);
+  var weekdayTue = sanitize($root.find("#schedule_weekday_tue").prop("checked")*1);
+  var weekdayWed = sanitize($root.find("#schedule_weekday_wed").prop("checked")*1);
+  var weekdayThu = sanitize($root.find("#schedule_weekday_thu").prop("checked")*1);
+  var weekdayFri = sanitize($root.find("#schedule_weekday_fri").prop("checked")*1);
+  var weekdaySat = sanitize($root.find("#schedule_weekday_sat").prop("checked")*1);
+  var weekdaySun = sanitize($root.find("#schedule_weekday_sun").prop("checked")*1);
+  var endDate = sanitize($root.find("#schedule_end_date").val());
+  var weekdayExcludeMon = sanitize($root.find("#schedule_weekday_exclude_mon").prop("checked")*1);
+  var weekdayExcludeTue = sanitize($root.find("#schedule_weekday_exclude_tue").prop("checked")*1);
+  var weekdayExcludeWed = sanitize($root.find("#schedule_weekday_exclude_wed").prop("checked")*1);
+  var weekdayExcludeThu = sanitize($root.find("#schedule_weekday_exclude_thu").prop("checked")*1);
+  var weekdayExcludeFri = sanitize($root.find("#schedule_weekday_exclude_fri").prop("checked")*1);
+  var weekdayExcludeSat = sanitize($root.find("#schedule_weekday_exclude_sat").prop("checked")*1);
+  var weekdayExcludeSun = sanitize($root.find("#schedule_weekday_exclude_sun").prop("checked")*1);
+  var datesPickedExclude = sanitize($root.find("#schedule_dates_picked_exclude").val());
+  var exclusionMet1 = sanitize($root.find("#schedule_exclusion_met1").val());
+  var exclusionMet2 = sanitize($root.find("#schedule_exclusion_met2").val());
   var occurrenceCount = "10";
 
   $.ajax({
@@ -202,7 +204,7 @@ function schedulePickDate(date, datesTarget) {
 
   $datesPicked.val(dates.join(" "));
 
-  getScheduleNextOccurrences();
+  getScheduleNextOccurrences(date);
 }
 
 function changeScheduleType(sType, obj){
