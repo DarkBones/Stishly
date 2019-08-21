@@ -2,7 +2,7 @@ class Transaction
 
   class CreateScheduledTransactions
 
-    def initialize(transaction, current_user, scheduled_transaction_id, schedule=nil, is_scheduled=true, timezone=nil, schedule_period_id=nil)
+    def initialize(transaction, current_user, scheduled_transaction_id=nil, schedule=nil, is_scheduled=true, timezone=nil, schedule_period_id=nil)
       @transaction = transaction
       @current_user = current_user
       @is_scheduled = is_scheduled
@@ -10,7 +10,7 @@ class Transaction
       @schedule = schedule
       @scheduled_transaction_id = scheduled_transaction_id
       @schedule_period_id = schedule_period_id
-      @schedule_period_id ||= schedule.current_period_id
+      @schedule_period_id ||= schedule.current_period_id unless schedule.nil?
     end
 
     def perform
@@ -51,7 +51,7 @@ private
       t.schedule_id = schedule_id
       t.queue_scheduled = transaction.queue_scheduled
       t.is_queued = is_queued
-      t.scheduled_transaction_id = @scheduled_transaction_id
+      t.scheduled_transaction_id = @scheduled_transaction_id unless @scheduled_transaction_id.nil?
       t.schedule_period_id = @schedule_period_id
 
       unless @is_scheduled

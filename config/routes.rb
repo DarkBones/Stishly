@@ -82,6 +82,9 @@ Rails.application.routes.draw do
           put '/:transaction_id', to: 'transactions#update'
         end
       end
+      scope '/delete' do
+        delete '/', to: 'schedules#delete', as: :delete_schedule
+      end
     end
   end
 

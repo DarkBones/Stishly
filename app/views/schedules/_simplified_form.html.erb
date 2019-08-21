@@ -124,7 +124,7 @@
                 <option value="tue">Tuesday</option>
                 <option value="wed">Wednesday</option>
                 <option value="thu">Thursday</option>
-                <option value="fri">Friday</option>
+                <option value="fri" selected="selected">Friday</option>
                 <option value="sat">Saturday</option>
               </select>
             </div>
@@ -230,6 +230,17 @@
       $(this).attr("changed", "changed");
       $(this).val(value);
     });
+  });
+
+  $("[id^=periodNum").change(function(){
+    let n = parseInt($(this).val());
+    if (Number.isNaN(n)) {
+      n = 1;
+    }
+
+    if (n < 1) {
+      $(this).val(1);
+    }
   });
 
 

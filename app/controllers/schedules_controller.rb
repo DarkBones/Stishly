@@ -40,6 +40,27 @@ class SchedulesController < ApplicationController
     @schedule = @schedule.decorate
   end
 
+  def delete
+    @schedule_id = params[:id]
+    if Schedule.exists?(@schedule_id)
+      schedule = current_user.schedules.find(@schedule_id)
+      schedule.user_transactions.each do |transaction|
+        transaction.destroy if transaction.schedules.length <= 1
+      end
+
+      current_user.transactions.where(schedule_id: schedule.id).each do |transaction|
+        if transaction.is_scheduled
+          transaction.destroy
+        else
+          transaction.schedule_id = nil
+          transaction.save
+        end
+      end
+      
+      schedule.destroy
+    end
+  end
+
 private
   
   def schedule_params

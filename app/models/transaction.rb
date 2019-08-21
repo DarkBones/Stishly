@@ -294,9 +294,19 @@ class Transaction < ApplicationRecord
       current_user.save
     end
 
-    transactions.each do |t|
-      Account.add(current_user, t.account, t.account_currency_amount, t.local_datetime) if t.parent_id.nil? && !t.is_scheduled
+    transaction = self.find_main_transaction(transactions)
+
+    update_account_balance = true
+    unless transaction.transfer_transaction.nil?
+      update_account_balance = false if transaction.account.id == transaction.transfer_transaction.account.id
     end
+
+    if update_account_balance
+      Account.add(current_user, transaction.account, transaction.account_currency_amount, transaction.local_datetime)
+      Account.add(current_user, transaction.transfer_transaction.account, transaction.transfer_transaction.account_currency_amount, transaction.transfer_transaction.local_datetime) unless transaction.transfer_transaction.nil?
+    end
+
+    return transactions
   end
 
   def self.create_from_schedule(transaction, schedule, scheduled_transaction_id)

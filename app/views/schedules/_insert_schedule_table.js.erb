@@ -62,7 +62,7 @@ function insertSchedule() {
   		}
 
   		$("#schedule_" + "<%= schedule.id %>").hide().fadeIn(500);
-
+  		setDeleteListeners();
   	}
   });
 }

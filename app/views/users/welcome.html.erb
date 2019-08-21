@@ -428,6 +428,19 @@
   		values.push(e);
   	});
 
+    // check if there is at least one spending account
+    var spendingAccounts = 0
+    fs.find(".account_type").each(function() {
+      if ($(this).val() == "spend") {
+        spendingAccounts += 1;
+      }
+    });
+    if (spendingAccounts == 0) {
+      triggerNotice("Create at least one spending account", true);
+      valid = false;
+      return false;
+    }
+
   	return valid;
   }
 

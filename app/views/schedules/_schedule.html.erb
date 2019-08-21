@@ -22,5 +22,9 @@
     <% else %>
       <i class="fa fa-play-circle clickable fa-lg" id="schedule-activate-button_<%= schedule.id %>" onclick="activateSchedule(<%= schedule.id %>);"></i>
     <% end %>
+    <%#= link_to "Delete", delete_schedule_path(schedule), class: "delete-confirm fa fa-trash-alt clickable fa-lg", "confirm-message" => "This action will delete schedule '#{schedule.name}'. This cannot be undone." %>
+    <%= link_to(delete_schedule_path(schedule), class: "delete-confirm", "confirm-message" => "This action will delete schedule '#{schedule.name}'. This cannot be undone. Do you want to continue?") do %>
+      <i class="fa fa-trash clickable fa-lg"></i>
+    <% end %>
   </td>
 </tr>

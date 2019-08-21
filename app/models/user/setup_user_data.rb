@@ -15,7 +15,7 @@ class User
   		expense_params = get_expense_params(@params)
 
   		# save the accounts
-  		account_params.each do |a|
+  		account_params.reverse_each do |a|
   			#account = @current_user.accounts.new(a)
   			Account.create(a, @current_user)
   		end
