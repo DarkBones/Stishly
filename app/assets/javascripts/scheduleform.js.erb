@@ -80,7 +80,7 @@ function changeRunsEvery(obj) {
   if (val < 1){
     $(obj).parents("#schedule-form-root").find("#schedule_run_every").val("1");
   }
-  getScheduleNextOccurrences();
+  getScheduleNextOccurrences(obj);
 }
 
 function changeSchedulePeriod(val, obj) {
