@@ -146,7 +146,7 @@ class TransactionMenuTest < ApplicationSystemTestCase
     assert page.find("#transaction_account_currency").value == '0'
 
     fill_in "Amount", with: "10000"
-    assert page.find("#transaction_account_currency").value.to_f >= 8
+    assert page.find("#transaction_account_currency").value.to_f > 0
 
     page.find("#transactionform #multiple-multiple").click
     sleep 2
@@ -159,7 +159,7 @@ class TransactionMenuTest < ApplicationSystemTestCase
 
     #fill_in "Transactions", with: "one 100000"
     wait_for_ajax
-    assert page.find("#transaction_account_currency").value.to_f >= 8
+    assert page.find("#transaction_account_currency").value.to_f > 0
 
     #assert_selector '#transaction_total', text: "Total: ¥100,000"
   end

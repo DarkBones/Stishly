@@ -284,6 +284,7 @@
   	
   	row.find(".form-control").each(function(){
   		$(this).attr("name", $(this).attr("name") + num.toString());
+      $(this).attr("id", $(this).attr("id") + num.toString());
   	});
   }
 

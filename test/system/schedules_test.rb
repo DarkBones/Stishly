@@ -153,6 +153,7 @@ class SchedulesTest < ApplicationSystemTestCase
     click_on 'show advanced options'
 
     select 'Daily', from: "schedule[schedule]"
+    sleep 2
     assert_selector '#scheduleform #button-group-weekdays', visible: :hidden
     assert_selector '#scheduleform #schedule_days', visible: :hidden
     assert_selector '#scheduleform #schedule_days2', visible: :hidden
