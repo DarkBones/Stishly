@@ -58,6 +58,12 @@ function InsertTransactions() {
 
       InsertTransaction($dayDiv, t_time, t_id, active_account);
     }
+    <% if @update_day_total %>
+      $balance = $("#transactions_list #" + "<%= @date %>" + " h3 span");
+      currentBalance = parseInt($balance.attr("balance"));
+      accountCurrency = $balance.attr("currency");
+      UpdateBalance($balance, currentBalance, accountCurrency, parseInt("<%= @total_amount %>"));
+    <% end %>
   <% end %>
 
 }
@@ -73,6 +79,18 @@ function UpdateLeftMenu() {
     }
   });
 }
+
+function UpdateBalance($target, current_balance, currency, add) {
+    $.ajax({
+      type: 'GET',
+      dataType: 'json',
+      url: '/api/v1/account_display_balance/' + current_balance + '/' + currency + '/' + currency + '/' + add,
+      success: function(data) {
+        $target.attr('balance', current_balance + add);
+        $target.html(data.html);
+      }
+    });
+  }
 
 // inserts a transaction
 function InsertTransaction($dayDiv, time, id, account) {
