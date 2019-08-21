@@ -38,7 +38,7 @@ class Schedule < ApplicationRecord
   validate :subscription, :on => :create
 
   belongs_to :user
-  has_and_belongs_to_many :user_transactions, foreign_key: "schedule_id", class_name: "Transaction"
+  has_and_belongs_to_many :user_transactions, foreign_key: "schedule_id", class_name: "Transaction", dependent: :destroy
 
   def self.get_all_transactions_until_date(user, until_date, start_date=nil)
     # if start_date is nil, set it to today

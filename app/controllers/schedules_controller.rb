@@ -61,6 +61,10 @@ class SchedulesController < ApplicationController
     end
   end
 
+  def delete_all
+    current_user.schedules.destroy_all
+  end
+
 private
   
   def schedule_params

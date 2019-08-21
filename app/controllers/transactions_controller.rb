@@ -13,9 +13,6 @@ class TransactionsController < ApplicationController
 
     @transactions = Schedule.get_all_transactions_until_date(current_user, @date)
 
-    puts @transactions.class.name
-    puts @transactions.length
-
     #@transactions.sort_by &:local_datetime
     @schedule = schedule
   end
