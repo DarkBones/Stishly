@@ -17,6 +17,31 @@ class SchedulesTransaction < ApplicationRecord
 
     transaction_ids = params[:transactions].split
 
+    main_transactions = []
+    transactions = []
+    transaction_ids.each do |t_id|
+      t = current_user.transactions.find(t_id)
+      next if t.nil?
+
+      t = Transaction.find_main_transaction(t)
+
+      next if main_transactions.include? t.id
+
+      main_transactions.push(t.id)
+
+      sch_transactions = Transaction.create_scheduled_transactions(t, current_user)
+      transactions.push(Transaction.join_to_schedule(sch_transactions, schedule))
+    end
+
+    return transactions
+  end
+
+  def self.join_transactions_OLD(params, current_user)
+    schedule = current_user.schedules.find(params[:schedules])
+    return if schedule.nil?
+
+    transaction_ids = params[:transactions].split
+
     transactions = []
     transaction_ids.each do |t_id|
       add = true
