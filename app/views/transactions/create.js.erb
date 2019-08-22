@@ -68,18 +68,6 @@ function InsertTransactions() {
 
 }
 
-function UpdateLeftMenu() {
-  $.ajax({
-    type: "GET",
-    dataType: "html",
-    url: "/api/v1/render/left_menu",
-    success(data) {
-
-      $("#page-left-menu").html(data);
-    }
-  });
-}
-
 function UpdateBalance($target, current_balance, currency, add) {
     $.ajax({
       type: 'GET',

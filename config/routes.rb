@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       get '/', to: 'transactions#show'
       put '/approve', to: 'transactions#approve', as: :approve_transaction
       put '/discard', to: 'transactions#discard'
+      delete '/', to: 'transactions#delete', as: :delete_transaction
       scope '/edit' do
         put '/', to: 'transactions#update', as: :edit_transaction
         scope '/upcoming' do
@@ -38,6 +39,9 @@ Rails.application.routes.draw do
           patch '/', to: 'transactions#update_scheduled', as: :edit_scheduled_transaction
         end
       end
+    end
+    scope '/mass_delete' do
+      delete '/(:ids)', to: 'transactions#mass_delete', as: :mass_delete_transactions
     end
   end
 

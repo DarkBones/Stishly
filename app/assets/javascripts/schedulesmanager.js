@@ -12,6 +12,7 @@ function scheduleTransactionsForm(scheduleId) {
     },
     success(data) {
       $("#sch_transactions_list").prepend(data);
+      setDeleteListeners();
     }
   });
 }

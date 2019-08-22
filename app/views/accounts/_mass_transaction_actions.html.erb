@@ -1,3 +1,4 @@
 <div class="float-right">
   <button type="button" class="btn btn-link mass_transaction_action_button disabled" id="mass_assign_to_schedule" onclick="resetTransactionsToScheduleForm();" data-toggle="modal" data-target="#transactions_to_schedule">assign to schedule</button>
+  <button class="btn btn-link mass_transaction_action_button disabled delete-confirm" id="mass_delete" data-link="<%= mass_delete_transactions_path %>" ids-target="#selected-transactions" confirm-message="This action deletes all selected transactions. This cannot be undone. Continue?">delete</button>
 </div>

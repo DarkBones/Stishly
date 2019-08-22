@@ -29,7 +29,7 @@
         
         <div class="col-12 py-5">
           <%= f.submit 'Save', :class => 'float-right btn btn-primary' %>
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmation_modal">Delete</button>
+          <button type="button" class="btn btn-danger delete-confirm" confirm-message="This action will delete this transaction from the schedule. Continue?" data-link="<%= delete_transaction_path(transaction) %>">Delete</button>
         </div>
       <% end %>
     </div>

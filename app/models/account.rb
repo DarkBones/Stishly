@@ -220,23 +220,6 @@ class Account < ApplicationRecord
     return account
   end
 
-  def self.add_OLD(current_user, id, amount, local_datetime)
-    return if amount.nil?
-    
-    account = current_user.accounts.find_by_id(id)
-
-    balance = account.balance
-    balance += amount
-
-    Account.update(id, :balance => balance)
-
-    history = account.account_histories.create({
-      local_datetime: local_datetime,
-      balance: account.balance
-    })
-    history.save
-  end
-
   # TODO: Optimize add and subtract into a single function
   def self.add(current_user, account, amount, local_datetime)
     return if amount.nil?

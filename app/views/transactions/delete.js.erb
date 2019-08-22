@@ -1,0 +1,15 @@
+$("[data-dismiss=modal]").trigger({ type: "click" });
+
+<% unless @transaction_ids.nil? %>
+	
+	<% @transaction_ids.each do |id| %>
+
+		$("#transaction_<%= id %>").each(function(){
+			$(this).fadeOut(500);
+		});
+
+		UpdateLeftMenu();
+
+	<% end %>
+
+<% end %>

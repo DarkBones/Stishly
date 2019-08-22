@@ -127,6 +127,32 @@ class Transaction < ApplicationRecord
     end
   }
 
+  def self.delete(transaction, current_user)
+    return if transaction.nil?
+
+    main_transaction = self.find_main_transaction(transaction)
+    transfer_transaction = main_transaction.transfer_transaction
+
+    deleted_transactions = []
+
+    unless main_transaction.is_scheduled
+      Account.subtract(current_user, main_transaction.account, main_transaction.account_currency_amount, main_transaction.local_datetime)
+      Account.subtract(current_user, transfer_transaction.account, transfer_transaction.account_currency_amount, transfer_transaction.local_datetime) unless transfer_transaction.nil?
+    end
+
+    unless transfer_transaction.nil?
+      deleted_transactions.push(transfer_transaction.id)
+      transfer_transaction.children.destroy_all
+      transfer_transaction.destroy
+    end
+
+    deleted_transactions.push(main_transaction.id)
+    main_transaction.children.destroy_all
+    main_transaction.destroy
+
+    return deleted_transactions;
+  end
+
   def self.update(transaction, params, current_user, scheduled: false)
     if transaction.class == String || transaction.class == Integer
       transaction = current_user.transactions.find(transaction)

@@ -15,7 +15,21 @@ $(function() {
 			var message = "Are you sure?";
 			var messageAttr = $(this).attr("confirm-message");
 
-			$("#confirmation_modal form").attr("action", $(this).attr("data-link"));
+			var ids = "";
+			var action = "";
+
+			if(typeof($(this).attr("ids-target")) !== "undefined") {
+				ids = $($(this).attr("ids-target")).val().replace(/ /g, ",");
+			} else {
+				$("#confirmation_modal #ids").val("");
+			}
+
+			action = $(this).attr("data-link");
+			if (ids.length > 0) {
+				action += "/" + ids
+			}
+
+			$("#confirmation_modal form").attr("action", action);
 			$("#confirmation_modal input[type='submit']").removeAttr("disabled");
 
 			if(typeof(messageAttr) !== "undefined") {
@@ -30,11 +44,4 @@ $(function() {
 
 $(document).on("turbolinks:load", () => {
 	setDeleteListeners();
-	//setDeleteConfirmTargets();
-
-	$("#confirmation_modal").on("show.bs.modal", function() {
-    console.log("hh");
-    console.log($(this).attr("id"));
-  });
-
 });
