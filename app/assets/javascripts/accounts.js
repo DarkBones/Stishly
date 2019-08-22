@@ -33,19 +33,3 @@ function goToAccount(object) {
 $(document).ajaxComplete(function() {
   displaySummaryAccount();
 });
-
-// gets the currently active account by checking the URL of the current page
-window.getActiveAccountName = function (){
-  var urlArr = [];
-
-  urlArr = window.location.pathname.split("/");
-  if (urlArr[1].toLowerCase() === "accounts") {
-    if (typeof(urlArr[2]) !== "undefined") {
-      if (urlArr[2].length > 0){
-        return decodeURI(urlArr[2]);
-      }
-    }
-  }
-
-  return null;
-};

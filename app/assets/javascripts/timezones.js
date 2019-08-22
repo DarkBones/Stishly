@@ -9,9 +9,3 @@ $(document).on("turbolinks:load", () => {
   setTimezones();
   
 });
-
-window.setTimezones = function() {
-	$("#timezone_input").each(function(){
-    $(this).setTimezone();
-  });
-}
