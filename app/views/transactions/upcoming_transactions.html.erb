@@ -37,7 +37,6 @@
     originalTId = tId;
 
     $("#edit_upcoming_transaction_form_fields").html("");
-    $("#edit_upcoming_transaction_form #transaction_name").text("");
     $.ajax({
       type: "GET",
       dataType: "html",
@@ -50,14 +49,6 @@
         setDatepickers();
         addLadderformListeners();
         setTimezones();
-        $.ajax({
-          type: "GET",
-          dataType: "json",
-          url: "/api/v1/transactions/" + transactionId.toString(),
-          success(data) {
-            $("#edit_upcoming_transaction_form #transaction_name").text(data.description);
-          }
-        });
       }
     });
   }
@@ -68,7 +59,6 @@
     originalTId = transactionId;
 
     $("#edit_upcoming_transaction_form_fields").html("");
-    $("#edit_upcoming_transaction_form #transaction_name").text("");
     $.ajax({
       type: "GET",
       dataType: "html",
@@ -81,14 +71,6 @@
         setDatepickers();
         addLadderformListeners();
         setTimezones();
-        $.ajax({
-          type: "GET",
-          dataType: "json",
-          url: "/api/v1/transactions/" + transactionId.toString(),
-          success(data) {
-            $("#edit_upcoming_transaction_form #transaction_name").text(data.description);
-          }
-        });
       }
     });
   }

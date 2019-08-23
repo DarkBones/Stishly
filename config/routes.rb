@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       put '/discard', to: 'transactions#discard'
       delete '/', to: 'transactions#delete', as: :delete_transaction
       scope '/edit' do
-        put '/', to: 'transactions#update', as: :edit_transaction
+        patch '/', to: 'transactions#update', as: :edit_transaction
         scope '/upcoming' do
           scope '/occurrence' do
             patch '/', to: 'transactions#update_upcoming_occurrence', as: :edit_upcoming_transaction_occurrence
@@ -222,6 +222,11 @@ Rails.application.routes.draw do
               scope '/:id' do
                 get '/', to: 'api_gui#edit_upcoming_transaction_series_form'
               end
+            end
+          end
+          scope '/edit' do
+            scope '/:id' do
+              get '/', to: 'api_gui#edit_transaction'
             end
           end
         end

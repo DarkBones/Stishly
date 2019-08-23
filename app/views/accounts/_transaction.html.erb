@@ -36,7 +36,7 @@
     <% end %>
 
 
-    <a href="<%= transactions_path + "/" + transaction.id.to_s %>">
+    <a href="#" data-toggle="modal" data-target="#edit_transaction_form" onclick="editTransaction(this);" id="<%= transaction.id %>">
       <li time="<%= transaction.time_num %>" id="transaction_<%= transaction.id %>">
 
         <%= image_tag "categories/" + transaction.category.symbol + ".svg",

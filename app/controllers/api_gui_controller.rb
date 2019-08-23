@@ -65,6 +65,11 @@ class ApiGuiController < BaseApiBrowserController
   	render partial: "transactions/edit_upcoming_transaction_occurrence", :locals => {:transaction => transaction, :schedule_id => params[:schedule_id], :schedule_period_id => params[:schedule_period_id], :scheduled_transaction_id => params[:scheduled_transaction_id]}
   end
 
+  def edit_transaction
+    transaction = current_user.transactions.find(params[:id]).decorate
+    render partial: "transactions/edit_transaction", :locals => {:transaction => transaction}
+  end
+
   def edit_upcoming_transaction_series_form
   	transaction = current_user.transactions.find(params[:id]).decorate
   	render partial: "transactions/edit_upcoming_transaction_series", :locals => {:transaction => transaction}
