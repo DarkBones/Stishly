@@ -32,15 +32,15 @@ $(document).on("turbolinks:load", () => {
 
     // GET DATE AND TIME
     window.getDate = function () {
-      var dt = new Date(),
-          h = dt.getHours(),
-          m = dt.getMinutes();
-          d = dt.getDate();
-          mm = dt.getMonth();
-          y = dt.getYear() + 1900;
-      if(h < 10) h = "0" + h;
-      if(m < 10) m = "0" + m;
-      if(d < 10) d = "0" + d;
+      var dt = new Date();
+      var h = dt.getHours();
+      var m = dt.getMinutes();
+      var d = dt.getDate();
+      var mm = dt.getMonth();
+      var y = dt.getYear() + 1900;
+      if(h < 10) {h = "0" + h};
+      if(m < 10) {m = "0" + m};
+      if(d < 10) {d = "0" + d};
 
       var month = new Array();
       month[0] = "Jan";
@@ -59,15 +59,15 @@ $(document).on("turbolinks:load", () => {
       return d + "-" + month[mm] + "-" + y;
     }
     window.getTime = function () {
-      var dt = new Date(),
-          h = dt.getHours(),
-          m = dt.getMinutes();
-          d = dt.getDate();
-          mm = dt.getMonth();
-          y = dt.getYear() + 1900;
-      if(h < 10) h = "0" + h;
-      if(m < 10) m = "0" + m;
-      if(d < 10) d = "0" + d;
+      var dt = new Date();
+      var h = dt.getHours();
+      var m = dt.getMinutes();
+      var d = dt.getDate();
+      var mm = dt.getMonth();
+      var y = dt.getYear() + 1900;
+      if(h < 10) {h = "0" + h};
+      if(m < 10) {m = "0" + m};
+      if(d < 10) {d = "0" + d};
 
       return h + ":" + m;
     }
