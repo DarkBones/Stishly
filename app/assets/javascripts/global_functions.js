@@ -38,9 +38,9 @@ $(document).on("turbolinks:load", () => {
       var d = dt.getDate();
       var mm = dt.getMonth();
       var y = dt.getYear() + 1900;
-      if(h < 10) {h = "0" + h};
-      if(m < 10) {m = "0" + m};
-      if(d < 10) {d = "0" + d};
+      if(h < 10) {h = "0" + h;}
+      if(m < 10) {m = "0" + m;}
+      if(d < 10) {d = "0" + d;}
 
       var month = new Array();
       month[0] = "Jan";
@@ -65,9 +65,9 @@ $(document).on("turbolinks:load", () => {
       var d = dt.getDate();
       var mm = dt.getMonth();
       var y = dt.getYear() + 1900;
-      if(h < 10) {h = "0" + h};
-      if(m < 10) {m = "0" + m};
-      if(d < 10) {d = "0" + d};
+      if(h < 10) {h = "0" + h;}
+      if(m < 10) {m = "0" + m;}
+      if(d < 10) {d = "0" + d;}
 
       return h + ":" + m;
     }
