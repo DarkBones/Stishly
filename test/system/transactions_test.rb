@@ -1,7 +1,6 @@
 require "application_system_test_case"
 
 class TransactionsTest < ApplicationSystemTestCase
-
   test "open and close transactions menu" do
     """
     Log in and click on 'new transaction'
@@ -210,7 +209,7 @@ class TransactionsTest < ApplicationSystemTestCase
     params = create_params(params)
     
     while check_form(params) == false
-        unless page.find("#transaction_description", visible: :all).visible?
+        unless page.find("#transactionform #transaction_description", visible: :all).visible?
             click_on "New Transaction"
         end
         fill_form(params)
@@ -249,18 +248,18 @@ class TransactionsTest < ApplicationSystemTestCase
   end
 
   def fill_form(params)
-    unless page.find("#transaction_description", visible: :all).visible?
+    unless page.find("#transactionform #transaction_description", visible: :all).visible?
         click_on "New Transaction"
     end
 
-    page.find("#type-" + params[:type]).click
+    page.find("#transactionform #type-" + params[:type]).click
     fill_in "Description", with: params[:description]
     select params[:account], from: "Account" unless params[:type] == "transfer"
     select params[:from_account], from: "From account" if params[:type] == "transfer"
     select params[:to_account], from: "To account" if params[:type] == "transfer"
 
     unless params[:type] == "transfer"
-        page.find("#categories-dropdown").click
+        page.find("#transactionform #categories-dropdown").click
         page.find(".category_" + params[:category].to_s).click
         select params[:currency], from: "Currency" unless params[:currency].nil?
     end
@@ -276,23 +275,22 @@ class TransactionsTest < ApplicationSystemTestCase
     fill_in "Date", with: params[:date] unless params[:date].nil?
     fill_in "Time", with: params[:time] unless params[:time].nil?
     fill_in "Rate", with: params[:rate] unless params[:rate].nil?
-    page.find("#transaction_account_currency").fill_in with: params[:amount_in_account_currency] unless params[:amount_in_account_currency].nil?
-    page.find("#transaction_rate_from_to").fill_in with: params[:transfer_rate] unless params[:transfer_rate].nil?
-    page.find("#transaction_to_account_currency").fill_in with: params[:amount_in_transfer_currency] unless params[:amount_in_transfer_currency].nil?
+    page.find("#transactionform #transaction_account_currency").fill_in with: params[:amount_in_account_currency] unless params[:amount_in_account_currency].nil?
+    page.find("#transactionform #transaction_rate_from_to").fill_in with: params[:transfer_rate] unless params[:transfer_rate].nil?
+    page.find("#transactionform #transaction_to_account_currency").fill_in with: params[:amount_in_transfer_currency] unless params[:amount_in_transfer_currency].nil?
 
     #take_screenshot
   end
 
   def check_form(params)
-    unless page.find("#transaction_description", visible: :all).visible?
+    unless page.find("#transactionform #transaction_description", visible: :all).visible?
         click_on "New Transaction"
     end
 
-    return false if page.find("#transaction_description").value != params[:description].to_s
-    return false if page.find("#transaction_amount").value != params[:amount].to_s unless params[:multiple] == "multiple"
-    return false if page.find("#transaction_transactions").value != params[:transactions].to_s unless params[:multiple] == "single"
+    return false if page.find("#transactionform #transaction_description").value != params[:description].to_s
+    return false if page.find("#transactionform #transaction_amount").value != params[:amount].to_s unless params[:multiple] == "multiple"
+    return false if page.find("#transactionform #transaction_transactions").value != params[:transactions].to_s unless params[:multiple] == "single"
 
     return true
   end
-
 end
