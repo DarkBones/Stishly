@@ -196,7 +196,7 @@ class Transaction < ApplicationRecord
     return transaction
   end
 
-  def self.cancel_upcoming_occurrence(current_user, transaction, schedule_id, schedule_period_id)
+  def self.cancel_upcoming_occurrence(transaction, schedule_id, schedule_period_id)
     # if the transaction already exists, it means that it was edited and is_cancelled can simply be set to true
     if !transaction.scheduled_transaction_id.nil? || !transaction.scheduled_date.nil?
       transaction.is_cancelled =  true
@@ -247,7 +247,7 @@ class Transaction < ApplicationRecord
     }
   end
 
-  def self.get_details(transactions, active_account, current_user)
+  def self.get_details(transactions, active_account)
     transaction_amounts_all = []
     account_ids_all = []
     transactions_parent = []
@@ -258,9 +258,8 @@ class Transaction < ApplicationRecord
 
     transactions.each do |t|
 
-      amount = 0
-
       amount = get_account_currency_amount(t, active_account)
+      amount ||= 0
       date = t.local_datetime.to_s.split[0]
 
       if active_account.nil? || active_account.id == t.account.id
@@ -358,7 +357,6 @@ class Transaction < ApplicationRecord
     Account.add(transaction.user, transaction.account, transaction.account_currency_amount, transaction.local_datetime)
   end
 
-private
   def self.convert_float_to_i_amount(amount, currency)
     currency = Money::Currency.new(currency) if currency.class == String
 

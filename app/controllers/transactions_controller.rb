@@ -34,7 +34,7 @@ class TransactionsController < ApplicationController
     end
 
 
-    transaction_details = Transaction.get_details(transactions, active_account, current_user)
+    transaction_details = Transaction.get_details(transactions, active_account)
 
     @transaction_amounts_all = transaction_details[:transaction_amounts_all]
     @account_ids_all = transaction_details[:account_ids_all]
