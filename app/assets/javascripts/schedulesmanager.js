@@ -81,5 +81,5 @@ function activateSchedule(scheduleId) {
     success(data) {
       $.getScript("api/v1/render/swap_schedules_table/" + scheduleId.toString() + "/inactive");
     }
-  })
+  });
 }
