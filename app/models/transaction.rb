@@ -164,7 +164,7 @@ class Transaction < ApplicationRecord
     return transactions
   end
 
-  def self.update_upcoming_occurrence(params, current_user, transaction)
+  def self.update_upcoming_occurrence(params, current_user)
     
     transactions = self.update(current_user.transactions.find(params[:id]), params, current_user)
 
