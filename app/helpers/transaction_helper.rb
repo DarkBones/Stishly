@@ -112,7 +112,7 @@ module TransactionHelper
 
     unless transaction.local_datetime.nil?
       dateclass = "datepicker-null"
-      date = transaction.local_datetime.strftime("%d-%b-%y")
+      date = transaction.local_datetime.strftime("%d-%b-%Y")
     else
       dateclass = ""
       date = nil

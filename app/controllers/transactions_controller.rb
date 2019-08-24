@@ -45,6 +45,10 @@ class TransactionsController < ApplicationController
     @total_amount = transaction_details[:total_amount].to_s
 
   end
+  
+  def update
+    @transactions = Transaction.update(params[:id], transaction_params, current_user)
+  end
 
   def create_scheduled
     @transaction = Transaction.create(transaction_params, current_user, scheduled: true)
@@ -84,9 +88,6 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find_main_transaction(@transaction)
   end
 
-  def update
-    @transactions = Transaction.update(params[:id], transaction_params, current_user)
-  end
 
   def queued
     @transactions = current_user.transactions.where("is_queued = true").decorate

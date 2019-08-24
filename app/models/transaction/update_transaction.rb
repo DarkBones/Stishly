@@ -9,7 +9,7 @@ class Transaction
   	end
 
   	def perform
-  		original_transaction = @transaction
+  		original_transaction = @transaction.dup
   		new_transaction = update_transactions(@transaction, @params, @user)
 
   		update_account_balances(original_transaction, new_transaction, @user)
