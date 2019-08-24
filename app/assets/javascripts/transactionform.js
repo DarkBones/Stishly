@@ -127,6 +127,7 @@ function updateTransactionResult(formId) {
     rate = $rateTarget.val();
     if (isMultiple) {
       amount = getTransactionTotalFromMultiple(formId);
+      updateTransactionsTotal(formId);
     } else {
       amount = $amountTarget.val();
     }
@@ -150,10 +151,9 @@ function updateTransactionResult(formId) {
       }
     });
   }
-
-  if(isMultiple){
+  /*if(isMultiple){
     updateTransactionsTotal(formId);
-  }
+  }*/
 }
 
 // whether the transfer currency rate should be shown

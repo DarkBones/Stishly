@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", () => {
+//$(document).on("turbolinks:load", () => {
 
   $(function() {
     
@@ -79,4 +79,4 @@ $(document).on("turbolinks:load", () => {
     }
   });
 
-});
+//});
