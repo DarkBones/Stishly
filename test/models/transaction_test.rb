@@ -30,15 +30,14 @@
 require 'test_helper'
 
 class TransactionTest < ActiveSupport::TestCase
+
   test "Create simple transaction" do
     current_user = users(:bas)
 
     params = create_params
 
-    transactions = Transaction.create(params, current_user)
-    transactions.each do |transaction|
-      assert transaction.persisted? == true, format_error("Not able to create transaction")
-    end
+    transaction = Transaction.create(params, current_user)
+    assert transaction.persisted? == true, format_error("Not able to create transaction")
   end
 
   test "Amount conversion" do
@@ -49,10 +48,8 @@ class TransactionTest < ActiveSupport::TestCase
       amount: "10"
     }
     params = create_params(params)
-    transactions = Transaction.create(params, current_user)
-    transactions.each do |transaction|
-      assert transaction.amount == -1000, format_error("Unexpected transaction amount", "-1000", transaction.amount)
-    end
+    transaction = Transaction.create(params, current_user)
+    assert transaction.amount == -1000, format_error("Unexpected transaction amount", "-1000", transaction.amount)
 
     params = {
       type: "expense",
@@ -60,10 +57,8 @@ class TransactionTest < ActiveSupport::TestCase
       currency: "JPY"
     }
     params = create_params(params)
-    transactions = Transaction.create(params, current_user)
-    transactions.each do |transaction|
-      assert transaction.amount == -100, format_error("Unexpected transaction amount", "-100", transaction.amount)
-    end
+    transaction = Transaction.create(params, current_user)
+    assert transaction.amount == -100, format_error("Unexpected transaction amount", "-100", transaction.amount)
   end
 
   test "Currency conversion" do
@@ -75,10 +70,8 @@ class TransactionTest < ActiveSupport::TestCase
       rate: "0.008"
     }
     params = create_params(params)
-    transactions = Transaction.create(params, current_user)
-    transactions.each do |transaction|
-      assert transaction.account_currency_amount == -8000, format_error("Unexpected transaction amount", "-8000", transaction.account_currency_amount)
-    end
+    transaction = Transaction.create(params, current_user)
+    assert transaction.account_currency_amount == -8000, format_error("Unexpected transaction amount", "-8000", transaction.account_currency_amount)
   end
 
   test "Multiple transactions" do
@@ -90,19 +83,10 @@ class TransactionTest < ActiveSupport::TestCase
       transactions: "one 100\ntwo 200\nthree 300\nfour 400"
     }
     params = create_params(params)
-    transactions = Transaction.create(params, current_user)
+    transaction = Transaction.create(params, current_user)
 
-    assert transactions.length == 5, format_error("Unexpected transaction count", 5, transactions.length)
-
-    main_transaction = nil
-    child_transactions = []
-    transactions.each do |transaction|
-      child_transactions.push(transaction) unless transaction.parent_id.nil?
-      main_transaction = transaction if transaction.parent_id.nil?
-    end
-
-    assert main_transaction.amount == -100000, format_error("Unexpected main transaction amount", -100000, main_transaction.amount)
-    assert child_transactions.length == 4, format_error("Unexpected amount of child transactions", 4, child_transactions.length)
+    assert transaction.children.length == 4, format_error("Unexpected transaction count", 4, transaction.children.length)
+    assert transaction.amount == -100000, format_error("Unexpected main transaction amount", -100000, transaction.amount)
 
   end
 
@@ -119,20 +103,17 @@ class TransactionTest < ActiveSupport::TestCase
     }
     params = create_params(params)
 
-    transactions = Transaction.create(params, current_user)
-    assert transactions.length == 2, format_error("Unexpected amount of transactions", 2, transactions.length)
+    transaction = Transaction.create(params, current_user)
+    assert_not transaction.transfer_transaction.nil?, format_error("No transfer transaction")
 
-    transactions.each do |transaction|
-      if transaction.account_id == from_account.id
-        assert transaction.amount == -100000, format_error("Unexpected transaction amount", -100000, transaction.amount)
-        assert transaction.direction == -1, format_error("Unexpected transaction direction", -1, transaction.direction)
-        assert transaction.transfer_account_id == to_account.id, format_error("Unexpected transaction transfer account", to_account.id, transaction.transfer_account_id)
-      else
-        assert transaction.amount == 100000, format_error("Unexpected transaction amount", 100000, transaction.amount)
-        assert transaction.direction == 1, format_error("Unexpected transaction direction", 1, transaction.direction)
-        assert transaction.transfer_account_id == from_account.id, format_error("Unexpected transaction transfer account", from_account.id, transaction.transfer_account_id)
-      end
-    end
+    assert transaction.account.id == from_account.id
+    assert transaction.amount == -100000, format_error("Unexpected transaction amount", -100000, transaction.amount)
+    assert transaction.direction == -1, format_error("Unexpected transaction direction", -1, transaction.direction)
+    assert transaction.transfer_account_id == to_account.id, format_error("Unexpected transaction transfer account", to_account.id, transaction.transfer_account_id)
+
+    assert transaction.transfer_transaction.amount == 100000, format_error("Unexpected transaction amount", 100000, transaction.transfer_transaction.amount)
+    assert transaction.transfer_transaction.direction == 1, format_error("Unexpected transaction direction", 1, transaction.transfer_transaction.direction)
+    assert transaction.transfer_transaction.transfer_account_id == from_account.id, format_error("Unexpected transaction transfer account", from_account.id, transaction.transfer_transaction.transfer_account_id)
   end
 
   test "Multi transfer transactions" do
@@ -150,8 +131,9 @@ class TransactionTest < ActiveSupport::TestCase
     }
     params = create_params(params)
 
-    transactions = Transaction.create(params, current_user)
-    assert transactions.length == 10, format_error("Unexpected amount of transactions", 10, transactions.length)
+    transaction = Transaction.create(params, current_user)
+    assert transaction.children.length == 4, format_error("Unexpected amount of transactions", 4, transaction.children.length)
+    assert transaction.transfer_transaction.children.length == 4, format_error("Unexpected amount of transactions", 4, transaction.transfer_transaction.children.length)
   end
 
   test "transfer between accounts with different currencies" do
@@ -170,18 +152,15 @@ class TransactionTest < ActiveSupport::TestCase
     }
     params = create_params(params)
 
-    transactions = Transaction.create(params, current_user)
-    transactions.each do |t|
-      if t.direction == -1
-        assert t.amount == -100, format_error("Unexpected transaction amount", -100, t.amount)
-        assert t.account_currency_amount == -100, format_error("Unexpected transaction account currency amount", -100, t.account_currency_amount)
-        assert t.user_currency_amount == -80, format_error("Unexpected transaction user currency amount", -80, t.user_currency_amount)
-      else
-        assert t.amount == 100, format_error("Unexpected transaction amount", 100, t.amount)
-        assert t.account_currency_amount == 80, format_error("Unexpected transaction account currency amount", 80, t.account_currency_amount)
-        assert t.user_currency_amount == 80, format_error("Unexpected transaction user currency amount", 80, t.user_currency_amount)
-      end
-    end
+    transaction = Transaction.create(params, current_user)
+    assert transaction.amount == -100, format_error("Unexpected transaction amount", -100, transaction.amount)
+    assert transaction.account_currency_amount == -100, format_error("Unexpected transaction account currency amount", -100, transaction.account_currency_amount)
+    assert transaction.user_currency_amount == -80, format_error("Unexpected transaction user currency amount", -80, transaction.user_currency_amount)
+
+    assert transaction.transfer_transaction.amount == 100, format_error("Unexpected transaction amount", 100, transaction.transfer_transaction.amount)
+    assert transaction.transfer_transaction.account_currency_amount == 80, format_error("Unexpected transaction account currency amount", 80, transaction.transfer_transaction.account_currency_amount)
+    assert transaction.transfer_transaction.user_currency_amount == 80, format_error("Unexpected transaction user currency amount", 80, transaction.transfer_transaction.user_currency_amount)
+
 
   end
 

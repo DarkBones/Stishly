@@ -19,17 +19,24 @@ class ApiGuiController < BaseApiBrowserController
 
     unless params[:account_name].nil?
       account = Account.get_from_name(params[:account_name], current_user)
+      currency = account.currency
     end
 
     date_formatted = User.format_date(transaction.local_datetime.to_date, false, false)
     d = transaction.local_datetime.to_date.to_s
-    account.nil? ? currency = current_user.currency : account.currency
-
+    currency ||= current_user.currency
+ 
     day_total = Account.day_total(account, current_user, transaction.local_datetime.to_date)
 
     transactions = []
-    transactions.push(render_to_string partial: 'accounts/transaction', :locals => { :active_account => account, :transaction => transaction })
-    transactions.push(render_to_string partial: 'accounts/transaction', :locals => { :active_account => account, :transaction => transfer_transaction }) unless transaction.transfer_transaction.nil?
+
+    if params[:account_name].nil? || params[:account_name] == transaction.account.name
+      transactions.push(render_to_string partial: 'accounts/transaction', :locals => { :active_account => account, :transaction => transaction })
+    end
+
+    if params[:account_name].nil? || params[:account_name] == transfer_transaction.account.name
+      transactions.push(render_to_string partial: 'accounts/transaction', :locals => { :active_account => account, :transaction => transfer_transaction }) unless transaction.transfer_transaction.nil?
+    end
 
     render json: {
       date: transaction.local_datetime.to_date.to_s,

@@ -7,11 +7,9 @@ class NewScheduleTransactionTest < ActiveSupport::TestCase
 
     params = create_params
 
-    transactions = Transaction.create(params, current_user)
-    transactions.each do |transaction|
-      assert transaction.persisted? == true, format_error("Not able to create transaction")
-      assert transaction.schedules[0].id == 101, format_error("Transaction not linked to schedule")
-    end
+    transaction = Transaction.create(params, current_user)
+    assert transaction.persisted? == true, format_error("Not able to create transaction")
+    assert transaction.schedules[0].id == 101, format_error("Transaction not linked to schedule")
   end
 
   test "new multiple transactions" do
@@ -25,7 +23,7 @@ class NewScheduleTransactionTest < ActiveSupport::TestCase
     params = create_params(params)
 
     transactions = Transaction.create(params, current_user)
-    assert transactions.length == 5, format_error("Unexpected amount of transactions", 5, transactions.length)
+    assert transactions.children.length == 4, format_error("Unexpected amount of transactions", 4, transactions.children.length)
   end
 
   def create_params(customised_params={}, current_user=nil, account=nil)

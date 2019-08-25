@@ -73,7 +73,7 @@ function insertTransactionDiv(html, $dayDiv, time) {
 
 function insertDayDiv(html, date, dateNum) {
 	if($("#day_" + date).length > 0){
-		updateDayDiv(date);
+		$("#" + date).find("h3").replaceWith($($.parseHTML(html)).find("h3")); // update the existing div
 		return false;
 	}
 
@@ -90,8 +90,4 @@ function insertDayDiv(html, date, dateNum) {
 	if(inserted == false) {
 		$("#transactions_list").append(html).hide().fadeIn(500);
 	}
-}
-
-function updateDayDiv(date) {
-	
 }

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UpcomingTransactionsTest < ActiveSupport::TestCase
+class FutureTransactionsTest < ActiveSupport::TestCase
 
 	test "create future transaction" do
 		user = users(:future_transactions)
@@ -8,7 +8,7 @@ class UpcomingTransactionsTest < ActiveSupport::TestCase
 		params = create_params
 
 		params[:date] = 1.week.from_now.strftime("%d-%b-%Y")
-		transaction = Transaction.create(params, user)[0]
+		transaction = Transaction.create(params, user)
 
 		assert transaction.is_scheduled == true, format_error("Future transactions should be scheduled")
 		assert transaction.scheduled_date == 1.week.from_now.to_date, format_error("Unexpected scheduled date", 1.week.from_now.to_date, transaction.scheduled_date)
@@ -21,7 +21,7 @@ class UpcomingTransactionsTest < ActiveSupport::TestCase
 		params = create_params
 
 		params[:date] = 1.week.ago.strftime("%d-%b-%Y")
-		transaction = Transaction.create(params, user)[0]
+		transaction = Transaction.create(params, user)
 
 		assert transaction.is_scheduled == false, format_error("Past transactions should not be scheduled")
 		assert transaction.scheduled_date.nil?, format_error("Unexpected scheduled date", "nil", transaction.scheduled_date)
@@ -33,7 +33,7 @@ class UpcomingTransactionsTest < ActiveSupport::TestCase
 		params = create_params
 
 		params[:date] = Time.now.strftime("%d-%b-%Y")
-		transaction = Transaction.create(params, user)[0]
+		transaction = Transaction.create(params, user)
 
 		assert transaction.is_scheduled == false, format_error("Present transactions should not be scheduled")
 		assert transaction.scheduled_date.nil?, format_error("Unexpected scheduled date", "nil", transaction.scheduled_date)
