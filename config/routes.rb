@@ -249,6 +249,9 @@ Rails.application.routes.draw do
         scope '/left_menu' do
           get '/', to: 'api_gui#render_left_menu'
         end
+        scope '/create_transaction' do
+          get '/:transaction_id/(:account_name)', to: 'api_gui#create_transaction'
+        end
         scope '/transaction' do
           scope '/:transaction' do
             get '/', to: 'api_gui#render_transaction'

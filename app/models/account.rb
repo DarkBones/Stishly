@@ -30,6 +30,14 @@ class Account < ApplicationRecord
   has_many :account_histories, dependent: :destroy
   has_many :sch_transactions
 
+  def self.day_total(account, user, date)
+    if account.nil?
+      return user.transactions.where("DATE(transactions.local_datetime) = DATE(?) AND parent_id IS NULL AND is_scheduled = false", date).sum(:user_currency_amount)
+    else
+      return account.transactions.where("DATE(transactions.local_datetime) = DATE(?) AND parent_id IS NULL AND is_scheduled = false", date).sum(:account_currency_amount)
+    end
+  end
+
   def self.get_from_name(name, current_user)
     if name
       account = current_user.accounts.where(name: name).take()

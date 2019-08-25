@@ -18,6 +18,10 @@ class TransactionsController < ApplicationController
   end
 
   def create
+    @transaction = Transaction.create(transaction_params, current_user)
+  end
+
+  def create_OLD
     @params = params[:transaction]
     all_transactions = Transaction.create(transaction_params, current_user)
 

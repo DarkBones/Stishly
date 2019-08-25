@@ -331,7 +331,7 @@ class Transaction < ApplicationRecord
       Account.add(current_user, transaction.transfer_transaction.account, transaction.transfer_transaction.account_currency_amount, transaction.transfer_transaction.local_datetime) unless transaction.transfer_transaction.nil?
     end
 
-    return transactions
+    return transaction
   end
 
   def self.create_from_schedule(transaction, schedule, scheduled_transaction_id)

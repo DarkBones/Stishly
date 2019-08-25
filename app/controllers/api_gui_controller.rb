@@ -13,6 +13,33 @@ class ApiGuiController < BaseApiBrowserController
 		render json: Account.get_display_balance_html(params)
 	end
 
+  def create_transaction
+    transaction = current_user.transactions.find(params[:transaction_id]).decorate
+    transfer_transaction = transaction.transfer_transaction.decorate unless transaction.transfer_transaction.nil?
+
+    unless params[:account_name].nil?
+      account = Account.get_from_name(params[:account_name], current_user)
+    end
+
+    date_formatted = User.format_date(transaction.local_datetime.to_date, false, false)
+    d = transaction.local_datetime.to_date.to_s
+    account.nil? ? currency = current_user.currency : account.currency
+
+    day_total = Account.day_total(account, current_user, transaction.local_datetime.to_date)
+
+    transactions = []
+    transactions.push(render_to_string partial: 'accounts/transaction', :locals => { :active_account => account, :transaction => transaction })
+    transactions.push(render_to_string partial: 'accounts/transaction', :locals => { :active_account => account, :transaction => transfer_transaction }) unless transaction.transfer_transaction.nil?
+
+    render json: {
+      date: transaction.local_datetime.to_date.to_s,
+      date_num: (transaction.local_datetime.to_date.to_s.gsub! '-', ''),
+      time: transaction.local_datetime.strftime("%H%M%S"),
+      date_div: (render_to_string partial: 'accounts/transactions_date', :locals => { :d => d, :account_currency => currency, :day_total => day_total, :d_formatted => date_formatted }),
+      transactions: transactions
+    }
+  end
+
 	def new_account_form
 		render partial: "accounts/new_account_form"
 	end
