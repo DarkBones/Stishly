@@ -34,8 +34,10 @@ class ApiGuiController < BaseApiBrowserController
       transactions.push(render_to_string partial: 'accounts/transaction', :locals => { :active_account => account, :transaction => transaction })
     end
 
-    if params[:account_name].nil? || params[:account_name] == transfer_transaction.account.name
-      transactions.push(render_to_string partial: 'accounts/transaction', :locals => { :active_account => account, :transaction => transfer_transaction }) unless transaction.transfer_transaction.nil?
+    unless transfer_transaction.nil?
+      if params[:account_name].nil? || params[:account_name] == transfer_transaction.account.name
+        transactions.push(render_to_string partial: 'accounts/transaction', :locals => { :active_account => account, :transaction => transfer_transaction }) unless transaction.transfer_transaction.nil?
+      end
     end
 
     render json: {
