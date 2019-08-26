@@ -265,7 +265,7 @@ Rails.application.routes.draw do
           end
         end
         scope '/transaction_date' do
-          scope '/:date/:day_total/:account_currency' do
+          scope '/:date/(:account)' do
             get '/', to: 'api_gui#render_transaction_date'
           end
         end

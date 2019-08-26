@@ -22,7 +22,7 @@ class TransactionsController < ApplicationController
   end
   
   def update
-    @transactions = Transaction.update(params[:id], transaction_params, current_user)
+    @transaction = Transaction.update(params[:id], transaction_params, current_user)
   end
 
   def create_scheduled

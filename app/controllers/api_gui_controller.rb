@@ -79,9 +79,24 @@ class ApiGuiController < BaseApiBrowserController
     render partial: "schedules/transactionlist", :locals => {:transactions => transactions, :schedule_id => params[:schedule]}
   end
 
+  #def render_transaction_date
+  #	date_formatted = User.format_date(params[:date].to_date, false, false)
+  #  render partial: 'accounts/transactions_date', :locals => { :d => params[:date], :account_currency => params[:account_currency], :day_total => params[:day_total], :d_formatted => date_formatted }
+  #end
+
   def render_transaction_date
-  	date_formatted = User.format_date(params[:date].to_date, false, false)
-    render partial: 'accounts/transactions_date', :locals => { :d => params[:date], :account_currency => params[:account_currency], :day_total => params[:day_total], :d_formatted => date_formatted }
+    account = Account.get_from_name(params[:account], current_user) unless params[:account].nil?
+    date = params[:date].to_date
+    date_formatted = User.format_date(params[:date].to_date, false, false)
+    day_total = Account.day_total(account, current_user, date)
+
+    if account.nil?
+      currency = current_user.currency
+    else
+      currency = account.currency
+    end
+
+    render partial: 'accounts/transactions_date', :locals => { :d => params[:date], :account_currency => currency, :day_total => day_total, :d_formatted => date_formatted }
   end
 
   def edit_schedule_form
