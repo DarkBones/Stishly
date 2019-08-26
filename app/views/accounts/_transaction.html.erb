@@ -14,9 +14,9 @@
   if transaction.currency != currency
     conversion_message = balance(transaction.amount, Money::Currency.new(transaction.currency), "cents")
   end
-  %>
+%>
 
-<div class="transaction_listing" time="<%= transaction.time_num %>">
+<div id="transaction_listing_<%= transaction.id %>" class="transaction_listing" time="<%= transaction.time_num %>">
   <div class="select-item-container" id="transaction_<%= transaction.id %>">
 
     <div class="transaction-checkbox float-left" id="select_transaction_<%= transaction.id %>">

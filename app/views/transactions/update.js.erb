@@ -1,35 +1,3 @@
 $("[data-dismiss=modal]").trigger({ type: "click" });
 
-var $originalTxn = $("#transaction_<%= @transaction.id %>").parents(".transaction_listing");
-var $originalTransferTxn = null;
-var $dayDiv = $originalTxn.parents(".transactions_date");
-var activeAccount = getActiveAccountName();
-var date = $dayDiv.attr("id");
-
-<% unless @transaction.transfer_transaction.nil? %>
-	$originalTransferTxn = $("#transaction_<%= @transaction.transfer_transaction.id %>").parents(".transaction_listing");
-<% end %>
-
-// update the day div
-var url = "/api/v1/render/transaction_date/" + date
-if (activeAccount !== null) {
-	url += "/" + activeAccount
-}
-$.ajax({
-	type: "GET",
-	dataType: "html",
-	url: url,
-	success(data) {
-		$("#" + date).find("h3").replaceWith($($.parseHTML(data)).find("h3"));
-		$originalTxn.remove();
-		if($originalTransferTxn !== null) {
-			$originalTransferTxn.remove();
-		}
-
-		if($dayDiv.find(".transaction_listing").length == 0) {
-			$dayDiv.remove();
-		}
-
-		<%= render partial: "insert_transaction", :locals => {:transaction => @transaction} %>
-	}
-});
+<%= render partial: "remove_transaction", :locals => {:transaction => @transaction, :insert_new => true} %>

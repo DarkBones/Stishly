@@ -1,0 +1,33 @@
+var $originalTxn = $("#transaction_listing_<%= transaction.id %>");
+var $originalTransferTxn = null;
+var $dayDiv = $originalTxn.parents(".transactions_date");
+var activeAccount = getActiveAccountName();
+var date = $dayDiv.attr("id");
+
+<% unless transaction.transfer_transaction.nil? %>
+	$originalTransferTxn = $("#transaction_listing_<%= transaction.transfer_transaction.id %>");
+<% end %>
+
+// update the day div
+var url = "/api/v1/render/transaction_date/" + date
+if (activeAccount !== null) {
+	url += "/" + activeAccount
+}
+$.ajax({
+	type: "GET",
+	dataType: "html",
+	url: url,
+	success(data) {
+		$("#" + date).find("h3").replaceWith($($.parseHTML(data)).find("h3"));
+		$originalTxn.remove();
+		if($originalTransferTxn !== null) {
+			$originalTransferTxn.remove();
+		}
+
+		if($dayDiv.find(".transaction_listing").length == 0) {
+			$dayDiv.remove();
+		}
+
+		<%= render partial: "insert_transaction", :locals => {:transaction => transaction} if insert_new %>
+	}
+});

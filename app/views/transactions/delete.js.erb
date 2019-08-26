@@ -1,15 +1,44 @@
 $("[data-dismiss=modal]").trigger({ type: "click" });
 
+UpdateLeftMenu();
+
+var $originalTxn, $dayDiv, url, date;
+var activeAccount = getActiveAccountName();
+
 <% unless @transaction_ids.nil? %>
 	
 	<% @transaction_ids.each do |id| %>
 
-		$("#transaction_<%= id %>").each(function(){
-			$(this).fadeOut(500);
-		});
+		deleteTransaction("<%= id %>");
 
-		UpdateLeftMenu();
+		var $originalTxn = $("#transaction_listing_<%= id %>");
+		var $dayDiv = $originalTxn.parents(".transactions_date");
 
+		$originalTxn.remove();
+
+		if($dayDiv.find(".transaction_listing").length == 0) {
+			$dayDiv.remove();
+		}
 	<% end %>
 
 <% end %>
+
+function deleteTransaction(id) {
+	var $originalTxn = $("#transaction_listing_" + id);
+	var $dayDiv = $originalTxn.parents(".transactions_date");
+	var date = $dayDiv.attr("id");
+
+	var url = "/api/v1/render/transaction_date/" + date
+	if (activeAccount !== null) {
+		url += "/" + activeAccount
+	}
+
+	$.ajax({
+		type: "GET",
+		dataType: "html",
+		url: url,
+		success(data) {
+			$("#" + date).find("h3").replaceWith($($.parseHTML(data)).find("h3"));
+		}
+	});
+}
