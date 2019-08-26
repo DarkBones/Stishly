@@ -142,13 +142,13 @@ class Transaction < ApplicationRecord
 
     unless transfer_transaction.nil?
       deleted_transactions.push(transfer_transaction.id)
-      #transfer_transaction.children.destroy_all
-      #transfer_transaction.destroy
+      transfer_transaction.children.destroy_all
+      transfer_transaction.destroy
     end
 
     deleted_transactions.push(main_transaction.id)
-    #main_transaction.children.destroy_all
-    #main_transaction.destroy
+    main_transaction.children.destroy_all
+    main_transaction.destroy
 
     return deleted_transactions;
   end
