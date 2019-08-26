@@ -12,7 +12,7 @@ class SchTransactionsTest < ApplicationSystemTestCase
     page.find("#select_transaction_1804").click
     page.find("#select_transaction_1806").click
 
-    click_on "assign to schedule"
+    page.find("#mass_assign_to_schedule").click
 
     assert page.find("#schedules_transaction_transactions", visible: :all).value == "1801 1804 1806"
 

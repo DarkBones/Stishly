@@ -29,68 +29,69 @@
     
   </head>
   <body class="<%= @layout_bg %>">
-    <header>
-      <%= render 'layouts/navigation' %>
-    </header>
-    <main role="main">
-      <div id="overlay"></div>
-      <%= render 'layouts/messages' %>
-      <%= render 'layouts/confirmation' %>
+    <div class="page-container">
+      <header>
+        <%= render 'layouts/navigation' %>
+      </header>
+      <main role="main">
+        <div id="overlay"></div>
+        <%= render 'layouts/messages' %>
+        <%= render 'layouts/confirmation' %>
 
-      <% if Rails.env.production? %>
-        <%= render 'layouts/dev_warning' %>
-      <% end %>
-
-      <div class="wrapper">
-        <% if user_signed_in? %>
-          <%= render "card_forms/new_account_form" %>
-          <%= render "card_forms/new_transaction_form" %>
-          <%= render "card_forms/edit_transaction_form" %>
-          <div id="page-left-menu">
-            <%= render 'layouts/left_menu', locals: {active_account: @active_account} %>
-          </div>
+        <% if Rails.env.production? %>
+          <%= render 'layouts/dev_warning' %>
         <% end %>
-        <div id="content" class="<%= "in" if !user_signed_in? || @hide_sidebar %>">
-          <%= yield %>
-          <div id="ajax_spinner_template" class="hidden">
-            <div class="ajax_spinner">
-              <%= image_tag "ajax_spinner.svg" %>
+
+        <div class="wrapper">
+          <% if user_signed_in? %>
+            <%= render "card_forms/new_account_form" %>
+            <%= render "card_forms/new_transaction_form" %>
+            <%= render "card_forms/edit_transaction_form" %>
+            <div id="page-left-menu">
+              <%= render 'layouts/left_menu', locals: {active_account: @active_account} %>
+            </div>
+          <% end %>
+          <div id="content" class="<%= "in" if !user_signed_in? || @hide_sidebar %>">
+            <%= yield %>
+            <div id="ajax_spinner_template" class="hidden">
+              <div class="ajax_spinner">
+                <%= image_tag "ajax_spinner.svg" %>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
 
-    <footer>
-      
-    </footer>
+      <footer>
+        
+      </footer>
 
-    <% if user_signed_in? %>
-      <script>
-        function setDatepickers(){
+      <% if user_signed_in? %>
+        <script>
+          function setDatepickers(){
 
-          if ($(".datepicker").length > 0) {
-            $(".datepicker").datepicker({
-              format: "dd-M-yyyy",
-              todayHighlight: true,
-              weekStart: <%= current_user.country.nil? ? 0 : current_user.country.week_start %>,
-              autoclose: true
-            });
+            if ($(".datepicker").length > 0) {
+              $(".datepicker").datepicker({
+                format: "dd-M-yyyy",
+                todayHighlight: true,
+                weekStart: <%= current_user.country.nil? ? 0 : current_user.country.week_start %>,
+                autoclose: true
+              });
 
-            $('.datepicker').each(function(){
-              if (!$(this).hasClass('datepicker-null')){
-                $(this).attr({'value': getDate});
-              }
-            });
+              $('.datepicker').each(function(){
+                if (!$(this).hasClass('datepicker-null')){
+                  $(this).attr({'value': getDate});
+                }
+              });
 
-            $('input[type="time"][value="now"]').each(function(){
-              $(this).attr({'value': getTime});
-            });
+              $('input[type="time"][value="now"]').each(function(){
+                $(this).attr({'value': getTime});
+              });
+            }
           }
-        }
-        setDatepickers();
-      </script>
-    <% end %>
-
+          setDatepickers();
+        </script>
+      <% end %>
+    </div>
   </body>
 </html>

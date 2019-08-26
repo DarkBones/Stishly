@@ -5,6 +5,10 @@ html, body, div, p {
   //font-size: 1.025em;
 }
 
+body {
+  padding-right: 0 !important;
+}
+
 #navbar-top {
 	-webkit-box-shadow: 0px -20px 21px 18px rgba(0,0,0,0.33);
 	-moz-box-shadow: 0px -20px 21px 18px rgba(0,0,0,0.33);
