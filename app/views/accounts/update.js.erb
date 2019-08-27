@@ -1,0 +1,14 @@
+$("#account-title-balance").attr("balance", "<%= @active_account.balance %>");
+
+UpdateLeftMenu();
+
+$.ajax({
+	type: "GET",
+	dataType: "text",
+	url: "/api/v1/currencies/<%= @active_account.currency %>/format/<%= @active_account.balance %>",
+	success(data) {
+		$("#account-title-balance").text(data);
+		$("#account-title-balance").show();
+		$("#editAccountBalance").hide();
+	}
+});

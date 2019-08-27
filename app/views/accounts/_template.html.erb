@@ -1,0 +1,30 @@
+<div class="container hide-pagination">
+  <div class="row">
+    <div class="col-12">
+      <h2>
+
+        <%= @active_account.name %> -
+        <span id="account-title-balance" onclick="toggleAccountBalanceEdit(this);" balance=<%= @active_account.balance%>>
+          <%= balance(@active_account.balance.to_f, Account.get_currency(@active_account), "cents") %>
+        </span>
+        <% if @active_account.persisted? %>
+          <span id="editAccountBalance" style="display:none;">
+            <%= form_for @active_account, remote: true, :html => { :style => 'width:auto; display:inline-block' } do |f| %>
+              <%= f.number_field :balance, placeholder: "1000.00", class: 'form-control', step: :any, value: @active_account.balance_float, "style" => "width: auto; display: inline-block;" %>
+            <% end %>
+          </span>
+        <% end %>
+
+      </h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <%= render "account_tab_menu", locals: {active_tab: active_tab} %>
+    </div>
+  </div>
+
+  <%= yield :account_content %>
+
+</div>

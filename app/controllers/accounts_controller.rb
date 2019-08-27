@@ -8,7 +8,8 @@ class AccountsController < ApplicationController
   def update
     account = current_user.accounts.find(params[:id])
     Account.update_account(account, update_params)
-    redirect_to "/accounts", notice: "Account saved"
+    @active_account = current_user.accounts.find(params[:id])
+    redirect_to "/accounts", notice: "Account saved" if params[:account].include?("name")
   end
 
   def show

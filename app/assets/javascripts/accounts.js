@@ -33,3 +33,8 @@ function goToAccount(object) {
 $(document).ajaxComplete(function() {
   displaySummaryAccount();
 });
+
+function toggleAccountBalanceEdit(obj) {
+  $("#account-title-balance").hide();
+  $("#editAccountBalance").show();
+}

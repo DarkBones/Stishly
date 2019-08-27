@@ -1,23 +1,4 @@
-<div class="container hide-pagination">
-  <div class="row">
-    <div class="col-12">
-      <h2>
-
-        <%= @active_account.name %> -
-        <span id="account-title-balance" balance=<%= @active_account.balance%>>
-          <%= balance(@active_account.balance.to_f, Account.get_currency(@active_account), "cents") %>
-        </span>
-
-      </h2>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-12">
-      <%= render "account_tab_menu", locals: {active_tab: "Transactions"} %>
-    </div>
-  </div>
-
+<%= content_for :account_content do %>
   <div id="row">
     <div class="col-12">
       <%= render partial: "filter_form" %>
@@ -41,5 +22,6 @@
       </div>
     </div>
   </div>
+<% end %>
 
-</div>
+<%= render partial: "template", :locals => {:active_tab => "Transactions"} %>
