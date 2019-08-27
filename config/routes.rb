@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   end
 
   scope '/accounts' do
+    get '/', to: 'accounts#index'
     scope '/:id' do
       get '/', to: 'accounts#show', as: :show_account
+      delete '/', to: 'accounts#destroy', as: :delete_account
       scope '/settings' do
         get '/', to: 'accounts#settings', as: :account_settings
         scope '/edit' do

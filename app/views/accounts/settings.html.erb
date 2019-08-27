@@ -1,0 +1,56 @@
+<div class="container hide-pagination">
+  <div class="row">
+    <div class="col-12">
+      <h2>
+
+        <%= @active_account.name %> -
+        <span id="account-title-balance" balance=<%= @active_account.balance%>>
+          <%= balance(@active_account.balance.to_f, Account.get_currency(@active_account), "cents") %>
+        </span>
+
+      </h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <%= render "account_tab_menu", locals: {active_tab: "Settings"} %>
+    </div>
+  </div>
+
+  <%= form_for @active_account do |f| %>
+    <div class="row pt-4 pb-2">
+      <div class="col-12 col-sm-6">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="col-12 col-sm-6">
+        <%= f.label :currency %>
+        <%= f.select(:currency, all_currencies(Money::Currency.table), {}, { :class => "form-control", "disabled" => "disabled" }) %>
+      </div>
+    </div>
+    <div class="row py-2">
+      <div class="col-12 col-sm-6">
+        <%= f.label :type %>
+        <%= f.select(:account_type, [["Spending", "spend"], ["Saving", "save"]], {selected: "spend"}, {:class => "form-control"}) %>
+      </div>
+      <div class="col-12 col-sm-6">
+        <%= f.label :balance %>
+        <%= f.number_field :balance, placeholder: "1000.00", class: 'form-control', step: :any %>
+      </div>
+    </div>
+    <div class="row py-2">
+      <div class="col-12">
+        <%= f.label :description %>
+        <%= f.text_area :description, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="row py-2">
+      <div class="col-12">
+        <%= f.submit 'Save', :class => 'float-right btn btn-primary' %>
+        <button type="button" class="btn btn-danger delete-confirm" confirm-message="This action will delete this account and all associated transactions. This cannot be undone. Continue?" data-link="<%= delete_account_path(@active_account) %>">Delete</button>
+      </div>
+    </div>
+  <% end %>
+
+</div>

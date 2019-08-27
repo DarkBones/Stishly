@@ -30,6 +30,25 @@ class Account < ApplicationRecord
   has_many :account_histories, dependent: :destroy
   has_many :sch_transactions
 
+  def self.delete(account)
+    # decouple transfer transactions
+    transfer_transactions = account.transactions.where("transfer_transaction_id is not null")
+    transfer_transactions.each do |tt|
+      transaction = tt.transfer_transaction
+      unless transaction.nil?
+        transaction.transfer_transaction_id = nil
+        transaction.transfer_account_id = nil
+        transaction.save
+      end
+    end
+
+    # delete account transactions
+    account.transactions.destroy_all
+
+    # delete the account
+    account.destroy
+  end
+
   def self.day_total(account, user, date)
     if account.nil?
       return user.transactions.where("DATE(transactions.local_datetime) = DATE(?) AND parent_id IS NULL AND is_scheduled = false", date).sum(:user_currency_amount)

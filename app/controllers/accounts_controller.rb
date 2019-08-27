@@ -1,5 +1,10 @@
 class AccountsController < ApplicationController
 
+  def destroy
+    Account.delete(current_user.accounts.find(params[:id]))
+    redirect_to "/accounts", notice: "Account deleted"
+  end
+
   def show
     @active_account = current_user.accounts.where(name: params[:id]).take.decorate
 
@@ -129,8 +134,7 @@ class AccountsController < ApplicationController
   end
 
   def settings
-    @account_id = params[:id]
-    @active_account = current_user.accounts.where(name: params[:id]).take.decorate
+    @active_account = Account.get_from_name(params[:id], current_user)
   end
 
   private
