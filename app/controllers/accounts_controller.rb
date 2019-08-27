@@ -7,7 +7,7 @@ class AccountsController < ApplicationController
 
   def update
     account = current_user.accounts.find(params[:id])
-    Account.update(account, update_params)
+    Account.update_account(account, update_params)
     redirect_to "/accounts", notice: "Account saved"
   end
 

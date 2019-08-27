@@ -49,7 +49,7 @@ class Account < ApplicationRecord
     account.destroy
   end
 
-  def self.update(account, params)
+  def self.update_account(account, params)
     currency = Money::Currency.new(account.currency)
     params[:balance] = params[:balance].to_f * currency.subunit_to_unit
     account.update!(params)
