@@ -36,7 +36,7 @@
       </div>
       <div class="col-12 col-sm-6">
         <%= f.label :balance %>
-        <%= f.number_field :balance, placeholder: "1000.00", class: 'form-control', step: :any %>
+        <%= f.number_field :balance, placeholder: "1000.00", class: 'form-control', step: :any, value: @active_account.balance_float %>
       </div>
     </div>
     <div class="row py-2">

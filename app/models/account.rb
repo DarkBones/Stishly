@@ -20,7 +20,7 @@ class Account < ApplicationRecord
   validates :name, format: { without: /[-\._~:\/\?#\[\]@!\$&'\(\)\*\+,;={}"]/, message: "Special characters not allowed" }
   validates :name, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('account.failure.already_exists') }
   validates :currency, presence: true
-  validate :subscription, :on => :create
+  validate :subscription
 
 
   belongs_to :user
@@ -47,6 +47,12 @@ class Account < ApplicationRecord
 
     # delete the account
     account.destroy
+  end
+
+  def self.update(account, params)
+    currency = Money::Currency.new(account.currency)
+    params[:balance] = params[:balance].to_f * currency.subunit_to_unit
+    account.update!(params)
   end
 
   def self.day_total(account, user, date)

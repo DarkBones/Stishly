@@ -5,6 +5,12 @@ class AccountsController < ApplicationController
     redirect_to "/accounts", notice: "Account deleted"
   end
 
+  def update
+    account = current_user.accounts.find(params[:id])
+    Account.update(account, update_params)
+    redirect_to "/accounts", notice: "Account saved"
+  end
+
   def show
     @active_account = current_user.accounts.where(name: params[:id]).take.decorate
 
@@ -134,7 +140,7 @@ class AccountsController < ApplicationController
   end
 
   def settings
-    @active_account = Account.get_from_name(params[:id], current_user)
+    @active_account = Account.get_from_name(params[:id], current_user).decorate
   end
 
   private
@@ -145,6 +151,10 @@ class AccountsController < ApplicationController
 
   def account_settings_params
     params.require(:account).permit(:setting)
+  end
+
+  def update_params
+    params.require(:account).permit(:name, :balance, :description, :account_type)
   end
 
 end
