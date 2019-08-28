@@ -17,6 +17,30 @@ class CurrencyRate < ApplicationRecord
     UpdateRates.new(currency).perform
   end
 
+  # populates any conversion combinations that may be missing
+  def self.populate_currency_rates
+    puts "..populating currency rates"
+    Money::Currency.all.each do |from|
+      Money::Currency.all.each do |to|
+        rate = CurrencyRate.where("from_currency = ? AND to_currency = ?", from.to_s, to.to_s)
+        if rate.length == 0
+          new_rate = CurrencyRate.new({
+            from_currency: from.to_s,
+            to_currency: to.to_s,
+            used_count: 0
+          })
+          new_rate.save!
+        end
+      end
+    end
+  end
+
+  # populates any conversion rates that are null
+  def self.populate_missing_rates
+    puts "..populating missing rates"
+    
+  end
+
   def self.get_rate(from, to)
     currency_rate_record = self.where(from_currency: from, to_currency: to).order(:created_at).reverse_order().take
     if currency_rate_record.nil?
@@ -27,28 +51,6 @@ class CurrencyRate < ApplicationRecord
     return 0 if currency_rate_record.nil?
 
     return currency_rate_record.rate
-  end
-
-  def self.get_rate_OLD(from, to)
-    currency_rate_record = self.where(from_currency: from, to_currency: to, updated_at: 1.days.ago..Time.now.utc).take
-    if currency_rate_record
-      return currency_rate_record.rate
-    end
-
-    require 'money/bank/open_exchange_rates_bank'
-
-    oxr = Money::Bank::OpenExchangeRatesBank.new
-    oxr.app_id = Rails.application.credentials.openexchangerates[:api_key]
-    oxr.update_rates
-
-    oxr.cache = '/tmp/cache/exchange_rates.json'
-    oxr.ttl_in_seconds = 86400
-
-    Money.default_bank = oxr
-    rate = Money.default_bank.get_rate(from, to).to_f
-
-    self.update_rate(from, to, rate)
-    return rate
   end
 
   def self.update_rate(from, to, rate)

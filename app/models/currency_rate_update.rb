@@ -19,6 +19,7 @@ class CurrencyRateUpdate < ApplicationRecord
 
 		retention = APP_CONFIG['currency_rates']['retention']
 		currency = self.where("updated_at <= ?", retention.seconds.ago).order(:updated_at).take
+		#currency = self.all.order(:updated_at).take
 
 		return currency.currency unless currency.nil?
 		return nil

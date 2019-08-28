@@ -56,9 +56,10 @@ private
 				save_rate(from, to, rate)
 
 				# save the currencies to the currency_rate_update table in case they weren't logged yet
-				CurrencyRateUpdate.insert_new(from)
-				CurrencyRateUpdate.insert_new(to)
+				#CurrencyRateUpdate.insert_new(from)
+				#CurrencyRateUpdate.insert_new(to)
 			end
+			CurrencyRateUpdate.insert_new(@source)
 		end
 
 		# saves the rate to the db
