@@ -276,6 +276,7 @@ class ScheduleFormParamsTest < ActiveSupport::TestCase
     params[:dates_picked] = '28'
     params[:weekday_exclude_sat] = '1'
     params[:weekday_exclude_sun] = '1'
+    params[:exclusion_met1] = 'cancel'
 
     schedule = Schedule.create_from_form(params, current_user, true)
     
