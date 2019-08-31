@@ -24,9 +24,10 @@ class Schedule
         end
       end
 
-      next_date = find_next_date.to_date
+      next_date = find_next_date
+      next_date = next_date.to_date unless next_date.nil?
 
-      if @return_datetime
+      if @return_datetime && !next_date.nil?
         next_date = next_date.to_datetime
         next_date = tz.local_to_utc(next_date)
       end
