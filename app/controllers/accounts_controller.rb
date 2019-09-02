@@ -19,7 +19,8 @@ class AccountsController < ApplicationController
       params[:filterrific] = {
         sorted_by: 'created_at_desc',
         is_queued: false,
-        include_children: 1
+        include_children: 1,
+        is_balancer: 0
       }
     end
     params[:filterrific][:account] = params[:id]
@@ -52,7 +53,8 @@ class AccountsController < ApplicationController
       params[:filterrific] = {
         sorted_by: 'created_at_desc',
         is_queued: false,
-        include_children: 1
+        include_children: 1,
+        is_balancer: 0
       }
     end
     

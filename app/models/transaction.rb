@@ -56,7 +56,8 @@ class Transaction < ApplicationRecord
       #:in_the_last,
       :sorted_by,
       :is_scheduled,
-      :is_queued
+      :is_queued,
+      :is_balancer
     ]
   )
 
@@ -72,6 +73,7 @@ class Transaction < ApplicationRecord
   scope :account, ->(account_name) { joins(:account).where("accounts.name = ?", account_name) }
   scope :is_scheduled, ->(scheduled) { where("is_scheduled = ?", scheduled) }
   scope :is_queued, ->(queued) { where("is_queued = ?", queued) }
+  scope :is_balancer, -> (balancer) { where("is_balancer = ?", balancer) }
   
   scope :period, ->(range){
     
@@ -126,6 +128,32 @@ class Transaction < ApplicationRecord
       raise(ArgumentError, "Invalid sort option: #{sort_option.inspect}")
     end
   }
+
+  def self.create_balancer(account, target)
+    tz = TZInfo::Timezone.get(account.user.timezone)
+    amount = target - account.balance
+    user_amount = CurrencyRate.convert(amount.to_i, account.currency, account.user.currency)
+    if amount < 0
+      direction = -1
+    else
+      direction = 1
+    end
+
+    transaction = self.new
+    transaction.user_id = account.user.id
+    transaction.currency = account.currency
+    transaction.timezone = account.user.timezone
+    transaction.account_currency_amount = amount
+    transaction.user_currency_amount = user_amount
+    transaction.account_id = account.id
+    transaction.is_balancer = true
+    transaction.local_datetime = tz.utc_to_local(Time.now.utc)
+    transaction.amount = amount
+    transaction.direction = direction
+
+    transaction.save!
+
+  end
 
   def self.delete(transaction, current_user)
     return if transaction.nil?
