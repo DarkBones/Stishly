@@ -21,28 +21,6 @@ private
 		@expand = params[:expand].sub(" ", "").split(",") if params[:expand]
 	end
 
-	def expand_fields_OLD(json)
-		#if @expand.include? "currency"
-		#	if json.class = Array
-		#		item['user'] = @user.to_json
-		#	else
-		#
-		#	end
-		#end
-
-		if @expand.include? "currency"
-			if json.class == Array
-				json.each do |item|
-					item['currency'] = JSON.parse(Money::Currency.new(item['currency']).to_json) if item['currency']
-				end
-			else
-				json['currency'] = JSON.parse(Money::Currency.new(json['currency']).to_json) if json['currency']
-			end
-		end
-
-		return json
-	end
-
 	def expand_fields(json)
 
 		if @expand.include? "currency"
