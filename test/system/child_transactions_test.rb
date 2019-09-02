@@ -1,11 +1,6 @@
 require "application_system_test_case"
 
 class ChildTransactionsTest < ApplicationSystemTestCase
-  # test "visiting the index" do
-  #   visit child_transactions_url
-  #
-  #   assert_selector "h1", text: "ChildTransactions"
-  # end
 
   test "child transactions invisible" do
     login_user(users(:transactions), 'SomePassword123^!')
@@ -17,6 +12,7 @@ class ChildTransactionsTest < ApplicationSystemTestCase
     fill_in "Description", with: "Multiple transactions"
     page.find("#transactionform #multiple-multiple").click
     fill_in "Transactions", with: "one 1\ntwo 2\nthree 3\nfour 4\n"
+    find(:css, "input[id$='timezone_input']").set("Europe/London")
     click_on "Create Transaction"
     sleep 2
 

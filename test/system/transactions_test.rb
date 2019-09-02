@@ -1,7 +1,6 @@
 require "application_system_test_case"
 
 class TransactionsTest < ApplicationSystemTestCase
-=begin
   test "open and close transactions menu" do
     """
     Log in and click on 'new transaction'
@@ -66,7 +65,6 @@ class TransactionsTest < ApplicationSystemTestCase
     select "Current Account", from: "Account"
     assert page.find("#transaction_currency").value == "CAD", format_error("Unexpected selected currency", "CAD", page.find("#transaction_currency").value)
   end
-=end
 
   test "open category dropdown" do
     login_user(users(:transactions), 'SomePassword123^!')
@@ -78,7 +76,6 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector '#categoriesDropdownOptions_', visible: :visible
   end
 
-=begin
   test "select category" do
     login_user(users(:bas), 'SomePassword123^!')
 
@@ -91,6 +88,7 @@ class TransactionsTest < ApplicationSystemTestCase
 
     assert_selector "#categories-dropdown", text: "Cinema"
   end
+
 
   test "search category" do
     login_user(users(:bas), 'SomePassword123^!')
@@ -207,7 +205,7 @@ class TransactionsTest < ApplicationSystemTestCase
 
     assert_selector('#transactions_list li', count: 2)
   end
-=end
+
   def create_transaction(params={})
     params = create_params(params)
     
@@ -239,7 +237,8 @@ class TransactionsTest < ApplicationSystemTestCase
         rate: nil,
         amount_in_account_currency: nil,
         transfer_rate: nil,
-        amount_in_transfer_currency: nil
+        amount_in_transfer_currency: nil,
+        timezone: "Europe/London"
     }
 
     custom_params.keys.each do |cp|
@@ -275,6 +274,8 @@ class TransactionsTest < ApplicationSystemTestCase
         fill_in "Transactions", with: params[:transactions]
     end
 
+    #page.find("#timezone_input").fill_in("Europe/London")
+    find(:css, "input[id$='timezone_input']").set("Europe/London")
     fill_in "Date", with: params[:date] unless params[:date].nil?
     fill_in "Time", with: params[:time] unless params[:time].nil?
     fill_in "Rate", with: params[:rate] unless params[:rate].nil?
