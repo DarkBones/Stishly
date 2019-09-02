@@ -55,17 +55,11 @@ class Account < ApplicationRecord
     params[:balance] = balance.to_i
 
     if balance != account.balance
-      transaction = Transaction.create_balancer(account, balance)
+      Transaction.create_balancer(account, balance)
     end
 
     account.update!(params)
 
-  end
-
-  def self.update_account_OLD(account, params)
-    currency = Money::Currency.new(account.currency)
-    params[:balance] = params[:balance].to_f * currency.subunit_to_unit
-    account.update!(params)
   end
 
   def self.day_total(account, user, date)
