@@ -1,6 +1,7 @@
 require "application_system_test_case"
 
 class TransactionsTest < ApplicationSystemTestCase
+=begin
   test "open and close transactions menu" do
     """
     Log in and click on 'new transaction'
@@ -33,14 +34,14 @@ class TransactionsTest < ApplicationSystemTestCase
     page.driver.browser.navigate.refresh
     logout
   end
-
   test "automatic account selection" do
     login_user(users(:transactions), 'SomePassword123^!')
 
     click_on "New Transaction"
 
     assert page.find("#transaction_account").value == "Current Account", format_error("Unexpected selected account", "Current Account", page.find("#transaction_account").value)
-    click_on "Close"
+    #click_on "Close"
+    page.find("#new_transactions_form .modal-footer .btn-secondary").click
 
     page.find("#account_16").click
     click_on "New Transaction"
@@ -65,6 +66,7 @@ class TransactionsTest < ApplicationSystemTestCase
     select "Current Account", from: "Account"
     assert page.find("#transaction_currency").value == "CAD", format_error("Unexpected selected currency", "CAD", page.find("#transaction_currency").value)
   end
+=end
 
   test "open category dropdown" do
     login_user(users(:transactions), 'SomePassword123^!')
@@ -76,6 +78,7 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector '#categoriesDropdownOptions_', visible: :visible
   end
 
+=begin
   test "select category" do
     login_user(users(:bas), 'SomePassword123^!')
 
@@ -204,7 +207,7 @@ class TransactionsTest < ApplicationSystemTestCase
 
     assert_selector('#transactions_list li', count: 2)
   end
-
+=end
   def create_transaction(params={})
     params = create_params(params)
     
