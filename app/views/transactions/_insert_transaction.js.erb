@@ -39,6 +39,7 @@ function insertTransaction(id, account) {
 		url: url,
 		success(data) {
 			insertDayDiv(data.date_div, data.date, data.date_num);
+			updateTitle(data.title_balance_html, data.title_balance_float)
 			
 			//var html = data.transactions.pop();
 			while (data.transactions.length > 0) {
@@ -47,6 +48,11 @@ function insertTransaction(id, account) {
 			}
 		}
 	})
+}
+
+function updateTitle(html, float) {
+	$("#account-title-balance").text(html);
+  $("#editAccountBalance #account_balance").val(float);
 }
 
 function insertTransactionDiv(html, $dayDiv, time) {

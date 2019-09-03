@@ -18,7 +18,7 @@ class ApiGuiController < BaseApiBrowserController
     transfer_transaction = transaction.transfer_transaction.decorate unless transaction.transfer_transaction.nil?
 
     unless params[:account_name].nil?
-      account = Account.get_from_name(params[:account_name], current_user)
+      account = Account.get_from_name(params[:account_name], current_user).decorate
       currency = account.currency
     end
 
@@ -41,6 +41,8 @@ class ApiGuiController < BaseApiBrowserController
     end
 
     render json: {
+      title_balance_html: Money.new(account.balance, account.currency).format,
+      title_balance_float: account.balance_float,
       date: transaction.local_datetime.to_date.to_s,
       date_num: (transaction.local_datetime.to_date.to_s.gsub! '-', ''),
       time: transaction.local_datetime.strftime("%H%M%S"),

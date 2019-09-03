@@ -35,6 +35,8 @@ $(document).ajaxComplete(function() {
 });
 
 function toggleAccountBalanceEdit(obj) {
-  $("#account-title-balance").hide();
-  $("#editAccountBalance").show();
+  if($("#editAccountBalance").length > 0) {
+    $("#account-title-balance").hide();
+    $("#editAccountBalance").show();
+  }
 }
