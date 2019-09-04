@@ -47,7 +47,7 @@ class AccountsController < ApplicationController
   end
 
   def index
-    @active_account = Account.create_summary_account(current_user, true)
+    @active_account = Account.create_summary_account(current_user, true).decorate
 
     unless params.keys.include? "filterrific"
       params[:filterrific] = {

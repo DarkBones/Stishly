@@ -40,3 +40,34 @@ function toggleAccountBalanceEdit(obj) {
     $("#editAccountBalance").show();
   }
 }
+
+// close the edit acco"unt balance container when clicking outside of it
+$(document).mouseup(function(e) {
+  var $container = $("#editAccountBalance");
+
+  if($container.is(":hidden")) {
+    return false;
+  }
+
+  var $input = $("#editAccountBalance #account_balance");
+  var $balance = $("#account-title-balance");
+
+  if(!$input.is(e.target)) {
+    $container.hide();
+    $input.val($balance.attr("balance_float"));
+    $balance.show();
+  }
+});
+
+
+
+$(document).mouseup(function(e) 
+{
+    var container = $("YOUR CONTAINER SELECTOR");
+
+    // if the target of the click isn't the container nor a descendant of the container
+    if (!container.is(e.target) && container.has(e.target).length === 0) 
+    {
+        container.hide();
+    }
+});
