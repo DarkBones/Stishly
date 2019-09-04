@@ -1241,6 +1241,7 @@ upcoming_transactions_run: {
   updated_at: "<%= Time.now.utc %>",
   local_datetime: "<%= Time.now.utc %>",
   category_id: 0,
+  schedule_id: 1701,
   is_scheduled: true
 }
 

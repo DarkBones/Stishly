@@ -12,7 +12,6 @@ class ChildTransactionsTest < ApplicationSystemTestCase
     fill_in "Description", with: "Multiple transactions"
     page.find("#transactionform #multiple-multiple").click
     fill_in "Transactions", with: "one 1\ntwo 2\nthree 3\nfour 4\n"
-    find(:css, "input[id$='timezone_input']").set("Europe/London")
     click_on "Create Transaction"
     sleep 2
 

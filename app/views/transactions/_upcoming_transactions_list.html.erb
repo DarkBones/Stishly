@@ -27,7 +27,7 @@
 		<%= transaction.description %>
 	</td>
 	<td id="upcoming-amount"><!-- amount -->
-		<%= balance(transaction.amount, transaction.currency) %>
+		<%= balance(transaction.amount, transaction.currency, "cents") %>
 	</td>
 	<td>
 		<div class="dropdown show">

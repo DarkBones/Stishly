@@ -275,7 +275,7 @@ class TransactionsTest < ApplicationSystemTestCase
     end
 
     #page.find("#timezone_input").fill_in("Europe/London")
-    find(:css, "input[id$='timezone_input']").set("Europe/London")
+    #find(:css, "input[id$='timezone_input']").set("Europe/London")
     fill_in "Date", with: params[:date] unless params[:date].nil?
     fill_in "Time", with: params[:time] unless params[:time].nil?
     fill_in "Rate", with: params[:rate] unless params[:rate].nil?

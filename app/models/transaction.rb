@@ -344,7 +344,7 @@ class Transaction < ApplicationRecord
 
     timezone = transactions[0].timezone if transactions.length > 0
 
-    if timezone != current_user.timezone
+    if timezone != current_user.timezone && Rails.env.test? == false
       current_user.timezone = timezone
       current_user.save
     end

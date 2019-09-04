@@ -150,6 +150,7 @@ class SchedulesTest < ApplicationSystemTestCase
     click_on "New Schedule"
 
     page.find('#scheduleform #type-advanced').click
+    sleep 1
     click_on 'show advanced options'
 
     select 'Daily', from: "schedule[schedule]"

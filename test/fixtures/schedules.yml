@@ -592,8 +592,8 @@ upcoming_transactions_daily_run: {
   created_at: '<%= Time.now.utc %>',
   updated_at: '<%= Time.now.utc %>',
   is_active: 1,
-  next_occurrence: '2019-03-29',
-  next_occurrence_utc: '2019-03-29 00:00'
+  next_occurrence: '<%= 1.day.from_now.to_date %>',
+  next_occurrence_utc: '<%= 1.day.from_now.to_date.to_datetime %>'
 }
 
 update_transactions_one: {

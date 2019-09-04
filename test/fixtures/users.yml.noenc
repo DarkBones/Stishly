@@ -301,7 +301,8 @@ upcoming_transactions_dst: {
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
   finished_setup: true,
-  email: upcoming@transactionsdst.com
+  email: upcoming@transactionsdst.com,
+  unconfirmed_email: upcoming@transactionsdst.com,
 }
 
 upcoming_transactions_run: {
@@ -317,7 +318,8 @@ upcoming_transactions_run: {
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,
   finished_setup: true,
-  email: upcoming@transactionsrun.com
+  email: upcoming@transactionsrun.com,
+  unconfirmed_email: upcoming@transactionsrun.com
 }
 
 update_transactions: {
