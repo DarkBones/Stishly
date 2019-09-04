@@ -62,7 +62,7 @@ private
       end
 
       t.save
-      Account.add(t.user, t.account, t.account_currency_amount, t.local_datetime) if t.parent_id.nil? && t.is_queued == false
+      Account.add(t.account, t.account_currency_amount, t.local_datetime) if t.parent_id.nil? && t.is_queued == false
       Notification.create(NOTIFICATIONS['new_queued_transaction'], @current_user, true) if t.is_queued
 
       transactions.push(t)

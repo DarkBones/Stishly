@@ -33,7 +33,7 @@ private
 
 			unless new_transaction.nil?
 				unless new_transaction.is_scheduled
-					Account.add(user, new_transaction.account, new_transaction.account_currency_amount, new_transaction.local_datetime)
+					Account.add(new_transaction.account, new_transaction.account_currency_amount, new_transaction.local_datetime)
 				end
 			end
 		end

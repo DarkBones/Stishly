@@ -55,7 +55,8 @@ class Account < ApplicationRecord
     params[:balance] = balance.to_i
 
     if balance != account.balance
-      Transaction.create_balancer(account, balance)
+      transaction = Transaction.create_balancer(account, balance)
+      self.add(transaction.account, transaction.amount, transaction.local_datetime)
     end
 
     account.update!(params)
@@ -261,13 +262,13 @@ class Account < ApplicationRecord
   end
 
   # TODO: Optimize add and subtract into a single function
-  def self.add(current_user, account, amount, local_datetime)
+  def self.add(account, amount, local_datetime)
     return if amount.nil?
 
     balance = account.balance
     balance += amount
 
-    Account.update(account.id, :balance => balance)
+    account = Account.update(account.id, :balance => balance)
 
     history = account.account_histories.create({
       local_datetime: local_datetime,

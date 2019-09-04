@@ -153,6 +153,8 @@ class Transaction < ApplicationRecord
 
     transaction.save!
 
+    return transaction
+
   end
 
   def self.delete(transaction, current_user)
@@ -355,8 +357,8 @@ class Transaction < ApplicationRecord
     end
 
     if update_account_balance
-      Account.add(current_user, transaction.account, transaction.account_currency_amount, transaction.local_datetime)
-      Account.add(current_user, transaction.transfer_transaction.account, transaction.transfer_transaction.account_currency_amount, transaction.transfer_transaction.local_datetime) unless transaction.transfer_transaction.nil?
+      Account.add(transaction.account, transaction.account_currency_amount, transaction.local_datetime)
+      Account.add(transaction.transfer_transaction.account, transaction.transfer_transaction.account_currency_amount, transaction.transfer_transaction.local_datetime) unless transaction.transfer_transaction.nil?
     end
 
     return transaction
@@ -382,7 +384,7 @@ class Transaction < ApplicationRecord
     transaction.is_queued = false
     transaction.save!
 
-    Account.add(transaction.user, transaction.account, transaction.account_currency_amount, transaction.local_datetime)
+    Account.add(transaction.account, transaction.account_currency_amount, transaction.local_datetime)
   end
 
   def self.convert_float_to_i_amount(amount, currency)
