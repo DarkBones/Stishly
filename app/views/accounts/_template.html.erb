@@ -5,7 +5,7 @@
 
         <%= @active_account.name %> -
         <span id="account-title-balance" onclick="toggleAccountBalanceEdit(this);" balance=<%= @active_account.balance%>>
-          <%= balance(@active_account.balance.to_f, Account.get_currency(@active_account), "cents") %>
+          <%= balance(@active_account.balance.to_f, Account.get_currency(@active_account)) %>
         </span>
         <% if @active_account.persisted? %>
           <span id="editAccountBalance" style="display:none;">
