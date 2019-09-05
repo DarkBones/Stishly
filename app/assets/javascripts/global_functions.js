@@ -81,7 +81,7 @@
     // update the account title balance
     window.updateAccountTitleBalance = function() {
       var activeAccount = getActiveAccountName();
-      var url = "/api/v1/render/account_title_balance"
+      var url = "/api/v1/render/account_title_balance";
       if (activeAccount !== null) {
         url += "/" + activeAccount.toString();
       }

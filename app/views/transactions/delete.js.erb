@@ -33,7 +33,7 @@ function deleteTransaction(id) {
 	var $dayDiv = $originalTxn.parents(".transactions_date");
 	var date = $dayDiv.attr("id");
 
-	var url = "/api/v1/render/transaction_date/" + date
+	var url = "/api/v1/render/transaction_date/" + date;
 	if (activeAccount !== null) {
 		url += "/" + activeAccount
 	}
