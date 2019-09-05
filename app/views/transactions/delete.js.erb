@@ -19,6 +19,11 @@ var activeAccount = getActiveAccountName();
 		if($dayDiv.find(".transaction_listing").length == 0) {
 			$dayDiv.remove();
 		}
+
+		$("#selected-transactions").val("")
+		$(".mass_transaction_action_button").each(function(index, value){
+      $("#" + value.id).addClass("disabled");
+    });
 	<% end %>
 
 <% end %>
