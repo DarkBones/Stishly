@@ -77,6 +77,26 @@
         $(this).setTimezone();
       });
     }
+
+    // update the account title balance
+    window.updateAccountTitleBalance = function() {
+      var activeAccount = getActiveAccountName();
+      var url = "/api/v1/render/account_title_balance"
+      if (activeAccount !== null) {
+        url += "/" + activeAccount.toString();
+      }
+
+      $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: url,
+        success(data) {
+          $("#account-title-balance").text(data.html);
+          $("#editAccountBalance #account_balance").val(data.float);
+        }
+      });
+    }
+
   });
 
 //});

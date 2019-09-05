@@ -298,6 +298,12 @@ Rails.application.routes.draw do
       end
       #/api/v1/render
       scope '/render' do
+        #/api/v1/render/account_title_balance(/:account)
+        scope '/account_title_balance/' do
+          scope '(/:account)' do
+            get '/', to: 'api_gui#render_account_title_balance'
+          end
+        end
         #/api/v1/render/left_menu
         scope '/left_menu' do
           get '/', to: 'api_gui#render_left_menu'

@@ -1,5 +1,21 @@
 class ApiGuiController < BaseApiBrowserController
 
+  def render_account_title_balance
+    unless params[:account].nil?
+      account = Account.get_from_name(params[:account], current_user).decorate
+      html = Money.new(account.balance, account.currency).format
+      float = account.balance_float
+    else
+      html = Money.new(current_user.accounts.sum(:balance), current_user.currency).format
+      float = 0
+    end
+
+    render json: {
+      html: html,
+      float: float
+    }
+  end
+
 	def account_display_balance
 		render json: "bad request", status: :bad_request and return unless params[:amount] && params[:from] && params[:to] && params[:add]
 
