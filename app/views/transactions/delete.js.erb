@@ -39,6 +39,12 @@ function deleteTransaction(id) {
 		url: url,
 		success(data) {
 			$("#" + date).find("h3").replaceWith($($.parseHTML(data)).find("h3"));
+			updateAccountTitle();
 		}
 	});
+}
+
+function updateAccountTitle() {
+	var activeAccount = getActiveAccountName();
+	alert(activeAccount);
 }
