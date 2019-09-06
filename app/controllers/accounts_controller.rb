@@ -6,14 +6,15 @@ class AccountsController < ApplicationController
   end
 
   def update
-    account = current_user.accounts.find(params[:id])
+    account = current_user.accounts.friendly.find(params[:id])
     Account.update_account(account, update_params)
-    @active_account = current_user.accounts.find(params[:id])
+    @active_account = current_user.accounts.friendly.find(params[:id])
     redirect_to "/accounts", notice: "Account saved" if params[:account].include?("name")
   end
 
   def show
     @active_account = current_user.accounts.where(name: params[:id]).take.decorate
+    #@active_account = current_user.accounts.friendly.find(params[:id]).decorate
 
     unless params.keys.include? "filterrific"
       params[:filterrific] = {
@@ -124,7 +125,7 @@ class AccountsController < ApplicationController
 
   def sort
     params[:account].each_with_index do |id, index|
-      Account.where(id: id).update_all(position: index + 1)
+      Account.where(hash_id: id).update_all(position: index + 1)
     end
 
     head :ok

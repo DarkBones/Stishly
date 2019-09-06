@@ -97,6 +97,22 @@
       });
     }
 
+    // modified serialize function to handle hashed ids
+    window.serializeHashed = function($container) {
+      var str = "";
+      var els = $container.find(".sortable")
+
+      var el;
+      $container.find(".sortable").each(function(){
+        el = $(this).attr("id").split(/_(.+)/);
+        if (str !== "") str = str + "&"
+        str = str + el[0] + "[]=" + el[1];
+      });
+
+      return str
+    }
+
+
   });
 
 //});

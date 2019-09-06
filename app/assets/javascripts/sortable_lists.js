@@ -7,7 +7,8 @@ function makeSortableLists(className=".sortable-list", handleName=".sort-handle"
       Rails.ajax({
         url: "/accounts/sort",
         type: "PATCH",
-        data: $(this).sortable("serialize"),
+        //data: $(this).sortable("serialize"),
+        data: serializeHashed($(this)),
       });
     }
   });

@@ -25,7 +25,10 @@ function goToAccount(object) {
 
   $accountButton = $("#" + object.id);
   linkName = $accountButton.attr("name");
-  url = "/" + linkName.replace("_", "/");
+  url = "/accounts"
+  if(typeof(linkName) !== "undefined") {
+    url += "/" + linkName;
+  }
   window.location.href = url;
 }
 

@@ -61,7 +61,7 @@ class Account < ApplicationRecord
       self.add(transaction.account, transaction.amount, transaction.local_datetime)
     end
 
-    account.update!(params)
+    account.update(params)
 
   end
 

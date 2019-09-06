@@ -10,7 +10,7 @@ module Friendlyable
 	def set_hash_id
 		hash_id = nil
 		loop do
-			hash_id = SecureRandom.urlsafe_base64(6)#.gsub(/-|/,('a'..'z').to_a[rand(26)])
+			hash_id = SecureRandom.urlsafe_base64(6)#.gsub('_','+')
 			break unless self.class.name.constantize.where(:hash_id => hash_id).exists?
 		end
 
