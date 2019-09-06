@@ -37,6 +37,8 @@
 #
 
 class User < ApplicationRecord
+  include Friendlyable
+  
   kms_attr :first_name, key_id: Rails.application.credentials.aws[:kms_key_id]
   kms_attr :last_name, key_id: Rails.application.credentials.aws[:kms_key_id]
 

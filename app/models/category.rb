@@ -13,6 +13,8 @@
 #
 
 class Category < ApplicationRecord
+  include Friendlyable
+  
   belongs_to :user
   has_many :transactions
   has_one :parent, :class_name => 'Category'

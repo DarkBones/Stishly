@@ -29,6 +29,7 @@
 #
 
 class Schedule < ApplicationRecord
+  include Friendlyable
 
   validates :name, :start_date, presence: true
   #validates :name, format: { without: /[-\._~:\/\?#\[\]@!\$&'\(\)\*\+,;={}"]/, message: "Special characters -._~:/?#[]@!$&\'()*+,;={}\" not allowed" }

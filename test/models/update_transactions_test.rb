@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class AccountTest < ActiveSupport::TestCase
+class UpdateTransactionsTest < ActiveSupport::TestCase
 
   test "get main transaction" do
   	user = users(:update_transactions)
@@ -80,7 +80,7 @@ class AccountTest < ActiveSupport::TestCase
 
   	updated_transactions.each do |ut|
   		ut.attributes.each do |field, value|
-  			if field != "created_at" && field != "updated_at"
+  			if field != "created_at" && field != "updated_at" && field != "hash_id"
   				if field == "id"
   					assert_not original_transactions.find(value).nil?, format_error("Unexpected transaction id. When a transaction is updated, is should keep the same id", nil, ut.id)
   				elsif field != "transfer_transaction_id"

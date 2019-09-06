@@ -28,6 +28,7 @@
 #
 
 class Transaction < ApplicationRecord
+  include Friendlyable
 
   belongs_to :account
   has_one :user, through: :account

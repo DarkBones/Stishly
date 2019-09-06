@@ -15,6 +15,7 @@
 #
 
 class Notification < ApplicationRecord
+	include Friendlyable
 
 	belongs_to :user
 

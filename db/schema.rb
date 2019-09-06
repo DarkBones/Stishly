@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_01_154949) do
+ActiveRecord::Schema.define(version: 2019_09_06_091716) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2019_09_01_154949) do
     t.string "currency", null: false
     t.boolean "is_default"
     t.string "account_type", default: "spend"
+    t.string "hash_id"
     t.index ["name"], name: "index_accounts_on_name"
     t.index ["user_id"], name: "index_accounts_on_user_id"
   end
@@ -49,6 +50,7 @@ ActiveRecord::Schema.define(version: 2019_09_01_154949) do
     t.bigint "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "hash_id"
     t.index ["parent_id"], name: "index_categories_on_parent_id"
     t.index ["user_id"], name: "index_categories_on_user_id"
   end
@@ -96,6 +98,7 @@ ActiveRecord::Schema.define(version: 2019_09_01_154949) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "created_at_local_datetime"
+    t.string "hash_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
@@ -129,6 +132,7 @@ ActiveRecord::Schema.define(version: 2019_09_01_154949) do
     t.date "pause_until"
     t.datetime "pause_until_utc"
     t.integer "current_period_id", default: 0
+    t.string "hash_id"
     t.index ["name"], name: "index_schedules_on_name"
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
@@ -195,6 +199,7 @@ ActiveRecord::Schema.define(version: 2019_09_01_154949) do
     t.boolean "is_cancelled", default: false
     t.date "scheduled_date"
     t.boolean "is_balancer", default: false
+    t.string "hash_id"
     t.index ["account_id"], name: "index_transactions_on_account_id"
     t.index ["category_id"], name: "index_transactions_on_category_id"
     t.index ["parent_id"], name: "index_transactions_on_parent_id"
@@ -235,6 +240,7 @@ ActiveRecord::Schema.define(version: 2019_09_01_154949) do
     t.string "email_bidx"
     t.string "provider"
     t.string "uid"
+    t.string "hash_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["country_id"], name: "index_users_on_country_id"
     t.index ["email_bidx"], name: "index_users_on_email_bidx"
