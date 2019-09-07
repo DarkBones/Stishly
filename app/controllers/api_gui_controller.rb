@@ -177,7 +177,7 @@ class ApiGuiController < BaseApiBrowserController
       schedule_id = 0
       period_id = 0
     else
-      schedule_id = schedule.id
+      schedule_id = schedule.hash_id
       period_id = transaction.schedule_period_id
     end
 

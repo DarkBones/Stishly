@@ -40,7 +40,7 @@
     $.ajax({
       type: "GET",
       dataType: "html",
-      url: "/api/v1/forms/transactions/upcoming/edit_occurrence/" + transactionId.toString() + "/" + scheduleId.toString() + "/" + schedulePeriod.toString() + "/" + scheduledTransactionId.toString(),
+      url: "/api/v1/forms/transactions/upcoming/edit_occurrence/" + transactionId.toString() + "/" + scheduleId + "/" + schedulePeriod.toString() + "/" + scheduledTransactionId.toString(),
       beforeSend() {
         insertAjaxSpinner($("#edit_upcoming_transaction_form_fields"));
       },

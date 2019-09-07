@@ -595,7 +595,8 @@ upcoming_transactions_daily_run: {
   updated_at: '<%= Time.now.utc %>',
   is_active: 1,
   next_occurrence: '<%= 1.day.from_now.to_date %>',
-  next_occurrence_utc: '<%= 1.day.from_now.to_date.to_datetime %>'
+  next_occurrence_utc: '<%= 1.day.from_now.to_date.to_datetime %>',
+  hash_id: UrBZu4OH8lj0
 }
 
 update_transactions_one: {

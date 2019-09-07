@@ -1,2 +1,2 @@
-$("#schedule_" + "<%= schedule.id %>").remove();
+$("#schedule_" + "<%= schedule.hash_id %>").remove();
 <%= render partial: "/schedules/insert_schedule_table", :locals => {:schedule => schedule} %>

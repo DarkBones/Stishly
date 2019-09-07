@@ -1,6 +1,6 @@
 <%
   schedule_id = 0
-  schedule_id = transaction.schedule.id unless transaction.schedule.nil?
+  schedule_id = transaction.schedule.hash_id unless transaction.schedule.nil?
 %>
 
 <div class="card-header" id="heading<%= transaction.id %>">
