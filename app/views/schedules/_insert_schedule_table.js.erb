@@ -53,7 +53,7 @@ function insertSchedule() {
 	$.ajax({
   	type: "GET",
   	dataType: "html",
-  	url: "api/v1/render/schedule/" + <%= schedule.id %> + "/table_row",
+  	url: "api/v1/render/schedule/<%= schedule.hash_id %>/table_row",
   	success(data) {
   		if (insert == "before") {
   			$(data).insertBefore("#" + $insertTarget.attr("id"));
@@ -61,7 +61,7 @@ function insertSchedule() {
   			$insertTarget.append(data);
   		}
 
-  		$("#schedule_" + "<%= schedule.id %>").hide().fadeIn(500);
+  		$("#schedule_" + "<%= schedule.hash_id %>").hide().fadeIn(500);
   		setDeleteListeners();
   	}
   });

@@ -1,6 +1,5 @@
 
-
-$("#schedule_" + "<%= schedule.id %>").remove();
+$("#schedule_" + "<%= schedule.hash_id %>").remove();
 
 if ($("table#schedules_<%= remove_from %> tr").length == 1) {
 	$("table#schedules_<%= remove_from %>").remove();

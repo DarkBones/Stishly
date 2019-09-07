@@ -52,7 +52,8 @@ payday: {
   updated_at: '<%= Time.now.utc %>',
   is_active: 1,
   next_occurrence: '2018-03-28',
-  next_occurrence_utc: '2018-03-28 00:00'
+  next_occurrence_utc: '2018-03-28 00:00',
+  hash_id: LTtuYQYmO-kO
 }
 
 bonus_day: {
@@ -73,7 +74,8 @@ bonus_day: {
   updated_at: '<%= Time.now.utc %>',
   is_active: 1,
   next_occurrence: '2018-04-28',
-  next_occurrence_utc: '2018-04-28 00:00'
+  next_occurrence_utc: '2018-04-28 00:00',
+  hash_id: GFl1hng-oIiK
 }
 
 payday_cvg: {

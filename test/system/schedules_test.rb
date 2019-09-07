@@ -209,13 +209,13 @@ class SchedulesTest < ApplicationSystemTestCase
      login_user(users(:schedules), 'SomePassword123^!')
 
      visit "/schedules"
-     page.find("#schedule-transactions-button_1:first-of-type").click
+     page.find("#schedule-transactions-button_LTtuYQYmO-kO:first-of-type").click
      page.find("#new-scheduled-transaction").click
      
      assert_selector "#new_schedule_transactionform #categories-dropdown", text: "Uncategorised"
 
      page.find("#new_schedule_transactionform #categories-dropdown").click
-     page.find("#new_schedule_transactionform #search-categories_1").fill_in with: "fue"
+     page.find("#new_schedule_transactionform #search-categories_LTtuYQYmO-kO").fill_in with: "fue"
      
      assert_selector "#new_schedule_transactionform .category_86", visible: :hidden
      assert_selector "#new_schedule_transactionform .category_87", visible: :visible

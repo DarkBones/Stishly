@@ -96,7 +96,7 @@ class ApiGuiController < BaseApiBrowserController
   end
 
   def render_schedule_transactions
-    schedule = current_user.schedules.find(params[:schedule])
+    schedule = current_user.schedules.friendly.find(params[:schedule])
     transactions = schedule.user_transactions.where("parent_id is null AND (transfer_transaction_id is null OR (transfer_transaction_id is not null AND direction = -1))").order(:description).decorate
     
     render partial: "schedules/transactionlist", :locals => {:transactions => transactions, :schedule_id => params[:schedule]}
@@ -129,7 +129,7 @@ class ApiGuiController < BaseApiBrowserController
   end
 
   def render_schedule_pauseform
-  	schedule = current_user.schedules.find(params[:id])
+  	schedule = current_user.schedules.friendly.find(params[:id])
 
   	render partial: "schedules/schedule_pause_form", :locals => {:schedule => schedule}
   end
@@ -160,12 +160,12 @@ class ApiGuiController < BaseApiBrowserController
   end
 
   def render_schedule_table_row
-    schedule = current_user.schedules.find(params[:id]).decorate
+    schedule = current_user.schedules.friendly.find(params[:id]).decorate
     render partial: "schedules/schedule", :locals => {:schedule => schedule}
   end
 
   def swap_schedules_table
-    schedule = current_user.schedules.find(params[:schedule]).decorate
+    schedule = current_user.schedules.friendly.find(params[:schedule]).decorate
     render partial: "schedules/swap_table", :locals => {:schedule => schedule, :from => params[:from]}
   end
 

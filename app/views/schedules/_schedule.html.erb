@@ -1,4 +1,4 @@
-<tr next_occurrence="<%= schedule.time_num %>" id="<%= "schedule_#{schedule.id}" %>">
+<tr next_occurrence="<%= schedule.time_num %>" id="<%= "schedule_#{schedule.hash_id}" %>">
   <td>
     <%= schedule.name %>
   </td>
@@ -10,17 +10,17 @@
     <% end %>
   </td>
   <td>
-    <i class="fa fa-list clickable fa-lg" data-toggle="modal" data-target="#schedule_transactions_form" id="schedule-transactions-button_<%= schedule.id %>" onclick="scheduleTransactionsForm(<%= schedule.id %>);"></i>
-    <i class="fa fa-edit clickable fa-lg" data-toggle="modal" data-target="#editscheduleform" id="schedule-edit-button_<%= schedule.id%>" onclick="editScheduleForm(<%= schedule.id %>);"></i>
+    <i class="fa fa-list clickable fa-lg" data-toggle="modal" data-target="#schedule_transactions_form" id="schedule-transactions-button_<%= schedule.hash_id %>" onclick="scheduleTransactionsForm('<%= schedule.hash_id %>');"></i>
+    <i class="fa fa-edit clickable fa-lg" data-toggle="modal" data-target="#editscheduleform" id="schedule-edit-button_<%= schedule.hash_id%>" onclick="editScheduleForm('<%= schedule.hash_id %>');"></i>
     <% if schedule.pause_until_utc.nil? && schedule.is_active %>
-      <i class="fa fa-pause-circle clickable fa-lg" data-toggle="modal" data-target="#schedule_pause_form" id="schedule-pause-button_<%= schedule.id %>" onclick="schedulePauseForm(<%= schedule.id %>);"></i>
+      <i class="fa fa-pause-circle clickable fa-lg" data-toggle="modal" data-target="#schedule_pause_form" id="schedule-pause-button_<%= schedule.hash_id %>" onclick="schedulePauseForm('<%= schedule.hash_id %>');"></i>
     <% elsif !schedule.pause_until_utc.nil? && schedule.is_active %>
-      <i class="fa fa-play-circle clickable fa-lg" id="schedule-play-button_<%= schedule.id %>" onclick="unpauseSchedule(<%= schedule.id %>);"></i>
+      <i class="fa fa-play-circle clickable fa-lg" id="schedule-play-button_<%= schedule.hash_id %>" onclick="unpauseSchedule('<%= schedule.hash_id %>');"></i>
     <% end %>
     <% if schedule.is_active %>
-      <i class="fa fa-stop-circle clickable fa-lg" id="schedule-stop-button_<%= schedule.id %>" onclick="stopSchedule(<%= schedule.id %>, this);"></i>
+      <i class="fa fa-stop-circle clickable fa-lg" id="schedule-stop-button_<%= schedule.hash_id %>" onclick="stopSchedule('<%= schedule.hash_id %>', this);"></i>
     <% else %>
-      <i class="fa fa-play-circle clickable fa-lg" id="schedule-activate-button_<%= schedule.id %>" onclick="activateSchedule(<%= schedule.id %>);"></i>
+      <i class="fa fa-play-circle clickable fa-lg" id="schedule-activate-button_<%= schedule.hash_id %>" onclick="activateSchedule('<%= schedule.hash_id %>');"></i>
     <% end %>
     <%#= link_to "Delete", delete_schedule_path(schedule), class: "delete-confirm fa fa-trash-alt clickable fa-lg", "confirm-message" => "This action will delete schedule '#{schedule.name}'. This cannot be undone." %>
     <%= link_to(delete_schedule_path(schedule), class: "delete-confirm", "confirm-message" => "This action will delete schedule '#{schedule.name}'. This cannot be undone. Do you want to continue?") do %>

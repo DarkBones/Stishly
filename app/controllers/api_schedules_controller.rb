@@ -113,7 +113,7 @@ class ApiSchedulesController < BaseApiController
   end
 
   def unpause
-  	schedule = @user.schedules.find(params[:schedule])
+  	schedule = @user.schedules.friendly.find(params[:schedule])
   	render json: "not found", status: :not_found and return if schedule.nil?
 
   	schedule.pause_until = nil
@@ -123,7 +123,7 @@ class ApiSchedulesController < BaseApiController
   end
   
   def stop
-  	schedule = @user.schedules.find(params[:schedule])
+  	schedule = @user.schedules.friendly.find(params[:schedule])
   	render json: "not found", status: :not_found and return if schedule.nil?
 
   	schedule.is_active = false
@@ -132,7 +132,7 @@ class ApiSchedulesController < BaseApiController
   end
 
   def activate
-  	schedule = @user.schedules.find(params[:schedule])
+  	schedule = @user.schedules.friendly.find(params[:schedule])
   	render json: "not found", status: :not_found and return if schedule.nil?
 
   	schedule.is_active = true

@@ -30,7 +30,7 @@ class SchTransactionsTest < ApplicationSystemTestCase
     page.find(".navbar-gear").click
     click_on "Schedules"
 
-    page.find("#schedule-transactions-button_2").click
+    page.find("#schedule-transactions-button_GFl1hng-oIiK").click
     wait_for_ajax
 
     assert_selector "#sch_transactions_list", text: "Test"
@@ -69,7 +69,7 @@ class SchTransactionsTest < ApplicationSystemTestCase
     page.find(".navbar-gear").click
     click_on "Schedules"
 
-    page.find("#schedule-transactions-button_2").click
+    page.find("#schedule-transactions-button_GFl1hng-oIiK").click
     wait_for_ajax
 
     page.find("#heading1001").click
