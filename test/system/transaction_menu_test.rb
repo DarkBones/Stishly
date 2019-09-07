@@ -19,7 +19,7 @@ class TransactionMenuTest < ApplicationSystemTestCase
     assert_selector '#accounts_list', text: "Savings Account\n€0.00"
     
     # click on one of the accounts, and then on new transaction
-    page.find("#account_16").click
+    page.find("#account_Ac0zFCDl8ApZ").click
     click_on "New Transaction"
 
     # check if the transaction menu is visible

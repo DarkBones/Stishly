@@ -28,7 +28,8 @@ bas_1: {
   name: 'Current account',
   description: 'My current account at AIB',
   is_default: true,
-  currency: 'EUR'
+  currency: 'EUR',
+  hash_id: jvkHRHdOLFH-
 }
 
 bas_2: {
@@ -37,7 +38,8 @@ bas_2: {
   user_id: 1,
   name: 'BOI account',
   is_default: false,
-  currency: 'EUR'
+  currency: 'EUR',
+  hash_id: 3wPNUsSvn8YP
 }
 
 bas_3: {
@@ -46,7 +48,8 @@ bas_3: {
   user_id: 1,
   name: 'Test account',
   is_default: false,
-  currency: 'EUR'
+  currency: 'EUR',
+  hash_id: 9nmxbbf1tedH
 }
 
 bas_4: {
@@ -55,7 +58,8 @@ bas_4: {
   user_id: 1,
   name: 'Test2 account',
   is_default: false,
-  currency: 'EUR'
+  currency: 'EUR',
+  hash_id: o8xIIKx1MCzz
 }
 
 bas_5: {
@@ -64,7 +68,8 @@ bas_5: {
   user_id: 1,
   name: 'Test3 account',
   is_default: false,
-  currency: 'EUR'
+  currency: 'EUR',
+  hash_id: SNilsHJqNRoi
 }
 
 bas_JPY: {
@@ -73,7 +78,8 @@ bas_JPY: {
   user_id: 1,
   name: 'Test account JPY',
   is_default: false,
-  currency: 'JPY'
+  currency: 'JPY',
+  hash_id: fEvv2r5o8DWD
 }
 
 bas_EUR: {
@@ -82,7 +88,8 @@ bas_EUR: {
   user_id: 1,
   name: 'Test account EUR',
   is_default: false,
-  currency: 'EUR'
+  currency: 'EUR',
+  hash_id: lnB1x_dVYcUC
 }
 
 sab_1: {
@@ -90,7 +97,8 @@ sab_1: {
   user_id: 2,
   name: 'Current account',
   is_default: true,
-  currency: 'EUR'
+  currency: 'EUR',
+  hash_id: WXs-KoQggIPn
 }
 
 sab_2: {
@@ -98,7 +106,8 @@ sab_2: {
   user_id: 2,
   name: 'Test account',
   is_default: false,
-  currency: 'EUR'
+  currency: 'EUR',
+  hash_id: x9Y_uoIIoSm7
 }
 
 transactions_1: {
@@ -107,7 +116,8 @@ transactions_1: {
   user_id: 4,
   name: 'Test account',
   is_default: true,
-  currency: 'EUR'
+  currency: 'EUR',
+  hash_id: JV0-S53kDfqP
 }
 
 currency_1: {
@@ -116,7 +126,8 @@ currency_1: {
   user_id: 5,
   name: 'To be converted',
   is_default: true,
-  currency: 'EUR'
+  currency: 'EUR',
+  hash_id: 3KJE47LB5WAE
 }
 
 currency_2: {
@@ -125,7 +136,8 @@ currency_2: {
   user_id: 5,
   name: 'Not to be converted',
   is_default: false,
-  currency: 'EUR'
+  currency: 'EUR',
+  hash_id: MWNd2tsS-7vx
 }
 
 endless_page: {
@@ -135,6 +147,7 @@ endless_page: {
   name: 'Endless Page',
   is_default: true,
   currency: 'EUR',
+  hash_id: KpI4Cq6dLiYo
 }
 
 destroy_1: {
@@ -143,7 +156,8 @@ destroy_1: {
   user_id: 7,
   name: 'Destroy this account',
   is_default: true,
-  currency: 'EUR'
+  currency: 'EUR',
+  hash_id: VHcUm4uC3HQk
 }
 
 destroy_2: {
@@ -152,7 +166,8 @@ destroy_2: {
   user_id: 7,
   name: 'Destroy this account too',
   is_default: true,
-  currency: 'EUR'
+  currency: 'EUR',
+  hash_id: NL8vuE74cLwP
 }
 
 transactions_2: {
@@ -162,7 +177,8 @@ transactions_2: {
   name: 'Current Account',
   is_default: true,
   currency: 'EUR',
-  position: 0
+  position: 0,
+  hash_id: Ac0zFCDl8ApZ
 }
 
 transactions_3: {
@@ -172,7 +188,8 @@ transactions_3: {
   name: 'Savings Account',
   is_default: false,
   currency: 'EUR',
-  position: 1
+  position: 1,
+  hash_id: sVRZ_GLdEeoA
 }
 
 transactions_4: {
@@ -182,7 +199,8 @@ transactions_4: {
   name: 'JPY',
   is_default: false,
   currency: 'JPY',
-  position: 2
+  position: 2,
+  hash_id: Gun-HUMqFV1c
 }
 
 search_1: {
@@ -192,7 +210,8 @@ search_1: {
   name: 'Current account',
   is_default: true,
   currency: 'EUR',
-  position: 1
+  position: 1,
+  hash_id: 5omVnzQ3EI28
 }
 
 search_2: {
@@ -202,7 +221,8 @@ search_2: {
   name: 'Savings account',
   is_default: false,
   currency: 'EUR',
-  position: 2
+  position: 2,
+  hash_id: kzWuMfJkihAs
 }
 
 schedule_1: {
@@ -212,7 +232,8 @@ schedule_1: {
   name: Scheduled transactions,
   is_default: true,
   currency: EUR,
-  position: 1
+  position: 1,
+  hash_id: 4NXlRl4jJ3x8
 }
 
 schedule_2: {
@@ -222,7 +243,8 @@ schedule_2: {
   name: Savings account,
   is_default: false,
   currency: EUR,
-  position: 2
+  position: 2,
+  hash_id: O0pIMO4iLPpO
 }
 
 overlap_1: {
@@ -231,7 +253,8 @@ overlap_1: {
   user_id: 11,
   name: Current,
   currency: EUR,
-  position: 1
+  position: 1,
+  hash_id: 1s94YnjvhVbg
 }
 
 overlap_2: {
@@ -240,7 +263,8 @@ overlap_2: {
   user_id: 11,
   name: Current,
   currency: EUR,
-  position: 1
+  position: 1,
+  hash_id: H0GoUOf5kpzf
 }
 
 duplicate_transactions_1: {
@@ -249,7 +273,8 @@ duplicate_transactions_1: {
   user_id: 12,
   name: Current Account,
   currency: EUR,
-  position: 1
+  position: 1,
+  hash_id: 067XMO7HZDkM
 }
 
 duplicate_transactions_2: {
@@ -258,7 +283,8 @@ duplicate_transactions_2: {
   user_id: 12,
   name: Savings,
   currency: EUR,
-  position: 1
+  position: 1,
+  hash_id: wfDLqjPvBA36
 }
 
 pause_schedules: {
@@ -267,7 +293,8 @@ pause_schedules: {
   user_id: 13,
   name: Pause,
   currency: EUR,
-  position: 1
+  position: 1,
+  hash_id: ALlU8lMUEo99
 }
 
 schedules_ids: {
@@ -276,7 +303,8 @@ schedules_ids: {
   user_id: 14,
   name: Period,
   currency: EUR,
-  position: 1
+  position: 1,
+  hash_id: v7j-kRI-BYWw
 }
 
 upcoming_transactions: {
@@ -286,7 +314,8 @@ upcoming_transactions: {
   name: Upcoming,
   currency: EUR,
   position: 1,
-  account_type: spend
+  account_type: spend,
+  hash_id: dp8OOKRR7oN2
 }
 
 upcoming_transactions_dst: {
@@ -296,7 +325,8 @@ upcoming_transactions_dst: {
   name: Upcoming,
   currency: EUR,
   position: 1,
-  account_type: spend
+  account_type: spend,
+  hash_id: 5AvZnmUwXjij
 }
 
 upcoming_transactions_run_one: {
@@ -306,7 +336,8 @@ upcoming_transactions_run_one: {
   name: Current,
   currency: EUR,
   position: 1,
-  account_type: spend
+  account_type: spend,
+  hash_id: yrSlA1_MKmGg
 }
 
 upcoming_transactions_run_two: {
@@ -316,7 +347,8 @@ upcoming_transactions_run_two: {
   name: Saving,
   currency: EUR,
   position: 1,
-  account_type: save
+  account_type: save,
+  hash_id: 4CXKfO3kYS8A
 }
 
 upcoming_transactions_run_three: {
@@ -326,7 +358,8 @@ upcoming_transactions_run_three: {
   name: Cash,
   currency: JPY,
   position: 1,
-  account_type: save
+  account_type: save,
+  hash_id: phPl2M9Hlzk8
 }
 
 update_transactions_one: {
@@ -335,7 +368,8 @@ update_transactions_one: {
   user_id: 18,
   name: One,
   currency: EUR,
-  position: 0
+  position: 0,
+  hash_id: y6QQL0DdXfkL
 }
 
 update_transactions_two: {
@@ -344,7 +378,8 @@ update_transactions_two: {
   user_id: 18,
   name: Two,
   currency: EUR,
-  position: 0
+  position: 0,
+  hash_id: JkaOFIZiUndH
 }
 
 future_transactions_one: {
@@ -353,5 +388,6 @@ future_transactions_one: {
   user_id: 19,
   name: One,
   currency: EUR,
-  position: 0
+  position: 0,
+  hash_id: EJI6ICiXi2XU
 }

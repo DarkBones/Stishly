@@ -95,8 +95,10 @@ class AccountsTest < ApplicationSystemTestCase
 
     login_user(current_user, 'SomePassword123^!')
 
-    for i in 1..5
-        page.find("#account_#{i}").click
+    ids = ["jvkHRHdOLFH-", "3wPNUsSvn8YP", "9nmxbbf1tedH", "o8xIIKx1MCzz", "SNilsHJqNRoi"]
+
+    for i in 0..4
+        page.find("#account_#{ids[i]}").click
 
         for x in 1..i
             assert_selector 'li', text: "transaction " + x.to_s + "\n€#{x}.00"
@@ -110,7 +112,7 @@ class AccountsTest < ApplicationSystemTestCase
 
     login_user(current_user, 'SomePassword123^!')
 
-    page.find("#account_13").click
+    page.find("#account_KpI4Cq6dLiYo").click
 
     sleep 1
     assert_selector 'li', text: "transaction 1\n€1.00"

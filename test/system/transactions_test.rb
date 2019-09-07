@@ -18,7 +18,7 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector '#accounts_list', text: "Savings Account\n€0.00"
     
     # click on one of the accounts, and then on new transaction
-    page.find("#account_16").click
+    page.find("#account_Ac0zFCDl8ApZ").click
     click_on "New Transaction"
 
     # check if the transaction menu is visible
@@ -42,12 +42,12 @@ class TransactionsTest < ApplicationSystemTestCase
     #click_on "Close"
     page.find("#new_transactions_form .modal-footer .btn-secondary").click
 
-    page.find("#account_16").click
+    page.find("#account_Ac0zFCDl8ApZ").click
     click_on "New Transaction"
     assert page.find("#transaction_account").value == "Current Account", format_error("Unexpected selected account", "Current Account", page.find("#transaction_account").value)
     click_on "Close"
 
-    page.find("#account_17").click
+    page.find("#account_sVRZ_GLdEeoA").click
     click_on "New Transaction"
     assert page.find("#transaction_account").value == "Savings Account", format_error("Unexpected selected account", "Savings Account", page.find("#transaction_account").value)
   end
