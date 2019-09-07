@@ -5,7 +5,7 @@
   $("[data-dismiss=modal]").trigger({ type: "click" });
 
   $('<%= j render @account %>').insertAfter($('#accounts_list #account_0')).hide().fadeIn(500);
-  $('#account_' + <%= @account.id %>).hide().fadeIn(1000);
+  $('#account_' + <%= @account.hash_id %>).hide().fadeIn(1000);
 
   var total_amount = parseInt($('#accounts_list li').first().find('span').attr('balance'));
 
