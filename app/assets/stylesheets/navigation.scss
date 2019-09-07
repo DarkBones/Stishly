@@ -74,6 +74,10 @@ body {
   }
 }
 
+#accounts_list li.active {
+  background-color: lighten($secondaryColor, 30%) !important;
+}
+
 .dropdown-menu_notifications {
   max-height: 50vh;
   overflow-y: scroll;
