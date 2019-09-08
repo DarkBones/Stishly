@@ -120,7 +120,8 @@ class AccountsController < ApplicationController
   end
 
   def settings
-    @active_account = Account.get_from_name(params[:id], current_user).decorate
+    @active_account = Account.get_from_name(params[:id], current_user) or not_found
+    @active_account = @active_account.decorate
   end
 
   private
