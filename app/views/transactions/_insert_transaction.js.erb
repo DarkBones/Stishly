@@ -24,7 +24,7 @@ if($("#transactions_list").length > 0){
 }
 
 if(insert) {
-	insertTransaction("<%= transaction.id %>", activeAccount);
+	insertTransaction("<%= transaction.hash_id %>", activeAccount);
 }
 
 function insertTransaction(id, account) {

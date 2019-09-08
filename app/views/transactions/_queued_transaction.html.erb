@@ -1,5 +1,5 @@
 <tr>
-	<%= form_for transaction, url: approve_transaction_path(transaction.id), :method => "put" do |f| %>
+	<%= form_for transaction, url: approve_transaction_path(transaction.hash_id), :method => "put" do |f| %>
 		<td>
 			<%= User.format_date(transaction.local_datetime.to_date) %>
 		</td>
@@ -22,7 +22,7 @@
 			<% end %>
 		</td>
 		<td>
-			<%= link_to "Discard", :controller => "transactions", :action => "discard", :id => transaction.id %>
+			<%= link_to "Discard", :controller => "transactions", :action => "discard", :id => transaction.hash_id %>
 			<%= f.submit 'Approve', :class => '' %>
 		</td>
 	<% end %>

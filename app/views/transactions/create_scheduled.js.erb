@@ -6,7 +6,7 @@ function insert_transaction() {
 	$.ajax({
 		type: "GET",
 		dataType: "html",
-		url: "api/v1/render/scheduled_transaction/<%= @transaction.id %>",
+		url: "api/v1/render/scheduled_transaction/<%= @transaction.hash_id %>",
 		success(data) {
 
 			$(".card-scheduled-transaction").each(function(){
@@ -17,7 +17,7 @@ function insert_transaction() {
 			});
 
 			$(data).insertBefore("#new_transaction_card");
-			$("#transaction_<%= @transaction.id %>").hide().fadeIn(500);
+			$("#transaction_<%= @transaction.hash_id %>").hide().fadeIn(500);
 		}
 	});
 }

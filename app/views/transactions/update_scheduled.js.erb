@@ -1,4 +1,4 @@
-if ( $("#sch_transactions_list #transaction_<%= @transaction.id %>").length > 0 ) {
+if ( $("#sch_transactions_list #transaction_<%= @transaction.hash_id %>").length > 0 ) {
 	update_transaction();
 }
 
@@ -6,7 +6,7 @@ function update_transaction() {
 	$.ajax({
 		type: "GET",
 		dataType: "html",
-		url: "api/v1/render/scheduled_transaction/<%= @transaction.id %>",
+		url: "api/v1/render/scheduled_transaction/<%= @transaction.hash_id %>",
 		success(data) {
 
 			$(".card-scheduled-transaction").each(function(){
@@ -16,8 +16,8 @@ function update_transaction() {
 				}
 			});
 
-			$("#sch_transactions_list #transaction_<%= @transaction.id %>").html(data);
-			$("#transaction_<%= @transaction.id %>").hide().fadeIn(500);
+			$("#sch_transactions_list #transaction_<%= @transaction.hash_id %>").html(data);
+			$("#transaction_<%= @transaction.hash_id %>").hide().fadeIn(500);
 		}
 	});
 }

@@ -36,6 +36,8 @@
     
     originalTId = tId;
 
+    //alert("TRANSACTION ID = " + transactionId + "\nSCHEDULE ID = " + scheduleId + "\nPERIOD = " + schedulePeriod.toString() + "\nTID = " + scheduledTransactionId);
+
     $("#edit_upcoming_transaction_form_fields").html("");
     $.ajax({
       type: "GET",

@@ -33,7 +33,7 @@ class HiddenFieldsTest < ApplicationSystemTestCase
 
     page.find("#account_0").click
 
-    page.find("#select_transaction_1801").click
+    page.find("#select_transaction_5jGb4q5OIy2l").click
 
     page.find("#mass_assign_to_schedule").click
 

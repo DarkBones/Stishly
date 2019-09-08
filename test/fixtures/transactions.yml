@@ -393,7 +393,8 @@ sch_transaction_1: {
   updated_at: "<%= Time.now.utc %>",
   local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
-  transfer_account_id: null
+  transfer_account_id: null,
+  hash_id: 48bPA_TS4aFb
 }
 
 sch_transaction_2_main: {
@@ -413,7 +414,8 @@ sch_transaction_2_main: {
   updated_at: "<%= Time.now.utc %>",
   local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
-  transfer_account_id: null
+  transfer_account_id: null,
+  hash_id: OuzsEKnOk96x
 }
 
 sch_transaction_2_child_1: {
@@ -510,7 +512,8 @@ sch_transaction_3_from: {
   updated_at: "<%= Time.now.utc %>",
   local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
-  transfer_transaction_id: 1004
+  transfer_transaction_id: 1004,
+  hash_id: 1BOJK9aKnJD1
 }
 sch_transaction_3_to: {
   id: 1004,
@@ -913,7 +916,8 @@ schedule_1: {
   updated_at: "2018-01-01 00:00",
   local_datetime: "<%= 100.seconds.ago %>",
   timezone: "Europe/London",
-  category_id: 0
+  category_id: 0,
+  hash_id: 5jGb4q5OIy2l
 }
 
 schedule_4_main: {
@@ -929,7 +933,8 @@ schedule_4_main: {
   updated_at: "2018-01-01 00:00",
   local_datetime: "<%= 98.seconds.ago %>",
   timezone: "Europe/London",
-  category_id: 0
+  category_id: 0,
+  hash_id: 5mzqUy-0WyC4
 }
 
 schedule_5_to: {
@@ -948,7 +953,8 @@ schedule_5_to: {
   timezone: "Europe/London",
   category_id: 0,
   transfer_account_id: 21,
-  transfer_transaction_id: 805
+  transfer_transaction_id: 805,
+  hash_id: 91PqMe82hH36
 }
 
 paused_scheduled: {
@@ -1242,7 +1248,8 @@ upcoming_transactions_run: {
   local_datetime: "<%= Time.now.utc %>",
   category_id: 0,
   schedule_id: 1701,
-  is_scheduled: true
+  is_scheduled: true,
+  hash_id: IPkuisDyz-Om
 }
 
 upcoming_transactions_run_2: {
@@ -1259,7 +1266,8 @@ upcoming_transactions_run_2: {
   updated_at: "<%= Time.now.utc %>",
   local_datetime: "<%= Time.now.utc %>",
   category_id: 0,
-  is_scheduled: true
+  is_scheduled: true,
+  hash_id: -tRb8DSf3fIR
 }
 
 upcoming_transactions_run_3: {
@@ -1276,7 +1284,8 @@ upcoming_transactions_run_3: {
   updated_at: "<%= Time.now.utc %>",
   local_datetime: "<%= Time.now.utc %>",
   category_id: 0,
-  is_scheduled: true
+  is_scheduled: true,
+  hash_id: eqGNd3ktlH_l
 }
 
 upcoming_transactions_run_4: {
@@ -1293,7 +1302,8 @@ upcoming_transactions_run_4: {
   updated_at: "<%= Time.now.utc %>",
   local_datetime: "<%= Time.now.utc %>",
   category_id: 0,
-  is_scheduled: true
+  is_scheduled: true,
+  hash_id: 9vsAh0YpVIUz
 }
 
 upcoming_transactions_run_5: {
@@ -1310,7 +1320,8 @@ upcoming_transactions_run_5: {
   updated_at: "<%= Time.now.utc %>",
   local_datetime: "<%= Time.now.utc %>",
   category_id: 0,
-  is_scheduled: true
+  is_scheduled: true,
+  hash_id: 3kj4eZKY57Y2
 }
 
 upcoming_transactions_run_6: {
@@ -1327,7 +1338,8 @@ upcoming_transactions_run_6: {
   updated_at: "<%= Time.now.utc %>",
   local_datetime: "<%= Time.now.utc %>",
   category_id: 0,
-  is_scheduled: true
+  is_scheduled: true,
+  hash_id: NTXBY4_deapx
 }
 
 upcoming_transactions_run_7: {
@@ -1344,7 +1356,8 @@ upcoming_transactions_run_7: {
   updated_at: "<%= Time.now.utc %>",
   local_datetime: "<%= Time.now.utc %>",
   category_id: 0,
-  is_scheduled: true
+  is_scheduled: true,
+  hash_id: 2_Uub5dwFrzp
 }
 
 upcoming_transactions_run_8: {
@@ -1361,7 +1374,8 @@ upcoming_transactions_run_8: {
   updated_at: "<%= Time.now.utc %>",
   local_datetime: "<%= Time.now.utc %>",
   category_id: 0,
-  is_scheduled: true
+  is_scheduled: true,
+  hash_id: 2OdljFaZOFM9
 }
 
 upcoming_transactions_run_9: {
@@ -1378,7 +1392,8 @@ upcoming_transactions_run_9: {
   updated_at: "<%= Time.now.utc %>",
   local_datetime: "<%= Time.now.utc %>",
   category_id: 0,
-  is_scheduled: true
+  is_scheduled: true,
+  hash_id: c7az8JRxgCyE
 }
 
 upcoming_transactions_run_10: {
@@ -1395,7 +1410,8 @@ upcoming_transactions_run_10: {
   updated_at: "<%= Time.now.utc %>",
   local_datetime: "<%= Time.now.utc %>",
   category_id: 0,
-  is_scheduled: true
+  is_scheduled: true,
+  hash_id: 2XL4i66AaPKr
 }
 
 upcoming_transactions_run_6_edited: {
@@ -1415,7 +1431,8 @@ upcoming_transactions_run_6_edited: {
   is_scheduled: true,
   schedule_id: 1701,
   schedule_period_id: 0,
-  scheduled_transaction_id: 1706
+  scheduled_transaction_id: 1706,
+  hash_id: cyKUdAPb_rSz
 }
 
 upcoming_transactions_run_8_ran_manually: {
@@ -1435,7 +1452,8 @@ upcoming_transactions_run_8_ran_manually: {
   is_scheduled: false,
   schedule_id: 1701,
   schedule_period_id: 0,
-  scheduled_transaction_id: 1708
+  scheduled_transaction_id: 1708,
+  hash_id: yF3n6WGZ9kPv
 }
 
 upcoming_transactions_run_3_ran_manually: {
@@ -1456,7 +1474,8 @@ upcoming_transactions_run_3_ran_manually: {
   schedule_id: 1701,
   schedule_period_id: 0,
   scheduled_transaction_id: 1703,
-  is_cancelled: true
+  is_cancelled: true,
+  hash_id: B_dRJxIT7xke
 }
 
 update_transaction_simple_expense: {

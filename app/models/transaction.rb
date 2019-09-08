@@ -186,7 +186,7 @@ class Transaction < ApplicationRecord
 
   def self.update(transaction, params, current_user, scheduled: false)
     if transaction.class == String || transaction.class == Integer
-      transaction = current_user.transactions.find(transaction)
+      transaction = current_user.transactions.friendly.find(transaction)
     end
 
     return if transaction.nil?

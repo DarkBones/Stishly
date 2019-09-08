@@ -20,7 +20,7 @@ class SchedulesTransaction < ApplicationRecord
     main_transactions = []
     transactions = []
     transaction_ids.each do |t_id|
-      t = current_user.transactions.find(t_id)
+      t = current_user.transactions.friendly.find(t_id)
       next if t.nil?
 
       t = Transaction.find_main_transaction(t)

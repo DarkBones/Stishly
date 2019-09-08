@@ -30,7 +30,7 @@ class ApiGuiController < BaseApiBrowserController
 	end
 
   def create_transaction
-    transaction = current_user.transactions.find(params[:transaction_id]).decorate
+    transaction = current_user.transactions.friendly.find(params[:transaction_id]).decorate
     transfer_transaction = transaction.transfer_transaction.decorate unless transaction.transfer_transaction.nil?
 
     unless params[:account_name].nil?
@@ -90,7 +90,7 @@ class ApiGuiController < BaseApiBrowserController
 
 	def render_transaction
     active_account = Account.get_from_name(params[:account], current_user)
-    transaction = current_user.transactions.find(params[:transaction]).decorate
+    transaction = current_user.transactions.friendly.find(params[:transaction]).decorate
 
     render partial: 'accounts/transaction', :locals => { :active_account => active_account, :transaction => transaction }
   end
@@ -135,17 +135,17 @@ class ApiGuiController < BaseApiBrowserController
   end
 
   def edit_upcoming_transaction_occurrence_form
-  	transaction = current_user.transactions.find(params[:id]).decorate
+  	transaction = current_user.transactions.friendly.find(params[:id]).decorate
   	render partial: "transactions/edit_upcoming_transaction_occurrence", :locals => {:transaction => transaction, :schedule_id => params[:schedule_id], :schedule_period_id => params[:schedule_period_id], :scheduled_transaction_id => params[:scheduled_transaction_id]}
   end
 
   def edit_transaction
-    transaction = current_user.transactions.find(params[:id]).decorate
+    transaction = current_user.transactions.friendly.find(params[:id]).decorate
     render partial: "transactions/edit_transaction", :locals => {:transaction => transaction}
   end
 
   def edit_upcoming_transaction_series_form
-  	transaction = current_user.transactions.find(params[:id]).decorate
+  	transaction = current_user.transactions.friendly.find(params[:id]).decorate
   	render partial: "transactions/edit_upcoming_transaction_series", :locals => {:transaction => transaction}
   end
 
@@ -170,7 +170,7 @@ class ApiGuiController < BaseApiBrowserController
   end
 
   def render_upcoming_transaction_dropdown
-    transaction = current_user.transactions.find(params[:id]).decorate
+    transaction = current_user.transactions.friendly.find(params[:id]).decorate
     schedule = transaction.schedule
 
     if schedule.nil?
@@ -181,9 +181,9 @@ class ApiGuiController < BaseApiBrowserController
       period_id = transaction.schedule_period_id
     end
 
-    transaction_id = schedule_id.to_s + transaction.id.to_s + period_id.to_s
+    transaction_id = schedule_id.to_s + transaction.hash_id + period_id.to_s
 
-    scheduled_transaction_id = transaction.id
+    scheduled_transaction_id = transaction.hash_id
     scheduled_transaction_id = transaction.scheduled_transaction_id unless transaction.scheduled_transaction_id.nil?
 
     render partial: "transactions/upcoming_transaction_dropdown", :locals => {
@@ -199,7 +199,7 @@ class ApiGuiController < BaseApiBrowserController
   end
 
   def render_scheduled_transaction
-    transaction = current_user.transactions.find(params[:id]).decorate
+    transaction = current_user.transactions.friendly.find(params[:id]).decorate
     render partial: 'schedules/transaction', :locals => {:transaction => transaction}
   end
 

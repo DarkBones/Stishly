@@ -7,16 +7,16 @@
   	schedule_id = transaction.schedule.hash_id
   	period_id = transaction.schedule_period_id
   end
-	transaction_id = schedule_id.to_s + transaction.id.to_s + period_id.to_s
+	transaction_id = "#{schedule_id}#{transaction.hash_id}#{period_id}"
 
 
 	transaction.schedule.nil? ? schedule_name = "" : schedule_name = transaction.schedule.name
 
-	scheduled_transaction_id = transaction.id
+	scheduled_transaction_id = transaction.hash_id
   scheduled_transaction_id = transaction.scheduled_transaction_id unless transaction.scheduled_transaction_id.nil?
 %>
 
-<tr class="<%= 'upcoming-cancelled' if transaction.is_cancelled %>" id="transaction_<%= transaction_id %>" series-id="<%= transaction.id %>" schedule="<%= schedule_id %>" period="<%= period_id %>" scheduled-transaction="<%= scheduled_transaction_id %>">
+<tr class="<%= 'upcoming-cancelled' if transaction.is_cancelled %>" id="transaction_<%= transaction_id %>" series-id="<%= transaction.hash_id %>" schedule="<%= schedule_id %>" period="<%= period_id %>" scheduled-transaction="<%= scheduled_transaction_id %>">
 	<td id="upcoming-date"><!-- date -->
 		<%= User.format_date(transaction.local_datetime) %>
 	</td>

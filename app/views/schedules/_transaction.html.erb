@@ -1,4 +1,4 @@
-<div class="transaction card" id="transaction_<%= transaction.id %>" amount="<%= transaction.user_currency_amount %>">
+<div class="transaction card" id="transaction_<%= transaction.hash_id %>" amount="<%= transaction.user_currency_amount %>">
 
   <%= render partial: "schedules/transaction_card", :locals => {:transaction => transaction} %>
 

@@ -9,7 +9,7 @@ $("[data-dismiss=modal]").trigger({ type: "click" });
   	schedule_id = @transaction.schedule.hash_id
   	period_id = @transaction.schedule_period_id
   end
-	new_transaction_id = schedule_id + @transaction.id.to_s + period_id.to_s
+	new_transaction_id = schedule_id + @transaction.hash_id + period_id.to_s
 %>
 
 $("#transaction_" + originalTId.toString() + " #upcoming-description").text("<%= @transaction.description %>");
@@ -24,11 +24,11 @@ $.ajax({
 		$.ajax({
 			type: "GET",
 			dataType: "html",
-			url: "api/v1/render/upcoming_transaction/<%= @transaction.id %>/dropdown",
+			url: "api/v1/render/upcoming_transaction/<%= @transaction.hash_id %>/dropdown",
 			success(data) {
 				$("#transaction_" + originalTId.toString() + " #upcoming-dropdown").html(data);
 				
-				$("#transaction_" + originalTId.toString()).attr("series-id", "<%= @transaction.id %>");
+				$("#transaction_" + originalTId.toString()).attr("series-id", "<%= @transaction.hash_id %>");
 				$("#transaction_" + originalTId.toString()).attr("id", "transaction_<%= new_transaction_id %>");
 			},
 			error() {
@@ -45,7 +45,7 @@ $.ajax({
 $.ajax({
 	type: "GET",
 	dataType: "json",
-	url: "api/v1/transactions/<%= @transaction.id %>",
+	url: "api/v1/transactions/<%= @transaction.hash_id %>",
 	success(data) {
 		$("#transaction_" + originalTId.toString() + " #upcoming-date").text(data.date_user_format);
 	}

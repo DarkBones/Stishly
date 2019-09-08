@@ -1,11 +1,11 @@
-var $originalTxn = $("#transaction_listing_<%= transaction.id %>");
+var $originalTxn = $("#transaction_listing_<%= transaction.hash_id %>");
 var $originalTransferTxn = null;
 var $dayDiv = $originalTxn.parents(".transactions_date");
 var activeAccount = getActiveAccountName();
 var date = $dayDiv.attr("id");
 
 <% unless transaction.transfer_transaction.nil? %>
-	$originalTransferTxn = $("#transaction_listing_<%= transaction.transfer_transaction.id %>");
+	$originalTransferTxn = $("#transaction_listing_<%= transaction.transfer_transaction.hash_id %>");
 <% end %>
 
 // update the day div

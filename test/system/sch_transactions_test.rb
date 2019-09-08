@@ -1,20 +1,19 @@
 require "application_system_test_case"
 
 class SchTransactionsTest < ApplicationSystemTestCase
-  
   test "attach transactions to schedule" do 
     # login as schedules user
     login_user(users(:schedules), 'SomePassword123^!')
 
     page.find("#account_0").click
 
-    page.find("#select_transaction_1801").click
-    page.find("#select_transaction_1804").click
-    page.find("#select_transaction_1806").click
+    page.find("#select_transaction_5jGb4q5OIy2l").click
+    page.find("#select_transaction_5mzqUy-0WyC4").click
+    page.find("#select_transaction_91PqMe82hH36").click
 
     page.find("#mass_assign_to_schedule").click
 
-    assert page.find("#schedules_transaction_transactions", visible: :all).value == "1801 1804 1806"
+    assert page.find("#schedules_transaction_transactions", visible: :all).value == "5jGb4q5OIy2l 5mzqUy-0WyC4 91PqMe82hH36"
 
     #select "Payday", from: "Schedule"
     page.find("#schedules_transaction_schedules").select("Payday")
@@ -40,27 +39,27 @@ class SchTransactionsTest < ApplicationSystemTestCase
     assert_selector "#sch_transactions_list", text: "€10.00"
     assert_selector "#sch_transactions_list", text: "€500.00"
 
-    assert_selector "#transaction_1001", visible: :hidden
-    assert_selector "#transaction_1002", visible: :hidden
-    assert_selector "#transaction_1003", visible: :hidden
+    assert_selector "#transaction_48bPA_TS4aFb", visible: :hidden
+    assert_selector "#transaction_OuzsEKnOk96x", visible: :hidden
+    assert_selector "#transaction_1BOJK9aKnJD1", visible: :hidden
 
-    page.find("#heading1001").click
+    page.find("#heading48bPA_TS4aFb").click
     sleep 0.3
-    assert_selector "#transaction_1001", visible: :visible
-    assert_selector "#transaction_1002", visible: :hidden
-    assert_selector "#transaction_1003", visible: :hidden
+    assert_selector "#transaction_48bPA_TS4aFb", visible: :visible
+    assert_selector "#transaction_OuzsEKnOk96x", visible: :hidden
+    assert_selector "#transaction_1BOJK9aKnJD1", visible: :hidden
 
-    page.find("#heading1002").click
+    page.find("#headingOuzsEKnOk96x").click
     sleep 0.3
-    assert_selector "#transaction_1001", visible: :hidden
-    assert_selector "#transaction_1002", visible: :visible
-    assert_selector "#transaction_1003", visible: :hidden
+    assert_selector "#transaction_48bPA_TS4aFb", visible: :hidden
+    assert_selector "#transaction_OuzsEKnOk96x", visible: :visible
+    assert_selector "#transaction_1BOJK9aKnJD1", visible: :hidden
 
-    page.find("#heading1003").click
+    page.find("#heading1BOJK9aKnJD1").click
     sleep 0.3
-    assert_selector "#transaction_1001", visible: :hidden
-    assert_selector "#transaction_1002", visible: :hidden
-    assert_selector "#transaction_1003", visible: :visible
+    assert_selector "#transaction_48bPA_TS4aFb", visible: :hidden
+    assert_selector "#transaction_OuzsEKnOk96x", visible: :hidden
+    assert_selector "#transaction_1BOJK9aKnJD1", visible: :visible
   end
 
   test "edit scheduled transactions" do
@@ -72,7 +71,7 @@ class SchTransactionsTest < ApplicationSystemTestCase
     page.find("#schedule-transactions-button_GFl1hng-oIiK").click
     wait_for_ajax
 
-    page.find("#heading1001").click
+    page.find("#heading48bPA_TS4aFb").click
     sleep 0.3
 
     fill_in "Description", with: "New description"
@@ -81,4 +80,5 @@ class SchTransactionsTest < ApplicationSystemTestCase
 
     assert_selector "#sch_transactions_list", text: "New description"
   end
+
 end

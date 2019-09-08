@@ -3,7 +3,7 @@
   <div class="modal-body">
     <div class="container">
 
-        <%= render partial: "transactions/transaction_form_fields", :locals => {:transaction => transaction, :f => f, :base_only => true, :form_id_prefix => "", :form_id_suffix => "", :scheduled_transaction_id => transaction.id } %>
+        <%= render partial: "transactions/transaction_form_fields", :locals => {:transaction => transaction, :f => f, :base_only => true, :form_id_prefix => "", :form_id_suffix => "", :scheduled_transaction_id => transaction.hash_id } %>
 
     </div>
   </div>
