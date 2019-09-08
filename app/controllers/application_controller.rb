@@ -69,11 +69,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
+  
   private
 
   def valid_timezone(tz)
     return !tz.nil? && ActiveSupport::TimeZone[tz].present?
 
   end
+
 
 end

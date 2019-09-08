@@ -13,7 +13,10 @@ class AccountsController < ApplicationController
   end
 
   def show
-    @active_account = current_user.accounts.where(name: params[:id]).take.decorate
+    @active_account = Account.get_from_name(params[:id], current_user) or not_found
+    @active_account = @active_account.decorate
+
+    #@active_account = current_user.accounts.where(name: params[:id]).take.decorate
     #@active_account = current_user.accounts.friendly.find(params[:id]).decorate
 
     unless params.keys.include? "filterrific"
