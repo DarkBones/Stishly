@@ -217,7 +217,7 @@ class SchedulesTest < ApplicationSystemTestCase
      page.find("#new_schedule_transactionform #categories-dropdown").click
      page.find("#new_schedule_transactionform #search-categories_LTtuYQYmO-kO").fill_in with: "fue"
      
-     assert_selector "#new_schedule_transactionform .category_86", visible: :hidden
-     assert_selector "#new_schedule_transactionform .category_87", visible: :visible
+     assert_selector "#new_schedule_transactionform .category_dRrYpyKCdqFm", visible: :hidden
+     assert_selector "#new_schedule_transactionform .category_xn-2SkGUfSwQ", visible: :visible
   end
 end

@@ -121,6 +121,11 @@ module TransactionHelper
     params[:dateclass] = dateclass
     params[:date] = date
 
+    params[:category_hash_id] = "0"
+    if transaction.category_id > 0
+      params[:category_hash_id] = transaction.category.hash_id
+    end
+
     return params
   end
 

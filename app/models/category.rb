@@ -54,7 +54,7 @@ class Category < ApplicationRecord
       end
 
       current_user.categories.order(:name).each do |cat|
-        tree[cat.id][:id] = cat.id
+        tree[cat.id][:id] = cat.hash_id
         tree[cat.id][:name] = cat.name
         tree[cat.id][:color] = cat.color
         tree[cat.id][:symbol] = cat.symbol

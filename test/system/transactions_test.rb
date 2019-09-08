@@ -84,31 +84,9 @@ class TransactionsTest < ApplicationSystemTestCase
     assert_selector "#categories-dropdown", text: "Uncategorised"
 
     page.find("#categories-dropdown").click
-    page.find(".category_11").click
+    page.find(".category_HdJ6NFFbe0hf").click
 
     assert_selector "#categories-dropdown", text: "Cinema"
-  end
-
-
-  test "search category" do
-    login_user(users(:bas), 'SomePassword123^!')
-
-    click_on "New Transaction"
-
-    assert_selector "#categories-dropdown", text: "Uncategorised"
-
-    page.find("#categories-dropdown").click
-    page.find("#search-categories_").fill_in with: "cinem"
-    
-    assert_selector ".category_1", visible: :visible
-    assert_selector ".category_12", visible: :visible
-    assert_selector ".category_11", visible: :visible
-
-    for i in 1..82
-        unless [1, 12, 11].include? i
-            assert_selector ".category_" + i.to_s, visible: :hidden
-        end
-    end
   end
 
   test "simple transaction" do

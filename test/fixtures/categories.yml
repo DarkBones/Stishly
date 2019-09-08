@@ -19,7 +19,7 @@
 # below each fixture, per the syntax in the comments below
 #
 
-entertainment1: { id: 1, name: 'Entertainment', color: '0, 100%, 50%', symbol: 'entertainment', user_id: 1, parent_id: }
+entertainment1: { id: 1, name: 'Entertainment', color: '0, 100%, 50%', symbol: 'entertainment', user_id: 1, parent_id: , hash_id: ylcQxSNHaiRu}
 food_drinks2: { id: 2, name: 'Food & Drinks', color: '36, 100%, 50%', symbol: 'food_drinks', user_id: 1, parent_id: }
 health3: { id: 3, name: 'Health', color: '72, 100%, 50%', symbol: 'health', user_id: 1, parent_id: }
 house4: { id: 4, name: 'Household', color: '108, 100%, 50%', symbol: 'house', user_id: 1, parent_id: }
@@ -29,7 +29,7 @@ others7: { id: 7, name: 'Other', color: '216, 100%, 50%', symbol: 'others', user
 shopping8: { id: 8, name: 'Shopping', color: '252, 100%, 50%', symbol: 'shopping', user_id: 1, parent_id: }
 transport9: { id: 9, name: 'Transport', color: '288, 100%, 50%', symbol: 'transport', user_id: 1, parent_id: }
 vehicle10: { id: 10, name: 'Vehicle', color: '324, 100%, 50%', symbol: 'vehicle', user_id: 1, parent_id: }
-cinema11: { id: 11, name: 'Cinema', color: '0, 100%, 50%', symbol: 'cinema', user_id: 1, parent_id: 12}
+cinema11: { id: 11, name: 'Cinema', color: '0, 100%, 50%', symbol: 'cinema', user_id: 1, parent_id: 12, hash_id: HdJ6NFFbe0hf}
 date12: { id: 12, name: 'Date', color: '0, 100%, 50%', symbol: 'date', user_id: 1, parent_id: 1}
 hobbies13: { id: 13, name: 'Hobbies', color: '0, 100%, 50%', symbol: 'hobbies', user_id: 1, parent_id: 1}
 holiday14: { id: 14, name: 'Holiday', color: '0, 100%, 50%', symbol: 'holiday', user_id: 1, parent_id: 1}
@@ -107,5 +107,5 @@ destroy: { id: 83, name: 'Destroy', color: '144, 100%, 50%', symbol: 'salary', u
 public_transport752: { id: 84, name: 'Public Transport', color: '288, 100%, 50%', symbol: 'public_transport', user_id: 1}
 fuel772: { id: 85, name: 'Fuel', color: '324, 100%, 50%', symbol: 'fuel', user_id: 10}
 
-public_transport7522: { id: 86, name: 'Public Transport', color: '288, 100%, 50%', symbol: 'public_transport', user_id: 9}
-fuel7722: { id: 87, name: 'Fuel', color: '324, 100%, 50%', symbol: 'fuel', user_id: 9}
+public_transport7522: { id: 86, name: 'Public Transport', color: '288, 100%, 50%', symbol: 'public_transport', user_id: 9, hash_id: dRrYpyKCdqFm}
+fuel7722: { id: 87, name: 'Fuel', color: '324, 100%, 50%', symbol: 'fuel', user_id: 9, hash_id: xn-2SkGUfSwQ}

@@ -31,6 +31,8 @@ private
       local_datetime = parse_datetime(params[:date], params[:time])
       is_scheduled = get_is_scheduled(params, params[:timezone], local_datetime)
       timezone = get_timezone
+      category_id = 0
+      category_id = @current_user.categories.friendly.find(params[:category_id]).id if params[:category_id].length > 2
 
       current_transaction = {
         direction: get_direction(params, transferred),
@@ -42,7 +44,7 @@ private
         account_rate: get_account_rate(params, account, currency, transferred),
         user_rate: user_rate,
         timezone: validate_timezone(timezone),
-        category_id: params[:category_id],
+        category_id: category_id,
         local_datetime: local_datetime,
         schedule_id: params[:schedule_id],
         schedule_period_id: params[:schedule_period_id],
