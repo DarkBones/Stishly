@@ -45,7 +45,7 @@
             :class => "rounded-circle",
             "height" => "30" %>
 
-          <%= fa_icon transaction.category.symbol, class: "rounded-circle", :style => 'background-color: hsl(' + transaction.category.color + '); color: white; padding: 5px;' %>
+          <%= fa_icon transaction.category.symbol, class: "rounded-circle category", :style => 'background-color: hsl(' + transaction.category.decorate.color + '); padding: 5px;' %>
 
           <%= transaction.description %>
           <span class="balance float-right">

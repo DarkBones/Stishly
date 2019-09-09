@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_06_091716) do
+ActiveRecord::Schema.define(version: 2019_09_09_130549) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2019_09_06_091716) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
-    t.string "color", null: false
+    t.string "color"
     t.string "symbol"
     t.bigint "user_id"
     t.bigint "parent_id"
