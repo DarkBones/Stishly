@@ -40,10 +40,12 @@
       <a href="#" data-toggle="modal" data-target="#edit_transaction_form" onclick="editTransaction(this);" id="<%= transaction.hash_id %>">
         <li time="<%= transaction.time_num %>" id="transaction_<%= transaction.hash_id %>">
 
-          <%= image_tag "categories/" + transaction.category.symbol + ".svg",
+          <%#= image_tag "categories/" + transaction.category.symbol + ".svg",
             :style => "background-color: hsl(" + transaction.category.color + ");",
             :class => "rounded-circle",
             "height" => "30" %>
+
+          <%= fa_icon transaction.category.symbol, class: "rounded-circle", :style => 'background-color: hsl(' + transaction.category.color + '); color: white; padding: 5px;' %>
 
           <%= transaction.description %>
           <span class="balance float-right">

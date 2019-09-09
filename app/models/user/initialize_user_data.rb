@@ -15,116 +15,116 @@ private
 
       entertainment = @current_user.categories.create({
         name: "Entertainment",
-        symbol: "entertainment",
+        symbol: "theater-masks",
         color: "0, 100%, 50%"
       })
 
       food_drinks = @current_user.categories.create({
         name: "Food & Drinks",
-        symbol: "food_drinks",
+        symbol: "utensils",
         color: "36, 100%, 50%"
       })
 
       health = @current_user.categories.create({
         name: "Health",
-        symbol: "health",
+        symbol: "heartbeat",
         color: "72, 100%, 50%"
       })
 
       household = @current_user.categories.create({
         name: "Household",
-        symbol: "house",
+        symbol: "home",
         color: "108, 100%, 50%"
       })
 
       income = @current_user.categories.create({
         name: "Income",
-        symbol: "income",
+        symbol: "coins",
         color: "144, 100%, 50%"
       })
 
       investments = @current_user.categories.create({
         name: "investments",
-        symbol: "investments",
+        symbol: "file-invoice-dollar",
         color: "180, 100%, 50%"
       })
 
       other = @current_user.categories.create({
         name: "Other",
-        symbol: "others",
+        symbol: "ellipsis-h",
         color: "216, 100%, 50%"
       })
 
       shopping = @current_user.categories.create({
         name: "Shopping",
-        symbol: "shopping",
+        symbol: "shopping-bag",
         color: "252, 100%, 50%"
       })
 
       transport = @current_user.categories.create({
         name: "Transport",
-        symbol: "transport",
+        symbol: "shuttle-van",
         color: "288, 100%, 50%"
       })
 
       vehicle = @current_user.categories.create({
         name: "Vehicle",
-        symbol: "vehicle",
+        symbol: "cog",
         color: "324, 100%, 50%"
       })
 
       @current_user.categories.create([
         {
           name: "Cinema",
-          symbol: "cinema",
+          symbol: "film",
           parent_id: entertainment.id,
           color: entertainment.color
         },
         {
           name: "Date",
-          symbol: "date",
+          symbol: "heart",
           parent_id: entertainment.id,
           color: entertainment.color
         },
         {
           name: "Hobbies",
-          symbol: "hobbies",
+          symbol: "palette",
           parent_id: entertainment.id,
           color: entertainment.color
         },
         {
           name: "Holiday",
-          symbol: "holiday",
+          symbol: "suitcase-rolling",
           parent_id: entertainment.id,
           color: entertainment.color
         },
         {
           name: "Lottery / Gambling",
-          symbol: "lottery",
+          symbol: "ticket-alt",
           parent_id: entertainment.id,
           color: entertainment.color
         },
         {
           name: "Social",
-          symbol: "social",
+          symbol: "user-friends",
           parent_id: entertainment.id,
           color: entertainment.color
         },
         {
           name: "Software",
-          symbol: "software",
+          symbol: "code",
           parent_id: entertainment.id,
           color: entertainment.color
         },
         {
           name: "Sport Events",
-          symbol: "sport_event",
+          symbol: "football-ball",
           parent_id: entertainment.id,
           color: entertainment.color
         },
         {
           name: "Subscriptions",
-          symbol: "subscription",
+          symbol: "money-bill-wave-alt",
           parent_id: entertainment.id,
           color: entertainment.color
         },
@@ -136,109 +136,109 @@ private
         },
         {
           name: "Video Games",
-          symbol: "video_game",
+          symbol: "gamepad",
           parent_id: entertainment.id,
           color: entertainment.color
         },
         {
           name: "Bars / Pubs",
-          symbol: "bars_pubs",
+          symbol: "glass-cheers",
           parent_id: food_drinks.id,
           color: food_drinks.color
         },
         {
           name: "Fast Food",
-          symbol: "fast_food",
+          symbol: "hamburger",
           parent_id: food_drinks.id,
           color: food_drinks.color
         },
         {
           name: "Groceries",
-          symbol: "groceries",
+          symbol: "shopping-basket",
           parent_id: food_drinks.id,
           color: food_drinks.color
         },
         {
           name: "Order / Take-out",
-          symbol: "order_takeout",
+          symbol: "pizza-slice",
           parent_id: food_drinks.id,
           color: food_drinks.color
         },
         {
           name: "Restaurant",
-          symbol: "restaurant",
+          symbol: "concierge-bell",
           parent_id: food_drinks.id,
           color: food_drinks.color
         },
         {
           name: "Dentist",
-          symbol: "dentist",
+          symbol: "tooth",
           parent_id: health.id,
           color: health.color
         },
         {
           name: "Doctor",
-          symbol: "doctor",
+          symbol: "stethoscope",
           parent_id: health.id,
           color: health.color
         },
         {
           name: "Insurance",
-          symbol: "health_insurance",
+          symbol: "file-medical",
           parent_id: health.id,
           color: health.color
         },
         {
           name: "Pharmacy",
-          symbol: "pharmacy",
+          symbol: "pills",
           parent_id: health.id,
           color: health.color
         },
         {
           name: "Psychiatrist",
-          symbol: "psychiatrist",
+          symbol: "brain",
           parent_id: health.id,
           color: health.color
         },
         {
           name: "Sport & Fitness",
-          symbol: "fitness",
+          symbol: "dumbbell",
           parent_id: health.id,
           color: health.color
         },
         {
           name: "Wellness & Beauty",
-          symbol: "wellness_beauty",
+          symbol: "spa",
           parent_id: health.id,
           color: health.color
         },
         {
           name: "Electricity",
-          symbol: "electricity",
+          symbol: "bolt",
           parent_id: household.id,
           color: household.color
         },
         {
           name: "Insurance",
-          symbol: "house_insurance",
+          symbol: "house-damage",
           parent_id: household.id,
           color: household.color
         },
         {
           name: "Internet",
-          symbol: "internet",
+          symbol: "wifi",
           parent_id: household.id,
           color: household.color
         },
         {
           name: "Maintenance",
-          symbol: "maintenance_household",
+          symbol: "brush",
           parent_id: household.id,
           color: household.color
         },
         {
           name: "Mortgage",
-          symbol: "mortgage",
+          symbol: "percentage",
           parent_id: household.id,
           color: household.color
         },
@@ -250,157 +250,157 @@ private
         },
         {
           name: "Rent",
-          symbol: "rent",
+          symbol: "key",
           parent_id: household.id,
           color: household.color
         },
         {
           name: "Services",
-          symbol: "services",
+          symbol: "hands-helping",
           parent_id: household.id,
           color: household.color
         },
         {
           name: "Water",
-          symbol: "water",
+          symbol: "tint",
           parent_id: household.id,
           color: household.color
         },
         {
           name: "Child Support",
-          symbol: "child_support",
+          symbol: "baby",
           parent_id: income.id,
           color: income.color
         },
         {
           name: "Gifts",
-          symbol: "gifts",
+          symbol: "gift",
           parent_id: income.id,
           color: income.color
         },
         {
           name: "Interest / Dividends",
-          symbol: "interest_dividends",
+          symbol: "percentage",
           parent_id: income.id,
           color: income.color
         },
         {
           name: "Lending",
-          symbol: "lending",
+          symbol: "book",
           parent_id: income.id,
           color: income.color
         },
         {
           name: "Lottery / Gambling",
-          symbol: "lottery",
+          symbol: "ticket-alt",
           parent_id: income.id,
           color: income.color
         },
         {
           name: "Refunds",
-          symbol: "refunds",
+          symbol: "redo-alt",
           parent_id: income.id,
           color: income.color
         },
         {
           name: "Rent",
-          symbol: "rent",
+          symbol: "key",
           parent_id: income.id,
           color: income.color
         },
         {
           name: "Salary",
-          symbol: "salary",
+          symbol: "money-check-alt",
           parent_id: income.id,
           color: income.color
         },
         {
           name: "Sale",
-          symbol: "sale",
+          symbol: "cash-register",
           parent_id: income.id,
           color: income.color
         },
         {
           name: "Financial Investments",
-          symbol: "financial_investments",
+          symbol: "chart-line",
           parent_id: investments.id,
           color: investments.color
         },
         {
           name: "Realty",
-          symbol: "realty",
+          symbol: "building",
           parent_id: investments.id,
           color: investments.color
         },
         {
           name: "Savings",
-          symbol: "savings",
+          symbol: "piggy-bank",
           parent_id: investments.id,
           color: investments.color
         },
         {
           name: "Alcohol",
-          symbol: "alcohol",
+          symbol: "wine-bottle",
           parent_id: other.id,
           color: other.color
         },
         {
           name: "Charges & Fees",
-          symbol: "charges_fees",
+          symbol: "receipt",
           parent_id: other.id,
           color: other.color
         },
         {
           name: "E-cigarette",
-          symbol: "ecigarette",
+          symbol: "smoking",
           parent_id: other.id,
           color: other.color
         },
         {
           name: "Fines",
-          symbol: "fines",
+          symbol: "bell",
           parent_id: other.id,
           color: other.color
         },
         {
           name: "Insurance",
-          symbol: "insurance",
+          symbol: "umbrella",
           parent_id: other.id,
           color: other.color
         },
         {
           name: "Loans, Interest",
-          symbol: "lending",
+          symbol: "book",
           parent_id: other.id,
           color: other.color
         },
         {
           name: "Postal Services",
-          symbol: "postal_services",
+          symbol: "mail-bulk",
           parent_id: other.id,
           color: other.color
         },
         {
           name: "Tobacco",
-          symbol: "tobacco",
+          symbol: "smoking",
           parent_id: other.id,
           color: other.color
         },
         {
           name: "Books",
-          symbol: "books",
+          symbol: "bookmark",
           parent_id: shopping.id,
           color: shopping.color
         },
         {
           name: "Clothes & Shoes",
-          symbol: "clothes",
+          symbol: "tshirt",
           parent_id: shopping.id,
           color: shopping.color
         },
         {
           name: "Electronics",
-          symbol: "electronics",
+          symbol: "plug",
           parent_id: shopping.id,
           color: shopping.color
         },
@@ -412,31 +412,31 @@ private
         },
         {
           name: "Hobbies",
-          symbol: "hobbies",
+          symbol: "puzzle-piece",
           parent_id: shopping.id,
           color: shopping.color
         },
         {
           name: "Home & Garden",
-          symbol: "home_garden",
+          symbol: "hammer",
           parent_id: shopping.id,
           color: shopping.color
         },
         {
           name: "Jewellery & Accessories",
-          symbol: "jewellery",
+          symbol: "ring",
           parent_id: shopping.id,
           color: shopping.color
         },
         {
           name: "Kids",
-          symbol: "kids",
+          symbol: "child",
           parent_id: shopping.id,
           color: shopping.color
         },
         {
           name: "Pets",
-          symbol: "pets",
+          symbol: "paw",
           parent_id: shopping.id,
           color: shopping.color
         },
@@ -448,19 +448,19 @@ private
         },
         {
           name: "Video Games",
-          symbol: "video_game",
+          symbol: "gamepad",
           parent_id: shopping.id,
           color: shopping.color
         },
         {
           name: "Flights",
-          symbol: "flights",
+          symbol: "plane-departure",
           parent_id: transport.id,
           color: transport.color
         },
         {
           name: "Public Transport",
-          symbol: "public_transport",
+          symbol: "train",
           parent_id: transport.id,
           color: transport.color
         },
@@ -472,25 +472,25 @@ private
         },
         {
           name: "Fuel",
-          symbol: "fuel",
+          symbol: "gas-pump",
           parent_id: vehicle.id,
           color: vehicle.color
         },
         {
           name: "Insurance",
-          symbol: "vehicle_insurance",
+          symbol: "car-crash",
           parent_id: vehicle.id,
           color: vehicle.color
         },
         {
           name: "Lease",
-          symbol: "lease",
+          symbol: "car",
           parent_id: vehicle.id,
           color: vehicle.color
         },
         {
           name: "Maintenance",
-          symbol: "maintenance_vehicle",
+          symbol: "wrench",
           parent_id: vehicle.id,
           color: vehicle.color
         },
@@ -502,7 +502,7 @@ private
         },
         {
           name: "Rental",
-          symbol: "rentals",
+          symbol: "key",
           parent_id: vehicle.id,
           color: vehicle.color
         }

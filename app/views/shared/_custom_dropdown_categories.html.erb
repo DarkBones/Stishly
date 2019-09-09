@@ -3,7 +3,8 @@
     <% if selected.nil? %>
       <%= "- any -" %>
     <% else %>
-      <%= image_tag('categories/' + selected.symbol + '.svg', :class => 'rounded-circle', :style => 'background-color: hsl(' + selected.color + ');', 'height' => '30') %> <%= selected.name %>
+      <%#= image_tag('categories/' + selected.symbol + '.svg', :class => 'rounded-circle', :style => 'background-color: hsl(' + selected.color + ');', 'height' => '30') %><%#= selected.name %>
+      <%= fa_icon selected.symbol, class: "rounded-circle", :style => 'background-color: hsl(' + selected.color + '); color: white; padding: 5px;' %> <%= selected.name %>
     <% end %>
   </button>
   <div class="dropdown-menu" aria-labelledby="categories-dropdown" id="categoriesDropdownOptions<%= id_suff %>">
