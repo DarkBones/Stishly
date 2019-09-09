@@ -10,7 +10,7 @@ class AccountsTest < ApplicationSystemTestCase
     # Open the new account menu
     page.find("#new-account-button").click
     # Find and store the submit button
-    submit = page.find("#accountform input[type=submit]")
+    submit = page.find("#accountform button[type=submit]")
     # Check if button is disabled correctly
     #assert submit[:disabled], format_error("Save account button not disabled when name is blank", "disabled = true", "disabled = " + submit[:disabled].to_s)
     # Fill in an account name
@@ -24,7 +24,7 @@ class AccountsTest < ApplicationSystemTestCase
     # Open the new account menu
     page.find("#new-account-button").click
     # Find and store the submit button
-    submit = page.find("#accountform input[type=submit]")
+    submit = page.find("#accountform button[type=submit]")
     # Fill in the details
     fill_in "account[name]", with: "test. account. two"
     fill_in "account[balance]", with: "5000"
@@ -36,7 +36,7 @@ class AccountsTest < ApplicationSystemTestCase
     # Open the new account menu
     page.find("#new-account-button").click
     # Find and store the submit button
-    submit = page.find("#accountform input[type=submit]")
+    submit = page.find("#accountform button[type=submit]")
     # Fill in the same name as the previous account
     fill_in "account[name]", with: "test. account. two"
     # Save the account
@@ -52,7 +52,7 @@ class AccountsTest < ApplicationSystemTestCase
     # Open the new account menu
     page.find("#new-account-button").click
     # Find and store the submit button
-    submit = page.find("#accountform input[type=submit]")
+    submit = page.find("#accountform button[type=submit]")
     # Fill in the details
     fill_in "account[name]", with: "test account three"
     fill_in "account[balance]", with: "10000.42"
@@ -63,7 +63,7 @@ class AccountsTest < ApplicationSystemTestCase
     # Open the new account menu
     page.find("#new-account-button").click
     # Find and store the submit button
-    submit = page.find("#accountform input[type=submit]")
+    submit = page.find("#accountform button[type=submit]")
     # Fill in the details
     fill_in "account[name]", with: "test account four"
     fill_in "account[balance]", with: "50000"
@@ -77,7 +77,7 @@ class AccountsTest < ApplicationSystemTestCase
     # Open the new account menu
     page.find("#new-account-button").click
     # Find and store the submit button
-    submit = page.find("#accountform input[type=submit]")
+    submit = page.find("#accountform button[type=submit]")
     # Fill in the details
     fill_in "account[name]", with: "test account five"
     fill_in "account[balance]", with: "0.08"

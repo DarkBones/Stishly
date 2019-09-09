@@ -28,7 +28,7 @@
     </div>
     <div class="row py-2">
       <div class="col-12">
-        <%= f.submit 'Save', :class => 'float-right btn btn-primary' %>
+        <%= f.button 'Save', :class => 'float-right btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " Processing ..."} %>
         <button type="button" class="btn btn-danger delete-confirm" confirm-message="This action will delete this account and all associated transactions. This cannot be undone. Continue?" data-link="<%= delete_account_path(@active_account) %>">Delete</button>
       </div>
     </div>

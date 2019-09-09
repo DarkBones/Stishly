@@ -13,7 +13,9 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     fill_in "Email", with: user.unconfirmed_email
     fill_in "Password", with: password
 
-    page.execute_script("$('input[name=\"commit\"]').click()")
+    #page.execute_script("$('input[name=\"commit\"]').click()")
+    #page.execute_script("$('input[type=\"submit\"]').click()")
+    find('button[type="submit"]').click
   end
 
   def login_as_blank

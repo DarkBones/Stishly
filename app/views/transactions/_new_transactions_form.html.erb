@@ -10,6 +10,6 @@
 
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <%= f.submit 'Create Transaction', :class => 'btn btn-primary' %>
+    <%= f.button 'Create Transaction', :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " Processing ..."} %>
   </div>
 <% end %>

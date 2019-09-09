@@ -74,7 +74,7 @@ class UsersTest < ApplicationSystemTestCase
         end
       end
 
-      find('input[name="commit"]').click
+      find('button[type="submit"]').click
 
       if i < form_fields.length
         assert_selector 'h2', text: I18n.t('errors.form')

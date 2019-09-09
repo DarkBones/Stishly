@@ -8,6 +8,6 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal" id="schedule_close_form">Close</button>
-    <%= f.submit 'Save Schedule', :class => 'btn btn-primary' %>
+    <%= f.button 'Save Schedule', :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " Processing ..."} %>
   </div>
 <% end %>

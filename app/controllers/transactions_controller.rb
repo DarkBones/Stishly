@@ -1,4 +1,5 @@
 class TransactionsController < ApplicationController
+
   def show
     @active_transaction = current_user.transactions.friendly.find(params[:id])
     @account_id = @active_transaction.account.hash_id
