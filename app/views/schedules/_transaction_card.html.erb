@@ -28,7 +28,7 @@
         <%= render partial: "transactions/transaction_form_fields", :locals => {:transaction => transaction, :f => f, :base_only => true, :form_id_prefix => "schedule_", :form_id_suffix => "_" + transaction.hash_id, :schedule_id => schedule_id } %>
         
         <div class="col-12 py-5">
-          <%= f.button 'Save', :class => 'float-right btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " Processing ..."} %>
+          <%= f.button 'Save', :class => 'float-right btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " Updating transaction ..."} %>
           <button type="button" class="btn btn-danger delete-confirm" confirm-message="This action will delete this transaction from the schedule. Continue?" data-link="<%= delete_transaction_path(transaction) %>">Delete</button>
         </div>
       <% end %>
