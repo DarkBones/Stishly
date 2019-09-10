@@ -20,7 +20,7 @@ class Category < ApplicationRecord
   has_one :parent, :class_name => 'Category'
   has_many :children, :class_name => 'Category', :foreign_key => 'parent_id'
 
-  def self.get_user_categories(current_user, as_array=false, include_blank=false)
+  def self.get_user_categories(current_user, as_array=false, include_blank=false, include_uncategorised = true)
     if as_array
       tree = Hash.new { |h,k| h[k] = { :name => nil, :children => [ ], :children_paths => "", :parent_id => nil } }
 
@@ -39,14 +39,16 @@ class Category < ApplicationRecord
         idx += 1
       end
 
-      tree[idx][:id] = 0
-      tree[idx][:name] = "Uncategorised"
-      tree[idx][:color] = "0, 0%, 50%"
-      tree[idx][:symbol] = nil
-      tree[idx][:parent_id] = nil
-      tree[idx][:children_paths] = "uncategorised"
+      if include_uncategorised
+        tree[idx][:id] = 0
+        tree[idx][:name] = "Uncategorised"
+        tree[idx][:color] = "0, 0%, 50%"
+        tree[idx][:symbol] = nil
+        tree[idx][:parent_id] = nil
+        tree[idx][:children_paths] = "uncategorised"
 
-      tree[nil][:children].push(tree[idx])
+        tree[nil][:children].push(tree[idx])
+      end
 
       # set the parent_keys first (required for recursive search)
       current_user.categories.order(:name).each do |cat|

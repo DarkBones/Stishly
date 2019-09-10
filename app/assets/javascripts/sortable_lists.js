@@ -12,6 +12,25 @@ function makeSortableLists(className=".sortable-list", handleName=".sort-handle"
       });
     }
   });
+
+  $(".sortable-nested").nestedSortable({
+    listType: "ul",
+    startCollapsed: true,
+    handle: "div",
+    items: "li",
+    //toleranceElement: "> div"
+    update(e, ui) {
+      //alert(serializeHashed($(this)));
+      //console.log($(this).nestedSortable('serialize'));
+      console.log(serializeHashedNested($(this)));
+      Rails.ajax({
+        url: "/categories/sort",
+        type: "PATCH",
+        //data: serializeHashed($(this)),
+        data: serializeHashedNested($(this)),
+      });
+    }
+  });
 }
 
 $(document).on("turbolinks:load", () => {

@@ -1,0 +1,8 @@
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<%#= draw_tree(Category.get_user_categories(current_user, true, false, false), ul_class: "sortable-nested", include_sort_handle: true) %> 
+			<%= draw_sortable_list(Category.get_user_categories(current_user, true, false, false)) %>
+		</div>
+	</div>
+</div>

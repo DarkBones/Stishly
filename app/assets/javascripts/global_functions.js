@@ -100,7 +100,7 @@
     // modified serialize function to handle hashed ids
     window.serializeHashed = function($container) {
       var str = "";
-      var els = $container.find(".sortable")
+      var els = $container.find(".sortable");
 
       var el;
       $container.find(".sortable").each(function(){
@@ -110,6 +110,39 @@
       });
 
       return str
+    }
+
+    window.serializeHashedNested = function($container) {
+      var result = "";
+      var parentId;
+
+      $container.find(".sortable").each(function() {
+        if ($(this).parents(".sortable").length === 0) {
+          parentId = "root";
+        } else {
+          parentId = $(this).parents(".sortable").attr("id").split(/_(.+)/)[1];
+        }
+        if (result !== "") result += "&"
+        result += $(this).attr("id").split(/_(.+)/)[1] + "[]=" + parentId;
+      });
+
+      return result;
+    }
+
+    window.serializeHashedNested_OLD = function($container) {
+      var result = [];
+      var parent_id;
+
+      $container.find(".sortable").each(function(){
+        if ($(this).parents(".sortable").length === 0) {
+          parent_id = "root";
+        } else {
+          parent_id = $(this).parents(".sortable").attr("id").split(/_(.+)/)[1];
+        }
+        result.push($(this).attr("id").split(/_(.+)/)[1] + "=" + parent_id.toString());
+      });
+
+      return "{series=[" + result.toString() + "]}";
     }
 
 

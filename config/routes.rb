@@ -20,6 +20,13 @@ Rails.application.routes.draw do
     end
   end
 
+  scope '/categories' do
+    get '/', to: 'categories#index'
+    scope '/sort' do
+      patch '/', to: 'categories#sort'
+    end
+  end
+
   scope '/transactions' do
     post '/', to: 'transactions#create'
     scope '/:id' do
