@@ -6,12 +6,11 @@ class CategoryDecorator < ApplicationDecorator
 
   	unless model.parent_id.nil?
   		parent_id = model.parent_id
-  		while !parent_id.nil?
+  		until parent_id.nil?
   			parent = Category.find(parent_id)
 
   			unless parent.color.nil?
   				return parent.color
-  				break
   			end
 
   			parent_id = parent.parent_id
