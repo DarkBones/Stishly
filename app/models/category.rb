@@ -55,7 +55,7 @@ class Category < ApplicationRecord
         tree[cat.id][:parent_id] = cat.parent_id
       end
 
-      current_user.categories.decorate.order(:name).each do |cat|
+      current_user.categories.decorate.order(:position).each do |cat|
         tree[cat.id][:id] = cat.hash_id
         tree[cat.id][:name] = cat.name
         tree[cat.id][:color] = cat.color
