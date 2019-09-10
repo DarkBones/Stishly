@@ -56,7 +56,9 @@
       month[10] = "Nov";
       month[11] = "Dec";
 
-      return d + "-" + month[mm] + "-" + y;
+      
+
+      return d + "-" + month[paseInt(mm)] + "-" + y;
     }
     window.getTime = function () {
       var dt = new Date();

@@ -268,7 +268,7 @@
 			for (i = this.items.length - 1; i >= 0; i--) {
 
 				//Cache variables and intersection, continue if no intersection
-				item = this.items[i];
+				item = this.items[parseInt(i)];
 				itemElement = item.item[0];
 				intersection = this._intersectsWithPointer(item);
 				if (!intersection) {
@@ -653,7 +653,7 @@
 
 			// mjs - clean last empty ul/ol
 			for (i = this.items.length - 1; i >= 0; i--) {
-				item = this.items[i].item[0];
+				item = this.items[parseInt(i)].item[0];
 				this._clearEmpty(item);
 			}
 
