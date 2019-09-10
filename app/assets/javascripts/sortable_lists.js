@@ -7,7 +7,6 @@ function makeSortableLists(className=".sortable-list", handleName=".sort-handle"
       Rails.ajax({
         url: "/accounts/sort",
         type: "PATCH",
-        //data: $(this).sortable("serialize"),
         data: serializeHashed($(this)),
       });
     }
@@ -20,13 +19,10 @@ function makeSortableLists(className=".sortable-list", handleName=".sort-handle"
     items: "li",
     //toleranceElement: "> div"
     update(e, ui) {
-      //alert(serializeHashed($(this)));
-      //console.log($(this).nestedSortable('serialize'));
       console.log(serializeHashedNested($(this)));
       Rails.ajax({
         url: "/categories/sort",
         type: "PATCH",
-        //data: serializeHashed($(this)),
         data: serializeHashedNested($(this)),
       });
     }

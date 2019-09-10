@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
 	end
 
 	def sort
-		puts params.to_yaml
+		#puts params.to_yaml
 	end
 
 end
