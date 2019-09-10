@@ -7,7 +7,7 @@
   $('<%= j render @account %>').insertAfter($('#accounts_list #account_0')).hide().fadeIn(500);
   $('#account_<%= @account.hash_id %>').hide().fadeIn(1000);
 
-  var total_amount = parseInt($('#accounts_list li').first().find('span').attr('balance'));
+  var total_amount = parseInt($('#accounts_list li').first().find('span').attr('balance'), 10);
 
   // Update the total amount
   $.ajax({
@@ -15,7 +15,7 @@
     dataType: "json",
     url: "/api/v1/account_display_balance/" + (total_amount).toString() + '/' + '<%= @account.currency %>' + '/' + '<%= User.get_currency(current_user) %>' + '/' + '<%= @account.balance %>',
     success: function(data) {
-      total_amount = parseInt(data.balance)
+      total_amount = parseInt(data.balance, 10)
       $('#accounts_list li').first().find('span').attr('balance', total_amount);
       $('#accounts_list li').first().find('span').html(data.html);
     }

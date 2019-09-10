@@ -56,11 +56,11 @@ function updateTitle(html, float) {
 }
 
 function insertTransactionDiv(html, $dayDiv, time) {
-	var time = parseInt(time);
+	var time = parseInt(time, 10);
 	var inserted = false;
 
 	$dayDiv.find(".transaction_listing").each(function(){
-		if(parseInt($(this).attr("time")) < time) {
+		if(parseInt($(this).attr("time"), 10) < time) {
 			inserted = true;
 			$(html).insertBefore($(this)).hide().fadeIn(500);
 			return false;
@@ -78,10 +78,10 @@ function insertDayDiv(html, date, dateNum) {
 		return false;
 	}
 
-	var dateNum = parseInt(dateNum);
+	var dateNum = parseInt(dateNum, 10);
 	var inserted = false;
 	$("#transactions_list div [id^='day_']").each(function(){
-		if (parseInt($(this).attr("num")) < dateNum) {
+		if (parseInt($(this).attr("num"), 10) < dateNum) {
 			inserted = true;
 			$(html).insertBefore($(this).parent()).hide().fadeIn(500);
 			return false;

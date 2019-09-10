@@ -242,7 +242,7 @@
   	var nameArr, idx, accountName, currency, rowcount, $option;
 
   	nameArr = $(e).attr("name").split("_");
-  	idx = parseInt(nameArr[nameArr.length - 1]);
+  	idx = parseInt(nameArr[nameArr.length - 1], 10);
 
   	rowcount = $(".account_row").length;
 

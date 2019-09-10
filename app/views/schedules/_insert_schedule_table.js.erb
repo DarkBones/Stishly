@@ -17,7 +17,7 @@ var $insertTarget = $("table#schedules_<%= type %>") // the target for the inser
 
 // find where in the table to insert the schedule
 $("table#schedules_<%= type %> tr").each(function(){
-	next_occurrence = parseInt($(this).attr("next_occurrence"));
+	next_occurrence = parseInt($(this).attr("next_occurrence"), 10);
 
 	// if the next occurrence of the row is higher than the new schedule's next occurrence, insert the new schedule before it
 	if (next_occurrence >= timeNum) {

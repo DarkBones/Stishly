@@ -195,7 +195,7 @@
 
 <script>
   $("[id^=month_day]").change(function(){
-    let n = parseInt($(this).val());
+    let n = parseInt($(this).val(), 10);
     if (Number.isNaN(n)) {
       n = 1
     }
@@ -234,7 +234,7 @@
   });
 
   $("[id^=periodNum").change(function(){
-    let n = parseInt($(this).val());
+    let n = parseInt($(this).val(), 10);
     if (Number.isNaN(n)) {
       n = 1;
     }

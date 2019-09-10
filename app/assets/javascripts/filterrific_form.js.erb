@@ -72,8 +72,8 @@ $(document).on("turbolinks:load", () => {
 
           subunits = data.subunit_to_unit;
 
-          from = parseInt(input.split(",")[0]) * subunits;
-          to = parseInt(input.split(",")[1]) * subunits;
+          from = parseInt(input.split(",")[0], 10) * subunits;
+          to = parseInt(input.split(",")[1], 10) * subunits;
 
           $inputTarget.val(from + "," + to);
           $("#filter-form").submit();
