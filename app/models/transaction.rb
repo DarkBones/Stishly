@@ -76,11 +76,11 @@ class Transaction < ApplicationRecord
   scope :is_queued, ->(queued) { where("is_queued = ?", queued) }
   scope :is_balancer, -> (balancer) { where("is_balancer = ?", balancer) }
   
-  scope :period, ->(range){
+  scope :period, lambda {|range|
     
   }
 
-  scope :include_children, ->(value) {
+  scope :include_children, lambda {|value|
     case value
     when 1
       where("parent_id IS NULL")
@@ -89,19 +89,19 @@ class Transaction < ApplicationRecord
     end
   }
 
-  scope :amount_range, ->(range_str){
+  scope :amount_range, lambda {|range_str|
     range_str = range_str.split(",")
     where("ABS(user_currency_amount) >= ? AND ABS(user_currency_amount) <= ?", range_str[0], range_str[1])
   }
 
-  scope :category_id, ->(category_id) {
+  scope :category_id, lambda {|category_id|
     category_ids = []
 
     category_ids.push(category_id)
 
     if category_id != 0
 
-      cat = Category.where(id: category_id).includes(:children).first
+      cat = Category.where(hash_id: category_id).includes(:children).first
       children = Category.get_children(cat)
 
       children.each do |c|
@@ -112,7 +112,7 @@ class Transaction < ApplicationRecord
     where("category_id in (?)", category_ids)
   }
   
-  scope :sorted_by, ->(sort_option) {
+  scope :sorted_by, lambda {|sort_option|
     direction = /desc$/.match?(sort_option) ? "desc" : "asc"
     case sort_option.to_s
     when /^created_at_/

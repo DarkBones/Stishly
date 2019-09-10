@@ -82,15 +82,15 @@
     // update the account title balance
     window.updateAccountTitleBalance = function() {
       var activeAccount = getActiveAccountName();
-      var url = "/api/v1/render/account_title_balance";
+      var apiUrl = "/api/v1/render/account_title_balance";
       if (activeAccount !== null) {
-        url += "/" + activeAccount.toString();
+        apiUrl += "/" + activeAccount.toString();
       }
 
       $.ajax({
         type: "GET",
         dataType: "json",
-        url: url,
+        url: apiUrl,
         success(data) {
           $("#account-title-balance").text(data.html);
           $("#editAccountBalance #account_balance").val(data.float);
@@ -112,7 +112,7 @@
 
       console.log(str);
 
-      return str
+      return str;
     };
 
     window.serializeHashedNested = function($container) {
@@ -145,7 +145,7 @@
         } else {
           parentId = $(this).parents(".sortable").attr("id").split(/_(.+)/)[1];
         }
-        if (result !== "") result += "&"
+        if (result !== "") { result += "&"; }
         result += $(this).attr("id").split(/_(.+)/)[1] + "[]=" + parentId;
       });
 
