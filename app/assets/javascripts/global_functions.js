@@ -56,10 +56,9 @@
       month[10] = "Nov";
       month[11] = "Dec";
 
-      
-
       return d + "-" + month[paseInt(mm)] + "-" + y;
-    }
+    };
+
     window.getTime = function () {
       var dt = new Date();
       var h = dt.getHours();
@@ -72,13 +71,13 @@
       if(d < 10) {d = "0" + d;}
 
       return h + ":" + m;
-    }
+    };
 
     window.setTimezones = function() {
       $("#timezone_input").each(function(){
         $(this).setTimezone();
       });
-    }
+    };
 
     // update the account title balance
     window.updateAccountTitleBalance = function() {
@@ -97,7 +96,7 @@
           $("#editAccountBalance #account_balance").val(data.float);
         }
       });
-    }
+    };
 
     // modified serialize function to handle hashed ids
     window.serializeHashed = function($container) {
@@ -107,14 +106,14 @@
       var el;
       $container.find(".sortable").each(function(){
         el = $(this).attr("id").split(/_(.+)/);
-        if (str !== "") str = str + "&"
+        if (str !== "") { str = str + "&"; }
         str = str + el[0] + "[]=" + el[1];
       });
 
       console.log(str);
 
       return str
-    }
+    };
 
     window.serializeHashedNested = function($container) {
       var result = "";
@@ -127,14 +126,14 @@
         } else {
           parentId = $(this).parents(".sortable").attr("id").split(/_(.+)/)[1];
         }
-        if (result !== "") result += "&";
+        if (result !== "") { result += "&"; }
         el = $(this).attr("id").split(/_(.+)/);
 
         result += el[0] + "[]=" + el[1] + "." + parentId;
       });
 
       return result;
-    }
+    };
 
     window.serializeHashedNestedOLD = function($container) {
       var result = "";
@@ -151,7 +150,7 @@
       });
 
       return result;
-    }
+    };
 
 
   });
