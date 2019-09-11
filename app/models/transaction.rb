@@ -97,17 +97,18 @@ class Transaction < ApplicationRecord
   scope :category_id, lambda {|category_id|
     category_ids = []
 
-    category_ids.push(category_id)
+    cat = Category.where(hash_id: category_id).includes(:children).first
+    category_ids.push(cat.id)
 
     if category_id != 0
 
-      cat = Category.where(hash_id: category_id).includes(:children).first
       children = Category.get_children(cat)
 
       children.each do |c|
         category_ids.push(c.id)
       end
     end
+
 
     where("category_id in (?)", category_ids)
   }
