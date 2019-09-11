@@ -46,6 +46,7 @@ class Category < ApplicationRecord
         tree[idx][:symbol] = nil
         tree[idx][:parent_id] = nil
         tree[idx][:children_paths] = "uncategorised"
+        tree[idx][:color_inherited] = false
 
         tree[nil][:children].push(tree[idx])
       end
@@ -61,6 +62,8 @@ class Category < ApplicationRecord
         tree[cat.id][:color] = cat.color
         tree[cat.id][:symbol] = cat.symbol
         tree[cat.id][:children_paths] += ".#{cat.name}"
+        tree[cat.id][:color_inherited] = cat.color_inherited?
+        
         tree[cat.parent_id][:children].push(tree[cat.id])
 
         id = cat.parent_id

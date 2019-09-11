@@ -20,4 +20,8 @@ class CategoryDecorator < ApplicationDecorator
   	return "0, 0%, 50%"
   end
 
+  def color_inherited?
+    return model.color.nil?
+  end
+
 end

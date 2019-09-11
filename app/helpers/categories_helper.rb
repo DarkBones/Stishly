@@ -25,7 +25,7 @@ module CategoriesHelper
 
   def draw_sortable_list(node, first_ul = true)
   	if first_ul
-  		result = "<ul class=\"sortable-nested\">"
+  		result = "<ul class=\"sortable-nested\" id=\"categories_list\">"
   	else
   		result = "<ul>"
   	end
@@ -33,7 +33,9 @@ module CategoriesHelper
   	node.each do |n|
   		cl = "rounded-circle"
   		cl += " category" unless n[:symbol].nil?
-  		result += "<li class=\"category_#{n[:id]} py-2 px-0 sortable\" id=\"category_#{n[:id]}\">"
+  		result += "<li class=\"category_#{n[:id]} py-2 px-0 sortable\" id=\"category_#{n[:id]}\""
+      result += " color=\"#{n[:color]}\"" unless n[:color_inherited]
+      result += ">"
   		result += "<div class=\"sort-handle move-cursor\"></div>"
   		result += fa_icon n[:symbol], class: cl, :style => 'background-color: hsl(' + n[:color] + '); padding: 5px;'
       result += " " + n[:name]

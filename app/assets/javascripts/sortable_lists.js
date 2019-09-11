@@ -19,7 +19,9 @@ function makeSortableLists(className=".sortable-list", handleName=".sort-handle"
     items: "li",
     //toleranceElement: "> div"
     update(e, ui) {
-      console.log(serializeHashedNested($(this)));
+      if ($(this).attr("id") === "categories_list") {
+        setCategoryColors($(this));
+      }
       Rails.ajax({
         url: "/categories/sort",
         type: "PATCH",

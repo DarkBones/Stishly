@@ -152,6 +152,27 @@
       return result;
     };
 
+    // sets the category colors on the categories page
+    window.setCategoryColors = function($target) {
+      var color = "";
+      var c;
+
+      $target.find(".sortable").each(function() {
+        if(typeof($(this).attr("color")) === "undefined") {
+          c = $(this).parents("[color]").attr("color");
+          if (typeof(c) === "undefined") {
+            color = "0, 0%, 50%";
+          } else {
+            color = c;
+          }
+
+        } else {
+          color = $(this).attr("color");
+        }
+        $(this).find(".rounded-circle").css("background-color", "hsl(" + color + ");");
+      });
+    }
+
 
   });
 
