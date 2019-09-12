@@ -74,7 +74,7 @@ end
 gem 'bootstrap-sass', '~> 3.4.1'
 
 # Adds user authentication
-gem 'devise'
+gem 'devise', '>= 4.7.1'
 gem 'devise_roles'
 gem 'pundit'
 gem 'rails_layout'
