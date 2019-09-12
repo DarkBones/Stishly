@@ -25,6 +25,11 @@ Rails.application.routes.draw do
     scope '/sort' do
       patch '/', to: 'categories#sort'
     end
+    scope '/edit' do
+      scope '/:id' do
+        patch '/', to: 'categories#update', as: :edit_category
+      end
+    end
   end
 
   scope '/transactions' do
@@ -246,6 +251,12 @@ Rails.application.routes.draw do
       end
       #/api/v1/forms
       scope '/forms' do
+        #/api/v1/forms/edit_category/:id
+        scope '/edit_category' do
+          scope '/:id' do
+            get '/', to: 'api_gui#edit_category_form'
+          end
+        end
         #/api/v1/forms/accounts
         scope '/accounts' do
           #/api/v1/forms/accounts/new

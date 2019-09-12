@@ -1,0 +1,16 @@
+<%= form_with(model: category, :url => edit_category_path) do |f| %>
+
+	<div class="row">
+		<div class="col-12">
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<%= render partial: "categories/symbols_dropdown", :locals => {:symbol => category.symbol, :color => category.color, :id => category.hash_id} %>
+				</div>
+				<%= f.text_field :name, class: "form-control" %>
+
+			</div>
+		</div>
+	</div>
+
+	<%= f.hidden_field :symbol %>
+<% end %>

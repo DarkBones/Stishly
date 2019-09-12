@@ -1,5 +1,11 @@
 class ApiGuiController < BaseApiBrowserController
 
+  def edit_category_form
+    category = current_user.categories.friendly.find(params[:id]).decorate
+
+    render partial: "categories/edit_form", :locals => {:category => category}
+  end
+
   def render_account_title_balance
     unless params[:account].nil?
       account = Account.get_from_name(params[:account], current_user).decorate
