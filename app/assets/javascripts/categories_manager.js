@@ -3,23 +3,21 @@ $(document).on("turbolinks:load", () => {
 	  event.stopPropagation();
 
 	  var id = $(event.target).attr("id");
-	  if (typeof(id) === "undefined") {
-	  	return false;
-	  }
-
-	  id = id.split(/_(.+)/)[1];
-	  
-	  if ($(event.target).parents("li").find("span#category_" + id).is(":visible")){
-		  $.ajax({
-		  	type: "GET",
-		  	dataType: "html",
-		  	url: "/api/v1/forms/edit_category/" + id,
-		  	success(data) {
-		  		$(event.target).parents("li").find("span#category_" + id).hide();
-		  		$(event.target).parents("li").find("span#edit_category_" + id).show();
-		  		$(event.target).parents("li").find("span#edit_category_" + id).html(data);
-		  	}
-		  });
+	  if (typeof(id) !== "undefined") {
+		  id = id.split(/_(.+)/)[1];
+		  
+		  if ($(event.target).parents("li").find("span#category_" + id).is(":visible")){
+			  $.ajax({
+			  	type: "GET",
+			  	dataType: "html",
+			  	url: "/api/v1/forms/edit_category/" + id,
+			  	success(data) {
+			  		$(event.target).parents("li").find("span#category_" + id).hide();
+			  		$(event.target).parents("li").find("span#edit_category_" + id).show();
+			  		$(event.target).parents("li").find("span#edit_category_" + id).html(data);
+			  	}
+			  });
+		  }
 	  }
 	});
 });

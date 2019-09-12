@@ -21,4 +21,8 @@ class CategoriesController < ApplicationController
 		end
 	end
 
+	def update
+		puts 1/0
+	end
+
 end

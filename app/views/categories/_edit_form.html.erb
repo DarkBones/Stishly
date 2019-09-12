@@ -3,14 +3,25 @@
 	<div class="row">
 		<div class="col-12">
 			<div class="input-group">
+				<%= f.hidden_field :symbol %>
 				<div class="input-group-prepend">
 					<%= render partial: "categories/symbols_dropdown", :locals => {:symbol => category.symbol, :color => category.color, :id => category.hash_id} %>
 				</div>
+				<div class="input-group-prepend">
+					<%= f.text_field :color, class: "form-control" %>
+				</div>
 				<%= f.text_field :name, class: "form-control" %>
-
+				<div class="input-group-append">
+					<%= f.button 'Save', :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " Saving ..."} %>
+				</div>
 			</div>
 		</div>
 	</div>
 
-	<%= f.hidden_field :symbol %>
 <% end %>
+
+<script>
+	$("#category_color").minicolors({
+		theme: 'bootstrap'
+	});
+</script>

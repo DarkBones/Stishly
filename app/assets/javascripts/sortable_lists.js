@@ -15,7 +15,7 @@ function makeSortableLists(className=".sortable-list", handleName=".sort-handle"
   $(".sortable-nested").nestedSortable({
     listType: "ul",
     startCollapsed: true,
-    handle: "div",
+    handle: ".sort-handle",
     items: "li",
     //toleranceElement: "> div"
     update(e, ui) {
