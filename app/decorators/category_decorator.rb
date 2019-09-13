@@ -24,4 +24,8 @@ class CategoryDecorator < ApplicationDecorator
     return model.color.nil?
   end
 
+  def color_direct
+    return model.color
+  end
+
 end
