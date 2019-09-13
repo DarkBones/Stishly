@@ -12,6 +12,9 @@ $(document).on("turbolinks:load", () => {
 			  	dataType: "html",
 			  	url: "/api/v1/forms/edit_category/" + id,
 			  	success(data) {
+			  		hideEditForms();
+
+			  		$(event.target).parents("li").find("span#edit_category_" + id).addClass("active_form");
 			  		$(event.target).parents("li").find("span#category_" + id).hide();
 			  		$(event.target).parents("li").find("span#edit_category_" + id).show();
 			  		$(event.target).parents("li").find("span#edit_category_" + id).html(data);
@@ -32,6 +35,25 @@ $(document).mouseup(function(e) {
   	$container.hide();
   }
 });
+
+// hide edit forms when clicking outside of them
+$(document).mouseup(function(e) {
+	var $container = $("#categories_list li .active");
+
+	if($container.is(":hidden")) {
+		return false;
+	} else if (typeof($(e.target).parents(".active_form").attr("class")) === "undefined") {
+		hideEditForms();
+	}
+});
+
+function hideEditForms() {
+	$("#categories_list li .active_form").each(function() {
+		$(this).html("");
+		$(this).hide();
+		$(this).parents("li").find("span.category_html").show();
+	});
+}
 
 // search symbols
 function searchCategorySymbol(obj) {

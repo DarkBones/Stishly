@@ -35,7 +35,7 @@ module CategoriesHelper
   		result += "<li class=\"category_#{n[:id]} py-2 px-0 sortable\" id=\"category_#{n[:id]}\""
       result += " color=\"#{n[:color]}\"" unless n[:color_inherited]
       result += ">"
-      result += "<span id=\"category_#{n[:id]}\">"
+      result += "<span id=\"category_#{n[:id]}\" class=\"category_html\">"
   		result += "<div class=\"sort-handle move-cursor\"></div>"
   		result += fa_icon n[:symbol], class: cl, :style => 'background-color: ' + n[:color] + '; padding: 5px;'
       result += " " + n[:name]
