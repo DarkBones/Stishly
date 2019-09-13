@@ -32,7 +32,7 @@ module CategoriesHelper
   	node.each do |n|
   		cl = "rounded-circle"
   		cl += " category" unless n[:symbol].nil?
-  		result += "<li class=\"category_#{n[:id]} py-2 px-0 sortable\" id=\"category_#{n[:id]}\""
+  		result += "<li class=\"category_#{n[:id]} py-2 px-0 sortable dropdown-item\" id=\"category_#{n[:id]}\""
       result += " color=\"#{n[:color]}\"" unless n[:color_inherited]
       result += ">"
       result += "<span id=\"category_#{n[:id]}\" class=\"category_html\">"
