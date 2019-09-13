@@ -1,5 +1,10 @@
 class ApiGuiController < BaseApiBrowserController
 
+  def render_category
+    category = current_user.categories.friendly.find(params[:id]).decorate
+    render partial: "categories/category", :locals => {:category => category}
+  end
+
   def edit_category_form
     category = current_user.categories.friendly.find(params[:id]).decorate
 

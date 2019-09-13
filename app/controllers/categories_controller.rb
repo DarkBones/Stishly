@@ -22,7 +22,14 @@ class CategoriesController < ApplicationController
 	end
 
 	def update
-		puts 1/0
+		Category.update(current_user.categories.friendly.find(params[:id]), update_params)
+		redirect_back(fallback_location: root_path)
+	end
+
+private
+
+	def update_params
+		params.require(:category).permit(:symbol, :color, :name)
 	end
 
 end

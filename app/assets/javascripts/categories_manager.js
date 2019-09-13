@@ -82,5 +82,12 @@ function searchCategorySymbol(obj) {
 function selectCategorySymbol(obj) {
 	$("#category_symbol").val($(obj).attr("name"));
 	$("button#dropdownMenuSymbols").html($(obj).find(".symbol").html());
+	setCategoryColor(obj);	
 	$(".dropdown-menu-symbols").hide();
+}
+
+function setCategoryColor(obj) {
+	var color = $(obj).parents(".row").find("#category_color").val();
+	$(obj).parents(".row").find(".dropdown-toggle-symbols").attr("color", color);
+	$(obj).parents(".row").find(".symbol_field i.category").css("background-color", $(obj).parents(".row").find(".dropdown-toggle-symbols").attr("color"));
 }

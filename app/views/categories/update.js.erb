@@ -1,0 +1,6 @@
+var $category = $("#categories_list li#category_<%= @category.hash_id %>");
+
+
+var $categoryForm = $category.find("span#edit_category_<%= @category.hash_id %>");
+$categoryForm.html("");
+$categoryForm.hide();

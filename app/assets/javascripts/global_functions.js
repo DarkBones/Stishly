@@ -135,23 +135,6 @@
       return result;
     };
 
-    window.serializeHashedNestedOLD = function($container) {
-      var result = "";
-      var parentId;
-
-      $container.find(".sortable").each(function() {
-        if ($(this).parents(".sortable").length === 0) {
-          parentId = "root";
-        } else {
-          parentId = $(this).parents(".sortable").attr("id").split(/_(.+)/)[1];
-        }
-        if (result !== "") { result += "&"; }
-        result += $(this).attr("id").split(/_(.+)/)[1] + "[]=" + parentId;
-      });
-
-      return result;
-    };
-
     // sets the category colors on the categories page
     window.setCategoryColors = function($target) {
       var color = "";
@@ -159,7 +142,7 @@
 
       $target.find(".sortable").each(function() {
         if(typeof($(this).attr("color")) === "undefined") {
-          c = $(this).parents("[color]").attr("color");
+          c = $(this).parents("li[color]").attr("color");
           if (typeof(c) === "undefined") {
             color = "#808080";
           } else {

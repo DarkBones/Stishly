@@ -1,8 +1,8 @@
 <div class="dropdown">
-	<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuSymbols" onclick="$('#symbols_<%= id %>').toggle();" style="height: 38px;">
-		<%= fa_icon symbol, class: "rounded-circle category", :style => 'background-color: black; padding: 5px;' %>
+	<button class="btn btn-light dropdown-toggle dropdown-toggle-symbols" type="button" id="dropdownMenuSymbols" onclick="$('#symbols_<%= id %>').toggle();" style="height: 38px;" color="<%= color %>">
+		<%= fa_icon symbol, class: "rounded-circle category", :style => 'background-color: ' + color + '; padding: 5px;' %>
   </button>
 </div>
 <div class="dropdown-menu-symbols dropshadow" id="symbols_<%= id %>" style="display: none;">
-	<%= render partial: "categories/symbols" %>
+	<%= render partial: "categories/symbols", :locals => {:color => color} %>
 </div>
