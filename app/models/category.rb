@@ -42,7 +42,7 @@ class Category < ApplicationRecord
       if include_uncategorised
         tree[idx][:id] = 0
         tree[idx][:name] = "Uncategorised"
-        tree[idx][:color] = "0, 0%, 50%"
+        tree[idx][:color] = "#808080"
         tree[idx][:symbol] = nil
         tree[idx][:parent_id] = nil
         tree[idx][:children_paths] = "uncategorised"
@@ -83,7 +83,7 @@ class Category < ApplicationRecord
     cat = Category.new
     cat.id = 0
     cat.name = 'Uncategorised'
-    cat.color = '0, 0%, 50%'
+    cat.color = '#808080'
     cat.symbol = 'uncategorised'
     return cat
   end

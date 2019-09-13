@@ -16,70 +16,70 @@ private
       entertainment = @current_user.categories.create({
         name: "Entertainment",
         symbol: "theater-masks",
-        color: "0, 100%, 50%",
+        color: "#FBD237",
         position: 1
       })
 
       food_drinks = @current_user.categories.create({
         name: "Food & Drinks",
         symbol: "utensils",
-        color: "36, 100%, 50%",
+        color: "#F4CDC3",
         position: 13
       })
 
       health = @current_user.categories.create({
         name: "Health",
         symbol: "heartbeat",
-        color: "72, 100%, 50%",
+        color: "#D7AE91",
         position: 19
       })
 
       household = @current_user.categories.create({
         name: "Household",
         symbol: "home",
-        color: "108, 100%, 50%",
+        color: "#86D7E1",
         position: 27
       })
 
       income = @current_user.categories.create({
         name: "Income",
         symbol: "coins",
-        color: "144, 100%, 50%",
+        color: "#7CB436",
         position: 37
       })
 
       investments = @current_user.categories.create({
         name: "investments",
         symbol: "file-invoice-dollar",
-        color: "180, 100%, 50%",
+        color: "#FF470E",
         position: 47
       })
 
       other = @current_user.categories.create({
         name: "Other",
         symbol: "ellipsis-h",
-        color: "216, 100%, 50%",
+        color: "#E30677",
         position: 51
       })
 
       shopping = @current_user.categories.create({
         name: "Shopping",
         symbol: "shopping-bag",
-        color: "252, 100%, 50%",
+        color: "#4588A5",
         position: 60
       })
 
       transport = @current_user.categories.create({
         name: "Transport",
         symbol: "shuttle-van",
-        color: "288, 100%, 50%",
+        color: "#567243",
         position: 72
       })
 
       vehicle = @current_user.categories.create({
         name: "Vehicle",
         symbol: "cog",
-        color: "324, 100%, 50%",
+        color: "#004C8F",
         position: 76
       })
 

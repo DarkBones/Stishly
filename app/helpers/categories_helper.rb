@@ -9,8 +9,7 @@ module CategoriesHelper
       result += " path=\"#{n[:children_paths]}\""
       result += " onclick=\"setCategory(this, '" + n[:id].to_s + "', '" + suff + "')\">"
       result += "<div class=\"sort-handle move-cursor\"></div>" if include_sort_handle
-      #result += image_tag('categories/' + n[:symbol] + '.svg', :class => 'rounded-circle', :style => 'background-color: hsl(' + n[:color] + ');', 'height' => '30')
-      result += fa_icon n[:symbol], class: cl, :style => 'background-color: hsl(' + n[:color] + '); padding: 5px;'
+      result += fa_icon n[:symbol], class: cl, :style => 'background-color: ' + n[:color] + '; padding: 5px;'
       result += " " + n[:name]
       result += "</li>"
       if n[:children].any?
@@ -38,7 +37,7 @@ module CategoriesHelper
       result += ">"
       result += "<span id=\"category_#{n[:id]}\">"
   		result += "<div class=\"sort-handle move-cursor\"></div>"
-  		result += fa_icon n[:symbol], class: cl, :style => 'background-color: hsl(' + n[:color] + '); padding: 5px;'
+  		result += fa_icon n[:symbol], class: cl, :style => 'background-color: ' + n[:color] + '; padding: 5px;'
       result += " " + n[:name]
       result += "</span>"
 

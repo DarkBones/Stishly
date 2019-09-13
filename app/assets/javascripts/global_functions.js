@@ -161,7 +161,7 @@
         if(typeof($(this).attr("color")) === "undefined") {
           c = $(this).parents("[color]").attr("color");
           if (typeof(c) === "undefined") {
-            color = "0, 0%, 50%";
+            color = "#808080";
           } else {
             color = c;
           }
@@ -169,7 +169,7 @@
         } else {
           color = $(this).attr("color");
         }
-        $(this).find(".rounded-circle").css("background-color", "hsl(" + color + ");");
+        $(this).find(".rounded-circle").css("background-color", color + ";");
       });
     }
 

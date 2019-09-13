@@ -17,7 +17,7 @@ class CategoryDecorator < ApplicationDecorator
   		end
   	end
 
-  	return "0, 0%, 50%"
+  	return "#808080"
   end
 
   def color_inherited?

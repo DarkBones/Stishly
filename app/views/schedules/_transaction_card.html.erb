@@ -7,7 +7,7 @@
   <a class="btn btn-link collapsed col-12 clickable" data-toggle="collapse" data-target="#collapse<%= transaction.hash_id %>" aria-expanded="true" aria-controls="collapse<%= transaction.hash_id %>">
     <span class="float-left">
       <%= image_tag "categories/" + transaction.category.symbol + ".svg",
-        :style => "background-color: hsl(" + transaction.category.color + ");",
+        :style => "background-color: " + transaction.category.decorate.color + ";",
         :class => "rounded-circle",
         "height" => "30" %>
       <%= transaction.description %>
