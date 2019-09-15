@@ -26,7 +26,7 @@ $(document).on("turbolinks:load", () => {
 
 				action = $(this).attr("data-link");
 				if (ids.length > 0) {
-					action += "/" + ids
+					action += "/" + ids;
 				}
 
 				$("#confirmation_modal form").attr("action", action);
@@ -39,7 +39,8 @@ $(document).on("turbolinks:load", () => {
 			});
 
 			setDeleteConfirmTargets();
-		}
+		};
+
 	});
 	setDeleteListeners();
 });
