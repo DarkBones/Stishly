@@ -25,6 +25,9 @@ Rails.application.routes.draw do
     scope '/sort' do
       patch '/', to: 'categories#sort'
     end
+    scope '/create' do
+      post '/', to: 'categories#create', as: :new_category
+    end
     scope '/edit' do
       scope '/:id' do
         patch '/', to: 'categories#update', as: :edit_category

@@ -3,6 +3,11 @@ class CategoriesController < ApplicationController
 	def index
 	end
 
+	def create
+		@category = Category.create(current_user, category_params)
+		redirect_back(fallback_location: root_path)
+	end
+
 	def sort
 		params[:category].each_with_index do |ids, idx|
 			ids = ids.split(".")
@@ -22,13 +27,13 @@ class CategoriesController < ApplicationController
 	end
 
 	def update
-		Category.update(current_user.categories.friendly.find(params[:id]), update_params)
+		Category.update(current_user.categories.friendly.find(params[:id]), category_params)
 		redirect_back(fallback_location: root_path)
 	end
 
 private
 
-	def update_params
+	def category_params
 		params.require(:category).permit(:symbol, :color, :name)
 	end
 

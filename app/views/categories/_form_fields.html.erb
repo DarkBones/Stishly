@@ -1,9 +1,11 @@
 <div class="row">
 	<div class="col-12">
 		<div class="input-group">
-			<%= f.hidden_field :symbol %>
-			<div class="input-group-prepend symbol_field">
-				<%= render partial: "categories/symbols_dropdown", :locals => {:symbol => category.symbol, :color => category.color, :id => category.hash_id} %>
+			<div class="category_symbol_field">
+				<%= f.hidden_field :symbol %>
+				<div class="input-group-prepend symbol_field">
+					<%= render partial: "categories/symbols_dropdown", :locals => {:symbol => category.symbol, :color => category.color, :id => category.hash_id} %>
+				</div>
 			</div>
 			<div class="input-group-prepend">
 				<%= f.text_field :color, class: "form-control", value: category.color_direct, "onchange" => "setCategoryColor(this)" %>
@@ -15,3 +17,12 @@
 		</div>
 	</div>
 </div>
+
+
+<script>
+	$("#category_color").each(function() {
+		$(this).minicolors({
+			theme: "bootstrap"
+		});
+	})
+</script>

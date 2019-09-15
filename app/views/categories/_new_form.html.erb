@@ -1,0 +1,6 @@
+<% category = Category.new.decorate %>
+<%= form_with(model: category, :url => new_category_path, html: { autocomplete: "off" }) do |f| %>
+
+	<%= render partial: "categories/form_fields", :locals => { :f => f, :category => category } %>
+
+<% end %>

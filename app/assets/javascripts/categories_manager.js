@@ -79,15 +79,17 @@ function searchCategorySymbol(obj) {
   }
 }
 
-function setCategoryColor(obj) {
+function setCategoryColorOLD(obj) {
 	var color = $(obj).parents(".row").find("#category_color").val();
 	$(obj).parents(".row").find(".dropdown-toggle-symbols").attr("color", color);
 	$(obj).parents(".row").find(".symbol_field i.category").css("background-color", $(obj).parents(".row").find(".dropdown-toggle-symbols").attr("color"));
 }
 
 function selectCategorySymbol(obj) {
-	$("#category_symbol").val($(obj).attr("name"));
+	var color = $(obj).parents(".row").find(".symbol_field i.category").css("background-color");
+
+	$(obj).parents(".category_symbol_field").find("#category_symbol").val($(obj).attr("name"));
 	$("button#dropdownMenuSymbols").html($(obj).find(".symbol").html());
-	setCategoryColor(obj);	
+	$(obj).parents(".row").find(".symbol_field i.category").css("background-color", color);
 	$(".dropdown-menu-symbols").hide();
 }

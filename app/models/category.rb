@@ -20,6 +20,26 @@ class Category < ApplicationRecord
   has_one :parent, :class_name => 'Category'
   has_many :children, :class_name => 'Category', :foreign_key => 'parent_id'
 
+  def self.create(current_user, params)
+    category = current_user.categories.new(params)
+
+    if current_user.categories.length == 0
+      position = 0
+    else
+      position = current_user.categories.order(:position).first.position - 1 unless current_user.categories.order(:position).first.nil?
+    end
+
+    position ||= 0
+    category.position = position
+
+    unless category.color.nil?
+      category.color = nil if category.color.length < 4
+    end
+
+    category.save
+    return category
+  end
+
   def self.update(category, params)
     params[:color] = nil if params[:color].length < 4
     return category.update!(params)
