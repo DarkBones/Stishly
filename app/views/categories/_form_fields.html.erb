@@ -8,7 +8,7 @@
 				</div>
 			</div>
 			<div class="input-group-prepend">
-				<%= f.text_field :color, class: "form-control", value: category.color_direct, "onchange" => "setCategoryColor(this)" %>
+				<%= f.text_field :color, class: "form-control category_color", value: category.color_direct, "onchange" => "setCategoryColor(this)" %>
 			</div>
 			<%= f.text_field :name, class: "form-control" %>
 			<div class="input-group-append">
@@ -20,9 +20,10 @@
 
 
 <script>
-	$("#category_color").each(function() {
+	$(".category_color").each(function() {
 		$(this).minicolors({
-			theme: "bootstrap"
+			theme: "bootstrap",
+			letterCase: "uppercase"
 		});
 	})
 </script>

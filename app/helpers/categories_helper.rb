@@ -33,7 +33,7 @@ module CategoriesHelper
   		cl = "rounded-circle"
   		cl += " category" unless n[:symbol].nil? || n[:symbol].length == 0
   		result += "<li class=\"category_#{n[:id]} py-2 px-0 sortable dropdown-item\" id=\"category_#{n[:id]}\""
-      result += " color=\"#{n[:color]}\"" unless n[:color_inherited]
+      result += " color=\"#{n[:color]}\"" if n[:color_inherited] == false
       result += ">"
       result += "<span id=\"category_#{n[:id]}\" class=\"category_html\">"
   		result += "<div class=\"sort-handle move-cursor\"></div>"

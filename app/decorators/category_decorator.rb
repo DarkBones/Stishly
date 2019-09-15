@@ -21,7 +21,7 @@ class CategoryDecorator < ApplicationDecorator
   end
 
   def color_inherited?
-    return model.color.nil?
+    return model.color.nil? || model.color.length < 4
   end
 
   def color_direct
