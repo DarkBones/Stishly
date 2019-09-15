@@ -79,6 +79,12 @@ function searchCategorySymbol(obj) {
   }
 }
 
+function setCategoryColor(obj) {
+	var color = $(obj).parents(".row").find("#category_color").val();
+	$(obj).parents(".row").find(".dropdown-toggle-symbols").attr("color", color);
+	$(obj).parents(".row").find(".symbol_field i.category").css("background-color", $(obj).parents(".row").find(".dropdown-toggle-symbols").attr("color"));
+}
+
 function selectCategorySymbol(obj) {
 	var color = $(obj).parents(".row").find(".symbol_field i.category").css("background-color");
 
