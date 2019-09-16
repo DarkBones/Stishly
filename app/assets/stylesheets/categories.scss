@@ -3,6 +3,7 @@
 .category_symbol {
 	width: 120px;
 	height: 140px;
+	//overflow-wrap: break-word;
 	float: left;
 	padding: 10px;
 	.symbol {
@@ -14,6 +15,12 @@
 			width: 45px;
 			height: 45px;
 		}
+	}
+	.symbol-name {
+		background-color: red;
+		width: 100%;
+		overflow-wrap: break-word;
+		height: 100%;
 	}
 	&:hover {
 		background-color: lighten($secondaryColor, 30%);
@@ -28,4 +35,11 @@
 	text-align: center;
 	max-width: 630px;
 	max-height: 500px;
+}
+
+.ui-sortable-placeholder {
+	display: block;
+	visibility: visible !important;
+	background-color: lighten($secondaryColor, 30%);
+	border: 1px dashed $secondaryColor;
 }

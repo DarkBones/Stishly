@@ -14,10 +14,9 @@ function makeSortableLists(className=".sortable-list", handleName=".sort-handle"
 
   $(".sortable-nested").nestedSortable({
     listType: "ul",
-    startCollapsed: true,
     handle: ".sort-handle",
     items: "li",
-    //toleranceElement: "> div"
+    toleranceElement: "> div",
     update(e, ui) {
       if ($(this).attr("id") === "categories_list") {
         setCategoryColors($(this));
