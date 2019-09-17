@@ -3,7 +3,6 @@
 .category_symbol {
 	width: 120px;
 	height: 140px;
-	//overflow-wrap: break-word;
 	float: left;
 	padding: 10px;
 	.symbol {
@@ -17,10 +16,9 @@
 		}
 	}
 	.symbol-name {
-		background-color: red;
 		width: 100%;
 		overflow-wrap: break-word;
-		height: 100%;
+		white-space:normal;
 	}
 	&:hover {
 		background-color: lighten($secondaryColor, 30%);
@@ -40,6 +38,6 @@
 .ui-sortable-placeholder {
 	display: block;
 	visibility: visible !important;
-	background-color: lighten($secondaryColor, 30%);
+	background-color: lighten($secondaryColor, 40%);
 	border: 1px dashed $secondaryColor;
 }
