@@ -24,9 +24,9 @@ module CategoriesHelper
 
   def draw_sortable_list(node, first_ul=true)
   	if first_ul
-  		result = "<ul class=\"sortable-nested\" id=\"categories_list\">"
+  		result = "<ul class=\"sortable-nested unselectable\" id=\"categories_list\" unselectable=\"on\">"
   	else
-  		result = "<ul>"
+  		result = "<ul class=\"unselectable\">"
   	end
 
   	node.each do |n|

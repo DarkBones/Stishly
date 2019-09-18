@@ -15,7 +15,10 @@ function makeSortableLists(className=".sortable-list", handleName=".sort-handle"
   $(".sortable-nested").nestedSortable({
     listType: "ul",
     handle: ".sort-handle",
+    helper: 'clone',
     items: "li",
+    opacity: .6,
+    isTree: true,
     toleranceElement: "> div",
     update(e, ui) {
       if ($(this).attr("id") === "categories_list") {
