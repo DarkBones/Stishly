@@ -41,3 +41,16 @@
 	background-color: lighten($secondaryColor, 40%);
 	border: 1px dashed $secondaryColor;
 }
+
+.category-delete-button {
+	opacity: 0;
+	color: $secondaryColor;
+}
+
+#categories_list li:hover .category-delete-button {
+	opacity: 0.6;
+}
+
+#categories_list li:hover .category-delete-button:hover {
+	opacity: 1;
+}
