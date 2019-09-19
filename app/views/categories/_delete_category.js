@@ -1,3 +1,13 @@
+function deleteCategory(id) {
+	$.ajax({
+		type: "DELETE",
+		url: "api/v1/categories/" + id + "/delete",
+		success() {
+			location.reload();
+		}
+	});
+}
+
 function prepareDeleteCategory(id) {
 	$.ajax({
 		type: "GET",
@@ -7,19 +17,8 @@ function prepareDeleteCategory(id) {
 			if (data === "0") {
 				deleteCategory(id);
 			} else {
-				$('#category_delete_modal').modal('show');
-				console.log("HH");
+				$("#category_delete_modal").modal("show");
 			}
-		}
-	});
-}
-
-function deleteCategory(id) {
-	$.ajax({
-		type: "DELETE",
-		url: "api/v1/categories/" + id + "/delete",
-		success() {
-			location.reload();
 		}
 	});
 }
