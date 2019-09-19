@@ -40,7 +40,7 @@ module CategoriesHelper
   		result += fa_icon n[:symbol], class: cl, :style => 'background-color: ' + n[:color] + '; padding: 5px;'
       result += " " + n[:name]
       # delete button
-      result += "<span class=\"float-right clickable category-delete-button\" onclick=\"deleteCategory('#{n[:id]}');\">"
+      result += "<span class=\"float-right clickable category-delete-button\" onclick=\"prepareDeleteCategory('#{n[:id]}');\">"
       result += fa_icon "trash"
       result += "</span>"
       result += "</div></span>"

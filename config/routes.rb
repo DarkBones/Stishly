@@ -155,6 +155,20 @@ Rails.application.routes.draw do
       scope '/account_display_balance/:amount/:from/:to/:add' do
         get '/', to: 'api_gui#account_display_balance'
       end
+      #/api/v1/categories
+      scope '/categories' do
+        #/api/v1/categories/:id
+        scope '/:id' do
+          #/api/v1/categories/:id/delete
+          scope '/delete' do
+            delete '/', to: 'api_categories#delete'
+          end
+          #/api/v1/categories/:id/transaction_count
+          scope '/transaction_count' do
+            get '/', to: 'api_categories#transaction_count'
+          end
+        end
+      end
       #/api/v1/currencies
       scope '/currencies' do
         get '/', to: 'api_currencies#index'
