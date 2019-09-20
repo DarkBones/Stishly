@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   end
 
   scope '/categories' do
-    get '/', to: 'categories#index'
+    get '/', to: 'categories#index', as: :categories
     scope '/sort' do
       patch '/', to: 'categories#sort'
     end

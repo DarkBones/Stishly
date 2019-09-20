@@ -16,8 +16,10 @@ function prepareDeleteCategory(id) {
 		success(data) {
 			if (data === "0") {
 				deleteCategory(id);
+			} else if (data === "1") {
+				triggerNotice("Cannot delete this category as there is 1 transaction associated with it.", true);
 			} else {
-				$("#category_delete_modal").modal("show");
+				triggerNotice("Cannot delete this category as there are " + data + " transactions associated with it.", true);
 			}
 		}
 	});
