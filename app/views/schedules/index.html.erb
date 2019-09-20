@@ -1,43 +1,70 @@
-<h2>Schedules</h2>
-
 <%= render 'schedule_menu' %>
 <%= render 'schedule_edit_menu' %>
 <%= render 'schedule_transactions_menu' %>
 <%= render 'schedule_pause_menu' %>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#scheduleform" id="new-schedule-button" onclick="renderScheduleMenu();">
-  New Schedule
-</button>
+<div class="container" id="schedules_tables">
+  <div class="row">
+    <div class="col-12">
 
-<h3>Active Schedules</h3>
-<div id="active-schedules">
-  <% if @schedules.length == 0 %>
-    <p>
-      <%= I18n.t('schedules.no_active_schedules') %>
-    </p>
-  <% else %>
-    <%= render 'schedules_table', :active => true %>
-  <% end %>
-</div>
+      <h2>
+        Schedules
+        <button type="button" class="float-right btn btn-primary" data-toggle="modal" data-target="#scheduleform" id="new-schedule-button" onclick="renderScheduleMenu();">
+          New Schedule
+        </button>
+      </h2>
 
-<h3>Paused Schedules</h3>
-<div id="paused-schedules">
-  <% if @paused_schedules.length == 0 %>
-    <p>
-      <%= I18n.t('schedules.no_paused_schedules') %>
-    </p>
-  <% else %>
-    <%= render 'schedules_table', :active => true, :paused => true %>
-  <% end %>
-</div>
+    </div>
+  </div>
 
-<h3>Inactive Schedules</h3>
-<div id="inactive-schedules">
-  <% if @inactive_schedules.length == 0 %>
-    <p>
-      <%= I18n.t('schedules.no_inactive_schedules') %>
-    </p>
-  <% else %>
-    <%= render 'schedules_table', :active => false %>
-  <% end %>
+  <div class="row py-2">
+    <div class="col-12">
+
+      <h3>Active Schedules</h3>
+      <div id="active-schedules">
+        <% if @schedules.length == 0 %>
+          <p>
+            <%= I18n.t('schedules.no_active_schedules') %>
+          </p>
+        <% else %>
+          <%= render 'schedules_table', :active => true %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row py-2">
+    <div class="col-12">
+
+      <h3>Paused Schedules</h3>
+      <div id="paused-schedules">
+        <% if @paused_schedules.length == 0 %>
+          <p>
+            <%= I18n.t('schedules.no_paused_schedules') %>
+          </p>
+        <% else %>
+          <%= render 'schedules_table', :active => true, :paused => true %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row py-2">
+    <div class="col-12">
+
+      <h3>Inactive Schedules</h3>
+      <div id="inactive-schedules">
+        <% if @inactive_schedules.length == 0 %>
+          <p>
+            <%= I18n.t('schedules.no_inactive_schedules') %>
+          </p>
+        <% else %>
+          <%= render 'schedules_table', :active => false %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
 </div>

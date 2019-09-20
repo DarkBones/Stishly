@@ -34,6 +34,9 @@ private
       category_id = 0
       category_id = @current_user.categories.friendly.find(params[:category_id]).id if params[:category_id].length > 2
 
+      schedule = @current_user.schedules.friendly.find(params[:schedule_id]) unless params[:schedule_id].nil?
+      schedule_id = schedule.id unless schedule.nil?
+
       current_transaction = {
         direction: get_direction(params, transferred),
         description: params[:description],
@@ -46,7 +49,7 @@ private
         timezone: validate_timezone(timezone),
         category_id: category_id,
         local_datetime: local_datetime,
-        schedule_id: params[:schedule_id],
+        schedule_id: schedule_id,
         schedule_period_id: params[:schedule_period_id],
         is_scheduled: is_scheduled,
         scheduled_transaction_id: params[:scheduled_transaction_id],

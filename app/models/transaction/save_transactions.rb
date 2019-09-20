@@ -13,6 +13,10 @@ class Transaction
 
       schedule = nil
       @transactions.each do |t|
+
+        puts t.to_yaml
+        puts 1/0
+
         transfer_account_id = nil
         parent_id = nil
 

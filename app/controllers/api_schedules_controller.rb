@@ -5,14 +5,14 @@ class ApiSchedulesController < BaseApiController
 	end
 
 	def show
-		schedule = @user.schedules.find(params[:schedule])
+		schedule = @user.schedules.friendly.find(params[:schedule])
 		render json: "not found", status: :not_found and return if schedule.nil?
 
 		render json: prepare_json(JSON.parse(schedule.to_json))
 	end
 
 	def transactions
-		schedule = @user.schedules.find(params[:schedule])
+		schedule = @user.schedules.friendly.find(params[:schedule])
 		render json: "not found", status: :not_found and return if schedule.nil?
 
 		render json: prepare_json(JSON.parse(schedule.user_transactions.order(:description).to_json))

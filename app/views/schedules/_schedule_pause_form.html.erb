@@ -9,7 +9,7 @@
           Pause until
         </div>
         <div class="col-6 col-sm-9 py-2">
-          <%= f.text_field :pause_until, class: 'datepicker datepicker-null form-control', id: "schedule_pause_input" %>
+          <%= f.text_field :pause_until, class: 'datepicker-future datepicker-null form-control', id: "schedule_pause_input", autocomplete: "off" %>
         </div>
       </div>
 

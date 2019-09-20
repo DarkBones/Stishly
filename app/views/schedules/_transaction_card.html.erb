@@ -6,10 +6,7 @@
 <div class="card-header" id="heading<%= transaction.hash_id %>">
   <a class="btn btn-link collapsed col-12 clickable" data-toggle="collapse" data-target="#collapse<%= transaction.hash_id %>" aria-expanded="true" aria-controls="collapse<%= transaction.hash_id %>">
     <span class="float-left">
-      <%= image_tag "categories/" + transaction.category.symbol + ".svg",
-        :style => "background-color: " + transaction.category.decorate.color + ";",
-        :class => "rounded-circle",
-        "height" => "30" %>
+      <%= fa_icon transaction.category.symbol, class: "rounded-circle category", :style => 'background-color: ' + transaction.category.decorate.color + '; padding: 5px;' %>
       <%= transaction.description %>
     </span>
     <span class="float-right">

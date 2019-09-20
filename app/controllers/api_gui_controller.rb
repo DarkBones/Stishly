@@ -134,7 +134,7 @@ class ApiGuiController < BaseApiBrowserController
   end
 
   def edit_schedule_form
-  	schedule = current_user.schedules.find(params[:id])
+  	schedule = current_user.schedules.friendly.find(params[:id])
 
   	render partial: "schedules/edit_schedule_form", :locals => {:schedule => schedule}
   end

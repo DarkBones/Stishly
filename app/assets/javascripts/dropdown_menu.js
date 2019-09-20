@@ -14,8 +14,8 @@ function handleSearchResult(li, text) {
 
 function searchCategories(target, input, obj){
   if (typeof(obj.id) !== "undefined"){
-    var $categories = $(target);
-    var text = $(input).val();
+    var $categories = $(obj).parents(".transactionform_root").find(target);
+    var text = $(obj).parents(".transactionform_root").find(input).val();
     var liArr, liLength, li;
     var liPos = 0;
     var $obj = $("#" + obj.id);
@@ -64,6 +64,5 @@ function setCategory(obj, id, suff="") {
   var $categoriesDropdown = $(obj).closest("div#categoriesDropdownOptions" + suff).siblings("button#categories-dropdown");
 
   $categoriesDropdown.html($("#categoriesDropdownOptions" + suff + " li.category_" + id.toString()).html());
-  $($categoriesDropdown.attr("input-target")).val(id);
-  //alert($categoriesDropdown.attr("input-target"));
+  $categoriesDropdown.parents(".transactionform_root").find($categoriesDropdown.attr("input-target")).val(id);
 }

@@ -88,6 +88,17 @@
                 $(this).attr({'value': getTime});
               });
             }
+
+            if ($(".datepicker-future").length > 0) {
+              $(".datepicker-future").datepicker({
+                format: "dd-M-yyyy",
+                todayHighlight: false,
+                week_start: <%= current_user.country.nil? ? 0 : current_user.country.week_start %>,
+                autoclose: true,
+                startDate: '+1d'
+              })
+            }
+
           }
           setDatepickers();
         </script>
