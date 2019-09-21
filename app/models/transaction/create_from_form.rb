@@ -95,7 +95,7 @@ private
       return @params[:timezone] unless @params[:timezone].nil?
 
       unless @params[:schedule_id].nil?
-        return @current_user.schedules.find(@params[:schedule_id]).timezone if @params[:schedule_id].to_i > 0
+        return @current_user.schedules.friendly.find(@params[:schedule_id]).timezone if @params[:schedule_id].to_i > 0
       end
       return @current_user.timezone
     end
