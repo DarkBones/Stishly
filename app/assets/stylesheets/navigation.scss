@@ -84,6 +84,30 @@ body {
   width: 300px;
 }
 
+table {
+  width: 100%;
+
+  tr:hover {
+    background-color: lighten($secondaryColor, 45%);
+  }
+
+  tr:hover .action-button {
+    opacity: 0.5;
+  }
+
+  tr:hover .action-button:hover {
+    opacity: 1;
+  }
+
+  td {
+    padding: 10px 5px;
+  }
+
+  th {
+    padding: 0 5px;
+  }
+}
+
 @media (max-width: 992px) {
   #sidebar.in {
     width: 0;

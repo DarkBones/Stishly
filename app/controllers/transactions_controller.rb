@@ -66,20 +66,36 @@ class TransactionsController < ApplicationController
 
 
   def queued
-    @transactions = current_user.transactions.where("is_queued = true").decorate
+    @transactions = []
+
+    transactions = current_user.transactions.where("is_queued = true AND parent_id IS NULL").decorate
+    transaction_ids = []
+
+    transactions.each do |t|
+      transaction = Transaction.find_main_transaction(t)
+      
+      unless transaction_ids.include? transaction.id
+        transaction_ids.push(transaction.id)
+        @transactions.push(transaction)
+      end
+    end
   end
 
   def discard
-    transaction = current_user.transactions.find(params[:id])
+    transaction = current_user.transactions.friendly.find(params[:id])
     transaction.destroy unless transaction.nil?
     redirect_back fallback_location: root_path
   end
 
   def approve
-    transaction = current_user.transactions.find(params[:id])
+    transaction = current_user.transactions.friendly.find(params[:id])
 
     unless transaction.nil?
-      Transaction.approve_transaction(transaction, approve_params)
+      if params[:commit] == "Approve"
+        Transaction.approve_transaction(transaction, approve_params)
+      else
+        Transaction.destroy(transaction)
+      end
     end
 
     redirect_back fallback_location: root_path

@@ -378,15 +378,46 @@ class Transaction < ApplicationRecord
   end
 
   def self.approve_transaction(transaction, params)
-    transaction.description = params[:description]
-    transaction.amount = convert_float_to_i_amount(params[:amount], transaction.currency)
-    params[:account_currency_amount].nil? ? transaction.account_currency_amount = convert_float_to_i_amount(params[:amount], transaction.currency) : transaction.account_currency_amount = convert_float_to_i_amount(params[:account_currency_amount], transaction.account.currency)
-    params[:user_currency_amount].nil? ? transaction.user_currency_amount = convert_float_to_i_amount(params[:amount], transaction.currency) : transaction.user_currency_amount = convert_float_to_i_amount(params[:user_currency_amount], transaction.user.currency)
+    main_transaction = self.find_main_transaction(transaction)
 
-    transaction.is_queued = false
-    transaction.save!
+    main_transaction.description = params[:description]
+    main_transaction.amount = convert_float_to_i_amount(params[:amount], main_transaction.currency)
 
-    Account.add(transaction.account, transaction.account_currency_amount, transaction.local_datetime)
+    transfer_transaction = main_transaction.transfer_transaction
+
+    if params[:account_currency_amount].nil?
+      main_transaction.account_currency_amount = convert_float_to_i_amount(params[:amount], main_transaction.currency)
+      unless transfer_transaction.nil?
+        transfer_transaction.account_currency_amount = convert_float_to_i_amount(params[:amount], transfer_transaction.currency)
+      end
+    else
+      main_transaction.account_currency_amount = convert_float_to_i_amount(params[:account_currency_amount], main_transaction.account.currency)
+      unless transfer_transaction.nil?
+        transfer_transaction.account_currency_amount = convert_float_to_i_amount(params[:account_currency_amount], transfer_transaction.account.currency)
+      end
+    end
+
+    if params[:user_currency_amount].nil?
+      main_transaction.user_currency_amount = convert_float_to_i_amount(params[:amount], main_transaction.currency)
+      unless transfer_transaction.nil?
+        transfer_transaction.user_currency_amount = convert_float_to_i_amount(params[:amount], transfer_transaction.currency)
+      end
+    else
+      main_transaction.user_currency_amount = convert_float_to_i_amount(params[:user_currency_amount], main_transaction.user.currency)
+      unless transfer_transaction.nil?
+        transfer_transaction.user_currency_amount = convert_float_to_i_amount(params[:user_currency_amount], transfer_transaction.user.currency)
+      end
+    end
+
+    main_transaction.is_queued = false
+    main_transaction.save!
+    Account.add(main_transaction.account, main_transaction.account_currency_amount, main_transaction.local_datetime)
+
+    unless transfer_transaction.nil?
+      transfer_transaction.is_queued = false
+      transfer_transaction.save!
+      Account.add(transfer_transaction.account, transfer_transaction.account_currency_amount, transfer_transaction.local_datetime) unless transfer_transaction.nil?
+    end
   end
 
   def self.convert_float_to_i_amount(amount, currency)
