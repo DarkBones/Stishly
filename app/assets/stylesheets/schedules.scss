@@ -4,7 +4,7 @@
 	width: 100%;
 
 	tr:hover {
-		background-color: lighten($secondaryColor, 40%);
+		background-color: lighten($secondaryColor, 45%);
 	}
 
 	tr:hover .action-button {
@@ -18,9 +18,13 @@
 	td {
 		padding: 10px 5px;
 	}
+
+	th {
+		padding: 0 5px;
+	}
 }
 
-.action-button {
+.schedule-action-button {
 	color: $secondaryColor !important;
 	opacity: 0;
 

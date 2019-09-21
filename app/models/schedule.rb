@@ -102,7 +102,7 @@ class Schedule < ApplicationRecord
       end
     end
 
-    return transactions
+    return transactions.sort_by { |hsh| hsh[:local_datetime] }
   end
 
   def self.get_form_params(schedule)
