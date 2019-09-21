@@ -46,7 +46,6 @@ private
   		@current_user.currency = currency.iso_code
   		@current_user.country_code = country.country_code
   		@current_user.country_id = country.id
-  		@current_user.timezone = validate_timezone(@params[:timezone])
   		@current_user.save!
 		end
 
@@ -89,7 +88,8 @@ private
 				amount: params["amount_#{idx}"],
 				average_amount: params["average_amount_#{idx}"],
 				account: params["account_#{idx}"],
-				account_average: params["account_average_#{idx}"]
+				account_average: params["account_average_#{idx}"],
+				timezone: @current_user.timezone
 			}
 		end
 

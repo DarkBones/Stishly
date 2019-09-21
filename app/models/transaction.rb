@@ -197,10 +197,26 @@ class Transaction < ApplicationRecord
   end
 
   def self.update_upcoming_occurrence(params, current_user)
-    
-    transactions = self.update(current_user.transactions.find(params[:id]), params, current_user)
+    transaction = current_user.transactions.friendly.find(params[:scheduled_transaction_id])
+    scheduled_transaction = current_user.transactions.where(scheduled_transaction_id: transaction.id, schedule_period_id: params[:schedule_period_id]).take
 
-    return transactions
+    unless scheduled_transaction
+      #scheduled_transaction = self.create(params, current_user, save: true, scheduled: true)
+
+      scheduled_transaction = CreateFromForm.new(params, current_user, scheduled: true).perform
+      scheduled_transaction = SaveTransactions.new(scheduled_transaction, current_user, false).perform
+
+      scheduled_transaction.each do |t|
+        t.scheduled_transaction_id = transaction.id
+        t.save
+      end
+
+      scheduled_transaction = self.find_main_transaction(scheduled_transaction)
+    end
+
+    self.update(scheduled_transaction, params, current_user, scheduled: true)
+
+    return scheduled_transaction
   end
 
   def self.destroy(transaction)

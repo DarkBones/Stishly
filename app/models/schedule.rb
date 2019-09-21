@@ -42,6 +42,10 @@ class Schedule < ApplicationRecord
   has_and_belongs_to_many :user_transactions, foreign_key: "schedule_id", class_name: "Transaction", dependent: :destroy
 
   def self.get_all_transactions_until_date(user, until_date, start_date=nil)
+    return GetTransactionsUntilDate.new(user, until_date, start_date).perform
+  end
+
+  def self.get_all_transactions_until_date_OLD(user, until_date, start_date=nil)
     # if start_date is nil, set it to today
     start_date ||= Time.now.utc
 
@@ -92,6 +96,7 @@ class Schedule < ApplicationRecord
 
         next_occurrence += 1.day
         break if next_occurrence >= until_date
+        break
       end
     end
 

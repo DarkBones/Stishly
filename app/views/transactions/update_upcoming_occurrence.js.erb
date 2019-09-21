@@ -12,6 +12,8 @@ $("[data-dismiss=modal]").trigger({ type: "click" });
 	new_transaction_id = schedule_id + @transaction.hash_id + period_id.to_s
 %>
 
+alert('<%= @transaction.description %>');
+alert(originalTId);
 $("#transaction_" + originalTId.toString() + " #upcoming-description").text("<%= @transaction.description %>");
 $.ajax({
 	type: "GET",
@@ -26,6 +28,7 @@ $.ajax({
 			dataType: "html",
 			url: "api/v1/render/upcoming_transaction/<%= @transaction.hash_id %>/dropdown",
 			success(data) {
+				alert(data);
 				$("#transaction_" + originalTId.toString() + " #upcoming-dropdown").html(data);
 				
 				$("#transaction_" + originalTId.toString()).attr("series-id", "<%= @transaction.hash_id %>");
