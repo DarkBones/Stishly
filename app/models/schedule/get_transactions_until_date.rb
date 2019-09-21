@@ -41,8 +41,7 @@ class Schedule
 private
 
 		def get_next_occurrence(schedule)
-			next_occurrence = schedule.pause_until_utc
-			next_occurrence ||= schedule.next_occurrence_utc
+			next_occurrence = schedule.pause_until_utc || schedule.next_occurrence_utc
 		end
 
 		def get_transactions(schedule, period, date)
