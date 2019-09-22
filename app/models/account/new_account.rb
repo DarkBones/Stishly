@@ -10,6 +10,8 @@ class Account
     end
 
     def perform()
+      @name = "New" if @name == "new"
+      
       account_details = {
         :name => @name,
         :balance => (@balance * @currency.subunit_to_unit).to_f.round.to_i,
