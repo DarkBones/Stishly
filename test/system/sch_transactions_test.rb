@@ -80,5 +80,4 @@ class SchTransactionsTest < ApplicationSystemTestCase
 
     assert_selector "#sch_transactions_list", text: "New description"
   end
-
 end

@@ -394,6 +394,7 @@ sch_transaction_1: {
   local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null,
+  schedule_id: 2,
   hash_id: 48bPA_TS4aFb
 }
 
@@ -415,6 +416,7 @@ sch_transaction_2_main: {
   local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_account_id: null,
+  schedule_id: 2,
   hash_id: OuzsEKnOk96x
 }
 
@@ -513,6 +515,7 @@ sch_transaction_3_from: {
   local_datetime: "<%= Time.now.utc %>",
   timezone: "Europe/London",
   transfer_transaction_id: 1004,
+  schedule_id: 2,
   hash_id: 1BOJK9aKnJD1
 }
 sch_transaction_3_to: {
