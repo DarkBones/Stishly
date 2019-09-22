@@ -7,7 +7,8 @@ class ApiCategoriesController < ApplicationController
 
 	def delete
 		category = current_user.categories.friendly.find(params[:id])
-		category.destroy
+		
+		Category.delete(category)
 	end
 
 end

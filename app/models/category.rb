@@ -45,6 +45,21 @@ class Category < ApplicationRecord
     return category.update!(params)
   end
 
+  def self.delete(category)
+    unless self.where(id: category.parent_id).empty?
+      parent_category = self.where(id: category.parent_id).take.id
+    else
+      parent_category = nil
+    end
+
+    category.children.each do |c|
+      c.parent_id = parent_category
+      c.save
+    end
+
+    category.destroy
+  end
+
   def self.get_user_categories(current_user, as_array=false, include_blank=false, include_uncategorised = true)
     if as_array
       tree = Hash.new { |h,k| h[k] = { :name => nil, :children => [ ], :children_paths => "", :parent_id => nil } }
