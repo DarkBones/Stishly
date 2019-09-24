@@ -29,7 +29,7 @@
     <div class="row py-2">
       <div class="col-12">
         <%= f.button I18n.t('buttons.edit_account_save.text'), :class => 'float-right btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{I18n.t('buttons.edit_account_save.action')} ..."} %>
-        <button type="button" class="btn btn-danger delete-confirm" confirm-message="This action will delete this account and all associated transactions. This cannot be undone. Continue?" data-link="<%= delete_account_path(@active_account) %>">Delete</button>
+        <button type="button" class="btn btn-danger delete-confirm" confirm-message="<%= I18n.t('account.delete_warning') %>" data-link="<%= delete_account_path(@active_account) %>"><%= I18n.t('buttons.delete_account.text') %></button>
       </div>
     </div>
   <% end %>

@@ -2,7 +2,6 @@ require "application_system_test_case"
 
 class AccountsTest < ApplicationSystemTestCase
 
-=begin
 	test 'Open and close the menu' do
 
 		login_as_blank
@@ -165,6 +164,7 @@ class AccountsTest < ApplicationSystemTestCase
 		max_spending = free_tier.max_spending_accounts
 
 		(0..max_spending).each do |n|
+			page.driver.browser.navigate.refresh
 			find('#new-account-button').click
 			fill_in 'account[name]', with: "Account #{n}"
 			click_on I18n.t('buttons.create_account.text')
@@ -174,6 +174,7 @@ class AccountsTest < ApplicationSystemTestCase
 
 		find('#accountform button.close').click
 		(max_spending..max).each do |n|
+			page.driver.browser.navigate.refresh
 			find('#new-account-button').click
 			fill_in 'account[name]', with: "Account #{n}"
 			find('#accountform #account_account_type').find(:option, I18n.t('account.types.saving')).select_option
@@ -185,7 +186,6 @@ class AccountsTest < ApplicationSystemTestCase
 
 	end
 
-=end
 	test 'Edit account' do
 
 		login_as_blank
@@ -195,8 +195,9 @@ class AccountsTest < ApplicationSystemTestCase
 		fill_in 'account[name]', with: 'Edit'
 		click_on I18n.t('buttons.create_account.text')
 
+		page.driver.browser.navigate.refresh
+
 		# navigate to new account
-		find('#accounts_list', text: 'Edit').click
 		visit '/accounts/Edit/settings'
 		
 		fill_in 'account[name]', with: 'EditNewName'
@@ -215,6 +216,106 @@ class AccountsTest < ApplicationSystemTestCase
 	end
 
 	test 'Edit account, change name to "new"' do
+
+		login_as_blank
+
+		# create an account
+		find('#new-account-button').click
+		fill_in 'account[name]', with: 'TestAccount'
+		click_on I18n.t('buttons.create_account.text')
+
+		page.driver.browser.navigate.refresh
+
+		# edit the account and change the name to 'new'
+		visit '/accounts/TestAccount/settings'
+		fill_in 'account[name]', with: 'new'
+		click_on I18n.t('buttons.edit_account_save.text')
+
+		# verify the name was saved as 'New'
+		assert_selector '#accounts_list', text: 'New'
+
+	end
+
+	test 'Quick edit account balance' do
+
+		login_as_blank
+
+		find('#new-account-button').click
+		fill_in 'account[name]', with: 'Balance'
+		click_on I18n.t('buttons.create_account.text')
+
+		page.driver.browser.navigate.refresh
+
+		visit '/accounts/Balance'
+
+		# verify the balance input field is hidden
+		assert_selector 'input#account_balance', visible: :hidden
+		# verify the balance span is visible
+		assert_selector '#account-title-balance', visible: :visible
+
+		# click on the balance
+		find('#account-title-balance').click
+
+		# verify the balance input is visible
+		assert_selector 'input#account_balance', visible: :visible
+		# verify the balance span is hidden
+		assert_selector '#account-title-balance', visible: :hidden
+
+		# fill in a new balance
+		fill_in 'account[balance]', with: '1212.01'
+		find('input#account_balance').native.send_keys(:return)
+
+		sleep 2
+
+		assert_selector '#accounts_list', text: '€1,212.01'
+		assert_selector '#account-title-balance', text: '€1,212.01'
+
+		page.driver.browser.navigate.refresh
+
+		assert_selector '#accounts_list', text: '€1,212.01'
+		assert_selector '#account-title-balance', text: '€1,212.01'
+
+		# check if a balancer transaction was created
+		balancer = Transaction.where(user_id: 3, is_balancer: true).take
+		assert_not balancer.nil?, 'No balancer transaction created'
+		assert balancer.amount == 121201, format_error('Unexpected balancer amount', 121201, balancer.amount)
+
+		# verify the balancer transaction isn't visible
+		visit '/accounts/Balance'
+		assert_no_text 'balancer_transaction'
+
+	end
+
+	test 'delete account' do
+
+		login_as_blank
+
+		find('#new-account-button').click
+		fill_in 'account[name]', with: 'Destroy'
+		click_on I18n.t('buttons.create_account.text')
+
+		page.driver.browser.navigate.refresh
+
+		visit '/accounts/Destroy/settings'
+
+		click_on I18n.t('buttons.delete_account.text')
+
+		# assert the warning text is showing
+		assert_selector '#confirmation_modal', text: I18n.t('account.delete_warning')
+
+		# deny the confirmation and check that the account wasn't deleted
+		click_on I18n.t('buttons.deny.text')
+		page.driver.browser.navigate.refresh
+		assert_selector '#accounts_list', text: 'Destroy'
+
+		# delete the account for real
+		click_on I18n.t('buttons.delete_account.text')
+		click_on I18n.t('buttons.confirm.text')
+
+		visit root_path
+
+		# verify the account was deleted
+		assert_no_text 'Destroy'
 
 	end
 

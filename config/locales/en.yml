@@ -52,6 +52,7 @@ en:
       transactions: Transactions
       settings: Settings
       overview: Overview
+    delete_warning: This action will delete this account and all its transactions. This cannot be undone. Continue?
   transaction:
     confirmations:
       confirmed: Transaction created
@@ -127,6 +128,13 @@ en:
     edit_account_save:
       text: Save Changes
       action: Updating account
+    delete_account:
+      text: Delete
+      action: Deleting account
+    confirm:
+      text: "Yes"
+    deny:
+      text: "No"
 
   helpers:
     label:

@@ -56,6 +56,11 @@ class Account < ApplicationRecord
     balance = params[:balance].to_f * currency.subunit_to_unit
     params[:balance] = balance.to_i
 
+    # name 'new' not allowed
+    if params[:name] == 'new'
+      params[:name] = 'New'
+    end
+
     if balance != account.balance
       transaction = Transaction.create_balancer(account, balance)
       self.add(transaction.account, transaction.amount, transaction.local_datetime)

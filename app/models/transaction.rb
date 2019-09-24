@@ -42,7 +42,7 @@ class Transaction < ApplicationRecord
   attr_reader :rate, :account_currency, :rate_from_to, :to_account_currency, :date, :time, :active_account, :schedule_id, :schedule_type
 
   filterrific(
-    default_filter_params: { sorted_by: 'created_at_desc', include_children: 1, is_scheduled: 0 },
+    default_filter_params: { sorted_by: 'created_at_desc', include_children: 1, is_scheduled: false, is_balancer: false },
     available_filters: [
       :description,
       :from_date,
@@ -142,6 +142,7 @@ class Transaction < ApplicationRecord
     end
 
     transaction = self.new
+    transaction.description = 'balancer_transaction'
     transaction.user_id = account.user.id
     transaction.currency = account.currency
     transaction.timezone = account.user.timezone

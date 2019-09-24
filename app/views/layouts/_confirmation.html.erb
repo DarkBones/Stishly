@@ -15,10 +15,10 @@
       <div class="modal-footer">
 
         <%= form_tag("/schedules", method: "delete", remote: true) do %>
-          <%= submit_tag "Yes", class: "btn btn-danger" %>
+          <%= submit_tag I18n.t('buttons.confirm.text'), class: "btn btn-danger" %>
         <% end %>
 
-        <button type="button" class="btn btn-secondary delete-confirm-dismiss" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-secondary delete-confirm-dismiss" data-dismiss="modal"><%= I18n.t('buttons.deny.text') %></button>
       </div>
 
     </div>
