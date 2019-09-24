@@ -9,7 +9,7 @@
         </div>
         <div class="col-12 col-sm-5">
           <%= f.label :type %><br />
-          <%= f.select(:account_type, [["Spending", "spend"], ["Saving", "save"]], {selected: "spend"}, {:class => "form-control"}) %>
+          <%= f.select(:account_type, [[I18n.t('account.types.spending'), "spend"], [I18n.t('account.types.saving'), "save"]], {selected: "spend"}, {:class => "form-control"}) %>
         </div>
       </div>
 
@@ -36,6 +36,6 @@
 
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <%= f.button 'Create Account', :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " Creating account ..."} %>
+    <%= f.button I18n.t('buttons.create_account.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{I18n.t('buttons.create_account.action')} ..."} %>
   </div>
 <% end %>

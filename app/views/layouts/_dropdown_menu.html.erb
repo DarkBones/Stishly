@@ -13,14 +13,14 @@ end
 %>
 
 <ul class="list-unstyled">
-	<%= li_pref.html_safe %><%= link_to 'Edit account', edit_user_registration_path, { :class=> cl } %><%= li_suff.html_safe %>
+	<%= li_pref.html_safe %><%= link_to I18n.t('buttons.edit_user_account.text'), edit_user_registration_path, { :class=> cl } %><%= li_suff.html_safe %>
 	<% if current_user.finished_setup %>
 		<%#= li_pref.html_safe %><%#= link_to 'Settings', user_settings_path, { :class=> cl } %><%#= li_suff.html_safe %>
-		<%= li_pref.html_safe %><%= link_to 'Schedules', schedules_url, { :class => cl } %><%= li_suff.html_safe %>
-    <%= li_pref.html_safe %><%= link_to 'Notifications', notifications_path, { :class => cl } %><%= li_suff.html_safe %>
-    <%= li_pref.html_safe %><%= link_to 'Upcoming Transactions', upcoming_transactions_path, { :class => cl } %><%= li_suff.html_safe %>
-    <%= li_pref.html_safe %><%= link_to 'Categories', categories_path, { :class => cl } %><%= li_suff.html_safe %>
+		<%= li_pref.html_safe %><%= link_to I18n.t('buttons.schedules.text'), schedules_url, { :class => cl } %><%= li_suff.html_safe %>
+    <%= li_pref.html_safe %><%= link_to I18n.t('buttons.notifications.text'), notifications_path, { :class => cl } %><%= li_suff.html_safe %>
+    <%= li_pref.html_safe %><%= link_to I18n.t('buttons.upcoming_transactions.text'), upcoming_transactions_path, { :class => cl } %><%= li_suff.html_safe %>
+    <%= li_pref.html_safe %><%= link_to I18n.t('buttons.categories.text'), categories_path, { :class => cl } %><%= li_suff.html_safe %>
 		<%= divider.html_safe %>
 	<% end %>
-	<%= li_pref.html_safe %><%= link_to 'Sign out', destroy_user_session_path, { :class=> cl } %><%= li_suff.html_safe %>
+	<%= li_pref.html_safe %><%= link_to I18n.t('buttons.sign_out.text'), destroy_user_session_path, { :class=> cl } %><%= li_suff.html_safe %>
 </ul>

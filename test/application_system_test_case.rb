@@ -25,6 +25,13 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     login_user(user, password)
   end
 
+  def login_as_blank_free
+    user = users(:new_free)
+    password = "SomePassword123^!"
+
+    login_user(user, password)
+  end
+
   def logout
     sleep 2
     page.find(".navbar-gear").click

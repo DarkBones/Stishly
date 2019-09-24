@@ -8,6 +8,8 @@
   $('#account_<%= @account.hash_id %>').hide().fadeIn(1000);
 
   var total_amount = parseInt($('#accounts_list li').first().find('span').attr('balance'), 10);
+  
+  $("#create-account-instruction").remove();
 
   // Update the total amount
   $.ajax({

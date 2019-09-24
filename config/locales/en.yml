@@ -31,49 +31,119 @@
 
 en:
   homepage:
-    welcome_h1: "Welcome"
+    welcome_h1: Welcome
   account:
     confirmations:
-      confirmed: "Account created"
+      confirmed: Account created
     instructions:
-      create: "Create an account by clicking the '+' button"
+      create: Create an account by clicking here or on the '+' button
     failure:
-      invalid_name: "Invalid account name"
-      invalid_name_dot: "Invalid account name. Dots (.) not allowed"
-      already_exists: "Account with the same name already exists"
+      no_name: can't be blank
+      invalid_name: Invalid account name
+      invalid_name_dot: Invalid account name. Dots (.) not allowed
+      already_exists: already exists
+      special_characters: special characters are not allowed
+      upgrade_for_accounts: Upgrade to premium for more accounts
+      upgrade_for_spending: Upgrade to premium for more spending accounts
+    types:
+      spending: Spending
+      saving: Saving
+    tabs:
+      transactions: Transactions
+      settings: Settings
+      overview: Overview
   transaction:
     confirmations:
-      confirmed: "Transaction created"
+      confirmed: Transaction created
   schedule:
     confirmations:
-      confirmed: "Schedule created"
+      confirmed: Schedule created
     failure:
-      invalid_name: "Invalid schedule name"
-      invalid_date: "Invalid date"
-      already_exists: "Schedule with the same name already exists"
-      unknown: "Unknown error creating the schedule"
+      invalid_name: Invalid schedule name
+      invalid_date: Invalid date
+      already_exists: Schedule with the same name already exists
+      unknown: Unknown error creating the schedule
   dates:
-    today: "Today"
-    yesterday: "Yesterday"
-    tomorrow: "Tomorrow"
+    today: Today
+    yesterday: Yesterday
+    tomorrow: Tomorrow
   errors:
-    form: "Please fix the below errors"
+    form: Please fix the below errors
   schedules:
-    no_active_schedules: "There are no active schedules"
-    no_inactive_schedules: "There are no inactive schedules"
-    no_paused_schedules: "There are no paused schedules"
+    no_active_schedules: There are no active schedules
+    no_inactive_schedules: There are no inactive schedules
+    no_paused_schedules: There are no paused schedules
   sch_transactions:
     confirmations:
-      confirmed: "Added {num} {transactions} to {schedule}"
-      updated: "Successfully updated transaction"
+      confirmed: Added {num} {transactions} to {schedule}
+      updated: Successfully updated transaction
 
   hints:
     fixed_amount:
-      title: "Fixed / Varied amounts"
-      body: "Transactions with fixed amounts get logged immidiately. For transactions with varying amounts, you will be asked to review them before they are logged."
+      title: Fixed / Varied amounts
+      body: Transactions with fixed amounts get logged immidiately. For transactions with varying amounts, you will be asked to review them before they are logged.
 
   errors:
     form: Please fix the below errors
     messages:
       password:
         password_strength: "too weak! Combine at least uppercase letters, lowercase letters, and numbers"
+
+  buttons:
+    sign_up:
+      text: Sign up
+      action: Signing you up
+    sign_in:
+      text: Sign in
+      action: Signing you in
+    sign_out:
+      text: Sign out
+      action: Signing you out
+    sign_in_facebook:
+      text: Sign in with Facebook
+      action: Sign in with Facebook
+    sign_in_google:
+      text: Sign in with Google
+      action: Sign in with Google
+    edit_user_account:
+      text: Edit account
+    schedules:
+      text: Schedules
+    notifications:
+      text: Notifications
+    upcoming_transactions:
+      text: Upcoming Transactions
+    categories:
+      text: Categories
+    destroy_user_account:
+      text: Delete my account
+      action: Deleting your account
+    update_user_account:
+      text: Update
+      action: Updating your account
+    create_account:
+      text: Create Account
+      action: Creating account
+    edit_account_save:
+      text: Save Changes
+      action: Updating account
+
+  helpers:
+    label:
+      user:
+        email: Email
+        password: Password
+        password_confirmation: Password confirmation
+        first_name: First name
+        last_name: Last name
+        country: Country
+        current_password: Current password
+
+  pages:
+    edit_user_account:
+      title: Edit User
+      messages:
+        password_fields: Leave these fields blank if you don't want to change your password.
+        current_password: You must enter your current password to make changes.
+        delete_account_title: Delete account
+

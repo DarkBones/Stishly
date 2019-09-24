@@ -89,6 +89,23 @@ new: {
   subscription_tier_id: 2
 }
 
+new_free: {
+  id: 30003,
+  first_name: New,
+  last_name: User,
+  email_bidx: <%= User.generate_email_bidx("new_user_free@example.com").inspect %>,
+  country_code: 'IE',
+  country_id: 1,
+  timezone: 'Europe/London',
+  encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
+  confirmed_at: '2018-11-14 19:54:40',
+  currency: EUR,
+  finished_setup: true,
+  email: new_user_free@example.com,
+  unconfirmed_email: new_user_free@example.com,
+  subscription_tier_id: 1
+}
+
 transactions_test: {
   id: 4,
   first_name: Transactions,
@@ -370,3 +387,4 @@ setup_wizard: {
   email: setupwizard@stishly.com,
   unconfirmed_email: setupwizard@stishly.com
 }
+

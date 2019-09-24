@@ -18,7 +18,7 @@
 
 		<div class="col-6 col-sm-5 col-md-3 py-2">
 			<label class="d-md-none">Type</label>
-			<%= select_tag "account_type_", options_for_select([["Spending", "spend"], ["Saving", "save"]]), {:class => "form-control account_type", "onchange" => "editAccountType(this); return false"} %>
+			<%= select_tag "account_type_", options_for_select([[I18n.t('account.types.spending'), "spend"], [I18n.t('account.types.saving'), "save"]]), {:class => "form-control account_type", "onchange" => "editAccountType(this); return false"} %>
 		</div>
 
 	</div>

@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12 py-2">
-        <h3>Sign in</h3>
+        <h3><%= I18n.t('buttons.sign_in.text') %></h3>
       </div>
     </div>
 
@@ -51,7 +51,7 @@
 
         <div class="row">
           <div class="col-12 py-2">
-            <%= f.button 'Sign in', :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " Signing you in ..."} %>
+            <%= f.button I18n.t('buttons.sign_in.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " " + I18n.t('buttons.sign_in.action') + " ..."} %>
           </div>
         </div>
 
@@ -62,10 +62,10 @@
           <div class="col-12 py-2">
             <label>&#8203</label>
             <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-block btn-social btn-facebook", method: :post do %>
-               <span class="fa fa-facebook"></span> Sign in with Facebook
+               <span class="fa fa-facebook"></span> <%= I18n.t('buttons.sign_in_facebook.text') %>
             <% end %>
             <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-block btn-social btn-google", method: :post do %>
-               <span class="fa fa-google"></span> Sign in with Google
+               <span class="fa fa-google"></span> <%= I18n.t('buttons.sign_in_google.text') %>
             <% end %>
           </div>
         </div>

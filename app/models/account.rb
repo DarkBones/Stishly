@@ -18,8 +18,8 @@
 class Account < ApplicationRecord
   include Friendlyable
   
-  validates :name, presence: true
-  validates :name, format: { without: /[-\._~:\/\?#\[\]@!\$&'\(\)\*\+,;={}"]/, message: "Special characters not allowed" }
+  validates :name, presence: { message: I18n.t('account.failure.no_name') }
+  validates :name, format: { without: /[-\.~:\/\?#\[\]@!\$&'\(\)\*\+,;={}"]/, message: I18n.t('account.failure.special_characters') }
   validates :name, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('account.failure.already_exists') }
   validates :currency, presence: true
   validate :subscription, :on => :create
@@ -318,10 +318,10 @@ private
     return if accounts.nil?
 
     if accounts.length >= subscription_tier.max_accounts
-      errors.add(:account, "Upgrade to premium for more accounts") unless subscription_tier.max_accounts < 0
+      errors.add(:account, I18n.t('account.failure.upgrade_for_accounts')) unless subscription_tier.max_accounts < 0
     elsif account_type == "spend"
       if accounts.where(account_type: "spend").length >= subscription_tier.max_spending_accounts
-        errors.add(:account, "Upgrade to premium for more spending accounts") unless subscription_tier.max_accounts < 0
+        errors.add(:account, I18n.t('account.failure.upgrade_for_spending')) unless subscription_tier.max_accounts < 0
       end
     end
 
