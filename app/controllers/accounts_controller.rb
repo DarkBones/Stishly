@@ -22,9 +22,9 @@ class AccountsController < ApplicationController
     unless params.keys.include? "filterrific"
       params[:filterrific] = {
         sorted_by: 'created_at_desc',
-        is_queued: 0,
+        is_queued: false,
         include_children: 1,
-        is_balancer: 0
+        is_balancer: false
       }
     end
     params[:filterrific][:account] = params[:id]
@@ -56,9 +56,9 @@ class AccountsController < ApplicationController
     unless params.keys.include? "filterrific"
       params[:filterrific] = {
         sorted_by: 'created_at_desc',
-        is_queued: 0,
+        is_queued: false,
         include_children: 1,
-        is_balancer: 0
+        is_balancer: false
       }
     end
     
