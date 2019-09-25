@@ -40,7 +40,6 @@ en:
     failure:
       no_name: can't be blank
       invalid_name: Invalid account name
-      invalid_name_dot: Invalid account name. Dots (.) not allowed
       already_exists: already exists
       special_characters: special characters are not allowed
       upgrade_for_accounts: Upgrade to premium for more accounts
@@ -88,7 +87,7 @@ en:
     form: Please fix the below errors
     messages:
       password:
-        password_strength: "too weak! Combine at least uppercase letters, lowercase letters, and numbers"
+        password_strength: too weak! Combine at least uppercase letters, lowercase letters, and numbers
 
   buttons:
     sign_up:
