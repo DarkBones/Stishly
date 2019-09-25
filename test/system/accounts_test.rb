@@ -318,6 +318,7 @@ class AccountsTest < ApplicationSystemTestCase
 		click_on I18n.t('buttons.confirm.text')
 
 		visit root_path
+		
 
 		# verify the account was deleted
 		assert_no_text 'Destroy'
