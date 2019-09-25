@@ -284,6 +284,11 @@ class AccountsTest < ApplicationSystemTestCase
 		visit '/accounts/Balance'
 		assert_no_text 'balancer_transaction'
 
+		# verify that a new account history was recorded
+		account = Account.where(user_id: 3, name: 'Balance').take
+		history = AccountHistory.where(account_id: account.id, balance: 121201).take
+		assert_not history.nil?, 'Account history not recorded after changing its balance'
+
 	end
 
 	test 'delete account' do
