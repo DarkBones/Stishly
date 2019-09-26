@@ -1,5 +1,5 @@
 <div class="expenseRow">
 	<hr />
-	<button class="btn btn-danger float-right rounded-circle btn-fieldset" data-toggle="tooltip" data-placement="top" title="Remove this expense" onclick="removeExpenseRow(this); return false;">&times</button>
+	<button class="btn btn-danger float-right rounded-circle btn-fieldset" data-toggle="tooltip" data-placement="top" title="<%= t('title_hints.remove_expense') %>" onclick="removeExpenseRow(this); return false;">&times</button>
 	<%= render :partial => 'schedules/simplified_form', :locals => {:type => "fixed_expense"} %>
 </div>

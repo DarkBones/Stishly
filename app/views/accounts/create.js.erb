@@ -23,7 +23,7 @@
     }
   });
 
-  triggerNotice('<%= I18n.t("account.confirmations.confirmed") %>', false);
+  triggerNotice('<%= t("account.confirmations.confirmed") %>', false);
 
   // add the new account in the transaction accounts options
   var o = new Option("<%= @account.name %> (<%= @account.currency %>)", "<%= @account.name %>");

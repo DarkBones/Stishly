@@ -91,19 +91,19 @@ function changeSchedulePeriod(val, obj) {
 
   switch (val.toLowerCase()) {
     case "daily":
-      $(obj).parents("#schedule-form-root").find("p#period").text("days");
+      $(obj).parents("#schedule-form-root").find("p#period").text("<%= I18n.t('schedule.periods_quant.days') %>");
       $(obj).parents("#schedule-form-root").find(".daily").slideDown("fast");
       break;
     case "weekly":
-      $(obj).parents("#schedule-form-root").find("p#period").text("weeks");
+      $(obj).parents("#schedule-form-root").find("p#period").text("<%= I18n.t('schedule.periods_quant.weeks') %>");
       $(obj).parents("#schedule-form-root").find(".weekly").slideDown("fast");
       break;
     case "monthly":
-      $(obj).parents("#schedule-form-root").find("p#period").text("months");
+      $(obj).parents("#schedule-form-root").find("p#period").text("<%= I18n.t('schedule.periods_quant.months') %>");
       $(obj).parents("#schedule-form-root").find(".monthly").slideDown("fast");
       break;
     case "annually":
-      $(obj).parents("#schedule-form-root").find("p#period").text("years");
+      $(obj).parents("#schedule-form-root").find("p#period").text("<%= I18n.t('schedule.periods_quant.years') %>");
       $(obj).parents("#schedule-form-root").find(".annually").slideDown("fast");
   }
 }

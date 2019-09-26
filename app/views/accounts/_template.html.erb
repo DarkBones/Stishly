@@ -3,7 +3,11 @@
     <div class="col-12">
       <h2>
 
-        <%= @active_account.name %> -
+        <% if @active_account.persisted? %>
+          <%= @active_account.name %> -
+        <% else %>
+          <%= t('account.all') %>
+        <% end %>
         <span id="account-title-balance" onclick="toggleAccountBalanceEdit(this);" balance_float="<%= @active_account.balance_float %>" balance=<%= @active_account.balance%>>
           <%= balance(@active_account.balance.to_f, Account.get_currency(@active_account)) %>
         </span>

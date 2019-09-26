@@ -5,11 +5,11 @@
       <div class="row py-2">
         <div class="col-12 col-sm-7">
           <%= f.label :name %><br />
-          <%= f.text_field :name, placeholder: "Current account", class: 'form-control' %>
+          <%= f.text_field :name, placeholder: t('placeholders.current_account'), class: 'form-control' %>
         </div>
         <div class="col-12 col-sm-5">
           <%= f.label :type %><br />
-          <%= f.select(:account_type, [[I18n.t('account.types.spending'), "spend"], [I18n.t('account.types.saving'), "save"]], {selected: "spend"}, {:class => "form-control"}) %>
+          <%= f.select(:account_type, [[t('account.types.spending'), "spend"], [t('account.types.saving'), "save"]], {selected: "spend"}, {:class => "form-control"}) %>
         </div>
       </div>
 
@@ -35,7 +35,7 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <%= f.button I18n.t('buttons.create_account.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{I18n.t('buttons.create_account.action')} ..."} %>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('buttons.close.text') %></button>
+    <%= f.button t('buttons.create_account.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('buttons.create_account.action')} ..."} %>
   </div>
 <% end %>

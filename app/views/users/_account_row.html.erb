@@ -2,23 +2,23 @@
 	<div class="row py-2">
 		
 		<div class="col-12 col-md-4 py-2">
-			<label class="d-md-none">Name</label>
+			<label class="d-md-none"><%= t('pages.setup.account.name') %></label>
 			<input type="text" name="account_name_" placeholder="Account name" class="form-control account_name" onkeyup="editAccountSelect(this); return false" id="account_name_">
 		</div>
 
 		<div class="col-12 col-sm-4 col-md-3 py-2">
-			<label class="d-md-none">Balance</label>
+			<label class="d-md-none"><%= t('pages.setup.account.balance') %></label>
 			<input type="number" name="account_balance_" step="any" placeholder="1234.56" class="form-control" id="account_balance_">
 		</div>
 
 		<div class="col-6 col-sm-3 col-md-2 py-2">
-			<label class="d-md-none">Currency</label>
+			<label class="d-md-none"><%= t('pages.setup.account.currency') %></label>
 			<%= select_tag "account_currency_", options_for_select(all_currencies(Money::Currency.table), :selected => current_user.currency), {:class => "form-control currency account_currency", "onchange" => "editAccountSelect(this); return false"} %>
 		</div>
 
 		<div class="col-6 col-sm-5 col-md-3 py-2">
-			<label class="d-md-none">Type</label>
-			<%= select_tag "account_type_", options_for_select([[I18n.t('account.types.spending'), "spend"], [I18n.t('account.types.saving'), "save"]]), {:class => "form-control account_type", "onchange" => "editAccountType(this); return false"} %>
+			<label class="d-md-none"><%= t('pages.setup.account.type') %></label>
+			<%= select_tag "account_type_", options_for_select([[t('account.types.spending'), "spend"], [t('account.types.saving'), "save"]]), {:class => "form-control account_type", "onchange" => "editAccountType(this); return false"} %>
 		</div>
 
 	</div>

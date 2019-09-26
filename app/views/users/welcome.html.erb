@@ -5,7 +5,7 @@
 
       <div class="row">
         <div class="col-12">
-          <h1 class="text-light text-center">Welcome</h1>
+          <h1 class="text-light text-center"><%= t('pages.setup.title') %></h1>
         </div>
       </div>
 
@@ -16,51 +16,51 @@
 
             <!-- progressbar -->
             <ul id="wizzard-progressbar">
-              <li class="active"><span class="d-none d-sm-block">Country</span><span class="d-sm-none">&nbsp;</li>
-              <li><span class="d-none d-sm-block">Accounts</span><span class="d-sm-none">&nbsp;</li>
-              <li><span class="d-none d-sm-block">Income</span><span class="d-sm-none">&nbsp;</li>
-              <li><span class="d-none d-sm-block">Expenses</span><span class="d-sm-none">&nbsp;</li>
+              <li class="active"><span class="d-none d-sm-block"><%= t('pages.setup.country.title') %></span><span class="d-sm-none">&nbsp;</li>
+              <li><span class="d-none d-sm-block"><%= t('pages.setup.accounts.title') %></span><span class="d-sm-none">&nbsp;</li>
+              <li><span class="d-none d-sm-block"><%= t('pages.setup.income.title') %></span><span class="d-sm-none">&nbsp;</li>
+              <li><span class="d-none d-sm-block"><%= t('pages.setup.expenses.title') %></span><span class="d-sm-none">&nbsp;</li>
             </ul>
 
             <!--fieldsets -->
             <!-- COUNTRY AND CURRENCY -->
             <fieldset class="rounded dropshadow bg-light py-2 px-2" id="setup_country">
-              <h3>Country</h3>
-              <h4>Select your country and preferred currency</h4>
+              <h3><%= t('pages.setup.country.title') %></h3>
+              <h4><%= t('pages.setup.country.hint') %></h4>
 
               <div class="row">
                 <div class="col-12 col-sm-9 col-lg-6 py-2">
-                  <label>Country</label>
+                  <label><%= t('pages.setup.country.title') %></label>
                   <%= country_select("user", "country", { include_blank: 'Select your country' }, { class: 'form-control', 'onchange' => 'changeUserCountry(this);', :autofocus => true }) %>
                 </div>
                 <div class="col-12 col-sm-3 col-lg-6 py-2">
-                  <label>Base Currency</label>
+                  <label><%= t('pages.setup.country.currency') %></label>
                   <%= select_tag "user_currency", options_for_select(all_currencies(Money::Currency.table)), {:class => "form-control currency", :include_blank => true} %>
                   <%= hidden_field_tag :timezone, id: 'timezone_input', value: '' %>
                 </div>
               </div>
 
-              <input type="button" name="next" class="btn next action-button px-4 py-2 my-5 btn-rounded btn-secondary" value="Next"/><br />
+              <input type="button" name="next" class="btn next action-button px-4 py-2 my-5 btn-rounded btn-secondary" value="<%= t('buttons.next.text') %>"/><br />
 
             </fieldset>
 
             <!-- ACCOUNTS -->
             <fieldset class="rounded dropshadow bg-light py-2 px-2" id="setup_accounts">
-              <h3 class="fs-title">Accounts</h3>
-              <h4 class="fs-subtitle">Set up your accounts</h4>
+              <h3 class="fs-title"><%= t('pages.setup.accounts.title') %></h3>
+              <h4 class="fs-subtitle"><%= t('pages.setup.accounts.hint') %></h4>
 
               <div class="row">
                 <div class="col-4 px-0 d-none d-md-block">
-                  <label>Name</label>
+                  <label><%= t('pages.setup.accounts.name') %></label>
                 </div>
                 <div class="col-3 px-0 d-none d-md-block">
-                  <label>Balance</label>
+                  <label><%= t('pages.setup.accounts.balance') %></label>
                 </div>
                 <div class="col-2 px-0 d-none d-md-block">
-                  <label>Currency</label>
+                  <label><%= t('pages.setup.accounts.currency') %></label>
                 </div>
                 <div class="col-3 px-0 d-none d-md-block">
-                  <label>Type</label>
+                  <label><%= t('pages.setup.accounts.type') %></label>
                 </div>
               </div>
 
@@ -68,26 +68,26 @@
                 <%= render partial: "account_row" %>
               </div>
 
-              <button type="button" class="btn btn-secondary btn-fieldset plusmin" data-toggle="tooltip" data-placement="top" title="Add additional account" onclick="insertAccountRow(); return false;">+</button>
-              <button type="button" id="remove_account_row" class="btn btn-secondary disabled btn-fieldset plusmin"  data-toggle="tooltip" data-placement="top" title="Remove account" onclick="removeAccountRow();" style="right: 90px;">-</button>
+              <button type="button" class="btn btn-secondary btn-fieldset plusmin" data-toggle="tooltip" data-placement="top" title="<%= t('title_hints.add_account') %>" onclick="insertAccountRow(); return false;">+</button>
+              <button type="button" id="remove_account_row" class="btn btn-secondary disabled btn-fieldset plusmin"  data-toggle="tooltip" data-placement="top" title="<%= t('title_hints.remove_account') %>" onclick="removeAccountRow();" style="right: 90px;">-</button>
 
-              <input type="button" name="previous" class="btn previous action-button px-4 py-2 my-2 btn-rounded btn-secondary" value="Previous"/>
-              <input type="button" name="next" class="btn next action-button px-4 py-2 my-5 btn-rounded btn-secondary" value="Next"/>
+              <input type="button" name="previous" class="btn previous action-button px-4 py-2 my-2 btn-rounded btn-secondary" value="<%= t('buttons.previous.text') %>"/>
+              <input type="button" name="next" class="btn next action-button px-4 py-2 my-5 btn-rounded btn-secondary" value="<%= t('buttons.next.text') %>"/>
 
             </fieldset>
 
             <!-- INCOME -->
             <fieldset class="rounded dropshadow bg-light py-2 px-2">
-              <h3 class="fs-title">Income</h3>
-              <h4 class="fs-subtitle">Describe your income</h4>
+              <h3 class="fs-title"><%= t('pages.setup.income.title') %></h3>
+              <h4 class="fs-subtitle"><%= t('pages.setup.income.hint') %></h4>
 
               <div id="simple_schedule_form" class="ladderform">
                 <div class="root">
 
                   <select name="regularity" class="form-control">
-                    <option value="none" children="">I don't have an income</option>
-                    <option value="regular" children=".path-regular">I get paid on regular intervals</option>
-                    <option value="sporadic" children="">I get paid sporadically</option>
+                    <option value="none" children=""><%= t('pages.setup.income.none') %></option>
+                    <option value="regular" children=".path-regular"><%= t('pages.setup.income.regular') %></option>
+                    <option value="sporadic" children=""><%= t('pages.setup.income.sporadic') %></option>
                   </select>
 
                   <div class="children py-2">
@@ -100,22 +100,22 @@
 
               </div>
 
-	            <input type="button" name="previous" class="btn previous action-button px-4 py-2 my-2 btn-rounded btn-secondary" value="Previous"/>
-	            <input type="button" name="next" class="btn next action-button px-4 py-2 my-5 btn-rounded btn-secondary" value="Next"/>
+	            <input type="button" name="previous" class="btn previous action-button px-4 py-2 my-2 btn-rounded btn-secondary" value="<%= t('buttons.previous.text') %>"/>
+	            <input type="button" name="next" class="btn next action-button px-4 py-2 my-5 btn-rounded btn-secondary" value="<%= t('buttons.next.text') %>"/>
             </fieldset>
 
             <!-- EXPENSES -->
             <fieldset class="rounded dropshadow bg-light py-2 px-2">
-            	<h3>Expenses</h3>
-            	<h4>Add your fixed expenses</h4>
+            	<h3><%= t('pages.setup.expenses.title') %></h3>
+            	<h4><%= t('pages.setup.expenses.hint') %></h4>
 
             	<div id="expenseRows">
 	            	<%#= render partial: "expense_row" %>
 	            </div>
 
-            	<button class="btn btn-secondary btn-fieldset plusmin" data-toggle="tooltip" data-placement="top" title="Add fixed expense" onclick="insertExpenseRow(); return false;">+</button>
+            	<button class="btn btn-secondary btn-fieldset plusmin" data-toggle="tooltip" data-placement="top" title="<%= t('title_hints.add_expense') %>" onclick="insertExpenseRow(); return false;">+</button>
 
-            	<input type="button" name="previous" class="btn previous action-button px-4 py-2 my-2 btn-rounded btn-secondary" style="margin-top: 100px!important;" value="Previous"/><br />
+            	<input type="button" name="previous" class="btn previous action-button px-4 py-2 my-2 btn-rounded btn-secondary" style="margin-top: 100px!important;" value="<%= t('buttons.previous.text') %>"/><br />
             	<input type="submit" class="btn px-4 py-2 my-2 btn-rounded btn-primary" style="font-size: 1.5em;">
             </fieldset>
 

@@ -22,8 +22,6 @@
 			<% end %>
 		</td>
 		<td style="width: 200px;">
-			<%#= f.button "Discard", :controller => "transactions", :action => "discard", :id => transaction.hash_id %>
-			<%#= button_tag 'Discard', :class => 'btn btn-danger',  data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " Discarding transaction ..."} %>
 			<%= f.submit 'Discard', :class => 'btn btn-danger' %>
 			<%= f.submit 'Approve', :class => 'btn btn-primary' %>
 		</td>

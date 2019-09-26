@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-12">
           <div class="input-group">
-            <%= f.text_field(:description, class: 'form-control', placeholder: "Search") %>
+            <%= f.text_field(:description, class: 'form-control', placeholder: t('placeholders.search')) %>
             <div class="input-group-append">
               <%= image_submit_tag("search.svg", height: "38px", width: "50px", class: "btn btn-secondary") %>
               <div style="position: relative;">
@@ -21,7 +21,7 @@
 
       <div class="row">
         <div class="col-12">
-          <button type="button" class="btn btn-link float-right" id="advanced_search_toggle" onclick="advancedFilterOptions();">advanced</button>
+          <button type="button" class="btn btn-link float-right" id="advanced_search_toggle" onclick="advancedFilterOptions();"><%= t('buttons.advanced.text') %></button>
         </div>
       </div>
 
@@ -31,12 +31,12 @@
           <div class="col-12 py-2">
             <%= f.label :period %>
             <%= f.select(:period, [
-              ["Any", "any"],
-              ["Today", "today"],
-              ["Past 7 days", "7days"],
-              ["Past 30 days", "30days"],
+              [t('filterrific.period.any'), "any"],
+              [t('filterrific.period.today'), "today"],
+              [t('filterrific.period.past_week'), "7days"],
+              [t('filterrific.period.past_month'), "30days"],
               #["Current period", "period"],
-              ["Custom range ...", "custom"]
+              [t('filterrific.period.custom'), "custom"]
               ], {}, { :class => "form-control", "onchange" => "changeFilterPeriod(this.value)" }) %>
           </div>
         </div>
@@ -143,7 +143,7 @@
               <%= f.text_field(:include_children,
               "data-provide" => "slider",
               "data-slider-ticks" => "[1, 2, 3]",
-              "data-slider-ticks-labels" => '["Parent", "Child", "All"]',
+              "data-slider-ticks-labels" => '["' + t('filterrific.granularity.parent') + '", "' + t('filterrific.granularity.child') + '", "' + t('filterrific.granularity.all') + '"]',
               "data-slider-ticks-snap-bounds" => "30",
               "data-slider-tooltip" => "hide",
               "data-slider-value" => include_children_slider_value
@@ -156,14 +156,14 @@
           <div class="col-12">
             <%= f.label :sort_by %>
             <%= f.select(:sorted_by, [
-              ["Created (desc)", "created_at_desc"], 
-              ["Created (asc)", "created_at_asc"], 
-              ["Description (desc)", "description_desc"], 
-              ["Description (asc)", "description_asc"], 
-              ["Amount (desc)", "amount_desc"],
-              ["Amount (asc)", "amount_asc"],
-              #["Category (desc)", "category_desc"],
-              #["Category (asc)", "category_asc"]
+              [t('filterrific.sort_by.created_desc'), "created_at_desc"], 
+              [t('filterrific.sort_by.created_asc'), "created_at_asc"], 
+              [t('filterrific.sort_by.description_desc'), "description_desc"], 
+              [t('filterrific.sort_by.description_asc'), "description_asc"], 
+              [t('filterrific.sort_by.amount_desc'), "amount_desc"],
+              [t('filterrific.sort_by.amount_asc'), "amount_asc"],
+              #[t('filterrific.sort_by.category_desc'), "category_desc"],
+              #[t('filterrific.sort_by.category_asc'), "category_asc"]
               ], {}, { :class => 'form-control' }) %>
           </div>
         </div>
@@ -173,7 +173,7 @@
         <div class="row">
           <div class="col-12">
             <%= link_to(
-              'Reset filters',
+              t('buttons.reset_filters.text'),
               reset_filterrific_url,
               "onclick" => "reloadPageAfterClearFilters();"
             ) %>

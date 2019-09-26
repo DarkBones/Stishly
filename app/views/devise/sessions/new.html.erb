@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12 py-2">
-        <h3><%= I18n.t('buttons.sign_in.text') %></h3>
+        <h3><%= t('buttons.sign_in.text') %></h3>
       </div>
     </div>
 
@@ -36,14 +36,14 @@
         <div class="row">
           <div class="col-6 py-2">
             <div class="checkbox">
-              <label class="checkbox-container"> Remember me
+              <label class="checkbox-container"> <%= t('buttons.remember_me.text') %>
                 <%= f.check_box :remember_me %>
                 <span class="checkmark"></span>
               </label>
             </div>
           </div>
           <div class="col-6 py-2">
-            <%= link_to "Forgot password?", new_password_path(resource_name), class: 'float-right' %>
+            <%= link_to t('buttons.forgot_password.text'), new_password_path(resource_name), class: 'float-right' %>
           </div>
         </div>
 
@@ -51,7 +51,7 @@
 
         <div class="row">
           <div class="col-12 py-2">
-            <%= f.button I18n.t('buttons.sign_in.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " " + I18n.t('buttons.sign_in.action') + " ..."} %>
+            <%= f.button t('buttons.sign_in.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " " + t('buttons.sign_in.action') + " ..."} %>
           </div>
         </div>
 
@@ -62,10 +62,10 @@
           <div class="col-12 py-2">
             <label>&#8203</label>
             <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-block btn-social btn-facebook", method: :post do %>
-               <span class="fa fa-facebook"></span> <%= I18n.t('buttons.sign_in_facebook.text') %>
+               <span class="fa fa-facebook"></span> <%= t('buttons.sign_in_facebook.text') %>
             <% end %>
             <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-block btn-social btn-google", method: :post do %>
-               <span class="fa fa-google"></span> <%= I18n.t('buttons.sign_in_google.text') %>
+               <span class="fa fa-google"></span> <%= t('buttons.sign_in_google.text') %>
             <% end %>
           </div>
         </div>

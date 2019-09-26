@@ -18,10 +18,14 @@ class AccountDecorator < Draper::Decorator
   end
 
   def short_name
-    if model.name.length + model.balance.to_s.length > 30
-      model.name[0.. 20 - model.balance.to_s.length] + "..."
+    if model.persisted?
+      if model.name.length + model.balance.to_s.length > 30
+        model.name[0.. 20 - model.balance.to_s.length] + "..."
+      else
+        model.name
+      end
     else
-      model.name
+      I18n.t('account.all')
     end
   end
 

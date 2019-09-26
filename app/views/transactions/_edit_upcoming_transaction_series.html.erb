@@ -10,6 +10,6 @@
 
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <%= f.button 'Save Transaction', :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " Updating series ..."} %>
+    <%= f.button t('buttons.edit_upcoming_series.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('buttons.edit_upcoming_series.action')} ..."} %>
   </div>
 <% end %>

@@ -4,18 +4,18 @@
   <div class="row">
     <div class="col-12">
 
-    	<h2>Upcoming Transactions</h2>
-    	<p>Transactions scheduled between now and <%= User.format_date(@date + 1.day, true) %></p>
+    	<h2><%= t('pages.upcoming.title') %></h2>
+    	<p><%= t('pages.upcoming.hint') %> <%= User.format_date(@date + 1.day, true) %></p>
 
       <div id="schedules_tables">
       	<% if @transactions.length == 0 %>
-      		<p>No transactions scheduled for now</p>
+      		<p><%= t('pages.upcoming.no_scheduled') %></p>
       	<% else %>
       		<table>
-      			<th>Date</th>
-      			<th>Schedule</th>
-      			<th>Description</th>
-      			<th>Amount</th>
+      			<th><%= t('pages.upcoming.date') %></th>
+      			<th><%= t('pages.upcoming.schedule') %></th>
+      			<th><%= t('pages.upcoming.description') %></th>
+      			<th><%= t('pages.upcoming.amount') %></th>
       			<th></th>
   	    		<%= render :partial => "upcoming_transactions_list", :collection => @transactions, :as => :transaction %>
   	    	</table>

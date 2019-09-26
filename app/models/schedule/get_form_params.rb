@@ -16,8 +16,13 @@ private
       type = determine_type(schedule) # advanced / simple
       name = schedule.name
       period = period(schedule) # monthly / weekly / etc
-      period_txt = schedule.period
-      period_txt ||= "months"
+
+      unless schedule.period.nil?
+        period_txt = I18n.t('schedule.periods_quant.' + schedule.period)
+      else
+        period_txt = I18n.t('schedule.periods_quant.months')
+      end
+
       start_date = start_date(schedule)
       period_num = period_num(schedule)
       days_month1 = days_month1(schedule)

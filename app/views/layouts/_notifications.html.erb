@@ -3,11 +3,11 @@
 	<% if notifications.length > 0 %>
 		<%= render notifications %>
 	<% else %>
-		<p class="px-2">No notifications</p>
+		<p class="px-2"><%= t('notifications.no_notifications') %></p>
 	<% end %>
 	<% if current_user.notifications.length > APP_CONFIG['ui']['notifications']['page_length'] %>
 		<li class="nav-item">
-			<%= link_to "View all", notifications_path %>
+			<%= link_to t('notifications.view_all'), notifications_path %>
 		</li>
 	<% end %>
 </ul>

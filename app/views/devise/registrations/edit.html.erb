@@ -4,7 +4,7 @@
 
     <div class="row">
       <div class="col-12">
-        <h2><%= I18n.t('pages.edit_user_account.title') %></h2>
+        <h2><%= t('pages.edit_user_account.title') %></h2>
       </div>
     </div>
 
@@ -42,7 +42,7 @@
 
       <div class="row">
         <div class="col-12">
-          <p><%= I18n.t('pages.edit_user_account.messages.password_fields') %></p>
+          <p><%= t('pages.edit_user_account.messages.password_fields') %></p>
         </div>
       </div>
 
@@ -64,7 +64,7 @@
 
       <div class="row">
         <div class="col-12 pt-2">
-          <p><%= I18n.t('pages.edit_user_account.messages.current_password') %></p>
+          <p><%= t('pages.edit_user_account.messages.current_password') %></p>
         </div>
       </div>
 
@@ -77,20 +77,20 @@
 
       <div class="row">
         <div class="col-12 py-2">
-          <%= f.button I18n.t('buttons.update_user_account.text'), :class => 'btn btn-secondary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " " + I18n.t('buttons.update_user_account.action') + " ..."} %>
+          <%= f.button t('buttons.update_user_account.text'), :class => 'btn btn-secondary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " " + t('buttons.update_user_account.action') + " ..."} %>
         </div>
       </div>
     <% end %>
 
     <div class="row py-3">
       <div class="col-12">
-        <h2><%= I18n.t('pages.edit_user_account.messages.delete_account_title') %></h2>
+        <h2><%= t('pages.edit_user_account.messages.delete_account_title') %></h2>
       </div>
     </div>
 
     <div class="row">
       <div class="col-12">
-        <%= button_to I18n.t('buttons.destroy_user_account.text'), registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button right' %>
+        <%= button_to t('buttons.destroy_user_account.text'), registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button right' %>
       </div>
     </div>
           

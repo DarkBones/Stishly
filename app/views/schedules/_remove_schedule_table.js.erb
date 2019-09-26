@@ -3,5 +3,5 @@ $("#schedule_" + "<%= schedule.hash_id %>").remove();
 
 if ($("table#schedules_<%= remove_from %> tr").length == 1) {
 	$("table#schedules_<%= remove_from %>").remove();
-	$("#<%= remove_from %>-schedules").append("<p><%= I18n.t('schedules.no_' + remove_from + '_schedules') %></p>");
+	$("#<%= remove_from %>-schedules").append("<p><%= t('schedules.no_' + remove_from + '_schedules') %></p>");
 }

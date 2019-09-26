@@ -1,11 +1,9 @@
-<%= render "categories/confirmation" %>
-
 <div class="container">
 	<div class="row">
 		<div class="col-12">
 			<h2>
-				Categories
-    	<button type="button" class="float-right btn btn-link" data-toggle="tooltip" data-placement="top" title="Add new category" onclick="insertNewCategoryForm(); return false;">New</button>
+				<%= t('pages.categories.title') %>
+    	<button type="button" class="float-right btn btn-link" data-toggle="tooltip" data-placement="top" title="<%= t('title_hints.create_category') %>" onclick="insertNewCategoryForm(); return false;"><%= t('buttons.new_category.text') %></button>
     	</h2>
 		</div>
 	</div>

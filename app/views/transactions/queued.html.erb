@@ -2,26 +2,26 @@
   <div class="row">
     <div class="col-12">
 
-			<h2>Queued Transactions</h2>
+			<h2><%= t('pages.queued.title') %></h2>
 			<% if @transactions.length == 0 %>
-				<p>No queued transactions</p>
+				<p><%= t('pages.queued.no_queued') %></p>
 			<% else %>
 				<table>
 					<tr>
 						<th>
-							Date
+							<%= t('pages.queued.date') %>
 						</th>
 						<th>
-							Description
+							<%= t('pages.queued.description') %>
 						</th>
 						<th>
-							Account
+							<%= t('pages.queued.account') %>
 						</th>
 						<th>
-							Currency
+							<%= t('pages.queued.currency') %>
 						</th>
 						<th>
-							Amount
+							<%= t('pages.queued.amount') %>
 						</th>
 						<th>
 						</th>

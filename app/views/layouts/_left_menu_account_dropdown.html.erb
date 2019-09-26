@@ -4,7 +4,7 @@
     <div class="card-header" id="accountDropdown">
       <a class="btn btn-link collapsed col-12 clickable" data-toggle="collapse" data-target="#collapseAccuntDropdown" id="accountDropdownToggle">
         <span class="float-left">
-          <h5>Account<%#= current_user.first_name if Rails.env.test? == false %></h5>
+          <h5><%= current_user.first_name if Rails.env.test? == false %></h5>
         </span>
       </a>
     </div>

@@ -2,20 +2,20 @@
   <% if defined?(paused) && paused == true %>
     <% table_id = 'schedules_paused' %>
     <% schedules = @paused_schedules %>
-    <% th_run_date = 'Paused until' %>
+    <% th_run_date = t('schedule.table.paused_until') %>
   <% else %>
     <% table_id = 'schedules_active' %>
     <% schedules = @schedules %>
-    <% th_run_date = 'Next run date' %>
+    <% th_run_date = t('schedule.table.next_run_date') %>
   <% end %>
 <% else %>
   <% table_id = 'schedules_inactive' %>
   <% schedules = @inactive_schedules %>
-  <% th_run_date = 'Last run date' %>
+  <% th_run_date = t('schedule.table.last_run_date') %>
 <% end %>
 
 <table id="<%= table_id %>">
-  <th>Name</th>
+  <th><%= t('schedule.table.name') %></th>
   <th><%= th_run_date %></th>
   <th></th>
   <%= render schedules if defined?(schedules) && !schedules.nil? %>

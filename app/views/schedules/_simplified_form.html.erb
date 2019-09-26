@@ -17,25 +17,25 @@
       <% else %>
         <select name="category<%= suff %>" class="form-control">
           <option disabled selected value> -- </option>
-          <option value="rent" children=".path-schedule">Rent</option>
-          <option value="mortgage" children=".path-schedule">Mortgage</option>
-          <option value="electricity" children=".path-schedule">Electricity</option>
-          <option value="water" children=".path-schedule">Water</option>
-          <option value="vehicle" children=".path-schedule">Car loan</option>
-          <option value="vehicle_insurance" children=".path-schedule">Car Insurance</option>
-          <option value="health_insurance" children=".path-schedule">Health Insurance</option>
-          <option value="house_insurance" children=".path-schedule">Property Insurance</option>
-          <option value="phone" children=".path-schedule">Phone</option>
-          <option value="internet" children=".path-schedule">Internet</option>
-          <option value="subscription" children=".path-schedule">Subscriptions</option>
-          <option value="tv" children=".path-schedule">Cable</option>
-          <option value="lending" children=".path-schedule">Debt payments</option>
-          <option value="other" children=".path-schedule, .path-other-category">Other ...</option>
+          <option value="rent" children=".path-schedule"><%= t('schedule_form.categories.rent') %></option>
+          <option value="mortgage" children=".path-schedule"><%= t('schedule_form.categories.mortgage') %></option>
+          <option value="electricity" children=".path-schedule"><%= t('schedule_form.categories.electricity') %></option>
+          <option value="water" children=".path-schedule"><%= t('schedule_form.categories.water') %></option>
+          <option value="vehicle" children=".path-schedule"><%= t('schedule_form.categories.car_loan') %></option>
+          <option value="vehicle_insurance" children=".path-schedule"><%= t('schedule_form.categories.car_insurance') %></option>
+          <option value="health_insurance" children=".path-schedule"><%= t('schedule_form.categories.health_insurance') %></option>
+          <option value="house_insurance" children=".path-schedule"><%= t('schedule_form.categories.property_insurance') %></option>
+          <option value="phone" children=".path-schedule"><%= t('schedule_form.categories.phone') %></option>
+          <option value="internet" children=".path-schedule"><%= t('schedule_form.categories.internet') %></option>
+          <option value="subscription" children=".path-schedule"><%= t('schedule_form.categories.subscriptions') %></option>
+          <option value="tv" children=".path-schedule"><%= t('schedule_form.categories.cable') %></option>
+          <option value="lending" children=".path-schedule"><%= t('schedule_form.categories.debt_payments') %></option>
+          <option value="other" children=".path-schedule, .path-other-category"><%= t('schedule_form.categories.other') %></option>
         </select>
 
         <div class="children py-2">
           <div class="hidden path-other-category">
-            <input type="text" name="category_name" class="form-control" placeholder="Fixed expense name">
+            <input type="text" name="category_name" class="form-control" placeholder="<%= t('placeholders.fixed_expense') %>">
           </div>
 
           <div class="hidden path-schedule py-2">
@@ -43,25 +43,25 @@
       <% end %>
   <% end %>
 
-  <p>every</p>
+  <p><%= t('schedule_form.sentence.every') %></p>
   <input type="number" class="form-control pos_n" id="periodNum<%= suff %>" value="1" step="1" name="periodNum<%= suff %>">
   <select name="period<%= suff %>" class="form-control">
-    <option value="months" children=".path-months, .path-amount">months</option>
-    <option value="weeks" children=".path-weeks, .path-amount">weeks</option>
-    <option value="days" children=".path-days, .path-amount">days</option>
+    <option value="months" children=".path-months, .path-amount"><%= t('schedule_form.sentence.months') %></option>
+    <option value="weeks" children=".path-weeks, .path-amount"><%= t('schedule_form.sentence.weeks') %></option>
+    <option value="days" children=".path-days, .path-amount"><%= t('schedule_form.sentence.days') %></option>
   </select>
 
 
   <div class="children">
     <div class="hidden ignore-ladder path-months path-weeks path-days" id="start_date">
-      <p>starting on</p>
+      <p><%= t('schedule_form.sentence.starting_on') %></p>
       <input name="start_date<%= suff %>" class="form-control datepicker">
     </div>
     <div class="path-months">
-      <p>on the</p>
+      <p><%= t('schedule_form.sentence.on_the') %></p>
       <select name="month_day<%= suff %>" class="form-control" id="month_day<%= suff %>">
-        <option value="1">first</option>
-        <option value="last">last</option>
+        <option value="1"><%= t('schedule_form.sentence.first') %></option>
+        <option value="last"><%= t('schedule_form.sentence.last') %></option>
         <option value="2">2nd</option>
         <option value="3">3rd</option>
         <option value="4">4th</option>
@@ -92,36 +92,36 @@
       </select>
       <select name="month_day2<%= suff %>" class="form-control" id="month_day2<%= suff %>">
         <option disabled selected value> -- </option>
-        <option value="day" children=".path-months-except-wday, .path-amount">day</option>
-        <option value="sun" children="">Sunday</option>
-        <option value="mon" children="">Monday</option>
-        <option value="tue" children="">Tuesday</option>
-        <option value="wed" children="">Wednesday</option>
-        <option value="thu" children="">Thursday</option>
-        <option value="fri" children="">Friday</option>
-        <option value="sat" children="">Saturday</option>
+        <option value="day" children=".path-months-except-wday, .path-amount"><%= t('schedule.weekdays.day') %></option>
+        <option value="sun" children=""><%= t('schedule.weekdays.sunday') %></option>
+        <option value="mon" children=""><%= t('schedule.weekdays.monday') %></option>
+        <option value="tue" children=""><%= t('schedule.weekdays.tuesday') %></option>
+        <option value="wed" children=""><%= t('schedule.weekdays.wednesday') %></option>
+        <option value="thu" children=""><%= t('schedule.weekdays.thursday') %></option>
+        <option value="fri" children=""><%= t('schedule.weekdays.friday') %></option>
+        <option value="sat" children=""><%= t('schedule.weekdays.saturday') %></option>
       </select>
 
       <div class="children">
         <div class="hidden path-months-except-wday">
           <select name="month_exclude_wday<%= suff %>" class="form-control">
-            <option value="none" children=".path-amount">without exceptions</option>
-            <option value="weekends" children=".path-months-except-met, .path-amount">except on weekends</option>
-            <option value="except-sun" children=".path-months-except-met, .path-amount">except on Sundays</option>
-            <option value="except-mon" children=".path-months-except-met, .path-amount">except on Mondays</option>
-            <option value="except-tue" children=".path-months-except-met, .path-amount">except on Tuesdays</option>
-            <option value="except-wed" children=".path-months-except-met, .path-amount">except on Wednesdays</option>
-            <option value="except-thu" children=".path-months-except-met, .path-amount">except on Thursdays</option>
-            <option value="except-fri" children=".path-months-except-met, .path-amount">except on Fridays</option>
-            <option value="except-sat" children=".path-months-except-met, .path-amount">except on Saturdays</option>
+            <option value="none" children=".path-amount"><%= t('schedule.weekdays.without_exceptions') %></option>
+            <option value="weekends" children=".path-months-except-met, .path-amount"><%= t('schedule.weekdays.except_on') %> <%= t('schedule_form.sentence.weekends') %></option>
+            <option value="except-sun" children=".path-months-except-met, .path-amount"><%= t('schedule.weekdays.except_on') %> <%= t('schedule_form.sentence.sundays') %></option>
+            <option value="except-mon" children=".path-months-except-met, .path-amount"><%= t('schedule.weekdays.except_on') %> <%= t('schedule_form.sentence.mondays') %></option>
+            <option value="except-tue" children=".path-months-except-met, .path-amount"><%= t('schedule.weekdays.except_on') %> <%= t('schedule_form.sentence.tuesdays') %></option>
+            <option value="except-wed" children=".path-months-except-met, .path-amount"><%= t('schedule.weekdays.except_on') %> <%= t('schedule_form.sentence.wednesdays') %></option>
+            <option value="except-thu" children=".path-months-except-met, .path-amount"><%= t('schedule.weekdays.except_on') %> <%= t('schedule_form.sentence.thursdays') %></option>
+            <option value="except-fri" children=".path-months-except-met, .path-amount"><%= t('schedule.weekdays.except_on') %> <%= t('schedule_form.sentence.fridays') %></option>
+            <option value="except-sat" children=".path-months-except-met, .path-amount"><%= t('schedule.weekdays.except_on') %> <%= t('schedule_form.sentence.saturdays') %></option>
           </select>
 
           <div class="children py-2">
             <div class="hidden path-months-except-met">
-              <p>, then <%= type == "income" ? "I get paid" : "run" %> on the</p>
+              <p><%= t('schedule_form.sentence.then') %> <%= type == "income" ? t('schedule_form.sentence.i_get_paid') : t('schedule_form.sentence.run') %> <%= t('schedule_form.sentence.on_the') %></p>
               <select name="month_exclude_met<%= suff %>" class="form-control">
-                <option value="previous">previous</option>
-                <option value="next">next</option>
+                <option value="previous"><%= t('schedule_form.sentence.previous') %></option>
+                <option value="next"><%= t('schedule_form.sentence.next') %></option>
               </select>
               <select name="month_exclude_met_day<%= suff %>" class="form-control">
                 <option value="sun">Sunday</option>
@@ -144,34 +144,34 @@
       <p>on</p>
       <select name="week_day<%= suff %>" class="form-control">
         <option disabled selected value> -- </option>
-        <option value="sun">Sunday</option>
-        <option value="mon">Monday</option>
-        <option value="tue">Tuesday</option>
-        <option value="wed">Wednesday</option>
-        <option value="thu">Thursday</option>
-        <option value="fri">Friday</option>
-        <option value="sat">Saturday</option>
+        <option value="sun"><%= t('schedule.weekdays.sunday') %></option>
+        <option value="mon"><%= t('schedule.weekdays.monday') %></option>
+        <option value="tue"><%= t('schedule.weekdays.tuesday') %></option>
+        <option value="wed"><%= t('schedule.weekdays.wednesday') %></option>
+        <option value="thu"><%= t('schedule.weekdays.thursday') %></option>
+        <option value="fri"><%= t('schedule.weekdays.friday') %></option>
+        <option value="sat"><%= t('schedule.weekdays.saturday') %></option>
       </select>
     </div>
 
     <% if type == "income" || type == "fixed_expense" %>
       <div class="path-amount py-2">
-        <%= hint(I18n.t('hints.fixed_amount.title'), I18n.t('hints.fixed_amount.body')) %>
+        <%= hint(t('hints.fixed_amount.title'), t('hints.fixed_amount.body')) %>
         <select name="fixed_amount<%= suff %>" class="form-control">
-          <option value="fixed" children=".path-fixed-amount">Fixed amount</option>
-          <option value="varied" children=".path-varied-amount">the amount varies</option>
+          <option value="fixed" children=".path-fixed-amount"><%= t('schedule_form.sentence.fixed_amount') %></option>
+          <option value="varied" children=".path-varied-amount"><%= t('schedule_form.sentence.amount_varies') %></option>
         </select>
 
         <div class="children py-2">
 
           <div class="path-fixed-amount">
             <%= select_tag "currency#{suff}", options_for_select(all_currencies(Money::Currency.table), :selected => current_user.currency), {:class => "form-control currency"} %>
-            <input type="number" step="any" class="form-control" placeholder="amount" name="amount<%= suff %>"><br />
+            <input type="number" step="any" class="form-control" placeholder="<%= t('placeholders.amount') %>" name="amount<%= suff %>"><br />
             <%= select_tag "account#{suff}", options_for_select(user_accounts_array),{:class => "form-control account_select my-2"} %>
           </div>
           <div class="hidden path-varied-amount">
             <%= select_tag "currency#{suff}", options_for_select(all_currencies(Money::Currency.table), :selected => current_user.currency), {:class => "form-control currency"} %>
-            <input type="number" step="any" class="form-control" placeholder="Average amount" name="average_amount<%= suff %>"><br />
+            <input type="number" step="any" class="form-control" placeholder="<%= t('placeholders.average_amount') %>" name="average_amount<%= suff %>"><br />
             <%= select_tag "account_average#{suff}", options_for_select(user_accounts_array),{:class => "form-control account_select my-2"} %>
           </div>
           

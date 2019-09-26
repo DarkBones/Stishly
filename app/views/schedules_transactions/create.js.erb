@@ -1,5 +1,5 @@
 <% 
-message = I18n.t("sch_transactions.confirmations.confirmed") 
+message = t("sch_transactions.confirmations.confirmed") 
 message.sub! "{num}", @number.to_s
 message.sub! "{transactions}", @transaction
 message.sub! "{schedule}", @schedule
