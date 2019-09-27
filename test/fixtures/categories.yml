@@ -18,77 +18,66 @@ bas_date_2:
   :id: 2
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 1
 bas_cinema_3:
   :id: 3
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 2
 bas_hobbies_3:
   :id: 3
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 1
 bas_holiday_4:
   :id: 4
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 1
 bas_lottery_gambling_5:
   :id: 5
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 1
 bas_social_6:
   :id: 6
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 1
 bas_software_7:
   :id: 7
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 1
 bas_sport_events_8:
   :id: 8
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 1
 bas_subscriptions_9:
   :id: 9
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 1
 bas_tv_10:
   :id: 10
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 1
 bas_video_games_11:
   :id: 11
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 1
 bas_food_drinks_2:
@@ -101,35 +90,30 @@ bas_bars_pubs_3:
   :id: 3
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 2
 bas_fast_food_4:
   :id: 4
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 2
 bas_groceries_5:
   :id: 5
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 2
 bas_order_takeout_6:
   :id: 6
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 2
 bas_restaurant_7:
   :id: 7
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 2
 bas_health_3:
@@ -190,77 +174,66 @@ sab_date_28:
   :id: 28
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 27
 sab_cinema_29:
   :id: 29
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 28
 sab_hobbies_29:
   :id: 29
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 27
 sab_holiday_30:
   :id: 30
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 27
 sab_lottery_gambling_31:
   :id: 31
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 27
 sab_social_32:
   :id: 32
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 27
 sab_software_33:
   :id: 33
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 27
 sab_sport_events_34:
   :id: 34
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 27
 sab_subscriptions_35:
   :id: 35
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 27
 sab_tv_36:
   :id: 36
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 27
 sab_video_games_37:
   :id: 37
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 27
 sab_food_drinks_28:
@@ -273,35 +246,30 @@ sab_bars_pubs_29:
   :id: 29
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 28
 sab_fast_food_30:
   :id: 30
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 28
 sab_groceries_31:
   :id: 31
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 28
 sab_order_takeout_32:
   :id: 32
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 28
 sab_restaurant_33:
   :id: 33
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 28
 sab_health_29:
@@ -362,77 +330,66 @@ new_date_54:
   :id: 54
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 53
 new_cinema_55:
   :id: 55
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 54
 new_hobbies_55:
   :id: 55
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 53
 new_holiday_56:
   :id: 56
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 53
 new_lottery_gambling_57:
   :id: 57
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 53
 new_social_58:
   :id: 58
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 53
 new_software_59:
   :id: 59
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 53
 new_sport_events_60:
   :id: 60
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 53
 new_subscriptions_61:
   :id: 61
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 53
 new_tv_62:
   :id: 62
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 53
 new_video_games_63:
   :id: 63
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 53
 new_food_drinks_54:
@@ -445,35 +402,30 @@ new_bars_pubs_55:
   :id: 55
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 54
 new_fast_food_56:
   :id: 56
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 54
 new_groceries_57:
   :id: 57
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 54
 new_order_takeout_58:
   :id: 58
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 54
 new_restaurant_59:
   :id: 59
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 54
 new_health_55:
@@ -534,77 +486,66 @@ new_free_date_80:
   :id: 80
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 79
 new_free_cinema_81:
   :id: 81
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 80
 new_free_hobbies_81:
   :id: 81
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 79
 new_free_holiday_82:
   :id: 82
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 79
 new_free_lottery_gambling_83:
   :id: 83
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 79
 new_free_social_84:
   :id: 84
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 79
 new_free_software_85:
   :id: 85
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 79
 new_free_sport_events_86:
   :id: 86
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 79
 new_free_subscriptions_87:
   :id: 87
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 79
 new_free_tv_88:
   :id: 88
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 79
 new_free_video_games_89:
   :id: 89
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 79
 new_free_food_drinks_80:
@@ -617,35 +558,30 @@ new_free_bars_pubs_81:
   :id: 81
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 80
 new_free_fast_food_82:
   :id: 82
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 80
 new_free_groceries_83:
   :id: 83
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 80
 new_free_order_takeout_84:
   :id: 84
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 80
 new_free_restaurant_85:
   :id: 85
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 80
 new_free_health_81:
@@ -706,77 +642,66 @@ transactions_test_date_106:
   :id: 106
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 105
 transactions_test_cinema_107:
   :id: 107
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 106
 transactions_test_hobbies_107:
   :id: 107
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 105
 transactions_test_holiday_108:
   :id: 108
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 105
 transactions_test_lottery_gambling_109:
   :id: 109
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 105
 transactions_test_social_110:
   :id: 110
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 105
 transactions_test_software_111:
   :id: 111
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 105
 transactions_test_sport_events_112:
   :id: 112
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 105
 transactions_test_subscriptions_113:
   :id: 113
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 105
 transactions_test_tv_114:
   :id: 114
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 105
 transactions_test_video_games_115:
   :id: 115
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 105
 transactions_test_food_drinks_106:
@@ -789,35 +714,30 @@ transactions_test_bars_pubs_107:
   :id: 107
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 106
 transactions_test_fast_food_108:
   :id: 108
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 106
 transactions_test_groceries_109:
   :id: 109
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 106
 transactions_test_order_takeout_110:
   :id: 110
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 106
 transactions_test_restaurant_111:
   :id: 111
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 106
 transactions_test_health_107:
@@ -878,77 +798,66 @@ currency_test_date_132:
   :id: 132
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 131
 currency_test_cinema_133:
   :id: 133
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 132
 currency_test_hobbies_133:
   :id: 133
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 131
 currency_test_holiday_134:
   :id: 134
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 131
 currency_test_lottery_gambling_135:
   :id: 135
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 131
 currency_test_social_136:
   :id: 136
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 131
 currency_test_software_137:
   :id: 137
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 131
 currency_test_sport_events_138:
   :id: 138
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 131
 currency_test_subscriptions_139:
   :id: 139
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 131
 currency_test_tv_140:
   :id: 140
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 131
 currency_test_video_games_141:
   :id: 141
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 131
 currency_test_food_drinks_132:
@@ -961,35 +870,30 @@ currency_test_bars_pubs_133:
   :id: 133
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 132
 currency_test_fast_food_134:
   :id: 134
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 132
 currency_test_groceries_135:
   :id: 135
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 132
 currency_test_order_takeout_136:
   :id: 136
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 132
 currency_test_restaurant_137:
   :id: 137
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 132
 currency_test_health_133:
@@ -1050,77 +954,66 @@ endless_page_date_158:
   :id: 158
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 157
 endless_page_cinema_159:
   :id: 159
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 158
 endless_page_hobbies_159:
   :id: 159
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 157
 endless_page_holiday_160:
   :id: 160
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 157
 endless_page_lottery_gambling_161:
   :id: 161
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 157
 endless_page_social_162:
   :id: 162
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 157
 endless_page_software_163:
   :id: 163
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 157
 endless_page_sport_events_164:
   :id: 164
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 157
 endless_page_subscriptions_165:
   :id: 165
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 157
 endless_page_tv_166:
   :id: 166
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 157
 endless_page_video_games_167:
   :id: 167
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 157
 endless_page_food_drinks_158:
@@ -1133,35 +1026,30 @@ endless_page_bars_pubs_159:
   :id: 159
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 158
 endless_page_fast_food_160:
   :id: 160
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 158
 endless_page_groceries_161:
   :id: 161
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 158
 endless_page_order_takeout_162:
   :id: 162
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 158
 endless_page_restaurant_163:
   :id: 163
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 158
 endless_page_health_159:
@@ -1222,77 +1110,66 @@ destroy_date_184:
   :id: 184
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 183
 destroy_cinema_185:
   :id: 185
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 184
 destroy_hobbies_185:
   :id: 185
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 183
 destroy_holiday_186:
   :id: 186
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 183
 destroy_lottery_gambling_187:
   :id: 187
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 183
 destroy_social_188:
   :id: 188
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 183
 destroy_software_189:
   :id: 189
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 183
 destroy_sport_events_190:
   :id: 190
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 183
 destroy_subscriptions_191:
   :id: 191
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 183
 destroy_tv_192:
   :id: 192
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 183
 destroy_video_games_193:
   :id: 193
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 183
 destroy_food_drinks_184:
@@ -1305,35 +1182,30 @@ destroy_bars_pubs_185:
   :id: 185
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 184
 destroy_fast_food_186:
   :id: 186
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 184
 destroy_groceries_187:
   :id: 187
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 184
 destroy_order_takeout_188:
   :id: 188
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 184
 destroy_restaurant_189:
   :id: 189
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 184
 destroy_health_185:
@@ -1394,77 +1266,66 @@ transactions_date_210:
   :id: 210
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 209
 transactions_cinema_211:
   :id: 211
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 210
 transactions_hobbies_211:
   :id: 211
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 209
 transactions_holiday_212:
   :id: 212
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 209
 transactions_lottery_gambling_213:
   :id: 213
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 209
 transactions_social_214:
   :id: 214
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 209
 transactions_software_215:
   :id: 215
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 209
 transactions_sport_events_216:
   :id: 216
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 209
 transactions_subscriptions_217:
   :id: 217
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 209
 transactions_tv_218:
   :id: 218
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 209
 transactions_video_games_219:
   :id: 219
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 209
 transactions_food_drinks_210:
@@ -1477,35 +1338,30 @@ transactions_bars_pubs_211:
   :id: 211
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 210
 transactions_fast_food_212:
   :id: 212
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 210
 transactions_groceries_213:
   :id: 213
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 210
 transactions_order_takeout_214:
   :id: 214
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 210
 transactions_restaurant_215:
   :id: 215
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 210
 transactions_health_211:
@@ -1566,77 +1422,66 @@ schedules_date_236:
   :id: 236
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 235
 schedules_cinema_237:
   :id: 237
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 236
 schedules_hobbies_237:
   :id: 237
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 235
 schedules_holiday_238:
   :id: 238
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 235
 schedules_lottery_gambling_239:
   :id: 239
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 235
 schedules_social_240:
   :id: 240
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 235
 schedules_software_241:
   :id: 241
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 235
 schedules_sport_events_242:
   :id: 242
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 235
 schedules_subscriptions_243:
   :id: 243
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 235
 schedules_tv_244:
   :id: 244
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 235
 schedules_video_games_245:
   :id: 245
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 235
 schedules_food_drinks_236:
@@ -1649,35 +1494,30 @@ schedules_bars_pubs_237:
   :id: 237
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 236
 schedules_fast_food_238:
   :id: 238
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 236
 schedules_groceries_239:
   :id: 239
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 236
 schedules_order_takeout_240:
   :id: 240
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 236
 schedules_restaurant_241:
   :id: 241
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 236
 schedules_health_237:
@@ -1738,77 +1578,66 @@ transaction_search_date_262:
   :id: 262
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 261
 transaction_search_cinema_263:
   :id: 263
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 262
 transaction_search_hobbies_263:
   :id: 263
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 261
 transaction_search_holiday_264:
   :id: 264
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 261
 transaction_search_lottery_gambling_265:
   :id: 265
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 261
 transaction_search_social_266:
   :id: 266
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 261
 transaction_search_software_267:
   :id: 267
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 261
 transaction_search_sport_events_268:
   :id: 268
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 261
 transaction_search_subscriptions_269:
   :id: 269
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 261
 transaction_search_tv_270:
   :id: 270
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 261
 transaction_search_video_games_271:
   :id: 271
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 261
 transaction_search_food_drinks_262:
@@ -1821,35 +1650,30 @@ transaction_search_bars_pubs_263:
   :id: 263
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 262
 transaction_search_fast_food_264:
   :id: 264
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 262
 transaction_search_groceries_265:
   :id: 265
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 262
 transaction_search_order_takeout_266:
   :id: 266
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 262
 transaction_search_restaurant_267:
   :id: 267
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 262
 transaction_search_health_263:
@@ -1910,77 +1734,66 @@ schedules_overlap_date_288:
   :id: 288
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 287
 schedules_overlap_cinema_289:
   :id: 289
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 288
 schedules_overlap_hobbies_289:
   :id: 289
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 287
 schedules_overlap_holiday_290:
   :id: 290
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 287
 schedules_overlap_lottery_gambling_291:
   :id: 291
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 287
 schedules_overlap_social_292:
   :id: 292
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 287
 schedules_overlap_software_293:
   :id: 293
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 287
 schedules_overlap_sport_events_294:
   :id: 294
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 287
 schedules_overlap_subscriptions_295:
   :id: 295
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 287
 schedules_overlap_tv_296:
   :id: 296
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 287
 schedules_overlap_video_games_297:
   :id: 297
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 287
 schedules_overlap_food_drinks_288:
@@ -1993,35 +1806,30 @@ schedules_overlap_bars_pubs_289:
   :id: 289
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 288
 schedules_overlap_fast_food_290:
   :id: 290
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 288
 schedules_overlap_groceries_291:
   :id: 291
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 288
 schedules_overlap_order_takeout_292:
   :id: 292
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 288
 schedules_overlap_restaurant_293:
   :id: 293
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 288
 schedules_overlap_health_289:
@@ -2082,77 +1890,66 @@ duplicate_transactions_date_314:
   :id: 314
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 313
 duplicate_transactions_cinema_315:
   :id: 315
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 314
 duplicate_transactions_hobbies_315:
   :id: 315
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 313
 duplicate_transactions_holiday_316:
   :id: 316
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 313
 duplicate_transactions_lottery_gambling_317:
   :id: 317
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 313
 duplicate_transactions_social_318:
   :id: 318
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 313
 duplicate_transactions_software_319:
   :id: 319
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 313
 duplicate_transactions_sport_events_320:
   :id: 320
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 313
 duplicate_transactions_subscriptions_321:
   :id: 321
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 313
 duplicate_transactions_tv_322:
   :id: 322
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 313
 duplicate_transactions_video_games_323:
   :id: 323
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 313
 duplicate_transactions_food_drinks_314:
@@ -2165,35 +1962,30 @@ duplicate_transactions_bars_pubs_315:
   :id: 315
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 314
 duplicate_transactions_fast_food_316:
   :id: 316
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 314
 duplicate_transactions_groceries_317:
   :id: 317
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 314
 duplicate_transactions_order_takeout_318:
   :id: 318
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 314
 duplicate_transactions_restaurant_319:
   :id: 319
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 314
 duplicate_transactions_health_315:
@@ -2254,77 +2046,66 @@ pause_schedule_date_340:
   :id: 340
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 339
 pause_schedule_cinema_341:
   :id: 341
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 340
 pause_schedule_hobbies_341:
   :id: 341
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 339
 pause_schedule_holiday_342:
   :id: 342
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 339
 pause_schedule_lottery_gambling_343:
   :id: 343
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 339
 pause_schedule_social_344:
   :id: 344
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 339
 pause_schedule_software_345:
   :id: 345
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 339
 pause_schedule_sport_events_346:
   :id: 346
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 339
 pause_schedule_subscriptions_347:
   :id: 347
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 339
 pause_schedule_tv_348:
   :id: 348
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 339
 pause_schedule_video_games_349:
   :id: 349
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 339
 pause_schedule_food_drinks_340:
@@ -2337,35 +2118,30 @@ pause_schedule_bars_pubs_341:
   :id: 341
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 340
 pause_schedule_fast_food_342:
   :id: 342
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 340
 pause_schedule_groceries_343:
   :id: 343
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 340
 pause_schedule_order_takeout_344:
   :id: 344
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 340
 pause_schedule_restaurant_345:
   :id: 345
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 340
 pause_schedule_health_341:
@@ -2426,77 +2202,66 @@ schedule_period_ids_date_366:
   :id: 366
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 365
 schedule_period_ids_cinema_367:
   :id: 367
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 366
 schedule_period_ids_hobbies_367:
   :id: 367
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 365
 schedule_period_ids_holiday_368:
   :id: 368
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 365
 schedule_period_ids_lottery_gambling_369:
   :id: 369
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 365
 schedule_period_ids_social_370:
   :id: 370
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 365
 schedule_period_ids_software_371:
   :id: 371
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 365
 schedule_period_ids_sport_events_372:
   :id: 372
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 365
 schedule_period_ids_subscriptions_373:
   :id: 373
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 365
 schedule_period_ids_tv_374:
   :id: 374
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 365
 schedule_period_ids_video_games_375:
   :id: 375
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 365
 schedule_period_ids_food_drinks_366:
@@ -2509,35 +2274,30 @@ schedule_period_ids_bars_pubs_367:
   :id: 367
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 366
 schedule_period_ids_fast_food_368:
   :id: 368
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 366
 schedule_period_ids_groceries_369:
   :id: 369
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 366
 schedule_period_ids_order_takeout_370:
   :id: 370
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 366
 schedule_period_ids_restaurant_371:
   :id: 371
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 366
 schedule_period_ids_health_367:
@@ -2598,77 +2358,66 @@ upcoming_transactions_date_392:
   :id: 392
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 391
 upcoming_transactions_cinema_393:
   :id: 393
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 392
 upcoming_transactions_hobbies_393:
   :id: 393
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 391
 upcoming_transactions_holiday_394:
   :id: 394
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 391
 upcoming_transactions_lottery_gambling_395:
   :id: 395
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 391
 upcoming_transactions_social_396:
   :id: 396
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 391
 upcoming_transactions_software_397:
   :id: 397
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 391
 upcoming_transactions_sport_events_398:
   :id: 398
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 391
 upcoming_transactions_subscriptions_399:
   :id: 399
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 391
 upcoming_transactions_tv_400:
   :id: 400
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 391
 upcoming_transactions_video_games_401:
   :id: 401
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 391
 upcoming_transactions_food_drinks_392:
@@ -2681,35 +2430,30 @@ upcoming_transactions_bars_pubs_393:
   :id: 393
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 392
 upcoming_transactions_fast_food_394:
   :id: 394
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 392
 upcoming_transactions_groceries_395:
   :id: 395
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 392
 upcoming_transactions_order_takeout_396:
   :id: 396
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 392
 upcoming_transactions_restaurant_397:
   :id: 397
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 392
 upcoming_transactions_health_393:
@@ -2770,77 +2514,66 @@ upcoming_transactions_dst_date_418:
   :id: 418
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 417
 upcoming_transactions_dst_cinema_419:
   :id: 419
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 418
 upcoming_transactions_dst_hobbies_419:
   :id: 419
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 417
 upcoming_transactions_dst_holiday_420:
   :id: 420
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 417
 upcoming_transactions_dst_lottery_gambling_421:
   :id: 421
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 417
 upcoming_transactions_dst_social_422:
   :id: 422
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 417
 upcoming_transactions_dst_software_423:
   :id: 423
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 417
 upcoming_transactions_dst_sport_events_424:
   :id: 424
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 417
 upcoming_transactions_dst_subscriptions_425:
   :id: 425
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 417
 upcoming_transactions_dst_tv_426:
   :id: 426
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 417
 upcoming_transactions_dst_video_games_427:
   :id: 427
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 417
 upcoming_transactions_dst_food_drinks_418:
@@ -2853,35 +2586,30 @@ upcoming_transactions_dst_bars_pubs_419:
   :id: 419
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 418
 upcoming_transactions_dst_fast_food_420:
   :id: 420
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 418
 upcoming_transactions_dst_groceries_421:
   :id: 421
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 418
 upcoming_transactions_dst_order_takeout_422:
   :id: 422
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 418
 upcoming_transactions_dst_restaurant_423:
   :id: 423
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 418
 upcoming_transactions_dst_health_419:
@@ -2942,77 +2670,66 @@ upcoming_transactions_run_date_444:
   :id: 444
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 443
 upcoming_transactions_run_cinema_445:
   :id: 445
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 444
 upcoming_transactions_run_hobbies_445:
   :id: 445
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 443
 upcoming_transactions_run_holiday_446:
   :id: 446
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 443
 upcoming_transactions_run_lottery_gambling_447:
   :id: 447
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 443
 upcoming_transactions_run_social_448:
   :id: 448
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 443
 upcoming_transactions_run_software_449:
   :id: 449
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 443
 upcoming_transactions_run_sport_events_450:
   :id: 450
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 443
 upcoming_transactions_run_subscriptions_451:
   :id: 451
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 443
 upcoming_transactions_run_tv_452:
   :id: 452
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 443
 upcoming_transactions_run_video_games_453:
   :id: 453
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 443
 upcoming_transactions_run_food_drinks_444:
@@ -3025,35 +2742,30 @@ upcoming_transactions_run_bars_pubs_445:
   :id: 445
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 444
 upcoming_transactions_run_fast_food_446:
   :id: 446
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 444
 upcoming_transactions_run_groceries_447:
   :id: 447
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 444
 upcoming_transactions_run_order_takeout_448:
   :id: 448
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 444
 upcoming_transactions_run_restaurant_449:
   :id: 449
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 444
 upcoming_transactions_run_health_445:
@@ -3114,77 +2826,66 @@ update_transactions_date_470:
   :id: 470
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 469
 update_transactions_cinema_471:
   :id: 471
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 470
 update_transactions_hobbies_471:
   :id: 471
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 469
 update_transactions_holiday_472:
   :id: 472
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 469
 update_transactions_lottery_gambling_473:
   :id: 473
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 469
 update_transactions_social_474:
   :id: 474
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 469
 update_transactions_software_475:
   :id: 475
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 469
 update_transactions_sport_events_476:
   :id: 476
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 469
 update_transactions_subscriptions_477:
   :id: 477
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 469
 update_transactions_tv_478:
   :id: 478
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 469
 update_transactions_video_games_479:
   :id: 479
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 469
 update_transactions_food_drinks_470:
@@ -3197,35 +2898,30 @@ update_transactions_bars_pubs_471:
   :id: 471
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 470
 update_transactions_fast_food_472:
   :id: 472
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 470
 update_transactions_groceries_473:
   :id: 473
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 470
 update_transactions_order_takeout_474:
   :id: 474
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 470
 update_transactions_restaurant_475:
   :id: 475
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 470
 update_transactions_health_471:
@@ -3286,77 +2982,66 @@ future_transactions_date_496:
   :id: 496
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 495
 future_transactions_cinema_497:
   :id: 497
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 496
 future_transactions_hobbies_497:
   :id: 497
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 495
 future_transactions_holiday_498:
   :id: 498
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 495
 future_transactions_lottery_gambling_499:
   :id: 499
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 495
 future_transactions_social_500:
   :id: 500
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 495
 future_transactions_software_501:
   :id: 501
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 495
 future_transactions_sport_events_502:
   :id: 502
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 495
 future_transactions_subscriptions_503:
   :id: 503
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 495
 future_transactions_tv_504:
   :id: 504
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 495
 future_transactions_video_games_505:
   :id: 505
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 495
 future_transactions_food_drinks_496:
@@ -3369,35 +3054,30 @@ future_transactions_bars_pubs_497:
   :id: 497
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 496
 future_transactions_fast_food_498:
   :id: 498
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 496
 future_transactions_groceries_499:
   :id: 499
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 496
 future_transactions_order_takeout_500:
   :id: 500
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 496
 future_transactions_restaurant_501:
   :id: 501
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 496
 future_transactions_health_497:
@@ -3458,77 +3138,66 @@ setup_wizard_date_522:
   :id: 522
   :name: Date
   :symbol: heart
-  :color: 
   :position: 2
   :parent_id: 521
 setup_wizard_cinema_523:
   :id: 523
   :name: cinema
   :symbol: film
-  :color: 
   :position: 3
   :parent_id: 522
 setup_wizard_hobbies_523:
   :id: 523
   :name: Hobbies
   :symbol: palette
-  :color: 
   :position: 4
   :parent_id: 521
 setup_wizard_holiday_524:
   :id: 524
   :name: Holiday
   :symbol: suitcase-rolling
-  :color: 
   :position: 5
   :parent_id: 521
 setup_wizard_lottery_gambling_525:
   :id: 525
   :name: Lottery / Gambling
   :symbol: ticket-alt
-  :color: 
   :position: 6
   :parent_id: 521
 setup_wizard_social_526:
   :id: 526
   :name: Social
   :symbol: user-friends
-  :color: 
   :position: 7
   :parent_id: 521
 setup_wizard_software_527:
   :id: 527
   :name: Software
   :symbol: code
-  :color: 
   :position: 8
   :parent_id: 521
 setup_wizard_sport_events_528:
   :id: 528
   :name: Sport Events
   :symbol: football-ball
-  :color: 
   :position: 9
   :parent_id: 521
 setup_wizard_subscriptions_529:
   :id: 529
   :name: Subscriptions
   :symbol: money-bill-wave-alt
-  :color: 
   :position: 10
   :parent_id: 521
 setup_wizard_tv_530:
   :id: 530
   :name: TV
   :symbol: tv
-  :color: 
   :position: 11
   :parent_id: 521
 setup_wizard_video_games_531:
   :id: 531
   :name: Video Games
   :symbol: gamepad
-  :color: 
   :position: 12
   :parent_id: 521
 setup_wizard_food_drinks_522:
@@ -3541,35 +3210,30 @@ setup_wizard_bars_pubs_523:
   :id: 523
   :name: Bars / Pubs
   :symbol: glass-cheers
-  :color: 
   :position: 14
   :parent_id: 522
 setup_wizard_fast_food_524:
   :id: 524
   :name: Fast Food
   :symbol: hamburger
-  :color: 
   :position: 15
   :parent_id: 522
 setup_wizard_groceries_525:
   :id: 525
   :name: Groceries
   :symbol: shopping-basket
-  :color: 
   :position: 16
   :parent_id: 522
 setup_wizard_order_takeout_526:
   :id: 526
   :name: Order / Take-out
   :symbol: pizza-slice
-  :color: 
   :position: 17
   :parent_id: 522
 setup_wizard_restaurant_527:
   :id: 527
   :name: Restaurant
   :symbol: concierge-bell
-  :color: 
   :position: 18
   :parent_id: 522
 setup_wizard_health_523:

@@ -59,7 +59,7 @@ EOH
 				categories[cat_id][:id] = id
 				categories[cat_id][:name] = value[:name]
 				categories[cat_id][:symbol] = value[:symbol]
-				categories[cat_id][:color] = value[:color]
+				categories[cat_id][:color] = value[:color] unless value[:color].nil?
 				categories[cat_id][:position] = categories.length
 				categories[cat_id][:parent_id] = parent_id unless parent_id.nil?
 
@@ -219,7 +219,5 @@ EOH
 		end
 
 	end
-
-	## END TEST
 
 end
