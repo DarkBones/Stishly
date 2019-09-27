@@ -56,19 +56,19 @@ EOH
 				cat_id = "#{k}_#{key}_#{id}"
 				categories[cat_id] = {}
 
-				categories[cat_id][:id] = id
-				categories[cat_id][:user_id] = user_id
-				categories[cat_id][:name] = value[:name]
-				categories[cat_id][:symbol] = value[:symbol]
-				categories[cat_id][:color] = value[:color] unless value[:color].nil?
-				categories[cat_id][:position] = categories.length
-				categories[cat_id][:parent_id] = parent_id unless parent_id.nil?
-				categories[cat_id][:hash_id] = SecureRandom.urlsafe_base64(6)
+				categories[cat_id]["id"] = rand(10 ** 10)
+				categories[cat_id]["user_id"] = user_id
+				categories[cat_id]["name"] = value[:name]
+				categories[cat_id]["symbol"] = value[:symbol]
+				categories[cat_id]["color"] = value[:color] unless value[:color].nil?
+				categories[cat_id]["position"] = categories.length
+				categories[cat_id]["parent_id"] = parent_id unless parent_id.nil?
+				categories[cat_id]["hash_id"] = SecureRandom.urlsafe_base64(6)
 
 				id += 1
 
 				unless value[:children].nil?
-					categories = categories.merge(get_categories(k, value[:children], id, user_id, categories, categories[cat_id][:id]))
+					categories = categories.merge(get_categories(k, value[:children], id, user_id, categories, categories[cat_id]["id"]))
 				end
 
 			end
@@ -209,12 +209,6 @@ EOH
 			f.write(<<EOH)
 #----------------------------------------------------------------------
 # DO NOT MODIFY THIS FILE!!
-#
-# This file is generated from #{src_yml} by:
-#
-#   (edit #{src_yml})
-#   $ rake fixt, or
-#   $ rake
 #----------------------------------------------------------------------
 EOH
 			f.write(categories.to_yaml)

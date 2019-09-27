@@ -1,4378 +1,4372 @@
 #----------------------------------------------------------------------
 # DO NOT MODIFY THIS FILE!!
-#
-# This file is generated from test/fixtures/users.yml.noenc by:
-#
-#   (edit test/fixtures/users.yml.noenc)
-#   $ rake fixt, or
-#   $ rake
 #----------------------------------------------------------------------
 ---
 bas_entertainment_1:
-  :id: 1
-  :user_id: 1
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: 6vAABsIZ
+  id: 9020083431
+  user_id: 1
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: tW7lZHiU
 bas_date_2:
-  :id: 2
-  :user_id: 1
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 1
-  :hash_id: McrutVdf
+  id: 8844427480
+  user_id: 1
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 9020083431
+  hash_id: VD-GowjA
 bas_cinema_3:
-  :id: 3
-  :user_id: 1
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 2
-  :hash_id: ZN9VYHOe
+  id: 4792077510
+  user_id: 1
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 8844427480
+  hash_id: UcTfKZwA
 bas_hobbies_3:
-  :id: 3
-  :user_id: 1
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 1
-  :hash_id: w2FfmbNE
+  id: 3694159547
+  user_id: 1
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 9020083431
+  hash_id: zJq0QQKz
 bas_holiday_4:
-  :id: 4
-  :user_id: 1
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 1
-  :hash_id: JlEgvG-x
+  id: 1502595815
+  user_id: 1
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 9020083431
+  hash_id: fHeGJtkd
 bas_lottery_gambling_5:
-  :id: 5
-  :user_id: 1
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 1
-  :hash_id: GEnkRTjx
+  id: 7191351700
+  user_id: 1
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 9020083431
+  hash_id: DDytIev3
 bas_social_6:
-  :id: 6
-  :user_id: 1
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 1
-  :hash_id: oyI8Cx7P
+  id: 5110935629
+  user_id: 1
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 9020083431
+  hash_id: WxNmKH5c
 bas_software_7:
-  :id: 7
-  :user_id: 1
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 1
-  :hash_id: HDEBxPwe
+  id: 9109444382
+  user_id: 1
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 9020083431
+  hash_id: Mk5YcjJT
 bas_sport_events_8:
-  :id: 8
-  :user_id: 1
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 1
-  :hash_id: vj_2BpWV
+  id: 1705802544
+  user_id: 1
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 9020083431
+  hash_id: KRSjlxih
 bas_subscriptions_9:
-  :id: 9
-  :user_id: 1
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 1
-  :hash_id: iqEjZegi
+  id: 1606572043
+  user_id: 1
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 9020083431
+  hash_id: tTwSfcWn
 bas_tv_10:
-  :id: 10
-  :user_id: 1
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 1
-  :hash_id: 4iI-JFc5
+  id: 9088481906
+  user_id: 1
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 9020083431
+  hash_id: Boymybm6
 bas_video_games_11:
-  :id: 11
-  :user_id: 1
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 1
-  :hash_id: vzXd58SM
+  id: 6839445015
+  user_id: 1
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 9020083431
+  hash_id: YGXkDlWv
 bas_food_drinks_2:
-  :id: 2
-  :user_id: 1
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: XbNE3KCE
+  id: 4253955730
+  user_id: 1
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: wOmPjKth
 bas_bars_pubs_3:
-  :id: 3
-  :user_id: 1
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 2
-  :hash_id: 9NT0wEAx
+  id: 2830769712
+  user_id: 1
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 4253955730
+  hash_id: Vj3WLiIk
 bas_fast_food_4:
-  :id: 4
-  :user_id: 1
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 2
-  :hash_id: ylHNR0-m
+  id: 5298321713
+  user_id: 1
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 4253955730
+  hash_id: FCZwGA5C
 bas_groceries_5:
-  :id: 5
-  :user_id: 1
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 2
-  :hash_id: fApS5-af
+  id: 5939854300
+  user_id: 1
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 4253955730
+  hash_id: rbtnKjT_
 bas_order_takeout_6:
-  :id: 6
-  :user_id: 1
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 2
-  :hash_id: ZUi6IIO5
+  id: 6188190250
+  user_id: 1
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 4253955730
+  hash_id: Dg0Sb7QG
 bas_restaurant_7:
-  :id: 7
-  :user_id: 1
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 2
-  :hash_id: XcTQrW_t
+  id: 5024319904
+  user_id: 1
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 4253955730
+  hash_id: jUWkD0St
 bas_health_3:
-  :id: 3
-  :user_id: 1
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: Uvjk7Qw-
+  id: 6589397912
+  user_id: 1
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: A67WXdR1
 bas_household_4:
-  :id: 4
-  :user_id: 1
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: RV9KScNG
+  id: 1847505895
+  user_id: 1
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: NTIz_WJS
 bas_income_5:
-  :id: 5
-  :user_id: 1
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: cHsHUNh0
+  id: 9170288365
+  user_id: 1
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: QJVnyrwB
 bas_investments_6:
-  :id: 6
-  :user_id: 1
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: EBDbaItH
+  id: 7024160159
+  user_id: 1
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: G_XHdIgu
 bas_other_7:
-  :id: 7
-  :user_id: 1
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: y3ThCYWf
+  id: 1243060675
+  user_id: 1
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: _rllHCoJ
 bas_shopping_8:
-  :id: 8
-  :user_id: 1
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: aW4zd3rQ
+  id: 7782662450
+  user_id: 1
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: sZkmjp-B
 bas_transport_9:
-  :id: 9
-  :user_id: 1
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: pm1aF35_
+  id: 7537699694
+  user_id: 1
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: oGojhcZa
 bas_vehicle_10:
-  :id: 10
-  :user_id: 1
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: 6mOcIt4-
+  id: 153357176
+  user_id: 1
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: Vgt9XOhL
 sab_entertainment_27:
-  :id: 27
-  :user_id: 2
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: TLwu4h8t
+  id: 6187719934
+  user_id: 2
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: VduD23xw
 sab_date_28:
-  :id: 28
-  :user_id: 2
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 27
-  :hash_id: z2umONAL
+  id: 4127564535
+  user_id: 2
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 6187719934
+  hash_id: 4F-8smwp
 sab_cinema_29:
-  :id: 29
-  :user_id: 2
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 28
-  :hash_id: pX-P7Ohd
+  id: 3057683767
+  user_id: 2
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 4127564535
+  hash_id: LS186vSP
 sab_hobbies_29:
-  :id: 29
-  :user_id: 2
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 27
-  :hash_id: tjpsKXz6
+  id: 2307069183
+  user_id: 2
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 6187719934
+  hash_id: 3azD-dDZ
 sab_holiday_30:
-  :id: 30
-  :user_id: 2
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 27
-  :hash_id: 3AM0cHKs
+  id: 7587365449
+  user_id: 2
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 6187719934
+  hash_id: s_CUb3Sq
 sab_lottery_gambling_31:
-  :id: 31
-  :user_id: 2
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 27
-  :hash_id: ERd-mlpv
+  id: 5724467046
+  user_id: 2
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 6187719934
+  hash_id: g-6tbylN
 sab_social_32:
-  :id: 32
-  :user_id: 2
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 27
-  :hash_id: L0OWfZCx
+  id: 4077228507
+  user_id: 2
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 6187719934
+  hash_id: GhPSAgJ2
 sab_software_33:
-  :id: 33
-  :user_id: 2
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 27
-  :hash_id: Z-Jodi1n
+  id: 3917684953
+  user_id: 2
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 6187719934
+  hash_id: mTOj7DwS
 sab_sport_events_34:
-  :id: 34
-  :user_id: 2
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 27
-  :hash_id: 8jp-MHBH
+  id: 9454355274
+  user_id: 2
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 6187719934
+  hash_id: 6FDU4BHJ
 sab_subscriptions_35:
-  :id: 35
-  :user_id: 2
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 27
-  :hash_id: 44O9Xj1T
+  id: 857404460
+  user_id: 2
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 6187719934
+  hash_id: 8zbxAwSf
 sab_tv_36:
-  :id: 36
-  :user_id: 2
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 27
-  :hash_id: rds9Mugx
+  id: 5488788547
+  user_id: 2
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 6187719934
+  hash_id: gIdmuXT6
 sab_video_games_37:
-  :id: 37
-  :user_id: 2
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 27
-  :hash_id: g5OSrCBB
+  id: 223170975
+  user_id: 2
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 6187719934
+  hash_id: m1fuUUVN
 sab_food_drinks_28:
-  :id: 28
-  :user_id: 2
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: 0PmaYrLx
+  id: 1409776520
+  user_id: 2
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: G8cBEiG0
 sab_bars_pubs_29:
-  :id: 29
-  :user_id: 2
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 28
-  :hash_id: JZAzhFCZ
+  id: 5459296101
+  user_id: 2
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 1409776520
+  hash_id: I-IB_lFA
 sab_fast_food_30:
-  :id: 30
-  :user_id: 2
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 28
-  :hash_id: yYW3WELI
+  id: 5158410049
+  user_id: 2
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 1409776520
+  hash_id: mtOXBkbj
 sab_groceries_31:
-  :id: 31
-  :user_id: 2
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 28
-  :hash_id: Uw24PpM9
+  id: 1839443721
+  user_id: 2
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 1409776520
+  hash_id: vOpnc_FW
 sab_order_takeout_32:
-  :id: 32
-  :user_id: 2
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 28
-  :hash_id: eTyFEHAa
+  id: 9683640634
+  user_id: 2
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 1409776520
+  hash_id: gpbefGac
 sab_restaurant_33:
-  :id: 33
-  :user_id: 2
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 28
-  :hash_id: p9Nc3Bsu
+  id: 1700327386
+  user_id: 2
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 1409776520
+  hash_id: UgfADHvp
 sab_health_29:
-  :id: 29
-  :user_id: 2
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: V_c5m80p
+  id: 1658090185
+  user_id: 2
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: O-zSfW9f
 sab_household_30:
-  :id: 30
-  :user_id: 2
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: lDrhT3_Y
+  id: 273290049
+  user_id: 2
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: fg3UMRCG
 sab_income_31:
-  :id: 31
-  :user_id: 2
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: 9yXnBi9g
+  id: 7989178042
+  user_id: 2
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: LmRX7ysQ
 sab_investments_32:
-  :id: 32
-  :user_id: 2
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: hA6XJkQ4
+  id: 4737700452
+  user_id: 2
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: aqBE-TM0
 sab_other_33:
-  :id: 33
-  :user_id: 2
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: z5tob7SU
+  id: 3921293450
+  user_id: 2
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: Y5CBh-Rc
 sab_shopping_34:
-  :id: 34
-  :user_id: 2
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: Hq5U1LWX
+  id: 64674120
+  user_id: 2
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: Gd6uyef3
 sab_transport_35:
-  :id: 35
-  :user_id: 2
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: 5PDu6Eow
+  id: 7410572270
+  user_id: 2
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: 8dO2PZA0
 sab_vehicle_36:
-  :id: 36
-  :user_id: 2
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: f36pwz65
+  id: 6279374340
+  user_id: 2
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: vWNMK_25
 new_entertainment_53:
-  :id: 53
-  :user_id: 3
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: "-tF2Hw1P"
+  id: 3663195068
+  user_id: 3
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: EqoW9sVX
 new_date_54:
-  :id: 54
-  :user_id: 3
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 53
-  :hash_id: 0XAhAYSO
+  id: 9771530563
+  user_id: 3
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 3663195068
+  hash_id: y1fAy6w8
 new_cinema_55:
-  :id: 55
-  :user_id: 3
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 54
-  :hash_id: 6Vxy2Fev
+  id: 8686985977
+  user_id: 3
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 9771530563
+  hash_id: ooMX9D2q
 new_hobbies_55:
-  :id: 55
-  :user_id: 3
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 53
-  :hash_id: FcPweQwb
+  id: 3121965641
+  user_id: 3
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 3663195068
+  hash_id: UosgTFpO
 new_holiday_56:
-  :id: 56
-  :user_id: 3
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 53
-  :hash_id: _eIvmVGC
+  id: 9691310009
+  user_id: 3
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 3663195068
+  hash_id: uUK04VUR
 new_lottery_gambling_57:
-  :id: 57
-  :user_id: 3
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 53
-  :hash_id: _5hjoLqC
+  id: 7692104230
+  user_id: 3
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 3663195068
+  hash_id: MWQMpw7b
 new_social_58:
-  :id: 58
-  :user_id: 3
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 53
-  :hash_id: Rc02JNXY
+  id: 9437010701
+  user_id: 3
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 3663195068
+  hash_id: BzhLzETc
 new_software_59:
-  :id: 59
-  :user_id: 3
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 53
-  :hash_id: LK7ycklx
+  id: 7907952464
+  user_id: 3
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 3663195068
+  hash_id: lcCbJcQE
 new_sport_events_60:
-  :id: 60
-  :user_id: 3
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 53
-  :hash_id: aOD0fjQ7
+  id: 8991882911
+  user_id: 3
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 3663195068
+  hash_id: 9Eg6PmsZ
 new_subscriptions_61:
-  :id: 61
-  :user_id: 3
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 53
-  :hash_id: JHowtrt-
+  id: 45196823
+  user_id: 3
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 3663195068
+  hash_id: CWPOfbGD
 new_tv_62:
-  :id: 62
-  :user_id: 3
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 53
-  :hash_id: wo_sUdrv
+  id: 7605755888
+  user_id: 3
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 3663195068
+  hash_id: d1yai-xj
 new_video_games_63:
-  :id: 63
-  :user_id: 3
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 53
-  :hash_id: e8jM_VAW
+  id: 2279809605
+  user_id: 3
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 3663195068
+  hash_id: i1Ky28PF
 new_food_drinks_54:
-  :id: 54
-  :user_id: 3
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: ny9el79o
+  id: 8600659338
+  user_id: 3
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: Z3Gg8YOR
 new_bars_pubs_55:
-  :id: 55
-  :user_id: 3
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 54
-  :hash_id: 7L4JVVbd
+  id: 3694778274
+  user_id: 3
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 8600659338
+  hash_id: dBLRBBou
 new_fast_food_56:
-  :id: 56
-  :user_id: 3
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 54
-  :hash_id: ni-9tAp0
+  id: 9185858864
+  user_id: 3
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 8600659338
+  hash_id: mYH1l51a
 new_groceries_57:
-  :id: 57
-  :user_id: 3
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 54
-  :hash_id: fSjSWIqV
+  id: 8381627050
+  user_id: 3
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 8600659338
+  hash_id: h-6H0xmu
 new_order_takeout_58:
-  :id: 58
-  :user_id: 3
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 54
-  :hash_id: x_2gMkwb
+  id: 5925578209
+  user_id: 3
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 8600659338
+  hash_id: hw_reNzQ
 new_restaurant_59:
-  :id: 59
-  :user_id: 3
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 54
-  :hash_id: 9utkoOMP
+  id: 8018862658
+  user_id: 3
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 8600659338
+  hash_id: cWpIuMBR
 new_health_55:
-  :id: 55
-  :user_id: 3
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: RsqZGEQL
+  id: 1492508787
+  user_id: 3
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: UD5dGCYp
 new_household_56:
-  :id: 56
-  :user_id: 3
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: W1WWjKke
+  id: 8897919379
+  user_id: 3
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: CTjprsdG
 new_income_57:
-  :id: 57
-  :user_id: 3
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: k9xVr1J1
+  id: 5289741360
+  user_id: 3
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: VA9-5-Ex
 new_investments_58:
-  :id: 58
-  :user_id: 3
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: mCPJ4N6R
+  id: 6580263174
+  user_id: 3
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: c8xhHWBR
 new_other_59:
-  :id: 59
-  :user_id: 3
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: Rs-QxoEt
+  id: 5805043394
+  user_id: 3
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: XTANweg2
 new_shopping_60:
-  :id: 60
-  :user_id: 3
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: mNdBgN81
+  id: 7545171387
+  user_id: 3
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: rSZ6MtOe
 new_transport_61:
-  :id: 61
-  :user_id: 3
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: hB7McBcU
+  id: 9798580673
+  user_id: 3
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: 7BxUm5ID
 new_vehicle_62:
-  :id: 62
-  :user_id: 3
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: Vv8PNzXZ
+  id: 91312152
+  user_id: 3
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: Ou-s6FC7
 new_free_entertainment_79:
-  :id: 79
-  :user_id: 30003
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: wAxtkjHX
+  id: 8016741427
+  user_id: 30003
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: ogoEdEEg
 new_free_date_80:
-  :id: 80
-  :user_id: 30003
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 79
-  :hash_id: L3PT_-eU
+  id: 1797152206
+  user_id: 30003
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 8016741427
+  hash_id: paA0KHGM
 new_free_cinema_81:
-  :id: 81
-  :user_id: 30003
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 80
-  :hash_id: 17pfhzl_
+  id: 2189171259
+  user_id: 30003
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 1797152206
+  hash_id: eG1Cuzf0
 new_free_hobbies_81:
-  :id: 81
-  :user_id: 30003
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 79
-  :hash_id: VCcf-jYp
+  id: 4410398491
+  user_id: 30003
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 8016741427
+  hash_id: J7pC6Nso
 new_free_holiday_82:
-  :id: 82
-  :user_id: 30003
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 79
-  :hash_id: 8XZ8clU_
+  id: 7062889219
+  user_id: 30003
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 8016741427
+  hash_id: WxQs4IAI
 new_free_lottery_gambling_83:
-  :id: 83
-  :user_id: 30003
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 79
-  :hash_id: AfOWDFo3
+  id: 7115549014
+  user_id: 30003
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 8016741427
+  hash_id: uzo62MNs
 new_free_social_84:
-  :id: 84
-  :user_id: 30003
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 79
-  :hash_id: sgyRE9Fr
+  id: 2101659275
+  user_id: 30003
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 8016741427
+  hash_id: LXbYCgE0
 new_free_software_85:
-  :id: 85
-  :user_id: 30003
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 79
-  :hash_id: BwmLsvLO
+  id: 7230393177
+  user_id: 30003
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 8016741427
+  hash_id: 4obWFdA4
 new_free_sport_events_86:
-  :id: 86
-  :user_id: 30003
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 79
-  :hash_id: j-aqYwPL
+  id: 3856450613
+  user_id: 30003
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 8016741427
+  hash_id: zdtEZmHa
 new_free_subscriptions_87:
-  :id: 87
-  :user_id: 30003
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 79
-  :hash_id: 8U-V45Vg
+  id: 6817688410
+  user_id: 30003
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 8016741427
+  hash_id: nvBb3hkI
 new_free_tv_88:
-  :id: 88
-  :user_id: 30003
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 79
-  :hash_id: Jio2-p8y
+  id: 3126155950
+  user_id: 30003
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 8016741427
+  hash_id: _nMZ3iOX
 new_free_video_games_89:
-  :id: 89
-  :user_id: 30003
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 79
-  :hash_id: LqMYHsuV
+  id: 8392660570
+  user_id: 30003
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 8016741427
+  hash_id: ufDDIwlS
 new_free_food_drinks_80:
-  :id: 80
-  :user_id: 30003
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: Qt_CSARW
+  id: 5989465507
+  user_id: 30003
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: jcnp-SDA
 new_free_bars_pubs_81:
-  :id: 81
-  :user_id: 30003
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 80
-  :hash_id: dlSPEqbk
+  id: 2883528811
+  user_id: 30003
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 5989465507
+  hash_id: jlgx6_Ih
 new_free_fast_food_82:
-  :id: 82
-  :user_id: 30003
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 80
-  :hash_id: 3zEiWr2y
+  id: 3702997979
+  user_id: 30003
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 5989465507
+  hash_id: YQvj1KiB
 new_free_groceries_83:
-  :id: 83
-  :user_id: 30003
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 80
-  :hash_id: 4JSaJ7aC
+  id: 7928201696
+  user_id: 30003
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 5989465507
+  hash_id: IogmgNEp
 new_free_order_takeout_84:
-  :id: 84
-  :user_id: 30003
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 80
-  :hash_id: DfnxDt-l
+  id: 3899805251
+  user_id: 30003
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 5989465507
+  hash_id: ExVgBI0A
 new_free_restaurant_85:
-  :id: 85
-  :user_id: 30003
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 80
-  :hash_id: JL69NL2y
+  id: 2455864015
+  user_id: 30003
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 5989465507
+  hash_id: 8n-rkvdA
 new_free_health_81:
-  :id: 81
-  :user_id: 30003
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: 6FDDN0kZ
+  id: 3983870487
+  user_id: 30003
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: Z7OMCQ3w
 new_free_household_82:
-  :id: 82
-  :user_id: 30003
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: 9KZzvhqW
+  id: 1714209048
+  user_id: 30003
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: nim8v_n-
 new_free_income_83:
-  :id: 83
-  :user_id: 30003
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: 8SNNjrI8
+  id: 9631594356
+  user_id: 30003
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: c9aHElXe
 new_free_investments_84:
-  :id: 84
-  :user_id: 30003
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: 7Atk3dX6
+  id: 1992191968
+  user_id: 30003
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: zc4EZgzl
 new_free_other_85:
-  :id: 85
-  :user_id: 30003
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: hov2DT9_
+  id: 8668619271
+  user_id: 30003
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: e4ljdTFk
 new_free_shopping_86:
-  :id: 86
-  :user_id: 30003
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: W-_2v45J
+  id: 7288138169
+  user_id: 30003
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: Y3CAQWfz
 new_free_transport_87:
-  :id: 87
-  :user_id: 30003
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: 6EL_8p6P
+  id: 8207808448
+  user_id: 30003
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: B-qQMRbX
 new_free_vehicle_88:
-  :id: 88
-  :user_id: 30003
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: 3MNYsLr1
+  id: 2770065195
+  user_id: 30003
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: GHlTe0Z-
 transactions_test_entertainment_105:
-  :id: 105
-  :user_id: 4
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: vVuCF8Hr
+  id: 9837630141
+  user_id: 4
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: XL0gky-b
 transactions_test_date_106:
-  :id: 106
-  :user_id: 4
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 105
-  :hash_id: LJxiABPR
+  id: 7183348518
+  user_id: 4
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 9837630141
+  hash_id: 3LxHfCst
 transactions_test_cinema_107:
-  :id: 107
-  :user_id: 4
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 106
-  :hash_id: laBDiwCL
+  id: 2497132037
+  user_id: 4
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 7183348518
+  hash_id: DKAwkMV-
 transactions_test_hobbies_107:
-  :id: 107
-  :user_id: 4
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 105
-  :hash_id: c_96USRq
+  id: 4271679424
+  user_id: 4
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 9837630141
+  hash_id: n9AgKX69
 transactions_test_holiday_108:
-  :id: 108
-  :user_id: 4
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 105
-  :hash_id: yHaZH3cG
+  id: 1326553346
+  user_id: 4
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 9837630141
+  hash_id: UqheeibO
 transactions_test_lottery_gambling_109:
-  :id: 109
-  :user_id: 4
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 105
-  :hash_id: GLbWMXKj
+  id: 2967500099
+  user_id: 4
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 9837630141
+  hash_id: uWRH0w9Q
 transactions_test_social_110:
-  :id: 110
-  :user_id: 4
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 105
-  :hash_id: KOdJPYdF
+  id: 5638083738
+  user_id: 4
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 9837630141
+  hash_id: gqJNkA5D
 transactions_test_software_111:
-  :id: 111
-  :user_id: 4
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 105
-  :hash_id: pgJ_qBFn
+  id: 10312734
+  user_id: 4
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 9837630141
+  hash_id: AJKP3J2o
 transactions_test_sport_events_112:
-  :id: 112
-  :user_id: 4
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 105
-  :hash_id: d05GeTnj
+  id: 6541615351
+  user_id: 4
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 9837630141
+  hash_id: HvZtaYns
 transactions_test_subscriptions_113:
-  :id: 113
-  :user_id: 4
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 105
-  :hash_id: FzG2bjyP
+  id: 9589128505
+  user_id: 4
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 9837630141
+  hash_id: Mduzgz5o
 transactions_test_tv_114:
-  :id: 114
-  :user_id: 4
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 105
-  :hash_id: iJlmXTqf
+  id: 1823419708
+  user_id: 4
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 9837630141
+  hash_id: S4RfgwCf
 transactions_test_video_games_115:
-  :id: 115
-  :user_id: 4
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 105
-  :hash_id: JhhLU_5x
+  id: 9750320510
+  user_id: 4
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 9837630141
+  hash_id: qBmdYruq
 transactions_test_food_drinks_106:
-  :id: 106
-  :user_id: 4
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: w6sT6p__
+  id: 2093908927
+  user_id: 4
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: U6BGI0Pn
 transactions_test_bars_pubs_107:
-  :id: 107
-  :user_id: 4
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 106
-  :hash_id: CpbSBFBF
+  id: 426959760
+  user_id: 4
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 2093908927
+  hash_id: _CeM7PRJ
 transactions_test_fast_food_108:
-  :id: 108
-  :user_id: 4
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 106
-  :hash_id: 3ij0rJt6
+  id: 5467207002
+  user_id: 4
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 2093908927
+  hash_id: P4zM529K
 transactions_test_groceries_109:
-  :id: 109
-  :user_id: 4
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 106
-  :hash_id: dn0UDOu7
+  id: 4859586460
+  user_id: 4
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 2093908927
+  hash_id: UpWB7cDN
 transactions_test_order_takeout_110:
-  :id: 110
-  :user_id: 4
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 106
-  :hash_id: 9Yv7h2_w
+  id: 1092274888
+  user_id: 4
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 2093908927
+  hash_id: 1cQGV-eT
 transactions_test_restaurant_111:
-  :id: 111
-  :user_id: 4
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 106
-  :hash_id: S_cojrgm
+  id: 2421615692
+  user_id: 4
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 2093908927
+  hash_id: AZMUKzM6
 transactions_test_health_107:
-  :id: 107
-  :user_id: 4
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: Fa4DmRyi
+  id: 2680279517
+  user_id: 4
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: 4Z5JVf6b
 transactions_test_household_108:
-  :id: 108
-  :user_id: 4
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: Sj1_BS8A
+  id: 2303651961
+  user_id: 4
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: R_qyXDI3
 transactions_test_income_109:
-  :id: 109
-  :user_id: 4
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: eydTIQyY
+  id: 1694611076
+  user_id: 4
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: Wqt_ASl5
 transactions_test_investments_110:
-  :id: 110
-  :user_id: 4
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: navvbEM3
+  id: 727663149
+  user_id: 4
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: vO_crMrS
 transactions_test_other_111:
-  :id: 111
-  :user_id: 4
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: iUOiCl7t
+  id: 2678872396
+  user_id: 4
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: yM2xtJMy
 transactions_test_shopping_112:
-  :id: 112
-  :user_id: 4
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: Zxe5xy9F
+  id: 8751656221
+  user_id: 4
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: 0X7aFDUB
 transactions_test_transport_113:
-  :id: 113
-  :user_id: 4
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: 41ZRAkw4
+  id: 4297790967
+  user_id: 4
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: HQ3g5s2C
 transactions_test_vehicle_114:
-  :id: 114
-  :user_id: 4
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: vOnPzMEt
+  id: 490155178
+  user_id: 4
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: a0gHJo9R
 currency_test_entertainment_131:
-  :id: 131
-  :user_id: 5
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: 5dkWln6B
+  id: 1789577539
+  user_id: 5
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: QlLirUYt
 currency_test_date_132:
-  :id: 132
-  :user_id: 5
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 131
-  :hash_id: 0aRuHP2B
+  id: 9038358340
+  user_id: 5
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 1789577539
+  hash_id: IodP1fiZ
 currency_test_cinema_133:
-  :id: 133
-  :user_id: 5
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 132
-  :hash_id: w17rNcqx
+  id: 9429171721
+  user_id: 5
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 9038358340
+  hash_id: gSqmz-Yt
 currency_test_hobbies_133:
-  :id: 133
-  :user_id: 5
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 131
-  :hash_id: DhGBG6y_
+  id: 3992759841
+  user_id: 5
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 1789577539
+  hash_id: Z8anrRs7
 currency_test_holiday_134:
-  :id: 134
-  :user_id: 5
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 131
-  :hash_id: XQe0lX6v
+  id: 7046059542
+  user_id: 5
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 1789577539
+  hash_id: fzqRx7ui
 currency_test_lottery_gambling_135:
-  :id: 135
-  :user_id: 5
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 131
-  :hash_id: dh5S6sl5
+  id: 8433531459
+  user_id: 5
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 1789577539
+  hash_id: FgyXjSys
 currency_test_social_136:
-  :id: 136
-  :user_id: 5
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 131
-  :hash_id: "-ecooPva"
+  id: 4449647705
+  user_id: 5
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 1789577539
+  hash_id: qf3riLm-
 currency_test_software_137:
-  :id: 137
-  :user_id: 5
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 131
-  :hash_id: IqYnX2P4
+  id: 4078857250
+  user_id: 5
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 1789577539
+  hash_id: IDxfvyJ0
 currency_test_sport_events_138:
-  :id: 138
-  :user_id: 5
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 131
-  :hash_id: yDqCGQyP
+  id: 452698812
+  user_id: 5
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 1789577539
+  hash_id: Xt9HLy-E
 currency_test_subscriptions_139:
-  :id: 139
-  :user_id: 5
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 131
-  :hash_id: ttjKXH6-
+  id: 7921964027
+  user_id: 5
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 1789577539
+  hash_id: D6WbkDgW
 currency_test_tv_140:
-  :id: 140
-  :user_id: 5
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 131
-  :hash_id: 0ftahN5c
+  id: 3297290570
+  user_id: 5
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 1789577539
+  hash_id: gOgLNC0d
 currency_test_video_games_141:
-  :id: 141
-  :user_id: 5
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 131
-  :hash_id: ISK5k2Pi
+  id: 3112097989
+  user_id: 5
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 1789577539
+  hash_id: YCpc68k-
 currency_test_food_drinks_132:
-  :id: 132
-  :user_id: 5
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: IDDukBj0
+  id: 4888060654
+  user_id: 5
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: 4o1zTMtc
 currency_test_bars_pubs_133:
-  :id: 133
-  :user_id: 5
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 132
-  :hash_id: 7nOgFvEG
+  id: 2968186861
+  user_id: 5
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 4888060654
+  hash_id: Ni6luIPz
 currency_test_fast_food_134:
-  :id: 134
-  :user_id: 5
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 132
-  :hash_id: CgosG62l
+  id: 8842130465
+  user_id: 5
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 4888060654
+  hash_id: KZXei9Mr
 currency_test_groceries_135:
-  :id: 135
-  :user_id: 5
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 132
-  :hash_id: XFmQrBIS
+  id: 8417685084
+  user_id: 5
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 4888060654
+  hash_id: ov9_PRQ_
 currency_test_order_takeout_136:
-  :id: 136
-  :user_id: 5
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 132
-  :hash_id: cg2YTjkc
+  id: 7039955520
+  user_id: 5
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 4888060654
+  hash_id: HgK9DZHy
 currency_test_restaurant_137:
-  :id: 137
-  :user_id: 5
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 132
-  :hash_id: 5m7xzPtk
+  id: 6440982861
+  user_id: 5
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 4888060654
+  hash_id: ZUdbq9QV
 currency_test_health_133:
-  :id: 133
-  :user_id: 5
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: OWwoEgpf
+  id: 232673629
+  user_id: 5
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: 0ZdN8QPS
 currency_test_household_134:
-  :id: 134
-  :user_id: 5
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: MqORWRlU
+  id: 3053519370
+  user_id: 5
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: UshtomdH
 currency_test_income_135:
-  :id: 135
-  :user_id: 5
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: FuVfAmNL
+  id: 8825196842
+  user_id: 5
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: "-YZqCqKt"
 currency_test_investments_136:
-  :id: 136
-  :user_id: 5
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: m9KSlOp2
+  id: 9706201094
+  user_id: 5
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: bNP5P9fU
 currency_test_other_137:
-  :id: 137
-  :user_id: 5
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: fu7Buy5D
+  id: 3313912326
+  user_id: 5
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: jJoYo7Nr
 currency_test_shopping_138:
-  :id: 138
-  :user_id: 5
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: Mhvc4LNh
+  id: 857471331
+  user_id: 5
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: rqfPzyo9
 currency_test_transport_139:
-  :id: 139
-  :user_id: 5
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: AahjUhW_
+  id: 1568420116
+  user_id: 5
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: SfUNFKaw
 currency_test_vehicle_140:
-  :id: 140
-  :user_id: 5
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: SHlmdOCH
+  id: 2680498353
+  user_id: 5
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: GFD2AbL0
 endless_page_entertainment_157:
-  :id: 157
-  :user_id: 6
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: d0BwHR3E
+  id: 1164105119
+  user_id: 6
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: bEr0jncH
 endless_page_date_158:
-  :id: 158
-  :user_id: 6
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 157
-  :hash_id: ia_131jw
+  id: 7475630825
+  user_id: 6
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 1164105119
+  hash_id: A58JIsWN
 endless_page_cinema_159:
-  :id: 159
-  :user_id: 6
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 158
-  :hash_id: 6Lm9Qs1e
+  id: 2010583533
+  user_id: 6
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 7475630825
+  hash_id: WU_E4lbu
 endless_page_hobbies_159:
-  :id: 159
-  :user_id: 6
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 157
-  :hash_id: BbnuR0LU
+  id: 3605228549
+  user_id: 6
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 1164105119
+  hash_id: BQv3Vuxc
 endless_page_holiday_160:
-  :id: 160
-  :user_id: 6
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 157
-  :hash_id: sPegSN0z
+  id: 5528906332
+  user_id: 6
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 1164105119
+  hash_id: ZaQ4lVAG
 endless_page_lottery_gambling_161:
-  :id: 161
-  :user_id: 6
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 157
-  :hash_id: N1Y-h3TS
+  id: 7711629263
+  user_id: 6
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 1164105119
+  hash_id: zlEbrhC0
 endless_page_social_162:
-  :id: 162
-  :user_id: 6
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 157
-  :hash_id: UN2EDkLZ
+  id: 9294747476
+  user_id: 6
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 1164105119
+  hash_id: MfUNfJD0
 endless_page_software_163:
-  :id: 163
-  :user_id: 6
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 157
-  :hash_id: GmHrEk_V
+  id: 9588810791
+  user_id: 6
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 1164105119
+  hash_id: QN0sV-gb
 endless_page_sport_events_164:
-  :id: 164
-  :user_id: 6
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 157
-  :hash_id: iQhlvD86
+  id: 4730185652
+  user_id: 6
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 1164105119
+  hash_id: U4m1WtpZ
 endless_page_subscriptions_165:
-  :id: 165
-  :user_id: 6
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 157
-  :hash_id: BS-HtosR
+  id: 4308089940
+  user_id: 6
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 1164105119
+  hash_id: oL7Nt7Kx
 endless_page_tv_166:
-  :id: 166
-  :user_id: 6
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 157
-  :hash_id: aCRz8Td-
+  id: 7075287372
+  user_id: 6
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 1164105119
+  hash_id: NJfTLSXr
 endless_page_video_games_167:
-  :id: 167
-  :user_id: 6
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 157
-  :hash_id: iTc3AWlH
+  id: 1425262916
+  user_id: 6
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 1164105119
+  hash_id: GWq79wwK
 endless_page_food_drinks_158:
-  :id: 158
-  :user_id: 6
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: pEWSfYwx
+  id: 1616812245
+  user_id: 6
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: EQntkNVH
 endless_page_bars_pubs_159:
-  :id: 159
-  :user_id: 6
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 158
-  :hash_id: Y-52gYzM
+  id: 8166014139
+  user_id: 6
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 1616812245
+  hash_id: GixEMe_d
 endless_page_fast_food_160:
-  :id: 160
-  :user_id: 6
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 158
-  :hash_id: WDXg2yZH
+  id: 7753807945
+  user_id: 6
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 1616812245
+  hash_id: 6NrjFTdl
 endless_page_groceries_161:
-  :id: 161
-  :user_id: 6
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 158
-  :hash_id: 99x7Yc91
+  id: 5019750452
+  user_id: 6
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 1616812245
+  hash_id: FMtZFZXg
 endless_page_order_takeout_162:
-  :id: 162
-  :user_id: 6
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 158
-  :hash_id: 8IBXMySr
+  id: 5376760419
+  user_id: 6
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 1616812245
+  hash_id: 1mWzTzDs
 endless_page_restaurant_163:
-  :id: 163
-  :user_id: 6
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 158
-  :hash_id: hrQ4nVgW
+  id: 8706507114
+  user_id: 6
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 1616812245
+  hash_id: 04WJCNwd
 endless_page_health_159:
-  :id: 159
-  :user_id: 6
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: EfRzWsUT
+  id: 5607833608
+  user_id: 6
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: cQ-nt1QU
 endless_page_household_160:
-  :id: 160
-  :user_id: 6
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: 2J92B9f0
+  id: 4735506089
+  user_id: 6
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: "-FU5Ml_I"
 endless_page_income_161:
-  :id: 161
-  :user_id: 6
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: aSDbKz2j
+  id: 6094635310
+  user_id: 6
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: IXSYVq0Y
 endless_page_investments_162:
-  :id: 162
-  :user_id: 6
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: AKMIIhlB
+  id: 9072890766
+  user_id: 6
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: bEtOmUAT
 endless_page_other_163:
-  :id: 163
-  :user_id: 6
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: Ejv5F0Dw
+  id: 4091485412
+  user_id: 6
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: 9mttJKWW
 endless_page_shopping_164:
-  :id: 164
-  :user_id: 6
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: yTJdNDCz
+  id: 1373449291
+  user_id: 6
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: mMEbatnX
 endless_page_transport_165:
-  :id: 165
-  :user_id: 6
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: Xlx--uKP
+  id: 1422413228
+  user_id: 6
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: VbOC5LZt
 endless_page_vehicle_166:
-  :id: 166
-  :user_id: 6
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: FxBoUqJu
+  id: 2014694391
+  user_id: 6
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: q-jPSapi
 destroy_entertainment_183:
-  :id: 183
-  :user_id: 7
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: IEP-aidw
+  id: 5566406576
+  user_id: 7
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: MWODQ4BF
 destroy_date_184:
-  :id: 184
-  :user_id: 7
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 183
-  :hash_id: iLj03tI5
+  id: 8813974603
+  user_id: 7
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 5566406576
+  hash_id: P4x3sWJ0
 destroy_cinema_185:
-  :id: 185
-  :user_id: 7
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 184
-  :hash_id: 6azehbHI
+  id: 2711528374
+  user_id: 7
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 8813974603
+  hash_id: VhbgO5Av
 destroy_hobbies_185:
-  :id: 185
-  :user_id: 7
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 183
-  :hash_id: WZpMdYwg
+  id: 6254572679
+  user_id: 7
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 5566406576
+  hash_id: 5Msm7icm
 destroy_holiday_186:
-  :id: 186
-  :user_id: 7
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 183
-  :hash_id: qYMJdEEM
+  id: 4816095557
+  user_id: 7
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 5566406576
+  hash_id: fF_UrsJj
 destroy_lottery_gambling_187:
-  :id: 187
-  :user_id: 7
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 183
-  :hash_id: 8Ho782EN
+  id: 7739410391
+  user_id: 7
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 5566406576
+  hash_id: jbXf6DHE
 destroy_social_188:
-  :id: 188
-  :user_id: 7
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 183
-  :hash_id: xQ0tiTtR
+  id: 9311018505
+  user_id: 7
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 5566406576
+  hash_id: NJXVratk
 destroy_software_189:
-  :id: 189
-  :user_id: 7
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 183
-  :hash_id: Hl6kV1Tn
+  id: 6488525999
+  user_id: 7
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 5566406576
+  hash_id: _wYRnFXr
 destroy_sport_events_190:
-  :id: 190
-  :user_id: 7
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 183
-  :hash_id: V_31_h2j
+  id: 3368114008
+  user_id: 7
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 5566406576
+  hash_id: VdJpWmy4
 destroy_subscriptions_191:
-  :id: 191
-  :user_id: 7
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 183
-  :hash_id: yvc8pQaC
+  id: 439998545
+  user_id: 7
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 5566406576
+  hash_id: rCT2AiwN
 destroy_tv_192:
-  :id: 192
-  :user_id: 7
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 183
-  :hash_id: xGp4hkxx
+  id: 1110600940
+  user_id: 7
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 5566406576
+  hash_id: XPemC1CW
 destroy_video_games_193:
-  :id: 193
-  :user_id: 7
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 183
-  :hash_id: 4hDEHEd0
+  id: 6703374924
+  user_id: 7
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 5566406576
+  hash_id: 7GuQTPDQ
 destroy_food_drinks_184:
-  :id: 184
-  :user_id: 7
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: f2ilR7MG
+  id: 8005055101
+  user_id: 7
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: rk-wviOF
 destroy_bars_pubs_185:
-  :id: 185
-  :user_id: 7
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 184
-  :hash_id: PAdlE_u4
+  id: 1160463318
+  user_id: 7
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 8005055101
+  hash_id: ZGv4B9Z3
 destroy_fast_food_186:
-  :id: 186
-  :user_id: 7
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 184
-  :hash_id: A2mGq0Il
+  id: 3281504631
+  user_id: 7
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 8005055101
+  hash_id: LCqaV6AA
 destroy_groceries_187:
-  :id: 187
-  :user_id: 7
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 184
-  :hash_id: iw_PCBHQ
+  id: 4925471407
+  user_id: 7
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 8005055101
+  hash_id: i06W3G5y
 destroy_order_takeout_188:
-  :id: 188
-  :user_id: 7
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 184
-  :hash_id: _Jz6iY9t
+  id: 2898739300
+  user_id: 7
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 8005055101
+  hash_id: lORsEz4y
 destroy_restaurant_189:
-  :id: 189
-  :user_id: 7
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 184
-  :hash_id: IzCtL837
+  id: 3889842928
+  user_id: 7
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 8005055101
+  hash_id: 4Wdgzb5K
 destroy_health_185:
-  :id: 185
-  :user_id: 7
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: X4N57NFS
+  id: 9245270474
+  user_id: 7
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: nCmSwE03
 destroy_household_186:
-  :id: 186
-  :user_id: 7
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: 0oKgOi3k
+  id: 1380141317
+  user_id: 7
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: sONJZD6J
 destroy_income_187:
-  :id: 187
-  :user_id: 7
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: tAwJyRQx
+  id: 5883856449
+  user_id: 7
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: AtebdwQg
 destroy_investments_188:
-  :id: 188
-  :user_id: 7
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: etqp6QFc
+  id: 1450987575
+  user_id: 7
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: 3OXELNFj
 destroy_other_189:
-  :id: 189
-  :user_id: 7
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: 48UdsaFU
+  id: 9217586510
+  user_id: 7
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: 9EACQQ3e
 destroy_shopping_190:
-  :id: 190
-  :user_id: 7
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: kATksC-C
+  id: 3368103856
+  user_id: 7
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: 3cSDLTsn
 destroy_transport_191:
-  :id: 191
-  :user_id: 7
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: 5ueX8M_s
+  id: 8303665297
+  user_id: 7
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: zNYiYNxL
 destroy_vehicle_192:
-  :id: 192
-  :user_id: 7
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: aizmsLMB
+  id: 9387161403
+  user_id: 7
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: NQEg1pjJ
 transactions_entertainment_209:
-  :id: 209
-  :user_id: 8
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: NZC-D-fD
+  id: 9400864725
+  user_id: 8
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: q_c9Mwpy
 transactions_date_210:
-  :id: 210
-  :user_id: 8
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 209
-  :hash_id: jTUj3jsS
+  id: 9773397663
+  user_id: 8
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 9400864725
+  hash_id: JmWj_Wrv
 transactions_cinema_211:
-  :id: 211
-  :user_id: 8
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 210
-  :hash_id: ZOpbsJcb
+  id: 8065181442
+  user_id: 8
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 9773397663
+  hash_id: kCuIpshE
 transactions_hobbies_211:
-  :id: 211
-  :user_id: 8
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 209
-  :hash_id: 2nRDzZR4
+  id: 5717909608
+  user_id: 8
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 9400864725
+  hash_id: GI2lH3-7
 transactions_holiday_212:
-  :id: 212
-  :user_id: 8
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 209
-  :hash_id: XCp3s8Tx
+  id: 75850077
+  user_id: 8
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 9400864725
+  hash_id: JZwJFhAE
 transactions_lottery_gambling_213:
-  :id: 213
-  :user_id: 8
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 209
-  :hash_id: mCA19keM
+  id: 6204123511
+  user_id: 8
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 9400864725
+  hash_id: qKDhwO9q
 transactions_social_214:
-  :id: 214
-  :user_id: 8
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 209
-  :hash_id: YnQOdSDb
+  id: 5185979340
+  user_id: 8
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 9400864725
+  hash_id: Zp6pwEL-
 transactions_software_215:
-  :id: 215
-  :user_id: 8
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 209
-  :hash_id: OvAAXI2Z
+  id: 1290683866
+  user_id: 8
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 9400864725
+  hash_id: nFzmb7kB
 transactions_sport_events_216:
-  :id: 216
-  :user_id: 8
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 209
-  :hash_id: DxDJ3y4m
+  id: 7304187426
+  user_id: 8
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 9400864725
+  hash_id: mTkhh-x9
 transactions_subscriptions_217:
-  :id: 217
-  :user_id: 8
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 209
-  :hash_id: vEn-6JxL
+  id: 4646935902
+  user_id: 8
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 9400864725
+  hash_id: 8n8nGqYV
 transactions_tv_218:
-  :id: 218
-  :user_id: 8
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 209
-  :hash_id: y6ptpwI-
+  id: 2525654499
+  user_id: 8
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 9400864725
+  hash_id: dZ9tUUQJ
 transactions_video_games_219:
-  :id: 219
-  :user_id: 8
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 209
-  :hash_id: bucltHxa
+  id: 3350393575
+  user_id: 8
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 9400864725
+  hash_id: 6IoufsUK
 transactions_food_drinks_210:
-  :id: 210
-  :user_id: 8
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: GAcMLHtW
+  id: 9400486943
+  user_id: 8
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: J7ath8r4
 transactions_bars_pubs_211:
-  :id: 211
-  :user_id: 8
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 210
-  :hash_id: b0hlDOR9
+  id: 3274689647
+  user_id: 8
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 9400486943
+  hash_id: ojnnkJkS
 transactions_fast_food_212:
-  :id: 212
-  :user_id: 8
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 210
-  :hash_id: D1To8Ddz
+  id: 7727466880
+  user_id: 8
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 9400486943
+  hash_id: sCT4NWmh
 transactions_groceries_213:
-  :id: 213
-  :user_id: 8
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 210
-  :hash_id: GQzSyxTX
+  id: 1716309454
+  user_id: 8
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 9400486943
+  hash_id: IIkz-uVw
 transactions_order_takeout_214:
-  :id: 214
-  :user_id: 8
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 210
-  :hash_id: x9w-RFZI
+  id: 8626982551
+  user_id: 8
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 9400486943
+  hash_id: g08uCymh
 transactions_restaurant_215:
-  :id: 215
-  :user_id: 8
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 210
-  :hash_id: 0E6gEQLu
+  id: 4620829436
+  user_id: 8
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 9400486943
+  hash_id: tVlJyjYc
 transactions_health_211:
-  :id: 211
-  :user_id: 8
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: PKEVlpDu
+  id: 3782435149
+  user_id: 8
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: cxbSphqh
 transactions_household_212:
-  :id: 212
-  :user_id: 8
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: SwzTTikJ
+  id: 1917763537
+  user_id: 8
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: kH4iIEww
 transactions_income_213:
-  :id: 213
-  :user_id: 8
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: mfK1lzQB
+  id: 4472720075
+  user_id: 8
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: D8P15ZOc
 transactions_investments_214:
-  :id: 214
-  :user_id: 8
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: zijR9SFF
+  id: 8372923659
+  user_id: 8
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: KbG9FfRS
 transactions_other_215:
-  :id: 215
-  :user_id: 8
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: wFemePpZ
+  id: 7527458550
+  user_id: 8
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: WWpEJn_U
 transactions_shopping_216:
-  :id: 216
-  :user_id: 8
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: moy_1llW
+  id: 6862950677
+  user_id: 8
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: qByOS-ia
 transactions_transport_217:
-  :id: 217
-  :user_id: 8
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: rEv6WGrh
+  id: 462694825
+  user_id: 8
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: eupZTapW
 transactions_vehicle_218:
-  :id: 218
-  :user_id: 8
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: AcQEKJ1P
+  id: 6285444163
+  user_id: 8
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: pQGQf93T
 schedules_entertainment_235:
-  :id: 235
-  :user_id: 9
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: b-ZV8GXx
+  id: 9864245065
+  user_id: 9
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: EeGb0_t-
 schedules_date_236:
-  :id: 236
-  :user_id: 9
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 235
-  :hash_id: "-gaVfF-g"
+  id: 5540757567
+  user_id: 9
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 9864245065
+  hash_id: z7QCV_5V
 schedules_cinema_237:
-  :id: 237
-  :user_id: 9
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 236
-  :hash_id: GvevCIRf
+  id: 303997471
+  user_id: 9
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 5540757567
+  hash_id: knI-IkNC
 schedules_hobbies_237:
-  :id: 237
-  :user_id: 9
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 235
-  :hash_id: h7iohrfX
+  id: 8139979909
+  user_id: 9
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 9864245065
+  hash_id: c7hBaYeM
 schedules_holiday_238:
-  :id: 238
-  :user_id: 9
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 235
-  :hash_id: a-W4FOzT
+  id: 1382149963
+  user_id: 9
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 9864245065
+  hash_id: h8GvcDKA
 schedules_lottery_gambling_239:
-  :id: 239
-  :user_id: 9
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 235
-  :hash_id: bShLW1gu
+  id: 6286198522
+  user_id: 9
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 9864245065
+  hash_id: dudgtClR
 schedules_social_240:
-  :id: 240
-  :user_id: 9
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 235
-  :hash_id: g16V9wqV
+  id: 3114952060
+  user_id: 9
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 9864245065
+  hash_id: hsw0ga8i
 schedules_software_241:
-  :id: 241
-  :user_id: 9
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 235
-  :hash_id: MoWncRwG
+  id: 8227087550
+  user_id: 9
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 9864245065
+  hash_id: kKAkAwrM
 schedules_sport_events_242:
-  :id: 242
-  :user_id: 9
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 235
-  :hash_id: V-Vr0DNp
+  id: 5776237115
+  user_id: 9
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 9864245065
+  hash_id: qlSm7-i1
 schedules_subscriptions_243:
-  :id: 243
-  :user_id: 9
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 235
-  :hash_id: 6wWccgqe
+  id: 3318161295
+  user_id: 9
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 9864245065
+  hash_id: c4SGEfBP
 schedules_tv_244:
-  :id: 244
-  :user_id: 9
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 235
-  :hash_id: mH__2Hpg
+  id: 6327195409
+  user_id: 9
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 9864245065
+  hash_id: sh1ps-G3
 schedules_video_games_245:
-  :id: 245
-  :user_id: 9
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 235
-  :hash_id: zPPvJpmc
+  id: 2277684618
+  user_id: 9
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 9864245065
+  hash_id: "-b_dX5to"
 schedules_food_drinks_236:
-  :id: 236
-  :user_id: 9
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: 6ouruBkw
+  id: 8590272894
+  user_id: 9
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: vPeZp4eq
 schedules_bars_pubs_237:
-  :id: 237
-  :user_id: 9
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 236
-  :hash_id: jrDOiAum
+  id: 4480701062
+  user_id: 9
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 8590272894
+  hash_id: SfaSLgLc
 schedules_fast_food_238:
-  :id: 238
-  :user_id: 9
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 236
-  :hash_id: BVLsnocx
+  id: 73530441
+  user_id: 9
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 8590272894
+  hash_id: JjovlTZv
 schedules_groceries_239:
-  :id: 239
-  :user_id: 9
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 236
-  :hash_id: gsX5-6Vn
+  id: 635797671
+  user_id: 9
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 8590272894
+  hash_id: zgRF-Qy-
 schedules_order_takeout_240:
-  :id: 240
-  :user_id: 9
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 236
-  :hash_id: cjAjb5SU
+  id: 1561208439
+  user_id: 9
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 8590272894
+  hash_id: JxFVGzjr
 schedules_restaurant_241:
-  :id: 241
-  :user_id: 9
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 236
-  :hash_id: V9MJt-Gq
+  id: 8004286685
+  user_id: 9
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 8590272894
+  hash_id: g8eK2hJ-
 schedules_health_237:
-  :id: 237
-  :user_id: 9
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: hBQQDahc
+  id: 7368252642
+  user_id: 9
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: f4wDP4UW
 schedules_household_238:
-  :id: 238
-  :user_id: 9
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: X2tDABBY
+  id: 7314615254
+  user_id: 9
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: nnI1GWvw
 schedules_income_239:
-  :id: 239
-  :user_id: 9
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: ZayMmalN
+  id: 2508837478
+  user_id: 9
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: 2eKfiANZ
 schedules_investments_240:
-  :id: 240
-  :user_id: 9
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: 8CCPaRRF
+  id: 7673306479
+  user_id: 9
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: 40UCUKq7
 schedules_other_241:
-  :id: 241
-  :user_id: 9
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: Tzx2MRfE
+  id: 2698936105
+  user_id: 9
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: 6GXJpJqH
 schedules_shopping_242:
-  :id: 242
-  :user_id: 9
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: 3tkJucK8
+  id: 1857182635
+  user_id: 9
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: rsdQO8ua
 schedules_transport_243:
-  :id: 243
-  :user_id: 9
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: 5mONcFmW
+  id: 5123478916
+  user_id: 9
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: b1qMBcOT
 schedules_vehicle_244:
-  :id: 244
-  :user_id: 9
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: clE4pTOL
+  id: 179667432
+  user_id: 9
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: l7ChMiAT
 transaction_search_entertainment_261:
-  :id: 261
-  :user_id: 10
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: nCt_iDGf
+  id: 9713847716
+  user_id: 10
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: XMd04KGR
 transaction_search_date_262:
-  :id: 262
-  :user_id: 10
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 261
-  :hash_id: 2Uacp4m0
+  id: 8794988895
+  user_id: 10
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 9713847716
+  hash_id: 2zZ_CpJR
 transaction_search_cinema_263:
-  :id: 263
-  :user_id: 10
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 262
-  :hash_id: 4hu1fTxM
+  id: 9513144577
+  user_id: 10
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 8794988895
+  hash_id: bYWcr3hx
 transaction_search_hobbies_263:
-  :id: 263
-  :user_id: 10
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 261
-  :hash_id: omWiUTtX
+  id: 8319590830
+  user_id: 10
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 9713847716
+  hash_id: BrCUnhA9
 transaction_search_holiday_264:
-  :id: 264
-  :user_id: 10
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 261
-  :hash_id: u2_nDfAF
+  id: 2670908057
+  user_id: 10
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 9713847716
+  hash_id: l6CMi_Cq
 transaction_search_lottery_gambling_265:
-  :id: 265
-  :user_id: 10
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 261
-  :hash_id: qGks2Oz-
+  id: 6582577055
+  user_id: 10
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 9713847716
+  hash_id: u0jUpCRg
 transaction_search_social_266:
-  :id: 266
-  :user_id: 10
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 261
-  :hash_id: EuQxbQYu
+  id: 6676520249
+  user_id: 10
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 9713847716
+  hash_id: XDBDtgnS
 transaction_search_software_267:
-  :id: 267
-  :user_id: 10
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 261
-  :hash_id: B0X5354D
+  id: 2679071016
+  user_id: 10
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 9713847716
+  hash_id: SyzNce0t
 transaction_search_sport_events_268:
-  :id: 268
-  :user_id: 10
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 261
-  :hash_id: EVe3MYES
+  id: 4952043007
+  user_id: 10
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 9713847716
+  hash_id: Gdyn_Irz
 transaction_search_subscriptions_269:
-  :id: 269
-  :user_id: 10
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 261
-  :hash_id: C_rD4MV9
+  id: 914439812
+  user_id: 10
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 9713847716
+  hash_id: V_AVlE4p
 transaction_search_tv_270:
-  :id: 270
-  :user_id: 10
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 261
-  :hash_id: u-hYg9vU
+  id: 5111676969
+  user_id: 10
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 9713847716
+  hash_id: 0B_lvfjU
 transaction_search_video_games_271:
-  :id: 271
-  :user_id: 10
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 261
-  :hash_id: eVox_xMU
+  id: 9215957142
+  user_id: 10
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 9713847716
+  hash_id: qdx8Hhap
 transaction_search_food_drinks_262:
-  :id: 262
-  :user_id: 10
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: axMPzfJw
+  id: 2396383418
+  user_id: 10
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: DDTVYicZ
 transaction_search_bars_pubs_263:
-  :id: 263
-  :user_id: 10
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 262
-  :hash_id: UO0hiFcC
+  id: 8386187277
+  user_id: 10
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 2396383418
+  hash_id: CdWMv7E3
 transaction_search_fast_food_264:
-  :id: 264
-  :user_id: 10
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 262
-  :hash_id: ohujv8GQ
+  id: 9282411018
+  user_id: 10
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 2396383418
+  hash_id: tF5kAbA8
 transaction_search_groceries_265:
-  :id: 265
-  :user_id: 10
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 262
-  :hash_id: jhqJCBs9
+  id: 8988262471
+  user_id: 10
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 2396383418
+  hash_id: LDgGSGXo
 transaction_search_order_takeout_266:
-  :id: 266
-  :user_id: 10
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 262
-  :hash_id: I6BJBWv8
+  id: 3632350039
+  user_id: 10
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 2396383418
+  hash_id: VF7LBaLl
 transaction_search_restaurant_267:
-  :id: 267
-  :user_id: 10
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 262
-  :hash_id: zU7oeINU
+  id: 9589424007
+  user_id: 10
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 2396383418
+  hash_id: 70Wsz-i1
 transaction_search_health_263:
-  :id: 263
-  :user_id: 10
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: FGyPS1KJ
+  id: 1742459203
+  user_id: 10
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: NOBv3B93
 transaction_search_household_264:
-  :id: 264
-  :user_id: 10
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: h0oZ_KcM
+  id: 4601210090
+  user_id: 10
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: t6uhENMu
 transaction_search_income_265:
-  :id: 265
-  :user_id: 10
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: bKNuAiiq
+  id: 8739533481
+  user_id: 10
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: a6ltS4Qt
 transaction_search_investments_266:
-  :id: 266
-  :user_id: 10
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: wKAVMqnF
+  id: 9274975249
+  user_id: 10
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: 8tk7AOUO
 transaction_search_other_267:
-  :id: 267
-  :user_id: 10
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: W6Wy9x7j
+  id: 1709130319
+  user_id: 10
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: cK-JGnZx
 transaction_search_shopping_268:
-  :id: 268
-  :user_id: 10
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: l51vH0bV
+  id: 5211688599
+  user_id: 10
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: t2ee-1-3
 transaction_search_transport_269:
-  :id: 269
-  :user_id: 10
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: 9jujH-IP
+  id: 3083467154
+  user_id: 10
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: 5EcYdyDJ
 transaction_search_vehicle_270:
-  :id: 270
-  :user_id: 10
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: a2uhDv9T
+  id: 4510904130
+  user_id: 10
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: uqp2gTff
 schedules_overlap_entertainment_287:
-  :id: 287
-  :user_id: 11
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: 2xtICsTN
+  id: 7662504463
+  user_id: 11
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: IS-LjFOH
 schedules_overlap_date_288:
-  :id: 288
-  :user_id: 11
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 287
-  :hash_id: mM676cpH
+  id: 4190528008
+  user_id: 11
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 7662504463
+  hash_id: YGsu1XKo
 schedules_overlap_cinema_289:
-  :id: 289
-  :user_id: 11
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 288
-  :hash_id: WS7mQDY5
+  id: 3817330762
+  user_id: 11
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 4190528008
+  hash_id: 2YIfNB_W
 schedules_overlap_hobbies_289:
-  :id: 289
-  :user_id: 11
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 287
-  :hash_id: 2XiJ3U8q
+  id: 3368792821
+  user_id: 11
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 7662504463
+  hash_id: fy1YRgZr
 schedules_overlap_holiday_290:
-  :id: 290
-  :user_id: 11
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 287
-  :hash_id: DAKSYbjz
+  id: 5638218654
+  user_id: 11
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 7662504463
+  hash_id: bUTH4s0a
 schedules_overlap_lottery_gambling_291:
-  :id: 291
-  :user_id: 11
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 287
-  :hash_id: cFuYaG_0
+  id: 8011364477
+  user_id: 11
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 7662504463
+  hash_id: Pw054JAI
 schedules_overlap_social_292:
-  :id: 292
-  :user_id: 11
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 287
-  :hash_id: f_77DM85
+  id: 936769333
+  user_id: 11
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 7662504463
+  hash_id: i3I2lsxX
 schedules_overlap_software_293:
-  :id: 293
-  :user_id: 11
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 287
-  :hash_id: 4yp1o_eo
+  id: 4426624505
+  user_id: 11
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 7662504463
+  hash_id: fdDeHvtU
 schedules_overlap_sport_events_294:
-  :id: 294
-  :user_id: 11
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 287
-  :hash_id: d8vzaWMf
+  id: 3012590133
+  user_id: 11
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 7662504463
+  hash_id: L1mdfpjQ
 schedules_overlap_subscriptions_295:
-  :id: 295
-  :user_id: 11
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 287
-  :hash_id: dRUqVQhK
+  id: 3703694276
+  user_id: 11
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 7662504463
+  hash_id: YGHGZbxC
 schedules_overlap_tv_296:
-  :id: 296
-  :user_id: 11
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 287
-  :hash_id: amMJSt62
+  id: 5259400318
+  user_id: 11
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 7662504463
+  hash_id: qe8BxNV3
 schedules_overlap_video_games_297:
-  :id: 297
-  :user_id: 11
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 287
-  :hash_id: q5Ywjsit
+  id: 6661983495
+  user_id: 11
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 7662504463
+  hash_id: IO6fdfTc
 schedules_overlap_food_drinks_288:
-  :id: 288
-  :user_id: 11
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: _7LRGvU8
+  id: 8638066526
+  user_id: 11
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: ME9YOh3g
 schedules_overlap_bars_pubs_289:
-  :id: 289
-  :user_id: 11
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 288
-  :hash_id: Sc3LBe0_
+  id: 5366446615
+  user_id: 11
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 8638066526
+  hash_id: 7bT7SFWf
 schedules_overlap_fast_food_290:
-  :id: 290
-  :user_id: 11
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 288
-  :hash_id: qDQB-Eoo
+  id: 5987970268
+  user_id: 11
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 8638066526
+  hash_id: McvfIQ_t
 schedules_overlap_groceries_291:
-  :id: 291
-  :user_id: 11
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 288
-  :hash_id: wnYYJD20
+  id: 5236375840
+  user_id: 11
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 8638066526
+  hash_id: sI0Kq9Pl
 schedules_overlap_order_takeout_292:
-  :id: 292
-  :user_id: 11
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 288
-  :hash_id: uJ6pbJFb
+  id: 2953776878
+  user_id: 11
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 8638066526
+  hash_id: IxD-hrwH
 schedules_overlap_restaurant_293:
-  :id: 293
-  :user_id: 11
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 288
-  :hash_id: r9cDsZmP
+  id: 6188822467
+  user_id: 11
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 8638066526
+  hash_id: 9MvBUr6R
 schedules_overlap_health_289:
-  :id: 289
-  :user_id: 11
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: 6y__0v-I
+  id: 8651265092
+  user_id: 11
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: c56dRDwi
 schedules_overlap_household_290:
-  :id: 290
-  :user_id: 11
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: VQ5ABhkU
+  id: 8406254090
+  user_id: 11
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: QkrzMDe3
 schedules_overlap_income_291:
-  :id: 291
-  :user_id: 11
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: vE0r4rYH
+  id: 5974262068
+  user_id: 11
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: 3yJrPeu8
 schedules_overlap_investments_292:
-  :id: 292
-  :user_id: 11
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: VLlOIrej
+  id: 7798225078
+  user_id: 11
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: 5Yy3K4kn
 schedules_overlap_other_293:
-  :id: 293
-  :user_id: 11
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: 26LOYUNq
+  id: 3401535239
+  user_id: 11
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: 1ECMLgKW
 schedules_overlap_shopping_294:
-  :id: 294
-  :user_id: 11
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: sPGs8ssj
+  id: 1016802535
+  user_id: 11
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: xCA61qki
 schedules_overlap_transport_295:
-  :id: 295
-  :user_id: 11
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: Ffltqbhk
+  id: 4041560659
+  user_id: 11
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: Az9m5NO1
 schedules_overlap_vehicle_296:
-  :id: 296
-  :user_id: 11
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: Qn2JNfHI
+  id: 2933867102
+  user_id: 11
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: hBBRrGsz
 duplicate_transactions_entertainment_313:
-  :id: 313
-  :user_id: 12
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: M8DEXxOJ
+  id: 5962963589
+  user_id: 12
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: Ckk_ND72
 duplicate_transactions_date_314:
-  :id: 314
-  :user_id: 12
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 313
-  :hash_id: zE_G3r3W
+  id: 7838223744
+  user_id: 12
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 5962963589
+  hash_id: QASpT1Ha
 duplicate_transactions_cinema_315:
-  :id: 315
-  :user_id: 12
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 314
-  :hash_id: MqPTmKZR
+  id: 7516271057
+  user_id: 12
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 7838223744
+  hash_id: JipgaU0m
 duplicate_transactions_hobbies_315:
-  :id: 315
-  :user_id: 12
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 313
-  :hash_id: biq0jONv
+  id: 7359634260
+  user_id: 12
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 5962963589
+  hash_id: b0ooeh_i
 duplicate_transactions_holiday_316:
-  :id: 316
-  :user_id: 12
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 313
-  :hash_id: 7cptUw98
+  id: 2513189075
+  user_id: 12
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 5962963589
+  hash_id: 1Zc687GS
 duplicate_transactions_lottery_gambling_317:
-  :id: 317
-  :user_id: 12
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 313
-  :hash_id: MXsqmddD
+  id: 2389977753
+  user_id: 12
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 5962963589
+  hash_id: Xx-pAeUv
 duplicate_transactions_social_318:
-  :id: 318
-  :user_id: 12
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 313
-  :hash_id: 32N7Q25M
+  id: 7156928911
+  user_id: 12
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 5962963589
+  hash_id: JVWJp0dB
 duplicate_transactions_software_319:
-  :id: 319
-  :user_id: 12
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 313
-  :hash_id: losxuBzx
+  id: 4836781482
+  user_id: 12
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 5962963589
+  hash_id: IkW_4UhQ
 duplicate_transactions_sport_events_320:
-  :id: 320
-  :user_id: 12
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 313
-  :hash_id: 0eycVa9_
+  id: 6833845203
+  user_id: 12
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 5962963589
+  hash_id: Bic55f34
 duplicate_transactions_subscriptions_321:
-  :id: 321
-  :user_id: 12
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 313
-  :hash_id: z3IDPfw-
+  id: 1091217292
+  user_id: 12
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 5962963589
+  hash_id: d42HL6en
 duplicate_transactions_tv_322:
-  :id: 322
-  :user_id: 12
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 313
-  :hash_id: HFVhnQMq
+  id: 5635212816
+  user_id: 12
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 5962963589
+  hash_id: 5vythg9p
 duplicate_transactions_video_games_323:
-  :id: 323
-  :user_id: 12
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 313
-  :hash_id: 9Q7tX4MR
+  id: 7217304181
+  user_id: 12
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 5962963589
+  hash_id: HzmTcMrq
 duplicate_transactions_food_drinks_314:
-  :id: 314
-  :user_id: 12
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: "-gbesOhq"
+  id: 4017497346
+  user_id: 12
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: PEsUw8ZF
 duplicate_transactions_bars_pubs_315:
-  :id: 315
-  :user_id: 12
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 314
-  :hash_id: P4GZ1uAJ
+  id: 8429511473
+  user_id: 12
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 4017497346
+  hash_id: FyhzuCrD
 duplicate_transactions_fast_food_316:
-  :id: 316
-  :user_id: 12
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 314
-  :hash_id: 7AL0-lxy
+  id: 2190614812
+  user_id: 12
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 4017497346
+  hash_id: vbEc9hYw
 duplicate_transactions_groceries_317:
-  :id: 317
-  :user_id: 12
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 314
-  :hash_id: V7AZnp3w
+  id: 1029477618
+  user_id: 12
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 4017497346
+  hash_id: tlJunZEU
 duplicate_transactions_order_takeout_318:
-  :id: 318
-  :user_id: 12
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 314
-  :hash_id: Rd-l8tu9
+  id: 6306792374
+  user_id: 12
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 4017497346
+  hash_id: d8ReWQ6i
 duplicate_transactions_restaurant_319:
-  :id: 319
-  :user_id: 12
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 314
-  :hash_id: baXuEh9_
+  id: 3162807957
+  user_id: 12
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 4017497346
+  hash_id: MdNEI1Qm
 duplicate_transactions_health_315:
-  :id: 315
-  :user_id: 12
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: IP5w22Th
+  id: 8020756793
+  user_id: 12
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: Hicnmg2U
 duplicate_transactions_household_316:
-  :id: 316
-  :user_id: 12
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: MmtXfikv
+  id: 4047631204
+  user_id: 12
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: R3qvH7-N
 duplicate_transactions_income_317:
-  :id: 317
-  :user_id: 12
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: Rn1bFwiw
+  id: 726964742
+  user_id: 12
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: yUmc78ZJ
 duplicate_transactions_investments_318:
-  :id: 318
-  :user_id: 12
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: fdkhelB1
+  id: 6928339351
+  user_id: 12
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: 1Y4Ch8Nb
 duplicate_transactions_other_319:
-  :id: 319
-  :user_id: 12
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: b0c64TnY
+  id: 8969757303
+  user_id: 12
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: Vl8K2hm-
 duplicate_transactions_shopping_320:
-  :id: 320
-  :user_id: 12
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: WeyRuV6z
+  id: 2454091129
+  user_id: 12
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: OnkYdQCf
 duplicate_transactions_transport_321:
-  :id: 321
-  :user_id: 12
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: rMWxG8Lq
+  id: 9799764745
+  user_id: 12
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: 7V2un21f
 duplicate_transactions_vehicle_322:
-  :id: 322
-  :user_id: 12
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: MX-xjemq
+  id: 2312360054
+  user_id: 12
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: FNh-4gyD
 pause_schedule_entertainment_339:
-  :id: 339
-  :user_id: 13
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: 91N9UM98
+  id: 2746180554
+  user_id: 13
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: ad1MdE6G
 pause_schedule_date_340:
-  :id: 340
-  :user_id: 13
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 339
-  :hash_id: d27NU9y7
+  id: 4209625583
+  user_id: 13
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 2746180554
+  hash_id: Iqq_dtBB
 pause_schedule_cinema_341:
-  :id: 341
-  :user_id: 13
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 340
-  :hash_id: ZynH5CpU
+  id: 9562058561
+  user_id: 13
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 4209625583
+  hash_id: BWTcYRTR
 pause_schedule_hobbies_341:
-  :id: 341
-  :user_id: 13
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 339
-  :hash_id: NdAtbJ-k
+  id: 3400391267
+  user_id: 13
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 2746180554
+  hash_id: V8EYMTOY
 pause_schedule_holiday_342:
-  :id: 342
-  :user_id: 13
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 339
-  :hash_id: JXwyzjrO
+  id: 3055397676
+  user_id: 13
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 2746180554
+  hash_id: Y59fnldz
 pause_schedule_lottery_gambling_343:
-  :id: 343
-  :user_id: 13
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 339
-  :hash_id: hLEbtUa0
+  id: 3728522819
+  user_id: 13
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 2746180554
+  hash_id: gtM_pxI7
 pause_schedule_social_344:
-  :id: 344
-  :user_id: 13
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 339
-  :hash_id: g5Z236Dl
+  id: 4938809298
+  user_id: 13
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 2746180554
+  hash_id: fdXjrcuP
 pause_schedule_software_345:
-  :id: 345
-  :user_id: 13
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 339
-  :hash_id: ohAPsI9K
+  id: 3760331145
+  user_id: 13
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 2746180554
+  hash_id: ebq_meG_
 pause_schedule_sport_events_346:
-  :id: 346
-  :user_id: 13
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 339
-  :hash_id: Xeu2RrS-
+  id: 4306059226
+  user_id: 13
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 2746180554
+  hash_id: HZ5mnSTC
 pause_schedule_subscriptions_347:
-  :id: 347
-  :user_id: 13
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 339
-  :hash_id: IEutxbjV
+  id: 2619668408
+  user_id: 13
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 2746180554
+  hash_id: jF0-qo16
 pause_schedule_tv_348:
-  :id: 348
-  :user_id: 13
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 339
-  :hash_id: QBkKD1PJ
+  id: 5191117129
+  user_id: 13
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 2746180554
+  hash_id: "-dJKzccQ"
 pause_schedule_video_games_349:
-  :id: 349
-  :user_id: 13
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 339
-  :hash_id: AweNwF1t
+  id: 889035360
+  user_id: 13
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 2746180554
+  hash_id: FMM6ioGs
 pause_schedule_food_drinks_340:
-  :id: 340
-  :user_id: 13
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: iRIQqo7L
+  id: 9376097202
+  user_id: 13
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: BVfvFJ1X
 pause_schedule_bars_pubs_341:
-  :id: 341
-  :user_id: 13
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 340
-  :hash_id: IOmnhi6t
+  id: 9937368103
+  user_id: 13
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 9376097202
+  hash_id: "-jPSAfa4"
 pause_schedule_fast_food_342:
-  :id: 342
-  :user_id: 13
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 340
-  :hash_id: _a5VTOev
+  id: 1108578226
+  user_id: 13
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 9376097202
+  hash_id: s-yolt-M
 pause_schedule_groceries_343:
-  :id: 343
-  :user_id: 13
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 340
-  :hash_id: 2VOAv-5v
+  id: 3878528075
+  user_id: 13
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 9376097202
+  hash_id: 3Gage5x8
 pause_schedule_order_takeout_344:
-  :id: 344
-  :user_id: 13
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 340
-  :hash_id: 4_885cWl
+  id: 4042014730
+  user_id: 13
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 9376097202
+  hash_id: sgaBS2FU
 pause_schedule_restaurant_345:
-  :id: 345
-  :user_id: 13
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 340
-  :hash_id: _2dbNyzc
+  id: 3610511239
+  user_id: 13
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 9376097202
+  hash_id: LUOE-F_P
 pause_schedule_health_341:
-  :id: 341
-  :user_id: 13
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: 7Bzv3ViK
+  id: 3244389606
+  user_id: 13
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: KU8JKiKL
 pause_schedule_household_342:
-  :id: 342
-  :user_id: 13
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: QC7NxrNQ
+  id: 2134093748
+  user_id: 13
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: txJYCCv_
 pause_schedule_income_343:
-  :id: 343
-  :user_id: 13
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: t0qoP3Bo
+  id: 3640220646
+  user_id: 13
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: 6t2UFQCI
 pause_schedule_investments_344:
-  :id: 344
-  :user_id: 13
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: OW68lN_B
+  id: 3819538502
+  user_id: 13
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: iKgbi16Y
 pause_schedule_other_345:
-  :id: 345
-  :user_id: 13
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: JCDVcdsm
+  id: 4201111558
+  user_id: 13
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: XsJeBu3p
 pause_schedule_shopping_346:
-  :id: 346
-  :user_id: 13
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: ALYAZHgV
+  id: 8479927631
+  user_id: 13
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: o27CSz5N
 pause_schedule_transport_347:
-  :id: 347
-  :user_id: 13
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: TjOwicQ5
+  id: 3231754361
+  user_id: 13
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: lvdIYozp
 pause_schedule_vehicle_348:
-  :id: 348
-  :user_id: 13
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: dv1HkIdc
+  id: 6480459885
+  user_id: 13
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: RA3gHjqK
 schedule_period_ids_entertainment_365:
-  :id: 365
-  :user_id: 14
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: CYVvCTds
+  id: 6569151860
+  user_id: 14
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: YxRuWfkX
 schedule_period_ids_date_366:
-  :id: 366
-  :user_id: 14
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 365
-  :hash_id: mkf8fG3A
+  id: 9863947777
+  user_id: 14
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 6569151860
+  hash_id: X6T5Bpra
 schedule_period_ids_cinema_367:
-  :id: 367
-  :user_id: 14
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 366
-  :hash_id: nocGj1KH
+  id: 339603333
+  user_id: 14
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 9863947777
+  hash_id: "-an1hfKU"
 schedule_period_ids_hobbies_367:
-  :id: 367
-  :user_id: 14
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 365
-  :hash_id: h4aGWgLp
+  id: 9990753973
+  user_id: 14
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 6569151860
+  hash_id: y4eGjwHn
 schedule_period_ids_holiday_368:
-  :id: 368
-  :user_id: 14
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 365
-  :hash_id: I7x0tTmd
+  id: 8898326232
+  user_id: 14
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 6569151860
+  hash_id: 8GUsQSBC
 schedule_period_ids_lottery_gambling_369:
-  :id: 369
-  :user_id: 14
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 365
-  :hash_id: bmUU7KLo
+  id: 8301944567
+  user_id: 14
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 6569151860
+  hash_id: JTtnwEM9
 schedule_period_ids_social_370:
-  :id: 370
-  :user_id: 14
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 365
-  :hash_id: RXwdl4Z8
+  id: 5549230824
+  user_id: 14
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 6569151860
+  hash_id: T0pS2lTc
 schedule_period_ids_software_371:
-  :id: 371
-  :user_id: 14
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 365
-  :hash_id: Hzb9dTvb
+  id: 7230274904
+  user_id: 14
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 6569151860
+  hash_id: E7aLgKwh
 schedule_period_ids_sport_events_372:
-  :id: 372
-  :user_id: 14
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 365
-  :hash_id: Af0-3hlH
+  id: 4224502213
+  user_id: 14
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 6569151860
+  hash_id: BSCOrQ7e
 schedule_period_ids_subscriptions_373:
-  :id: 373
-  :user_id: 14
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 365
-  :hash_id: u-wGsGPD
+  id: 563909646
+  user_id: 14
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 6569151860
+  hash_id: ItY_nEwP
 schedule_period_ids_tv_374:
-  :id: 374
-  :user_id: 14
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 365
-  :hash_id: RyTXqqhO
+  id: 4032381918
+  user_id: 14
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 6569151860
+  hash_id: CDOukFP4
 schedule_period_ids_video_games_375:
-  :id: 375
-  :user_id: 14
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 365
-  :hash_id: fJKJYDW0
+  id: 3253145044
+  user_id: 14
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 6569151860
+  hash_id: Jb_iR4BL
 schedule_period_ids_food_drinks_366:
-  :id: 366
-  :user_id: 14
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: Ial3tsSE
+  id: 5672972092
+  user_id: 14
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: GC0VZjFa
 schedule_period_ids_bars_pubs_367:
-  :id: 367
-  :user_id: 14
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 366
-  :hash_id: uUg4vB0h
+  id: 9262144901
+  user_id: 14
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 5672972092
+  hash_id: Z2B6hQBG
 schedule_period_ids_fast_food_368:
-  :id: 368
-  :user_id: 14
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 366
-  :hash_id: gQOmVyqF
+  id: 5864410477
+  user_id: 14
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 5672972092
+  hash_id: "-rdySM_x"
 schedule_period_ids_groceries_369:
-  :id: 369
-  :user_id: 14
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 366
-  :hash_id: PEB3X2Ct
+  id: 9020858851
+  user_id: 14
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 5672972092
+  hash_id: f676YwtS
 schedule_period_ids_order_takeout_370:
-  :id: 370
-  :user_id: 14
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 366
-  :hash_id: Zry_Dd7i
+  id: 9600572851
+  user_id: 14
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 5672972092
+  hash_id: KpjEBorW
 schedule_period_ids_restaurant_371:
-  :id: 371
-  :user_id: 14
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 366
-  :hash_id: 3h_cQIvL
+  id: 853493889
+  user_id: 14
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 5672972092
+  hash_id: 2WkUwpg0
 schedule_period_ids_health_367:
-  :id: 367
-  :user_id: 14
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: qPuvaHGU
+  id: 7912751917
+  user_id: 14
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: c-3d1HkX
 schedule_period_ids_household_368:
-  :id: 368
-  :user_id: 14
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: 4u1G-Mv-
+  id: 3120669076
+  user_id: 14
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: 23XVtJNP
 schedule_period_ids_income_369:
-  :id: 369
-  :user_id: 14
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: GWyknwDH
+  id: 6715468030
+  user_id: 14
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: RlGUvUQv
 schedule_period_ids_investments_370:
-  :id: 370
-  :user_id: 14
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: 3mdvmvQx
+  id: 2715525573
+  user_id: 14
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: Bns9nkUI
 schedule_period_ids_other_371:
-  :id: 371
-  :user_id: 14
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: 6DszJy7K
+  id: 5158736157
+  user_id: 14
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: szoifvpU
 schedule_period_ids_shopping_372:
-  :id: 372
-  :user_id: 14
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: ukUlj2K3
+  id: 2828357619
+  user_id: 14
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: ScBbvqUR
 schedule_period_ids_transport_373:
-  :id: 373
-  :user_id: 14
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: zJpkTdfh
+  id: 7989836158
+  user_id: 14
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: H_5SoRSa
 schedule_period_ids_vehicle_374:
-  :id: 374
-  :user_id: 14
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: SOtA2F1U
+  id: 8651832285
+  user_id: 14
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: 3EmkmSIj
 upcoming_transactions_entertainment_391:
-  :id: 391
-  :user_id: 15
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: rSs4UY7H
+  id: 3832435128
+  user_id: 15
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: bE5L4Jri
 upcoming_transactions_date_392:
-  :id: 392
-  :user_id: 15
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 391
-  :hash_id: HzUNbrKx
+  id: 1471883179
+  user_id: 15
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 3832435128
+  hash_id: dMk5v2iS
 upcoming_transactions_cinema_393:
-  :id: 393
-  :user_id: 15
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 392
-  :hash_id: wc9AU50J
+  id: 3704531495
+  user_id: 15
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 1471883179
+  hash_id: I2fyRAHt
 upcoming_transactions_hobbies_393:
-  :id: 393
-  :user_id: 15
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 391
-  :hash_id: X8EfzfdA
+  id: 9049045584
+  user_id: 15
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 3832435128
+  hash_id: j1GsrAqp
 upcoming_transactions_holiday_394:
-  :id: 394
-  :user_id: 15
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 391
-  :hash_id: _Jauj9LU
+  id: 5592363064
+  user_id: 15
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 3832435128
+  hash_id: YUyoE7Yp
 upcoming_transactions_lottery_gambling_395:
-  :id: 395
-  :user_id: 15
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 391
-  :hash_id: tX_RqNwd
+  id: 3821633103
+  user_id: 15
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 3832435128
+  hash_id: k9AfO2bT
 upcoming_transactions_social_396:
-  :id: 396
-  :user_id: 15
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 391
-  :hash_id: XnbghbpS
+  id: 3802597447
+  user_id: 15
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 3832435128
+  hash_id: W74zNaTs
 upcoming_transactions_software_397:
-  :id: 397
-  :user_id: 15
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 391
-  :hash_id: uf9BqL0h
+  id: 1812564314
+  user_id: 15
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 3832435128
+  hash_id: i0bwgInw
 upcoming_transactions_sport_events_398:
-  :id: 398
-  :user_id: 15
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 391
-  :hash_id: mVNwqBYA
+  id: 5703302900
+  user_id: 15
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 3832435128
+  hash_id: 7Q47F6AM
 upcoming_transactions_subscriptions_399:
-  :id: 399
-  :user_id: 15
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 391
-  :hash_id: c2BeRj4u
+  id: 7526180823
+  user_id: 15
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 3832435128
+  hash_id: 5bfGnKy9
 upcoming_transactions_tv_400:
-  :id: 400
-  :user_id: 15
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 391
-  :hash_id: I4l-G68C
+  id: 7436928822
+  user_id: 15
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 3832435128
+  hash_id: UhB8gDoN
 upcoming_transactions_video_games_401:
-  :id: 401
-  :user_id: 15
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 391
-  :hash_id: Sg5oAUM1
+  id: 2334967395
+  user_id: 15
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 3832435128
+  hash_id: zKoJ2Bv_
 upcoming_transactions_food_drinks_392:
-  :id: 392
-  :user_id: 15
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: AHE6x1Ht
+  id: 5776763236
+  user_id: 15
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: tTId_Kbu
 upcoming_transactions_bars_pubs_393:
-  :id: 393
-  :user_id: 15
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 392
-  :hash_id: tXMOz1qG
+  id: 2953742184
+  user_id: 15
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 5776763236
+  hash_id: tEiabQI0
 upcoming_transactions_fast_food_394:
-  :id: 394
-  :user_id: 15
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 392
-  :hash_id: 3GZSK_6a
+  id: 1323319966
+  user_id: 15
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 5776763236
+  hash_id: sybjTBDX
 upcoming_transactions_groceries_395:
-  :id: 395
-  :user_id: 15
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 392
-  :hash_id: iSLE0qrg
+  id: 4771117502
+  user_id: 15
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 5776763236
+  hash_id: aMVVOF3i
 upcoming_transactions_order_takeout_396:
-  :id: 396
-  :user_id: 15
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 392
-  :hash_id: z18oDhVz
+  id: 954832871
+  user_id: 15
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 5776763236
+  hash_id: Djhimzoh
 upcoming_transactions_restaurant_397:
-  :id: 397
-  :user_id: 15
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 392
-  :hash_id: TNuuksvs
+  id: 4516271828
+  user_id: 15
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 5776763236
+  hash_id: LCTrAzzL
 upcoming_transactions_health_393:
-  :id: 393
-  :user_id: 15
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: mmeseLjY
+  id: 6626197264
+  user_id: 15
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: sniGVPjq
 upcoming_transactions_household_394:
-  :id: 394
-  :user_id: 15
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: CkeHB-b4
+  id: 2395390455
+  user_id: 15
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: sIyCnTlz
 upcoming_transactions_income_395:
-  :id: 395
-  :user_id: 15
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: IcBYiqW0
+  id: 8185630010
+  user_id: 15
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: MIBX42X-
 upcoming_transactions_investments_396:
-  :id: 396
-  :user_id: 15
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: "-QyWM5sa"
+  id: 6130127743
+  user_id: 15
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: e761CaUa
 upcoming_transactions_other_397:
-  :id: 397
-  :user_id: 15
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: W4KT9DW8
+  id: 4860347443
+  user_id: 15
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: 34-9YJPw
 upcoming_transactions_shopping_398:
-  :id: 398
-  :user_id: 15
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: EwIySi_p
+  id: 5021247058
+  user_id: 15
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: vsU5jUML
 upcoming_transactions_transport_399:
-  :id: 399
-  :user_id: 15
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: 4n7N4u-3
+  id: 9155550565
+  user_id: 15
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: QHLVVy9P
 upcoming_transactions_vehicle_400:
-  :id: 400
-  :user_id: 15
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: VMVl0boR
+  id: 8429005579
+  user_id: 15
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: QmKCRag_
 upcoming_transactions_dst_entertainment_417:
-  :id: 417
-  :user_id: 16
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: u4eBU_3P
+  id: 952464419
+  user_id: 16
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: oLf2ciNM
 upcoming_transactions_dst_date_418:
-  :id: 418
-  :user_id: 16
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 417
-  :hash_id: OKtKjnlN
+  id: 8786387920
+  user_id: 16
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 952464419
+  hash_id: NDsxkOHK
 upcoming_transactions_dst_cinema_419:
-  :id: 419
-  :user_id: 16
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 418
-  :hash_id: dYa76QwY
+  id: 7767990673
+  user_id: 16
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 8786387920
+  hash_id: DQKu8_z3
 upcoming_transactions_dst_hobbies_419:
-  :id: 419
-  :user_id: 16
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 417
-  :hash_id: c5MPMCVt
+  id: 3532206599
+  user_id: 16
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 952464419
+  hash_id: YU14b_dI
 upcoming_transactions_dst_holiday_420:
-  :id: 420
-  :user_id: 16
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 417
-  :hash_id: tkIb91D0
+  id: 3345703922
+  user_id: 16
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 952464419
+  hash_id: uNIAV4Z3
 upcoming_transactions_dst_lottery_gambling_421:
-  :id: 421
-  :user_id: 16
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 417
-  :hash_id: ALWyGA7C
+  id: 6655127938
+  user_id: 16
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 952464419
+  hash_id: opE7f6LY
 upcoming_transactions_dst_social_422:
-  :id: 422
-  :user_id: 16
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 417
-  :hash_id: 8hPc6yuG
+  id: 341505256
+  user_id: 16
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 952464419
+  hash_id: uIGsp4Uc
 upcoming_transactions_dst_software_423:
-  :id: 423
-  :user_id: 16
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 417
-  :hash_id: xuNuvN3E
+  id: 3500161176
+  user_id: 16
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 952464419
+  hash_id: PSECEE8J
 upcoming_transactions_dst_sport_events_424:
-  :id: 424
-  :user_id: 16
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 417
-  :hash_id: RJRINX1V
+  id: 2639180376
+  user_id: 16
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 952464419
+  hash_id: RqMuZrZX
 upcoming_transactions_dst_subscriptions_425:
-  :id: 425
-  :user_id: 16
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 417
-  :hash_id: UxiY2reT
+  id: 4970441918
+  user_id: 16
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 952464419
+  hash_id: 70Vb7txU
 upcoming_transactions_dst_tv_426:
-  :id: 426
-  :user_id: 16
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 417
-  :hash_id: OycFQbbq
+  id: 5532190547
+  user_id: 16
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 952464419
+  hash_id: "-e2HvAG-"
 upcoming_transactions_dst_video_games_427:
-  :id: 427
-  :user_id: 16
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 417
-  :hash_id: 5JUDwnIF
+  id: 6305601374
+  user_id: 16
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 952464419
+  hash_id: MXlv6Ohd
 upcoming_transactions_dst_food_drinks_418:
-  :id: 418
-  :user_id: 16
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: mjyK-Pao
+  id: 8322501042
+  user_id: 16
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: eUK4UiVY
 upcoming_transactions_dst_bars_pubs_419:
-  :id: 419
-  :user_id: 16
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 418
-  :hash_id: b6Nz23zi
+  id: 3496687972
+  user_id: 16
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 8322501042
+  hash_id: BfX5H7O7
 upcoming_transactions_dst_fast_food_420:
-  :id: 420
-  :user_id: 16
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 418
-  :hash_id: UsmouumQ
+  id: 3348295427
+  user_id: 16
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 8322501042
+  hash_id: B6PfltPv
 upcoming_transactions_dst_groceries_421:
-  :id: 421
-  :user_id: 16
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 418
-  :hash_id: v14gKbz1
+  id: 4966478299
+  user_id: 16
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 8322501042
+  hash_id: X3dsZsu_
 upcoming_transactions_dst_order_takeout_422:
-  :id: 422
-  :user_id: 16
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 418
-  :hash_id: F78bPVcM
+  id: 5060279431
+  user_id: 16
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 8322501042
+  hash_id: uxQKt9-r
 upcoming_transactions_dst_restaurant_423:
-  :id: 423
-  :user_id: 16
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 418
-  :hash_id: QVExlV1a
+  id: 5800180612
+  user_id: 16
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 8322501042
+  hash_id: uhFAuPUn
 upcoming_transactions_dst_health_419:
-  :id: 419
-  :user_id: 16
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: 6Ta2HSw_
+  id: 5109267373
+  user_id: 16
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: xQ4Yy4pO
 upcoming_transactions_dst_household_420:
-  :id: 420
-  :user_id: 16
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: MZjxRY9s
+  id: 5875215173
+  user_id: 16
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: JPsF3pkM
 upcoming_transactions_dst_income_421:
-  :id: 421
-  :user_id: 16
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: g4MJ8L33
+  id: 6517418580
+  user_id: 16
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: iMzFbvCy
 upcoming_transactions_dst_investments_422:
-  :id: 422
-  :user_id: 16
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: WgmXBjAz
+  id: 6739499972
+  user_id: 16
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: nuMnQnzP
 upcoming_transactions_dst_other_423:
-  :id: 423
-  :user_id: 16
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: 3vRdQ8uj
+  id: 3252492720
+  user_id: 16
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: VcYrZijq
 upcoming_transactions_dst_shopping_424:
-  :id: 424
-  :user_id: 16
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: PrXlaGp6
+  id: 8773803134
+  user_id: 16
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: j1WJr2NR
 upcoming_transactions_dst_transport_425:
-  :id: 425
-  :user_id: 16
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: NDIBUoNV
+  id: 5794664935
+  user_id: 16
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: BLiUSNZN
 upcoming_transactions_dst_vehicle_426:
-  :id: 426
-  :user_id: 16
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: a92Lwok-
+  id: 7857709849
+  user_id: 16
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: BjCdLvkL
 upcoming_transactions_run_entertainment_443:
-  :id: 443
-  :user_id: 17
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: eX7jDP9V
+  id: 4459815890
+  user_id: 17
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: jqD4t_Ej
 upcoming_transactions_run_date_444:
-  :id: 444
-  :user_id: 17
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 443
-  :hash_id: xAt-oi01
+  id: 7588696866
+  user_id: 17
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 4459815890
+  hash_id: AeE7zEkU
 upcoming_transactions_run_cinema_445:
-  :id: 445
-  :user_id: 17
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 444
-  :hash_id: XxdCtX-z
+  id: 7582559079
+  user_id: 17
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 7588696866
+  hash_id: dVUdaPAo
 upcoming_transactions_run_hobbies_445:
-  :id: 445
-  :user_id: 17
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 443
-  :hash_id: Uq5XI2k-
+  id: 2757113220
+  user_id: 17
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 4459815890
+  hash_id: r3o23j-G
 upcoming_transactions_run_holiday_446:
-  :id: 446
-  :user_id: 17
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 443
-  :hash_id: fdAOBDyy
+  id: 19428098
+  user_id: 17
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 4459815890
+  hash_id: _GNU8_Qv
 upcoming_transactions_run_lottery_gambling_447:
-  :id: 447
-  :user_id: 17
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 443
-  :hash_id: 98nZ6wEh
+  id: 7130023875
+  user_id: 17
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 4459815890
+  hash_id: RQkBKkKH
 upcoming_transactions_run_social_448:
-  :id: 448
-  :user_id: 17
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 443
-  :hash_id: lEWpfqPc
+  id: 3082080932
+  user_id: 17
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 4459815890
+  hash_id: "-iLQXxSj"
 upcoming_transactions_run_software_449:
-  :id: 449
-  :user_id: 17
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 443
-  :hash_id: 6fx8MMEw
+  id: 9764904888
+  user_id: 17
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 4459815890
+  hash_id: JKkf5vfH
 upcoming_transactions_run_sport_events_450:
-  :id: 450
-  :user_id: 17
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 443
-  :hash_id: 5OLyESTh
+  id: 4568710107
+  user_id: 17
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 4459815890
+  hash_id: oNEALVSo
 upcoming_transactions_run_subscriptions_451:
-  :id: 451
-  :user_id: 17
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 443
-  :hash_id: B-x0WMC1
+  id: 1633140544
+  user_id: 17
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 4459815890
+  hash_id: ys9_m8ss
 upcoming_transactions_run_tv_452:
-  :id: 452
-  :user_id: 17
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 443
-  :hash_id: cOPTpZDV
+  id: 285011608
+  user_id: 17
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 4459815890
+  hash_id: t81gusaJ
 upcoming_transactions_run_video_games_453:
-  :id: 453
-  :user_id: 17
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 443
-  :hash_id: Cerc_zJw
+  id: 3496564805
+  user_id: 17
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 4459815890
+  hash_id: kmau-YhX
 upcoming_transactions_run_food_drinks_444:
-  :id: 444
-  :user_id: 17
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: qVL2Z5jq
+  id: 8672752449
+  user_id: 17
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: oyeL7SIU
 upcoming_transactions_run_bars_pubs_445:
-  :id: 445
-  :user_id: 17
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 444
-  :hash_id: ixtqyTaH
+  id: 3289344765
+  user_id: 17
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 8672752449
+  hash_id: hBoraX7s
 upcoming_transactions_run_fast_food_446:
-  :id: 446
-  :user_id: 17
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 444
-  :hash_id: BAFm3e4n
+  id: 6662386324
+  user_id: 17
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 8672752449
+  hash_id: CzD8EmCD
 upcoming_transactions_run_groceries_447:
-  :id: 447
-  :user_id: 17
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 444
-  :hash_id: lFFbyfb0
+  id: 9368325112
+  user_id: 17
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 8672752449
+  hash_id: pZZnZVTF
 upcoming_transactions_run_order_takeout_448:
-  :id: 448
-  :user_id: 17
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 444
-  :hash_id: Ninc1q3n
+  id: 3480213148
+  user_id: 17
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 8672752449
+  hash_id: J-9pjoOq
 upcoming_transactions_run_restaurant_449:
-  :id: 449
-  :user_id: 17
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 444
-  :hash_id: UROzTMqI
+  id: 5367899518
+  user_id: 17
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 8672752449
+  hash_id: CBIWymUG
 upcoming_transactions_run_health_445:
-  :id: 445
-  :user_id: 17
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: GxsiH-bs
+  id: 8927387026
+  user_id: 17
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: DXDhM5PR
 upcoming_transactions_run_household_446:
-  :id: 446
-  :user_id: 17
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: K1a3fDdI
+  id: 165976624
+  user_id: 17
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: qxJFNNdy
 upcoming_transactions_run_income_447:
-  :id: 447
-  :user_id: 17
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: 66I1QFV6
+  id: 5682922068
+  user_id: 17
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: tqp7Gh_R
 upcoming_transactions_run_investments_448:
-  :id: 448
-  :user_id: 17
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: t6gw3d_5
+  id: 1290914484
+  user_id: 17
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: 94-PC1bk
 upcoming_transactions_run_other_449:
-  :id: 449
-  :user_id: 17
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: 18Af1P5Q
+  id: 4310989484
+  user_id: 17
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: qqh_n59C
 upcoming_transactions_run_shopping_450:
-  :id: 450
-  :user_id: 17
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: jX6CAGwB
+  id: 7006283045
+  user_id: 17
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: oRxcEnfb
 upcoming_transactions_run_transport_451:
-  :id: 451
-  :user_id: 17
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: 3xejzllM
+  id: 635868835
+  user_id: 17
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: SdKinzeD
 upcoming_transactions_run_vehicle_452:
-  :id: 452
-  :user_id: 17
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: mQzlsRB3
+  id: 9083705532
+  user_id: 17
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: 1S8K2b43
 update_transactions_entertainment_469:
-  :id: 469
-  :user_id: 18
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: tIDrQjG7
+  id: 7221589434
+  user_id: 18
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: rfKH3-F2
 update_transactions_date_470:
-  :id: 470
-  :user_id: 18
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 469
-  :hash_id: vEcvdarn
+  id: 7319423447
+  user_id: 18
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 7221589434
+  hash_id: VVHzFT5Z
 update_transactions_cinema_471:
-  :id: 471
-  :user_id: 18
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 470
-  :hash_id: WppZnacT
+  id: 9377217284
+  user_id: 18
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 7319423447
+  hash_id: 2tsa9bjo
 update_transactions_hobbies_471:
-  :id: 471
-  :user_id: 18
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 469
-  :hash_id: rYe2Yfsb
+  id: 4807436449
+  user_id: 18
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 7221589434
+  hash_id: 3PjVm68i
 update_transactions_holiday_472:
-  :id: 472
-  :user_id: 18
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 469
-  :hash_id: ruo87EPL
+  id: 7253107998
+  user_id: 18
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 7221589434
+  hash_id: 5rhMEBfi
 update_transactions_lottery_gambling_473:
-  :id: 473
-  :user_id: 18
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 469
-  :hash_id: VRf_sXxV
+  id: 6741334483
+  user_id: 18
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 7221589434
+  hash_id: H5Hs7lRI
 update_transactions_social_474:
-  :id: 474
-  :user_id: 18
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 469
-  :hash_id: iOsJKSDZ
+  id: 6986522514
+  user_id: 18
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 7221589434
+  hash_id: XnZ-vTCM
 update_transactions_software_475:
-  :id: 475
-  :user_id: 18
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 469
-  :hash_id: f4DNN3VW
+  id: 6327006797
+  user_id: 18
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 7221589434
+  hash_id: 4cNMYL_z
 update_transactions_sport_events_476:
-  :id: 476
-  :user_id: 18
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 469
-  :hash_id: STyfCDnO
+  id: 808871123
+  user_id: 18
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 7221589434
+  hash_id: Gl2mU2vP
 update_transactions_subscriptions_477:
-  :id: 477
-  :user_id: 18
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 469
-  :hash_id: clzKt8SD
+  id: 1631388322
+  user_id: 18
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 7221589434
+  hash_id: _F2_ezyN
 update_transactions_tv_478:
-  :id: 478
-  :user_id: 18
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 469
-  :hash_id: PcsBXL3Y
+  id: 1897121638
+  user_id: 18
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 7221589434
+  hash_id: RjA2KSMU
 update_transactions_video_games_479:
-  :id: 479
-  :user_id: 18
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 469
-  :hash_id: IVDfxfJ0
+  id: 2075957461
+  user_id: 18
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 7221589434
+  hash_id: V8a3tr3D
 update_transactions_food_drinks_470:
-  :id: 470
-  :user_id: 18
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: XRPWsP2I
+  id: 8652040322
+  user_id: 18
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: MCpqD32j
 update_transactions_bars_pubs_471:
-  :id: 471
-  :user_id: 18
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 470
-  :hash_id: T3qD_GEV
+  id: 2039802311
+  user_id: 18
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 8652040322
+  hash_id: MkF8YZmy
 update_transactions_fast_food_472:
-  :id: 472
-  :user_id: 18
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 470
-  :hash_id: 5oOx4Ck9
+  id: 9207794314
+  user_id: 18
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 8652040322
+  hash_id: eMqE-KVy
 update_transactions_groceries_473:
-  :id: 473
-  :user_id: 18
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 470
-  :hash_id: _upjwQFR
+  id: 2083549396
+  user_id: 18
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 8652040322
+  hash_id: 8DpM4XFJ
 update_transactions_order_takeout_474:
-  :id: 474
-  :user_id: 18
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 470
-  :hash_id: 6RMVhZAK
+  id: 3334263948
+  user_id: 18
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 8652040322
+  hash_id: nn6oYnai
 update_transactions_restaurant_475:
-  :id: 475
-  :user_id: 18
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 470
-  :hash_id: JZJityVr
+  id: 6212988692
+  user_id: 18
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 8652040322
+  hash_id: trayu6rJ
 update_transactions_health_471:
-  :id: 471
-  :user_id: 18
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: LYNhMB7e
+  id: 6420023162
+  user_id: 18
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: _mFpb_uv
 update_transactions_household_472:
-  :id: 472
-  :user_id: 18
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: 3xPnPOdj
+  id: 2647770055
+  user_id: 18
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: "-TDvvg82"
 update_transactions_income_473:
-  :id: 473
-  :user_id: 18
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: RzaLmWhD
+  id: 1834768041
+  user_id: 18
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: YPTMu4Li
 update_transactions_investments_474:
-  :id: 474
-  :user_id: 18
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: s0NWRgYt
+  id: 8830253895
+  user_id: 18
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: Z9w5tOfu
 update_transactions_other_475:
-  :id: 475
-  :user_id: 18
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: VWee_6Hr
+  id: 433061878
+  user_id: 18
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: aFDz14JI
 update_transactions_shopping_476:
-  :id: 476
-  :user_id: 18
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: nmNlyiJm
+  id: 273385147
+  user_id: 18
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: Zkiap39Y
 update_transactions_transport_477:
-  :id: 477
-  :user_id: 18
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: taXlOPCo
+  id: 1803433834
+  user_id: 18
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: _KW3oxda
 update_transactions_vehicle_478:
-  :id: 478
-  :user_id: 18
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: "-BzVjLYD"
+  id: 9571115688
+  user_id: 18
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: ccnUd0Rh
 future_transactions_entertainment_495:
-  :id: 495
-  :user_id: 19
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: bPYnScPC
+  id: 8071213921
+  user_id: 19
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: k9HwtIB6
 future_transactions_date_496:
-  :id: 496
-  :user_id: 19
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 495
-  :hash_id: 8Dw9_bno
+  id: 122645792
+  user_id: 19
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 8071213921
+  hash_id: BIRHXWAL
 future_transactions_cinema_497:
-  :id: 497
-  :user_id: 19
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 496
-  :hash_id: nU2AunfL
+  id: 5020662662
+  user_id: 19
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 122645792
+  hash_id: 0wOFVL8Y
 future_transactions_hobbies_497:
-  :id: 497
-  :user_id: 19
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 495
-  :hash_id: JUZNnFLh
+  id: 938708089
+  user_id: 19
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 8071213921
+  hash_id: 6ZU3Ye6b
 future_transactions_holiday_498:
-  :id: 498
-  :user_id: 19
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 495
-  :hash_id: mJmAtQH3
+  id: 6254620601
+  user_id: 19
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 8071213921
+  hash_id: LA-pKDRM
 future_transactions_lottery_gambling_499:
-  :id: 499
-  :user_id: 19
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 495
-  :hash_id: V0acWb19
+  id: 6211916501
+  user_id: 19
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 8071213921
+  hash_id: Ky-Cm98N
 future_transactions_social_500:
-  :id: 500
-  :user_id: 19
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 495
-  :hash_id: jaYGU9nO
+  id: 7775608218
+  user_id: 19
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 8071213921
+  hash_id: GyJvNgB5
 future_transactions_software_501:
-  :id: 501
-  :user_id: 19
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 495
-  :hash_id: Fk6ou0MK
+  id: 3479584139
+  user_id: 19
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 8071213921
+  hash_id: SQKghpLQ
 future_transactions_sport_events_502:
-  :id: 502
-  :user_id: 19
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 495
-  :hash_id: bmVSCYEg
+  id: 6506702562
+  user_id: 19
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 8071213921
+  hash_id: fZAWj6H6
 future_transactions_subscriptions_503:
-  :id: 503
-  :user_id: 19
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 495
-  :hash_id: qIrXZO81
+  id: 3820772779
+  user_id: 19
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 8071213921
+  hash_id: _OuJtkss
 future_transactions_tv_504:
-  :id: 504
-  :user_id: 19
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 495
-  :hash_id: piPNYdls
+  id: 8362571119
+  user_id: 19
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 8071213921
+  hash_id: hcOEG41r
 future_transactions_video_games_505:
-  :id: 505
-  :user_id: 19
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 495
-  :hash_id: 1V5Noqhj
+  id: 3165311148
+  user_id: 19
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 8071213921
+  hash_id: 5X4Za4l0
 future_transactions_food_drinks_496:
-  :id: 496
-  :user_id: 19
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: RMsciD5B
+  id: 6172449596
+  user_id: 19
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: 3kECojAl
 future_transactions_bars_pubs_497:
-  :id: 497
-  :user_id: 19
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 496
-  :hash_id: p7A0A7rN
+  id: 407898685
+  user_id: 19
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 6172449596
+  hash_id: 2HuPBFrQ
 future_transactions_fast_food_498:
-  :id: 498
-  :user_id: 19
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 496
-  :hash_id: GA6yfaeG
+  id: 7581971288
+  user_id: 19
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 6172449596
+  hash_id: 5-wWxPYx
 future_transactions_groceries_499:
-  :id: 499
-  :user_id: 19
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 496
-  :hash_id: z-6ASVWA
+  id: 6680224161
+  user_id: 19
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 6172449596
+  hash_id: _9mdHKEf
 future_transactions_order_takeout_500:
-  :id: 500
-  :user_id: 19
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 496
-  :hash_id: ywR1h7XG
+  id: 6294467955
+  user_id: 19
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 6172449596
+  hash_id: 1qhC24bM
 future_transactions_restaurant_501:
-  :id: 501
-  :user_id: 19
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 496
-  :hash_id: P9bnEXg4
+  id: 4455012373
+  user_id: 19
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 6172449596
+  hash_id: 2iJ5Wxgt
 future_transactions_health_497:
-  :id: 497
-  :user_id: 19
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: N5DotXpH
+  id: 658478303
+  user_id: 19
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: pSYxk1E_
 future_transactions_household_498:
-  :id: 498
-  :user_id: 19
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: DtH9e53s
+  id: 7281485458
+  user_id: 19
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: i-y2qhQn
 future_transactions_income_499:
-  :id: 499
-  :user_id: 19
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: MIZ6DCj_
+  id: 5457996562
+  user_id: 19
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: H0ZecSR0
 future_transactions_investments_500:
-  :id: 500
-  :user_id: 19
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: BCD54tzQ
+  id: 240583630
+  user_id: 19
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: Du9n0s16
 future_transactions_other_501:
-  :id: 501
-  :user_id: 19
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: 2hCLlqZ0
+  id: 5309715859
+  user_id: 19
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: 3cScFY98
 future_transactions_shopping_502:
-  :id: 502
-  :user_id: 19
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: xKABVAGT
+  id: 4334046801
+  user_id: 19
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: UwwEPXg3
 future_transactions_transport_503:
-  :id: 503
-  :user_id: 19
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: C6PN-t--
+  id: 8439816889
+  user_id: 19
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: haIe--fL
 future_transactions_vehicle_504:
-  :id: 504
-  :user_id: 19
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: zUQfEPUI
+  id: 8278223720
+  user_id: 19
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: g9JwHkpk
 setup_wizard_entertainment_521:
-  :id: 521
-  :user_id: 20
-  :name: Entertainment
-  :symbol: theater-masks
-  :color: "#FBD237"
-  :position: 1
-  :hash_id: 8yOK5pm9
+  id: 1423237844
+  user_id: 20
+  name: Entertainment
+  symbol: theater-masks
+  color: "#FBD237"
+  position: 1
+  hash_id: pMOHr9wU
 setup_wizard_date_522:
-  :id: 522
-  :user_id: 20
-  :name: Date
-  :symbol: heart
-  :position: 2
-  :parent_id: 521
-  :hash_id: hcaja4jJ
+  id: 6152371387
+  user_id: 20
+  name: Date
+  symbol: heart
+  position: 2
+  parent_id: 1423237844
+  hash_id: lkfun2sL
 setup_wizard_cinema_523:
-  :id: 523
-  :user_id: 20
-  :name: cinema
-  :symbol: film
-  :position: 3
-  :parent_id: 522
-  :hash_id: yCf7dNBK
+  id: 5791011455
+  user_id: 20
+  name: cinema
+  symbol: film
+  position: 3
+  parent_id: 6152371387
+  hash_id: KYvcZhjW
 setup_wizard_hobbies_523:
-  :id: 523
-  :user_id: 20
-  :name: Hobbies
-  :symbol: palette
-  :position: 4
-  :parent_id: 521
-  :hash_id: fNpVytG7
+  id: 4191061394
+  user_id: 20
+  name: Hobbies
+  symbol: palette
+  position: 4
+  parent_id: 1423237844
+  hash_id: 9soS7eL9
 setup_wizard_holiday_524:
-  :id: 524
-  :user_id: 20
-  :name: Holiday
-  :symbol: suitcase-rolling
-  :position: 5
-  :parent_id: 521
-  :hash_id: u7KNL3uh
+  id: 8149853547
+  user_id: 20
+  name: Holiday
+  symbol: suitcase-rolling
+  position: 5
+  parent_id: 1423237844
+  hash_id: l5Vk1BIV
 setup_wizard_lottery_gambling_525:
-  :id: 525
-  :user_id: 20
-  :name: Lottery / Gambling
-  :symbol: ticket-alt
-  :position: 6
-  :parent_id: 521
-  :hash_id: 87JRvymY
+  id: 6703701325
+  user_id: 20
+  name: Lottery / Gambling
+  symbol: ticket-alt
+  position: 6
+  parent_id: 1423237844
+  hash_id: CT80Svie
 setup_wizard_social_526:
-  :id: 526
-  :user_id: 20
-  :name: Social
-  :symbol: user-friends
-  :position: 7
-  :parent_id: 521
-  :hash_id: l4aebxAJ
+  id: 2037301663
+  user_id: 20
+  name: Social
+  symbol: user-friends
+  position: 7
+  parent_id: 1423237844
+  hash_id: SNdKAdB5
 setup_wizard_software_527:
-  :id: 527
-  :user_id: 20
-  :name: Software
-  :symbol: code
-  :position: 8
-  :parent_id: 521
-  :hash_id: f1c89ZJ9
+  id: 6919790205
+  user_id: 20
+  name: Software
+  symbol: code
+  position: 8
+  parent_id: 1423237844
+  hash_id: rt0jXIMH
 setup_wizard_sport_events_528:
-  :id: 528
-  :user_id: 20
-  :name: Sport Events
-  :symbol: football-ball
-  :position: 9
-  :parent_id: 521
-  :hash_id: 8a64CKTA
+  id: 3294906294
+  user_id: 20
+  name: Sport Events
+  symbol: football-ball
+  position: 9
+  parent_id: 1423237844
+  hash_id: wA5adN_R
 setup_wizard_subscriptions_529:
-  :id: 529
-  :user_id: 20
-  :name: Subscriptions
-  :symbol: money-bill-wave-alt
-  :position: 10
-  :parent_id: 521
-  :hash_id: 4O5AMQFs
+  id: 8827186826
+  user_id: 20
+  name: Subscriptions
+  symbol: money-bill-wave-alt
+  position: 10
+  parent_id: 1423237844
+  hash_id: 9w3VEgUi
 setup_wizard_tv_530:
-  :id: 530
-  :user_id: 20
-  :name: TV
-  :symbol: tv
-  :position: 11
-  :parent_id: 521
-  :hash_id: dWGBrF4i
+  id: 8991960104
+  user_id: 20
+  name: TV
+  symbol: tv
+  position: 11
+  parent_id: 1423237844
+  hash_id: R7T4ggmI
 setup_wizard_video_games_531:
-  :id: 531
-  :user_id: 20
-  :name: Video Games
-  :symbol: gamepad
-  :position: 12
-  :parent_id: 521
-  :hash_id: a_ZlFz5E
+  id: 3054906081
+  user_id: 20
+  name: Video Games
+  symbol: gamepad
+  position: 12
+  parent_id: 1423237844
+  hash_id: XzYdev_c
 setup_wizard_food_drinks_522:
-  :id: 522
-  :user_id: 20
-  :name: Food & Drinks
-  :symbol: utensils
-  :color: "#F4CDC3"
-  :position: 13
-  :hash_id: bQGzLOrX
+  id: 4303868321
+  user_id: 20
+  name: Food & Drinks
+  symbol: utensils
+  color: "#F4CDC3"
+  position: 13
+  hash_id: wtFMaENY
 setup_wizard_bars_pubs_523:
-  :id: 523
-  :user_id: 20
-  :name: Bars / Pubs
-  :symbol: glass-cheers
-  :position: 14
-  :parent_id: 522
-  :hash_id: iMAuouOU
+  id: 2443139826
+  user_id: 20
+  name: Bars / Pubs
+  symbol: glass-cheers
+  position: 14
+  parent_id: 4303868321
+  hash_id: hwsrUehX
 setup_wizard_fast_food_524:
-  :id: 524
-  :user_id: 20
-  :name: Fast Food
-  :symbol: hamburger
-  :position: 15
-  :parent_id: 522
-  :hash_id: zs58N8Hr
+  id: 7793821697
+  user_id: 20
+  name: Fast Food
+  symbol: hamburger
+  position: 15
+  parent_id: 4303868321
+  hash_id: 8M_TiW2U
 setup_wizard_groceries_525:
-  :id: 525
-  :user_id: 20
-  :name: Groceries
-  :symbol: shopping-basket
-  :position: 16
-  :parent_id: 522
-  :hash_id: dyT2Zlai
+  id: 5315894650
+  user_id: 20
+  name: Groceries
+  symbol: shopping-basket
+  position: 16
+  parent_id: 4303868321
+  hash_id: ZSc7NMpQ
 setup_wizard_order_takeout_526:
-  :id: 526
-  :user_id: 20
-  :name: Order / Take-out
-  :symbol: pizza-slice
-  :position: 17
-  :parent_id: 522
-  :hash_id: 4zJN5Dt7
+  id: 2336523989
+  user_id: 20
+  name: Order / Take-out
+  symbol: pizza-slice
+  position: 17
+  parent_id: 4303868321
+  hash_id: 1-R4uLm-
 setup_wizard_restaurant_527:
-  :id: 527
-  :user_id: 20
-  :name: Restaurant
-  :symbol: concierge-bell
-  :position: 18
-  :parent_id: 522
-  :hash_id: v6PcL2QA
+  id: 7974542587
+  user_id: 20
+  name: Restaurant
+  symbol: concierge-bell
+  position: 18
+  parent_id: 4303868321
+  hash_id: uYi75En6
 setup_wizard_health_523:
-  :id: 523
-  :user_id: 20
-  :name: Health
-  :symbol: heartbeat
-  :color: "#D7AE91"
-  :position: 19
-  :hash_id: m3MRURWC
+  id: 6325367812
+  user_id: 20
+  name: Health
+  symbol: heartbeat
+  color: "#D7AE91"
+  position: 19
+  hash_id: N8eLYfQ3
 setup_wizard_household_524:
-  :id: 524
-  :user_id: 20
-  :name: Household
-  :symbol: home
-  :color: "#86D7E1"
-  :position: 20
-  :hash_id: KCtGJxO4
+  id: 1543601880
+  user_id: 20
+  name: Household
+  symbol: home
+  color: "#86D7E1"
+  position: 20
+  hash_id: suDartJu
 setup_wizard_income_525:
-  :id: 525
-  :user_id: 20
-  :name: Income
-  :symbol: coins
-  :color: "#7CB436"
-  :position: 21
-  :hash_id: hu3w08KS
+  id: 3292237066
+  user_id: 20
+  name: Income
+  symbol: coins
+  color: "#7CB436"
+  position: 21
+  hash_id: R09P9sxy
 setup_wizard_investments_526:
-  :id: 526
-  :user_id: 20
-  :name: Investments
-  :symbol: file-invoice-dollar
-  :color: "#FF470E"
-  :position: 22
-  :hash_id: KI2pnezU
+  id: 2935251997
+  user_id: 20
+  name: Investments
+  symbol: file-invoice-dollar
+  color: "#FF470E"
+  position: 22
+  hash_id: 4vCoRlRZ
 setup_wizard_other_527:
-  :id: 527
-  :user_id: 20
-  :name: Other
-  :symbol: ellipsis-h
-  :color: "#4588A5"
-  :position: 23
-  :hash_id: JwXJGIvf
+  id: 4368561109
+  user_id: 20
+  name: Other
+  symbol: ellipsis-h
+  color: "#4588A5"
+  position: 23
+  hash_id: H0_SdMME
 setup_wizard_shopping_528:
-  :id: 528
-  :user_id: 20
-  :name: Shopping
-  :symbol: shopping-bag
-  :color: "#4588A5"
-  :position: 24
-  :hash_id: M2nUUGFD
+  id: 5046588357
+  user_id: 20
+  name: Shopping
+  symbol: shopping-bag
+  color: "#4588A5"
+  position: 24
+  hash_id: iG4dGZ-u
 setup_wizard_transport_529:
-  :id: 529
-  :user_id: 20
-  :name: Transport
-  :symbol: shuttle-van
-  :color: "#567243"
-  :position: 25
-  :hash_id: 6cDHkR3f
+  id: 6391423271
+  user_id: 20
+  name: Transport
+  symbol: shuttle-van
+  color: "#567243"
+  position: 25
+  hash_id: Xo-cr58T
 setup_wizard_vehicle_530:
-  :id: 530
-  :user_id: 20
-  :name: Vehicle
-  :symbol: cog
-  :color: "#004C8F"
-  :position: 26
-  :hash_id: 0nKEBQFU
+  id: 9269752742
+  user_id: 20
+  name: Vehicle
+  symbol: cog
+  color: "#004C8F"
+  position: 26
+  hash_id: inuhSmie
