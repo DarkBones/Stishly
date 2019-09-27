@@ -100,18 +100,6 @@ en:
       settings: Settings
       overview: Overview
     delete_warning: This action will delete this account and all its transactions. This cannot be undone. Continue?
-  
-  transaction:
-    name: Transactions
-    confirmations:
-      confirmed: Transaction created
-    new_sch_transaction: New Transaction
-    upcoming_actions:
-      edit_occ: Edit occurrence
-      edit_series: Edit series
-      cancel: Cancel occurrence
-      trigger: Trigger now
-      uncancel: Uncancel occurrence
 
   notifications:
     no_notifications: No notifications
@@ -194,6 +182,16 @@ en:
     multiple: Multiple
     transfer_message_to: Transferred to ?to?
     transfer_message_from: Transferred from ?from?
+    name: Transactions
+    confirmations:
+      confirmed: Transaction created
+    new_sch_transaction: New Transaction
+    upcoming_actions:
+      edit_occ: Edit occurrence
+      edit_series: Edit series
+      cancel: Cancel occurrence
+      trigger: Trigger now
+      uncancel: Uncancel occurrence
 
   filterrific:
     period:
@@ -220,9 +218,6 @@ en:
     today: Today
     yesterday: Yesterday
     tomorrow: Tomorrow
-  
-  errors:
-    form: Please fix the below errors
   
   schedules:
     no_active_schedules: There are no active schedules

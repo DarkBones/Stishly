@@ -1,11 +1,11 @@
-require "application_system_test_case"
+require 'application_system_test_case'
 
 class HiddenFieldsTest < ApplicationSystemTestCase
 
-  test "transaction menu" do
+  test 'transaction menu' do
     login_user(users(:upcoming_transactions_run), 'SomePassword123^!')
 
-    click_on "New Transaction"
+    click_on I18n.t('buttons.new_transaction.text')
     wait_for_ajax
     
     assert_selector '#active_account_field', visible: :hidden
@@ -13,13 +13,13 @@ class HiddenFieldsTest < ApplicationSystemTestCase
     assert_selector '#timezone_input', visible: :hidden
   end
 
-  test "upcoming transaction menu" do
+  test 'upcoming transaction menu' do
     login_user(users(:upcoming_transactions_run), 'SomePassword123^!')
 
-    page.find(".navbar-gear").click
-    click_on "Upcoming Transactions"
-    page.find_all(".upcoming_context_menu")[0].click
-    click_on "Edit occurrence"
+    page.find('.navbar-gear').click
+    click_on I18n.t('buttons.upcoming_transactions.text')
+    page.find_all('.upcoming_context_menu')[0].click
+    click_on I18n.t('transaction.upcoming_actions.edit_occ')
     wait_for_ajax
     
     assert_selector '#transaction_schedule_period_id', visible: :hidden
@@ -28,43 +28,43 @@ class HiddenFieldsTest < ApplicationSystemTestCase
 
   end
 
-  test "add transactions to schedule" do
+  test 'add transactions to schedule' do
     login_user(users(:schedules), 'SomePassword123^!')
 
-    page.find("#account_0").click
+    page.find('#account_0').click
 
-    page.find("#select_transaction_5jGb4q5OIy2l").click
+    page.find('#select_transaction_5jGb4q5OIy2l').click
 
-    page.find("#mass_assign_to_schedule").click
+    page.find('#mass_assign_to_schedule').click
 
     assert_selector '#schedules_transaction_transactions', visible: :hidden
   end
 
-  test "filter form" do
+  test 'filter form' do
     login_user(users(:schedules), 'SomePassword123^!')
 
-    page.find("#account_0").click
-    page.find("#advanced_search_toggle").click
+    page.find('#account_0').click
+    page.find('#advanced_search_toggle').click
     sleep 1
     assert_selector '#filterrific_category_id_filter', visible: :hidden
   end
 
-  test "sign up form" do
+  test 'sign up form' do
     visit root_path
-    all('a', :text => 'Sign up')[0].click
+    all('a', :text => I18n.t('buttons.sign_up.text'))[0].click
     assert_selector '#timezone_input', visible: :hidden
   end
 
-  test "sign in form" do
+  test 'sign in form' do
     visit root_path
-    all('a', :text => 'Sign in')[0].click
+    all('a', :text => I18n.t('buttons.sign_in.text'))[0].click
     assert_selector '#timezone_input', visible: :hidden
   end
 
-  test "schedule form" do
+  test 'schedule form' do
     login_as_blank
-    visit "/schedules"
-    click_on "New Schedule"
+    visit '/schedules'
+    click_on I18n.t('buttons.new_schedule.text')
 
     assert_selector '#timezone_input', visible: :hidden
     assert_selector '#schedule_dates_picked', visible: :hidden
