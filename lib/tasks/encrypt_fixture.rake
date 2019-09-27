@@ -51,12 +51,13 @@ EOH
 		desc "generate categories fixture"
 		require Rails.root + "config/environment"
 
-		def get_categories(k, template, id, categories={}, parent_id=nil)
+		def get_categories(k, template, id, user_id, categories={}, parent_id=nil)
 			template.each do |key, value|
 				cat_id = "#{k}_#{key}_#{id}"
 				categories[cat_id] = {}
 
 				categories[cat_id][:id] = id
+				categories[cat_id][:user_id] = user_id
 				categories[cat_id][:name] = value[:name]
 				categories[cat_id][:symbol] = value[:symbol]
 				categories[cat_id][:color] = value[:color] unless value[:color].nil?
@@ -67,7 +68,7 @@ EOH
 				id += 1
 
 				unless value[:children].nil?
-					categories = categories.merge(get_categories(k, value[:children], id, categories, categories[cat_id][:id]))
+					categories = categories.merge(get_categories(k, value[:children], id, user_id, categories, categories[cat_id][:id]))
 				end
 
 			end
@@ -201,7 +202,7 @@ EOH
 
 		for k, v in YAML.safe_load(ERB.new(File.read(Rails.root + src_yml)).result) do
 			id = categories.length + 1
-			categories = categories.merge(get_categories(k, template, id))
+			categories = categories.merge(get_categories(k, template, id, v["id"]))
 		end
 		
 		File.open(Rails.root + cat_yml, "w") do |f|
