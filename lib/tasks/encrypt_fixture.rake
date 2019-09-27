@@ -62,6 +62,7 @@ EOH
 				categories[cat_id][:color] = value[:color] unless value[:color].nil?
 				categories[cat_id][:position] = categories.length
 				categories[cat_id][:parent_id] = parent_id unless parent_id.nil?
+				categories[cat_id][:hash_id] = SecureRandom.urlsafe_base64(6)
 
 				id += 1
 
