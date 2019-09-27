@@ -88,7 +88,7 @@ EOH
 						symbol: 'heart',
 						children: {
 							cinema: {
-								name: 'cinema',
+								name: 'Cinema',
 								symbol: 'film',
 							}
 						}
