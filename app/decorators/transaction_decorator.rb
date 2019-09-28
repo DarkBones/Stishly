@@ -6,9 +6,15 @@ class TransactionDecorator < ApplicationDecorator
       model.category
     elsif model.transfer_transaction_id
       category = Category.new
-      category.symbol = "transfer"
+
+      if model.direction == -1
+        category.symbol = "sign-out-alt"
+      else
+        category.symbol = "sign-in-alt"
+      end
+
       category.name = "transfer"
-      category.color = "45, 100%, 51%";
+      category.color = "#FFC107";
       return category
     else
       category = Category.new
