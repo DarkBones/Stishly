@@ -326,6 +326,8 @@ class TransactionMenuTest < ApplicationSystemTestCase
 		# fill in an amount
 		find('#transactionform #transaction_amount').set('1000')
 
+		sleep 1
+
 		# verify the amount in EUR is 8
 		assert find('#transactionform #transaction_account_currency').value == '8.00', format_error('Unexpected account currency amount', '8.00', find('#transactionform #transaction_account_currency').value)
 

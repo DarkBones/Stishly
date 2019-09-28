@@ -268,6 +268,10 @@ private
     def parse_datetime(date, time)
       return if date.nil?
 
+      unless date.match(/\A[0-9]{2}-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-[0-9]{4}\z/)
+        date = Time.now.strftime("%d-%b-%Y")
+      end
+
       months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
 
       date_arr = date.split('-')

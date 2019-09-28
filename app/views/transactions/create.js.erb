@@ -3,4 +3,6 @@
 // dismiss the modal
 $("[data-dismiss=modal]").trigger({ type: "click" });
 
-<%= render partial: "insert_transaction", :locals => {:transaction => @transaction} %>
+<% if @transaction.scheduled_date.nil? %>
+	<%= render partial: "insert_transaction", :locals => {:transaction => @transaction} %>
+<% end %>
