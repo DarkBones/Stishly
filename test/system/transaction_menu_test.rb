@@ -23,6 +23,37 @@ class TransactionMenuTest < ApplicationSystemTestCase
 
 	end
 
+	test "default transaction menu fields" do
+    """
+    Log in and click on 'new transaction'
+    The following fields are visible from the start:
+    - #single-account
+    - #categories
+    - #amount
+    The following fields are hidden from the start:
+    - #transfer-account
+    - #currency-rate
+    - #currency-result
+    - #transactions
+    """
+    # login as transactions user
+    login_user(users(:transactions), 'SomePassword123^!')
+
+    # open the transaction menu
+    click_on "New Transaction"
+
+    # assert the visible fields
+    assert_selector '#single-account', visible: :visible
+    assert_selector '#categories', visible: :visible
+    assert_selector '#amount', visible: :visible
+
+    # assert the hidden fields
+    assert_selector '#transfer-account', visible: :hidden
+    assert_selector '#currency-rate', visible: :hidden
+    assert_selector '#currency-result', visible: :hidden
+    assert_selector '#transactions', visible: :hidden
+  end
+
 	test 'type color changes' do
 
 		start
@@ -329,7 +360,7 @@ class TransactionMenuTest < ApplicationSystemTestCase
 		sleep 1
 
 		# verify the amount in EUR is 8
-		assert find('#transactionform #transaction_account_currency').value == '8.00', format_error('Unexpected account currency amount', '8.00', find('#transactionform #transaction_account_currency').value)
+		assert find('#transactionform #transaction_account_currency').value.to_f >= 0.8, format_error('Unexpected account currency amount', '8.00', find('#transactionform #transaction_account_currency').value)
 
 		# click on "Multiple"
 		find('#transactionform #multiple-multiple').click
@@ -341,6 +372,8 @@ class TransactionMenuTest < ApplicationSystemTestCase
 
 		# fill in transactions
 		find('#transactionform #transaction_transactions').set("one 10\ntwo 20\nthree 30\nfour 40")
+
+		sleep 1
 
 		# verify the amount in EUR is 0.80
 		assert find('#transactionform #transaction_account_currency').value == '0.80', format_error('Unexpected account currency amount', '0.80', find('#transactionform #transaction_account_currency').value)

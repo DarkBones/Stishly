@@ -358,4 +358,41 @@ class AccountsTest < ApplicationSystemTestCase
 
   end
 
+  test 'Transaction visible test' do
+
+    current_user = users(:bas)
+
+    login_user(current_user, 'SomePassword123^!')
+
+    ids = ["jvkHRHdOLFH-", "3wPNUsSvn8YP", "9nmxbbf1tedH", "o8xIIKx1MCzz", "SNilsHJqNRoi"]
+
+    for i in 0..4
+        page.find("#account_#{ids[i]}").click
+
+        for x in 1..i
+            assert_selector 'li', text: "transaction " + x.to_s + "\n€#{x}.00"
+        end
+    end
+
+  end
+
+  test 'Endless page test' do
+    current_user = users(:endless_page)
+
+    login_user(current_user, 'SomePassword123^!')
+
+    page.find("#account_KpI4Cq6dLiYo").click
+
+    sleep 1
+    assert_selector 'li', text: "transaction 1\n€1.00"
+    assert_select 'li', {count: 0, text: "transaction 100"}
+
+    5.times do
+        page.execute_script "window.scrollBy(0,10000)"
+        sleep 1
+    end
+
+    assert_selector 'li', text: "transaction 100"
+  end
+
 end

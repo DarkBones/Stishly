@@ -36,7 +36,7 @@ class AccountTest < ActiveSupport::TestCase
   test "Save with disallowed characters in name" do
     current_user = users(:bas)
     
-    unsafe_chars = ["-", ".", "_", "~", ":", "/", "?", "#", "[", "]", "@", "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "=", "{", "}", "\""]
+    unsafe_chars = ["-", ".", "~", ":", "/", "?", "#", "[", "]", "@", "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "=", "{", "}", "\""]
 
     unsafe_chars.each do |c|
       account = current_user.accounts.build({:name => "test #{c} character", :currency => "EUR"})

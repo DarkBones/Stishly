@@ -1,6 +1,7 @@
 require "application_system_test_case"
 
 class SchedulesTest < ApplicationSystemTestCase
+
   test "visit the schedules page" do
     """
     log in as blank user and navigate to the schedules page
@@ -12,8 +13,8 @@ class SchedulesTest < ApplicationSystemTestCase
     """
 
     login_as_blank
-    page.find(".navbar-gear").click
-    click_on "Schedules"
+    page.find('.navbar-gear').click
+    click_on 'Schedules'
 
     assert_selector 'h2', text: 'Schedules'
     assert_selector 'h3', text: 'Active Schedules'
@@ -24,6 +25,7 @@ class SchedulesTest < ApplicationSystemTestCase
 
     assert_selector 'button#new-schedule-button', text: "New Schedule"
   end
+
   test "open and close schedule form" do
     login_as_blank
     visit "/schedules"
@@ -206,18 +208,30 @@ class SchedulesTest < ApplicationSystemTestCase
   end
 
   test "transaction category" do
-     login_user(users(:schedules), 'SomePassword123^!')
+    login_user(users(:schedules), 'SomePassword123^!')
 
-     visit "/schedules"
-     page.find("#schedule-transactions-button_LTtuYQYmO-kO:first-of-type").click
-     page.find("#new-scheduled-transaction").click
+    visit "/schedules"
+    page.find("#schedule-transactions-button_LTtuYQYmO-kO:first-of-type", visible: :all).click
+    page.find("#new-scheduled-transaction").click
      
-     assert_selector "#new_schedule_transactionform #categories-dropdown", text: "Uncategorised"
+    assert_selector "#new_schedule_transactionform #categories-dropdown", text: "Uncategorised"
 
-     page.find("#new_schedule_transactionform #categories-dropdown").click
-     page.find("#new_schedule_transactionform #search-categories_LTtuYQYmO-kO").fill_in with: "fue"
+    page.find("#new_schedule_transactionform #categories-dropdown").click
+    page.find("#new_schedule_transactionform #search-categories_LTtuYQYmO-kO").fill_in with: "cine"
      
-     assert_selector "#new_schedule_transactionform .category_dRrYpyKCdqFm", visible: :hidden
-     assert_selector "#new_schedule_transactionform .category_xn-2SkGUfSwQ", visible: :visible
+    category = Category.where(user_id: 9, name: "Cinema").take
+    all_catagories = Category.where(user_id: 9)
+
+    all_catagories.each do |c|
+        if ['Entertainment', 'Date'].include? c.name
+            assert_selector "#new_schedule_transactionform #categoriesDropdownOptions_LTtuYQYmO-kO .category_#{c.hash_id}.grey-out" 
+        elsif c.name == 'Cinema'
+            assert_no_selector "#new_schedule_transactionform #categoriesDropdownOptions_LTtuYQYmO-kO .category_#{c.hash_id}.grey-out"
+        else
+            assert_no_selector "#new_schedule_transactionform #categoriesDropdownOptions_LTtuYQYmO-kO .category_#{c.hash_id}"
+        end
+    end
+
   end
+
 end
