@@ -9,7 +9,7 @@ class TransactionsTest < ApplicationSystemTestCase
 			amount: 100
 		}
 
-		start
+		start_transaction
 
 		create_transaction(params)
 
@@ -42,7 +42,7 @@ class TransactionsTest < ApplicationSystemTestCase
 
 	test 'all months' do
 
-		start
+		start_transaction
 
 		# create a transaction for every month of the year 2015 and check if the date was handled correctly
 		['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].each_with_index do |m, i|
@@ -71,7 +71,7 @@ class TransactionsTest < ApplicationSystemTestCase
 			date: ""
 		}
 
-		fill_form(params)
+		fill_form_transaction(params)
 		# verify that the date field is blank
 		assert find('#transactionform #transaction_date').value == ''
 		click_on I18n.t('buttons.create_transaction.text')
@@ -91,7 +91,7 @@ class TransactionsTest < ApplicationSystemTestCase
 			currency: 'JPY'
 		}
 
-		start
+		start_transaction
 
 		create_transaction(params)
 
@@ -109,7 +109,7 @@ class TransactionsTest < ApplicationSystemTestCase
 			currency: 'JPY'
 		}
 
-		start
+		start_transaction
 
 		create_transaction(params)
 
@@ -128,7 +128,7 @@ class TransactionsTest < ApplicationSystemTestCase
 			amount: 1000
 		}
 
-		start
+		start_transaction
 
 		create_transaction(params)
 
@@ -156,7 +156,7 @@ class TransactionsTest < ApplicationSystemTestCase
 			amount: 1000
 		}
 
-		start
+		start_transaction
 
 		create_transaction(params)
 
@@ -191,7 +191,7 @@ class TransactionsTest < ApplicationSystemTestCase
 			transactions: "one 100\ntwo 200\nthree 300\nfour 400"
 		}
 
-		start
+		start_transaction
 
 		create_transaction(params)
 
@@ -236,7 +236,7 @@ class TransactionsTest < ApplicationSystemTestCase
 			transactions: "one 100\ntwo 200\nthree 300\nfour 400"
 		}
 
-		start
+		start_transaction
 
 		create_transaction(params)
 
@@ -257,7 +257,7 @@ class TransactionsTest < ApplicationSystemTestCase
 			date: 1.week.from_now.strftime("%d-%b-%Y")
 		}
 
-		start
+		start_transaction
 
 		create_transaction(params)
 
@@ -271,57 +271,6 @@ class TransactionsTest < ApplicationSystemTestCase
 
 		assert_no_selector "#transactions_list #transaction_#{transaction.hash_id}"
 
-	end
-
-
-	def create_transaction(params)
-		fill_form(params)
-		click_on I18n.t('buttons.create_transaction.text')
-		sleep 1
-	end
-
-	def fill_form(params)
-		# click on new transaction
-		click_on I18n.t('buttons.new_transaction.text')
-
-		# select the transaction type
-		find("#transactionform #type-#{params[:type]}").click unless params[:type].nil?
-
-		# fill in the description
-		find('#transactionform #transaction_description').set(params[:description]) unless params[:description].nil?
-
-		# select the account(s)
-		find('#transactionform #transaction_account').find(:option, params[:account]).select_option unless params[:account].nil?
-		find('#transactionform #transaction_from_account').find(:option, params[:from_account]).select_option unless params[:from_account].nil?
-		find('#transactionform #transaction_to_account').find(:option, params[:to_account]).select_option unless params[:to_account].nil?
-
-		# select currency
-		find('#transactionform #transaction_currency').find(:option, params[:currency]).select_option unless params[:currency].nil?
-
-		# select category
-		unless params[:category].nil?
-			category = Category.where(user_id: 8, name: params[:category]).take
-			find('#transactionform #categories-dropdown').click
-			find(".category_#{category.hash_id}").click
-		end
-
-		# select multiple / single
-		find("#transactionform #multiple-#{params[:multiple]}").click unless params[:multiple].nil?
-
-		# fill in the amount
-		find('#transactionform #transaction_amount').set(params[:amount]) unless params[:amount].nil?
-
-		# fill in the transactions
-		find('#transactionform #transaction_transactions').set(params[:transactions]) unless params[:transactions].nil?
-
-		# fill in the date and time
-		find('#transactionform #transaction_date').set(params[:date]) unless params[:date].nil?
-		find('#transactionform #transaction_time').set(params[:time]) unless params[:time].nil?
-	end
-
-	def start
-		login_user(users(:transactions), 'SomePassword123^!')
-		visit '/accounts'
 	end
 
 end

@@ -12,3 +12,17 @@
     <%= f.button 'Save Transaction', :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " Updating transaction ..."} %>
   </div>
 <% end %>
+
+<script>
+
+	<% if transaction.transfer_transaction %>
+
+		<% if transaction.account.currency != transaction.transfer_transaction.account.currency %>
+
+			$("#edit_transaction_form #rate_from_to").text($("#edit_transaction_form #rate_from_to").text().replace("%from%", "<%= transaction.account.currency %>").replace("%to%", "<%= transaction.transfer_transaction.account.currency %>"));
+
+		<% end %>
+
+	<% end %>
+
+</script>

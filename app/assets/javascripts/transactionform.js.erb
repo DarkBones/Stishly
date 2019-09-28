@@ -191,9 +191,7 @@ function showTransferCurrencyRates(formId, type=null) {
           $submitButton.removeAttr("disabled");
           $(formId + " #to_account_currency").text(data.to_account.currency);
           $(formId + " #transfer-currencies").show();
-          //$(formId + " #rate_from_to").text("FU");
           $(formId + " #rate_from_to").text("<%= I18n.t('helpers.label.transaction.rate_from_to') %>".replace("%from%", data.from_account.currency).replace("%to%", data.to_account.currency));
-          //$(formId + " #rate_from_to").text("Rate " + data.from_account.currency + " to " + data.to_account.currency);
           $(formId + " #transaction_rate_from_to").val(data.currency_rate);
 
           updateTransactionResult(formId);

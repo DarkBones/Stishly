@@ -131,7 +131,7 @@ function removeTransaction(tId) {
 }
 
 function editTransaction(obj){
-  var transactionId = $(obj).attr("id");
+  var transactionId = $(obj).attr("id").replace("txn_", "");
 
   $("#edit_transaction_form_fields").html("");
   $.ajax({
