@@ -161,7 +161,6 @@ class TransactionTest < ActiveSupport::TestCase
     assert transaction.transfer_transaction.account_currency_amount == 80, format_error("Unexpected transaction account currency amount", 80, transaction.transfer_transaction.account_currency_amount)
     assert transaction.transfer_transaction.user_currency_amount == 80, format_error("Unexpected transaction user currency amount", 80, transaction.transfer_transaction.user_currency_amount)
 
-
   end
 
   def create_params(customised_params={}, current_user=nil, account=nil)

@@ -23,6 +23,16 @@ class AccountsTest < ApplicationSystemTestCase
 
 	end
 
+	test 'Reset filters button hidden' do
+
+		login_user(users(:endless_page), 'SomePassword123^!')
+
+		visit '/accounts'
+
+		assert_no_selector '#reset_filters_link'
+
+	end
+
 	test 'Create simple account' do
 
 		login_as_blank
