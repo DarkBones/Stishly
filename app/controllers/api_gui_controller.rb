@@ -1,5 +1,29 @@
 class ApiGuiController < BaseApiBrowserController
 
+  def render_account_overview_charts
+    start_date = params[:start]
+    end_date = params[:end]
+    unless params[:account].nil?
+      account = Account.get_from_name(params[:account], current_user)
+    end
+
+    render plain: "Wrong date format" unless start_date.respond_to?("to_date")
+    render plain: "Wrong date format" unless end_date.respond_to?("to_date")
+    render plain: "Something went wrong" if account.nil? && !params[:account].nil?
+
+    start_date = start_date.to_date
+    end_date = end_date.to_date
+
+    unless account.nil?
+      history_data = ChartDatum.account_history(account, start_date: start_date, end_date: end_date)
+    else
+      history_data = ChartDatum.user_history(current_user, start_date: start_date, end_date: end_date)
+    end
+
+    render partial: "accounts/overview_charts", :locals => { :history_data => history_data }
+
+  end
+
   def render_category
     category = current_user.categories.friendly.find(params[:id]).decorate
     render partial: "categories/category", :locals => {:category => category}

@@ -113,6 +113,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
+    chartkick (3.2.1)
     childprocess (1.0.1)
       rake (< 13.0)
     chromedriver-helper (2.1.1)
@@ -181,7 +182,6 @@ GEM
       activerecord (>= 4.0.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    googlecharts (1.6.12)
     hashie (3.6.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
@@ -446,6 +446,7 @@ DEPENDENCIES
   bullet
   byebug
   capybara (>= 2.15)
+  chartkick
   chromedriver-helper
   coffee-rails (~> 4.2)
   concurrency
@@ -460,7 +461,6 @@ DEPENDENCIES
   filterrific
   font_awesome5_rails
   friendly_id (~> 5.1.0)
-  googlecharts
   jbuilder (~> 2.5)
   jquery-minicolors-rails
   jquery-rails

@@ -8,6 +8,16 @@ class AccountsController < ApplicationController
   def overview
     @active_account = Account.get_from_name(params[:id], current_user) or not_found
     @active_account = @active_account.decorate
+
+    @history_data = ChartDatum.account_history(@active_account)
+  end
+
+  def overview_all
+    @active_account = Account.create_summary_account(current_user, true).decorate
+
+    @history_data = ChartDatum.user_history(current_user)
+
+    render "overview"
   end
 
   def update

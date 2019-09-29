@@ -22,6 +22,9 @@ Rails.application.routes.draw do
       end
     end
   end
+  scope '/accounts_overview' do
+    get '/', to: 'accounts#overview_all', as: :account_all_overview
+  end
 
   scope '/categories' do
     get '/', to: 'categories#index', as: :categories
@@ -336,6 +339,10 @@ Rails.application.routes.draw do
       end
       #/api/v1/render
       scope '/render' do
+        #/api/v1/render/account_overview_charts/:start/:end(/:account)
+        scope '/account_overview_charts/:start/:end(/:account)' do
+          get '/', to: 'api_gui#render_account_overview_charts'
+        end
         #/api/v1/render/account_title_balance(/:account)
         scope '/account_title_balance/' do
           scope '(/:account)' do

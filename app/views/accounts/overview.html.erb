@@ -1,9 +1,45 @@
 <%= content_for :account_content do %>
+
   <div class="row pt-4">
-    <div class="col-12">
-      HELLO
+    <div class="col-12 col-lg-8 col-xl-6">
+      <div class="input-group">
+          <input type="text" class="datepicker datepicker-null form-control" id="from_date" value="<%= 30.days.ago.strftime("%d-%b-%Y") %>" onchange="overviewDaterangeChange();">
+          <div class="input-group-addon">
+            <span class="input-group-text"><%= t('pages.overview.date_from_to_to') %></span>
+          </div>
+          <input type="text" class="datepicker datepicker-null form-control" id="to_date" value="<%= Time.now.strftime("%d-%b-%Y") %>" onchange="overviewDaterangeChange();">
+      </div>
     </div>
   </div>
+
+  <%= render partial: "accounts/overview_charts", :locals => { :history_data => @history_data } %>
+
 <% end %>
 
 <%= render partial: "template", :locals => {:active_tab => "Overview"} %>
+
+<script>
+
+  function overviewDaterangeChange() {
+    var startDate = $("#from_date").val();
+    var endDate = $("#to_date").val();
+    var account = getActiveAccountName();
+
+    var url = "/api/v1/render/account_overview_charts/" + startDate + "/" + endDate
+    if (typeof(account) === "string") {
+      url += "/" + account
+    }
+
+    $("#overview-charts").html("");
+
+    $.ajax({
+      type: "GET",
+      dataType: "html",
+      url: url,
+      success(data){
+        $("#overview-charts").html(data);
+      }
+    });
+  }
+
+</script>
