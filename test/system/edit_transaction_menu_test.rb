@@ -25,28 +25,52 @@ class EditTransactionMenuTest < ApplicationSystemTestCase
 		sleep 1
 
 		# verify the conversion rates are visible
-		assert_selector '#edit_transaction_form #rate_from_to', visible: :visible
+		assert_selector '#edit_transactionform #rate_from_to', visible: :visible
 
 		# verify the rate label is correctly formatted
-		assert_selector '#edit_transaction_form #rate_from_to', text: 'Rate EUR to JPY'
+		assert_selector '#edit_transactionform #rate_from_to', text: 'Rate EUR to JPY'
 
 		# click on expense
-		find('#transactionform #type-expense').click
+		find('#edit_transactionform #type-expense').click
 
 		sleep 1
 
 		# verify the conversion rates are hidden
-		assert_selector '#edit_transaction_form #rate_from_to', visible: :hidden
+		assert_selector '#edit_transactionform #rate_from_to', visible: :hidden
 
 		# click on transfer
-		find('#transactionform #type-transfer').click
+		find('#edit_transactionform #type-transfer').click
 
 		sleep 1
 
 		# verify the conversion rates are visible
-		assert_selector '#edit_transaction_form #rate_from_to', visible: :visible
+		assert_selector '#edit_transactionform #rate_from_to', visible: :visible
 
-		take_screenshot
+	end
+
+	test 'edit transaction after ajax insert' do
+
+		params = {
+			description: 'Edit after ajax',
+			amount: 1000,
+			time: 1.hour.ago
+		}
+
+		start_transaction
+
+		create_transaction(params)
+
+		# search the transaction in the database
+		transaction = Transaction.where(user_id: 8, description: 'Edit after ajax').take
+
+		find("#txn_#{transaction.hash_id}").click
+		sleep 1
+
+		# verify the timezone field is filled in
+		assert find('#edit_transactionform #timezone_input', visible: :all).value == transaction.timezone
+
+		# verify the time is the same as the transaction time
+		assert find('#edit_transactionform #transaction_time').value == transaction.local_datetime.strftime("%H:%M")
 
 	end
 
