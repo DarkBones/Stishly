@@ -3,7 +3,10 @@
 	<div class="row pt-4">
 	  <div class="col-12 col-xl-6">
 	    <%= line_chart(history_data, title: "Balance History") %>
-	    <%= history_data %>
+	  </div>
+	  <div class="col-12 col-xl-6">
+	  	<%= pie_chart(category_data, title: "Categories") %>
+	  	<%= category_data %>
 	  </div>
 	</div>
 
