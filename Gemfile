@@ -145,3 +145,5 @@ gem 'data-confirm-modal'
 gem 'friendly_id', '~> 5.1.0'
 
 gem 'jquery-minicolors-rails'
+
+gem 'googlecharts'
