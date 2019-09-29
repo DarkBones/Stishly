@@ -5,6 +5,11 @@ class AccountsController < ApplicationController
     redirect_to "/accounts", notice: "Account deleted"
   end
 
+  def overview
+    @active_account = Account.get_from_name(params[:id], current_user) or not_found
+    @active_account = @active_account.decorate
+  end
+
   def update
     account = current_user.accounts.friendly.find(params[:id])
     Account.update_account(account, update_params)

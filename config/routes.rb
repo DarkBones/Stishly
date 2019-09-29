@@ -17,6 +17,9 @@ Rails.application.routes.draw do
           post '/', to: 'accounts#edit', as: :edit_account_settings
         end
       end
+      scope '/overview' do
+        get '/', to: 'accounts#overview', as: :account_overview
+      end
     end
   end
 
