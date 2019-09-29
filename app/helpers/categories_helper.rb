@@ -5,7 +5,7 @@ module CategoriesHelper
     node.each do |n|
       cl = "rounded-circle"
       cl += " category" unless n[:symbol].nil?
-      result += "<li class=\"category_" + n[:id].to_s + " dropdown-item py-2 px-0\""
+      result += "<li class=\"category_" + n[:id].to_s + " clickable dropdown-item py-2 px-0\""
       result += " path=\"#{n[:children_paths]}\""
       result += " onclick=\"setCategory(this, '" + n[:id].to_s + "', '" + suff + "')\">"
       result += "<div class=\"sort-handle move-cursor\"></div>" if include_sort_handle
