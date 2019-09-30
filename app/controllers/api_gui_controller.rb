@@ -16,11 +16,13 @@ class ApiGuiController < BaseApiBrowserController
 
     unless account.nil?
       history_data = ChartDatum.account_history(account, start_date: start_date, end_date: end_date)
+      category_data = ChartDatum.account_categories(account, start_date: start_date, end_date: end_date)
     else
       history_data = ChartDatum.user_history(current_user, start_date: start_date, end_date: end_date)
+      category_data = ChartDatum.user_categories(current_user, start_date: start_date, end_date: end_date)
     end
 
-    render partial: "accounts/overview_charts", :locals => { :history_data => history_data }
+    render partial: "accounts/overview_charts", :locals => { :history_data => history_data, :category_data => category_data }
 
   end
 

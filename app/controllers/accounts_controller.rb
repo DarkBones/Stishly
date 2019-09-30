@@ -17,6 +17,7 @@ class AccountsController < ApplicationController
     @active_account = Account.create_summary_account(current_user, true).decorate
 
     @history_data = ChartDatum.user_history(current_user)
+    @category_data = ChartDatum.user_categories(current_user)
 
     render "overview"
   end

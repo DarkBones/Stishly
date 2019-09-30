@@ -2,15 +2,27 @@
 
 	<div class="row pt-4">
 	  <div class="col-12">
-	    <%= line_chart(history_data, title: "Balance History") %>
+	    <%= line_chart(history_data, title: t('charts.balance_history')) %>
 	  </div>
 	</div>
 
-	<div class="row">
-		<div class="col-12 col-xl-6 py-2">
-	  	<%#= pie_chart(category_data, title: "Categories") %>
-	  	<%= category_data %>
-	  </div>
-	</div>
+	<% unless category_data[:root].length == 0 %>
+		<div class="row">
+			<div class="col-12 py-2">
+				<h3><%= t('pages.overview.expenses') %></h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 col-xl-6 py-2">
+		  	<%= pie_chart(category_data[:root], title: t('categories.name'), colors: category_data[:root_colors]) %>
+		  </div>
+
+		  <% category_data[:totals].each do |total| %>
+		  	<div class="col-12 col-xl-6 py-2">
+		  		<%= pie_chart(category_data[:charts][total[0]], title: total[0]) %>
+		  	</div>
+		  <% end %>
+		</div>
+	<% end %>
 
 </div>

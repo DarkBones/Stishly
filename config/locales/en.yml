@@ -431,6 +431,10 @@ en:
   categories:
     transferred: Transferred
     uncategorized: Uncategorized
+    name: Categories
+
+  charts:
+    balance_history: Balance History
 
   pages:
     edit_user_account:
@@ -494,3 +498,4 @@ en:
       title: User settings
     overview:
       date_from_to_to: to
+      expenses: Expenses

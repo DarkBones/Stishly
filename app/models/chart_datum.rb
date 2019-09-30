@@ -69,6 +69,19 @@ class ChartDatum < ApplicationRecord
     categories = get_category_charts(transactions, currency, type: "account")
   end
 
+  def self.user_categories(user, start_date: nil, end_date: nil, days: 30)
+    start_date ||= days.days.ago.to_date
+    end_date ||= Time.now.to_date
+
+    end_date += 1.day
+
+    transactions = user.transactions.where("local_datetime >= ? AND local_datetime <= ? AND parent_id is null AND amount < 0", start_date, end_date)
+
+    currency = Money::Currency.new(user.currency)
+
+    categories = get_category_charts(transactions, currency, type: "user")
+  end
+
 private
 
   def self.get_category_charts(transactions, currency, type: "account")
@@ -78,11 +91,12 @@ private
     categories = {}
     totals = {}
     root = {}
+    root_colors = []
     
     # iterate over the unique category ids
     categorized_transactions.distinct.pluck(:category_id).each do |cat_id|
       # find the category object
-      category = Category.find(cat_id)
+      category = Category.find(cat_id).decorate
 
       # store the total amount of transactions with the same category id
       amount = categorized_transactions.where(category_id: cat_id).sum(:amount)
@@ -97,7 +111,7 @@ private
       parent_id = category.parent_id
       # while there are parents, create a new chart
       until parent_id.nil?
-        parent = Category.find(parent_id)
+        parent = Category.find(parent_id).decorate
 
         unless categories.keys.include? parent.name
           categories[parent.name] = {}
@@ -117,17 +131,13 @@ private
 
         # create the root chart
         if parent_id.nil?
-          unless categories.keys.include? :root
-            categories[:root] = {}
-            totals[:root] = 0
+
+          unless root.keys.include? category.name
+            root[category.name] = 0
+            root_colors.push(category.color)
           end
 
-          unless categories[:root].keys.include? category.name
-            categories[:root][category.name] = 0
-          end
-
-          categories[:root][category.name] += amount
-          totals[:root] += amount
+          root[category.name] += amount
         end
 
       end
@@ -138,19 +148,20 @@ private
     uncategorized_transactions.each do |transaction|
       unless transaction.transfer_transaction.nil?
         if type == "account" && transaction.account.hash_id != transaction.transfer_transaction.account.hash_id
-          unless categories[:root].keys.include? I18n.t('categories.transferred')
-            categories[:root][I18n.t('categories.transferred')] = 0
+          unless root.keys.include? I18n.t('categories.transferred')
+            root[I18n.t('categories.transferred')] = 0
+            root_colors.push("#FFC107")
           end
 
           amount = transaction.account_currency_amount.to_f / currency.subunit_to_unit
-          categories[:root][I18n.t('categories.transferred')] += amount
-          totals[:root] += amount
+          root[I18n.t('categories.transferred')] += amount
         end
 
       else
 
-        unless categories[:root].keys.include? I18n.t('categories.uncategorized')
-          categories[:root][I18n.t('categories.uncategorized')] = 0
+        unless root.keys.include? I18n.t('categories.uncategorized')
+          root[I18n.t('categories.uncategorized')] = 0
+          root_colors.push("#808080")
         end
 
         if type == "account"
@@ -161,8 +172,7 @@ private
 
         amount /= currency.subunit_to_unit
 
-        categories[:root][I18n.t('categories.uncategorized')] += amount
-        totals[:root] += amount
+        root[I18n.t('categories.uncategorized')] += amount
 
       end
     end
@@ -173,6 +183,8 @@ private
     puts categories.to_yaml
 
     return {
+      root: root,
+      root_colors: root_colors,
       totals: totals,
       charts: categories
     }
