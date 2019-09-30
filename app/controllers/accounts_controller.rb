@@ -11,6 +11,7 @@ class AccountsController < ApplicationController
 
     @history_data = ChartDatum.account_history(@active_account)
     @category_data = ChartDatum.account_categories(@active_account)
+    @category_data_income = ChartDatum.account_categories(@active_account, type: "income")
   end
 
   def overview_all
@@ -18,6 +19,7 @@ class AccountsController < ApplicationController
 
     @history_data = ChartDatum.user_history(current_user)
     @category_data = ChartDatum.user_categories(current_user)
+    @category_data_income = ChartDatum.user_categories(current_user, type: "income")
 
     render "overview"
   end

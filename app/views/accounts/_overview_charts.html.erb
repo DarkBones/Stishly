@@ -9,7 +9,7 @@
 	<% unless category_data[:root].length == 0 %>
 		<div class="row">
 			<div class="col-12 py-2">
-				<h3><%= t('pages.overview.expenses') %></h3>
+				<h2><%= t('pages.overview.expenses') %></h2>
 			</div>
 		</div>
 		<div class="row">
@@ -20,6 +20,25 @@
 		  <% category_data[:totals].each do |total| %>
 		  	<div class="col-12 col-xl-6 py-2">
 		  		<%= pie_chart(category_data[:charts][total[0]], title: total[0]) %>
+		  	</div>
+		  <% end %>
+		</div>
+	<% end %>
+
+	<% unless category_data_income[:root].length == 0 %>
+		<div class="row">
+			<div class="col-12 py-2">
+				<h2><%= t('pages.overview.income') %></h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 col-xl-6 py-2">
+		  	<%= pie_chart(category_data_income[:root], title: t('categories.name'), colors: category_data_income[:root_colors]) %>
+		  </div>
+
+		  <% category_data_income[:totals].each do |total| %>
+		  	<div class="col-12 col-xl-6 py-2">
+		  		<%= pie_chart(category_data_income[:charts][total[0]], title: total[0]) %>
 		  	</div>
 		  <% end %>
 		</div>

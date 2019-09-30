@@ -56,26 +56,34 @@ class ChartDatum < ApplicationRecord
 
   end
 
-  def self.account_categories(account, start_date: nil, end_date: nil, days: 30)
+  def self.account_categories(account, start_date: nil, end_date: nil, days: 30, type: "expense")
     start_date ||= days.days.ago.to_date
     end_date ||= Time.now.to_date
 
     end_date += 1.day
 
-    transactions = account.transactions.where("local_datetime >= ? AND local_datetime <= ? AND parent_id is null AND amount < 0", start_date, end_date)
+    if type == "expense"
+      transactions = account.transactions.where("local_datetime >= ? AND local_datetime <= ? AND parent_id is null AND amount < 0", start_date, end_date)
+    else
+      transactions = account.transactions.where("local_datetime >= ? AND local_datetime <= ? AND parent_id is null AND amount > 0", start_date, end_date)
+    end
 
     currency = Money::Currency.new(account.currency)
 
     categories = get_category_charts(transactions, currency, type: "account")
   end
 
-  def self.user_categories(user, start_date: nil, end_date: nil, days: 30)
+  def self.user_categories(user, start_date: nil, end_date: nil, days: 30, type: "expense")
     start_date ||= days.days.ago.to_date
     end_date ||= Time.now.to_date
 
     end_date += 1.day
 
-    transactions = user.transactions.where("local_datetime >= ? AND local_datetime <= ? AND parent_id is null AND amount < 0", start_date, end_date)
+    if type == "expense"
+      transactions = user.transactions.where("local_datetime >= ? AND local_datetime <= ? AND parent_id is null AND amount < 0", start_date, end_date)
+    else
+      transactions = user.transactions.where("local_datetime >= ? AND local_datetime <= ? AND parent_id is null AND amount > 0", start_date, end_date)
+    end
 
     currency = Money::Currency.new(user.currency)
 
@@ -101,9 +109,9 @@ private
       # store the total amount of transactions with the same category id
       amount = categorized_transactions.where(category_id: cat_id).sum(:amount)
       if type == "account"
-        amount = categorized_transactions.where(category_id: cat_id).sum(:account_currency_amount).to_f
+        amount = categorized_transactions.where(category_id: cat_id).sum(:account_currency_amount).to_f.abs
       else
-        amount = categorized_transactions.where(category_id: cat_id).sum(:user_currency_amount).to_f
+        amount = categorized_transactions.where(category_id: cat_id).sum(:user_currency_amount).to_f.abs
       end
       amount /= currency.subunit_to_unit
 
@@ -178,7 +186,7 @@ private
     end
 
     # sort the hash by amount
-    totals = totals.sort_by {|_key, value| value}
+    totals = totals.sort_by {|_key, value| value}.reverse
 
     puts categories.to_yaml
 
@@ -188,55 +196,6 @@ private
       totals: totals,
       charts: categories
     }
-
-  end
-
-  def self.account_categories_OLD(account, start_date: nil, end_date: nil, days: 30)
-  	start_date ||= days.days.ago.to_date
-  	end_date ||= Time.now.to_date
-
-  	end_date += 1.day
-
-  	currency = Money::Currency.new(account.currency)
-
-  	data = {}
-  	account.transactions.where("local_datetime >= ? AND local_datetime <= ? AND parent_id is null", start_date, end_date).each do |t|
-
-  		unless t.category_id.nil?
-	  		if t.category_id > 0
-	  			category_name = t.category.name
-	  		elsif t.transfer_transaction.nil?
-	  			category_name = "Uncategorized"
-	  		else
-	  			if t.amount > 0
-	  				category_name = "Transferred to #{t.transfer_transaction.account.name}"
-	  			else
-	  				category_name = "Transferred from #{t.transfer_transaction.account.name}"
-	  			end
-	  		end
-	  	else
-	  		if t.transfer_transaction.nil?
-	  			category_name = "Uncategorized"
-	  		else
-	  			if t.amount > 0
-	  				category_name = "Transferred to #{t.transfer_transaction.account.name}"
-	  			else
-	  				category_name = "Transferred from #{t.transfer_transaction.account.name}"
-	  			end
-	  		end
-	  	end
-
-  		amount = t.account_currency_amount.to_f / currency.subunit_to_unit
-
-  		if data.keys.include? category_name
-  			data[category_name] += amount
-  		else
-  			data[category_name] = amount
-  		end
-
-  	end
-
-  	return data
 
   end
 
