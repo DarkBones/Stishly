@@ -20,6 +20,7 @@ class Category < ApplicationRecord
   has_one :parent, :class_name => 'Category'
   has_many :children, :class_name => 'Category', :foreign_key => 'parent_id'
 
+  
   def self.create(current_user, params)
     category = current_user.categories.new(params)
 

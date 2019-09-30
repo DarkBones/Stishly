@@ -11,14 +11,6 @@ class AccountsController < ApplicationController
 
     @history_data = ChartDatum.account_history(@active_account)
     @category_data = ChartDatum.account_categories(@active_account)
-
-    @category_data = {
-      one: 1,
-      two: {
-        a: 1,
-        b: 2
-      }
-    }
   end
 
   def overview_all

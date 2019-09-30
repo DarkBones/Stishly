@@ -1,11 +1,14 @@
 <div id="overview-charts">
 
 	<div class="row pt-4">
-	  <div class="col-12 col-xl-6">
+	  <div class="col-12">
 	    <%= line_chart(history_data, title: "Balance History") %>
 	  </div>
-	  <div class="col-12 col-xl-6">
-	  	<%= pie_chart(category_data, title: "Categories") %>
+	</div>
+
+	<div class="row">
+		<div class="col-12 col-xl-6 py-2">
+	  	<%#= pie_chart(category_data, title: "Categories") %>
 	  	<%= category_data %>
 	  </div>
 	</div>
