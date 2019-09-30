@@ -100,6 +100,7 @@ private
     totals = {}
     root = {}
     root_colors = []
+    total = 0
     
     # iterate over the unique category ids
     categorized_transactions.distinct.pluck(:category_id).each do |cat_id|
@@ -113,6 +114,7 @@ private
       else
         amount = categorized_transactions.where(category_id: cat_id).sum(:user_currency_amount).to_f.abs
       end
+      total += amount
       amount /= currency.subunit_to_unit
 
       # find the parent id
@@ -161,7 +163,9 @@ private
             root_colors.push("#FFC107")
           end
 
-          amount = transaction.account_currency_amount.to_f / currency.subunit_to_unit
+          amount = transaction.account_currency_amount.to_f
+          total += amount
+          amount /= currency.subunit_to_unit
           root[I18n.t('categories.transferred')] += amount
         end
 
@@ -177,6 +181,7 @@ private
         else
           amount = transaction.user_currency_amount
         end
+        total += amount
 
         amount /= currency.subunit_to_unit
 
@@ -191,6 +196,8 @@ private
     puts categories.to_yaml
 
     return {
+      total: total,
+      currency: currency.iso_code,
       root: root,
       root_colors: root_colors,
       totals: totals,
