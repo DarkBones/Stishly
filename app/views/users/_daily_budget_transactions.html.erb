@@ -1,0 +1,11 @@
+<% transactions.each do |transaction| %>
+	<tr>
+		<td class="date">
+			<%= User.format_date(transaction.local_datetime.to_date) %>
+		</td>
+		<td>
+			<%= transaction.description %>
+			<span class="float-right"><%= balance(transaction.user_currency_amount, current_user.currency, "cents") %></span>
+		</td>
+	</tr>
+<% end %>

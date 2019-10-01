@@ -1799,3 +1799,18 @@ daily_budget_three: {
   is_scheduled: true,
   schedule_id: 2103
 }
+
+daily_budget_three: {
+  id: 21041,
+  user_id: 21,
+  description: electricity,
+  account_id: 2101,
+  amount: -5000,
+  direction: -1,
+  account_currency_amount: -5000,
+  user_currency_amount: -5000,
+  currency: EUR,
+  timezone: "America/New_York",
+  is_scheduled: true,
+  schedule_id: 21041
+}

@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   #layout :primary_background, :only => :welcome
 
+  def daily_budget
+    @budget = User.daily_budget(current_user)
+  end
+
   def index
     @users = User.all
   end

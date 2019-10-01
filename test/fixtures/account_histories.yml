@@ -16,8 +16,17 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+
+<% for i in 1..100 %>
+daily_budget_one_<%= i %>: {
+  account_id: 2101,
+  local_datetime: "<%= i.hours.ago %>",
+  balance: <%= i * 123 %>
+}
+<% end %>
+
+daily_budget_two_1: {
+  account_id: 2102,
+  local_datetime: "<%= Time.now %>",
+  balance: 500000
+}

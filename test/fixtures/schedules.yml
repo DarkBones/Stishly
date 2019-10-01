@@ -697,3 +697,22 @@ daily_budget_three: {
   type_of: fixed expense,
   current_period_id: 0
 }
+
+daily_budget_four: {
+  id: 21041,
+  name: electricity,
+  user_id: 21,
+  start_date: 2019-09-30,
+  period: months,
+  period_num: 2,
+  days: 0,
+  days_month: first,
+  days_exclude: 0,
+  exclusion_met_day: 0,
+  timezone: America/New_York,
+  is_active: 1,
+  next_occurrence: 2019-11-01,
+  next_occurrence_utc: '2019-11-01 04:00:00',
+  type_of: fixed expense,
+  current_period_id: 0
+}

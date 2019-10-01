@@ -396,7 +396,7 @@ daily_budget: {
   country_code: 'IE',
   country_id: 1,
   subscription_tier_id: 1,
-  timezone: 'Europe/London',
+  timezone: 'America/New_York',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
   currency: EUR,

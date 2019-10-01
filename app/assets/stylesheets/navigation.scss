@@ -98,6 +98,10 @@ table {
   th {
     padding: 0 5px;
   }
+
+  td.date {
+    width: $tdDateWith;
+  }
 }
 
 @media (max-width: 992px) {

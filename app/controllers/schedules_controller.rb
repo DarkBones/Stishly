@@ -23,7 +23,7 @@ class SchedulesController < ApplicationController
   end
 
   def edit
-    @schedule = current_user.schedules.find(params[:id])
+    @schedule = current_user.schedules.friendly.find(params[:id])
     update_params = Schedule.edit(schedule_params, @schedule)
     @schedule.update(update_params)
 
@@ -43,7 +43,7 @@ class SchedulesController < ApplicationController
   def delete
     @schedule_id = params[:id]
     if current_user.schedules.where("id = ?", @schedule_id).exists?
-      schedule = current_user.schedules.find(@schedule_id)
+      schedule = current_user.schedules.friendly.find(@schedule_id)
       schedule.user_transactions.each do |transaction|
         transaction.destroy if transaction.schedules.length <= 1
       end

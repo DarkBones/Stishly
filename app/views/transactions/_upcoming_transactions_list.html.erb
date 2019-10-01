@@ -17,7 +17,7 @@
 %>
 
 <tr class="<%= 'upcoming-cancelled' if transaction.is_cancelled %>" id="transaction_<%= transaction_id %>" series-id="<%= transaction.hash_id %>" schedule="<%= schedule_id %>" period="<%= period_id %>" scheduled-transaction="<%= scheduled_transaction_id %>">
-	<td id="upcoming-date"><!-- date -->
+	<td id="upcoming-date" class="date"><!-- date -->
 		<%= User.format_date(transaction.local_datetime) %>
 	</td>
 	<td><!-- schedule -->

@@ -1,0 +1,132 @@
+<div class="container rounded bg-primary">
+	<div class="row px-3 py-3">
+			<div class="col-12">
+
+					<div class="row">
+						<div class="clickable col-12" onclick="$('#daily-budget-accounts').slideToggle();">
+							<h4 class="text-light">
+								<%= t('pages.daily_budget.balance') %>
+								<span class="float-right">
+									<%= balance(@budget[:balance][:start], current_user.currency, "cents") %>
+								</span>
+							</h4>
+						</div>
+					</div>
+
+				<% if @budget[:accounts].length > 0 %>
+					<div class="rounded px-2 py-2 mb-3 bg-light" id="daily-budget-accounts" style="width: 100%; display: none;">
+						<div class="row">
+							<div class="col-12">
+								<table>
+									<%= render partial: "users/daily_budget_accounts", :locals => {:accounts => @budget[:accounts]} %>
+
+									<tr>
+										<td class="date"></td>
+										<td class="border-bottom"></td>
+									</tr>
+
+									<tr>
+										<td class="date">
+										</td>
+										<td class="font-weight-bold">
+											<%= t('pages.daily_budget.total') %>
+											<span class="float-right">
+												<%= balance(@budget[:balance][:start], current_user.currency, "cents") %>
+											</span>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				<% end %>
+				
+				<% if @budget[:transactions][:scheduled].length > 0 %>
+
+					<div class="row">
+						<div class="clickable col-12" onclick="$('#daily-budget-upcoming-transactions').slideToggle();">
+							<h4 class="text-light">
+								<%= t('pages.daily_budget.transactions') %>
+								<span class="float-right">
+									<%= balance(@budget[:transactions][:scheduled][:total], current_user.currency, "cents") %>
+								</span>
+							</h4>
+						</div>
+					</div>
+
+					<div class="rounded px-2 py-2 mb-3 bg-light" id="daily-budget-upcoming-transactions" style="width: 100%; display: none;">
+						<div class="row">
+							<div class="col-12">
+								<table>
+									<%= render partial: "users/daily_budget_transactions", :locals => {:transactions => @budget[:transactions][:scheduled][:transactions] } %>
+
+									<tr>
+										<td class="date"></td>
+										<td class="border-bottom"></td>
+									</tr>
+
+									<tr>
+										<td class="date">
+										</td>
+										<td class="font-weight-bold">
+											<%= t('pages.daily_budget.total') %>
+											<span class="float-right">
+												<%= balance(@budget[:transactions][:scheduled][:total], current_user.currency, "cents") %>
+											</span>
+										</td>
+									</tr>
+								</table>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="row py-2">
+						<div class="col-8">
+						</div>
+						<div class="col-4" style="border-bottom: 2px solid white;">
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12">
+							<h4 class="text-light">
+								<%= t('pages.daily_budget.total') %>
+								<span class="float-right">
+									<%= balance(@budget[:balance][:start] + @budget[:transactions][:scheduled][:total], current_user.currency, "cents") %>
+								</span>
+							</h4>
+						</div>
+					</div>
+
+				<% end %>
+
+				<div class="row border-bottom">
+				</div>
+
+				<div class="row py-2">
+					<div class="col-12">
+						<h4 class="text-light">
+							<%= t('pages.daily_budget.days') %>
+							<span class="float-right">
+								<%= @budget[:days_until] %>
+							</span>
+						</h4>
+					</div>
+				</div>
+
+				<div class="row py-2">
+					<div class="col-12">
+						<h4 class="text-light">
+							<%= balance(@budget[:balance][:start] + @budget[:transactions][:scheduled][:total], current_user.currency, "cents") %> / <%= @budget[:days_until] %>
+							<span class="float-right">
+								<%= balance(@budget[:budget][:today], current_user.currency, "cents") %>
+							</span>
+						</h4>
+					</div>
+				</div>
+
+		</div>
+	</div>
+</div>

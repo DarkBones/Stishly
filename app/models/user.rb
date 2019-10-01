@@ -102,7 +102,6 @@ class User < ApplicationRecord
 
   def self.current_time
     tz = TZInfo::Timezone.get(@current_user.timezone)
-
     return tz.utc_to_local(Time.now.utc)
   end
 

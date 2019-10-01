@@ -26,6 +26,10 @@ Rails.application.routes.draw do
     get '/', to: 'accounts#overview_all', as: :account_all_overview
   end
 
+  scope '/daily_budget' do
+    get '/', to: 'users#daily_budget', as: :daily_budget
+  end
+
   scope '/categories' do
     get '/', to: 'categories#index', as: :categories
     scope '/sort' do

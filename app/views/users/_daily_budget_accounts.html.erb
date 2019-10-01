@@ -1,0 +1,11 @@
+<% accounts.each do |account| %>
+	<tr>
+		<td class="date">
+			<%= User.format_date(User.current_time.to_date) %>
+		</td>
+		<td>
+			<%= account.name %>
+			<span class="float-right"><%= balance(account.balance, current_user.currency, "cents") %></span>
+		</td>
+	</tr>
+<% end %>
