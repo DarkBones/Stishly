@@ -391,3 +391,34 @@ future_transactions_one: {
   position: 0,
   hash_id: EJI6ICiXi2XU
 }
+
+daily_budget_one: {
+  id: 2101,
+  balance: 200000,
+  user_id: 21,
+  name: Current,
+  currency: EUR,
+  position: 0,
+  hash_id: EJI6ICiXi2X5
+}
+
+daily_budget_two: {
+  id: 2102,
+  balance: 50000,
+  user_id: 21,
+  name: Cash,
+  currency: EUR,
+  position: 1,
+  hash_id: EJI6ICiXi2X6
+}
+
+daily_budget_three: {
+  id: 2103,
+  balance: 2000000,
+  user_id: 21,
+  name: Savings,
+  currency: EUR,
+  position: 2,
+  hash_id: EJI6ICiXi2X7,
+  account_type: save
+}

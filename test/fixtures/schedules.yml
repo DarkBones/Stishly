@@ -617,3 +617,83 @@ update_transactions_one: {
   next_occurrence: '2019-03-29',
   next_occurrence_utc: '2019-03-29 00:00'
 }
+
+daily_budget_main: {
+  id: 2100,
+  name: income,
+  user_id: 21,
+  start_date: 2019-09-30,
+  period: months,
+  period_num: 1,
+  days: 268435456,
+  days_month: specific,
+  days_month_day: 0,
+  days_exclude: 65,
+  exclusion_met: previous,
+  exclusion_met_day: 5,
+  timezone: America/New_York,
+  is_active: 1,
+  next_occurrence: 2019-10-28,
+  next_occurrence_utc: '2019-10-28 04:00:00',
+  type_of: main,
+  current_period_id: 0
+}
+
+daily_budget_one: {
+  id: 2101,
+  name: rent,
+  user_id: 21,
+  start_date: 2019-09-30,
+  period: months,
+  period_num: 1,
+  days: 0,
+  days_month: first,
+  days_exclude: 0,
+  exclusion_met_day: 0,
+  timezone: America/New_York,
+  is_active: 1,
+  next_occurrence: 2019-10-01,
+  next_occurrence_utc: '2019-10-01 04:00:00',
+  type_of: fixed expense,
+  current_period_id: 0
+}
+
+daily_budget_two: {
+  id: 21021,
+  name: water,
+  user_id: 21,
+  start_date: 2019-09-30,
+  period: weeks,
+  period_num: 1,
+  days: 2,
+  days_month: first,
+  days_month_day: 0,
+  days_exclude: 0,
+  exclusion_met_day: 0,
+  timezone: America/New_York,
+  is_active: 1,
+  next_occurrence: 2019-10-07,
+  next_occurrence_utc: '2019-10-07 04:00:00',
+  type_of: fixed expense,
+  current_period_id: 0
+}
+
+daily_budget_three: {
+  id: 2103,
+  name: subscription,
+  user_id: 21,
+  start_date: 2019-09-30,
+  period: days,
+  period_num: 1,
+  days: 0,
+  days_month: first,
+  days_month_day: 0,
+  days_exclude: 0,
+  exclusion_met_day: 0,
+  timezone: America/New_York,
+  is_active: 1,
+  next_occurrence: 2019-10-01,
+  next_occurrence_utc: '2019-10-01 04:00:00',
+  type_of: fixed expense,
+  current_period_id: 0
+}

@@ -100,7 +100,6 @@
           dataType: "html",
           url: "api/v1/render/upcoming_transaction/" + transactionId.toString() + "/dropdown",
           success(data) {
-            console.log(data);
             $("#transaction_" + tId.toString() + " #upcoming-dropdown").html(data);
           },
           error() {
@@ -135,7 +134,6 @@
           dataType: "html",
           url: "api/v1/render/upcoming_transaction/" + transactionId.toString() + "/dropdown",
           success(data) {
-            console.log(data);
             $("#transaction_" + tId.toString() + " #upcoming-dropdown").html(data);
           },
           error() {

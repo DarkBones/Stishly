@@ -388,3 +388,19 @@ setup_wizard: {
   unconfirmed_email: setupwizard@stishly.com
 }
 
+daily_budget: {
+  id: 21,
+  first_name: Daily,
+  last_name: Budget,
+  email_bidx: <%= User.generate_email_bidx("dailybudget@stishly.com").inspect %>,
+  country_code: 'IE',
+  country_id: 1,
+  subscription_tier_id: 1,
+  timezone: 'Europe/London',
+  encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
+  confirmed_at: '2018-11-14 19:54:40',
+  currency: EUR,
+  finished_setup: false,
+  email: dailybudget@stishly.com,
+  unconfirmed_email: dailybudget@stishly.com
+}

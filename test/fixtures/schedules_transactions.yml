@@ -200,3 +200,20 @@ upcoming_run_10: {
   transaction_id: 1710,
   schedule_id: 1701
 }
+
+daily_budget_main: {
+  transaction_id: 2100,
+  schedule_id: 2100
+}
+daily_budget_one: {
+  transaction_id: 21011,
+  schedule_id: 2101
+}
+daily_budget_two: {
+  transaction_id: 21021,
+  schedule_id: 21021
+}
+daily_budget_three: {
+  transaction_id: 21031,
+  schedule_id: 2103
+}

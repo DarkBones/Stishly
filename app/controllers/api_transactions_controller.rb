@@ -16,23 +16,24 @@ class ApiTransactionsController < BaseApiController
 	end
 
 	def cancel_upcoming_occurrence
-    transaction = @user.transactions.find(params[:id])
+    transaction = @user.transactions.friendly.find(params[:id])
     schedule = nil
-    schedule = @user.schedules.find(params[:schedule_id]) if params[:schedule_id].to_i > 0
+    schedule = @user.schedules.friendly.find(params[:schedule_id]) if params[:schedule_id].length > 3
+    schedule_id = schedule.id unless schedule.nil?
 
     return if transaction.nil?
     #return if @user.schedules.find(params[:schedule_id]).nil?
     return unless @user.transactions.where(scheduled_transaction_id: params[:id], schedule_id: params[:schedule_id], schedule_period_id: params[:schedule_period_id], is_cancelled: true).take.nil?
 
-    Transaction.cancel_upcoming_occurrence(transaction, params[:schedule_id], params[:schedule_period_id])
+    Transaction.cancel_upcoming_occurrence(transaction, schedule_id, params[:schedule_period_id])
     #redirect_back fallback_location: root_path
   end
 
   def uncancel_upcoming_occurrence
-    transaction = @user.transactions.find(params[:id])
+    transaction = @user.transactions.friendly.find(params[:id])
 
     return if transaction.nil?
-    return if @user.schedules.find(params[:schedule_id]).nil? if params[:schedule_id].to_i > 0
+    return if @user.schedules.friendly.find(params[:schedule_id]).nil? if params[:schedule_id].to_i > 3
     return unless @user.transactions.where(scheduled_transaction_id: params[:id], schedule_id: params[:schedule_id], schedule_period_id: params[:schedule_period_id], is_cancelled: true).take.nil?
 
     Transaction.uncancel_upcoming_occurrence(transaction)
@@ -40,9 +41,9 @@ class ApiTransactionsController < BaseApiController
   end
 
   def trigger_upcoming_occurrence
-  	transaction = @user.transactions.find(params[:id])
+  	transaction = @user.transactions.friendly.find(params[:id])
     schedule = nil
-    schedule = @user.schedules.find(params[:schedule_id]) if params[:schedule_id].to_i > 0
+    schedule = @user.schedules.friendly.find(params[:schedule_id]) if params[:schedule_id].length > 3
 
     return if transaction.nil?
     #return if schedule.nil?

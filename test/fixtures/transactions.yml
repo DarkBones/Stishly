@@ -1739,3 +1739,63 @@ future_transaction_past: {
   timezone: "Europe/London",
   is_scheduled: false
 }
+
+daily_budget_main: {
+  id: 2100,
+  user_id: 21,
+  description: income,
+  account_id: 2101,
+  amount: 200000,
+  direction: 1,
+  account_currency_amount: 200000,
+  user_currency_amount: 200000,
+  currency: EUR,
+  timezone: "America/New_York",
+  is_scheduled: true,
+  schedule_id: 2100
+}
+
+daily_budget_one: {
+  id: 21011,
+  user_id: 21,
+  description: rent,
+  account_id: 2101,
+  amount: -50000,
+  direction: -1,
+  account_currency_amount: -50000,
+  user_currency_amount: -50000,
+  currency: EUR,
+  timezone: "America/New_York",
+  is_scheduled: true,
+  schedule_id: 2101
+}
+
+daily_budget_two: {
+  id: 21021,
+  user_id: 21,
+  description: weekly,
+  account_id: 2101,
+  amount: -10000,
+  direction: -1,
+  account_currency_amount: -10000,
+  user_currency_amount: -10000,
+  currency: EUR,
+  timezone: "America/New_York",
+  is_scheduled: true,
+  schedule_id: 21021
+}
+
+daily_budget_three: {
+  id: 21031,
+  user_id: 21,
+  description: daily,
+  account_id: 2101,
+  amount: -500,
+  direction: -1,
+  account_currency_amount: -500,
+  user_currency_amount: -500,
+  currency: EUR,
+  timezone: "America/New_York",
+  is_scheduled: true,
+  schedule_id: 2103
+}

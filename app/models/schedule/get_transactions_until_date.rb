@@ -1,7 +1,7 @@
 class Schedule
 	class GetTransactionsUntilDate
 
-		def initialize(user, end_date, start_date=nil)
+		def initialize(user, end_date, start_date=nil, include_future: false)
 			@end_date = end_date
 			@start_date = start_date
 			@start_date ||= Time.now.utc
@@ -34,11 +34,22 @@ class Schedule
 
 			end
 
+			transactions += @user.transactions.where("scheduled_date < ?", @end_date)
+
+			if (include_future)
+				transactions += get_future_transactions(@user)
+			end
+
 			return transactions.sort_by { |hsh| hsh[:local_datetime] }
 
 		end
 
 private
+		
+		# returns transactions that are scheduled after the end_date (for use in daily budget calculations)
+		def get_future_transactions(user)
+
+		end
 
 		def get_next_occurrence(schedule)
 			next_occurrence = schedule.pause_until_utc || schedule.next_occurrence_utc

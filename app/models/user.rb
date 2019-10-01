@@ -76,6 +76,10 @@ class User < ApplicationRecord
   def will_save_change_to_email?
   end
 
+  def self.daily_budget(user)
+    return CalculateDailyBudget.new(user).perform
+  end
+
   def self.from_omniauth(auth)
     puts auth.to_yaml
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
