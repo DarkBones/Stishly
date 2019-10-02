@@ -64,7 +64,6 @@ private
 
 			accounts.each do |a|
 				total += get_user_amount(a.balance, currency, a.currency)
-				puts a.balance
 			end
 
 			return total
@@ -92,6 +91,35 @@ private
 			}
 		end
 
+		# calculates how much a user spends per day on average
+		def get_average_spending(user, window: 30)
+			start_date = @user_time.to_date - window.days
+			transactions = user.transactions.where("is_scheduled = false AND schedule_id IS NULL AND user_currency_amount < 0 AND is_cancelled = false AND is_queued = false AND local_datetime >= ?", start_date).order(:local_datetime)
+			first_transaction = user.transactions.where("local_datetime IS NOT NULL AND user_currency_amount IS NOT NULL AND schedule_id IS NULL AND is_cancelled = false AND is_queued = false").order(:local_datetime).first
+
+			if first_transaction.nil?
+				return {
+					amount: 0,
+					accuracy: 0
+				}
+			end
+
+			start_date = first_transaction.local_datetime.to_date if first_transaction.local_datetime.to_date > @user_time.to_date - window.days
+			puts start_date
+
+			days = (@user_time.to_date - start_date).to_i
+			sum = transactions.sum(:user_currency_amount).abs
+			sum /= days unless days == 0
+
+			accuracy = ((100.to_f/window) * days).round(1)
+
+			return {
+				amount: sum,
+				accuracy: accuracy
+			}
+
+		end
+
 		# calculates amount that can be spent today
 		def daily_budget(user, schedule)
 			user_currency = Money::Currency.new(user.currency) # the user's currency
@@ -115,7 +143,12 @@ private
 				budget_tomorrow = budget_today
 			end
 
+			# average daily spending
+			average_spend = get_average_spending(user)
+			spend_percentage = ((100.to_f/budget_tomorrow) * average_spend[:amount]).round(1)
+
 			result = {
+				bg_color: 'bg-warning',
 				type: 'daily_budget',
 				balance: {
 					start: balance_start[:total],
@@ -131,6 +164,13 @@ private
 				budget: {
 					today: budget_today,
 					tomorrow: budget_tomorrow
+				},
+				spending: {
+					average: {
+						amount: average_spend[:amount],
+						accuracy: average_spend[:accuracy],
+						percentage: spend_percentage
+					}
 				}
 			}
 		end

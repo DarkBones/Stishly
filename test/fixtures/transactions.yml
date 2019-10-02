@@ -1814,3 +1814,18 @@ daily_budget_three: {
   is_scheduled: true,
   schedule_id: 21041
 }
+
+<% for i in 1..30 %>
+daily_budget_<%= i %>: {
+  user_id: 21,
+  description: <%= "transaction " + i.to_s %>,
+  account_id: 2101,
+  amount: <%= i * -100 %>,
+  account_currency_amount: <%= i * -100 %>,
+  user_currency_amount: <%= i * -100 %>,
+  currency: 'CAD',
+  local_datetime: "<%= i.days.ago %>",
+  timezone: "America/New_York",
+  category_id: 0
+}
+<% end %>
