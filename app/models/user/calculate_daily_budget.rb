@@ -147,8 +147,19 @@ private
 			average_spend = get_average_spending(user)
 			spend_percentage = ((100.to_f/budget_tomorrow) * average_spend[:amount]).round(1)
 
+			if spend_percentage <= 62.5
+				status = 'excellent'
+			elsif spend_percentage <= 75
+				status = 'good'
+			elsif spend_percentage <= 87.5
+				status = 'fair'
+			elsif spend_percentage <= 100
+				status = 'caution'
+			else
+				status = 'bad'
+			end
+
 			result = {
-				bg_color: 'bg-warning',
 				type: 'daily_budget',
 				balance: {
 					start: balance_start[:total],
@@ -165,14 +176,16 @@ private
 					today: budget_today,
 					tomorrow: budget_tomorrow
 				},
-				spending: {
-					average: {
-						amount: average_spend[:amount],
-						accuracy: average_spend[:accuracy],
-						percentage: spend_percentage
-					}
+				average_spending: {
+					status: status,
+					amount: average_spend[:amount],
+					accuracy: average_spend[:accuracy],
+					percentage: spend_percentage
 				}
 			}
+
+			puts result.to_yaml
+			return result
 		end
 
 		# calculates days until money runs out
