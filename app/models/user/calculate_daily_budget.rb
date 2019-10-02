@@ -105,9 +105,9 @@ private
 			end
 
 			start_date = first_transaction.local_datetime.to_date if first_transaction.local_datetime.to_date > @user_time.to_date - window.days
-			puts start_date
 
 			days = (@user_time.to_date - start_date).to_i
+			days += 1 if days < window
 			sum = transactions.sum(:user_currency_amount).abs
 			sum /= days unless days == 0
 
@@ -149,15 +149,34 @@ private
 
 			if spend_percentage <= 62.5
 				status = 'excellent'
+				status_icon = 'grin-alt'
+				status_color = 'success'
 			elsif spend_percentage <= 75
 				status = 'good'
+				status_icon = 'smile-beam'
+				status_color = 'success'
 			elsif spend_percentage <= 87.5
 				status = 'fair'
+				status_icon = 'smile'
+				status_color = 'success'
 			elsif spend_percentage <= 100
 				status = 'caution'
+				status_icon = 'meh'
+				status_color = 'warning'
 			else
 				status = 'bad'
+				status_icon = 'frown'
+				status_color = 'danger'
 			end
+
+			if spend_percentage < 100
+				status_message = I18n.t('pages.daily_budget.under')
+			else
+				status_message = I18n.t('pages.daily_budget.over')
+			end
+			status_message = status_message.sub("@tomorrow@", Money.new(budget_tomorrow, user_currency.iso_code).format)
+			status_message = status_message.sub("@percent@", spend_percentage.to_s)
+			status_message = status_message.sub("@average@", Money.new(average_spend[:amount], user_currency.iso_code).format)
 
 			result = {
 				type: 'daily_budget',
@@ -178,13 +197,15 @@ private
 				},
 				average_spending: {
 					status: status,
+					status_icon: status_icon,
+					status_color: status_color,
+					status_message: status_message,
 					amount: average_spend[:amount],
 					accuracy: average_spend[:accuracy],
 					percentage: spend_percentage
 				}
 			}
 
-			puts result.to_yaml
 			return result
 		end
 

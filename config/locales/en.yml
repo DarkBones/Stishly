@@ -506,3 +506,12 @@ en:
       transactions: Upcoming Transactions
       balance: Balance
       days: Days until payday
+      status: Status
+      statuses:
+        excellend: Excellent
+        good: Good
+        fair: Fair
+        caution: Caution
+        bad: Bad
+      under: Your daily budget for tomorrow is @tomorrow@, which is @percent@ of what you spend on an average day, which is @average@.
+      over: Your daily budget for tomorrow is @tomorrow@, which is higher than what you spend on an average day, which is @average@
