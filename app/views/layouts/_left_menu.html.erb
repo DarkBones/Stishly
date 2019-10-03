@@ -20,6 +20,12 @@ end
 
         <hr />
 
+        <div class="d-block d-md-none">
+          <%= render partial: "users/daily_budget", :locals => { :type => 'link' } %>
+
+          <hr />
+        </div>
+
         <%= render partial: "left_menu/section", locals: {
           title: "#{t('account.name')} <span id=\"create-account-button\" class=\"float-right clickable\"><a data-toggle=\"modal\" data-target=\"#accountform\" onclick=\"renderAccountMenu();\" id=\"new-account-button\">+</a></span>".html_safe,
           section_layout: "left_menu/user_accounts",

@@ -130,7 +130,7 @@ private
 
 			# get the transactions
 			scheduled_transactions = get_scheduled_transactions(user, schedule, user_currency)
-			today_transactions = user.transactions.where("local_datetime >= ? AND local_datetime < ?", @user_time.to_date, @user_time.to_date)
+			today_transactions = user.transactions.where("date(local_datetime) >= ? AND date(local_datetime) <= ? AND is_cancelled = false AND is_queued = false AND schedule_id IS NULL AND user_currency_amount IS NOT NULL", @user_time.to_date, @user_time.to_date)
 
 			# days until payday
 			days_until = (schedule.next_occurrence - @user_time.to_date).to_i
@@ -179,12 +179,24 @@ private
 			status_message = status_message.sub("@percent@", spend_percentage.to_s)
 			status_message = status_message.sub("@average@", Money.new(average_spend[:amount], user_currency.iso_code).format)
 
+			spent_today = today_transactions.sum(:user_currency_amount) * -1
+			spent_perc = ((100.to_f/budget_today) * spent_today).round(1)
+
+			if spent_perc <= 75
+				spent_color = 'success'
+			elsif spent_perc < 100
+				spent_color = 'warning'
+			else
+				spent_color = 'danger'
+			end
+
 			result = {
 				type: 'daily_budget',
 				balance: {
 					start: balance_start[:total],
 					now: balance_now,
-					spend: today_transactions.sum(:user_currency_amount)
+					spent: spent_today,
+					spent_color: spent_color
 				},
 				accounts: balance_start[:accounts],
 				transactions: {

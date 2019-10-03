@@ -1,0 +1,25 @@
+<div class="rounded px-2 py-2 mb-3 bg-light" id="daily-budget-accounts" style="width: 100%; display: none;">
+	<div class="row">
+		<div class="col-12">
+			<table>
+				<%= render partial: "users/daily_budget_accounts", :locals => {:accounts => budget[:accounts]} %>
+
+				<tr>
+					<td class="date"></td>
+					<td class="border-bottom"></td>
+				</tr>
+
+				<tr>
+					<td class="date">
+					</td>
+					<td class="font-weight-bold">
+						<%= t('pages.daily_budget.total') %>
+						<span class="float-right">
+							<%= balance(budget[:balance][:start], current_user.currency, "cents") %>
+						</span>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

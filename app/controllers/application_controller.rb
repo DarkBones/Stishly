@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!, :except => [:country_currency, :privacy_policy, :api]
-  before_action :set_current_user, :setup_wizzard
+  before_action :set_current_user, :setup_wizzard, :daily_budget
 
   helper_method :user_accounts, :user_accounts_array, :user_categories_array, :user_schedules_array
 
@@ -8,6 +8,14 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
       unless current_user.finished_setup
         redirect_to user_welcome_path unless request.original_fullpath.start_with?('/users') || request.original_fullpath.start_with?('/api') || request.original_fullpath.start_with?('/registrations')
+      end
+    end
+  end
+
+  def daily_budget
+    if user_signed_in?
+      if current_user.finished_setup
+        @budget = User.daily_budget(current_user)
       end
     end
   end

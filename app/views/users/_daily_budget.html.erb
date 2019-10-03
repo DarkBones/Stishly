@@ -1,0 +1,34 @@
+<% if user_signed_in? %>
+	<% if current_user.finished_setup %>
+	<% type ||= 'dropdown' %>
+
+		<div class="dropdown mx-auto" style="width: auto;">
+
+			<% if type == 'dropdown' %>
+
+				<div class="navbar clickable mx-auto pt-3 rounded bg-<%= @budget[:balance][:spent_color] %>" id="daily_budget" style="width: auto;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<h4 class="text-light">
+						<%= balance(@budget[:balance][:spent], current_user.currency, "cents") %> / <%= balance(@budget[:budget][:today], current_user.currency, "cents") %>
+					</h4>
+				</div>
+
+				<div class="dropdown-menu dropshadow-light">
+					<%= render partial: "users/daily_budget_dropdown", :locals => { :budget => @budget } %>
+				</div>
+
+			<% else %>
+
+				<a href="<%= daily_budget_path %>">
+					<div class="navbar clickable mx-auto pt-3 bg-<%= @budget[:balance][:spent_color] %>" id="daily_budget" style="width: auto;">
+						<h4 class="text-light">
+							<%= balance(@budget[:balance][:spent], current_user.currency, "cents") %> / <%= balance(@budget[:budget][:today], current_user.currency, "cents") %>
+						</h4>
+					</div>
+				</a>
+
+			<% end %>
+
+		</div>
+
+	<% end %>
+<% end %>

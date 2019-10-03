@@ -1,0 +1,122 @@
+<div class="container rounded bg-primary" id="daily-budget-dropdown">
+	<div class="row px-3 py-3">
+			<div class="col-12">
+
+					<div class="row">
+						<div class="col-12 text-center text-light">
+							<h1><%= t('pages.daily_budget.title') %></h1>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12">
+							<h4 class="text-light">
+								<%= t('pages.daily_budget.balance') %>
+								<span class="float-right">
+									<%= balance(budget[:balance][:start], current_user.currency, "cents") %>
+								</span>
+							</h4>
+						</div>
+					</div>
+
+				<%# if budget[:accounts].length > 0 %>
+
+					<%#= render partial: "users/balance_table", :locals => { :budget => budget } %>
+
+				<%# end %>
+				
+				<% if budget[:transactions][:scheduled].length > 0 %>
+
+					<div class="row">
+						<div class="col-12">
+							<h4 class="text-light">
+								<%= t('pages.daily_budget.transactions') %>
+								<span class="float-right">
+									<%= balance(budget[:transactions][:scheduled][:total], current_user.currency, "cents") %>
+								</span>
+							</h4>
+						</div>
+					</div>
+
+					<%#= render partial: "users/transactions_table", :locals => { :budget => budget } %>
+
+					<div class="row py-2">
+						<div class="col-8">
+						</div>
+						<div class="col-4" style="border-bottom: 2px solid white;">
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12">
+							<h4 class="text-light font-weight-bold">
+								<%= t('pages.daily_budget.total') %>
+								<span class="float-right">
+									<%= balance(budget[:balance][:start] + budget[:transactions][:scheduled][:total], current_user.currency, "cents") %>
+								</span>
+							</h4>
+						</div>
+					</div>
+
+				<% end %>
+
+				<div class="row py-2">
+					<div class="col-12">
+						<h4 class="text-light">
+							<%= t('pages.daily_budget.days') %>
+							<span class="float-right">
+								<%= budget[:days_until] %>
+							</span>
+						</h4>
+					</div>
+				</div>
+
+				<div class="row py-2">
+					<div class="col-12">
+						<h4 class="text-light">
+							<%= balance(budget[:balance][:start] + budget[:transactions][:scheduled][:total], current_user.currency, "cents") %> / <%= budget[:days_until] %>
+							<span class="float-right">
+								<%= balance(budget[:budget][:today], current_user.currency, "cents") %>
+							</span>
+						</h4>
+					</div>
+				</div>
+
+				<div class="row py-2 border-bottom">
+				</div>
+
+				<div class="row py-2">
+					<div class="col-12">
+						<h2 class="text-light text-center">
+							<%= t('pages.daily_budget.status') %>
+						</h2>
+					</div>
+				</div>
+
+				<div class="rounded px-2 py-2 mb-3 bg-light" id="daily-budget-upcoming-transactions" style="width: 100%;">
+					<div class="row">
+						<div class="col-12 text-center text-<%= budget[:average_spending][:status_color] %>">
+							<span style="font-size: 75px;">
+								<%= fa_icon(budget[:average_spending][:status_icon]) %>
+							</span>
+							<h2 class="font-weight-bold">
+								<%= t("pages.daily_budget.statuses.#{budget[:average_spending][:status]}") %>
+							</h2>
+							<h5>
+								<%= budget[:average_spending][:status_message] %>
+							</h5>
+							<p class="text-dark">
+								<%= t("pages.daily_budget.status_messages.#{budget[:average_spending][:status]}.sub") %>
+							</p>
+							<% if budget[:average_spending][:accuracy] < 100 %>
+								<p class="text-dark rounded px-2 py-2 bg-warning">
+									<%= t('pages.daily_budget.inaccurate').sub('@percent@', budget[:average_spending][:accuracy].to_s) %>
+								</p>
+							<% end %>
+						</div>
+					</div>
+				</div>
+
+		</div>
+	</div>
+</div>

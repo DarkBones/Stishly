@@ -11,7 +11,10 @@
   <%#= User.daily_budget(current_user) %>
 
   <%#= render 'layouts/search_navbar' %>
-  
+  <div class="d-none d-md-block mx-auto">
+    <%= render 'users/daily_budget' %>
+  </div>
+
   <%= render 'layouts/navigation_links' %>
 	
 </nav>
