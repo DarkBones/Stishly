@@ -41,7 +41,7 @@ private
 
 			accounts.each do |a|
 				# get the latest AccountHistory entry from yesterday
-				history = a.account_histories.where("local_datetime < ?", @user_time.to_date - 1.day).order(:local_datetime).reverse_order.take
+				history = a.account_histories.where("date(local_datetime) <= ?", @user_time.to_date - 1.day).order(:local_datetime).reverse_order.take
 
 				# if no history was found, take the earliest one
 				history ||= a.account_histories.order(:local_datetime).take
@@ -174,6 +174,7 @@ private
 			else
 				status_message = I18n.t('pages.daily_budget.over')
 			end
+			status_message = I18n.t("pages.daily_budget.status_messages.#{status}.main")
 			status_message = status_message.sub("@tomorrow@", Money.new(budget_tomorrow, user_currency.iso_code).format)
 			status_message = status_message.sub("@percent@", spend_percentage.to_s)
 			status_message = status_message.sub("@average@", Money.new(average_spend[:amount], user_currency.iso_code).format)

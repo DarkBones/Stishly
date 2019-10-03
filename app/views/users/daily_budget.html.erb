@@ -3,6 +3,12 @@
 			<div class="col-12">
 
 					<div class="row">
+						<div class="col-12 text-center text-light">
+							<h1><%= t('pages.daily_budget.title') %></h1>
+						</div>
+					</div>
+
+					<div class="row">
 						<div class="clickable col-12" onclick="$('#daily-budget-accounts').slideToggle();">
 							<h4 class="text-light">
 								<%= t('pages.daily_budget.balance') %>
@@ -144,9 +150,17 @@
 							<h2 class="font-weight-bold">
 								<%= t("pages.daily_budget.statuses.#{@budget[:average_spending][:status]}") %>
 							</h2>
-							<h4>
+							<h5>
 								<%= @budget[:average_spending][:status_message] %>
-							</h4>
+							</h5>
+							<p class="text-dark">
+								<%= t("pages.daily_budget.status_messages.#{@budget[:average_spending][:status]}.sub") %>
+							</p>
+							<% if @budget[:average_spending][:accuracy] < 100 %>
+								<p class="text-dark rounded px-2 py-2 bg-warning">
+									<%= t('pages.daily_budget.inaccurate').sub('@percent@', @budget[:average_spending][:accuracy].to_s) %>
+								</p>
+							<% end %>
 						</div>
 					</div>
 				</div>

@@ -508,10 +508,27 @@ en:
       days: Days until payday
       status: Status
       statuses:
-        excellend: Excellent
+        excellent: Excellent
         good: Good
         fair: Fair
         caution: Caution
         bad: Bad
       under: Your daily budget for tomorrow is @tomorrow@, which is @percent@ of what you spend on an average day, which is @average@.
       over: Your daily budget for tomorrow is @tomorrow@, which is higher than what you spend on an average day, which is @average@
+      status_messages:
+        excellent:
+          main: Your average daily expense is @average@, which is only @percent@% of tomorrow's budget of @tomorrow@
+          sub: Consider transferring some money to a savings account or investing.
+        good:
+          main: Your average daily expense is @average@, which is @percent@% of tomorrow's budget of @tomorrow@
+          sub: Keep it up!
+        fair:
+          main: Your average daily expense is @average@, which is @percent@% of tomorrow's budget of @tomorrow@
+          sub: Try to cut down some expenses to be on the safe side.
+        cuation:
+          main: Your average daily expense is @average@, which is @percent@ of tomorrow's budget of @tomorrow@
+          sub: Consider going over your transactions to see where you are over-spending.
+        bad:
+          main: Tomorrow's daily budget is @tomorrow@, which is lower than your average daily expenses of @average@
+          sub: You are in danger of going into debt. Go over your transactions to see what you can cut.
+      inaccurate: The accuraccy of this status is @percent@% as there isn't enough data yet. Continued use of this application will improve the accuracy.
