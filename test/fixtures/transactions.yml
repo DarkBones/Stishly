@@ -1745,7 +1745,7 @@ daily_budget_main: {
   user_id: 21,
   description: income,
   account_id: 2101,
-  amount: 200000,
+  amount: 20000,
   direction: 1,
   account_currency_amount: 200000,
   user_currency_amount: 200000,
@@ -1815,14 +1815,14 @@ daily_budget_three: {
   schedule_id: 21041
 }
 
-<% for i in 1..2 %>
+<% for i in 1..25 %>
 daily_budget_<%= i %>: {
   user_id: 21,
   description: <%= "transaction " + i.to_s %>,
   account_id: 2101,
-  amount: <%= i * -100 %>,
-  account_currency_amount: <%= i * -100 %>,
-  user_currency_amount: <%= i * -100 %>,
+  amount: <%= i * -10000 %>,
+  account_currency_amount: <%= i * -1000 %>,
+  user_currency_amount: <%= i * -1000 %>,
   currency: 'CAD',
   local_datetime: "<%= i.days.ago %>",
   timezone: "America/New_York",

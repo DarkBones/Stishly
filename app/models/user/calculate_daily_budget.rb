@@ -70,11 +70,11 @@ private
 		end
 
 		# returns all transactions scheduled until next payday
-		def get_scheduled_transactions(user, schedule, currency)
+		def get_scheduled_transactions(user, date, currency)
 			total = 0
 			transactions = []
 
-			Schedule.get_all_transactions_until_date(user, schedule.next_occurrence).each do |t|
+			Schedule.get_all_transactions_until_date(user, date).each do |t|
 				if t.account.account_type == 'spend'
 					unless t.is_cancelled
 						amount = get_user_amount(t.amount, currency, t.currency)
@@ -108,7 +108,7 @@ private
 
 			days = (@user_time.to_date - start_date).to_i
 			days += 1 if days < window
-			sum = transactions.sum(:user_currency_amount).abs
+			sum = transactions.sum(:user_currency_amount)
 			sum /= days unless days == 0
 
 			accuracy = ((100.to_f/window) * days).round(1)
@@ -129,7 +129,7 @@ private
 			balance_start = get_balance_start(accounts, user_currency) # the spending balance at the start of today
 
 			# get the transactions
-			scheduled_transactions = get_scheduled_transactions(user, schedule, user_currency)
+			scheduled_transactions = get_scheduled_transactions(user, schedule.next_occurrence, user_currency)
 			today_transactions = user.transactions.where("date(local_datetime) >= ? AND date(local_datetime) <= ? AND is_cancelled = false AND is_queued = false AND schedule_id IS NULL AND user_currency_amount IS NOT NULL", @user_time.to_date, @user_time.to_date)
 
 			# days until payday
@@ -145,7 +145,7 @@ private
 
 			# average daily spending
 			average_spend = get_average_spending(user)
-			spend_percentage = ((100.to_f/budget_tomorrow) * average_spend[:amount]).round(1)
+			spend_percentage = ((100.to_f/budget_tomorrow) * (average_spend[:amount] * -1)).round(1)
 
 			if spend_percentage <= 62.5
 				status = 'excellent'
@@ -177,7 +177,7 @@ private
 			status_message = I18n.t("pages.daily_budget.status_messages.#{status}.main")
 			status_message = status_message.sub("@tomorrow@", Money.new(budget_tomorrow, user_currency.iso_code).format)
 			status_message = status_message.sub("@percent@", spend_percentage.to_s)
-			status_message = status_message.sub("@average@", Money.new(average_spend[:amount], user_currency.iso_code).format)
+			status_message = status_message.sub("@average@", Money.new((average_spend[:amount] * -1), user_currency.iso_code).format)
 
 			spent_today = today_transactions.sum(:user_currency_amount) * -1
 			spent_perc = ((100.to_f/budget_today) * spent_today).round(1)
@@ -224,6 +224,36 @@ private
 
 		# calculates days until money runs out
 		def budget_days(user)
+			user_currency = Money::Currency.new(user.currency) # the user's currency
+			accounts = user.accounts.where(account_type: 'spend') # the user's spending accounts
+
+			balance_now = get_balance_now(accounts, user_currency) # the spending balance as is
+
+			# average daily spending
+			average_spend = get_average_spending(user)
+			# get all scheduled transactions for a year
+			scheduled_transactions = get_scheduled_transactions(user, @user_time.to_date + 365.days, user_currency)
+
+			# how much the user spends in a whole year
+			puts average_spend
+			annual_spend = ((average_spend[:amount] * 365) + scheduled_transactions[:total]) * -1
+			if annual_spend <= 0 # if the user is spending a negative amount, return -1 for infinity
+				puts "infinity"
+				return -1
+			elsif balance_now - annual_spend >= 0 # if the balance is higher than what a user spends in a year, take a shortcut calculating the days
+				day_spend = annual_spend / 365
+				puts "shortcut #{balance_now / day_spend} days"
+				return balance_now / day_spend
+			end
+
+			balance = balance_now
+			current_date = @user_time.to_date
+			while balance > 0
+				balance -= average_spend[:amount]
+				#puts balance
+			end
+
+
 		end
 
 	end
