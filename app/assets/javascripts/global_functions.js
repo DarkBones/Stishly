@@ -23,7 +23,7 @@
           $("#navbar-daily-budget").html(data.navbar);
           $("#left-menu-daily-budget").html(data.left_menu);
         }
-      })
+      });
     }
 
     // gets the currently active account by checking the URL of the current page
