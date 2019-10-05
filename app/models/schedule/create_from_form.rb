@@ -24,6 +24,7 @@ class Schedule
 
     def perform
       @is_active ||= get_is_active if @is_active.nil?
+      type = get_type(@params[:type_of])
       schedule_params = {
         name: @params[:name],
         start_date: @start_date,
@@ -38,7 +39,7 @@ class Schedule
         exclusion_met_day: get_exclusion_met_day,
         timezone: validate_timezone(@params[:timezone]),
         is_active: @is_active,
-        type_of: @type
+        type_of: type
       }
 
       return schedule_params if @params_only
@@ -49,6 +50,19 @@ class Schedule
     end
 
 private
+
+    def get_type(type)
+      return 'schedule' if type.nil?
+      type = type.downcase
+      if type == 'main'
+        main_schedule = @current_user.schedules.where("type_of = 'main'").take
+        type = 'schedule' unless main_schedule.nil?
+      else
+        type = 'schedule'
+      end
+
+      return type
+    end
 
     # takes run_every as string, and returns a positive integer
     def sanitise_period_num(period_num)

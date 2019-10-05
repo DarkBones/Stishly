@@ -14,6 +14,18 @@
       });
     };
 
+    window.UpdateDailyBudget = function() {
+      $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "/api/v1/render/daily_budget",
+        success(data) {
+          $("#navbar-daily-budget").html(data.navbar);
+          $("#left-menu-daily-budget").html(data.left_menu);
+        }
+      })
+    }
+
     // gets the currently active account by checking the URL of the current page
     window.getActiveAccountName = function (){
       var urlArr = [];

@@ -57,6 +57,7 @@ function unpauseSchedule(scheduleId) {
     url: "/api/v1/schedules/" + scheduleId.toString() + "/unpause",
     success(data) {
       $.getScript( "api/v1/render/swap_schedules_table/" + scheduleId.toString() + "/paused");
+      UpdateDailyBudget();
     }
   });
 }

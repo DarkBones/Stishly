@@ -1,7 +1,13 @@
+var remove_from = $("#schedule_<%= schedule.hash_id %>").parents("table").attr("id");
+var parent = $("#schedule_<%= schedule.hash_id %>").parents(".schedules-table-parent").attr("id");
 
 $("#schedule_" + "<%= schedule.hash_id %>").remove();
 
-if ($("table#schedules_<%= remove_from %> tr").length == 1) {
-	$("table#schedules_<%= remove_from %>").remove();
-	$("#<%= remove_from %>-schedules").append("<p><%= t('schedules.no_' + remove_from + '_schedules') %></p>");
+if ($("table#" + remove_from + " tr").length == 1) {
+	$("table#" + remove_from).remove();
+	<% if schedule.type_of == 'main' %>
+		$("button#new-income-schedule-button").show();
+	<% else %>
+		$("#" + parent).append("<p><%= t('schedules.no_' + remove_from + '_schedules') %></p>");
+	<% end %>
 }

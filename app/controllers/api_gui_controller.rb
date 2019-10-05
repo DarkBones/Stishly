@@ -123,6 +123,10 @@ class ApiGuiController < BaseApiBrowserController
 		render partial: "schedules/new_schedule_form"
 	end
 
+  def new_income_schedule_form
+    render partial: "schedules/new_schedule_form", :locals => { :type_of => 'main' }
+  end
+
 	def render_notifications
 		render partial: "layouts/notifications"
 	end
@@ -195,6 +199,8 @@ class ApiGuiController < BaseApiBrowserController
       render partial: 'schedules/schedules_table', :locals => {:active => true, :paused => true}
     elsif params[:type] == "inactive"
       render partial: 'schedules/schedules_table', :locals => {:active => false}
+    elsif params[:type] == "main"
+      render partial: 'schedules/schedules_table', :locals => {:active => true, :main => true}
     end
   end
 
@@ -235,6 +241,13 @@ class ApiGuiController < BaseApiBrowserController
 
   def render_left_menu
     render partial: 'layouts/left_menu', :locals => {active_account: 0}
+  end
+
+  def render_daily_budget
+    render json: {
+      navbar: (render_to_string partial: "users/daily_budget", :locals => { :type => 'dropdown' }),
+      left_menu: (render_to_string partial: "users/daily_budget", :locals => { :type => 'link' })
+    }
   end
 
   def render_scheduled_transaction

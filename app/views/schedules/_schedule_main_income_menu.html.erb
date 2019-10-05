@@ -1,0 +1,17 @@
+<div class="modal <%= 'fade' if Rails.env.test? == false %>" id="scheduleincomeform" tabindex="-1" role="dialog" aria-labelledby="scheduleincomeformLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="scheduleincomeformLabel"><%= t('modal_titles.new_income_schedule') %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div id="main_schedule_form">
+
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,7 +1,11 @@
 <%
 	if schedule.is_active
 		if schedule.pause_until.nil?
-			type = "active"
+			if schedule.type_of == "main"
+				type = "main"
+			else
+				type = "active"
+			end
 		else
 			type = "paused"
 		end
@@ -40,6 +44,11 @@ if($("table#schedules_<%= type %>").length === 0) {
 		url: "api/v1/render/schedules_table/<%= type %>",
 		success(data) {
 			$("#<%= type %>-schedules p").remove();
+
+			<% if schedule.type_of == 'main' %>
+				$("button#new-income-schedule-button").hide();
+			<% end %>
+
 			$("#<%= type %>-schedules").append(data);
 			$insertTarget = $("table#schedules_<%= type %>");
 			insertSchedule();

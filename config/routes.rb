@@ -327,6 +327,10 @@ Rails.application.routes.draw do
           scope '/new' do
             get '/', to: 'api_gui#new_schedule_form'
           end
+          #/api/v1/forms/schedules/new_income
+          scope '/new_income' do
+            get '/', to: 'api_gui#new_income_schedule_form'
+          end
           #/api/v1/forms/schedules/edit
           scope '/edit/:id' do
             get '/', to: 'api_gui#edit_schedule_form'
@@ -356,6 +360,9 @@ Rails.application.routes.draw do
         #/api/v1/render/left_menu
         scope '/left_menu' do
           get '/', to: 'api_gui#render_left_menu'
+        end
+        scope '/daily_budget' do
+          get '/', to: 'api_gui#render_daily_budget'
         end
         #/api/v1/render/create_transaction/:transaction_id/(:account_name)
         scope '/create_transaction' do

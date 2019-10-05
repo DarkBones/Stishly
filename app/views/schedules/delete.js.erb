@@ -1,2 +1,8 @@
+/*$("[data-dismiss=modal]").trigger({ type: "click" });
+$("#schedule_<%= @schedule_id %>").fadeOut(500);*/
+
 $("[data-dismiss=modal]").trigger({ type: "click" });
-$("#schedule_<%= @schedule_id %>").fadeOut(500);
+
+<%= render partial: "/schedules/remove_schedule_table", :locals => {:schedule => @schedule, :remove_from => "active"} %>
+
+UpdateDailyBudget();

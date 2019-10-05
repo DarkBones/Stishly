@@ -22,6 +22,7 @@
     daypicker_exclude_style = "display: none;"
     weekdaypicker_exclude_style = ""
   end
+
 %>
 
 <div class = "row" id="schedule-form-root">
@@ -30,6 +31,7 @@
     <%= f.hidden_field :timezone, id: 'timezone_input', value: form_params[:timezone] %>
     <%= f.hidden_field :dates_picked, class: 'form-control' %>
     <%= f.hidden_field :dates_picked_exclude, class: 'form-control' %>
+    <%= f.hidden_field :type_of %>
 
     <div class="row py-2">
       <div class="col-12 py-5 bg-primary rounded" id="type">

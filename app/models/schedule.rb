@@ -37,6 +37,7 @@ class Schedule < ApplicationRecord
   validates :period_num, numericality: { only_integer: true }
   validates :period_num, numericality: { greater_than: 0, message: "'Run every' must be greater than zero" }
   validate :subscription, :on => :create
+  validate :schedule_type, :on => :create
 
   belongs_to :user
   has_and_belongs_to_many :user_transactions, foreign_key: "schedule_id", class_name: "Transaction", dependent: :destroy
@@ -130,6 +131,16 @@ private
       errors.add(:schedule, message) unless max < 0
     end
 
+  end
+
+  def schedule_type
+    if type_of == 'main'
+      main_schedule = user.schedules.where(type_of: 'main').take
+
+      unless main_schedule.nil?
+        errors.add(:schedule, "You can only have one main income schedule")
+      end
+    end
   end
 
 end

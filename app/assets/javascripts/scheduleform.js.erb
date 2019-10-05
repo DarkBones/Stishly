@@ -302,6 +302,26 @@ function renderScheduleMenu() {
   });
 }
 
+function renderIncomeScheduleMenu() {
+  $("#main_schedule_form").html("");
+  $.ajax({
+    type: "GET",
+    dataType: "html",
+    url: "/api/v1/forms/schedules/new_income",
+    beforeSend(){
+      insertAjaxSpinner($("#main_schedule_form"));
+    },
+    success(data) {
+      $("#main_schedule_form").html(data);
+      //resetScheduleMenu();
+      setDatepickers();
+      addLadderformListeners();
+      setTimezones();
+      getScheduleNextOccurrences($("#main_schedule_form").find("#type"));
+    }
+  });
+}
+
 function editScheduleForm(scheduleId){
   $("#edit_schedule_form").html("");
   $.ajax({

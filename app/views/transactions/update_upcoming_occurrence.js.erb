@@ -33,6 +33,7 @@ $.ajax({
 				
 				$("#transaction_" + originalTId.toString()).attr("series-id", "<%= @transaction.hash_id %>");
 				$("#transaction_" + originalTId.toString()).attr("id", "transaction_<%= new_transaction_id %>");
+				UpdateDailyBudget();
 			},
 			error() {
 				//location.reload();

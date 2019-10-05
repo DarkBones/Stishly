@@ -172,6 +172,7 @@ en:
     active: Active Schedules
     paused: Paused Schedules
     inactive: Inactive Schedules
+    main: Main Income Schedule
 
   transaction:
     types:
@@ -223,6 +224,7 @@ en:
     no_active_schedules: There are no active schedules
     no_inactive_schedules: There are no inactive schedules
     no_paused_schedules: There are no paused schedules
+    no_main_schedule: You don't have an main income schedule. Click here to create one
     pause_until: Pause until
   
   sch_transactions:
@@ -234,6 +236,9 @@ en:
     fixed_amount:
       title: Fixed / Varied amounts
       body: Transactions with fixed amounts get logged immidiately. For transactions with varying amounts, you will be asked to review them before they are logged.
+    income_schedule:
+      title: Income Schedule
+      body: Your main income schedule is used to calculate your daily budget.
 
   errors:
     form: Please fix the below errors
@@ -408,6 +413,7 @@ en:
     new_schedule: New Schedule
     pause: Pause
     reschedule_transaction: Reschedule Transaction
+    new_income_schedule: Main Income Schedule
 
   delete_warnings:
     mass_transactions: This action deletes all selected transactions. This cannot be undone. Continue?

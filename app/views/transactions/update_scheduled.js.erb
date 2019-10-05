@@ -18,6 +18,7 @@ function update_transaction() {
 
 			$("#sch_transactions_list #transaction_<%= @transaction.hash_id %>").html(data);
 			$("#transaction_<%= @transaction.hash_id %>").hide().fadeIn(500);
+			UpdateDailyBudget();
 		}
 	});
 }

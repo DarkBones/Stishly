@@ -12,6 +12,7 @@ $.ajax({
 
 			newTId = $(this).attr("schedule").toString() + $(this).attr("series-id").toString() + $(this).attr("period").toString();
 			$(this).attr("id", newTId);
+			UpdateDailyBudget();
 		});
 	},
 	error() {

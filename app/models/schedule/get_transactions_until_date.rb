@@ -8,7 +8,7 @@ class Schedule
 
 			@user = user
 
-			@schedules = @user.schedules.where("next_occurrence_utc > ? AND next_occurrence_utc < ? AND is_active = true", @start_date, @end_date)
+			@schedules = @user.schedules.where("next_occurrence_utc > ? AND next_occurrence_utc < ? AND is_active = true AND type_of != 'main'", @start_date, @end_date)
     	@tz = TZInfo::Timezone.get(@user.timezone)
 		end
 

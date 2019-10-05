@@ -18,6 +18,8 @@ function insert_transaction() {
 
 			$(data).insertBefore("#new_transaction_card");
 			$("#transaction_<%= @transaction.hash_id %>").hide().fadeIn(500);
+
+			UpdateDailyBudget();
 		}
 	});
 }

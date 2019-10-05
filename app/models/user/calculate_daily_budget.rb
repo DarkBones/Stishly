@@ -139,6 +139,9 @@ private
 
 			# calculate the budgets for today and tomorrow
 			budget_today = ((balance_start[:total] + scheduled_transactions[:total]).to_f / days_until).round
+			if budget_today < 0
+				budget_today = 0
+			end
 			if days_until > 1
 				budget_tomorrow = ((balance_now + scheduled_transactions[:total]).to_f / (days_until - 1)).round
 			else
@@ -277,9 +280,10 @@ private
 				balance += average_spend[:amount]
 
 				unless next_scheduled_transaction.nil?
-						while next_scheduled_transaction.local_datetime.to_date <= current_date
+					while next_scheduled_transaction.local_datetime.to_date <= current_date
 						balance -= get_user_amount(next_scheduled_transaction.amount, user_currency, next_scheduled_transaction.currency)
 						next_scheduled_transaction = scheduled_transactions[:transactions].pop
+						break if next_scheduled_transaction.nil?
 					end
 				end
 

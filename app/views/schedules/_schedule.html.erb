@@ -12,14 +12,14 @@
   <td style="width: 140px;">
     <i class="fa fa-list clickable fa-lg schedule-action-button" data-toggle="modal" data-target="#schedule_transactions_form" id="schedule-transactions-button_<%= schedule.hash_id %>" onclick="scheduleTransactionsForm('<%= schedule.hash_id %>');" title="<%= t('title_hints.transactions') %>"></i>
     <i class="fa fa-edit clickable fa-lg schedule-action-button" data-toggle="modal" data-target="#editscheduleform" id="schedule-edit-button_<%= schedule.hash_id%>" onclick="editScheduleForm('<%= schedule.hash_id %>');" title="<%= t('title_hints.edit') %>"></i>
-    <% if schedule.pause_until_utc.nil? && schedule.is_active %>
+    <% if schedule.pause_until_utc.nil? && schedule.is_active && schedule.type_of != 'main' %>
       <i class="fa fa-pause-circle clickable fa-lg schedule-action-button" data-toggle="modal" data-target="#schedule_pause_form" id="schedule-pause-button_<%= schedule.hash_id %>" onclick="schedulePauseForm('<%= schedule.hash_id %>');" title="<%= t('title_hints.pause') %>"></i>
-    <% elsif !schedule.pause_until_utc.nil? && schedule.is_active %>
+    <% elsif !schedule.pause_until_utc.nil? && schedule.is_active && schedule.type_of != 'main' %>
       <i class="fa fa-play-circle clickable fa-lg schedule-action-button" id="schedule-play-button_<%= schedule.hash_id %>" onclick="unpauseSchedule('<%= schedule.hash_id %>');" title="<%= t('title_hints.unpause') %>"></i>
     <% end %>
-    <% if schedule.is_active %>
+    <% if schedule.is_active && schedule.type_of != 'main' %>
       <i class="fa fa-stop-circle clickable fa-lg schedule-action-button" id="schedule-stop-button_<%= schedule.hash_id %>" onclick="stopSchedule('<%= schedule.hash_id %>', this);" title="<%= t('title_hints.stop') %>"></i>
-    <% else %>
+    <% elsif schedule.type_of != 'main' %>
       <i class="fa fa-play-circle clickable fa-lg schedule-action-button" id="schedule-activate-button_<%= schedule.hash_id %>" onclick="activateSchedule('<%= schedule.hash_id %>');" title="<%= t('title_hints.reactivate') %>"></i>
     <% end %>
     <%#= link_to "Delete", delete_schedule_path(schedule), class: "delete-confirm fa fa-trash-alt clickable fa-lg", "confirm-message" => "This action will delete schedule '#{schedule.name}'. This cannot be undone." %>

@@ -1,9 +1,16 @@
 <% schedule = Schedule.new %>
+<%
+  type_of ||= 'schedule'
+	if type_of == 'main'
+		schedule.type_of = 'main'
+		schedule.name = 'Income'
+	end
+%>
 
 <%= form_with(model: schedule) do |f| %>
   <div class="modal-body">
     <div class="container" id="scheduleform">
-    	<%= render partial: "/schedules/schedule_form_fields", :locals => {:f => f, :schedule => schedule} %>
+    	<%= render partial: "/schedules/schedule_form_fields", :locals => {:f => f, :schedule => schedule, :type_of => type_of } %>
     </div>
   </div>
   <div class="modal-footer">

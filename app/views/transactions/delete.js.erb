@@ -45,6 +45,7 @@ function deleteTransaction(id) {
 		success(data) {
 			$("#" + date).find("h3").replaceWith($($.parseHTML(data)).find("h3"));
 			updateAccountTitleBalance();
+			UpdateDailyBudget();
 		}
 	});
 }

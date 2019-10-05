@@ -1,8 +1,10 @@
 class SchedulesController < ApplicationController
   def index
-    @schedules = current_user.schedules.where(:is_active => 1, :pause_until_utc => nil).order(:next_occurrence).decorate
+    @schedules = current_user.schedules.where("is_active = true AND pause_until_utc IS NULL AND type_of != 'main'").order(:next_occurrence).decorate
     @paused_schedules = current_user.schedules.where("is_active = true AND pause_until_utc IS NOT NULL").order(:pause_until_utc).decorate
     @inactive_schedules = current_user.schedules.where(:is_active => 0).order(:next_occurrence).decorate
+    @main_schedule = current_user.schedules.where("type_of = 'main'").decorate
+
   end
 
   def create
@@ -42,7 +44,8 @@ class SchedulesController < ApplicationController
 
   def delete
     @schedule_id = params[:id]
-    if current_user.schedules.where("id = ?", @schedule_id).exists?
+    @schedule = current_user.schedules.friendly.find(params[:id])
+    unless @schedule.nil?
       schedule = current_user.schedules.friendly.find(@schedule_id)
       schedule.user_transactions.each do |transaction|
         transaction.destroy if transaction.schedules.length <= 1
@@ -96,7 +99,8 @@ private
       :dates_picked_exclude,
       :exclusion_met1,
       :exclusion_met2,
-      :occurrence_count
+      :occurrence_count,
+      :type_of
       )
   end
 
