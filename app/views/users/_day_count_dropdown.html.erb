@@ -1,0 +1,87 @@
+<div class="container rounded bg-primary" id="daily-budget-dropdown">
+	<div class="row px-3 py-3">
+			<div class="col-12">
+
+					<div class="row">
+						<div class="col-12 text-center text-light">
+							<h1><%= t('pages.daily_budget.title') %></h1>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12">
+							<h4 class="text-light">
+								<%= t('pages.daily_budget.balance') %>
+								<span class="float-right">
+									<%= balance(budget[:balance], current_user.currency, "cents") %>
+								</span>
+							</h4>
+						</div>
+					</div>
+
+
+				<div class="row">
+					<div class="col-12">
+						<h4 class="text-light">
+							<%= t('pages.daily_budget.transactions') %>
+							<span class="float-right">
+								<%= balance(budget[:transactions_total], current_user.currency, "cents") %>
+							</span>
+						</h4>
+					</div>
+				</div>
+
+				<div class="row py-2">
+					<div class="col-8">
+					</div>
+					<div class="col-4" style="border-bottom: 2px solid white;">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-12">
+						<h4 class="text-light font-weight-bold">
+							<%= t('pages.daily_budget.total') %>
+							<span class="float-right">
+								<%= balance(budget[:balance] + budget[:transactions_total], current_user.currency, "cents") %>
+							</span>
+						</h4>
+					</div>
+				</div>
+
+				<div class="row pt-2">
+					<div class="col-12">
+						<h4 class="text-light">
+							<%= t('pages.daily_budget.average_spending') %>
+							<span class="float-right">
+								<%= balance(budget[:average_spending][:amount] * -1, current_user.currency, "cents") %>
+							</span>
+						</h4>
+					</div>
+				</div>
+
+
+				<div class="row py-2">
+					<div class="col-12">
+						<h4 class="text-light">
+							<%= t('pages.daily_budget.days_depleted') %>
+							<span class="float-right">
+								<%= budget[:days] %>
+							</span>
+						</h4>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-12">
+						<% if budget[:average_spending][:accuracy] < 100 %>
+							<p class="text-dark rounded px-2 py-2 bg-warning">
+								<%= t('pages.daily_budget.inaccurate').sub('@percent@', budget[:average_spending][:accuracy].to_s) %>
+							</p>
+						<% end %>
+					</div>
+				</div>
+
+		</div>
+	</div>
+</div>

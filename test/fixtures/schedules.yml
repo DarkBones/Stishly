@@ -635,7 +635,7 @@ daily_budget_main: {
   is_active: 1,
   next_occurrence: 2019-10-28,
   next_occurrence_utc: '2019-10-28 04:00:00',
-  type_of: main,
+  type_of: schedule,
   current_period_id: 0
 }
 
