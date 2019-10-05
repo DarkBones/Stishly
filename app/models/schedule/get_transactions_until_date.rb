@@ -30,7 +30,7 @@ class Schedule
 
 					transactions += get_transactions(schedule, period_id, next_occurrence_local)
 
-					next_occurrence += 1.day
+					next_occurrence = next_occurrence_local + 1.day
 				end
 
 			end

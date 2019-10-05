@@ -243,7 +243,7 @@ private
 					type: 'days',
 					days: 0,
 					balance: balance_now,
-					transactions: scheduled_transactions[:total],
+					transactions_total: scheduled_transactions[:total],
 					average_spending: average_spend
 				}
 			end
@@ -255,7 +255,7 @@ private
 					type: 'days',
 					days: -1,
 					balance: balance_now,
-					transactions: scheduled_transactions[:total],
+					transactions_total: scheduled_transactions[:total],
 					average_spending: average_spend
 				}
 			elsif balance_now - annual_spend >= 0 # if the balance is higher than what a user spends in a year, take a shortcut calculating the days
@@ -264,7 +264,7 @@ private
 					type: 'days',
 					days: balance_now / day_spend,
 					balance: balance_now,
-					transactions: scheduled_transactions[:total],
+					transactions_total: scheduled_transactions[:total],
 					average_spending: average_spend
 				}
 			end
@@ -276,9 +276,11 @@ private
 			while balance > 0
 				balance += average_spend[:amount]
 
-				while next_scheduled_transaction.local_datetime.to_date <= current_date
-					balance -= get_user_amount(next_scheduled_transaction.amount, user_currency, next_scheduled_transaction.currency)
-					next_scheduled_transaction = scheduled_transactions[:transactions].pop
+				unless next_scheduled_transaction.nil?
+						while next_scheduled_transaction.local_datetime.to_date <= current_date
+						balance -= get_user_amount(next_scheduled_transaction.amount, user_currency, next_scheduled_transaction.currency)
+						next_scheduled_transaction = scheduled_transactions[:transactions].pop
+					end
 				end
 
 				current_date += 1.day
