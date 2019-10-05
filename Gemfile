@@ -147,3 +147,5 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'jquery-minicolors-rails'
 
 gem 'chartkick'
+
+gem 'stripe'

@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :charges
+
   scope '/accounts' do
     get '/', to: 'accounts#index'
     scope '/:id' do

@@ -6,3 +6,5 @@ ENV['AWS_SECRET_ACCESS_KEY'] = Rails.application.credentials.aws[:secret_access_
 
 ENV['EMAIL_ENCRYPTION_KEY'] = Rails.application.credentials.pii[:encryption_key]
 ENV['EMAIL_BLIND_INDEX_KEY'] = Rails.application.credentials.pii[:blind_index_key]
+
+ENV['STRIPE_PUBLIC_KEY'] = Rails.application.credentials.stripe[:public_key]
