@@ -22,7 +22,7 @@ class Account < ApplicationRecord
   validates :name, format: { without: /[-\.~:\/\?#\[\]@!\$&'\(\)\*\+,;={}"]/, message: I18n.t('account.failure.special_characters') }
   validates :name, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('account.failure.already_exists') }
   validates :currency, presence: true
-  validate :subscription, :on => :create
+  validate :plan
 
 
   belongs_to :user
@@ -314,24 +314,16 @@ class Account < ApplicationRecord
 
 private
 
-  def subscription
-    subscription_tier = APP_CONFIG['plans'][user.subscription_tier]
-    subscription_tier ||= APP_CONFIG['plans']['free']
-  end
+  def plan
+    
+    plan = APP_CONFIG['plans'][user.subscription]
+    plan ||= APP_CONFIG['plans']['free']
 
-  def subscription_OLD
-    subscription_tier = user.subscription_tier if user.subscription_tier_id > 0
-    subscription_tier ||= SubscriptionTier.where(name: "Free").take()
-    return unless subscription_tier
-
-    accounts = Account.where(user_id: user.id)
-    return if accounts.nil?
-
-    if accounts.length >= subscription_tier.max_accounts
-      errors.add(:account, I18n.t('account.failure.upgrade_for_accounts')) unless subscription_tier.max_accounts < 0
-    elsif account_type == "spend"
-      if accounts.where(account_type: "spend").length >= subscription_tier.max_spending_accounts
-        errors.add(:account, I18n.t('account.failure.upgrade_for_spending')) unless subscription_tier.max_accounts < 0
+    if user.accounts.length >= plan['max_accounts']
+      errors.add(:Plan, I18n.t('account.failure.upgrade_for_accounts')) unless plan['max_accounts'] < 0
+    elsif account_type == 'spend'
+      if user.accounts.where(account_type: 'spend').length >= plan['max_spending_accounts']
+        errors.add(:Plan, I18n.t('account.failure.upgrade_for_spending')) unless plan['max_spending_accounts'] < 0
       end
     end
 

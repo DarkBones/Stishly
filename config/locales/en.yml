@@ -117,6 +117,8 @@ en:
     confirmations:
       confirmed: Schedule created
     failure:
+      upgrade_for_schedules: Upgrade to premium for more Schedules
+      multiple_main_schedules: You can only have one main income schedule
       invalid_name: Invalid schedule name
       invalid_date: Invalid date
       already_exists: Schedule with the same name already exists

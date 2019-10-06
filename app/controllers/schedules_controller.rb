@@ -47,8 +47,9 @@ class SchedulesController < ApplicationController
     @schedule = current_user.schedules.friendly.find(params[:id])
     unless @schedule.nil?
       schedule = current_user.schedules.friendly.find(@schedule_id)
-      schedule.user_transactions.each do |transaction|
-        transaction.destroy if transaction.schedules.length <= 1
+      
+      SchedulesTransaction.where(schedule_id: schedule.id).each do |sch_t|
+        sch_t.destroy
       end
 
       current_user.transactions.where(schedule_id: schedule.id).each do |transaction|

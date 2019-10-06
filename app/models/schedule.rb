@@ -36,7 +36,7 @@ class Schedule < ApplicationRecord
   validates :period_num, numericality: true
   validates :period_num, numericality: { only_integer: true }
   validates :period_num, numericality: { greater_than: 0, message: "'Run every' must be greater than zero" }
-  validate :subscription, :on => :create
+  validate :plan, :on => :create
   validate :schedule_type, :on => :create
 
   belongs_to :user
@@ -110,25 +110,18 @@ class Schedule < ApplicationRecord
   end
 
 private
-  
-  def subscription
-    subscription_tier = user.subscription_tier if user.subscription_tier_id > 0
-    subscription_tier ||= SubscriptionTier.where(name: "Free").take()
-    return unless subscription_tier
 
-    max = -1
-    schedules = user.schedules.where(type_of: type_of)
+  def plan
+    
+    if type_of != 'main'    
+      plan = APP_CONFIG['plans'][user.subscription]
+      plan ||= APP_CONFIG['plans']['free']
 
-    if type_of.downcase == "schedule"
-      max = subscription_tier.max_schedules
-      message = "Upgrade to premium for more schedules"
-    elsif type_of.downcase == "fixed_expense"
-      max = subscription_tier.max_fixed_expenses
-      message = "Upgrade to premium for more fixed expenses"
-    end
+      schedules = user.schedules.where("type_of != 'main' AND id IS NOT NULL")
 
-    if schedules.length >= max
-      errors.add(:schedule, message) unless max < 0
+      if schedules.length >= plan['max_schedules']
+        errors.add(:Plan, I18n.t('schedule.failure.upgrade_for_schedules')) unless plan['max_schedules'] < 0
+      end
     end
 
   end
@@ -138,7 +131,7 @@ private
       main_schedule = user.schedules.where(type_of: 'main').take
 
       unless main_schedule.nil?
-        errors.add(:schedule, "You can only have one main income schedule")
+        errors.add(:schedule, I18n.t('schedule.failure.multiple_main_schedules'))
       end
     end
   end

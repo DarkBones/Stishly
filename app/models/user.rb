@@ -55,7 +55,6 @@ class User < ApplicationRecord
   has_many :accounts, dependent: :destroy
   has_many :setting_values, :as => :entity
   has_many :settings, through: :setting_values
-  belongs_to :subscription_tier, optional: :true
   has_many :schedules, dependent: :destroy
   has_many :categories, dependent: :destroy
   has_many :transactions, through: :accounts

@@ -10,9 +10,6 @@
 #Setting.create([{ description: 'date_format' }])
 #Setting.create([{ description: 'first_day_ot_week' }])
 
-SubscriptionTier.create({ name: "Free", cost: 0, month_billing_cycle: 0 })
-SubscriptionTier.create({ name: "Monthly", cost: 500, month_billing_cycle: 1, max_accounts: -1, max_fixed_expenses: -1, max_spending_accounts: -1, max_schedules: -1 })
-
 Country.create({ country_code: "AF", name: "Afghanistan", date_format: "d/m/yyyy", week_start: 6 })
 Country.create({ country_code: "AX", name: "Åland Islands", date_format: "yyyy-mm-dd", week_start: 1 })
 Country.create({ country_code: "AL", name: "Albania", date_format: "dd/mm/yyyy", week_start: 1 })

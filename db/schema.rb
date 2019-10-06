@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_10_121007) do
+ActiveRecord::Schema.define(version: 2019_10_06_152005) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -162,18 +162,6 @@ ActiveRecord::Schema.define(version: 2019_09_10_121007) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "subscription_tiers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.integer "cost"
-    t.integer "month_billing_cycle"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "max_accounts", default: 3
-    t.integer "max_fixed_expenses", default: 10
-    t.integer "max_spending_accounts", default: 2
-    t.integer "max_schedules", default: 3
-  end
-
   create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.integer "amount"
@@ -212,7 +200,6 @@ ActiveRecord::Schema.define(version: 2019_09_10_121007) do
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.binary "first_name_enc"
     t.binary "last_name_enc"
-    t.bigint "subscription_tier_id", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "encrypted_password", default: "", null: false
@@ -242,12 +229,12 @@ ActiveRecord::Schema.define(version: 2019_09_10_121007) do
     t.string "provider"
     t.string "uid"
     t.string "hash_id"
+    t.string "subscription", default: "free"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["country_id"], name: "index_users_on_country_id"
     t.index ["email_bidx"], name: "index_users_on_email_bidx"
     t.index ["encrypted_email_iv"], name: "index_users_on_encrypted_email_iv", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["subscription_tier_id"], name: "index_users_on_subscription_tier_id"
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
