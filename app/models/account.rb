@@ -315,6 +315,11 @@ class Account < ApplicationRecord
 private
 
   def subscription
+    subscription_tier = APP_CONFIG['plans'][user.subscription_tier]
+    subscription_tier ||= APP_CONFIG['plans']['free']
+  end
+
+  def subscription_OLD
     subscription_tier = user.subscription_tier if user.subscription_tier_id > 0
     subscription_tier ||= SubscriptionTier.where(name: "Free").take()
     return unless subscription_tier

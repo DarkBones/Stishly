@@ -9,3 +9,23 @@ ui:
 
 currency_rates:
   retention: 43386 # retention rate in seconds
+
+plans:
+  free:
+    cost: 0
+    max_accounts: 3
+    max_spending_accounts: 2
+    max_schedules: 3
+    max_transactions: 500
+  monthly:
+    cost: 600
+    max_accounts: -1
+    max_spending_accounts: -1
+    max_schedules: -1
+    max_transactions: -1
+  annually:
+    cost: 6000
+    max_accounts: -1
+    max_spending_accounts: -1
+    max_schedules: -1
+    max_transactions: -1
