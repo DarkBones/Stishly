@@ -49,13 +49,14 @@ class SchedulesController < ApplicationController
       schedule = current_user.schedules.friendly.find(@schedule_id)
       
       SchedulesTransaction.where(schedule_id: schedule.id).each do |sch_t|
+        txn = current_user.transactions.find(sch_t.transaction_id)
+        Transaction.delete(txn, current_user)
+        
         sch_t.destroy
       end
 
       current_user.transactions.where(schedule_id: schedule.id).each do |transaction|
-        if transaction.is_scheduled
-          transaction.destroy
-        else
+        unless transaction.is_scheduled
           transaction.schedule_id = nil
           transaction.save
         end

@@ -7,7 +7,7 @@
 			header = balance(@budget[:balance][:spent], current_user.currency, "cents") + " / " + balance(@budget[:budget][:today], current_user.currency, "cents")
 			text_color = "light"
 		else
-			header = @budget[:days].to_s + " " + t('pages.daily_budget.day')
+			header = t('pages.daily_budget.day') + ": " + @budget[:days].to_s
 			text_color = "primary"
 		end
 	%>

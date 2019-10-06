@@ -100,7 +100,6 @@ Rails.application.routes.draw do
   scope '/schedules' do
     get '/', to: 'schedules#index', as: :schedules
     post '/', to: 'schedules#create'
-    delete '/', to: 'schedules#delete_all'
     scope '/:id' do
       scope '/pause' do
         patch '/', to: 'schedules#pause', as: :pause_schedule
@@ -117,7 +116,7 @@ Rails.application.routes.draw do
         end
       end
       scope '/delete' do
-        delete '/', to: 'schedules#delete', as: :delete_schedule
+        delete '/', to: 'schedules#delete', as: :destroy_schedule
       end
     end
   end

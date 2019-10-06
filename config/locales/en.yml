@@ -226,7 +226,7 @@ en:
     no_active_schedules: There are no active schedules
     no_inactive_schedules: There are no inactive schedules
     no_paused_schedules: There are no paused schedules
-    no_main_schedule: You don't have an main income schedule. Click here to create one
+    no_main_schedule: You don't have a main income schedule. Click here to create one
     pause_until: Pause until
   
   sch_transactions:
@@ -540,6 +540,6 @@ en:
           main: Tomorrow's daily budget is @tomorrow@, which is lower than your average daily expenses of @average@
           sub: You are in danger of going into debt. Go over your transactions to see what you can cut.
       inaccurate: The accuraccy of this status is @percent@% as there isn't enough data yet. Continued use of this application will improve the accuracy.
-      day: days
+      day: Days
       days_depleted: Days until balance runs out
       average_spending: Average daily spending

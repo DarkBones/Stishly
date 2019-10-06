@@ -256,7 +256,7 @@ private
 			if annual_spend <= 0 # if the user is spending a negative amount, return -1 for infinity
 				return {
 					type: 'days',
-					days: -1,
+					days: '∞',
 					balance: balance_now,
 					transactions_total: scheduled_transactions[:total],
 					average_spending: average_spend
@@ -291,6 +291,8 @@ private
 
 				days += 1 if balance >= 0
 			end
+
+			days = '∞' if days < 0
 
 			return {
 					type: 'days',

@@ -52,7 +52,7 @@ bas: {
   finished_setup: true,
   email: bassiedoinker@example.com,
   unconfirmed_email: bassiedoinker@example.com,
-  subscription_tier_id: 2
+  subscription: monthly
 }
 
 sab: {
@@ -69,7 +69,7 @@ sab: {
   finished_setup: true,
   email: rekniodeissab@example.com,
   unconfirmed_email: rekniodeissab@example.com,
-  subscription_tier_id: 2
+  subscription: monthly
 }
 
 new: {
@@ -86,7 +86,7 @@ new: {
   finished_setup: true,
   email: new_user@example.com,
   unconfirmed_email: new_user@example.com,
-  subscription_tier_id: 2
+  subscription: monthly
 }
 
 new_free: {
@@ -103,7 +103,7 @@ new_free: {
   finished_setup: true,
   email: new_user_free@example.com,
   unconfirmed_email: new_user_free@example.com,
-  subscription_tier_id: 1
+  subscription: free
 }
 
 transactions_test: {
@@ -120,7 +120,7 @@ transactions_test: {
   finished_setup: true,
   email: transactions@test.com,
   unconfirmed_email: transactions@test.com,
-  subscription_tier_id: 2
+  subscription: monthly
 }
 
 currency_test: {
@@ -137,7 +137,7 @@ currency_test: {
   finished_setup: true,
   email: currency@test.com,
   unconfirmed_email: currency@test.com,
-  subscription_tier_id: 2
+  subscription: monthly
 }
 
 endless_page: {
@@ -154,7 +154,7 @@ endless_page: {
   finished_setup: true,
   email: endless@page.com,
   unconfirmed_email: endless@page.com,
-  subscription_tier_id: 2
+  subscription: monthly
 }
 
 destroy: {
@@ -171,7 +171,7 @@ destroy: {
   finished_setup: true,
   email: destroy@me.com,
   unconfirmed_email: destroy@me.com,
-  subscription_tier_id: 2
+  subscription: monthly
 }
 
 transactions: {
@@ -188,7 +188,7 @@ transactions: {
   finished_setup: true,
   email: transactions@creator.com,
   unconfirmed_email: transactions@creator.com,
-  subscription_tier_id: 2
+  subscription: monthly
 }
 
 schedules: {
@@ -205,7 +205,7 @@ schedules: {
   finished_setup: true,
   email: schedules@test.com,
   unconfirmed_email: schedules@test.com,
-  subscription_tier_id: 2
+  subscription: monthly
 }
 
 transaction_search: {
@@ -222,7 +222,7 @@ transaction_search: {
   finished_setup: true,
   email: transaction@search.com,
   unconfirmed_email: transaction@search.com,
-  subscription_tier_id: 2
+  subscription: monthly
 }
 
 schedules_overlap: {
@@ -239,7 +239,7 @@ schedules_overlap: {
   finished_setup: true,
   email: schedule@overlap.com,
   unconfirmed_email: schedule@overlap.com,
-  subscription_tier_id: 2
+  subscription: monthly
 }
 
 duplicate_transactions: {
@@ -256,7 +256,7 @@ duplicate_transactions: {
   finished_setup: true,
   email: duplicate@transactions.com,
   unconfirmed_email: duplicate@transactions.com,
-  subscription_tier_id: 2
+  subscription: monthly
 }
 
 pause_schedule: {
@@ -329,7 +329,7 @@ upcoming_transactions_run: {
   email_bidx: <%= User.generate_email_bidx("upcoming@transactionsrun.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
-  subscription_tier_id: 2,
+  subscription: monthly,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
@@ -346,7 +346,7 @@ update_transactions: {
   email_bidx: <%= User.generate_email_bidx("update@transactions.nl").inspect %>,
   country_code: 'IE',
   country_id: 1,
-  subscription_tier_id: 2,
+  subscription: monthly,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
@@ -362,7 +362,7 @@ future_transactions: {
   email_bidx: <%= User.generate_email_bidx("future@transactions.nl").inspect %>,
   country_code: 'IE',
   country_id: 1,
-  subscription_tier_id: 2,
+  subscription: monthly,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
@@ -378,7 +378,6 @@ setup_wizard: {
   email_bidx: <%= User.generate_email_bidx("setupwizard@stishly.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
-  subscription_tier_id: 0,
   timezone: 'Europe/London',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',
@@ -395,7 +394,7 @@ daily_budget: {
   email_bidx: <%= User.generate_email_bidx("dailybudget@stishly.com").inspect %>,
   country_code: 'IE',
   country_id: 1,
-  subscription_tier_id: 1,
+  subscription: free,
   timezone: 'America/New_York',
   encrypted_password: <%= User.new.send(:password_digest, 'SomePassword123^!') %>,
   confirmed_at: '2018-11-14 19:54:40',

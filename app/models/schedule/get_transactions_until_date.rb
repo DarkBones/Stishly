@@ -20,6 +20,8 @@ class Schedule
 				next_occurrence = get_next_occurrence(schedule)
 				period_id = schedule.current_period_id
 
+				previous_occ = next_occurrence.to_date # to ensure the next_occurrence date progresses
+
 				while next_occurrence < @end_date do
 
 					next_occurrence_local = Schedule.next_occurrence(schedule, date: next_occurrence.to_date, testing: true, return_datetime: true)
@@ -31,6 +33,12 @@ class Schedule
 					transactions += get_transactions(schedule, period_id, next_occurrence_local)
 
 					next_occurrence = next_occurrence_local + 1.day
+
+					if next_occurrence.to_date == previous_occ
+						next_occurrence += 1.day
+					end
+
+					previous_occ = next_occurrence.to_date
 				end
 
 			end
