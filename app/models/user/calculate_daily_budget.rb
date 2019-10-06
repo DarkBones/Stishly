@@ -276,12 +276,17 @@ private
 			current_date = @user_time.to_date
 			next_scheduled_transaction = scheduled_transactions[:transactions].pop
 			days = 0
+			scheduled_transactions_total = 0
 			while balance > 0
 				balance += average_spend[:amount]
 
 				unless next_scheduled_transaction.nil?
 					while next_scheduled_transaction.local_datetime.to_date <= current_date
-						balance -= get_user_amount(next_scheduled_transaction.amount, user_currency, next_scheduled_transaction.currency)
+						amount = get_user_amount(next_scheduled_transaction.amount, user_currency, next_scheduled_transaction.currency)
+
+						balance += amount
+						scheduled_transactions_total += amount
+
 						next_scheduled_transaction = scheduled_transactions[:transactions].pop
 						break if next_scheduled_transaction.nil?
 					end
@@ -298,7 +303,7 @@ private
 					type: 'days',
 					days: days,
 					balance: balance_now,
-					transactions_total: scheduled_transactions[:total],
+					transactions_total: scheduled_transactions_total,
 					average_spending: average_spend
 				}
 

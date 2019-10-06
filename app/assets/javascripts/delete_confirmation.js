@@ -2,9 +2,9 @@ $(document).on("turbolinks:load", () => {
 	$(function() {
 		window.setDeleteConfirmTargets = function() {
 			$(".delete-confirm").each(function(){
+				$(this).attr("data-toggle", "modal");
+				$(this).attr("data-target", "#confirmation_modal");
 				if( $(this).is('[data-link]') === false ){
-					$(this).attr("data-toggle", "modal");
-					$(this).attr("data-target", "#confirmation_modal");
 					$(this).attr("data-link", $(this).attr("href"));
 					$(this).attr("href", "#");
 				}
