@@ -6,7 +6,19 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :charges
+  resources :subscriptions
+
+  scope '/subscriptions' do
+    scope '/create' do
+      scope '/:plan' do
+        post '/', to: 'subscriptions#create', as: :create_subscription
+      end
+    end
+  end
+
+  scope '/plans' do
+    get '/', to: 'subscriptions#index'
+  end
 
   scope '/accounts' do
     get '/', to: 'accounts#index'

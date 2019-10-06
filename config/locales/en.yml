@@ -543,3 +543,17 @@ en:
       day: Days
       days_depleted: Days until balance runs out
       average_spending: Average daily spending
+    plans:
+      title: Subscription Plans
+      plans:
+        free:
+          title: Free
+        yearly:
+          title: Premium Annually
+        monthly:
+          title: Premium Monthly
+        limitations:
+          max_accounts: Maximum Accounts
+          max_spending_accounts: Maximum Spending Accounts
+          max_schedules: Maximum Schedules
+          retention: Transaction Retention

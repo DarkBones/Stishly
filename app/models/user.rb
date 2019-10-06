@@ -71,8 +71,13 @@ class User < ApplicationRecord
   validates :password, password_strength: {use_dictionary: true}, :on => :create
 
   after_create :initialize_user_data
+  before_destroy :cancel_subscriptions
 
   def will_save_change_to_email?
+  end
+
+  def cancel_subscriptions
+    Subscription.cancel(self)
   end
 
   def self.daily_budget(user)

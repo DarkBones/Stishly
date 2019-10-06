@@ -17,15 +17,18 @@ plans:
     max_spending_accounts: 2
     max_schedules: 3
     max_transactions: 500
+    stripe_id: null
   monthly:
     cost: 600
     max_accounts: -1
     max_spending_accounts: -1
     max_schedules: -1
     max_transactions: -1
+    stripe_id: plan_FwTAzDX2PVq6ZQ
   annually:
     cost: 6000
     max_accounts: -1
     max_spending_accounts: -1
     max_schedules: -1
     max_transactions: -1
+    stripe_id: plan_FwTCDMqnnDvGdL

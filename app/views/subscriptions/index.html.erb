@@ -1,0 +1,56 @@
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<h2>
+				<%= t('pages.plans.title') %>
+			</h2>
+		</div>
+	</div>
+
+	<div class="row mt-4 px-3">
+
+		<div class="col-12 col-md-4 px-0 mt-4">
+			<div class="card bg-primary">
+				<div class="card-body px-1 py-1">
+					<h3 class="card-title text-center text-light" style="height: 60px;"><%= t('pages.plans.plans.free.title') %></h3>
+						<ul class="card-text bg-light px-3 py-3 list-unstyled">
+							<li><%= t('pages.plans.limitations.max_accounts') %><span class="float-right">3</span></li>
+							<li><%= t('pages.plans.limitations.max_spending_accounts') %><span class="float-right">2</span></li>
+							<li><%= t('pages.plans.limitations.max_schedules') %><span class="float-right">3</span></li>
+							<li><%= t('pages.plans.limitations.retention') %><span class="float-right">500</span></li>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-12 col-md-4 px-0">
+			<div class="card bg-success">
+				<div class="card-body px-1 py-1">
+					<h3 class="card-title text-center text-light" style="height: 60px;"><%= balance(@plan.price_year, @plan.currency) %></h3>
+						<ul class="card-text bg-light px-3 py-3 list-unstyled">
+							<li><%= t('pages.plans.limitations.max_accounts') %><span class="float-right">&#8734;</span></li>
+							<li><%= t('pages.plans.limitations.max_spending_accounts') %><span class="float-right">&#8734;</span></li>
+							<li><%= t('pages.plans.limitations.max_schedules') %><span class="float-right">&#8734;</span></li>
+							<li><%= t('pages.plans.limitations.retention') %><span class="float-right">&#8734;</span></li>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-12 col-md-4 px-0 mt-4">
+			<div class="card bg-primary">
+				<div class="card-body px-1 py-1">
+					<h3 class="card-title text-center text-light" style="height: 60px;"><%= balance(@plan.price_month, @plan.currency) %></h3>
+						<ul class="card-text bg-light px-3 py-3 list-unstyled">
+							<li><%= t('pages.plans.limitations.max_accounts') %><span class="float-right">&#8734;</span></li>
+							<li><%= t('pages.plans.limitations.max_spending_accounts') %><span class="float-right">&#8734;</span></li>
+							<li><%= t('pages.plans.limitations.max_schedules') %><span class="float-right">&#8734;</span></li>
+							<li><%= t('pages.plans.limitations.retention') %><span class="float-right">&#8734;</span></li>
+					</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>

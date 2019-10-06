@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_06_152005) do
+ActiveRecord::Schema.define(version: 2019_10_06_222205) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -162,6 +162,18 @@ ActiveRecord::Schema.define(version: 2019_10_06_152005) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "stripe_plans", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "currency"
+    t.integer "price_eur"
+    t.integer "price_month"
+    t.integer "price_year"
+    t.string "plan_id_month"
+    t.string "plan_id_year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["currency"], name: "index_stripe_plans_on_currency"
+  end
+
   create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.integer "amount"
@@ -230,6 +242,7 @@ ActiveRecord::Schema.define(version: 2019_10_06_152005) do
     t.string "uid"
     t.string "hash_id"
     t.string "subscription", default: "free"
+    t.string "stripe_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["country_id"], name: "index_users_on_country_id"
     t.index ["email_bidx"], name: "index_users_on_email_bidx"
