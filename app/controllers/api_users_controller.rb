@@ -1,8 +1,7 @@
 class ApiUsersController < BaseApiController
 
 	def subscription
-		subscription_tier = @user.subscription_tier
-		subscription_tier ||= SubscriptionTier.where(name: "Free").take
+		subscription_tier = APP_CONFIG['plans'][@user.subscription]
 		subscription_tier = JSON.parse(subscription_tier.to_json)
 
 		render json: prepare_json(subscription_tier, ["name", "created_at", "updated_at", "id"])

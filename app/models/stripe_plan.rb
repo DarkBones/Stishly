@@ -30,18 +30,26 @@ class StripePlan < ApplicationRecord
 			end
 			amount_year *= currency.subunit_to_unit
 
+			amount_month -= 1
+			amount_year -= 1
+			
+			amount_year *= 12
+
 		else
 			amount_month = ((amount.to_f / 100).round) * 100
 			amount_year = ((((amount_month.to_f * 10) / 100) / 12).round) * 100
+
+			amount_month -= 1
+			amount_year -= 1
+
+			amount_year *= 12
 		end
 
 		plan_month = Stripe::Plan.create({
 		  currency: currency.iso_code.downcase,
 		  interval: 'month',
 		  amount: amount_month,
-		  product: {
-		    name: 'Stishly',
-		  },
+		  product: ENV['STRIPE_PRODUCT_ID'],
 		  nickname: "#{currency.iso_code} Month",
 		  trial_period_days: 7
 		})
@@ -51,9 +59,7 @@ class StripePlan < ApplicationRecord
 		  interval: 'month',
 		  interval_count: 12,
 		  amount: amount_year,
-		  product: {
-		    name: 'Stishly',
-		  },
+		  product: ENV['STRIPE_PRODUCT_ID'],
 		  nickname: "#{currency.iso_code} Year",
 		  trial_period_days: 7
 		})
