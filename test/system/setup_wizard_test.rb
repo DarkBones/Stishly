@@ -138,7 +138,7 @@ class SetupWizardTest < ApplicationSystemTestCase
 
     # Create more than the maximum allowed accounts
     find(".plusmin:first-of-type").click
-    assert_selector '#flash_alert', text: "Upgrade to permium for more accounts"
+    assert_selector '#flash_alert', text: "Upgrade to premium for more accounts"
 
     # Check if the dropdown menus are populated
     click_on "Next"
@@ -150,17 +150,6 @@ class SetupWizardTest < ApplicationSystemTestCase
     
     find("select[name='regularity']").find(:option, "I don't have an income").select_option
 
-    # create expenses
-    sleep 2
-    click_on "Next"
-    find(".plusmin:first-of-type").click
-    assert page.has_css?('.expenseRow'), format_error("New expense row wasn't inserted")
-
-    # create too many expenses
-    10.times do
-      find(".plusmin:first-of-type").click
-    end
-    assert_selector '#flash_alert', text: "Upgrade to permium for more fixed expenses"
   end
     
     # workaround to go to the first fieldset

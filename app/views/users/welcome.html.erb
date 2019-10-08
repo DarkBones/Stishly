@@ -19,7 +19,6 @@
               <li class="active"><span class="d-none d-sm-block"><%= t('pages.setup.country.title') %></span><span class="d-sm-none">&nbsp;</li>
               <li><span class="d-none d-sm-block"><%= t('pages.setup.accounts.title') %></span><span class="d-sm-none">&nbsp;</li>
               <li><span class="d-none d-sm-block"><%= t('pages.setup.income.title') %></span><span class="d-sm-none">&nbsp;</li>
-              <li><span class="d-none d-sm-block"><%= t('pages.setup.expenses.title') %></span><span class="d-sm-none">&nbsp;</li>
             </ul>
 
             <!--fieldsets -->
@@ -100,23 +99,8 @@
 
               </div>
 
-	            <input type="button" name="previous" class="btn previous action-button px-4 py-2 my-2 btn-rounded btn-secondary" value="<%= t('buttons.previous.text') %>"/>
-	            <input type="button" name="next" class="btn next action-button px-4 py-2 my-5 btn-rounded btn-secondary" value="<%= t('buttons.next.text') %>"/>
-            </fieldset>
-
-            <!-- EXPENSES -->
-            <fieldset class="rounded dropshadow bg-light py-2 px-2">
-            	<h3><%= t('pages.setup.expenses.title') %></h3>
-            	<h4><%= t('pages.setup.expenses.hint') %></h4>
-
-            	<div id="expenseRows">
-	            	<%#= render partial: "expense_row" %>
-	            </div>
-
-            	<button class="btn btn-secondary btn-fieldset plusmin" data-toggle="tooltip" data-placement="top" title="<%= t('title_hints.add_expense') %>" onclick="insertExpenseRow(); return false;">+</button>
-
-            	<input type="button" name="previous" class="btn previous action-button px-4 py-2 my-2 btn-rounded btn-secondary" style="margin-top: 100px!important;" value="<%= t('buttons.previous.text') %>"/><br />
-            	<input type="submit" class="btn px-4 py-2 my-2 btn-rounded btn-primary" style="font-size: 1.5em;">
+	            <input type="button" name="previous" class="btn previous action-button px-4 py-2 my-2 btn-rounded btn-secondary" value="<%= t('buttons.previous.text') %>"/><br />
+	            <input type="submit" class="btn px-4 py-2 my-2 btn-rounded btn-primary" style="font-size: 1.5em;">
             </fieldset>
 
           <% end %>
@@ -130,6 +114,8 @@
 
 <script>
   "use strict";
+
+  disableEnter();
 
   var current_fs, next_fs, previous_fs;
   var left, opacity, scale;
@@ -314,7 +300,7 @@
           $(".account_row").last().find(".currency").val(currency);
           editAccountType($(".account_row").last().find(".account_type"), false);
         } else {
-          triggerNotice("Upgrade to permium for more accounts", true);
+          triggerNotice("<%= t('account.failure.upgrade_for_accounts') %>", true);
         }
       }
     });
@@ -341,7 +327,7 @@
       success(data) {
         if(spendingAccounts > data.max_spending_accounts) {
           if(showNotice){
-            triggerNotice("Upgrade to permium for spending accounts", true);
+            triggerNotice("<%= t('account.failure.upgrade_for_spending') %>", true);
           }
           $(obj).val("save");
         }

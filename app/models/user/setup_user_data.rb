@@ -24,9 +24,9 @@ class User
   		Schedule.create_income(@current_user, income_params)
 
   		# save the fixed expenses
-  		expense_params.each do |e|
-  			Schedule.create_expense(@current_user, e)
-  		end
+  		#expense_params.each do |e|
+  		#	Schedule.create_expense(@current_user, e)
+  		#end
   	end
 
 private
