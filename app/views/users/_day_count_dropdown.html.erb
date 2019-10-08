@@ -23,7 +23,7 @@
 				<div class="row">
 					<div class="col-12">
 						<h4 class="text-light">
-							<%= t('pages.daily_budget.transactions') %>
+							<%= link_to t('pages.daily_budget.transactions'), schedules_path, class: "text-light" %>
 							<span class="float-right">
 								<%= balance(budget[:transactions_total], current_user.currency, "cents") %>
 							</span>
