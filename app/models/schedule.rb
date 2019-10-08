@@ -131,7 +131,7 @@ private
       main_schedule = user.schedules.where(type_of: 'main').take
 
       unless main_schedule.nil?
-        errors.add(:schedule, I18n.t('schedule.failure.multiple_main_schedules'))
+        errors.add(:schedule, "<a href='/plans'>" + I18n.t('schedule.failure.multiple_main_schedules') + "</a>")
       end
     end
   end

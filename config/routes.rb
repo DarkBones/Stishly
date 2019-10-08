@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   end
 
   scope '/plans' do
-    get '/', to: 'subscriptions#index'
+    get '/', to: 'subscriptions#index', as: :plans
   end
 
   scope '/accounts' do

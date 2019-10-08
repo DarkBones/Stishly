@@ -52,11 +52,37 @@ class Transaction
 
       link_schedule(transactions, schedule)
 
+      main_transaction = Transaction.find_main_transaction(transactions[0])
+      main_transaction.is_main = true
+      main_transaction.save
+
+      # if the user has too many transactions, delete the oldest one(s)
+      handle_retention(@current_user)
+
       return transactions
 
     end
 
 private
+
+    def handle_retention(user)
+      max_transactions = APP_CONFIG['plans'][user.subscription]['max_transactions']
+      return if max_transactions < 0
+
+      main_transactions = user.transactions.where("is_main = true").order(:local_datetime)
+
+      if main_transactions.length > max_transactions
+        to_delete = main_transactions.length - max_transactions
+        deleted = 0
+        main_transactions.each do |t|
+          Transaction.delete(t, user)
+          deleted += 1
+
+          break if deleted >= to_delete
+        end
+      end
+
+    end
 
     def link_schedule(transactions, schedule)
       return if schedule.nil? || !@link_to_schedule

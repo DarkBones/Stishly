@@ -319,11 +319,11 @@ private
     plan = APP_CONFIG['plans'][user.subscription]
     plan ||= APP_CONFIG['plans']['free']
 
-    if user.accounts.length >= plan['max_accounts']
-      errors.add(:Plan, I18n.t('account.failure.upgrade_for_accounts')) unless plan['max_accounts'] < 0
+    if user.accounts.where("id IS NOT NULL").length > plan['max_accounts']
+      errors.add(:Plan, "<a href='/plans'>" + I18n.t('account.failure.upgrade_for_accounts') + "</a>") unless plan['max_accounts'] < 0
     elsif account_type == 'spend'
-      if user.accounts.where(account_type: 'spend').length >= plan['max_spending_accounts']
-        errors.add(:Plan, I18n.t('account.failure.upgrade_for_spending')) unless plan['max_spending_accounts'] < 0
+      if user.accounts.where(account_type: 'spend').length > plan['max_spending_accounts']
+        errors.add(:Plan, "<a href='/plans'>" + I18n.t('account.failure.upgrade_for_spending') + "</a>") unless plan['max_spending_accounts'] < 0
       end
     end
 
