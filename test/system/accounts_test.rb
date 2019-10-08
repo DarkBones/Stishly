@@ -170,9 +170,8 @@ class AccountsTest < ApplicationSystemTestCase
 
 		login_as_blank_free
 
-		free_tier = SubscriptionTier.where(name: 'Free').take
-		max = free_tier.max_accounts
-		max_spending = free_tier.max_spending_accounts
+		max = 3
+		max_spending = 1
 
 		(0..max_spending).each do |n|
 			page.driver.browser.navigate.refresh

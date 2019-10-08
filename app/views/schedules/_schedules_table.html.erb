@@ -3,7 +3,7 @@
     <% table_id = 'schedules_paused' %>
     <% schedules = @paused_schedules %>
     <% th_run_date = t('schedule.table.paused_until') %>
-  <% elsif defined?(main) && main = true %>
+  <% elsif defined?(main) && main == true %>
     <% table_id = 'schedules_main' %>
     <% schedules = @main_schedule %>
     <% th_run_date = t('schedule.table.next_run_date') %>

@@ -1,31 +1,49 @@
 class Subscription < ApplicationRecord
 
-	def self.create(user, plan, params)
-		#return if user.subscription == plan
-		plan_name = plan
+	def self.create(user, period, params)
+		return if user.subscription == period
 
-		plan = APP_CONFIG['plans'][plan]
+		plan = StripePlan.where(currency: user.currency, price_eur: ENV['MONTH_PRICE_IN_EUR'].to_i).take
+		free_trial = user.free_trial_eligable # if the user hasn't had a different plan before, they are entitled to the free trial
+
+		if period == 'monthly'
+			if free_trial
+				plan_id = plan.plan_id_month
+			else
+				plan_id = plan.plan_id_month_no_trial
+			end
+		elsif period == 'yearly'
+			if free_trial
+				plan_id = plan.plan_id_year
+			else
+				plan_id = plan.plan_id_year_no_trial
+			end
+		end
+
+		return if plan_id.nil?
 
 		customer = self.get_stripe_customer(user, params)
 
-		if unsubscribe(customer, except_from_plan_id: plan['stripe_id']).nil?
+		subscription = unsubscribe(customer, except_from_plan_id: plan_id)
+		if subscription.nil?
 			subscription = Stripe::Subscription.create({
 				customer: customer.id,
 		  	items: [
 		  		{
-		  			plan: 'plan_FwTAzDX2PVq6ZQ'
+		  			plan: plan_id,
 		  		}
 		  	],
 			})
 		end
 
 
-		user.subscription = plan_name
-		user.save
+		return subscription[:status]
 
 	end
 
 	def self.cancel(user)
+		return if user.stripe_id.nil?
+
 		customer = Stripe::Customer.retrieve(user.stripe_id)
 		self.unsubscribe(customer)
 	end
@@ -52,7 +70,7 @@ private
 			elsif s[:plan][:id] != except_from_plan_id || !result.nil?
 				Stripe::Subscription.delete(s[:id])
 			else
-				result = s[:id]
+				result = s
 			end
 		end
 

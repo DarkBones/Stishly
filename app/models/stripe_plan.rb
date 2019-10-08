@@ -50,7 +50,7 @@ class StripePlan < ApplicationRecord
 		  interval: 'month',
 		  amount: amount_month,
 		  product: ENV['STRIPE_PRODUCT_ID'],
-		  nickname: "#{currency.iso_code} Month",
+		  nickname: "#{currency.iso_code} Month w 7 day trial",
 		  trial_period_days: 7
 		})
 
@@ -60,8 +60,25 @@ class StripePlan < ApplicationRecord
 		  interval_count: 12,
 		  amount: amount_year,
 		  product: ENV['STRIPE_PRODUCT_ID'],
-		  nickname: "#{currency.iso_code} Year",
+		  nickname: "#{currency.iso_code} Year w 7 day trial",
 		  trial_period_days: 7
+		})
+
+		plan_month_no_trial = Stripe::Plan.create({
+		  currency: currency.iso_code.downcase,
+		  interval: 'month',
+		  amount: amount_month,
+		  product: ENV['STRIPE_PRODUCT_ID'],
+		  nickname: "#{currency.iso_code} Month w/0 trial",
+		})
+
+		plan_year_no_trial = Stripe::Plan.create({
+		  currency: currency.iso_code.downcase,
+		  interval: 'month',
+		  interval_count: 12,
+		  amount: amount_year,
+		  product: ENV['STRIPE_PRODUCT_ID'],
+		  nickname: "#{currency.iso_code} Year w/0 trial",
 		})
 
 		plan = StripePlan.create({
@@ -71,6 +88,8 @@ class StripePlan < ApplicationRecord
 			price_year: amount_year,
 			plan_id_month: plan_month.id,
 			plan_id_year: plan_year.id,
+			plan_id_month_no_trial: plan_month_no_trial.id,
+			plan_id_year_no_trial: plan_year_no_trial.id,
 		})
 
 		plan.save

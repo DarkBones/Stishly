@@ -10,12 +10,33 @@ class SubscriptionsController < ApplicationController
 	def create
 		begin
 			plan = params[:plan]
-			Subscription.create(current_user, plan, params)
+			status = Subscription.create(current_user, plan, params)
+			
+			if status == 'active'
+				current_user.subscription = params[:plan]
+				current_user.free_trial_eligable = false
+				current_user.save
+
+				flash[:message] = "Thank you. Enjoy using premium!"
+				redirect_to root_path
+			else
+				flash[:error] = "Something went wrong. Please try again."
+				redirect_back(fallback_location: root_path)
+			end
 		rescue Stripe::CardError => e
 		  flash[:error] = e.message
 		  redirect_back(fallback_location: root_path)
 		end
 
+	end
+
+	def unsubscribe
+		Subscription.cancel(current_user)
+		current_user.subscription = 'free'
+		current_user.save
+
+		flash[:message] = "You have been unsubscibed"
+		redirect_to root_path
 	end
 
 end

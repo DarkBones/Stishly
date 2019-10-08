@@ -12,9 +12,8 @@ currency_rates:
 
 plans:
   free:
-    cost: 0
     max_accounts: 3
-    max_spending_accounts: 2
+    max_spending_accounts: 1
     max_schedules: 3
     max_transactions: 500
   monthly:

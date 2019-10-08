@@ -14,6 +14,9 @@ Rails.application.routes.draw do
         post '/', to: 'subscriptions#create', as: :create_subscription
       end
     end
+    scope '/unsubscribe' do
+      post '/', to: 'subscriptions#unsubscribe', as: :unsubscribe
+    end
   end
 
   scope '/plans' do

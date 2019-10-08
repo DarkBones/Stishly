@@ -6,7 +6,7 @@ class HiddenFieldsTest < ApplicationSystemTestCase
     login_user(users(:upcoming_transactions_run), 'SomePassword123^!')
 
     click_on I18n.t('buttons.new_transaction.text')
-    wait_for_ajax
+    sleep 1
     
     assert_selector '#active_account_field', visible: :hidden
     assert_selector '#edit_transaction__category_id_', visible: :hidden
@@ -20,7 +20,7 @@ class HiddenFieldsTest < ApplicationSystemTestCase
     click_on I18n.t('buttons.upcoming_transactions.text')
     page.find_all('.upcoming_context_menu')[0].click
     click_on I18n.t('transaction.upcoming_actions.edit_occ')
-    wait_for_ajax
+    sleep 1
     
     assert_selector '#transaction_schedule_period_id', visible: :hidden
     assert_selector '#transaction_scheduled_transaction_id', visible: :hidden

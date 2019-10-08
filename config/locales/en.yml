@@ -545,13 +545,34 @@ en:
       average_spending: Average daily spending
     plans:
       title: Subscription Plans
+      per_month: per month
+      billed_monthly: billed monthly
+      billed_yearly: billed annually
+      billed_free: "&#8203"
+      unsubscribe: Unsubscribe
+      start_free_trial: Start Your Free Trial
+      register_now: Register Now
+      continue: Continue
+      footer_title: "What's included:"
+      free_trial_included: 7 day free trial
+      delete_warning: Are you sure you want to unsubscribe from premium?
+      free_included:
+        accounts: 3 Accounts
+        spending_accounts: 1 Spending Account
+        schedules: 3 Schedules
+        transactions: 500 Transactions
+      paid_included:
+        accounts: Unlimited Accounts
+        spending_accounts: Unlimited Spending Accounts
+        schedules: Unlimited Schedules
+        transactions: Unlimited Transactions
       plans:
         free:
           title: Free
         yearly:
-          title: Premium Annually
+          title: Year
         monthly:
-          title: Premium Monthly
+          title: Month
         limitations:
           max_accounts: Maximum Accounts
           max_spending_accounts: Maximum Spending Accounts

@@ -1,0 +1,80 @@
+<div class="col-12 col-lg-4 text-center">
+	<div class="card border-light mb-3 dropshadow-wide">
+
+		<div class="card-body">
+			<h5 class="text-uppercase">
+				<%= t("pages.plans.plans.#{plan}.title") %>
+			</h5>
+			<h3 style="font-size: 70px;">
+				<%= balance(price, currency, "cents") %>
+			</h3>
+			<p class="mt-4">
+				<%= "#{currency} #{t('pages.plans.per_month')}" %>
+			</p>
+			<p>
+				<%= t("pages.plans.billed_#{plan}").html_safe %>
+			</p>
+
+			<% if current_user.subscription == plan %>
+				<% if plan == 'free' %>
+					<%= link_to t('pages.plans.continue'), root_path, class: "btn btn-rounded btn-primary" %>
+				<% else %>
+					<%= form_tag unsubscribe_path do %>
+						<%= submit_tag t('pages.plans.unsubscribe'), :data => { :confirm => t('pages.plans.delete_warning') }, class: "btn btn-rounded btn-danger" %>
+					<% end %>
+				<% end %>
+			<% else %>
+				<% if plan == 'free' && current_user.subscription != 'free' %>
+					<%= form_tag unsubscribe_path do %>
+						<%= submit_tag t('pages.plans.continue'), :data => { :confirm => t('pages.plans.delete_warning') }, class: "btn btn-rounded btn-danger" %>
+					<% end %>
+				<% else %>
+					<%= form_tag create_subscription_path(plan) do %>
+						<% if current_user.free_trial_eligable %>
+							<%= submit_tag t('pages.plans.start_free_trial'), class: "btn btn-rounded btn-primary" %>
+						<% else %>
+							<%= submit_tag t('pages.plans.register_now'), class: "btn btn-rounded btn-primary" %>
+						<% end %>
+
+						<% price_now = price %>
+						<% price_now *= 12 if plan == 'yearly' %>
+
+						<script
+							src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+							data-key="<%= ENV['STRIPE_PUBLIC_KEY'] %>"
+							data-currency="<%= currency %>"
+							data-name="<%= t('pages.plans.plans.' + plan + '.title') %>"
+							data-description="Premium Subscription"
+							data-amount="<%= price_now %>"
+							data-label="Sign Me Up!">
+						</script>
+					<% end %>
+				<% end %>
+			<% end %>
+		</div>
+
+		<div class="card-footer">
+			<h4>
+				<%= t('pages.plans.footer_title') %>
+			</h4>
+			<ul class="list-unstyled">
+				<%
+					if price > 0
+						type = 'paid'
+					else
+						type = 'free'
+					end
+				%>
+				<li><%= t("pages.plans.#{type}_included.accounts") %></li>
+				<li><%= t("pages.plans.#{type}_included.spending_accounts") %></li>
+				<li><%= t("pages.plans.#{type}_included.schedules") %></li>
+				<li><%= t("pages.plans.#{type}_included.transactions") %></li>
+				<% if current_user.free_trial_eligable && type != 'free' %>
+					<li><%= t("pages.plans.free_trial_included") %></li>
+				<% end %>
+			</ul>
+		</div>
+
+
+	</div>
+</div>
