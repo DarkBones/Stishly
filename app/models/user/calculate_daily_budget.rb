@@ -150,6 +150,7 @@ private
 
 			# average daily spending
 			average_spend = get_average_spending(user)
+
 			spend_percentage = ((100.to_f/budget_tomorrow) * (average_spend[:amount] * -1)).round(1)
 
 			if spend_percentage <= 62.5
