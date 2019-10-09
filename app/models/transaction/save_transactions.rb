@@ -46,15 +46,15 @@ class Transaction
         transfer_transactions[0].transfer_transaction_id = transfer_transactions[1].id
         transfer_transactions[1].transfer_transaction_id = transfer_transactions[0].id
 
-        transfer_transactions[0].save
-        transfer_transactions[1].save
+        transfer_transactions[0].save unless transfer_transactions[0].account.is_disabled
+        transfer_transactions[1].save unless transfer_transactions[1].account.is_disabled
       end
 
       link_schedule(transactions, schedule)
 
       main_transaction = Transaction.find_main_transaction(transactions[0])
       main_transaction.is_main = true
-      main_transaction.save
+      main_transaction.save if main_transaction.account.is_disabled == false
 
       # if the user has too many transactions, delete the oldest one(s)
       handle_retention(@current_user)
@@ -118,7 +118,7 @@ private
       t.scheduled_transaction_id = transaction[:scheduled_transaction_id]
       t.scheduled_date = transaction[:scheduled_date]
 
-      t.save!
+      t.save! unless t.account.is_disabled
 
       return t
     end

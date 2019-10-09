@@ -74,13 +74,3 @@ function stopSchedule(scheduleId, obj) {
     }
   });
 }
-
-function activateSchedule(scheduleId) {
-  $.ajax({
-    type: "PATCH",
-    url: "/api/v1/schedules/" + scheduleId.toString() + "/activate",
-    success(data) {
-      $.getScript("api/v1/render/swap_schedules_table/" + scheduleId.toString() + "/inactive");
-    }
-  });
-}

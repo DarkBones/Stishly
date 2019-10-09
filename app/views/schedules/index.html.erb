@@ -92,3 +92,42 @@
     </div>
   </div>
 </div>
+
+<script>
+
+  function activateSchedule(scheduleId) {
+    var schedules = 0;
+
+    var active_schedules = $("#schedules_active tr").length
+    var paused_schedules = $("#schedules_paused tr").length
+
+    if (active_schedules > 0){
+      active_schedules -= 1;
+    }
+    if (paused_schedules > 0){
+      paused_schedules -= 1;
+    }
+
+    schedules = active_schedules + paused_schedules
+
+    $.ajax({
+      type: "GET",
+      dataType: "json",
+      url: "/api/v1/users/subscription",
+      success(data){
+        if(schedules >= data.max_schedules && data.max_schedules >= 0) {
+          triggerNotice("<%= t('schedule.failure.upgrade_for_schedules') %>", true);
+        } else {
+          $.ajax({
+            type: "PATCH",
+            url: "/api/v1/schedules/" + scheduleId.toString() + "/activate",
+            success(data) {
+              $.getScript("api/v1/render/swap_schedules_table/" + scheduleId.toString() + "/inactive");
+            }
+          });
+        }
+      }
+    })
+  }
+
+</script>

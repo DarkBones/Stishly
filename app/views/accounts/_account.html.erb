@@ -4,6 +4,8 @@
 <% li_c += " sortable" if account.persisted? %>
 <% li_c += " no-sorting" if !account.persisted? %>
 <% li_c += " active" if @active_account && account.id == @active_account.id %>
+<% li_c += " disabled" if account.is_disabled %>
+<% disabled = 'disabled=disabled' if account.is_disabled %>
 <% 
 	if account.persisted?
 		account_id = account.hash_id
@@ -13,7 +15,7 @@
 %>
 
 
-<li class="<%= li_c %> py-2" name="<%= account.link %>" id="account_<%= account_id %>" onclick="goToAccount(this)">
+<li class="<%= li_c %> py-2" name="<%= account.link %>" id="account_<%= account_id %>" onclick="goToAccount(this)" <%= disabled %>>
   <div class="sort-handle<%= " move-cursor" if account.persisted? %>"></div>
   <% acc_curency = Account.get_currency(@account) %>
   <%= @account.short_name %>

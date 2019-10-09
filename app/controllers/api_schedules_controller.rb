@@ -135,11 +135,18 @@ class ApiSchedulesController < BaseApiController
   	schedule = @user.schedules.friendly.find(params[:schedule])
   	render json: "not found", status: :not_found and return if schedule.nil?
 
-  	schedule.is_active = true
-    schedule.end_date = nil
-    schedule.next_occurrence = Schedule.next_occurrence(schedule)
+    max_schedules = APP_CONFIG['plans'][@user.subscription]['max_schedules']
 
-  	schedule.save
+    if max_schedules < 0 || @user.schedules.where(is_active: true).length < max_schedules
+
+    	schedule.is_active = true
+      schedule.end_date = nil
+      schedule.next_occurrence = Schedule.next_occurrence(schedule)
+
+    	schedule.save
+
+    end
+
   end
 
 private

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_08_154053) do
+ActiveRecord::Schema.define(version: 2019_10_09_163439) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2019_10_08_154053) do
     t.boolean "is_default"
     t.string "account_type", default: "spend"
     t.string "hash_id"
+    t.boolean "is_disabled", default: false
     t.index ["name"], name: "index_accounts_on_name"
     t.index ["user_id"], name: "index_accounts_on_user_id"
   end

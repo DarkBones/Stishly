@@ -17,6 +17,11 @@ class SubscriptionsController < ApplicationController
 				current_user.free_trial_eligable = false
 				current_user.save
 
+				current_user.accounts.where("is_disabled = true").each do |a|
+					a.is_disabled = false
+					a.save
+				end
+
 				flash[:message] = "Thank you. Enjoy using premium!"
 				redirect_to root_path
 			else

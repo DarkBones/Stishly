@@ -82,6 +82,10 @@ body {
   background-color: lighten($secondaryColor, 40%) !important;
 }
 
+#accounts_list li.disabled {
+  color: lighten($secondaryColor, 15%) !important;
+}
+
 .dropdown-menu_notifications {
   max-height: 50vh;
   overflow-y: scroll;

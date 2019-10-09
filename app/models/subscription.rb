@@ -46,6 +46,33 @@ class Subscription < ApplicationRecord
 
 		customer = Stripe::Customer.retrieve(user.stripe_id)
 		self.unsubscribe(customer)
+
+		accounts = 0
+		spending_accounts = 0
+
+		user.accounts.where("is_disabled = false").order(:position).each do |a|
+			accounts += 1
+			spending_accounts += 1 if a.account_type == 'spend'
+
+			if accounts > APP_CONFIG['plans']['free']['max_accounts']
+				a.is_disabled = true
+				a.save
+			elsif spending_accounts > APP_CONFIG['plans']['free']['max_spending_accounts'] && a.account_type == 'spend'
+				a.is_disabled = true
+				a.save
+			end
+		end
+
+		schedules = 0
+		user.schedules.where("is_active = true").each do |s|
+			schedules += 1
+
+			if schedules > APP_CONFIG['plans']['free']['max_schedules']
+				s.is_active = false
+				s.save
+			end
+		end
+
 	end
 
 private

@@ -23,12 +23,17 @@ $(document).on("turbolinks:load", () => {
 function goToAccount(object) {
   var linkName, url, $accountButton;
 
-  $accountButton = $("#" + object.id);
-  linkName = $accountButton.attr("name");
-  url = "/accounts"
-  if(typeof(linkName) !== "undefined") {
-    url += "/" + linkName;
+  if ($(object).is("[disabled]")){
+    url = "/plans"
+  } else {
+    $accountButton = $("#" + object.id);
+    linkName = $accountButton.attr("name");
+    url = "/accounts"
+    if(typeof(linkName) !== "undefined") {
+      url += "/" + linkName;
+    }
   }
+
   window.location.href = url;
 }
 
