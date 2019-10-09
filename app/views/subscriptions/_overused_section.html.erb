@@ -1,0 +1,20 @@
+<h2>
+	<%= title %>
+</h2>
+<p>
+	<%= message.html_safe %>
+</p>
+<ul class="list-unstyled">
+	<% collection.each do |i| %>
+
+		<li>
+			<label class="checkbox-container">
+        <%= check_box_tag "select[#{i.hash_id}]", i.hash_id, false, class: 'checkbox-inline transaction-checkbox-input styled-checkbox', 'onchange' => 'selectTransaction(this);'%>
+        <span class="checkmark"></span>
+      </label>
+
+			<%= "#{collection_name}_#{i.hash_id}" %>
+		</li>
+
+	<% end %>
+</ul>

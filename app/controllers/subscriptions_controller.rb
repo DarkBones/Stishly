@@ -39,4 +39,16 @@ class SubscriptionsController < ApplicationController
 		redirect_to root_path
 	end
 
+	def over_usage
+		@accounts = current_user.accounts.order(:position)
+		@schedules = current_user.schedules.where("type_of != 'main'")
+
+		@overused_accounts = @accounts.length > APP_CONFIG['plans']['free']['max_accounts']
+		@overused_spending_accounts = @accounts.where("account_type = 'spend'").length > APP_CONFIG['plans']['free']['max_spending_accounts']
+		@overused_schedules = @schedules.length > APP_CONFIG['plans']['free']['max_schedules']
+	end
+
+	def show
+	end
+
 end

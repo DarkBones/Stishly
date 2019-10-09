@@ -579,3 +579,7 @@ en:
           max_schedules: Maximum Schedules
           retention: Transaction Retention
       currency_message: All prices are shown in @currency_name@ (@currency@) and include taxes
+    overused:
+      accounts:
+        title: Accounts
+        message: "You have too many accounts for your current plan. Please select which of the accounts below to disable.<br />Maximum allowed accounts: @max@"

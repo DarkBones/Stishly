@@ -18,6 +18,9 @@ Rails.application.routes.draw do
       post '/', to: 'subscriptions#unsubscribe', as: :unsubscribe
     end
   end
+  scope '/over_usage' do
+    get '/', to: 'subscriptions#over_usage', as: :disable_overuse
+  end
 
   scope '/plans' do
     get '/', to: 'subscriptions#index', as: :plans

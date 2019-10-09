@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!, :except => [:country_currency, :privacy_policy, :api]
-  before_action :set_current_user, :setup_wizzard, :daily_budget
+  before_action :set_current_user, :setup_wizzard, :daily_budget, :over_usage
 
   helper_method :user_accounts, :user_accounts_array, :user_categories_array, :user_schedules_array
 
@@ -8,6 +8,23 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
       unless current_user.finished_setup
         redirect_to user_welcome_path unless request.original_fullpath.start_with?('/users') || request.original_fullpath.start_with?('/api') || request.original_fullpath.start_with?('/registrations')
+      end
+    end
+  end
+
+  # if the user has more accounts or schedules than allowed, redirect to a page letting them disable some
+  def over_usage
+    if current_user.finished_setup
+      if current_user.subscription == 'free'
+        unless request.original_fullpath.start_with?('/plans')
+
+          # check if too many accounts
+          if current_user.accounts.length > APP_CONFIG['plans']['free']['max_accounts']
+            redirect_to disable_overuse_path
+          end
+
+        end
+
       end
     end
   end

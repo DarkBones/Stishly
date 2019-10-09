@@ -1,0 +1,19 @@
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<% if @overused_accounts %>
+				
+				<%= render partial: "overused_section", :locals => {
+					:title => t('pages.overused.accounts.title'),
+					:message => t('pages.overused.accounts.message').sub('@max@', APP_CONFIG['plans']['free']['max_accounts'].to_s),
+					:collection => @accounts,
+					:collection_name => 'account'
+				} %>
+
+			<% end %>
+
+			<%= @overused_spending_accounts %>
+			<%= @overused_schedules %>
+		</div>
+	</div>
+</div>
