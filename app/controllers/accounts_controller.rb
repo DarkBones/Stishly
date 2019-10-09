@@ -6,22 +6,30 @@ class AccountsController < ApplicationController
   end
 
   def overview
-    @active_account = Account.get_from_name(params[:id], current_user) or not_found
-    @active_account = @active_account.decorate
+    unless current_user.subscription == 'free'
+      @active_account = Account.get_from_name(params[:id], current_user) or not_found
+      @active_account = @active_account.decorate
 
-    @history_data = ChartDatum.account_history(@active_account)
-    @category_data = ChartDatum.account_categories(@active_account)
-    @category_data_income = ChartDatum.account_categories(@active_account, type: "income")
+      @history_data = ChartDatum.account_history(@active_account)
+      @category_data = ChartDatum.account_categories(@active_account)
+      @category_data_income = ChartDatum.account_categories(@active_account, type: "income")
+    else
+      redirect_to plans_path
+    end
   end
 
   def overview_all
-    @active_account = Account.create_summary_account(current_user, true).decorate
+    unless current_user.subscription == 'free'
+      @active_account = Account.create_summary_account(current_user, true).decorate
 
-    @history_data = ChartDatum.user_history(current_user)
-    @category_data = ChartDatum.user_categories(current_user)
-    @category_data_income = ChartDatum.user_categories(current_user, type: "income")
+      @history_data = ChartDatum.user_history(current_user)
+      @category_data = ChartDatum.user_categories(current_user)
+      @category_data_income = ChartDatum.user_categories(current_user, type: "income")
 
-    render "overview"
+      render "overview"
+    else
+      redirect_to plans_path
+    end
   end
 
   def update

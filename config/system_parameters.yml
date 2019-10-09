@@ -16,13 +16,16 @@ plans:
     max_spending_accounts: 1
     max_schedules: 3
     max_transactions: 500
+    insights: false
   monthly:
     max_accounts: -1
     max_spending_accounts: -1
     max_schedules: -1
     max_transactions: -1
+    insights: true
   yearly:
     max_accounts: -1
     max_spending_accounts: -1
     max_schedules: -1
     max_transactions: -1
+    insights: true

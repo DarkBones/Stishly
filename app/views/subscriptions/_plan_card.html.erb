@@ -65,12 +65,15 @@
 						type = 'free'
 					end
 				%>
-				<li><%= t("pages.plans.#{type}_included.accounts") %></li>
-				<li><%= t("pages.plans.#{type}_included.spending_accounts") %></li>
-				<li><%= t("pages.plans.#{type}_included.schedules") %></li>
-				<li><%= t("pages.plans.#{type}_included.transactions") %></li>
+				<li class="py-2"><%= t("pages.plans.#{type}_included.accounts") %></li>
+				<li class="py-2"><%= t("pages.plans.#{type}_included.spending_accounts") %></li>
+				<li class="py-2"><%= t("pages.plans.#{type}_included.schedules") %></li>
+				<li class="py-2"><%= t("pages.plans.#{type}_included.transactions") %></li>
+				<% if type == 'paid' %>
+					<li class="py-2"><%= t("pages.plans.paid_included.insights") %></li>
+				<% end %>
 				<% if current_user.free_trial_eligable && type != 'free' %>
-					<li><%= t("pages.plans.free_trial_included") %></li>
+					<li class="py-2"><%= t("pages.plans.free_trial_included") %></li>
 				<% end %>
 			</ul>
 		</div>

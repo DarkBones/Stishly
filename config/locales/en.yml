@@ -98,7 +98,7 @@ en:
     tabs:
       transactions: Transactions
       settings: Settings
-      overview: Overview
+      overview: Insights
     delete_warning: This action will delete this account and all its transactions. This cannot be undone. Continue?
 
   notifications:
@@ -195,6 +195,7 @@ en:
       cancel: Cancel occurrence
       trigger: Trigger now
       uncancel: Uncancel occurrence
+    limit_warning: You have reached the transaction limit. Older transactions have been removed.
 
   filterrific:
     period:
@@ -566,6 +567,7 @@ en:
         spending_accounts: Unlimited Spending Accounts
         schedules: Unlimited Schedules
         transactions: Unlimited Transactions
+        insights: Insights
       plans:
         free:
           title: Free
