@@ -12,6 +12,7 @@
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #  created_at_local_datetime :datetime
+#  hash_id                   :string(255)
 #
 
 class Notification < ApplicationRecord

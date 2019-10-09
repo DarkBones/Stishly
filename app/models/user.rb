@@ -5,7 +5,6 @@
 #  id                     :bigint           not null, primary key
 #  first_name_enc         :binary(65535)
 #  last_name_enc          :binary(65535)
-#  subscription_tier_id   :bigint           default(0)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  encrypted_password     :string(255)      default(""), not null
@@ -34,6 +33,11 @@
 #  email_bidx             :string(255)
 #  provider               :string(255)
 #  uid                    :string(255)
+#  hash_id                :string(255)
+#  subscription           :string(255)      default("free")
+#  stripe_id              :string(255)
+#  free_trial_eligable    :boolean          default(TRUE)
+#  last_plan_check        :datetime
 #
 
 class User < ApplicationRecord

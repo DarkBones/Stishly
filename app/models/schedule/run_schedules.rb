@@ -114,7 +114,7 @@ private
       schedule.next_occurrence = tz.utc_to_local(next_occurrence).to_date unless next_occurrence.nil?
       schedule.next_occurrence_utc = next_occurrence
 
-      schedule.save!
+      #schedule.save!
     end
 
   end

@@ -25,6 +25,11 @@
 #  queue_scheduled          :boolean          default(FALSE)
 #  is_queued                :boolean          default(FALSE)
 #  schedule_period_id       :integer
+#  is_cancelled             :boolean          default(FALSE)
+#  scheduled_date           :date
+#  is_balancer              :boolean          default(FALSE)
+#  hash_id                  :string(255)
+#  is_main                  :boolean
 #
 
 require 'test_helper'

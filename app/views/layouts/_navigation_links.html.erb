@@ -2,13 +2,13 @@
   <% if user_signed_in? %>
 
     <li class="nav-item dropdown d-none d-sm-block">
-      <a class="nav-link dropdown-toggle no-caret" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <a class="nav-link dropdown-toggle no-caret" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="readNotifications();">
         <div class="navbar-link rounded-circle bg-secondary navbar-messages">
           <%= image_tag 'message.svg' %>
         </div>
       </a>
       <div class="dropdown-menu dropdown-menu_notifications dropdown-menu-right dropshadow-light" aria-labelledby="notificationsDropdown">
-        <div id="user_notifications">
+        <div id="user_notifications" class="py-2 px-2">
           <%#= render partial: 'layouts/notifications' %>
         </div>
       </div>

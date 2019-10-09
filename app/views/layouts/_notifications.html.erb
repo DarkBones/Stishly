@@ -1,4 +1,5 @@
-<% notifications = current_user.notifications.reverse_order.limit(APP_CONFIG['ui']['notifications']['page_length'])	%>
+<% notifications = current_user.notifications.reverse_order.limit(APP_CONFIG['ui']['notifications']['page_length']).decorate	%>
+<h5>Notifications</h5>
 <ul class="list-unstyled">
 	<% if notifications.length > 0 %>
 		<%= render notifications %>

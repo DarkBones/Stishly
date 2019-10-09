@@ -264,6 +264,13 @@ Rails.application.routes.draw do
           end
         end
       end
+      #/api/v1/notifications
+      scope '/notifications' do
+        #/api/v1/notifications/mark_as_read
+        scope '/mark_as_read' do
+          patch '/', to: 'api_notifications#mark_read'
+        end
+      end
       #/api/v1/users
       scope '/users' do
         #/api/v1/users/subscription

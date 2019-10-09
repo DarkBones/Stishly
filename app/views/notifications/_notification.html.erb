@@ -5,9 +5,11 @@ if defined?(@truncate)
 end
 %>
 
-<a href="/<%= notification.link %>">
+<a href="<%= notification.link %>" class="text-dark">
 	<li class="nav-item">
-		<span class="title"><%= notification.title %></span><br />
+		<span class="text-secondary float-right"><%= notification.short_time %></span>
+		<span class="title <%= "font-weight-bold" unless notification.is_read %>"><%= notification.title %></span>
+		<br />
 		<% if truncate %>
 			<p><%= notification.body.truncate(50, separator: ' ') unless notification.body.nil? %></p>
 		<% else %>

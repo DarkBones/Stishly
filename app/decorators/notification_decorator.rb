@@ -1,13 +1,14 @@
 class NotificationDecorator < ApplicationDecorator
   delegate_all
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
+  def short_time
+  	tz = TZInfo::Timezone.get(model.user.timezone)
+
+  	if tz.utc_to_local(model.created_at).to_date == tz.utc_to_local(Time.now.utc).to_date
+  		return tz.utc_to_local(model.created_at).strftime("%H:%M")
+  	else
+  		return tz.utc_to_local(model.created_at).strftime("%d/%m")
+  	end
+  end
 
 end

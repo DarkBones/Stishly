@@ -13,6 +13,8 @@
 #  currency     :string(255)      not null
 #  is_default   :boolean
 #  account_type :string(255)      default("spend")
+#  hash_id      :string(255)
+#  is_disabled  :boolean          default(FALSE)
 #
 
 class Account < ApplicationRecord

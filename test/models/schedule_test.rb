@@ -20,12 +20,12 @@
 #  updated_at          :datetime         not null
 #  is_active           :boolean          default(TRUE)
 #  next_occurrence     :date
-#  last_occurrence     :date
 #  next_occurrence_utc :datetime
 #  type_of             :string(255)      default("schedule")
 #  pause_until         :date
 #  pause_until_utc     :datetime
 #  current_period_id   :integer          default(0)
+#  hash_id             :string(255)
 #
 
 require 'test_helper'
