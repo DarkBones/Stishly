@@ -1,8 +1,47 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!, :except => [:country_currency, :privacy_policy, :api]
-  before_action :set_current_user, :setup_wizzard, :daily_budget
+  before_action :set_current_user, :setup_wizzard, :daily_budget, :check_subscription
 
   helper_method :user_accounts, :user_accounts_array, :user_categories_array, :user_schedules_array
+
+  # check if a user's subscription is still valid
+  def check_subscription
+    last_check = current_user.last_plan_check
+    return if last_check > 1.days.ago unless last_check.nil?
+
+    s = User.get_subscription(current_user)
+    if s.nil?
+      unless current_user.subscription == 'free'
+        Subscription.cancel(current_user)
+      end
+    else
+      if current_user.subscription == 'free'
+
+        plan_id = s[:plan][:id]
+
+        plan = StripePlan.where(plan_id_month: plan_id).take
+        plan ||= StripePlan.where(plan_id_month_no_trial: plan_id).take
+        unless plan.nil?
+          current_user.subscription = 'monthly'
+        end
+
+        plan = StripePlan.where(plan_id_year: plan_id).take
+        plan ||= StripePlan.where(plan_id_year_no_trial: plan_id).take
+        unless plan.nil?
+          current_user.subscription = 'yearly'
+        end
+
+        current_user.accounts.where(is_disabled: true).each do |a|
+          a.is_disabled = false
+          a.save
+        end
+
+      end
+    end
+
+    current_user.last_plan_check = Time.now.utc
+    current_user.save
+  end
 
   def setup_wizzard
     if user_signed_in?

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_09_163439) do
+ActiveRecord::Schema.define(version: 2019_10_09_183114) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -248,6 +248,7 @@ ActiveRecord::Schema.define(version: 2019_10_09_163439) do
     t.string "subscription", default: "free"
     t.string "stripe_id"
     t.boolean "free_trial_eligable", default: true
+    t.datetime "last_plan_check"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["country_id"], name: "index_users_on_country_id"
     t.index ["email_bidx"], name: "index_users_on_email_bidx"

@@ -73,6 +73,9 @@ class Subscription < ApplicationRecord
 			end
 		end
 
+		user.subscription = 'free'
+		user.save
+
 	end
 
 private

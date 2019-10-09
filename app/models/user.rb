@@ -73,6 +73,16 @@ class User < ApplicationRecord
   after_create :initialize_user_data
   before_destroy :cancel_subscriptions
 
+  def self.get_subscription(user)
+    customer = Stripe::Customer.retrieve(user.stripe_id)
+
+    customer[:subscriptions].each do |s|
+      return s if s[:status] == 'active'
+    end
+
+    return nil
+  end
+
   def will_save_change_to_email?
   end
 
