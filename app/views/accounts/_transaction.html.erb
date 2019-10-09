@@ -37,7 +37,7 @@
       <% end %>
 
 
-      <a href="#" data-toggle="modal" data-target="#edit_transaction_form" onclick="editTransaction(this);" id="txn_<%= transaction.hash_id %>">
+      <a href="#" class="text-dark" data-toggle="modal" data-target="#edit_transaction_form" onclick="editTransaction(this);" id="txn_<%= transaction.hash_id %>">
         <li time="<%= transaction.time_num %>" id="transaction_<%= transaction.hash_id %>">
 
           <%= fa_icon transaction.category.symbol, class: "rounded-circle category", :style => 'background-color: ' + transaction.category.decorate.color + '; padding: 5px;' %>

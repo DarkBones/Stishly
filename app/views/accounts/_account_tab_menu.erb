@@ -1,20 +1,20 @@
 <ul class="nav nav-tabs">
   <% if @active_account.persisted? %>
     <li class="nav-item">
-      <%= link_to t('account.tabs.transactions'), show_account_path, :class => "nav-link" + (' active' if locals[:active_tab] == 'Transactions').to_s %>
+      <%= link_to t('account.tabs.transactions'), show_account_path, :class => "nav-link text-dark" + (' active' if locals[:active_tab] == 'Transactions').to_s %>
     </li>
     <li class="nav-item">
-      <%= link_to t('account.tabs.settings'), account_settings_path, :class => "nav-link" + (' active' if locals[:active_tab] == 'Settings').to_s %>
+      <%= link_to t('account.tabs.settings'), account_settings_path, :class => "nav-link text-dark" + (' active' if locals[:active_tab] == 'Settings').to_s %>
     </li>
     <li class="nav-item">
       <%= link_to t('account.tabs.overview'), account_overview_path(@active_account.name), :class => "nav-link" + (' active' if locals[:active_tab] == 'Overview').to_s %>
     </li>
   <% else %>
     <li class="nav-item">
-      <%= link_to t('account.tabs.transactions'), root_path + "account", :class => "nav-link" + (' active' if locals[:active_tab] == 'Transactions').to_s %>
+      <%= link_to t('account.tabs.transactions'), root_path + "accounts", :class => "nav-link text-dark" + (' active' if locals[:active_tab] == 'Transactions').to_s %>
     </li>
     <li class="nav-item">
-      <%= link_to t('account.tabs.overview'), account_all_overview_path, :class => "nav-link premium" + (' active' if locals[:active_tab] == 'Overview').to_s %>
+      <%= link_to t('account.tabs.overview'), account_all_overview_path, :class => "nav-link premium text-dark" + (' active' if locals[:active_tab] == 'Overview').to_s %>
     </li>
   <% end %>
 </ul>
