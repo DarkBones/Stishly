@@ -123,7 +123,7 @@ class User < ApplicationRecord
     return tz.utc_to_local(Time.now.utc)
   end
 
-  def self.format_date(d, include_weekday=false, today_names=false)
+  def self.format_date(d, include_weekday=false, today_names=false, hide_year=false)
     tz = TZInfo::Timezone.get(@current_user.timezone)
 
     if today_names
@@ -152,8 +152,14 @@ class User < ApplicationRecord
     date_format.sub! "mmm", "%b"
     date_format.sub! "mm", "%m"
     date_format.sub! "m", "%-m" unless date_format.include? "%m"
-    date_format.sub! "yyyy", "%Y"
-    date_format.sub! "yy", "%y"
+
+    unless hide_year
+      date_format.sub! "yyyy", "%Y"
+      date_format.sub! "yy", "%y"
+    else
+      date_format.sub! "yyyy", ""
+      date_format.sub! "yy", ""
+    end
 
     if include_weekday
       date_format = "%a, " + date_format

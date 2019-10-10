@@ -277,7 +277,9 @@ class Account < ApplicationRecord
     balance = account.balance
     balance += amount
 
-    account = Account.update(account.id, :balance => balance)
+    #account = Account.update(account.id, :balance => balance)
+    account.balance = balance
+    account.save
 
     history = account.account_histories.create({
       local_datetime: local_datetime,
@@ -321,10 +323,12 @@ private
     plan = APP_CONFIG['plans'][user.subscription]
     plan ||= APP_CONFIG['plans']['free']
 
-    if user.accounts.where("id IS NOT NULL").length > plan['max_accounts']
+    accounts = user.accounts.where("id IS NOT NULL AND is_disabled = false")
+
+    if accounts.length > plan['max_accounts']
       errors.add(:Plan, "<a href='/plans'>" + I18n.t('account.failure.upgrade_for_accounts') + "</a>") unless plan['max_accounts'] < 0
     elsif account_type == 'spend'
-      if user.accounts.where(account_type: 'spend').length > plan['max_spending_accounts']
+      if accounts.where(account_type: 'spend').length > plan['max_spending_accounts']
         errors.add(:Plan, "<a href='/plans'>" + I18n.t('account.failure.upgrade_for_spending') + "</a>") unless plan['max_spending_accounts'] < 0
       end
     end

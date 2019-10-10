@@ -53,23 +53,6 @@ class TransactionsController < ApplicationController
     render "delete"
   end
 
-  def mass_delete_OLD
-    @transaction_ids = []
-    params[:ids].split(",").each do |id|
-      puts "#{id} #{current_user.transactions.where(id: id.to_i).length}"
-      if current_user.transactions.where(id: id.to_i).length == 0
-        @transaction_ids.push(id.to_i)
-        next
-      end
-
-      transaction = current_user.transactions.find(id.to_i)
-      unless transaction.nil?
-        @transaction_ids += Transaction.delete(transaction, current_user)
-      end
-    end
-    render "delete"
-  end
-
   def update_series
     @transaction = Transaction.update(params[:id], transaction_params, current_user)
     @transaction = Transaction.find_main_transaction(@transaction)

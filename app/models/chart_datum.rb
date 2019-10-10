@@ -23,7 +23,7 @@ class ChartDatum < ApplicationRecord
   	end_date += 1.day
 
   	data = []
-  	user.accounts.each do |a|
+  	user.accounts.where(is_disabled: false).each do |a|
   		
   		d = {
   			name: a.name,
