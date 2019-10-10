@@ -14,13 +14,24 @@ class User
 private
 
 		def calculate_daily_budget(user)
+			#cache = ActiveSupport::Cache::MemoryStore.new
+			cache = Rails.cache
+
+			cache_name = user.hash_id + '_daily_budget'
+			if cache.exist?(cache_name)
+				return cache.fetch(cache_name)
+			end
+
 			main_schedule = user.schedules.where(type_of: 'main').take
 
 			unless main_schedule.nil?
-				return daily_budget(user, main_schedule)
+				result = daily_budget(user, main_schedule)
 			else
-				return budget_days(user)
+				result = budget_days(user)
 			end
+
+			cache.write(cache_name, result)
+			return result
 		end
 
 		def get_user_amount(amount, user_currency, currency)
@@ -239,7 +250,7 @@ private
 			# average daily spending
 			average_spend = get_average_spending(user)
 			# get all scheduled transactions for a year
-			scheduled_transactions = get_scheduled_transactions(user, @user_time.to_date + 365.days, user_currency, reverse: true)
+			scheduled_transactions = get_scheduled_transactions(user, @user_time.to_date + 90.days, user_currency, reverse: true)
 
 			# return if the balance is less than or equal to 0
 			if balance_now <= 0
@@ -247,19 +258,19 @@ private
 					type: 'days',
 					days: 0,
 					balance: balance_now,
-					transactions_total: scheduled_transactions[:total],
+					transactions_total: scheduled_transactions[:total] * 4,
 					average_spending: average_spend
 				}
 			end
 
 			# how much the user spends in a whole year
-			annual_spend = ((average_spend[:amount] * 365) + scheduled_transactions[:total]) * -1
+			annual_spend = ((average_spend[:amount] * 365) + (scheduled_transactions[:total] * 4)) * -1
 			if annual_spend <= 0 # if the user is spending a negative amount, return -1 for infinity
 				return {
 					type: 'days',
 					days: '∞',
 					balance: balance_now,
-					transactions_total: scheduled_transactions[:total],
+					transactions_total: scheduled_transactions[:total] * 4,
 					average_spending: average_spend
 				}
 			elsif balance_now - annual_spend >= 0 # if the balance is higher than what a user spends in a year, take a shortcut calculating the days
@@ -268,7 +279,7 @@ private
 					type: 'days',
 					days: balance_now / day_spend,
 					balance: balance_now,
-					transactions_total: scheduled_transactions[:total],
+					transactions_total: scheduled_transactions[:total] * 4,
 					average_spending: average_spend
 				}
 			end
