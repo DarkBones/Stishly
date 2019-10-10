@@ -265,7 +265,7 @@ private
 
 			# how much the user spends in a whole year
 			annual_spend = ((average_spend[:amount] * 365) + (scheduled_transactions[:total] * 4)) * -1
-			if annual_spend <= 0 # if the user is spending a negative amount, return -1 for infinity
+			if annual_spend <= 0 || average_spend[:amount] >= 0 # if the user is spending a negative amount, return -1 for infinity
 				return {
 					type: 'days',
 					days: '∞',
