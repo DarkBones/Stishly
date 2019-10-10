@@ -78,6 +78,8 @@ class User < ApplicationRecord
   before_destroy :cancel_subscriptions
 
   def self.get_subscription(user)
+    return if user.stripe_id.nil?
+    
     customer = Stripe::Customer.retrieve(user.stripe_id)
 
     customer[:subscriptions].each do |s|
