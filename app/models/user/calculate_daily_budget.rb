@@ -217,7 +217,7 @@ private
 				},
 				accounts: balance_start[:accounts],
 				transactions: {
-					#scheduled: scheduled_transactions,
+					scheduled: scheduled_transactions,
 					today: today_transactions
 				},
 				days_until: days_until,

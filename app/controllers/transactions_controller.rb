@@ -39,7 +39,11 @@ class TransactionsController < ApplicationController
   def mass_delete
     @transaction_ids = []
     params[:ids].split(",").each do |id|
-      transaction = current_user.transactions.friendly.find(id)
+      begin
+        transaction = current_user.transactions.friendly.find(id)
+      rescue
+        transaction = nil
+      end
 
       if transaction.nil?
         @transaction_ids.push(id)

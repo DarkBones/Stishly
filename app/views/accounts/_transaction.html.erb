@@ -63,7 +63,7 @@
         <ul class="child_transactions list-unstyled">
           <% transaction.children.decorate.each do |ct| %>
             <% child_currency = Money::Currency.new(ct.currency) %>
-            <li>
+            <li class="pl-5">
               <%= ct.description %>
               <span class="balance float-right">
                 <%= balance(ct.amount.to_f, child_currency, "cents") %>

@@ -1,7 +1,24 @@
-<% if user_signed_in? %>
-  <h1>Hello again</h1>
-<% else %>
-  <h1><%= t('homepage.welcome_h1') %></h1>
-  <%= link_to t('buttons.sign_up.text'), new_user_registration_path %>
-  <%= link_to t('buttons.sign_in.text'), new_user_session_path %>
-<% end %>
+<%#= link_to t('buttons.sign_up.text'), new_user_registration_path %>
+<%#= link_to t('buttons.sign_in.text'), new_user_session_path %>
+
+<div class="jumbotron">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+			  <h1 class="display-4"><%= t('homepage.welcome_h1') %></h1>
+			  <p class="lead">Your all-in-one friendly finance manager that helps you keep up to date with your budget and expenses.</p>
+			  <hr class="my-4">
+			  <p>Give your money the attention it deserves.</p>
+			  <a class="btn btn-lg btn-primary" href="<%= new_user_registration_path %>" role="button">Sign up for your free account today</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<h2>Record and track your expenses</h2>
+		</div>
+	</div>
+</div>

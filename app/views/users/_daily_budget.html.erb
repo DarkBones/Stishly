@@ -5,7 +5,7 @@
 		if @budget[:type] == 'daily_budget'
 			bg_color = 'bg-' + @budget[:balance][:spent_color]
 			header = balance(@budget[:balance][:spent], current_user.currency, "cents") + " / " + balance(@budget[:budget][:today], current_user.currency, "cents")
-			text_color = "light"
+			text_color = "text-#{@budget[:balance][:spent_color]}"
 		else
 			header = t('pages.daily_budget.day') + ": " + @budget[:days].to_s
 			text_color = "primary"
@@ -16,7 +16,7 @@
 
 			<% if type == 'dropdown' %>
 
-				<div class="navbar clickable mx-auto pt-3 rounded <%= bg_color %>" id="daily_budget" style="width: auto;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<div class="navbar clickable mx-auto pt-3 rounded" id="daily_budget" style="width: auto;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<h4 class="<%= text_color %>">
 						<%= header %>
 					</h4>

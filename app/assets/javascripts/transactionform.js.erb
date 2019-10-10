@@ -523,22 +523,19 @@ function resetTransactionMenu(formId){
 }
 
 function renderTransactionMenu(formId){
-  if ($("#new_transactions_form form").length === 0) {
-    $.ajax({
-      type: "GET",
-      dataType: "html",
-      url: "/api/v1/forms/transactions/new",
-      beforeSend(){
-        insertAjaxSpinner($("#new_transactions_form"));
-      },
-      success(data) {
-        $("#new_transactions_form").html(data);
-        setDatepickers();
-        resetTransactionMenu(formId);
-        setTimezones();
-      }
-    });
-  } else {
-    resetTransactionMenu(formId);
-  }
+  $("#new_transactions_form").html("");
+  $.ajax({
+    type: "GET",
+    dataType: "html",
+    url: "/api/v1/forms/transactions/new",
+    beforeSend(){
+      insertAjaxSpinner($("#new_transactions_form"));
+    },
+    success(data) {
+      $("#new_transactions_form").html(data);
+      setDatepickers();
+      resetTransactionMenu(formId);
+      setTimezones();
+    }
+  });
 }

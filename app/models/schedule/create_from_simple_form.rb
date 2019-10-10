@@ -1,7 +1,7 @@
 class Schedule
   class CreateFromSimpleForm
 
-  	def initialize(current_user, params, type="Schedule", schedule_name=nil, invert_amount=true)
+  	def initialize(current_user, params, type="schedule", schedule_name=nil, invert_amount=true)
   		@current_user = current_user
   		@params = params
   		@schedule_name = schedule_name
@@ -16,9 +16,12 @@ class Schedule
   		schedule = Schedule.create_from_form(schedule_params, @current_user, false, @type)
   		schedule.save
 
+  		category = @current_user.categories.where(name: "Salary").take
+
   		transaction_params = parse_transaction_params(@params, schedule)
 
   		transaction = @current_user.transactions.new(transaction_params)
+  		transaction.category_id = category.id unless category.nil?
   		transaction.save
 
   		Transaction.join_to_schedule(transaction, schedule)
@@ -82,6 +85,7 @@ private
 			end
 
 			return {
+				type_of: @type,
 				type: "advanced",
 				name: schedule_name,
 				start_date: params[:start_date].to_date,

@@ -13,7 +13,8 @@ class Schedule
 
       @tz = TZInfo::Timezone.get(validate_timezone(params[:timezone]))
 
-      @start_date = @params[:start_date].to_datetime
+      @start_date = @params[:start_date].to_datetime unless @params[:start_date].nil?
+      @start_date ||= @tz.utc_to_local(Time.now.utc)
 
       @start_date = @start_date.to_date unless @start_date.nil?
 
@@ -52,6 +53,7 @@ class Schedule
 private
 
     def get_type(type)
+      return type
       return 'schedule' if type.nil?
       type = type.downcase
       if type == 'main'
