@@ -64,10 +64,10 @@ test:
 
 production:
   adapter: postgresql
-  schema_search_path: stishly,stishly,public
-  username: stishly
-  password: abayy6yo9cr5dhgf
-  host: db-postgresql-nyc1-32629-do-user-4876769-0.db.ondigitalocean.com
-  port: 25061
-  database: stishly
+  schema_search_path: <%= Rails.application.credentials.db[:schema_production] %>
+  username: <%= Rails.application.credentials.db[:username_production] %>
+  password: <%= Rails.application.credentials.db[:password_production_new] %>
+  host: <%= Rails.application.credentials.db[:host_production] %>
+  port: <%= Rails.application.credentials.db[:port_production] %>
+  database: <%= Rails.application.credentials.db[:db_production] %>
   sslmode: require
