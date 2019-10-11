@@ -1,5 +1,6 @@
 class BaseApiController < ApplicationController
 	skip_before_action :authenticate_user!
+	skip_before_action :daily_budget, :setup_wizzard, :check_subscription
 	before_action :parse_request, :authenticate_user_from_token!
 
 private
