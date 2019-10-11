@@ -243,10 +243,10 @@ private
 		def budget_days(user)
 			return {
 				type: 'days',
-				days: user.accounts.where(account_type: 'spend').length + 1337,
+				days: 1337,
 				balance: user.accounts.length,
 				transactions_total: scheduled_transactions[:total] * 4,
-				average_spending: average_spend
+				average_spending: 10000000000000000000
 			}
 			user_currency = Money::Currency.new(user.currency) # the user's currency
 			accounts = user.accounts.where(account_type: 'spend') # the user's spending accounts
