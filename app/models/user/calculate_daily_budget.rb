@@ -252,6 +252,14 @@ private
 			# get all scheduled transactions for a year
 			scheduled_transactions = get_scheduled_transactions(user, @user_time.to_date + 90.days, user_currency, reverse: true)
 
+			return {
+				type: 'days',
+				days: user.accounts.where(account_type: 'spend').length,
+				balance: user.accounts.length,
+				transactions_total: scheduled_transactions[:total] * 4,
+				average_spending: average_spend
+			}
+
 			# return if the balance is less than or equal to 0
 			if balance_now <= 0
 				return {
@@ -268,11 +276,9 @@ private
 			if annual_spend <= 0 || average_spend[:amount] >= 0 # if the user is spending a negative amount, return -1 for infinity
 				return {
 					type: 'days',
-					days: user.id,
-					#balance: balance_now,
-					#transactions_total: scheduled_transactions[:total] * 4,
-					balance: user.accounts.where(account_type: 'spend').length + 1337,
-					transactions_total: user.accounts.length,
+					days: '∞',
+					balance: balance_now,
+					transactions_total: scheduled_transactions[:total] * 4,
 					average_spending: average_spend
 				}
 			elsif balance_now - annual_spend >= 0 # if the balance is higher than what a user spends in a year, take a shortcut calculating the days
