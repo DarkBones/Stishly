@@ -48,13 +48,8 @@ task :setup do
     # Create database.yml for Postgres if it doesn't exist
     path_database_yml = "config/database.yml"
     database_yml = %[production:
+  database: #{fetch(:user)}
   adapter: postgresql
-  username: #{Rails.application.credentials.db[:username_production]}
-  password: #{Rails.application.credentials.db[:password_production_new]}
-  host: #{Rails.application.credentials.db[:host_production]}
-  port: #{Rails.application.credentials.db[:port_production]}
-  database: defaultdb
-  sslmode: require
   pool: 5
   timeout: 5000]
     command %[test -e #{path_database_yml} || echo "#{database_yml}" > #{path_database_yml}]
