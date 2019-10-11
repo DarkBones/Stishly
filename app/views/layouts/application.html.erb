@@ -38,9 +38,9 @@
         <%= render 'layouts/messages' %>
         <%= render 'layouts/confirmation' %>
 
-        <% if Rails.env.production? %>
-          <%= render 'layouts/dev_warning' %>
-        <% end %>
+        <%# if Rails.env.production? %>
+          <%#= render 'layouts/dev_warning' %>
+        <%# end %>
 
         <div class="wrapper">
           <% if user_signed_in? %>
