@@ -268,7 +268,7 @@ private
 			if annual_spend <= 0 || average_spend[:amount] >= 0 # if the user is spending a negative amount, return -1 for infinity
 				return {
 					type: 'days',
-					days: '∞',
+					days: user.id,
 					#balance: balance_now,
 					#transactions_total: scheduled_transactions[:total] * 4,
 					balance: user.accounts.where(account_type: 'spend').length + 1337,
