@@ -28,6 +28,7 @@ class Subscription < ApplicationRecord
 		if subscription.nil?
 			subscription = Stripe::Subscription.create({
 				customer: customer.id,
+				trial_from_plan: true,
 		  	items: [
 		  		{
 		  			plan: plan_id,
