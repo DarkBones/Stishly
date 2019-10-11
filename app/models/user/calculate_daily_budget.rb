@@ -241,6 +241,13 @@ private
 
 		# calculates days until money runs out
 		def budget_days(user)
+			return {
+				type: 'days',
+				days: user.accounts.where(account_type: 'spend').length + 1337,
+				balance: user.accounts.length,
+				transactions_total: scheduled_transactions[:total] * 4,
+				average_spending: average_spend
+			}
 			user_currency = Money::Currency.new(user.currency) # the user's currency
 			accounts = user.accounts.where(account_type: 'spend') # the user's spending accounts
 
@@ -252,13 +259,6 @@ private
 			# get all scheduled transactions for a year
 			scheduled_transactions = get_scheduled_transactions(user, @user_time.to_date + 90.days, user_currency, reverse: true)
 
-			return {
-				type: 'days',
-				days: user.accounts.where(account_type: 'spend').length + 1337,
-				balance: user.accounts.length,
-				transactions_total: scheduled_transactions[:total] * 4,
-				average_spending: average_spend
-			}
 
 			# return if the balance is less than or equal to 0
 			if balance_now <= 0
