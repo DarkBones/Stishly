@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
         type: 'days',
         days: 1337,
         balance: user.accounts.length,
-        transactions_total: scheduled_transactions[:total] * 4,
+        transactions_total: 500,
         average_spending: 10000000000000000000
       }
   end
