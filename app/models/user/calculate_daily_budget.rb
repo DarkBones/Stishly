@@ -269,8 +269,10 @@ private
 				return {
 					type: 'days',
 					days: '∞',
-					balance: user.accounts.where(account_type: 'spend').length,
-					transactions_total: scheduled_transactions[:total] * 4,
+					#balance: balance_now,
+					#transactions_total: scheduled_transactions[:total] * 4,
+					balance: user.accounts.where(account_type: 'spend').length + 1337,
+					transactions_total: user.accounts.length,
 					average_spending: average_spend
 				}
 			elsif balance_now - annual_spend >= 0 # if the balance is higher than what a user spends in a year, take a shortcut calculating the days
