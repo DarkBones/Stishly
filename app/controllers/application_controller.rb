@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
     @budget = {
         type: 'days',
         days: 1337,
-        balance: user.accounts.length,
+        balance: current_user.accounts.length,
         transactions_total: 500,
         average_spending: 10000000000000000000
       }
