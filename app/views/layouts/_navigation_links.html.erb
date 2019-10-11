@@ -17,7 +17,7 @@
     <li class="nav-item dropdown d-none d-sm-block">
       <a class="nav-link dropdown-toggle no-caret" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <div class="navbar-link rounded-circle bg-secondary navbar-gear">
-          <%= image_tag 'gear.svg' %>
+          <%= image_tag 'gear.svg' %>.
         </div>
       </a>
       <div class="dropdown-menu dropdown-menu-right dropshadow-light" aria-labelledby="navbarDropdown">
@@ -26,6 +26,18 @@
     </li>
 
   <% else %>
+    <li class="nav-item d-none d-sm-block mx-2">
+      <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-block btn-facebook", "onclick" => "login('#{user_facebook_omniauth_authorize_path}');", method: :post do %>
+         <span class="fab fa-facebook-f"></span>&#8203;
+      <% end %>
+    </li>
+
+    <li class="nav-item d-none d-sm-block mx-2">
+      <%= link_to "#", class: "btn btn-block btn-google", method: :post do %>
+         <span class="fab fa-google"></span>&#8203;
+      <% end %>
+    </li>
+
     <li class="nav-item d-none d-sm-block">
       <%= link_to t('buttons.sign_in.text'), new_user_session_path, { :class=>"nav-link" } %>
     </li>
@@ -35,3 +47,22 @@
   <% end %>
 </ul>
 
+<script>
+  var newwindow;
+  function login(provider_url, width, height) {
+    var screenX     = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft,
+        screenY     = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop,
+        outerWidth  = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.body.clientWidth,
+        outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.body.clientHeight - 22),
+        left        = parseInt(screenX + ((outerWidth - width) / 2), 10),
+        top         = parseInt(screenY + ((outerHeight - height) / 2.5), 10),
+        features    = ('width=' + width + ',height=' + height + ',left=' + left + ',top=' + top);
+
+        newwindow = window.open(provider_url, 'Login', features);
+
+    if (window.focus)
+      newwindow.focus();
+
+    return false;
+  }
+</script>

@@ -16,51 +16,71 @@
 </div>
 
 <div class="container">
-	<div class="row">
-		<div class="col-12 col-xl-3 col-lg-4 col-md-6">
-			<div class="card" style="width: 100%">
-			  <%= image_tag "landing_page/expenses.png", class: "card-img-top" %>
-			  <div class="card-body">
-			    <h5 class="card-title">Track your expenses</h5>
-			    <p class="card-text">Recording your transactions is easy and quick.</p>
-			    <a href="<%= new_user_registration_path %>" class="btn btn-primary">Sign up for free</a>
-			  </div>
-			</div>
+	
+	<div class="row py-5">
+		<div class="col-12 col-md-7 col-lg-6 col-xl-5">
+			<%= image_tag "landing_page/expenses.png", "style" => "max-width: 100%;" %>
 		</div>
-
-		<div class="col-12 col-xl-3 col-lg-4 col-md-6">
-			<div class="card" style="width: 100%">
-			  <%= image_tag "landing_page/schedules.png", class: "card-img-top" %>
-			  <div class="card-body">
-			    <h5 class="card-title">Stay on top of bills</h5>
-			    <p class="card-text">Never miss or be surprised by bills ever again!</p>
-			    <a href="<%= new_user_registration_path %>" class="btn btn-primary">Sign up for free</a>
-			  </div>
-			</div>
+		<div class="col-12 col-md-5 col-lg-6 col-xl-7">
+			<h2>
+				Track your expenses
+			</h2>
+			<p>
+				Recording your transactions is easy and quick.
+			</p>
+			<a class="btn btn-lg btn-primary" href="<%= new_user_registration_path %>" role="button">Create your free account</a>
 		</div>
+	</div>
 
-		<div class="col-12 col-xl-3 col-lg-4 col-md-6">
-			<div class="card" style="width: 100%">
-			  <%= image_tag "landing_page/chart.png", class: "card-img-top" %>
-			  <div class="card-body">
-			    <h5 class="card-title">See where your money is going</h5>
-			    <p class="card-text">Gain valuable insights on how you are spending your money.</p>
-			    <a href="<%= new_user_registration_path %>" class="btn btn-primary">Sign up for free</a>
-			  </div>
-			</div>
+	<hr />
+
+	<div class="row py-5">
+		<div class="col-12 col-md-5 col-lg-6 col-xl-7">
+			<h2>
+				Stay on top of bills
+			</h2>
+			<p>
+				Never miss or be surprised by bills ever again!
+			</p>
+			<a class="btn btn-lg btn-primary" href="<%= new_user_registration_path %>" role="button">Sign up</a>
 		</div>
-
-		<div class="col-12 col-xl-3 col-lg-4 col-md-6">
-			<div class="card" style="width: 100%">
-			  <%= image_tag "landing_page/budget.png", class: "card-img-top" %>
-			  <div class="card-body">
-			    <h5 class="card-title">Always know how much you can spend</h5>
-			    <p class="card-text">The daily budget shows you how much you can spend today.</p>
-			    <a href="<%= new_user_registration_path %>" class="btn btn-primary">Sign up for free</a>
-			  </div>
-			</div>
+		<div class="col-12 col-md-7 col-lg-6 col-xl-5">
+			<%= image_tag "landing_page/schedules.png", "style" => "max-width: 100%;" %>
 		</div>
+	</div>
 
+	<hr />
+
+	<div class="row py-5">
+		<div class="col-12 col-md-7 col-lg-6 col-xl-5">
+			<%= image_tag "landing_page/chart.png", "style" => "max-width: 100%;" %>
+		</div>
+		<div class="col-12 col-md-5 col-lg-6 col-xl-7">
+			<h2>
+				See where your money is going
+			</h2>
+			<p>
+				Gain valuable insights on how you are spending your money.
+			</p>
+			<a class="btn btn-lg btn-primary" href="<%= new_user_registration_path %>" role="button">Sign up here</a>
+		</div>
+	</div>
+
+	<hr />
+
+	<div class="row py-5">
+		<div class="col-12 col-md-5 col-lg-6 col-xl-7">
+			<h2>
+				Always know how much you can spend
+			</h2>
+			<p>
+				The daily budget shows you how much you can spend today.
+			</p>
+			<a class="btn btn-lg btn-primary" href="<%= new_user_registration_path %>" role="button">Sign up for free</a>
+		</div>
+		<div class="col-12 col-md-7 col-lg-6 col-xl-5">
+			<%= image_tag "landing_page/budget.png", "style" => "max-width: 100%;" %>
+		</div>
 	</div>
 
 	<div class="row">
@@ -68,4 +88,7 @@
 			
 		</div>
 	</div>
+	
+</div>
+
 </div>
