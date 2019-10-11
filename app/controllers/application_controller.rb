@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_current_user
-    #User.set_current_user(current_user)
+    User.set_current_user(current_user)
   end
 
   def user_accounts
