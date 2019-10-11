@@ -19,7 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every '0 ? * * *' do
+every 1.hours do
   runner "Schedule.run_schedules"
   runner "CurrencyRate.update_rates"
 end
