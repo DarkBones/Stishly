@@ -254,7 +254,7 @@ private
 
 			return {
 				type: 'days',
-				days: user.accounts.where(account_type: 'spend').length,
+				days: user.accounts.where(account_type: 'spend').length + 1337,
 				balance: user.accounts.length,
 				transactions_total: scheduled_transactions[:total] * 4,
 				average_spending: average_spend
