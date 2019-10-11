@@ -9,7 +9,7 @@ ENV['EMAIL_BLIND_INDEX_KEY'] = Rails.application.credentials.pii[:blind_index_ke
 
 if Rails.env.production?
 	ENV['STRIPE_PUBLIC_KEY'] = Rails.application.credentials.stripe[:production][:public_key]
-	ENV['STRIPE_PRODUCT_ID'] = 'prod_FwcWr47UyLCmvt'
+	ENV['STRIPE_PRODUCT_ID'] = 'prod_FySwz9v0vantDh'
 else
 	ENV['STRIPE_PUBLIC_KEY'] = Rails.application.credentials.stripe[:test][:public_key]
 	ENV['STRIPE_PRODUCT_ID'] = 'prod_FwcWr47UyLCmvt'
