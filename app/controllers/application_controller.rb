@@ -57,19 +57,9 @@ class ApplicationController < ActionController::Base
   def daily_budget
     if user_signed_in?
       if current_user.finished_setup
-        #@budget = User.daily_budget(current_user)
+        @budget = User.daily_budget(current_user)
       end
     end
-    @budget = {
-        type: 'days',
-        days: 1337,
-        balance: current_user.accounts.length,
-        transactions_total: 500,
-        average_spending: {
-          amount: 10000000,
-          accuracy: 100
-        }
-      }
   end
 
   def privacy_policy
