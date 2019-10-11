@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
         #@budget = User.daily_budget(current_user)
       end
     end
-    @budget = User.daily_budget(current_user)
+    #@budget = User.daily_budget(current_user)
   end
 
   def privacy_policy
