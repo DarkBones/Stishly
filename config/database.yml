@@ -63,7 +63,6 @@ test:
 #  timeout: 5000
 
 production:
-  <<: *default
   adapter: postgresql
   username: <%= Rails.application.credentials.db[:username_production] %>
   password: <%= Rails.application.credentials.db[:password_production_new] %>
