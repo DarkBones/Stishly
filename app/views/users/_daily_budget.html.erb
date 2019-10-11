@@ -11,7 +11,7 @@
 			text_color = "primary"
 		end
 
-		header +=  " > " + @budget[:type]
+		header +=  " > " + @budget[:type] + " >> " + current_user.accounts.length.to_s + " / " + current_user.accounts.where(account_type: 'spend')
 	%>
 
 		<div class="dropdown mx-auto" style="width: auto;">
