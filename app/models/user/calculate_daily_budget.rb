@@ -242,7 +242,7 @@ private
 		# calculates days until money runs out
 		def budget_days(user)
 			user_currency = Money::Currency.new(user.currency) # the user's currency
-			accounts = user.accounts.where(account_type: 'spend') # the user's spending accounts
+			accounts = user.accounts.where("account_type = 'spend'") # the user's spending accounts
 
 			balance_now = get_balance_now(accounts, user_currency) # the spending balance as is
 
