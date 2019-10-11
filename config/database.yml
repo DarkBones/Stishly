@@ -54,10 +54,19 @@ test:
 #  username: money_manager
 #  password: <%= ENV['MONEY_MANAGER_DATABASE_PASSWORD'] %>
 #  url: <%= ENV['DATABASE_URL'] %>
+#production:
+#  adapter: postgresql
+#  database: money_manager_production
+#  username: stishly
+#  password: <%= Rails.application.credentials.db[:password_production] %>
+#  pool: 5
+#  timeout: 5000
+
 production:
   adapter: postgresql
-  database: money_manager_production
-  username: stishly
-  password: <%= Rails.application.credentials.db[:password_production] %>
-  pool: 5
-  timeout: 5000
+  username: <%= Rails.application.credentials.db[:username_production] %>
+  password: <%= Rails.application.credentials.db[:password_production_new] %>
+  host: <%= Rails.application.credentials.db[:host_production] %>
+  port: <%= Rails.application.credentials.db[:port_production] %>
+  database: defaultdb
+  sslmode: require
