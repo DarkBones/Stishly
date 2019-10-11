@@ -10,8 +10,6 @@
 			header = t('pages.daily_budget.day') + ": " + @budget[:days].to_s
 			text_color = "primary"
 		end
-
-		header +=  " > " + @budget[:type] + " >> " + current_user.accounts.length.to_s + " / " + current_user.accounts.where(account_type: 'spend').length.to_s
 	%>
 
 		<div class="dropdown mx-auto" style="width: auto;">
