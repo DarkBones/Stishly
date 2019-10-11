@@ -57,9 +57,10 @@ class ApplicationController < ActionController::Base
   def daily_budget
     if user_signed_in?
       if current_user.finished_setup
-        @budget = User.daily_budget(current_user)
+        #@budget = User.daily_budget(current_user)
       end
     end
+    @budget = User.daily_budget(current_user)
   end
 
   def privacy_policy
