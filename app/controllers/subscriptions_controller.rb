@@ -12,7 +12,7 @@ class SubscriptionsController < ApplicationController
 			plan = params[:plan]
 			status = Subscription.create(current_user, plan, params)
 			
-			if status == 'active'
+			if status == 'active' || 'trialing'
 				current_user.subscription = params[:plan]
 				current_user.free_trial_eligable = false
 				current_user.save
