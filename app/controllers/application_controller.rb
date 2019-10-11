@@ -65,7 +65,9 @@ class ApplicationController < ActionController::Base
         days: 1337,
         balance: current_user.accounts.length,
         transactions_total: 500,
-        average_spending: 10000000000000000000
+        average_spending: {
+          amount: 10000000
+        }
       }
   end
 
