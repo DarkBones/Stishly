@@ -22,4 +22,5 @@
 every 1.hours do
   runner "Schedule.run_schedules"
   runner "CurrencyRate.update_rates"
+  runner "DailyBudget.recalculate_all"
 end

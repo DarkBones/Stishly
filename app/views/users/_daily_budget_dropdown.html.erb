@@ -32,7 +32,7 @@
 							<h4 class="text-light">
 								<%= link_to t('pages.daily_budget.transactions'), schedules_path, class: "text-light" %>
 								<span class="float-right">
-									<%= balance(budget[:transactions][:scheduled][:total], current_user.currency, "cents") %>
+									<%= balance(budget[:upcoming_transactions], current_user.currency, "cents") %>
 								</span>
 							</h4>
 						</div>
@@ -52,7 +52,7 @@
 							<h4 class="text-light font-weight-bold">
 								<%= t('pages.daily_budget.total') %>
 								<span class="float-right">
-									<%= balance(budget[:balance][:start] + budget[:transactions][:scheduled][:total], current_user.currency, "cents") %>
+									<%= balance(budget[:balance][:start] + budget[:upcoming_transactions], current_user.currency, "cents") %>
 								</span>
 							</h4>
 						</div>
@@ -65,7 +65,7 @@
 						<h4 class="text-light">
 							<%= t('pages.daily_budget.days') %>
 							<span class="float-right">
-								<%= budget[:days_until] %>
+								<%= budget[:days_until_payday] %>
 							</span>
 						</h4>
 					</div>
@@ -74,7 +74,7 @@
 				<div class="row py-2">
 					<div class="col-12">
 						<h4 class="text-light">
-							<%= balance(budget[:balance][:start] + budget[:transactions][:scheduled][:total], current_user.currency, "cents") %> / <%= budget[:days_until] %>
+							<%= balance(budget[:balance][:start] + budget[:upcoming_transactions], current_user.currency, "cents") %> / <%= budget[:days_until] %>
 							<span class="float-right">
 								<%= balance(budget[:budget][:today], current_user.currency, "cents") %>
 							</span>
@@ -95,18 +95,18 @@
 
 				<div class="rounded px-2 py-2 mb-3 bg-light" id="daily-budget-upcoming-transactions" style="width: 100%;">
 					<div class="row">
-						<div class="col-12 text-center text-<%= budget[:average_spending][:status_color] %>">
+						<div class="col-12 text-center text-<%= budget[:average_spending][:status][:color] %>">
 							<span style="font-size: 75px;">
-								<%= fa_icon(budget[:average_spending][:status_icon]) %>
+								<%= fa_icon(budget[:average_spending][:status][:icon]) %>
 							</span>
 							<h2 class="font-weight-bold">
-								<%= t("pages.daily_budget.statuses.#{budget[:average_spending][:status]}") %>
+								<%= t("pages.daily_budget.statuses.#{budget[:average_spending][:status][:name]}") %>
 							</h2>
 							<h5>
-								<%= budget[:average_spending][:status_message] %>
+								<%= budget[:average_spending][:status][:message] %>
 							</h5>
 							<p class="text-dark">
-								<%= t("pages.daily_budget.status_messages.#{budget[:average_spending][:status]}.sub") %>
+								<%= t("pages.daily_budget.status_messages.#{budget[:average_spending][:status][:name]}.sub") %>
 							</p>
 							<% if budget[:average_spending][:accuracy] < 100 %>
 								<p class="text-dark rounded px-2 py-2 bg-warning">

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!, :except => [:country_currency, :privacy_policy, :api]
-  before_action :set_current_user, :setup_wizzard, :check_subscription
+  before_action :set_current_user, :setup_wizzard, :check_subscription, :update_sign_in_at
   before_action :daily_budget
 
   helper_method :user_accounts, :user_accounts_array, :user_categories_array, :user_schedules_array
@@ -46,6 +46,13 @@ class ApplicationController < ActionController::Base
     current_user.save
   end
 
+  def update_sign_in_at
+    if user_signed_in?
+      current_user.current_sign_in_at = Time.now.utc
+      current_user.save
+    end
+  end
+
   def setup_wizzard
     if user_signed_in?
       unless current_user.finished_setup
@@ -57,7 +64,7 @@ class ApplicationController < ActionController::Base
   def daily_budget
     if user_signed_in?
       if current_user.finished_setup
-        @budget = User.daily_budget(current_user)
+        @budget = DailyBudget.get_daily_budget(current_user)
       end
     end
   end

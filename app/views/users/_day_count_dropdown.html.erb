@@ -25,7 +25,7 @@
 						<h4 class="text-light">
 							<%= link_to t('pages.daily_budget.transactions'), schedules_path, class: "text-light" %>
 							<span class="float-right">
-								<%= balance(budget[:transactions_total], current_user.currency, "cents") %>
+								<%= balance(budget[:scheduled_transactions], current_user.currency, "cents") %>
 							</span>
 						</h4>
 					</div>
@@ -43,7 +43,7 @@
 						<h4 class="text-light font-weight-bold">
 							<%= t('pages.daily_budget.total') %>
 							<span class="float-right">
-								<%= balance(budget[:balance] + budget[:transactions_total], current_user.currency, "cents") %>
+								<%= balance(budget[:balance] + budget[:scheduled_transactions], current_user.currency, "cents") %>
 							</span>
 						</h4>
 					</div>
@@ -54,7 +54,7 @@
 						<h4 class="text-light">
 							<%= t('pages.daily_budget.average_spending') %>
 							<span class="float-right">
-								<%= balance(budget[:average_spending][:amount] * -1, current_user.currency, "cents") %>
+								<%= balance(budget[:average_spending][:amount], current_user.currency, "cents") %>
 							</span>
 						</h4>
 					</div>

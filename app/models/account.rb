@@ -34,6 +34,29 @@ class Account < ApplicationRecord
   has_many :account_histories, dependent: :destroy
   has_many :sch_transactions
 
+  # returns the spending balance of a user. If a date is provided, it returns the balance as it was on the start of that date
+  def self.get_spend_balance(user, date: nil)
+    balance = 0
+
+    if date.nil?
+      user.accounts.where(account_type: 'spend').each do |a|
+        balance += CurrencyRate.convert(a.balance, a.currency, user.currency)
+      end
+    else
+      user.accounts.where(account_type: 'spend').each do |a|
+        history = a.account_histories.where(
+          "date(local_datetime) <= ?", 
+          date).order(:local_datetime).reverse_order.take
+        history ||= a.account_histories.order(:local_datetime).take
+
+        balance += CurrencyRate.convert(history.balance, a.currency, user.currency)
+      end
+    end
+
+    return balance
+
+  end
+
   def self.delete(account)
     # decouple transfer transactions
     transfer_transactions = account.transactions.where("transfer_transaction_id is not null")
