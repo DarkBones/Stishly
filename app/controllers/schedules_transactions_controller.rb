@@ -1,6 +1,7 @@
 class SchedulesTransactionsController < ApplicationController
   
   def create
+    Schedule.invalidate_scheduled_transactions_cache(current_user)
     @budget = DailyBudget.recalculate(current_user)
     
     SchedulesTransaction.join_transactions(join_params, current_user)

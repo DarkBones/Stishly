@@ -113,9 +113,6 @@ class ApiSchedulesController < BaseApiController
   end
 
   def unpause
-    Schedule.invalidate_scheduled_transactions_cache(current_user)
-
-    @budget = DailyBudget.recalculate(current_user)
 
   	schedule = @user.schedules.friendly.find(params[:schedule])
   	render json: "not found", status: :not_found and return if schedule.nil?
@@ -124,12 +121,12 @@ class ApiSchedulesController < BaseApiController
   	schedule.pause_until_utc = nil
 
   	schedule.save
+
+    Schedule.invalidate_scheduled_transactions_cache(current_user)
+    @budget = DailyBudget.recalculate(current_user)
   end
   
   def stop
-    Schedule.invalidate_scheduled_transactions_cache(current_user)
-
-    @budget = DailyBudget.recalculate(current_user)
 
   	schedule = @user.schedules.friendly.find(params[:schedule])
   	render json: "not found", status: :not_found and return if schedule.nil?
@@ -137,12 +134,12 @@ class ApiSchedulesController < BaseApiController
   	schedule.is_active = false
   	
   	schedule.save
+    
+    Schedule.invalidate_scheduled_transactions_cache(current_user)
+    @budget = DailyBudget.recalculate(current_user)
   end
 
   def activate
-    Schedule.invalidate_scheduled_transactions_cache(current_user)
-    
-    @budget = DailyBudget.recalculate(current_user)
     
   	schedule = @user.schedules.friendly.find(params[:schedule])
   	render json: "not found", status: :not_found and return if schedule.nil?
@@ -157,6 +154,8 @@ class ApiSchedulesController < BaseApiController
 
     	schedule.save
 
+      Schedule.invalidate_scheduled_transactions_cache(current_user)
+      @budget = DailyBudget.recalculate(current_user)
     end
 
   end

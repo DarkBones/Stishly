@@ -8,11 +8,12 @@ class SchedulesController < ApplicationController
   end
 
   def create
-    @budget = DailyBudget.recalculate(current_user)
 
     @schedule = Schedule.create_from_form(schedule_params, current_user).decorate
     @schedule.save if @schedule.is_a?(ActiveRecord::Base)
     #redirect_back(fallback_location: root_path)
+
+    @budget = DailyBudget.recalculate(current_user)
   end
 
   def run_schedules(datetime=nil, schedules=nil)
@@ -21,16 +22,16 @@ class SchedulesController < ApplicationController
   end
 
   def pause
-    @budget = DailyBudget.recalculate(current_user)
 
     schedule = current_user.schedules.friendly.find(params[:id])
     @schedule = Schedule.pause(pause_params, schedule, current_user).decorate
     #redirect_back(fallback_location: root_path)
+
+    Schedule.invalidate_scheduled_transactions_cache(current_user)
+    @budget = DailyBudget.recalculate(current_user)
   end
 
   def edit
-    @budget = DailyBudget.recalculate(current_user)
-
     @schedule = current_user.schedules.friendly.find(params[:id])
     update_params = Schedule.edit(schedule_params, @schedule)
     @schedule.update(update_params)
@@ -46,10 +47,12 @@ class SchedulesController < ApplicationController
     @schedule.save
 
     @schedule = @schedule.decorate
+    
+    Schedule.invalidate_scheduled_transactions_cache(current_user)
+    @budget = DailyBudget.recalculate(current_user)
   end
 
   def delete
-    @budget = DailyBudget.recalculate(current_user)
 
     @schedule_id = params[:id]
     @schedule = current_user.schedules.friendly.find(params[:id])
@@ -72,12 +75,16 @@ class SchedulesController < ApplicationController
       
       schedule.destroy
     end
+
+    Schedule.invalidate_scheduled_transactions_cache(current_user)
+    @budget = DailyBudget.recalculate(current_user)
   end
 
   def delete_all
-    @budget = DailyBudget.recalculate(current_user)
-    
     current_user.schedules.destroy_all
+    
+    Schedule.invalidate_scheduled_transactions_cache(current_user)
+    @budget = DailyBudget.recalculate(current_user)
   end
 
 private

@@ -16,7 +16,6 @@ class ApiTransactionsController < BaseApiController
 	end
 
 	def cancel_upcoming_occurrence
-    @budget = DailyBudget.recalculate(current_user)
 
     transaction = @user.transactions.friendly.find(params[:id])
     schedule = nil
@@ -28,11 +27,13 @@ class ApiTransactionsController < BaseApiController
     return unless @user.transactions.where(scheduled_transaction_id: params[:id], schedule_id: params[:schedule_id], schedule_period_id: params[:schedule_period_id], is_cancelled: true).take.nil?
 
     Transaction.cancel_upcoming_occurrence(transaction, schedule_id, params[:schedule_period_id])
+    
+    Schedule.invalidate_scheduled_transactions_cache(current_user)
+    @budget = DailyBudget.recalculate(current_user)
     #redirect_back fallback_location: root_path
   end
 
   def uncancel_upcoming_occurrence
-    @budget = DailyBudget.recalculate(current_user)
 
     transaction = @user.transactions.friendly.find(params[:id])
 
@@ -42,11 +43,12 @@ class ApiTransactionsController < BaseApiController
 
     Transaction.uncancel_upcoming_occurrence(transaction)
     #redirect_back fallback_location: root_path
+    @budget = DailyBudget.recalculate(current_user)
+    Schedule.invalidate_scheduled_transactions_cache(current_user)
   end
 
   def trigger_upcoming_occurrence
-    @budget = DailyBudget.recalculate(current_user)
-    
+
   	transaction = @user.transactions.friendly.find(params[:id])
     schedule = nil
     schedule = @user.schedules.friendly.find(params[:schedule_id]) if params[:schedule_id].length > 3
@@ -55,6 +57,9 @@ class ApiTransactionsController < BaseApiController
     #return if schedule.nil?
 
     transactions = Transaction.trigger_upcoming_occurrence(@user, transaction, schedule, params[:schedule_period_id])
+    
+    @budget = DailyBudget.recalculate(current_user)
+    Schedule.invalidate_scheduled_transactions_cache(current_user)
     return transactions
     
   end

@@ -66,8 +66,10 @@ class Schedule < ApplicationRecord
   def self.invalidate_scheduled_transactions_cache(user)
     cache = Rails.cache
     cache_name = user.hash_id + '_upcoming_transactions'
+    puts cache_name
+    #cache.delete(cache_name)
 
-    if cache.exist?(cache_name)
+    while cache.exist?(cache_name)
       cache.delete(cache_name)
     end
   end
