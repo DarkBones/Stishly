@@ -113,6 +113,8 @@ class ApiSchedulesController < BaseApiController
   end
 
   def unpause
+    Schedule.invalidate_scheduled_transactions_cache(current_user)
+
     @budget = DailyBudget.recalculate(current_user)
 
   	schedule = @user.schedules.friendly.find(params[:schedule])
@@ -125,6 +127,8 @@ class ApiSchedulesController < BaseApiController
   end
   
   def stop
+    Schedule.invalidate_scheduled_transactions_cache(current_user)
+
     @budget = DailyBudget.recalculate(current_user)
 
   	schedule = @user.schedules.friendly.find(params[:schedule])
@@ -136,6 +140,8 @@ class ApiSchedulesController < BaseApiController
   end
 
   def activate
+    Schedule.invalidate_scheduled_transactions_cache(current_user)
+    
     @budget = DailyBudget.recalculate(current_user)
     
   	schedule = @user.schedules.friendly.find(params[:schedule])
