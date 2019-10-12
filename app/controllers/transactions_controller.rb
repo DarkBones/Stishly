@@ -19,24 +19,34 @@ class TransactionsController < ApplicationController
   end
 
   def create
+    @budget = DailyBudget.recalculate(current_user)
+
     @transaction = Transaction.create(transaction_params, current_user)
   end
   
   def update
+    @budget = DailyBudget.recalculate(current_user)
+
     @transaction = Transaction.update(params[:id], transaction_params, current_user)
   end
 
   def create_scheduled
+    @budget = DailyBudget.recalculate(current_user)
+
     @transaction = Transaction.create(transaction_params, current_user, scheduled: true)
     @transaction = Transaction.find_main_transaction(@transaction)
   end
 
   def delete
+    @budget = DailyBudget.recalculate(current_user)
+
     @transaction = current_user.transactions.find(params[:id])
     @transaction_ids = Transaction.delete(@transaction, current_user)
   end
 
   def mass_delete
+    @budget = DailyBudget.recalculate(current_user)
+
     @transaction_ids = []
     params[:ids].split(",").each do |id|
       begin
@@ -58,12 +68,16 @@ class TransactionsController < ApplicationController
   end
 
   def update_series
+    @budget = DailyBudget.recalculate(current_user)
+
     @transaction = Transaction.update(params[:id], transaction_params, current_user)
     @transaction = Transaction.find_main_transaction(@transaction)
     #redirect_back fallback_location: root_path
   end
 
   def update_scheduled
+    @budget = DailyBudget.recalculate(current_user)
+
     @transaction = Transaction.update(params[:id], transaction_params, current_user, scheduled: true)
     @transaction = Transaction.find_main_transaction(@transaction)
   end
@@ -92,6 +106,8 @@ class TransactionsController < ApplicationController
   end
 
   def approve
+    @budget = DailyBudget.recalculate(current_user)
+
     transaction = current_user.transactions.friendly.find(params[:id])
 
     unless transaction.nil?
@@ -106,6 +122,8 @@ class TransactionsController < ApplicationController
   end
 
   def update_upcoming_occurrence
+    @budget = DailyBudget.recalculate(current_user)
+    
     @transaction = Transaction.update_upcoming_occurrence(transaction_params, current_user)
     @transaction = Transaction.find_main_transaction(@transaction)
 

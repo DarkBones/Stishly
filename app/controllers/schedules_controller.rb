@@ -8,6 +8,8 @@ class SchedulesController < ApplicationController
   end
 
   def create
+    @budget = DailyBudget.recalculate(current_user)
+
     @schedule = Schedule.create_from_form(schedule_params, current_user).decorate
     @schedule.save if @schedule.is_a?(ActiveRecord::Base)
     #redirect_back(fallback_location: root_path)
@@ -19,12 +21,16 @@ class SchedulesController < ApplicationController
   end
 
   def pause
+    @budget = DailyBudget.recalculate(current_user)
+
     schedule = current_user.schedules.friendly.find(params[:id])
     @schedule = Schedule.pause(pause_params, schedule, current_user).decorate
     #redirect_back(fallback_location: root_path)
   end
 
   def edit
+    @budget = DailyBudget.recalculate(current_user)
+
     @schedule = current_user.schedules.friendly.find(params[:id])
     update_params = Schedule.edit(schedule_params, @schedule)
     @schedule.update(update_params)
@@ -43,6 +49,8 @@ class SchedulesController < ApplicationController
   end
 
   def delete
+    @budget = DailyBudget.recalculate(current_user)
+
     @schedule_id = params[:id]
     @schedule = current_user.schedules.friendly.find(params[:id])
     unless @schedule.nil?
@@ -67,6 +75,8 @@ class SchedulesController < ApplicationController
   end
 
   def delete_all
+    @budget = DailyBudget.recalculate(current_user)
+    
     current_user.schedules.destroy_all
   end
 
