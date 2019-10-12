@@ -16,7 +16,7 @@ class DailyBudget < ApplicationRecord
 	def self.get_daily_budget(user)
 		budget = self.get_from_cache(user)
 
-		#return budget unless budget.nil?
+		return budget unless budget.nil?
 		
 		budget = CalculateDailyBudget.new(user).perform
 		self.store_cache(user, budget)
@@ -36,6 +36,7 @@ class DailyBudget < ApplicationRecord
 	end
 
 	def self.invalidate_cache(user)
+		puts 1/0
 		cache = Rails.cache
 		cache_name = user.hash_id + '_daily_budget'
 
