@@ -113,6 +113,8 @@ class ApiSchedulesController < BaseApiController
   end
 
   def unpause
+    @budget = DailyBudget.recalculate(current_user)
+
   	schedule = @user.schedules.friendly.find(params[:schedule])
   	render json: "not found", status: :not_found and return if schedule.nil?
 
@@ -123,6 +125,8 @@ class ApiSchedulesController < BaseApiController
   end
   
   def stop
+    @budget = DailyBudget.recalculate(current_user)
+
   	schedule = @user.schedules.friendly.find(params[:schedule])
   	render json: "not found", status: :not_found and return if schedule.nil?
 
@@ -132,6 +136,8 @@ class ApiSchedulesController < BaseApiController
   end
 
   def activate
+    @budget = DailyBudget.recalculate(current_user)
+    
   	schedule = @user.schedules.friendly.find(params[:schedule])
   	render json: "not found", status: :not_found and return if schedule.nil?
 
