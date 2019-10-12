@@ -14,13 +14,13 @@ class User
 private
 
 		def calculate_daily_budget(user)
-			cache = ActiveSupport::Cache::MemoryStore.new
-			cache = Rails.cache
+			#cache = ActiveSupport::Cache::MemoryStore.new
+			#cache = Rails.cache
 
-			cache_name = user.hash_id + '_daily_budget'
-			if cache.exist?(cache_name)
-				return cache.fetch(cache_name)
-			end
+			#cache_name = user.hash_id + '_daily_budget'
+			#if cache.exist?(cache_name)
+			#	return cache.fetch(cache_name)
+			#end
 
 			main_schedule = user.schedules.where(type_of: 'main').take
 
@@ -30,7 +30,7 @@ private
 				result = budget_days(user)
 			end
 
-			cache.write(cache_name, result)
+			#cache.write(cache_name, result)
 			return result
 		end
 
