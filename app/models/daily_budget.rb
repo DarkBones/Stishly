@@ -96,7 +96,7 @@ private
 	end
 
 	def self.store_cache(user, budget)
-		invalidate_cache(user)
+		self.invalidate_cache(user)
 
 		cache = Rails.cache
 		cache_name = user.hash_id + '_daily_budget'

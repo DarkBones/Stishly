@@ -43,7 +43,33 @@ class Schedule < ApplicationRecord
   has_and_belongs_to_many :user_transactions, foreign_key: "schedule_id", class_name: "Transaction", dependent: :destroy
 
   def self.get_all_transactions_until_date(user, until_date, start_date=nil)
-    return GetTransactionsUntilDate.new(user, until_date, start_date).perform
+    transactions = self.get_scheduled_transactions_from_cache(user)
+    return transactions unless transactions.nil?
+
+    transactions = GetTransactionsUntilDate.new(user, until_date, start_date).perform
+    self.store_scheduled_transactions_cache(user, transactions)
+
+    return transactions
+  end
+
+  def self.invalidate_scheduled_transactions_cache_all
+    User.all.each do |user|
+      tz = TZInfo::Timezone.get(user.timezone)
+
+      hour = tz.utc_to_local(Time.now.utc).strftime("%H").to_i
+      if hour == 0
+        self.invalidate_scheduled_transactions_cache(user)
+      end
+    end
+  end
+
+  def self.invalidate_scheduled_transactions_cache(user)
+    cache = Rails.cache
+    cache_name = user.hash_id + '_upcoming_transactions'
+
+    if cache.exist?(cache_name)
+      cache.delete(cache_name)
+    end
   end
 
   def self.get_form_params(schedule)
@@ -68,6 +94,8 @@ class Schedule < ApplicationRecord
   end
 
   def self.pause(params, schedule, current_user)
+    self.invalidate_scheduled_transactions_cache(current_user)
+
     tz = TZInfo::Timezone.get(current_user.timezone)
     d = params[:pause_until].to_date
 
@@ -97,19 +125,42 @@ class Schedule < ApplicationRecord
   end
 
   def self.create_income(current_user, params)
+    self.invalidate_scheduled_transactions_cache(current_user)
     CreateFromSimpleForm.new(current_user, params, "main", "income", false).perform()
   end
 
   def self.create_expense(current_user, params)
+    self.invalidate_scheduled_transactions_cache(current_user)
     CreateFromSimpleForm.new(current_user, params, "fixed_expense").perform()
   end
 
   def self.edit(params, schedule)
+    self.invalidate_scheduled_transactions_cache(schedule.user)
     schedule_params = CreateFromForm.new(params, schedule.user, false, schedule.type_of, true, schedule.is_active).perform()
     return schedule_params
   end
 
 private
+
+  def self.get_scheduled_transactions_from_cache(user)
+    cache = Rails.cache
+
+    cache_name = user.hash_id + '_upcoming_transactions'
+
+    if cache.exist?(cache_name)
+      return cache.fetch(cache_name)
+    else
+      return nil
+    end
+  end
+
+  def self.store_scheduled_transactions_cache(user, transactions)
+    self.invalidate_scheduled_transactions_cache(user)
+
+    cache = Rails.cache
+    cache_name = user.hash_id + '_upcoming_transactions'
+    cache.write(cache_name, transactions)
+  end
 
   def plan
     

@@ -23,4 +23,5 @@ every 1.hours do
   runner "Schedule.run_schedules"
   runner "CurrencyRate.update_rates"
   runner "DailyBudget.recalculate_all"
+  runner "Schedule.invalidate_scheduled_transactions_cache_all"
 end

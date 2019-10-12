@@ -176,6 +176,8 @@ class Transaction < ApplicationRecord
     unless main_transaction.is_scheduled
       Account.subtract(current_user, main_transaction.account, main_transaction.account_currency_amount, main_transaction.local_datetime)
       Account.subtract(current_user, transfer_transaction.account, transfer_transaction.account_currency_amount, transfer_transaction.local_datetime) unless transfer_transaction.nil?
+    else
+      Schedule.invalidate_scheduled_transactions_cache(current_user)
     end
 
     unless transfer_transaction.nil?
@@ -203,6 +205,8 @@ class Transaction < ApplicationRecord
   end
 
   def self.update_upcoming_occurrence(params, current_user)
+    Schedule.Schedule.invalidate_scheduled_transactions_cache(current_user)
+
     transaction = current_user.transactions.friendly.find(params[:scheduled_transaction_id])
     scheduled_transaction = current_user.transactions.where(scheduled_transaction_id: transaction.id, schedule_period_id: params[:schedule_period_id]).take
 
@@ -251,6 +255,8 @@ class Transaction < ApplicationRecord
   end
 
   def self.cancel_upcoming_occurrence(transaction, schedule_id, schedule_period_id)
+    Schedule.invalidate_scheduled_transactions_cache(transaction.user)
+
     # if the transaction already exists, it means that it was edited and is_cancelled can simply be set to true
     if !transaction.scheduled_transaction_id.nil? || !transaction.scheduled_date.nil?
       transaction.is_cancelled =  true
@@ -270,11 +276,15 @@ class Transaction < ApplicationRecord
   end
 
   def self.uncancel_upcoming_occurrence(transaction)
+    Schedule.invalidate_scheduled_transactions_cache(transaction.user)
+
     transaction.is_cancelled = false
     transaction.save
   end
 
   def self.trigger_upcoming_occurrence(current_user, transaction, schedule, schedule_period_id)
+    Schedule.invalidate_scheduled_transactions_cache(current_user)
+    
     scheduled_transaction_id = transaction.scheduled_transaction_id
     scheduled_transaction_id ||= transaction.id
 

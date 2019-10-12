@@ -12,34 +12,7 @@ class DailyBudget
 			return calculate_daily_budget(@user)
 		end
 
-		def perform_light
-			return calculate_daily_budget_light(@user, @budget)
-		end
-
 private
-
-		def calculate_daily_budget_light(user, budget)
-
-			if budget[:type] == 'daily_budget'
-				spent_today = get_spent_today
-
-				spent_perc = ((100.to_f / budget[:budget][:today]) * spent_today).round(1)
-				case spent_perc
-				when 0...75
-					spent_color = 'success'
-				when 75...100
-					spent_color = 'warning'
-				else
-					spent_color = 'danger'
-				end
-
-				budget[:spent][:color] = spent_color
-
-			end
-
-			return budget
-
-		end
 
 		def get_spent_today(user)
 			return user.transactions.where("date(local_datetime) >= ?
