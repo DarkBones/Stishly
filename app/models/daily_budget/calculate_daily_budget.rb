@@ -1,17 +1,56 @@
 class DailyBudget
 	class CalculateDailyBudget
 
-		def initialize(user)
+		def initialize(user, budget=nil)
 			@user = user
 			tz = TZInfo::Timezone.get(user.timezone)
 			@user_time = tz.utc_to_local(Time.now.utc)
+			@budget = budget
 		end
 
 		def perform
 			return calculate_daily_budget(@user)
 		end
 
+		def perform_light
+			return calculate_daily_budget_light(@user, @budget)
+		end
+
 private
+
+		def calculate_daily_budget_light(user, budget)
+
+			if budget[:type] == 'daily_budget'
+				spent_today = get_spent_today
+
+				spent_perc = ((100.to_f / budget[:budget][:today]) * spent_today).round(1)
+				case spent_perc
+				when 0...75
+					spent_color = 'success'
+				when 75...100
+					spent_color = 'warning'
+				else
+					spent_color = 'danger'
+				end
+
+				budget[:spent][:color] = spent_color
+
+			end
+
+			return budget
+
+		end
+
+		def get_spent_today(user)
+			return user.transactions.where("date(local_datetime) >= ?
+				AND date(local_datetime) <= ?
+				AND is_cancelled = false
+				AND is_queued = false
+				AND is_scheduled = false
+				AND user_currency_amount IS NOT NULL",
+				@user_time.to_date, 
+				@user_time.to_date).sum(:user_currency_amount) * -1
+		end
 		
 		def calculate_daily_budget(user)
 			main_schedule = user.schedules.where(type_of: 'main').take
@@ -120,14 +159,7 @@ private
 				schedule.next_occurrence)[:total]
 			
 			# Spent today
-			spent_today = user.transactions.where("date(local_datetime) >= ?
-				AND date(local_datetime) <= ?
-				AND is_cancelled = false
-				AND is_queued = false
-				AND is_scheduled = false
-				AND user_currency_amount IS NOT NULL",
-				@user_time.to_date, 
-				@user_time.to_date).sum(:user_currency_amount) * -1
+			spent_today = get_spent_today(user)
 
 			days_until_payday = (schedule.next_occurrence - @user_time.to_date).to_i
 
