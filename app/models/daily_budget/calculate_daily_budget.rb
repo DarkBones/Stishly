@@ -151,24 +151,29 @@ private
 			spend_percentage = ((100.to_f/budget_tomorrow) * (average_spending[:amount] * -1)).round(1)
 
 			status_color = 'success'
-			case spend_percentage
-			when 0...62.5
+			if average_spending[:amount] > 0
 				status = 'excellent'
 				status_icon = 'grin-alt'
-			when 62.5...75
-				status = 'good'
-				status_icon = 'smile-beam'
-			when 75...87.5
-				status = 'fair'
-				status_icon = 'smile'
-			when 87.5...100
-				status = 'caution'
-				status_icon = 'meh'
-				status_color = 'warning'
 			else
-				status = 'bad'
-				status_icon = 'frown'
-				status_color = 'danger'
+				case spend_percentage
+				when 0...62.5
+					status = 'excellent'
+					status_icon = 'grin-alt'
+				when 62.5...75
+					status = 'good'
+					status_icon = 'smile-beam'
+				when 75...87.5
+					status = 'fair'
+					status_icon = 'smile'
+				when 87.5...100
+					status = 'caution'
+					status_icon = 'meh'
+					status_color = 'warning'
+				else
+					status = 'bad'
+					status_icon = 'frown'
+					status_color = 'danger'
+				end
 			end
 
 			status_message = I18n.t("pages.daily_budget.status_messages.#{status}.main")
