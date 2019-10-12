@@ -36,11 +36,11 @@ class DailyBudget < ApplicationRecord
 	end
 
 	def self.invalidate_cache(user)
-		puts 1/0
 		cache = Rails.cache
 		cache_name = user.hash_id + '_daily_budget'
 
 		if cache.exist?(cache_name)
+			puts 1/0
 			cache.delete(cache_name)
 		end
 	end
