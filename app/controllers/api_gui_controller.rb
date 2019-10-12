@@ -240,7 +240,8 @@ class ApiGuiController < BaseApiBrowserController
   end
 
   def render_left_menu
-    render partial: 'layouts/left_menu', :locals => {active_account: 0}
+    budget = DailyBudget.recalculate(current_user)
+    render partial: 'layouts/left_menu', :locals => {active_account: 0, :@budget => budget}
   end
 
   def render_daily_budget
