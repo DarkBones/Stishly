@@ -40,7 +40,6 @@ class DailyBudget < ApplicationRecord
 		cache_name = user.hash_id + '_daily_budget'
 
 		if cache.exist?(cache_name)
-			puts 1/0
 			cache.delete(cache_name)
 		end
 	end
@@ -91,10 +90,14 @@ private
 
 		if cache.exist?(cache_name)
 			return cache.fetch(cache_name)
+		else
+			return nil
 		end
 	end
 
 	def self.store_cache(user, budget)
+		invalidate_cache(user)
+
 		cache = Rails.cache
 		cache_name = user.hash_id + '_daily_budget'
 		cache.write(cache_name, budget)
