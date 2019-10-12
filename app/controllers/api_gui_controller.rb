@@ -244,9 +244,10 @@ class ApiGuiController < BaseApiBrowserController
   end
 
   def render_daily_budget
+    budget = DailyBudget.recalculate(current_user)
     render json: {
-      navbar: (render_to_string partial: "users/daily_budget", :locals => { :type => 'dropdown' }),
-      left_menu: (render_to_string partial: "users/daily_budget", :locals => { :type => 'link' })
+      navbar: (render_to_string partial: "users/daily_budget", :locals => { :type => 'dropdown', :@budget => budget }),
+      left_menu: (render_to_string partial: "users/daily_budget", :locals => { :type => 'link', :@budget => budget })
     }
   end
 
