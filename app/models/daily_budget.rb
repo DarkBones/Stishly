@@ -39,7 +39,7 @@ class DailyBudget < ApplicationRecord
 		cache = Rails.cache
 		cache_name = user.hash_id + '_daily_budget'
 
-		if cache.exist?
+		if cache.exist?(cache_name)
 			cache.delete(cache_name)
 		end
 	end
@@ -72,10 +72,6 @@ private
 
 			db = DailyBudget.where(user_id: user.id, local_date: local_date).take
 			db = DailyBudget.new if db.nil?
-
-			puts "HHHHHHHHHHHHHHHHHHHHHHHHHH"
-			puts db.class.name
-			puts "IIIIIIIIIIIIIIIIIIIIIIIIIII"
 
 			db.user_id = user.id
 			db.spent = budget[:spent][:today]
