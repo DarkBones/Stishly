@@ -40,7 +40,7 @@ class DailyBudget < ApplicationRecord
 		cache_name = user.hash_id + '_daily_budget'
 
 		if cache.exist?
-			cache.remove(cache_name)
+			cache.delete(cache_name)
 		end
 	end
 
