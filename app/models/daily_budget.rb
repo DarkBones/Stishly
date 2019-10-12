@@ -1,0 +1,2 @@
+class DailyBudget < ApplicationRecord
+end
