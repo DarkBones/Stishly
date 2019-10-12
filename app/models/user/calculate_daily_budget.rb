@@ -107,8 +107,8 @@ private
 		# calculates how much a user spends per day on average
 		def get_average_spending(user, window: 30)
 			start_date = @user_time.to_date - window.days
-			transactions = user.transactions.where("is_scheduled = false AND schedule_id IS NULL AND user_currency_amount < 0 AND is_cancelled = false AND is_queued = false AND local_datetime >= ?", start_date).order(:local_datetime)
-			first_transaction = user.transactions.where("local_datetime IS NOT NULL AND user_currency_amount IS NOT NULL AND schedule_id IS NULL AND is_cancelled = false AND is_queued = false").order(:local_datetime).first
+			transactions = user.transactions.where("is_scheduled = false AND user_currency_amount < 0 AND is_cancelled = false AND is_queued = false AND local_datetime IS NOT NULL AND local_datetime >= ?", start_date).order(:local_datetime)
+			first_transaction = user.transactions.where("local_datetime IS NOT NULL AND user_currency_amount IS NOT NULL AND is_cancelled = false AND is_queued = false").order(:local_datetime).first
 
 			if first_transaction.nil?
 				return {
