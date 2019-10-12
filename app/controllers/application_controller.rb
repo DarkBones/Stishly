@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
   # check if a user's subscription is still valid
   def check_subscription
+    return if Rails.env.test?
     return if current_user.nil?
     
     last_check = current_user.last_plan_check
@@ -47,6 +48,7 @@ class ApplicationController < ActionController::Base
   end
 
   def update_sign_in_at
+    return if Rails.env.test?
     if user_signed_in?
       current_user.current_sign_in_at = Time.now.utc
       current_user.save
@@ -62,6 +64,7 @@ class ApplicationController < ActionController::Base
   end
 
   def daily_budget
+    return if Rails.env.test?
     if user_signed_in?
       if current_user.finished_setup
         @budget = DailyBudget.get_daily_budget(current_user)
