@@ -192,13 +192,17 @@ private
 					user.currency).format)
 
 			spent_perc = ((100.to_f / budget_today) * spent_today).round(1)
-			case spent_perc
-			when 0...75
+			if spent_today < 0
 				spent_color = 'success'
-			when 75...100
-				spent_color = 'warning'
 			else
-				spent_color = 'danger'
+				case spent_perc
+				when 0...75
+					spent_color = 'success'
+				when 75...100
+					spent_color = 'warning'
+				else
+					spent_color = 'danger'
+				end
 			end
 
 			return {

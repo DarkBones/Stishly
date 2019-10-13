@@ -17,7 +17,6 @@ class DailyBudget < ApplicationRecord
 		budget = self.get_from_cache(user)
 
 		return budget unless budget.nil?
-		puts 1/0
 		
 		budget = CalculateDailyBudget.new(user).perform
 		self.store_cache(user, budget)
