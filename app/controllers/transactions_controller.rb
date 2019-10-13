@@ -31,10 +31,11 @@ class TransactionsController < ApplicationController
   end
 
   def create_scheduled
-    @budget = DailyBudget.recalculate(current_user)
-
     @transaction = Transaction.create(transaction_params, current_user, scheduled: true)
     @transaction = Transaction.find_main_transaction(@transaction)
+
+    Schedule.invalidate_scheduled_transactions_cache(current_user)
+    @budget = DailyBudget.recalculate(current_user)
   end
 
   def delete
