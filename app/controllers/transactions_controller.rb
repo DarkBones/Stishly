@@ -77,10 +77,11 @@ class TransactionsController < ApplicationController
   end
 
   def update_scheduled
-    @budget = DailyBudget.recalculate(current_user)
-
     @transaction = Transaction.update(params[:id], transaction_params, current_user, scheduled: true)
     @transaction = Transaction.find_main_transaction(@transaction)
+
+    Schedule.invalidate_scheduled_transactions_cache(current_user)
+    @budget = DailyBudget.recalculate(current_user)
   end
 
 
@@ -123,12 +124,13 @@ class TransactionsController < ApplicationController
   end
 
   def update_upcoming_occurrence
-    @budget = DailyBudget.recalculate(current_user)
-    
     @transaction = Transaction.update_upcoming_occurrence(transaction_params, current_user)
     @transaction = Transaction.find_main_transaction(@transaction)
 
     redirect_back fallback_location: root_path
+
+    Schedule.invalidate_scheduled_transactions_cache(current_user)
+    @budget = DailyBudget.recalculate(current_user)
   end
 
 private
