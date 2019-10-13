@@ -37,6 +37,8 @@ class UsersController < ApplicationController
   end
 
   def submit_setup
+    ab_finished(:landing_page)
+    
     User.setup_user(current_user, params)
     current_user.finished_setup = true
     current_user.save!

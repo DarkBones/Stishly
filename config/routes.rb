@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  match "/split" => Split::Dashboard, anchor: false, via: [:get, :post, :delete], constraints: -> (request) do
+    request.env['warden'].user.id == 25
+  end
+
   resources :accounts do
     collection do
       patch :sort

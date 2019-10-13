@@ -149,3 +149,4 @@ gem 'jquery-minicolors-rails'
 gem 'chartkick'
 
 gem 'stripe'
+gem 'split', require: 'split/dashboard'
