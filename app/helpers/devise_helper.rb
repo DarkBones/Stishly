@@ -8,7 +8,6 @@ module DeviseHelper
   # This method is intended to stay simple and it is unlikely that we are going to change
   # it to add more behavior or options.
   def devise_error_messages!
-    resource ||= User.new
     return "" if resource.errors.empty?
 
     messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
