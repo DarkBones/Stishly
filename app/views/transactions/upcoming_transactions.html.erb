@@ -33,7 +33,7 @@
     var transactionId = $(obj).parents("tr").attr("series-id");
     var scheduleId = $(obj).parents("tr").attr("schedule");
     var schedulePeriod = $(obj).parents("tr").attr("period");
-    var tId = $(obj).parents("tr").attr("id").split("_")[1];
+    var tId = $(obj).parents("tr").attr("id");
     var scheduledTransactionId = $(obj).parents("tr").attr("scheduled-transaction")
     
     originalTId = tId;
@@ -83,7 +83,7 @@
     var transactionId = $(obj).parents("tr").attr("series-id");
     var scheduleId = $(obj).parents("tr").attr("schedule");
     var schedulePeriod = $(obj).parents("tr").attr("period");
-    var tId = $(obj).parents("tr").attr("id").split("_")[1];
+    var tId = $(obj).parents("tr").attr("id");
 
     originalTId = tId;
 
@@ -92,15 +92,15 @@
       url: "/api/v1/transactions/" + transactionId.toString() + "/cancel_upcoming_occurrence/" + scheduleId.toString() + "/" + schedulePeriod.toString(),
       success(data) {
         triggerNotice("Transaction successfully cancelled", false);
-        $("#transaction_" + tId.toString()).addClass("upcoming-cancelled");
+        $("#" + tId.toString()).addClass("upcoming-cancelled");
         
-        $("#transaction_" + tId.toString() + " #upcoming-dropdown").html("");
+        $("#" + tId.toString() + " #upcoming-dropdown").html("");
         $.ajax({
           type: "GET",
           dataType: "html",
           url: "api/v1/render/upcoming_transaction/" + transactionId.toString() + "/dropdown",
           success(data) {
-            $("#transaction_" + tId.toString() + " #upcoming-dropdown").html(data);
+            $("#" + tId.toString() + " #upcoming-dropdown").html(data);
           },
           error() {
             location.reload();
@@ -117,7 +117,7 @@
     var transactionId = $(obj).parents("tr").attr("series-id");
     var scheduleId = $(obj).parents("tr").attr("schedule");
     var schedulePeriod = $(obj).parents("tr").attr("period");
-    var tId = $(obj).parents("tr").attr("id").split("_")[1];
+    var tId = $(obj).parents("tr").attr("id");
 
     originalTId = tId;
 
@@ -126,15 +126,15 @@
       url: "/api/v1/transactions/" + transactionId.toString() + "/uncancel_upcoming_occurrence/" + scheduleId.toString() + "/" + schedulePeriod.toString(),
       success(data) {
         triggerNotice("Transaction no longer cancelled", false);
-        $("#transaction_" + tId.toString()).removeClass("upcoming-cancelled");
+        $("#" + tId.toString()).removeClass("upcoming-cancelled");
 
-        $("#transaction_" + tId.toString() + " #upcoming-dropdown").html("");
+        $("#" + tId.toString() + " #upcoming-dropdown").html("");
         $.ajax({
           type: "GET",
           dataType: "html",
           url: "api/v1/render/upcoming_transaction/" + transactionId.toString() + "/dropdown",
           success(data) {
-            $("#transaction_" + tId.toString() + " #upcoming-dropdown").html(data);
+            $("#" + tId.toString() + " #upcoming-dropdown").html(data);
           },
           error() {
             location.reload();

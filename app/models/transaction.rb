@@ -390,6 +390,11 @@ class Transaction < ApplicationRecord
       update_account_balance = false if transaction.account.id == transaction.transfer_transaction.account.id
     end
 
+    unless transaction.scheduled_date.nil?
+      update_account_balance = false
+      Schedule.invalidate_scheduled_transactions_cache(current_user)
+    end
+
     if update_account_balance
       Account.add(transaction.account, transaction.account_currency_amount, transaction.local_datetime)
       Account.add(transaction.transfer_transaction.account, transaction.transfer_transaction.account_currency_amount, transaction.transfer_transaction.local_datetime) unless transaction.transfer_transaction.nil?

@@ -1,11 +1,12 @@
 class DailyBudget
 	class CalculateDailyBudget
 
-		def initialize(user, budget=nil)
+		def initialize(user, budget=nil, max_days: 365)
 			@user = user
 			tz = TZInfo::Timezone.get(user.timezone)
 			@user_time = tz.utc_to_local(Time.now.utc)
 			@budget = budget
+			@max_days = max_days
 		end
 
 		def perform
@@ -53,31 +54,31 @@ private
 			end
 
 			scheduled_transactions = get_scheduled_transactions(user,
-				@user_time.to_date + 90.days, 
+				@user_time.to_date + @max_days.days, 
 				reverse: true)
 
 			# how much a user spends in a whole quarter
-			quarter_spend = average_spending[:amount] * 90
+			quarter_spend = average_spending[:amount] * @max_days
 			quarter_spend += scheduled_transactions[:total] * -1
-			if quarter_spend <= 0 || average_spending[:amount] <= 0
+			if quarter_spend <= 0# || average_spending[:amount] <= 0
 				return {
 					type: 'days',
 					days: '∞',
-					balance: average_spending[:amount] * 90,
+					balance: balance,
 					scheduled_transactions: scheduled_transactions[:total],
 					average_spending: average_spending,
 				}
 			elsif balance - quarter_spend >= 0
 				return {
 					type: 'days',
-					days: '90+',
+					days: "#{@max_days}+",
 					balance: balance,
-					scheduled_transactions: scheduled_transactions[:total] * 4,
+					scheduled_transactions: scheduled_transactions[:total],
 					average_spending: average_spending
 				}
 			end
 
-			stopper = 90
+			stopper = @max_days
 			b = balance
 			current_date = @user_time.to_date
 			next_scheduled_transaction = scheduled_transactions[:transactions].pop
@@ -107,7 +108,7 @@ private
 
 				stopper -= 1
 				if stopper <= 0
-					days = '90+'
+					days = "#{@max_days}+"
 					break
 				end
 
@@ -267,7 +268,7 @@ private
 			accuracy = ((100.to_f / 30) * days).round(1)
 
 			return {
-				amount: sum,
+				amount: sum * -1,
 				accuracy: accuracy,
 			}
 
@@ -278,6 +279,7 @@ private
 			transactions = []
 
 			Schedule.get_all_transactions_until_date(user, date).each do |t|
+				next if t.account.nil?
 				if t.account.account_type == 'spend'
 					unless t.is_cancelled
 						amount = CurrencyRate.convert(t.amount,
