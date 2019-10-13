@@ -1,169 +1,89 @@
-<% ab_test(:landing_page, "sign_up_form", "jumbotron") do |page_type| %>
-	<% if page_type == 'sign_up_form' %>
-		<div class="container" style="max-width: 800px;">
-			<div class="row">
-				<div class="col-12 text-center">
-					<h1>Welcome to Stishly</h1>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-12 col-sm-6 my-2">
-					<%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-block btn-social btn-facebook", method: :post do %>
-		         <span class="fab fa-facebook-f"></span> Continue with Facebook
-		      <% end %>
-		    </div>
-		    <div class="col-12 col-sm-6 my-2 mb-3">
-		      <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-block btn-social btn-google", method: :post do %>
-		         <span class="fab fa-google"></span> Continue with Google
-		      <% end %>
-				</div>
-			</div>
-
-			<%= form_for(User.new, :url => registration_path(User.new), :html => { :role => 'form'}) do |f| %>
-
-		    <% if devise_error_messages!.length > 0 %>
-		      <div class="row">
-		        <div class="col-12 py-2">
-		          <%= devise_error_messages! %>
-		        </div>
-		      </div>
-		    <% end %>
-
-		    <div class="row">
-		      <div class="col-12 col-sm-6 py-2">
-		        <%= f.label :first_name %>
-		        <%= f.text_field :first_name, :autofocus => true, class: "form-control" %>
-		      </div>
-		      <div class="col-12 col-sm-6 py-2">
-		        <%= f.label :last_name %>
-		        <%= f.text_field :last_name, class: "form-control" %>
-		      </div>
-		    </div>
-
-		    <div class="row">
-		      <div class="col-12 py-2">
-		        <%= f.label :email %>
-		        <%= f.email_field :email, class: "form-control" %>
-		      </div>
-		    </div>
-
-		    <div class="row">
-		      <div class="col-12 py-2" style="margin-bottom: -16px;">
-		        <%= f.label :password %>
-		        <%= f.password_field :password, class: 'form-control' %>
-		      </div>
-		    </div>
-
-		    <%= render partial: "shared/password_strength" %>
-
-		    <div class="row">
-		      <div class="col-12 py-2">
-		        <%= f.label :password_confirmation %>
-		        <%= f.password_field :password_confirmation, class: 'form-control' %>
-		      </div>
-		    </div>
-
-		    <%= f.hidden_field :timezone, id: 'timezone_input', value: '' %>
-
-		    <div class="row">
-		      <div class="col-12 py-2">
-		        <%= f.button t('buttons.sign_up.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('buttons.sign_up.action')} ..."} %>
-		      </div>
-		    </div>
-
-			<% end %>
-
-		</div>
-	<% else %>
-		<div class="jumbotron">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-					  <h1 class="display-4"><%= t('homepage.welcome_h1') %></h1>
-					  <p class="lead">Your all-in-one friendly finance manager that helps you keep up to date with your budget and expenses.</p>
-					  <hr class="my-4">
-					  <p>Give your money the attention it deserves.</p>
-					  <a class="btn btn-lg btn-primary" href="<%= new_user_registration_path %>" role="button">Sign up for your free account today</a>
-					</div>
-				</div>
+<div class="jumbotron">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+			  <h1 class="display-4"><%= t('homepage.welcome_h1') %></h1>
+			  <p class="lead">Your all-in-one friendly finance manager that helps you keep up to date with your budget and expenses.</p>
+			  <hr class="my-4">
+			  <p>Give your money the attention it deserves.</p>
+			  <a class="btn btn-lg btn-primary" href="<%= new_user_registration_path %>" role="button">Sign up for your free account today</a>
 			</div>
 		</div>
+	</div>
+</div>
 
-		<div class="container">
+<div class="container">
+	
+	<div class="row py-5">
+		<div class="col-12 col-md-7 col-lg-6 col-xl-5">
+			<%= image_tag "landing_page/expenses.png", "style" => "max-width: 100%;" %>
+		</div>
+		<div class="col-12 col-md-5 col-lg-6 col-xl-7">
+			<h2>
+				Track your expenses
+			</h2>
+			<p>
+				Recording your transactions is easy and quick.
+			</p>
+			<a class="btn btn-lg btn-primary" href="<%= new_user_registration_path %>" role="button">Create your free account</a>
+		</div>
+	</div>
+
+	<hr />
+
+	<div class="row py-5">
+		<div class="col-12 col-md-5 col-lg-6 col-xl-7">
+			<h2>
+				Stay on top of bills
+			</h2>
+			<p>
+				Never miss or be surprised by bills ever again!
+			</p>
+			<a class="btn btn-lg btn-primary" href="<%= new_user_registration_path %>" role="button">Sign up</a>
+		</div>
+		<div class="col-12 col-md-7 col-lg-6 col-xl-5">
+			<%= image_tag "landing_page/schedules.png", "style" => "max-width: 100%;" %>
+		</div>
+	</div>
+
+	<hr />
+
+	<div class="row py-5">
+		<div class="col-12 col-md-7 col-lg-6 col-xl-5">
+			<%= image_tag "landing_page/chart.png", "style" => "max-width: 100%;" %>
+		</div>
+		<div class="col-12 col-md-5 col-lg-6 col-xl-7">
+			<h2>
+				See where your money is going
+			</h2>
+			<p>
+				Gain valuable insights on how you are spending your money.
+			</p>
+			<a class="btn btn-lg btn-primary" href="<%= new_user_registration_path %>" role="button">Sign up here</a>
+		</div>
+	</div>
+
+	<hr />
+
+	<div class="row py-5">
+		<div class="col-12 col-md-5 col-lg-6 col-xl-7">
+			<h2>
+				Always know how much you can spend
+			</h2>
+			<p>
+				The daily budget shows you how much you can spend today.
+			</p>
+			<a class="btn btn-lg btn-primary" href="<%= new_user_registration_path %>" role="button">Sign up for free</a>
+		</div>
+		<div class="col-12 col-md-7 col-lg-6 col-xl-5">
+			<%= image_tag "landing_page/budget.png", "style" => "max-width: 100%;" %>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-12 mb-5">
 			
-			<div class="row py-5">
-				<div class="col-12 col-md-7 col-lg-6 col-xl-5">
-					<%= image_tag "landing_page/expenses.png", "style" => "max-width: 100%;" %>
-				</div>
-				<div class="col-12 col-md-5 col-lg-6 col-xl-7">
-					<h2>
-						Track your expenses
-					</h2>
-					<p>
-						Recording your transactions is easy and quick.
-					</p>
-					<a class="btn btn-lg btn-primary" href="<%= new_user_registration_path %>" role="button">Create your free account</a>
-				</div>
-			</div>
-
-			<hr />
-
-			<div class="row py-5">
-				<div class="col-12 col-md-5 col-lg-6 col-xl-7">
-					<h2>
-						Stay on top of bills
-					</h2>
-					<p>
-						Never miss or be surprised by bills ever again!
-					</p>
-					<a class="btn btn-lg btn-primary" href="<%= new_user_registration_path %>" role="button">Sign up</a>
-				</div>
-				<div class="col-12 col-md-7 col-lg-6 col-xl-5">
-					<%= image_tag "landing_page/schedules.png", "style" => "max-width: 100%;" %>
-				</div>
-			</div>
-
-			<hr />
-
-			<div class="row py-5">
-				<div class="col-12 col-md-7 col-lg-6 col-xl-5">
-					<%= image_tag "landing_page/chart.png", "style" => "max-width: 100%;" %>
-				</div>
-				<div class="col-12 col-md-5 col-lg-6 col-xl-7">
-					<h2>
-						See where your money is going
-					</h2>
-					<p>
-						Gain valuable insights on how you are spending your money.
-					</p>
-					<a class="btn btn-lg btn-primary" href="<%= new_user_registration_path %>" role="button">Sign up here</a>
-				</div>
-			</div>
-
-			<hr />
-
-			<div class="row py-5">
-				<div class="col-12 col-md-5 col-lg-6 col-xl-7">
-					<h2>
-						Always know how much you can spend
-					</h2>
-					<p>
-						The daily budget shows you how much you can spend today.
-					</p>
-					<a class="btn btn-lg btn-primary" href="<%= new_user_registration_path %>" role="button">Sign up for free</a>
-				</div>
-				<div class="col-12 col-md-7 col-lg-6 col-xl-5">
-					<%= image_tag "landing_page/budget.png", "style" => "max-width: 100%;" %>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-12 mb-5">
-					
-				</div>
-			</div>
-
 		</div>
+	</div>
 
-	<% end %>
-<% end %>
+</div>

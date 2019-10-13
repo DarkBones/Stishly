@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
-  match "/split" => Split::Dashboard, anchor: false, via: [:get, :post, :delete], constraints: -> (request) do
-    request.env['warden'].user.id == 25
+  if Rails.env.production?
+    match "/split" => Split::Dashboard, anchor: false, via: [:get, :post, :delete], constraints: -> (request) do
+      request.env['warden'].user.is_admin?
+    end
+  else
+    mount Split::Dashboard, at: 'split'
   end
 
   resources :accounts do
