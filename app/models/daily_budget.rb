@@ -46,10 +46,10 @@ class DailyBudget < ApplicationRecord
 
 	def self.recalculate_all
 		User.all.each do |user|
-			tz = TZInfo::Timezone.get(user.timezone)
+			#tz = TZInfo::Timezone.get(user.timezone)
 
-			hour = tz.utc_to_local(Time.now.utc).strftime("%H").to_i
-			if hour == 0
+			#hour = tz.utc_to_local(Time.now.utc).strftime("%H").to_i
+			#if hour == 0
 				current_sign_in_at = user.current_sign_in_at
 
 				if !current_sign_in_at.nil? && current_sign_in_at >= 30.days.ago
@@ -58,7 +58,7 @@ class DailyBudget < ApplicationRecord
 					self.invalidate_cache(user)
 				end
 
-			end
+			#end
 		end
 	end
 
