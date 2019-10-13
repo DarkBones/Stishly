@@ -3,7 +3,7 @@ class WelcomeController < ApplicationController
 
   def index
     if user_signed_in?
-      redirect_to root_path + 'app'
+      redirect_to root_path + 'app' and return
     end
 
     ab_test(:landing_page, "sign_up_form", "jumbotron") do |page_type|
