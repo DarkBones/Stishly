@@ -14,9 +14,9 @@
 class DailyBudget < ApplicationRecord
 
 	def self.get_daily_budget(user)
-		budget = self.get_from_cache(user)
+		#budget = self.get_from_cache(user)
 
-		return budget unless budget.nil?
+		#return budget unless budget.nil?
 		
 		budget = CalculateDailyBudget.new(user).perform
 		self.store_cache(user, budget)

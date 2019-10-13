@@ -43,6 +43,7 @@
 						<h4 class="text-light font-weight-bold">
 							<%= t('pages.daily_budget.total') %>
 							<span class="float-right">
+								<% budget[:scheduled_transactions] ||= 0 %>
 								<%= balance(budget[:balance] + budget[:scheduled_transactions], current_user.currency, "cents") %>
 							</span>
 						</h4>

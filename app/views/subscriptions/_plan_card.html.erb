@@ -20,20 +20,20 @@
 					<%= link_to t('pages.plans.continue'), root_path, class: "btn btn-rounded btn-primary" %>
 				<% else %>
 					<%= form_tag unsubscribe_path do %>
-						<%= submit_tag t('pages.plans.unsubscribe'), :data => { :confirm => t('pages.plans.delete_warning') }, class: "btn btn-rounded btn-danger" %>
+						<%= submit_tag t('pages.plans.unsubscribe'), :data => { :confirm => t('pages.plans.delete_warning') }, class: "cancel_premium btn btn-rounded btn-danger" %>
 					<% end %>
 				<% end %>
 			<% else %>
 				<% if plan == 'free' && current_user.subscription != 'free' %>
 					<%= form_tag unsubscribe_path do %>
-						<%= submit_tag t('pages.plans.continue'), :data => { :confirm => t('pages.plans.delete_warning') }, class: "btn btn-rounded btn-danger" %>
+						<%= submit_tag t('pages.plans.continue'), :data => { :confirm => t('pages.plans.delete_warning') }, class: "cancel_premium btn btn-rounded btn-danger" %>
 					<% end %>
 				<% else %>
 					<%= form_tag create_subscription_path(plan) do %>
 						<% if current_user.free_trial_eligable %>
-							<%= submit_tag t('pages.plans.start_free_trial'), class: "btn btn-rounded btn-primary" %>
+							<%= submit_tag t('pages.plans.start_free_trial'), class: "order_premium btn btn-rounded btn-primary" %>
 						<% else %>
-							<%= submit_tag t('pages.plans.register_now'), class: "btn btn-rounded btn-primary" %>
+							<%= submit_tag t('pages.plans.register_now'), class: "order_premium btn btn-rounded btn-primary" %>
 						<% end %>
 
 						<% price_now = price %>

@@ -40,6 +40,8 @@ private
 		def budget_days(user)
 			balance = Account.get_spend_balance(user)
 
+			average_spending = get_average_spending(user)
+
 			if balance <= 0
 				return {
 					type: 'days',
@@ -49,8 +51,6 @@ private
 					average_spending: average_spending,
 				}
 			end
-
-			average_spending = get_average_spending(user)
 
 			scheduled_transactions = get_scheduled_transactions(user,
 				@user_time.to_date + 90.days, 
@@ -248,7 +248,12 @@ private
 				AND user_currency_amount IS NOT NULL
 				").order(:local_datetime).first
 
-			return 0 if first_transaction.nil?
+			if first_transaction.nil?
+				return {
+					amount: 0,
+					accuracy: 0,
+				}
+			end
 
 			start_date = first_transaction.local_datetime.to_date if first_transaction.local_datetime.to_date > start_date
 
@@ -256,6 +261,7 @@ private
 			days += 1 if days < 30
 
 			sum = transactions.sum(:user_currency_amount).to_f
+			sum ||= 0
 			sum = (sum / days).round unless days == 0
 
 			accuracy = ((100.to_f / 30) * days).round(1)
