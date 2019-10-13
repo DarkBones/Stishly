@@ -6,7 +6,17 @@
   	  </button>
     <% end %>
   <% end %>
-  <%= link_to image_tag("logo_std_blue.svg", :class => "navbar__logo", 'height' => '35'), root_path %>
+
+  <% if user_signed_in? %>
+    <% unless current_user.subscription == 'free' %>
+      <%= link_to image_tag("logo/logo_std_blue_premium.svg", :class => "navbar__logo", 'height' => '35'), root_path %>
+    <% else %>
+      <%= link_to image_tag("logo/logo_std_blue.svg", :class => "navbar__logo", 'height' => '35'), root_path %>
+    <% end %>
+  <% else %>
+    <%= link_to image_tag("logo/logo_std_blue.svg", :class => "navbar__logo", 'height' => '35'), root_path %>
+  <% end %>
+  
 
   <%#= User.daily_budget(current_user) %>
 
