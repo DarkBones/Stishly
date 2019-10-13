@@ -11,5 +11,6 @@ class WelcomeController < ApplicationController
     		redirect_to new_user_registration_path and return
     	end
     end
+
   end
 end
