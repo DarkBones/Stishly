@@ -8,7 +8,7 @@ class WelcomeController < ApplicationController
 
     ab_test(:landing_page, "sign_up_form", "jumbotron") do |page_type|
     	if page_type == 'sign_up_form'
-    		redirect_to new_user_registration_path
+    		redirect_to new_user_registration_path and return
     	end
     end
   end
