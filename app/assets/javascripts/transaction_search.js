@@ -45,7 +45,6 @@ function fillTransactionDetails(obj) {
 		dataType: "json",
 		url: "/api/v1/transactions/" + $(obj).attr("id"),
 		success(data){
-			console.log(data);
 
 			// Description
 			$root.find("#transaction_description").val(data.description);
@@ -118,5 +117,9 @@ function fillTransactionDetails(obj) {
 			}
 
 		}
-	})
+	});
 }
+
+$(document).on("click", (event) => {
+  $(".transaction_search_results").removeClass("show");
+});

@@ -1,5 +1,11 @@
 @import "variables";
 
+.transaction_search_results {
+  max-height: 350px;
+  overflow-y: scroll;
+  overflow-y: auto;
+}
+
 .tooltip.in {
   opacity: 1;
 }
