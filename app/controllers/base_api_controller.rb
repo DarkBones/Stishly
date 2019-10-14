@@ -41,6 +41,14 @@ private
 		
 		json = reject_key(json, "user_id")
 		json = reject_key(json, "id")
+		json = reject_key(json, "transfer_transaction_id")
+		json = reject_key(json, "transfer_account_id")
+		json = reject_key(json, "category_id")
+		json = reject_key(json, "parent_id")
+		json = reject_key(json, "category_id")
+		json = reject_key(json, "account_id")
+		json = reject_key(json, "scheduled_transaction_id")
+		json = reject_key(json, "schedule_id")
 		additional_fields.each do |f|
 			json = reject_key(json, f)
 		end

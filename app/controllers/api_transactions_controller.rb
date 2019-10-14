@@ -1,18 +1,44 @@
 class ApiTransactionsController < BaseApiController
 
+    def search
+        results = Transaction.search(@user, params[:description])
+        render partial: "transactions/search_results", :locals => {:results => results}
+    end
+
 	def show
 		render json: "bad request", status: :bad_request and return unless params[:id]
 
 		transaction = @user.transactions.friendly.find(params[:id])
 		render json: "not found", status: :not_found and return if transaction.nil?
-    user_date = User.format_date(transaction.local_datetime.to_date) unless transaction.local_datetime.nil?
 
+        currency = Money::Currency.new(transaction.currency)
 
-		transaction = JSON.parse(transaction.to_json)
-		transaction = prepare_json(transaction)
-    transaction[:date_user_format] = user_date
+        user_date = User.format_date(transaction.local_datetime.to_date) unless transaction.local_datetime.nil?
 
-		render json: transaction
+		transaction_json = JSON.parse(transaction.to_json)
+		transaction_json = prepare_json(transaction_json)
+        transaction_json[:date_user_format] = user_date
+        transaction_json[:amount_f] = transaction.amount.to_f / currency.subunit_to_unit
+
+        transaction_json[:account] = prepare_json(JSON.parse(transaction.account.to_json))
+
+        if transaction.children.length > 0
+            transaction_json[:children] = []
+            transaction.children.each do |ct|
+                ct_json = JSON.parse(ct.to_json)
+                ct_json = prepare_json(ct_json)
+                ct_json[:amount_f] = ct.amount.to_f / currency.subunit_to_unit
+                transaction_json[:children].push(ct_json)
+            end
+        end
+
+        if transaction.transfer_transaction
+            transaction_json[:transfer_account] = prepare_json(JSON.parse(transaction.transfer_transaction.account.to_json))
+        end
+
+        transaction_json[:category] = prepare_json(JSON.parse(transaction.category.to_json))
+
+		render json: transaction_json
 	end
 
 	def cancel_upcoming_occurrence

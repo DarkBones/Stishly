@@ -160,6 +160,10 @@ Rails.application.routes.draw do
           end
         end
       end
+      #/api/v1/transaction_search/:description
+      scope '/transaction_search/:description' do
+        get '/', to: 'api_transactions#search'
+      end
       #/api/v1/transactions
       scope '/transactions' do
         #/api/v1/transactions/:id

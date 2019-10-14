@@ -1,0 +1,15 @@
+<% if results.length > 0 %>
+	<ul class="list-unstyled">
+		<% results.each do |k, t| %>
+	
+			<li
+			class="py-2 clickable bold-on-hover"
+			onclick="fillTransactionDetails(this);"
+			id="<%= t.hash_id %>">
+				<%= fa_icon t.category.decorate.symbol, class: "rounded-circle category", :style => 'background-color: ' + t.category.decorate.color + '; padding: 5px;' %>
+				<%= t.description %>
+			</li>
+	
+		<% end %>
+	</ul>
+<% end %>

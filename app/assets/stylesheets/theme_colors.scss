@@ -26,6 +26,10 @@ html, body, div {
   border-color: darken($secondaryColor, 10%)!important;
 }
 
+.bold-on-hover:hover {
+  font-weight: bold;
+}
+
 
 .no-caret::after {
   display:none;

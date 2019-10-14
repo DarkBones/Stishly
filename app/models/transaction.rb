@@ -136,6 +136,26 @@ class Transaction < ApplicationRecord
     end
   }
 
+  def self.search(user, description)
+    results = {}
+
+    user.transactions.where("
+      transactions.description like ?
+      AND is_main = true
+      AND is_scheduled = false
+      AND is_cancelled = false
+      AND local_datetime IS NOT NULL
+      AND is_balancer = false",
+      "%#{description}%").order(:local_datetime).reverse.each do |t|
+      unless results.keys.include?("#{t.category_id}#{t.description}")
+        results["#{t.category_id}#{t.description}"] = t.decorate
+      end
+    end
+
+    return results
+
+  end
+
   def self.create_balancer(account, target)
     tz = TZInfo::Timezone.get(account.user.timezone)
     amount = target - account.balance

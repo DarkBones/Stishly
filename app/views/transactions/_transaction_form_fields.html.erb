@@ -54,9 +54,12 @@ end
     <div class="row py-2">
       <div class="col-12 py-2">
         <%= f.label :description %>
-        <%= f.text_field :description, class: "form-control" %>
+        <%= f.text_field :description, class: "form-control", "onkeyup" => "searchTransactions(this);", "onclick" => "showTransactionSearchResults(this);", autocomplete: "off" %>
+        <div class="transaction_search_results dropdown-menu">
+        </div>
       </div>
     </div>
+
 
     <%# SINGLE ACCOUNT %>
     <div class="row py-2" id="single-account" style="<%= params[:single_account_style] %>">

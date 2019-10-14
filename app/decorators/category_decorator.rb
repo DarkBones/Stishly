@@ -28,4 +28,17 @@ class CategoryDecorator < ApplicationDecorator
     return model.color
   end
 
+  def symbol
+    if model.id.nil?
+      if model.name == "uncategorised"
+        return "question"
+      else
+        return "sync-alt"
+      end
+      
+    end
+
+    return model.symbol
+  end
+
 end
