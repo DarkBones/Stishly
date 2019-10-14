@@ -71,7 +71,7 @@ private
 			local_date = tz.utc_to_local(Time.now.utc).to_date
 
 			db = DailyBudget.where(user_id: user.id, local_date: local_date).take
-			db = DailyBudget.new if db.nil?
+			db = DailyBudget.create if db.nil?
 
 			db.user_id = user.id
 			db.spent = budget[:spent][:today]
