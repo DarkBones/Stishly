@@ -1,20 +1,22 @@
-<div class="nav-item d-none d-md-block text-center float-right" style="position: absolute; right: 120px;">
-  <a class="text-secondary nav-link float-right" href="<%= schedules_path %>" title="Schedules">
-    <span style="font-size: 25px;">
-      <%= fa_icon "calendar-alt" %>
-    </span>
-    <br />
-    Schedules
-  </a>
+<% if user_signed_in? %>
+  <div class="nav-item d-none d-md-block text-center float-right" style="position: absolute; right: 120px;">
+    <a class="text-secondary nav-link float-right" href="<%= schedules_path %>" title="Schedules">
+      <span style="font-size: 25px;">
+        <%= fa_icon "calendar-alt" %>
+      </span>
+      <br />
+      Schedules
+    </a>
 
-  <a class="text-secondary nav-link float-right" href="<%= upcoming_transactions_path %>" title="Upcoming Transactions">
-    <span style="font-size: 25px;">
-      <%= fa_icon "clock" %>
-    </span>
-    <br />
-    Upcoming
-  </a>
-</div>
+    <a class="text-secondary nav-link float-right" href="<%= upcoming_transactions_path %>" title="Upcoming Transactions">
+      <span style="font-size: 25px;">
+        <%= fa_icon "clock" %>
+      </span>
+      <br />
+      Upcoming
+    </a>
+  </div>
+<% end %>
 
 <ul class="nav navbar-nav ml-auto">
   <% if user_signed_in? %>
