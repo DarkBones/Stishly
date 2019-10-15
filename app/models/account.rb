@@ -24,7 +24,8 @@ class Account < ApplicationRecord
   validates :name, format: { without: /[-\.~:\/\?#\[\]@!\$&'\(\)\*\+,;={}"]/, message: I18n.t('account.failure.special_characters') }
   validates :name, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('account.failure.already_exists') }
   validates :currency, presence: true
-  validate :plan
+  validate :plan, :on => :create
+  validate :plan_update, :on => :update
 
 
   belongs_to :user
@@ -342,16 +343,31 @@ class Account < ApplicationRecord
 private
 
   def plan
-    
     plan = APP_CONFIG['plans'][user.subscription]
     plan ||= APP_CONFIG['plans']['free']
 
     accounts = user.accounts.where("id IS NOT NULL AND is_disabled = false")
 
-    if accounts.length > plan['max_accounts']
+    if accounts.length >= plan['max_accounts']
       errors.add(:Plan, "<a href='/plans'>" + I18n.t('account.failure.upgrade_for_accounts') + "</a>") unless plan['max_accounts'] < 0
     elsif account_type == 'spend'
-      if accounts.where(account_type: 'spend').length > plan['max_spending_accounts']
+      if accounts.where(account_type: 'spend').length >= plan['max_spending_accounts']
+        errors.add(:Plan, "<a href='/plans'>" + I18n.t('account.failure.upgrade_for_spending') + "</a>") unless plan['max_spending_accounts'] < 0
+      end
+    end
+
+  end
+
+  def plan_update
+    plan = APP_CONFIG['plans'][user.subscription]
+    plan ||= APP_CONFIG['plans']['free']
+
+    accounts = user.accounts.where("id IS NOT NULL AND is_disabled = false")
+
+    if accounts.length >= plan['max_accounts']
+      errors.add(:Plan, "<a href='/plans'>" + I18n.t('account.failure.upgrade_for_accounts') + "</a>") unless plan['max_accounts'] < 0
+    elsif account_type == 'spend'
+      if accounts.where(account_type: 'spend').length >= plan['max_spending_accounts']
         errors.add(:Plan, "<a href='/plans'>" + I18n.t('account.failure.upgrade_for_spending') + "</a>") unless plan['max_spending_accounts'] < 0
       end
     end
