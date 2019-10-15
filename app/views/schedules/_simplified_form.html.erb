@@ -91,10 +91,9 @@
         <option value="28">28th</option>
       </select>
       <select name="month_day2<%= suff %>" class="form-control" id="month_day2<%= suff %>">
-        <option disabled selected value> -- </option>
         <option value="day" children=".path-months-except-wday, .path-amount"><%= t('schedule.weekdays.day') %></option>
         <option value="sun" children=""><%= t('schedule.weekdays.sunday') %></option>
-        <option value="mon" children=""><%= t('schedule.weekdays.monday') %></option>
+        <option value="mon" selected children=""><%= t('schedule.weekdays.monday') %></option>
         <option value="tue" children=""><%= t('schedule.weekdays.tuesday') %></option>
         <option value="wed" children=""><%= t('schedule.weekdays.wednesday') %></option>
         <option value="thu" children=""><%= t('schedule.weekdays.thursday') %></option>
