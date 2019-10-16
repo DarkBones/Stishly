@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  #resources :posts
+
   if Rails.env.production?
     match "/split" => Split::Dashboard, anchor: false, via: [:get, :post, :delete], constraints: -> (request) do
       request.env['warden'].user.is_admin?
@@ -26,6 +28,13 @@ Rails.application.routes.draw do
       post '/', to: 'subscriptions#unsubscribe', as: :unsubscribe
     end
   end
+
+  #scope '/blog' do
+  #  get '/', to: 'posts#index'
+  #  scope '/:id' do
+  #    get '/', to: 'posts#show'
+  #  end
+  #end
 
   scope '/plans' do
     get '/', to: 'subscriptions#index', as: :plans

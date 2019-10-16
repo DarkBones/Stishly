@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_13_165335) do
+ActiveRecord::Schema.define(version: 2019_10_15_175009) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -113,6 +113,16 @@ ActiveRecord::Schema.define(version: 2019_10_13_165335) do
     t.datetime "created_at_local_datetime"
     t.string "hash_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.string "thumbnail"
+    t.date "published_on"
+    t.string "hash_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "schedule_occurrences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
