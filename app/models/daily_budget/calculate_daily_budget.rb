@@ -189,7 +189,7 @@ private
 			status_message = status_message.sub("@percent@",
 				spend_percentage.to_s)
 			status_message = status_message.sub("@average@",
-				Money.new((average_spending[:amount] * -1),
+				Money.new((average_spending[:amount]),
 					user.currency).format)
 			status_message = status_message.sub("@average_abs@",
 				Money.new((average_spending[:amount].abs),
