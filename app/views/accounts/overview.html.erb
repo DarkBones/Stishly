@@ -1,3 +1,4 @@
+<% prefix = Money::Currency.new(@active_account.currency).symbol %>
 <%= content_for :account_content do %>
 
   <div class="row pt-4">
@@ -12,7 +13,7 @@
     </div>
   </div>
 
-  <%= render partial: "accounts/overview_charts", :locals => { :history_data => @history_data, :category_data => @category_data, :category_data_income => @category_data_income } %>
+  <%= render partial: "accounts/overview_charts", :locals => { :history_data => @history_data, :category_data => @category_data, :category_data_income => @category_data_income, :prefix => prefix } %>
 
 <% end %>
 

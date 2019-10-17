@@ -2,7 +2,7 @@
 
 	<div class="row pt-4">
 	  <div class="col-12">
-	    <%= line_chart(history_data, title: t('charts.balance_history')) %>
+	    <%= line_chart(history_data, title: t('charts.balance_history'), prefix: prefix) %>
 	  </div>
 	</div>
 
@@ -14,12 +14,12 @@
 		</div>
 		<div class="row">
 			<div class="col-12 col-xl-6 py-2">
-		  	<%= pie_chart(category_data[:root], title: t('categories.name'), colors: category_data[:root_colors], donut: true) %>
+		  	<%= pie_chart(category_data[:root], title: t('categories.name'), colors: category_data[:root_colors], donut: true, prefix: prefix) %>
 		  </div>
 
 		  <% category_data[:totals].each do |total| %>
 		  	<div class="col-12 col-xl-6 py-2">
-		  		<%= pie_chart(category_data[:charts][total[0]], title: total[0], donut: true) %>
+		  		<%= pie_chart(category_data[:charts][total[0]], title: total[0], donut: true, prefix: prefix) %>
 		  	</div>
 		  <% end %>
 		</div>
@@ -33,12 +33,12 @@
 		</div>
 		<div class="row">
 			<div class="col-12 col-xl-6 py-2">
-		  	<%= pie_chart(category_data_income[:root], title: t('categories.name'), colors: category_data_income[:root_colors], donut: true) %>
+		  	<%= pie_chart(category_data_income[:root], title: t('categories.name'), colors: category_data_income[:root_colors], donut: true, prefix: prefix) %>
 		  </div>
 
 		  <% category_data_income[:totals].each do |total| %>
 		  	<div class="col-12 col-xl-6 py-2">
-		  		<%= pie_chart(category_data_income[:charts][total[0]], title: total[0], donut: true) %>
+		  		<%= pie_chart(category_data_income[:charts][total[0]], title: total[0], donut: true, prefix: prefix) %>
 		  	</div>
 		  <% end %>
 		</div>
