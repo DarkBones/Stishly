@@ -157,9 +157,10 @@ private
 			spend_percentage = ((100.to_f/budget_tomorrow) * (average_spending[:amount] * -1)).round(1)
 
 			status_color = 'success'
-			if average_spending[:amount] > 0
+			if average_spending[:amount] < 0
 				status = 'excellent'
 				status_icon = 'grin-alt'
+				status_message = I18n.t("pages.daily_budget.status_messages.infinite.main")
 			else
 				case spend_percentage
 				when 0...62.5
@@ -182,13 +183,16 @@ private
 				end
 			end
 
-			status_message = I18n.t("pages.daily_budget.status_messages.#{status}.main")
+			status_message ||= I18n.t("pages.daily_budget.status_messages.#{status}.main")
 			status_message = status_message.sub("@tomorrow@",
 				Money.new(budget_tomorrow, user.currency).format)
 			status_message = status_message.sub("@percent@",
 				spend_percentage.to_s)
 			status_message = status_message.sub("@average@",
 				Money.new((average_spending[:amount] * -1),
+					user.currency).format)
+			status_message = status_message.sub("@average_abs@",
+				Money.new((average_spending[:amount].abs),
 					user.currency).format)
 
 			spent_perc = ((100.to_f / budget_today) * spent_today).round(1)

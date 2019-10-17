@@ -528,6 +528,9 @@ en:
       under: Your daily budget for tomorrow is @tomorrow@, which is @percent@ of what you spend on an average day, which is @average@.
       over: Your daily budget for tomorrow is @tomorrow@, which is higher than what you spend on an average day, which is @average@
       status_messages:
+        infinite:
+          main: On average, you are earning @average_abs@ per day.
+          sub: Consider transferring some money to a savings account or investing.
         excellent:
           main: Your average daily expense is @average@, which is only @percent@% of tomorrow's budget of @tomorrow@
           sub: Consider transferring some money to a savings account or investing.
