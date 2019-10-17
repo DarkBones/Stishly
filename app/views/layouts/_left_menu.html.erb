@@ -31,6 +31,24 @@ end
           section_layout: "left_menu/user_accounts",
           locals: { accounts: user_accounts, active_account: locals[:active_account] }
         } %>
+
+        <hr />
+
+        <%= render partial: "left_menu/section", locals: {
+          title: "Spending Balance",
+          section_layout: "left_menu/spending_balance",
+          locals: {},
+        } %>
+
+        <hr />
+
+        <%= render partial: "left_menu/section", locals: {
+          title: "Upcoming Schedules",
+          section_layout: "left_menu/upcoming_schedules",
+          locals: {
+
+          }
+        } %>
       <% end %>
 
     </div>

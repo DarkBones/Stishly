@@ -1,0 +1,27 @@
+<% accounts = current_user.accounts.where(account_type: "spend", is_disabled: false).order(:position) %>
+
+<% if accounts.length == 0 %>
+	<a id="create-account-instruction" class="clickable" data-toggle="modal" data-target="#accountform" onclick="renderAccountMenu();" >
+		You don't have any spending accounts. Click here to create some.
+	</a>
+<% else %>
+	<ul class="list-unstyled">
+		<% total = 0 %>
+		<% accounts.each do |account| %>
+			<li class="py-2 pl-4">
+				<%= account.name %>
+				<% amount = CurrencyRate.convert(account.balance, account.currency, current_user.currency) %>
+				<% total += amount %>
+				<span class="balance float-right" balance="<%= amount %>" currency="<%= current_user.currency %>">
+			    <%= balance(amount, current_user.currency, "cents") %>
+			  </span>
+			</li>
+		<% end %>
+		<li class="py-2 pl-4 font-weight-bold">
+			TOTAL
+			<span class="balance float-right" balance="<%= total %>" currency="<%= current_user.currency %>">
+				<%= balance(total, current_user.currency, "cents") %>
+			</span>
+		</li>
+	</ul>
+<% end %>

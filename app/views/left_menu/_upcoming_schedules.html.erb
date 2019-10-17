@@ -1,0 +1,18 @@
+<% schedules = current_user.schedules.where(type_of: 'schedule', is_active: true, pause_until_utc: nil) %>
+
+<% if schedules.length == 0 %>
+	<a href="<%= schedules_path %>" class="text-dark">
+		You don't have any upcoming schedules. Click here to create some.
+	</a>
+<% else %>
+	<ul class="list-unstyled">
+		<% schedules.each do |schedule| %>
+			<li class="py-2 pl-4">
+				<%= schedule.name %>
+				<span class="float-right">
+					<%= schedule.next_occurrence %>
+				</span>
+			</li>
+		<% end %>
+	</ul>
+<% end %>

@@ -24,8 +24,8 @@ class Account < ApplicationRecord
   validates :name, format: { without: /[-\.~:\/\?#\[\]@!\$&'\(\)\*\+,;={}"]/, message: I18n.t('account.failure.special_characters') }
   validates :name, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('account.failure.already_exists') }
   validates :currency, presence: true
-  validate :plan, :on => :create
-  validate :plan_update, :on => :update
+  #validate :plan, :on => :create
+  #validate :plan_update, :on => :update
 
 
   belongs_to :user
