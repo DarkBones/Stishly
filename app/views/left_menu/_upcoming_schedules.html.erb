@@ -1,4 +1,4 @@
-<% schedules = current_user.schedules.where(type_of: 'schedule', is_active: true, pause_until_utc: nil) %>
+<% schedules = current_user.schedules.where(type_of: 'schedule', is_active: true, pause_until_utc: nil).order(:next_occurrence_utc) %>
 
 <% if schedules.length == 0 %>
 	<a href="<%= schedules_path %>" class="text-dark">
