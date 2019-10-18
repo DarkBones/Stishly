@@ -2,16 +2,19 @@
 
 .highlight-container {
   height: 159px;
+  width: 100%;
   textarea {
     margin: 0 !important;
     border-radius: 0 !important;
     background-color: transparent !important;
     background-blend-mode: difference;
     position: absolute;
+    width: calc(100% - 30px);
     z-index: 1;
+    resize: none;
   }
   .backdrop {
-    width: 100%;
+    width: calc(100% - 30px);
     height: 159px;
 
     padding: 10px;
