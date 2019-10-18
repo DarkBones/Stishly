@@ -133,7 +133,15 @@ end
     <div class="row py-2 <%= params[:transactions_class] %>" id="transactions" style="<%= params[:transactions_style] %>">
       <div class="col-12 py-2">
         <%= f.label :transactions %>
-        <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: "form-control", value: transaction.amount_multiple, "onkeyup" => "updateTransactionResult('#" + formId + "'); updateTransactionsTotal('##{formId}');", "rows" => "6" %>
+        
+        <div class="highlight-container">
+          <div class="backdrop">
+            <div class="highlights">
+            </div>
+          </div>
+          <%= f.text_area :transactions, placeholder: "Milk 2.39\nApples 1.87\nBrocolli 3.09", class: "form-control", value: transaction.amount_multiple, "onkeyup" => "updateTransactionResult('#" + formId + "'); updateTransactionsTotal('##{formId}');", "rows" => "6" %>
+        </div>
+
         <div style="position: relative;" id="transaction_total_indicator">
           <p id="transaction_total">Total: <span id="transactions-total"><%= params[:transactions_total] %></span></p>
           <div style="width: 38px; height: 38px; position: absolute; top: 0; left: 45px;" id="total_ajax_spinner"></div>
@@ -236,4 +244,35 @@ end
     </div>
 
   </div>
+
+  <script>
+    $("#transaction_transactions").on({
+      "input": handleInput,
+      "scroll": handleScroll
+    });
+
+    function handleInput() {
+      var text = $("#transaction_transactions").val();
+      var highlightedText = applyHighlights(text);
+      $(".highlight-container .highlights").html(highlightedText);
+    }
+
+    function applyHighlights(text) {
+      return text
+        .replace(/\n$/g, "\n\n")
+        //.replace(/[A-Z].*?\b/g, "<mark>$&</mark>")
+        .replace(/-?[0-9\.]+$/gm, "<mark>$&</mark>")
+    }
+
+    function handleScroll() {
+      var scrollTop = $("#transaction_transactions").scrollTop();
+      $(".highlight-container .backdrop").scrollTop(scrollTop);
+
+      var scrollLeft = $("#transaction_transactions").scrollLeft();
+      $(".highlight-container .backdrop").scrollLeft(scrollLeft);
+
+      //alert(scrollTop);
+      //alert($(".highlight-container .backdrop").scrollTop());
+    }
+  </script>
 

@@ -1,5 +1,37 @@
 @import "variables";
 
+.highlight-container {
+  height: 159px;
+  textarea {
+    margin: 0 !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+    background-blend-mode: difference;
+    position: absolute;
+    z-index: 1;
+  }
+  .backdrop {
+    width: 100%;
+    height: 159px;
+
+    padding: 10px;
+    overflow: auto;
+    position: absolute;
+    z-index: 0;
+  }
+
+  .highlights {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: transparent;
+  }
+
+  mark {
+    color: transparent;
+    background-color: lighten($primaryColor, 40%);
+  }
+}
+
 .transaction_search_results {
   max-height: 350px;
   overflow-y: scroll;
