@@ -64,5 +64,5 @@ function setCategory(obj, id, suff="") {
   var $categoriesDropdown = $(obj).closest("div#categoriesDropdownOptions" + suff).siblings("button#categories-dropdown");
 
   $categoriesDropdown.html($("#categoriesDropdownOptions" + suff + " li.category_" + id.toString()).html());
-  $categoriesDropdown.parents(".transactionform_root").find($categoriesDropdown.attr("input-target")).val(id);
+  $categoriesDropdown.parents("form").find($categoriesDropdown.attr("input-target")).val(id);
 }

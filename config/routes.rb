@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   #resources :posts
+  resources :budgets
 
   if Rails.env.production?
     match "/split" => Split::Dashboard, anchor: false, via: [:get, :post, :delete], constraints: -> (request) do

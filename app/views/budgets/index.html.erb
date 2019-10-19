@@ -1,0 +1,28 @@
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<h2>
+				Budgets
+				<button type="button" class="float-right btn btn-primary" id="new-budget">
+          New Budget
+        </button>
+			</h2>
+		</div>
+	</div>
+
+	<div class="row">
+		<%= form_with(model: Budget.new) do |f| %>
+			<%= f.label :category %><br />
+      <%= render partial: "/shared/custom_dropdown_categories", locals: {
+        selected: nil,
+        options: Category.get_user_categories(current_user, true, true),
+        input_target: '#category_id_budget',
+        button_type: "btn-light",
+        id_suff: "_budget"
+      } %>
+      <% categories = Category.get_user_categories(current_user, true) %>
+      <%= f.text_field :category_id, :id => "category_id_budget_budget" %>
+		<% end %>
+	</div>
+
+</div>

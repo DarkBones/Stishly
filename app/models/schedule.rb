@@ -65,7 +65,7 @@ class Schedule < ApplicationRecord
 
   def self.invalidate_scheduled_transactions_cache(user)
     cache = Rails.cache
-    cache_name = user.hash_id + '_upcoming_transactions'
+    cache_name = user.hash_id.to_s + '_upcoming_transactions'
     puts cache_name
     #cache.delete(cache_name)
 
@@ -147,7 +147,7 @@ private
   def self.get_scheduled_transactions_from_cache(user)
     cache = Rails.cache
 
-    cache_name = user.hash_id + '_upcoming_transactions'
+    cache_name = user.hash_id.to_s + '_upcoming_transactions'
 
     if cache.exist?(cache_name)
       return cache.fetch(cache_name)
@@ -160,7 +160,7 @@ private
     self.invalidate_scheduled_transactions_cache(user)
 
     cache = Rails.cache
-    cache_name = user.hash_id + '_upcoming_transactions'
+    cache_name = user.hash_id.to_s + '_upcoming_transactions'
     cache.write(cache_name, transactions)
   end
 
