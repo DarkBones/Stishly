@@ -1,8 +1,19 @@
 function hideTimeout(id) {
+  var hov = 0;
   var $parent = $(id).parent().closest("div");
-  setTimeout( function() {
-    $parent.fadeOut(2000);
-  }, 1000);
+  $parent.hover(function(){
+    clearTimeout();
+    $parent.stop(true, true).fadeOut();
+    $parent.fadeIn(1);
+    hov = 1;
+  }, function(){
+    hov = 0;
+    setTimeout(function(){
+      if(hov === 0) {
+        $parent.fadeOut(2000);
+      }
+    }, 1000);
+  });
 }
 
 $(document).on("turbolinks:load", () => {
@@ -13,6 +24,10 @@ $(document).on("turbolinks:load", () => {
   if ($("#flash_alert").length) {
     hideTimeout("#flash_alert");
   }
+
+  $("#flash_notice").hover(function(){
+    alert("hi");
+  });
 
 });
 

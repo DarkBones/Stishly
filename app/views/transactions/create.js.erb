@@ -15,5 +15,9 @@ var max_transactions = <%= APP_CONFIG['plans'][current_user.subscription]['max_t
 if (max_transactions > 0) {
 	if (user_transactions >= max_transactions) {
 		triggerNotice("<%= t('transaction.limit_warning') %>", true);
+	} else {
+		triggerNotice("<%= t('transaction.confirmations.confirmed') %>", false);
 	}
+} else {
+	triggerNotice("<%= t('transaction.confirmations.confirmed') %>", false);
 }
