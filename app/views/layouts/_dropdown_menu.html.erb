@@ -1,11 +1,11 @@
 <%
 if is_dropdown
-  cl = 'dropdown-item'
+  cl = 'text-dark dropdown-item'
   li_pref = ''
   li_suff = ''
   divider = '<div class="dropdown-divider"></div>'
 else
-  cl = 'nav-link'
+  cl = 'text-dark nav-link'
   li_pref = '<li class="nav-item">'
   li_suff = '</li>'
   divider = '<div class="dropdown-divider"></div>'
@@ -16,6 +16,7 @@ end
 	<%= li_pref.html_safe %><%= link_to t('buttons.edit_user_account.text'), edit_user_registration_path, { :class=> cl } %><%= li_suff.html_safe %>
 	<% if current_user.finished_setup %>
 		<%#= li_pref.html_safe %><%#= link_to 'Settings', user_settings_path, { :class=> cl } %><%#= li_suff.html_safe %>
+    <%= li_pref.html_safe %><%= link_to "Budgets", budgets_path, { :class => cl } %><%= li_suff.html_safe %>
 		<%= li_pref.html_safe %><%= link_to t('buttons.schedules.text'), schedules_url, { :class => cl } %><%= li_suff.html_safe %>
     <%= li_pref.html_safe %><%= link_to t('buttons.notifications.text'), notifications_path, { :class => cl } %><%= li_suff.html_safe %>
     <%= li_pref.html_safe %><%= link_to t('buttons.upcoming_transactions.text'), upcoming_transactions_path, { :class => cl } %><%= li_suff.html_safe %>

@@ -1,5 +1,13 @@
 <% if user_signed_in? %>
-  <div class="nav-item d-none d-md-block text-center float-right" style="position: absolute; right: 120px;">
+  <div class="nav-item d-none d-lg-block text-center float-right" style="position: absolute; right: 120px;">
+    <a class="text-secondary nav-link float-right" href="<%= budgets_path %>" title="Budgets">
+      <span style="font-size: 25px;">
+        <%= fa_icon "chart-bar" %>
+      </span>
+      <br />
+      Budgets
+    </a>
+
     <a class="text-secondary nav-link float-right" href="<%= schedules_path %>" title="Schedules">
       <span style="font-size: 25px;">
         <%= fa_icon "calendar-alt" %>
