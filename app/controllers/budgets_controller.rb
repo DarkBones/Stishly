@@ -1,6 +1,8 @@
 class BudgetsController < ApplicationController
 
 	def index
+		@start_date = Schedule.get_previous_main_date(current_user)
+		@end_date = Schedule.get_next_main_date(current_user)
 		@budgets = Budget.get_budgets(current_user)
 	end
 

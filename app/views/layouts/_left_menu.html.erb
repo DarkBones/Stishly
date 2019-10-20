@@ -35,20 +35,21 @@ end
         <hr />
 
         <%= render partial: "left_menu/section", locals: {
-          title: "Spending Balance",
-          section_layout: "left_menu/spending_balance",
-          locals: {},
-        } %>
-
-        <hr />
-
-        <%= render partial: "left_menu/section", locals: {
           title: "Upcoming Schedules",
           section_layout: "left_menu/upcoming_schedules",
           locals: {
-
           }
         } %>
+
+        <% if current_user.budgets.length > 0 %>
+          <hr />
+          <%= render partial: "left_menu/section", locals: {
+            title: "Budgets",
+            section_layout: "left_menu/budgets",
+            locals: {
+            }
+          } %>
+        <% end %>
       <% end %>
 
     </div>

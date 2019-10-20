@@ -62,6 +62,18 @@ class Schedule < ApplicationRecord
     end
   end
 
+  def self.get_next_main_date(user)
+    tz = TZInfo::Timezone.get(user.timezone)
+
+    schedule = user.schedules.where(type_of: 'main').take
+
+    unless schedule.nil?
+      return tz.utc_to_local(schedule.next_occurrence_utc).to_date
+    else
+      return tz.utc_to_local(Time.now.utc).at_beginning_of_month + 1.month
+    end
+  end
+
   # returns the next occurrence of the main schedule
   # if the user doesn't have a main schedule, it returns the first of the next month
   def self.get_all_transactions_until_date(user)

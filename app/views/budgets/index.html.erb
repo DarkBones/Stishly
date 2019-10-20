@@ -9,6 +9,13 @@
 			</h2>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-12">
+			<h5>
+				From <%= User.format_date(@start_date) %> to <%= User.format_date(@end_date) %>
+			</h5>
+		</div>
+	</div>
 
 	<div id="new-budget-form" style="display: none;">
 		<%= form_with(model: Budget.new) do |f| %>

@@ -1,0 +1,15 @@
+<% budgets = Budget.get_budgets(current_user) %>
+
+<% budgets.each do |budget| %>
+	<a href="<%= budgets_path %>">
+		<div 
+		class="left-menu-budget text-center"
+		title="<%= budget.category.name %>: <%= balance(budget.spent, current_user.currency) %> / <%= balance(budget.amount, current_user.currency) %>">
+			<div class="progress progress-bar-vertical rounded-circle">
+				<div class="progress-bar bg-<%= budget.color %>" role="progressbar" aria-valuenow="<%= budget.percentage %>" aria-valuemin="0" aria-valuemax="100" style="height: <%= budget.percentage %>%;">
+		    </div>
+			</div>
+		    <%= fa_icon budget.category.decorate.symbol, class: "category-symbol" %>
+		</div>
+	</a>
+<% end %>
