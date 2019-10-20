@@ -6,8 +6,6 @@ class Budget < ApplicationRecord
 
 	attr_accessor :spent, :percentage, :color, :line_chart_data
 
-	validates :category_id, presence: { message: I18n.t('account.failure.no_name') }
-
 	def self.create_budget(user, params)
 		currency = Money::Currency.new(user.currency)
 		
@@ -33,6 +31,8 @@ class Budget < ApplicationRecord
 	def self.update(user, budget, params)
 		currency = Money::Currency.new(user.currency)
 
+		id = budget.id
+
 		category = user.categories.friendly.find(params[:category_id])
 		amount = params[:amount].to_f * currency.subunit_to_unit
 
@@ -40,6 +40,8 @@ class Budget < ApplicationRecord
 			category_id: category.id,
 			amount: amount,
 		})
+
+		budget = user.budgets.find(id)
 
 		return budget
 	end
@@ -61,7 +63,12 @@ class Budget < ApplicationRecord
 		user.budgets.order(:amount).includes(:category).reverse.each do |budget|
 			spent = all_transactions.where(category_id: budget.category_id).sum(:user_currency_amount) * -1
 			spent = Category.get_amount(budget.category, start_date: start_date) * -1
-			percentage = ((100.to_f / budget.amount) * spent).round
+			
+			unless budget.amount <= 0
+				percentage = ((100.to_f / budget.amount) * spent).round
+			else
+				percentage = 1000
+			end
 
 			if percentage < 0
 				percentage = 0

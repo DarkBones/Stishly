@@ -32,7 +32,7 @@ module ApplicationHelper
 
   def format_form_errors(obj, errors)
     result = "Failed to save #{obj}"
-    result += "<ul>"
+    result += "<ul class='list-unstyled'>"
 
     errors.each do |attribute, message|
       result += "<li>#{attribute}: #{message}</li>"

@@ -1,4 +1,3 @@
-<% currency = Money::Currency.new(current_user.currency) %>
 <div class="container">
 	<div class="row">
 		<div class="col-12">
@@ -43,76 +42,7 @@
 	</div>
 
 	<div id="budgets_list">
-		<% @budgets.each do |budget| %>
-			<% category = budget.category.decorate %>
-			<div class="row pt-4 clickable" onclick="showBudgetDetails('<%= budget.hash_id %>')">
-				<div class="col-12 col-sm-6 col-md-5 col-xl-3">
-					<%= fa_icon budget.category.decorate.symbol, class: "rounded-circle category", :style => 'background-color: ' + budget.category.decorate.color + '; padding: 5px;' %>
-					<%= category.name %>
-				</div>
-				<div class="col-12 col-sm-6 col-md-7 col-xl-9 py-2">
-					<div class="progress" title="<%= balance(budget.spent, current_user.currency) %> / <%= balance(budget.amount, current_user.currency) %>">
-					  <div class="progress-bar bg-<%= budget.color %>" role="progressbar" style="width: <%= budget.percentage %>%" aria-valuenow="<%= budget.percentage %>" aria-valuemin="0" aria-valuemax="100">
-					  	<%= budget.percentage %>%
-					  </div>
-					</div>
-				</div>
-			</div>
-
-			<div class="budget-row" id="budget_<%= budget.hash_id %>" style="display: none;">
-				<div class="row">
-					<div class="col-12 col-sm-6 col-md-5 col-xl-3">
-						<button type="button" class="budget-edit-button mt-2 btn btn-secondary" onclick="showBudgetEditForm(this)">
-							Edit
-						</button>
-						<div class="budget-edit-form rounded bg-light" id="budget_edit_<%= budget.hash_id %>" style="display: none;">
-							<%= form_with(model: budget) do |f| %>
-								<div class="row py-2">
-									<div class="col-12">
-										<%= f.label :category %><br />
-							      <%= render partial: "/shared/custom_dropdown_categories", locals: {
-							        selected: budget.category,
-							        options: Category.get_user_categories(current_user, true, false, false, "Select a category"),
-							        input_target: "#category_id_budget_#{budget.hash_id}",
-							        button_type: "btn-light",
-							        id_suff: "_budget_#{budget.hash_id}",
-							        blank_string: "Select a category",
-							      } %>
-							      <%= f.hidden_field :category_id, :id => "category_id_budget_#{budget.hash_id}_budget_#{budget.hash_id}", value: budget.category.hash_id %>
-									</div>
-								</div>
-								<div class="row py-2">
-									<div class="col-12">
-										<%= f.label :budget %>
-					    			<%= f.number_field :amount, class: "form-control", value: budget.amount / currency.subunit_to_unit %>
-									</div>
-								</div>
-
-								<div class="row py-2">
-									<div class="col-6">
-										<%= f.button "Delete", :class => 'btn btn-danger', name: "delete", data: {disable_with: "Delete"} %>
-									</div>
-									<div class="col-6">
-										<%= f.button "Save", :class => 'btn float-right btn-primary', name: "update", data: {disable_with: "Save"} %>
-									</div>
-								</div>
-							<% end %>
-						</div>
-					</div>
-					<div class="col-12 col-sm-6 col-md-7 col-xl-9 py-2">
-						<h3>
-							<%= budget.category.name %>
-						</h3>
-						<p>
-							<%= balance(budget.spent, current_user.currency, "cents") %> / <%= balance(budget.amount, current_user.currency, "cents") %>
-						</p>
-						<%= area_chart(budget.line_chart_data, title: budget.category.name, prefix: currency.symbol, height: "200px") %>
-					</div>
-				</div>
-			</div>
-
-			<hr />
-		<% end %>
+		<%= render partial: "budgets/budgets_list", :locals => { :budgets => @budgets } %>
 	</div>
 
 </div>

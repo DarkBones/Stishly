@@ -12,9 +12,13 @@ class BudgetsController < ApplicationController
 		budget = current_user.budgets.friendly.find(params[:id])
 		if params[:delete].nil?
 			@budget = Budget.update(current_user, budget, budget_params)
+			render "create"
 		else
-			puts "DELETE"
+			@budget = budget.hash_id
+			budget.destroy
+			render "destroy"
 		end
+
 	end
 
 private

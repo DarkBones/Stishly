@@ -1,1 +1,14 @@
-alert("hello");
+<% if @budget.invalid? %>
+	triggerNotice("<%= format_form_errors("budget", @budget.errors) %>", true);
+<% else %>
+	$("#budgets_list").html("");
+	insertAjaxSpinner($("#budgets_list"));
+	$.ajax({
+		type: "GET",
+		dataType: "html",
+		url: "/api/v1/render/budgets_list",
+		success(data){
+			$("#budgets_list").html(data);
+		}
+	});
+<% end %>

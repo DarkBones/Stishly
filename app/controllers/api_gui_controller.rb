@@ -28,6 +28,10 @@ class ApiGuiController < BaseApiBrowserController
 
   end
 
+  def render_budgets_list
+    render partial: "budgets/budgets_list", :locals => { :budgets => Budget.get_budgets(current_user) }
+  end
+
   def render_category
     category = current_user.categories.friendly.find(params[:id]).decorate
     render partial: "categories/category", :locals => {:category => category}

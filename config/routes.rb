@@ -392,6 +392,10 @@ Rails.application.routes.draw do
       end
       #/api/v1/render
       scope '/render' do
+        #/api/v1/render/budgets_list
+        scope '/budgets_list' do
+          get '/', to: 'api_gui#render_budgets_list'
+        end
         #/api/v1/render/account_overview_charts/:start/:end(/:account)
         scope '/account_overview_charts/:start/:end(/:account)' do
           get '/', to: 'api_gui#render_account_overview_charts'
