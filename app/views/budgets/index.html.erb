@@ -10,19 +10,53 @@
 		</div>
 	</div>
 
-	<div class="row">
+	<div id="new-budget-form">
 		<%= form_with(model: Budget.new) do |f| %>
-			<%= f.label :category %><br />
-      <%= render partial: "/shared/custom_dropdown_categories", locals: {
-        selected: nil,
-        options: Category.get_user_categories(current_user, true, true),
-        input_target: '#category_id_budget',
-        button_type: "btn-light",
-        id_suff: "_budget"
-      } %>
-      <% categories = Category.get_user_categories(current_user, true) %>
-      <%= f.text_field :category_id, :id => "category_id_budget_budget" %>
+			<div class="row">
+
+				<div class="col-12 col-lg-4 py-2">
+					<%= f.label :category %><br />
+		      <%= render partial: "/shared/custom_dropdown_categories", locals: {
+		        selected: nil,
+		        options: Category.get_user_categories(current_user, true, false, false, "Select a category"),
+		        input_target: '#category_id_budget',
+		        button_type: "btn-light",
+		        id_suff: "_budget",
+		        blank_string: "Select a category",
+		      } %>
+		      <%= f.hidden_field :category_id, :id => "category_id_budget_budget" %>
+		    </div>
+
+		    <div class="col-12 col-lg-5 py-2">
+		    	<%= f.label :budget %>
+		    	<%= f.number_field :amount, class: "form-control" %>
+		    </div>
+
+		    <div class="col-12 col-lg-3 py-2">
+		    	<%= f.label :submit, "&nbsp;".html_safe %><br />
+		    	<%= f.button "Save", :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " Creating Budget ..."} %>
+		    </div>
+
+			</div>
 		<% end %>
 	</div>
+
+	<% @budgets.each do |budget| %>
+		<% category = budget.category.decorate %>
+		<div class="row py-4">
+			<div class="col-12 col-sm-6 col-md-5 col-xl-3">
+				<%= fa_icon budget.category.decorate.symbol, class: "rounded-circle category", :style => 'background-color: ' + budget.category.decorate.color + '; padding: 5px;' %>
+				<%= category.name %>
+				<%= budget.spent %>
+			</div>
+			<div class="col-12 col-sm-6 col-md-7 col-xl-9 py-2">
+				<div class="progress">
+				  <div class="progress-bar bg-<%= budget.color %>" role="progressbar" style="width: <%= budget.percentage %>%" aria-valuenow="<%= budget.percentage %>" aria-valuemin="0" aria-valuemax="100">
+				  	<%= budget.percentage %>%
+				  </div>
+				</div>
+			</div>
+		</div>
+	<% end %>
 
 </div>

@@ -61,7 +61,9 @@ private
 		def get_transactions(schedule, period, date)
 			transactions = []
 
-			schedule.user_transactions.where(parent_id: nil).each do |transaction|
+			sch_transactions = schedule.user_transactions.where(parent_id: nil)
+
+			sch_transactions.each do |transaction|
 				t = transaction.dup
 
 				# check if transaction was edited

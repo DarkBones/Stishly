@@ -42,6 +42,40 @@ class Schedule < ApplicationRecord
   belongs_to :user
   has_and_belongs_to_many :user_transactions, foreign_key: "schedule_id", class_name: "Transaction", dependent: :destroy
 
+  # returns the previous run date of the user's main schedule
+  # if the user doesn't have a main schedule, it returns the first of the current month
+  def self.get_previous_main_date(user)
+    tz = TZInfo::Timezone.get(user.timezone)
+
+    schedule = user.schedules.where(type_of: 'main').take
+
+    unless schedule.nil?
+      previous_occurrence = ScheduleOccurrence.where(schedule_id: schedule.id).order(:occurrence_utc).reverse.first
+
+      if previous_occurrence.nil?
+        return tz.utc_to_local(Time.now.utc).at_beginning_of_month
+      else
+        return tz.utc_to_local(previous_occurrence.occurrence_utc)
+      end
+    else
+      return tz.utc_to_local(Time.now.utc).at_beginning_of_month
+    end
+  end
+
+  # returns the next occurrence of the main schedule
+  # if the user doesn't have a main schedule, it returns the first of the next month
+  def self.get_all_transactions_until_date(user)
+    tz = TZInfo::Timezone.get(user.timezone)
+
+    schedule = user.schedules.where(type_of: 'main').take
+
+    unless schedule.nil?
+      return tz.utc_to_local(schedule.next_occurrence_utc)
+    else
+      return tz.utc_to_local(Time.now.utc).at_beginning_of_month + 1.month
+    end
+  end
+
   def self.get_all_transactions_until_date(user, until_date, start_date=nil)
     transactions = self.get_scheduled_transactions_from_cache(user)
     return transactions unless transactions.nil?

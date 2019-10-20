@@ -63,7 +63,7 @@ class Category < ApplicationRecord
     category.destroy
   end
 
-  def self.get_user_categories(current_user, as_array=false, include_blank=false, include_uncategorised = true)
+  def self.get_user_categories(current_user, as_array=false, include_blank=false, include_uncategorised = true, blank_string = "- any -")
     if as_array
       tree = Hash.new { |h,k| h[k] = { :name => nil, :children => [ ], :children_paths => "", :parent_id => nil } }
 
@@ -71,7 +71,7 @@ class Category < ApplicationRecord
 
       if include_blank
         tree[idx][:id] = ""
-        tree[idx][:name] = "- any -"
+        tree[idx][:name] = blank_string
         tree[idx][:color] = ""
         tree[idx][:symbol] = "any"
         tree[idx][:parent_id] = nil
@@ -141,6 +141,47 @@ class Category < ApplicationRecord
     end
 
     return result
+  end
+
+  def self.get_amount(category, start_date: nil)
+    ids = self.get_ids(category)
+    
+    if start_date.nil?
+      return category.user.transactions.where("
+        is_scheduled = false
+        AND local_datetime IS NOT NULL
+        AND is_main = true
+        AND is_cancelled = false
+        AND is_queued = false
+        AND scheduled_date IS NULL
+        AND category_id in (?)
+        ", ids).sum(:user_currency_amount)
+    else
+      return category.user.transactions.where("
+        is_scheduled = false
+        AND local_datetime IS NOT NULL
+        AND is_main = true
+        AND is_cancelled = false
+        AND is_queued = false
+        AND scheduled_date IS NULL
+        AND category_id in (?)
+        AND local_datetime >= ?
+        ", ids, start_date).sum(:user_currency_amount)
+    end
+
+  end
+
+private
+    
+  # returns a collection of ids of the given category and its children
+  def self.get_ids(category, ids=[])
+    ids.push(category.id)
+
+    category.children.each do |child|
+      ids += self.get_ids(child)
+    end
+
+    return ids
   end
 
 end

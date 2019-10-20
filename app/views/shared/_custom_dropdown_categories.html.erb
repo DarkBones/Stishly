@@ -1,8 +1,9 @@
 <% selected = selected.decorate unless selected.nil? %>
+<% blank_string ||= "- any -" %>
 <div class="dropdown">
   <button class="btn <%= button_type %> dropdown-toggle text-left" type="button" id="categories-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" input-target="<%= input_target + id_suff %>">
     <% if selected.nil? %>
-      <%= "- any -" %>
+      <%= blank_string %>
     <% else %>
       <%= fa_icon selected.symbol, class: "rounded-circle", :style => 'background-color: ' + selected.color + '; color: white; padding: 5px;' %> <%= selected.name %>
     <% end %>

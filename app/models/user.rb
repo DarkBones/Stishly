@@ -66,6 +66,7 @@ class User < ApplicationRecord
   has_many :sch_transactions
   belongs_to :country, optional: :true
   has_many :notifications
+  has_many :budgets
 
   validates :first_name, :last_name, presence: true
   validates :email, uniqueness: true
