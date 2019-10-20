@@ -17,10 +17,14 @@ module ApplicationHelper
     end
 
     if balance[1] && span_class != "none"
-      result += ".<span"
-      result += " class=\"#{span_class}\"" if span_class != ""
-      result += " id=\"#{id}\"" if id != ""
-      result += ">#{balance[1]}</span>"
+      if span_class.length > 0 || id.length > 0
+        result += ".<span"
+        result += " class=\"#{span_class}\"" unless span_class.length == 0
+        result += " id=\"#{id}\"" unless id.length == 0
+        result += ">#{balance[1]}</span>"
+      else
+        result += ".#{balance[1]}"
+      end
     end
 
     return result.html_safe

@@ -1,17 +1,25 @@
 class BudgetsController < ApplicationController
 
 	def index
-		#@budgets = current_user.budgets.order(:amount).includes(:category).reverse
 		@budgets = Budget.get_budgets(current_user)
 	end
 
 	def create
-		Budget.create_budget(current_user, create_params)
+		@budget = Budget.create_budget(current_user, budget_params)
+	end
+
+	def update
+		budget = current_user.budgets.friendly.find(params[:id])
+		if params[:delete].nil?
+			@budget = Budget.update(current_user, budget, budget_params)
+		else
+			puts "DELETE"
+		end
 	end
 
 private
 
-	def create_params
+	def budget_params
 		params.require(:budget).permit(
 			:category_id,
 			:amount,

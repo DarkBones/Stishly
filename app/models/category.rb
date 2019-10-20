@@ -143,9 +143,34 @@ class Category < ApplicationRecord
     return result
   end
 
-  def self.get_amount(category, start_date: nil)
+  def self.get_amount(category, start_date: nil)    
+    transactions = self.get_transactions(category, start_date: start_date)
+    return transactions.sum(:user_currency_amount)
+  end
+
+  def self.get_historic_data(category, start_date: nil)
+    tz = TZInfo::Timezone.get(category.user.timezone)
+    currency = Money::Currency.new(category.user.currency)
+
+    transactions = self.get_transactions(category, start_date: start_date)
+    start_date ||= transactions.first.local_datetime
+
+    data = {}
+    current_date = start_date
+    stopper = 100
+    while current_date < tz.utc_to_local(Time.now.utc)
+      data[current_date.strftime("%d-%b-%Y")] = (transactions.where("date(local_datetime) <= ?", current_date).sum(:user_currency_amount) * -1).to_f / currency.subunit_to_unit
+      current_date += 1.day
+      stopper -= 1
+      break if stopper < 0
+    end
+
+    return data
+  end
+
+  def self.get_transactions(category, start_date: nil)
     ids = self.get_ids(category)
-    
+
     if start_date.nil?
       return category.user.transactions.where("
         is_scheduled = false
@@ -155,7 +180,7 @@ class Category < ApplicationRecord
         AND is_queued = false
         AND scheduled_date IS NULL
         AND category_id in (?)
-        ", ids).sum(:user_currency_amount)
+        ", ids).order(:local_datetime)
     else
       return category.user.transactions.where("
         is_scheduled = false
@@ -166,7 +191,7 @@ class Category < ApplicationRecord
         AND scheduled_date IS NULL
         AND category_id in (?)
         AND local_datetime >= ?
-        ", ids, start_date).sum(:user_currency_amount)
+        ", ids, start_date).order(:local_datetime)
     end
 
   end
