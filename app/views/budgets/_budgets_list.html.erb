@@ -41,7 +41,7 @@
 							<div class="row py-2">
 								<div class="col-12">
 									<%= f.label :budget %>
-				    			<%= f.number_field :amount, class: "form-control", value: budget.amount / currency.subunit_to_unit %>
+				    			<%= f.number_field :amount, class: "form-control", value: budget.amount.to_f / currency.subunit_to_unit, step: "any" %>
 								</div>
 							</div>
 
