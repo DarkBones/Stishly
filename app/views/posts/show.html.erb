@@ -1,3 +1,8 @@
+<%= content_for :meta_title, "#{@post.title}" %>
+<%= content_for :meta_robots, "index, follow" %>
+<%= content_for :meta_description, @post.body.html_safe.truncate(160) %>
+<%= content_for :meta_keywords, @post.tags %>
+
 <p id="notice"><%= notice %></p>
 
 <p>
