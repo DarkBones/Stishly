@@ -66,7 +66,7 @@ module TransactionHelper
       account = current_user.accounts.find(transaction.account_id)
       currency = transaction.currency
 
-      params[:from_account_name] = transaction.account.name
+      params[:from_account_name] = transaction.account.slug
       params[:to_account_name] = params[:from_account_name]
 
       if transaction.transfer_account_id
@@ -84,7 +84,7 @@ module TransactionHelper
     else
       params[:currency_conversion_style] = "display: none;"
       params[:currency_conversion_class] = "default-hide"
-      params[:from_account_name] = account.name
+      params[:from_account_name] = account.slug
       params[:to_account_name] = params[:from_account_name]
     end
 

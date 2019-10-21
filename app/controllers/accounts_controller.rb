@@ -12,7 +12,7 @@ class AccountsController < ApplicationController
       @active_account = Account.get_from_name(params[:id], current_user) or not_found
 
       add_breadcrumb @active_account.name, account_path(@active_account.slug)
-      add_breadcrumb "Overview", account_path(@active_account.slug) + "/overview"
+      add_breadcrumb "Insights", account_path(@active_account.slug) + "/overview"
 
       @active_account = @active_account.decorate
 
@@ -28,7 +28,7 @@ class AccountsController < ApplicationController
     unless current_user.subscription == 'free'
       @active_account = Account.create_summary_account(current_user, true).decorate
 
-      add_breadcrumb "Overview", "accounts_overview"
+      add_breadcrumb "Insights", "accounts_overview"
 
       @history_data = ChartDatum.user_history(current_user)
       @category_data = ChartDatum.user_categories(current_user)

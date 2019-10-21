@@ -76,7 +76,7 @@ class Transaction < ApplicationRecord
   scope :to_date, ->(to_date) { where("DATE(local_datetime) <= DATE(?)", to_date.to_date) }
   scope :from_amount, ->(from_amount) { where("user_currency_amount >= ?", from_amount) }
   scope :to_amount, ->(to_amount) { where("user_currency_amount >= ?", to_amount) }
-  scope :account, ->(account_name) { joins(:account).where("accounts.name = ?", account_name) }
+  scope :account, ->(account_name) { joins(:account).where("accounts.slug = ?", account_name) }
   scope :is_scheduled, ->(scheduled) { where("is_scheduled = ?", scheduled) }
   scope :is_queued, ->(queued) { where("is_queued = ?", queued) }
   scope :is_balancer, -> (balancer) { where("is_balancer = ?", balancer) }

@@ -26,7 +26,7 @@
   triggerNotice('<%= t("account.confirmations.confirmed") %>', false);
 
   // add the new account in the transaction accounts options
-  var o = new Option("<%= @account.name %> (<%= @account.currency %>)", "<%= @account.name %>");
+  var o = new Option("<%= @account.name %> (<%= @account.currency %>)", "<%= @account.slug %>");
   $(o).html("<%= @account.name %> (<%= @account.currency %>)");
   $("#transactionform #transaction_account, #transactionform #transaction_from_account, #transactionform #transaction_to_account").prepend(o);
 

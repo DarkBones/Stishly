@@ -12,9 +12,9 @@ if($("#transactions_list").length > 0){
 		insert = true;
 	} else {
 		var accounts = []
-		accounts.push("<%= transaction.account.name %>");
+		accounts.push("<%= transaction.account.slug %>");
 		<% unless transaction.transfer_transaction.nil? %>
-			accounts.push("<%= transaction.transfer_transaction.account.name %>");
+			accounts.push("<%= transaction.transfer_transaction.account.slug %>");
 		<% end %>
 		
 		if(accounts.includes(activeAccount)) {

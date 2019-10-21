@@ -61,12 +61,12 @@ function fillTransactionDetails(obj) {
 			}
 
 			// Account(s)
-			$root.find("#transaction_account").val(data.account.name);
-			$root.find("#transaction_from_account").val(data.account.name);
+			$root.find("#transaction_account").val(data.account.slug);
+			$root.find("#transaction_from_account").val(data.account.slug);
 			$root.find("#transaction_account").trigger("change");
 			$root.find("#transaction_from_account").trigger("change");
 			if(data.transfer_account) {
-				$root.find("#transaction_to_account").val(data.transfer_account.name);
+				$root.find("#transaction_to_account").val(data.transfer_account.slug);
 				$root.find("#transaction_to_account").trigger("change");
 			}
 
@@ -101,7 +101,11 @@ function fillTransactionDetails(obj) {
 				$root.find("#transaction_transactions").val(transactions);
 				$root.find("#transaction_transactions").trigger("keyup");
 			} else {
-				$root.find("#transaction_amount").val(data.amount_f);
+				if(data.transfer_account) {
+					$root.find("#transaction_amount").val(data.amount_f * -1);
+				} else {
+					$root.find("#transaction_amount").val(data.amount_f);
+				}
 			}
 
 			// Currency

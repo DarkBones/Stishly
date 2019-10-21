@@ -1,6 +1,8 @@
 class ApiGuiController < BaseApiBrowserController
 
   def render_account_overview_charts
+    currency = Money::Currency.new(@user.currency)
+
     start_date = params[:start]
     end_date = params[:end]
     unless params[:account].nil?
@@ -24,7 +26,11 @@ class ApiGuiController < BaseApiBrowserController
       category_data_income = ChartDatum.user_categories(current_user, start_date: start_date, end_date: end_date, type: "income")
     end
 
-    render partial: "accounts/overview_charts", :locals => { :history_data => history_data, :category_data => category_data, :category_data_income => category_data_income }
+    render partial: "accounts/overview_charts", :locals => { 
+      :history_data => history_data, 
+      :category_data => category_data, 
+      :category_data_income => category_data_income,
+      :prefix => currency.symbol, }
 
   end
 
@@ -44,6 +50,8 @@ class ApiGuiController < BaseApiBrowserController
   end
 
   def render_account_title_balance
+    puts params.to_yaml
+    puts 1/0
     unless params[:account].nil?
       account = Account.get_from_name(params[:account], current_user).decorate
       html = Money.new(account.balance, account.currency).format
@@ -94,12 +102,12 @@ class ApiGuiController < BaseApiBrowserController
 
     transactions = []
 
-    if params[:account_name].nil? || params[:account_name] == transaction.account.name
+    if params[:account_name].nil? || params[:account_name] == transaction.account.slug
       transactions.push(render_to_string partial: 'accounts/transaction', :locals => { :active_account => account, :transaction => transaction })
     end
 
     unless transfer_transaction.nil?
-      if params[:account_name].nil? || params[:account_name] == transfer_transaction.account.name
+      if params[:account_name].nil? || params[:account_name] == transfer_transaction.account.slug
         transactions.push(render_to_string partial: 'accounts/transaction', :locals => { :active_account => account, :transaction => transfer_transaction }) unless transaction.transfer_transaction.nil?
       end
     end
