@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: budgets
+#
+#  id          :bigint           not null, primary key
+#  user_id     :bigint
+#  category_id :bigint
+#  amount      :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  hash_id     :string(255)
+#
+
 class Budget < ApplicationRecord
 	include Friendlyable
 

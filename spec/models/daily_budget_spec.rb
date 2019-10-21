@@ -9,6 +9,7 @@
 #  currency   :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  local_date :date
 #
 
 require 'rails_helper'

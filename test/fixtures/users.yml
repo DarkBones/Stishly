@@ -38,6 +38,7 @@
 #  stripe_id              :string(255)
 #  free_trial_eligable    :boolean          default(TRUE)
 #  last_plan_check        :datetime
+#  is_admin               :boolean          default(FALSE)
 #
 
 #----------------------------------------------------------------------
