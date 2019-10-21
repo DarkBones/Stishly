@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   resources :posts
   resources :budgets
 
+  match "/404", to: "errors#not_found", via: :all
+  match "/422", to: "errors#unacceptable", via: :all
+  match "/500", to: "errors#internal_server_error", via: :all
+
   if Rails.env.production?
     match "/split" => Split::Dashboard, anchor: false, via: [:get, :post, :delete], constraints: -> (request) do
       request.env['warden'].user.is_admin?

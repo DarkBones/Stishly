@@ -13,6 +13,7 @@ module MoneyManager
 
     config.assets.initialize_on_precompile = false
     config.autoload_paths += %W(#{config.root}/lib)
+    config.exceptions_app = self.routes
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
