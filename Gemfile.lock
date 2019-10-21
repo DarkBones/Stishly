@@ -100,6 +100,7 @@ GEM
       railties (>= 3.1)
     bootstrap3-datetimepicker-rails (4.14.30)
       momentjs-rails (>= 2.8.1)
+    breadcrumbs_on_rails (3.0.1)
     builder (3.2.3)
     bullet (6.0.1)
       activesupport (>= 3.0.0)
@@ -458,6 +459,7 @@ DEPENDENCIES
   bootstrap-slider-rails
   bootstrap-social-rails
   bootstrap3-datetimepicker-rails (~> 4.14.30)
+  breadcrumbs_on_rails
   bullet
   byebug
   capybara (>= 2.15)

@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  add_breadcrumb "Posts", :posts_path
+
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
@@ -11,6 +13,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    add_breadcrumb @post.title, post_path(@post), :title => "Back to the Index"
   end
 
   # GET /posts/new

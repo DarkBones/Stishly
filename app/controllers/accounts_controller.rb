@@ -1,5 +1,7 @@
 class AccountsController < ApplicationController
 
+  add_breadcrumb "Accounts", :accounts_path
+
   def destroy
     Account.delete(current_user.accounts.friendly.find(params[:id]))
     redirect_to "/accounts", notice: "Account deleted"
@@ -41,6 +43,9 @@ class AccountsController < ApplicationController
 
   def show
     @active_account = Account.get_from_name(params[:id], current_user) or not_found
+
+    add_breadcrumb @active_account.name, account_path(@active_account)
+
     @active_account = @active_account.decorate
 
     #@active_account = current_user.accounts.where(name: params[:id]).take.decorate

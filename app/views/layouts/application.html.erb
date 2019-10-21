@@ -70,6 +70,7 @@
             </div>
           <% end %>
           <div id="content" class="<%= "in" if !user_signed_in? || @hide_sidebar %>">
+            <%= render_breadcrumbs %>
             <%= yield %>
             <div id="ajax_spinner_template" class="hidden">
               <div class="ajax_spinner">
