@@ -1,6 +1,10 @@
 <% if @budget.invalid? %>
 	triggerNotice("<%= format_form_errors("budget", @budget.errors) %>", true);
 <% else %>
+	$("#categories-dropdown").html("Select a category")
+	$("#category_id_budget_budget").val("");
+	$("#category_id_budget_budget").val("");
+
 	$("#budgets_list").html("");
 	insertAjaxSpinner($("#budgets_list"));
 	$.ajax({
