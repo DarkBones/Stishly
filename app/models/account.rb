@@ -23,7 +23,7 @@ class Account < ApplicationRecord
 
   
   validates :name, presence: { message: I18n.t('account.failure.no_name') }
-  validates :name, format: { without: /[-\.~:\/\?#\[\]@!\$&'\(\)\*\+,;={}"]/, message: I18n.t('account.failure.special_characters') }
+  #validates :name, format: { without: /[-\.~:\/\?#\[\]@!\$&'\(\)\*\+,;={}"]/, message: I18n.t('account.failure.special_characters') }
   validates :slug, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('account.failure.already_exists') }
   validates :currency, presence: true
   validate :plan, :on => :create
