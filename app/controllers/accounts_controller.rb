@@ -10,6 +10,10 @@ class AccountsController < ApplicationController
   def overview
     unless current_user.subscription == 'free'
       @active_account = Account.get_from_name(params[:id], current_user) or not_found
+
+      add_breadcrumb @active_account.name, account_path(@active_account.slug)
+      add_breadcrumb "Overview", account_path(@active_account.slug) + "/overview"
+
       @active_account = @active_account.decorate
 
       @history_data = ChartDatum.account_history(@active_account)
@@ -23,6 +27,8 @@ class AccountsController < ApplicationController
   def overview_all
     unless current_user.subscription == 'free'
       @active_account = Account.create_summary_account(current_user, true).decorate
+
+      add_breadcrumb "Overview", "accounts_overview"
 
       @history_data = ChartDatum.user_history(current_user)
       @category_data = ChartDatum.user_categories(current_user)
@@ -44,7 +50,7 @@ class AccountsController < ApplicationController
   def show
     @active_account = Account.get_from_name(params[:id], current_user) or not_found
 
-    add_breadcrumb @active_account.name, account_path(@active_account)
+    add_breadcrumb @active_account.name, account_path(@active_account.slug)
 
     @active_account = @active_account.decorate
 
@@ -157,6 +163,9 @@ class AccountsController < ApplicationController
   def settings
     @active_account = Account.get_from_name(params[:id], current_user) or not_found
     @active_account = @active_account.decorate
+
+    add_breadcrumb @active_account.name, account_path(@active_account.slug)
+    add_breadcrumb "Settings", account_path(@active_account.slug) + "/settings"
   end
 
   private
