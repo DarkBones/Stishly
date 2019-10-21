@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_19_201411) do
+ActiveRecord::Schema.define(version: 2019_10_21_142655) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -131,9 +131,10 @@ ActiveRecord::Schema.define(version: 2019_10_19_201411) do
     t.text "body"
     t.string "thumbnail"
     t.date "published_on"
-    t.string "hash_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_posts_on_slug", unique: true
   end
 
   create_table "schedule_occurrences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

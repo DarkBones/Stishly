@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  #resources :posts
+  resources :posts
   resources :budgets
 
   if Rails.env.production?

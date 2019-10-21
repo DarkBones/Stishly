@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
-	include Friendlyable
+	extend FriendlyId
+  friendly_id :title, use: :slugged
 	
 end
