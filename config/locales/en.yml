@@ -30,6 +30,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    models:
+      account: Account
+  attributes:
+    account:
+      slug: name
+
   homepage:
     welcome_h1: Welcome to Stishly!
 

@@ -192,9 +192,7 @@ private
 
     # sort the hash by amount
     totals = totals.sort_by {|_key, value| value}.reverse
-
-    puts categories.to_yaml
-
+    
     return {
       total: total,
       currency: currency.iso_code,

@@ -31,7 +31,8 @@ bas_1: {
   description: 'My current account at AIB',
   is_default: true,
   currency: 'EUR',
-  hash_id: jvkHRHdOLFH-
+  hash_id: jvkHRHdOLFH-,
+  slug: "current-account"
 }
 
 bas_2: {
@@ -41,7 +42,8 @@ bas_2: {
   name: 'BOI account',
   is_default: false,
   currency: 'EUR',
-  hash_id: 3wPNUsSvn8YP
+  hash_id: 3wPNUsSvn8YP,
+  slug: boi-account
 }
 
 bas_3: {
@@ -51,7 +53,8 @@ bas_3: {
   name: 'Test account',
   is_default: false,
   currency: 'EUR',
-  hash_id: 9nmxbbf1tedH
+  hash_id: 9nmxbbf1tedH,
+  slug: test-account
 }
 
 bas_4: {
@@ -61,7 +64,8 @@ bas_4: {
   name: 'Test2 account',
   is_default: false,
   currency: 'EUR',
-  hash_id: o8xIIKx1MCzz
+  hash_id: o8xIIKx1MCzz,
+  slug: test2-account
 }
 
 bas_5: {
@@ -71,7 +75,8 @@ bas_5: {
   name: 'Test3 account',
   is_default: false,
   currency: 'EUR',
-  hash_id: SNilsHJqNRoi
+  hash_id: SNilsHJqNRoi,
+  slug: test3-account
 }
 
 bas_JPY: {
@@ -81,7 +86,8 @@ bas_JPY: {
   name: 'Test account JPY',
   is_default: false,
   currency: 'JPY',
-  hash_id: fEvv2r5o8DWD
+  hash_id: fEvv2r5o8DWD,
+  slug: test-account-jpy
 }
 
 bas_EUR: {
@@ -91,7 +97,8 @@ bas_EUR: {
   name: 'Test account EUR',
   is_default: false,
   currency: 'EUR',
-  hash_id: lnB1x_dVYcUC
+  hash_id: lnB1x_dVYcUC,
+  slug: test-account-eur
 }
 
 sab_1: {
@@ -100,7 +107,8 @@ sab_1: {
   name: 'Current account',
   is_default: true,
   currency: 'EUR',
-  hash_id: WXs-KoQggIPn
+  hash_id: WXs-KoQggIPn,
+  slug: current-account
 }
 
 sab_2: {
@@ -109,7 +117,8 @@ sab_2: {
   name: 'Test account',
   is_default: false,
   currency: 'EUR',
-  hash_id: x9Y_uoIIoSm7
+  hash_id: x9Y_uoIIoSm7,
+  slug: test-account
 }
 
 transactions_1: {
@@ -119,7 +128,8 @@ transactions_1: {
   name: 'Test account',
   is_default: true,
   currency: 'EUR',
-  hash_id: JV0-S53kDfqP
+  hash_id: JV0-S53kDfqP,
+  slug: test-account
 }
 
 currency_1: {
@@ -129,7 +139,8 @@ currency_1: {
   name: 'To be converted',
   is_default: true,
   currency: 'EUR',
-  hash_id: 3KJE47LB5WAE
+  hash_id: 3KJE47LB5WAE,
+  slug: to-be-converted
 }
 
 currency_2: {
@@ -139,7 +150,8 @@ currency_2: {
   name: 'Not to be converted',
   is_default: false,
   currency: 'EUR',
-  hash_id: MWNd2tsS-7vx
+  hash_id: MWNd2tsS-7vx,
+  slug: not-to-be-converted
 }
 
 endless_page: {
@@ -149,7 +161,8 @@ endless_page: {
   name: 'Endless Page',
   is_default: true,
   currency: 'EUR',
-  hash_id: KpI4Cq6dLiYo
+  hash_id: KpI4Cq6dLiYo,
+  slug: endless-page
 }
 
 destroy_1: {
@@ -159,7 +172,8 @@ destroy_1: {
   name: 'Destroy this account',
   is_default: true,
   currency: 'EUR',
-  hash_id: VHcUm4uC3HQk
+  hash_id: VHcUm4uC3HQk,
+  slug: destroy-this-account
 }
 
 destroy_2: {
@@ -169,7 +183,8 @@ destroy_2: {
   name: 'Destroy this account too',
   is_default: true,
   currency: 'EUR',
-  hash_id: NL8vuE74cLwP
+  hash_id: NL8vuE74cLwP,
+  slug: destroy-this-account-too
 }
 
 transactions_2: {
@@ -180,7 +195,8 @@ transactions_2: {
   is_default: true,
   currency: 'EUR',
   position: 0,
-  hash_id: Ac0zFCDl8ApZ
+  hash_id: Ac0zFCDl8ApZ,
+  slug: current-account
 }
 
 transactions_3: {
@@ -191,7 +207,8 @@ transactions_3: {
   is_default: false,
   currency: 'EUR',
   position: 1,
-  hash_id: sVRZ_GLdEeoA
+  hash_id: sVRZ_GLdEeoA,
+  slug: savings-account
 }
 
 transactions_4: {
@@ -202,7 +219,8 @@ transactions_4: {
   is_default: false,
   currency: 'JPY',
   position: 2,
-  hash_id: Gun-HUMqFV1c
+  hash_id: Gun-HUMqFV1c,
+  slug: jpy-account
 }
 
 search_1: {
@@ -213,7 +231,8 @@ search_1: {
   is_default: true,
   currency: 'EUR',
   position: 1,
-  hash_id: 5omVnzQ3EI28
+  hash_id: 5omVnzQ3EI28,
+  slug: current-account
 }
 
 search_2: {
@@ -224,7 +243,8 @@ search_2: {
   is_default: false,
   currency: 'EUR',
   position: 2,
-  hash_id: kzWuMfJkihAs
+  hash_id: kzWuMfJkihAs,
+  slug: savings-account
 }
 
 schedule_1: {
@@ -235,7 +255,8 @@ schedule_1: {
   is_default: true,
   currency: EUR,
   position: 1,
-  hash_id: 4NXlRl4jJ3x8
+  hash_id: 4NXlRl4jJ3x8,
+  slug: scheduled-transactions
 }
 
 schedule_2: {
@@ -246,7 +267,8 @@ schedule_2: {
   is_default: false,
   currency: EUR,
   position: 2,
-  hash_id: O0pIMO4iLPpO
+  hash_id: O0pIMO4iLPpO,
+  slug: savings-account
 }
 
 overlap_1: {
@@ -256,7 +278,8 @@ overlap_1: {
   name: Current,
   currency: EUR,
   position: 1,
-  hash_id: 1s94YnjvhVbg
+  hash_id: 1s94YnjvhVbg,
+  slug: current
 }
 
 overlap_2: {
@@ -266,7 +289,8 @@ overlap_2: {
   name: Current,
   currency: EUR,
   position: 1,
-  hash_id: H0GoUOf5kpzf
+  hash_id: H0GoUOf5kpzf,
+  slug: current
 }
 
 duplicate_transactions_1: {
@@ -276,7 +300,8 @@ duplicate_transactions_1: {
   name: Current Account,
   currency: EUR,
   position: 1,
-  hash_id: 067XMO7HZDkM
+  hash_id: 067XMO7HZDkM,
+  slug: current-account
 }
 
 duplicate_transactions_2: {
@@ -286,7 +311,8 @@ duplicate_transactions_2: {
   name: Savings,
   currency: EUR,
   position: 1,
-  hash_id: wfDLqjPvBA36
+  hash_id: wfDLqjPvBA36,
+  slug: savings
 }
 
 pause_schedules: {
@@ -296,7 +322,8 @@ pause_schedules: {
   name: Pause,
   currency: EUR,
   position: 1,
-  hash_id: ALlU8lMUEo99
+  hash_id: ALlU8lMUEo99,
+  slug: pause
 }
 
 schedules_ids: {
@@ -306,7 +333,8 @@ schedules_ids: {
   name: Period,
   currency: EUR,
   position: 1,
-  hash_id: v7j-kRI-BYWw
+  hash_id: v7j-kRI-BYWw,
+  slug: period
 }
 
 upcoming_transactions: {
@@ -317,7 +345,8 @@ upcoming_transactions: {
   currency: EUR,
   position: 1,
   account_type: spend,
-  hash_id: dp8OOKRR7oN2
+  hash_id: dp8OOKRR7oN2,
+  slug: upcoming
 }
 
 upcoming_transactions_dst: {
@@ -328,7 +357,8 @@ upcoming_transactions_dst: {
   currency: EUR,
   position: 1,
   account_type: spend,
-  hash_id: 5AvZnmUwXjij
+  hash_id: 5AvZnmUwXjij,
+  slug: upcoming
 }
 
 upcoming_transactions_run_one: {
@@ -339,7 +369,8 @@ upcoming_transactions_run_one: {
   currency: EUR,
   position: 1,
   account_type: spend,
-  hash_id: yrSlA1_MKmGg
+  hash_id: yrSlA1_MKmGg,
+  slug: current
 }
 
 upcoming_transactions_run_two: {
@@ -350,7 +381,8 @@ upcoming_transactions_run_two: {
   currency: EUR,
   position: 1,
   account_type: save,
-  hash_id: 4CXKfO3kYS8A
+  hash_id: 4CXKfO3kYS8A,
+  slug: saving
 }
 
 upcoming_transactions_run_three: {
@@ -361,7 +393,8 @@ upcoming_transactions_run_three: {
   currency: JPY,
   position: 1,
   account_type: save,
-  hash_id: phPl2M9Hlzk8
+  hash_id: phPl2M9Hlzk8,
+  slug: cash
 }
 
 update_transactions_one: {
@@ -371,7 +404,8 @@ update_transactions_one: {
   name: One,
   currency: EUR,
   position: 0,
-  hash_id: y6QQL0DdXfkL
+  hash_id: y6QQL0DdXfkL,
+  slug: one
 }
 
 update_transactions_two: {
@@ -381,7 +415,8 @@ update_transactions_two: {
   name: Two,
   currency: EUR,
   position: 0,
-  hash_id: JkaOFIZiUndH
+  hash_id: JkaOFIZiUndH,
+  slug: two
 }
 
 future_transactions_one: {
@@ -391,7 +426,8 @@ future_transactions_one: {
   name: One,
   currency: EUR,
   position: 0,
-  hash_id: EJI6ICiXi2XU
+  hash_id: EJI6ICiXi2XU,
+  slug: one
 }
 
 daily_budget_one: {
@@ -401,7 +437,8 @@ daily_budget_one: {
   name: Current,
   currency: EUR,
   position: 0,
-  hash_id: EJI6ICiXi2X5
+  hash_id: EJI6ICiXi2X5,
+  slug: current
 }
 
 daily_budget_two: {
@@ -411,7 +448,8 @@ daily_budget_two: {
   name: Cash,
   currency: EUR,
   position: 1,
-  hash_id: EJI6ICiXi2X6
+  hash_id: EJI6ICiXi2X6,
+  slug: cash
 }
 
 daily_budget_three: {
@@ -422,5 +460,6 @@ daily_budget_three: {
   currency: EUR,
   position: 2,
   hash_id: EJI6ICiXi2X7,
+  slug: savings,
   account_type: save
 }

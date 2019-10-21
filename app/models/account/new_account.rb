@@ -17,7 +17,8 @@ class Account
         :balance => (@balance * @currency.subunit_to_unit).to_f.round.to_i,
         :description => @description,
         :currency => @currency.iso_code,
-        :account_type => @account_type
+        :account_type => @account_type,
+        :slug => @name.parameterize,
       }
 
       return Account.create(account_details, @current_user)

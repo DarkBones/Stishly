@@ -114,7 +114,7 @@ function updateTransactionResult(formId) {
   let $rateTarget = $(formId + " #transaction_rate");
   let $resultTarget = $(formId + " #transaction_account_currency");
   let $amountTarget = $(formId + " #transaction_amount");
-  let $accountTarget = $(formId + " #transaction_to_account");
+  let $accountTarget = $(formId + " #transaction_account");
   let $spinnerTarget = $(formId + " #transaction_account_currency_spinner");
   if (type === "transfer") {
     $rateTarget = $(formId + " #transaction_rate_from_to");
@@ -132,10 +132,11 @@ function updateTransactionResult(formId) {
       amount = $amountTarget.val();
     }
 
+
     $.ajax({
       type: "GET",
       dataType: "json",
-      url: "/api/v1/accounts/" + encodeURI($accountTarget.val()) + "/currency",
+      url: "/api/v1/accounts/" + $accountTarget.val() + "/currency",
       beforeSend() {
         $resultTarget.hide();
         $spinnerTarget.show();
@@ -325,7 +326,7 @@ function changeTransactionCurrency(obj, ignore=false, lockCurrency=true){
   $.ajax({
     type: "GET",
     dataType: "json",
-    url: "/api/v1/accounts/" + encodeURI(account) + "/currency",
+    url: "/api/v1/accounts/" + account + "/currency",
     beforeSend() {
       $submitButton.attr("disabled", true);
       $spinnerContainer.show();

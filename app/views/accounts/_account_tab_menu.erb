@@ -7,7 +7,7 @@
       <%= link_to t('account.tabs.settings'), account_settings_path, :class => "nav-link text-dark" + (' active' if locals[:active_tab] == 'Settings').to_s %>
     </li>
     <li class="nav-item">
-      <%= link_to t('account.tabs.overview'), account_overview_path(@active_account.name), :class => "nav-link premium text-dark" + (' active' if locals[:active_tab] == 'Overview').to_s %>
+      <%= link_to t('account.tabs.overview'), account_overview_path(@active_account.slug), :class => "nav-link premium text-dark" + (' active' if locals[:active_tab] == 'Overview').to_s %>
     </li>
   <% else %>
     <li class="nav-item">

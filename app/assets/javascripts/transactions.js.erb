@@ -1,21 +1,3 @@
-//"use strict";
-
-/*function set_currency(account_name, currency_changed, $currency_field) {
-  if(!currency_changed) {
-    var currency;
-    $.ajax({
-      type: "GET",
-      dataType: "json",
-      url: "/api/accounts/" + account_name + '/details',
-      success: function(data){
-        currency = data.currency;
-        $currency_field.val(currency);
-      }
-    });
-  }
-}*/
-
-
 $(document).on('turbolinks:load', ()=> {
   var transactionmenu_set = false;
 

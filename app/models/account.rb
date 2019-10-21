@@ -19,10 +19,12 @@
 
 class Account < ApplicationRecord
   include Friendlyable
+  extend FriendlyId
+
   
   validates :name, presence: { message: I18n.t('account.failure.no_name') }
   validates :name, format: { without: /[-\.~:\/\?#\[\]@!\$&'\(\)\*\+,;={}"]/, message: I18n.t('account.failure.special_characters') }
-  validates :name, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('account.failure.already_exists') }
+  validates :slug, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('account.failure.already_exists') }
   validates :currency, presence: true
   validate :plan, :on => :create
   validate :plan_update, :on => :update
@@ -92,6 +94,8 @@ class Account < ApplicationRecord
       self.add(transaction.account, transaction.amount, transaction.local_datetime)
     end
 
+    params[:slug] = params[:name].parameterize
+
     account.update(params)
 
   end
@@ -106,7 +110,7 @@ class Account < ApplicationRecord
 
   def self.get_from_name(name, current_user)
     if name
-      account = current_user.accounts.where(name: name).take()
+      account = current_user.accounts.where(slug: name).take
     else
       account = self.create_summary_account(current_user, true)
     end
@@ -364,10 +368,10 @@ private
 
     accounts = user.accounts.where("id IS NOT NULL AND is_disabled = false")
 
-    if accounts.length >= plan['max_accounts']
+    if accounts.length > plan['max_accounts']
       errors.add(:Plan, "<a href='/plans'>" + I18n.t('account.failure.upgrade_for_accounts') + "</a>") unless plan['max_accounts'] < 0
     elsif account_type == 'spend'
-      if accounts.where(account_type: 'spend').length >= plan['max_spending_accounts']
+      if accounts.where(account_type: 'spend').length > plan['max_spending_accounts']
         errors.add(:Plan, "<a href='/plans'>" + I18n.t('account.failure.upgrade_for_spending') + "</a>") unless plan['max_spending_accounts'] < 0
       end
     end

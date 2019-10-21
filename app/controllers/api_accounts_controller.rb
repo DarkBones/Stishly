@@ -10,7 +10,7 @@ class ApiAccountsController < BaseApiController
 	def show
 		render json: "bad request", status: :bad_request and return unless params[:account]
 
-		account = @user.accounts.where(name: params[:account]).take
+		account = @user.accounts.where(slug: params[:account]).take
 		render json: "not found", status: :not_found and return if account.nil?
 
 		account = JSON.parse(account.to_json)
@@ -22,7 +22,7 @@ class ApiAccountsController < BaseApiController
 	def currency
 		render json: "bad request", status: :bad_request and return unless params[:account]
 
-		account = @user.accounts.where(name: params[:account]).take
+		account = @user.accounts.where(slug: params[:account]).take
 		render json: "not found", status: :not_found and return if account.nil?
 
 		render json: Money::Currency.new(account.currency).to_json

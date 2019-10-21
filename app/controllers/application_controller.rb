@@ -95,7 +95,7 @@ class ApplicationController < ActionController::Base
     accounts = []
 
     Account.get_accounts(current_user).each do |a|
-      accounts.push(["#{a.name} (#{a.currency})", a.name]) if a.id > 0 && a.is_disabled == false
+      accounts.push(["#{a.name} (#{a.currency})", a.slug]) if a.id > 0 && a.is_disabled == false
     end
 
     return accounts
