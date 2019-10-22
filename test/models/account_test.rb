@@ -35,17 +35,6 @@ class AccountTest < ActiveSupport::TestCase
     assert_not account.save, format_error("Saved the account without a name")
   end
 
-  test "Save with disallowed characters in name" do
-    current_user = users(:bas)
-    
-    unsafe_chars = ["-", ".", "~", ":", "/", "?", "#", "[", "]", "@", "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "=", "{", "}", "\""]
-
-    unsafe_chars.each do |c|
-      account = current_user.accounts.build({:name => "test #{c} character", :currency => "EUR"})
-      assert_not account.save, format_error("Created account with special character #{c}")
-    end
-  end
-
   test "Save account without balance" do
     current_user = users(:bas)
     account = current_user.accounts.build({:name => 'test account without balance', :currency => 'EUR'})
