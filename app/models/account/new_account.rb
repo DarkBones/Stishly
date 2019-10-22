@@ -11,6 +11,8 @@ class Account
 
     def perform()
       @name = "New" if @name == "new"
+
+      slug = GenerateSlug.new(@current_user, @name).perform
       
       account_details = {
         :name => @name,
@@ -18,7 +20,7 @@ class Account
         :description => @description,
         :currency => @currency.iso_code,
         :account_type => @account_type,
-        :slug => @name.parameterize,
+        :slug => slug,
       }
 
       return Account.create(account_details, @current_user)

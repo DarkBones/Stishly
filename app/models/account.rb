@@ -23,8 +23,7 @@ class Account < ApplicationRecord
 
   
   validates :name, presence: { message: I18n.t('account.failure.no_name') }
-  #validates :name, format: { without: /[-\.~:\/\?#\[\]@!\$&'\(\)\*\+,;={}"]/, message: I18n.t('account.failure.special_characters') }
-  validates :slug, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('account.failure.already_exists') }
+  validates :name, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('account.failure.already_exists') }
   validates :currency, presence: true
   validate :plan, :on => :create
   validate :plan_update, :on => :update
@@ -94,7 +93,7 @@ class Account < ApplicationRecord
       self.add(transaction.account, transaction.amount, transaction.local_datetime)
     end
 
-    params[:slug] = params[:name].parameterize
+    params[:slug] = GenerateSlug.new(account.user, params[:name]).perform
 
     account.update(params)
 
