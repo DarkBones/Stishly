@@ -163,12 +163,12 @@ private
 
     # returns the account object
     def get_account(params, transferred=false)
-      return Account.get_from_name(params[:account].parameterize, @current_user) unless params[:type] == 'transfer'
+      return Account.get_from_name(params[:account], @current_user) unless params[:type] == 'transfer'
 
       if transferred
-        return Account.get_from_name(params[:to_account].parameterize, @current_user)
+        return Account.get_from_name(params[:to_account], @current_user)
       else
-        return Account.get_from_name(params[:from_account].parameterize, @current_user)
+        return Account.get_from_name(params[:from_account], @current_user)
       end
     end
 
@@ -176,7 +176,7 @@ private
     def get_currency(params)
       return params[:currency] unless params[:type] == 'transfer'
 
-      return Account.get_from_name(params[:from_account].parameterize, @current_user).currency
+      return Account.get_from_name(params[:from_account], @current_user).currency
     end
 
     # returns the total transaction amount in float

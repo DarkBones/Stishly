@@ -196,6 +196,7 @@ class ApiGuiController < BaseApiBrowserController
 
   def edit_transaction
     transaction = current_user.transactions.friendly.find(params[:id]).decorate
+    transaction = Transaction.find_main_transaction(transaction).decorate
     render partial: "transactions/edit_transaction", :locals => {:transaction => transaction}
   end
 

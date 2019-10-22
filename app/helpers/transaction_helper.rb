@@ -70,7 +70,7 @@ module TransactionHelper
       params[:to_account_name] = params[:from_account_name]
 
       if transaction.transfer_account_id
-        params[:to_account_name] = current_user.accounts.find(transaction.transfer_account_id).name
+        params[:to_account_name] = current_user.accounts.find(transaction.transfer_account_id).slug
       end
 
       if currency == account.currency || currency.nil?
