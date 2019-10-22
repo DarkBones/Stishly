@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :posts
+  #resources :posts
   resources :budgets
 
   match "/404", to: "errors#not_found", via: :all
