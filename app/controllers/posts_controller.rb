@@ -18,6 +18,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
+    render "errors/not_found", status: :not_found unless current_user.is_admin
     @post = Post.new
   end
 
