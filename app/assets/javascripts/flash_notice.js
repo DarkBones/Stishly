@@ -26,7 +26,7 @@ $(document).on("turbolinks:load", () => {
   }
 
   $("#flash_notice").hover(function(){
-    alert("hi");
+    //alert("hi");
   });
 
 });
