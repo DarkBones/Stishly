@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     #@posts = Post.where("published_on >= ?", Time.now.utc.to_date)
-    @posts = Post.all
+    @posts = Post.all.decorate
   end
 
   # GET /posts/1
@@ -24,11 +24,13 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    render "errors/not_found", status: :not_found unless current_user.is_admin
   end
 
   # POST /posts
   # POST /posts.json
   def create
+    render "errors/unacceptable", status: :unprocessable_entity unless current_user.is_admin
     @post = Post.new(post_params)
 
     respond_to do |format|
@@ -45,6 +47,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+    render "errors/unacceptable", status: :unprocessable_entity unless current_user.is_admin
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
@@ -59,6 +62,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
+    render "errors/unacceptable", status: :unprocessable_entity unless current_user.is_admin
     @post.destroy
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
@@ -69,7 +73,7 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.friendly.find(params[:id])
+      @post = Post.friendly.find(params[:id]).decorate
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

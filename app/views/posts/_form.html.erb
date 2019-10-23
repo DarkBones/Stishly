@@ -1,32 +1,88 @@
 <%= form_with(model: post, local: true) do |form| %>
   <% if post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+    <div class="row">
+      <div class="col-12">
+        <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-      <ul>
-      <% post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+          <% post.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  <div class="row py-2">
+    <div class="col-6">
+      <%= form.label :title %>
+      <%= form.text_field :title, class: "form-control" %>
+    </div>
+
+    <div class="col-6">
+      <%= form.label :publish_on %>
+      <%= form.text_field :date, class: 'datepicker form-control' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body %>
+  <div class="row py-2">
+    <div class="col-9">
+      <%= form.label :body %>
+      <%= form.text_area :body, class: "form-control", "rows" => "20" %>
+    </div>
+    <div class="col-3">
+      <%= form.label :formatting %>
+      <ul class="list-unstyled">
+
+        <li>
+          <b>bold</b>
+          <span class="float-right">
+            ^b<i>text</i>^b
+          </span>
+        </li>
+        <li>
+          <i>italic</i>
+          <span class="float-right">
+            ^i<i>text</i>^i
+          </span>
+        </li>
+        <li>
+          <u>underline</u>
+          <span class="float-right">
+            ^u<i>text</i>^u
+          </span>
+        </li>
+        <li>
+          <strike>strike</strike>
+          <span class="float-right">
+            ^str<i>text</i>^str
+          </span>
+        </li>
+        <li>
+          <a href="#">link</a>
+          <span class="float-right">
+            [a link_location, link_text]
+          </span>
+        </li>
+        <li>
+          image
+          <span class="float-right">
+            [img src, alt]
+          </span>
+        </li>
+
+      </ul>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :thumbnail %>
-    <%= form.text_field :thumbnail %>
+  <div class="row py-2">
+    <div class="col-12">
+      <%= form.label :thumbnail %>
+      <%= form.text_field :thumbnail, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+    <div class="actions">
+      <%= form.submit %>
+    </div>
 <% end %>
