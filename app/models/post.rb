@@ -16,9 +16,5 @@
 class Post < ApplicationRecord
 	extend FriendlyId
   friendly_id :title, use: :slugged
-
-  def self.format_html(post)
-  	return FormatHtml.new(post.body).perform
-  end
 	
 end

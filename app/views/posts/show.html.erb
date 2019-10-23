@@ -13,8 +13,8 @@
 <p>
   <strong>Body:</strong>
   <%#= @post.body.gsub("\n", "<br />").html_safe %>
-  <%= (@post.body.gsub(/\^b.*\^b/){|s| '<b>' + s.gsub('^b', '') + '</b>' }).html_safe %>
-  <%= @post.body_html %>
+  <%#= (@post.body.gsub(/\^b.*\^b/){|s| '<b>' + s.gsub('^b', '') + '</b>' }).html_safe %>
+  <%#= @post.body_html %>
   <%= post_html(@post.body) %>
 </p>
 
