@@ -31,6 +31,8 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     render "errors/unacceptable", status: :unprocessable_entity unless current_user.is_admin
+
+    params[:post][:published_on] = params[:post][:published_on].to_date
     @post = Post.new(post_params)
 
     respond_to do |format|
@@ -78,6 +80,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :body, :thumbnail)
+      params.require(:post).permit(:title, :body, :thumbnail, :published_on, :tags, :is_featured, :description)
     end
 end

@@ -1,0 +1,28 @@
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://stishly.com/posts/<%= @post.slug %>"
+    },
+    "headline": "<%= @post.title %>",
+    "image": [
+      "https://stishly.com/images/<%= @post.thumbnail %>"
+     ],
+    "datePublished": "<%= @post.published_on.strftime("%Y-%m-%dT00:00:00+00:00") %>"
+    "author": {
+      "@type": "Person",
+      "name": "Bas Donker"
+    },
+     "publisher": {
+      "@type": "Organization",
+      "name": "Stishly",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://stishly.com/images/logo.png"
+      }
+    },
+    "description": "<%= @post.description %>"
+  }
+</script>

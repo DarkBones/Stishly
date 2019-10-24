@@ -2,6 +2,9 @@
 <%= content_for :meta_robots, "index, follow" %>
 <%= content_for :meta_description, @post.body.html_safe.truncate(160) %>
 <%= content_for :meta_keywords, @post.tags %>
+<% content_for :meta_json_ld do %>
+	<%= render partial: "posts/json_ld" %>
+<% end %>
 
 <p id="notice"><%= notice %></p>
 

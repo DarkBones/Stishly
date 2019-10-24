@@ -21,7 +21,7 @@
 
     <div class="col-6">
       <%= form.label :publish_on %>
-      <%= form.text_field :date, class: 'datepicker form-control' %>
+      <%= form.text_field :published_on, class: 'datepicker form-control' %>
     </div>
   </div>
 
@@ -78,8 +78,29 @@
 
   <div class="row py-2">
     <div class="col-12">
+      <%= form.label :description %>
+      <%= form.text_area :description, class: "form-control", "rows" => "5" %>
+    </div>
+  </div>
+
+  <div class="row py-2">
+    <div class="col-12">
       <%= form.label :thumbnail %>
       <%= form.text_field :thumbnail, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="row py-2">
+    <div class="col-12">
+      <%= form.label :tags %>
+      <%= form.text_field :tags, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <%= form.label :is_featured %>
+      <%= form.check_box :is_featured %>
     </div>
   </div>
 

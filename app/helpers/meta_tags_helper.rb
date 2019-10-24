@@ -21,4 +21,8 @@ module MetaTagsHelper
     content_for?(:meta_robots) ? content_for(:meta_robots) : DEFAULT_META["meta_robots"]
   end
 
+  def meta_json_ld
+    content_for?(:meta_json_ld) ? content_for(:meta_json_ld) : ""
+  end
+
 end
