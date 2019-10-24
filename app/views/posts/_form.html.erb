@@ -37,41 +37,42 @@
         <li>
           <b>bold</b>
           <span class="float-right">
-            ^b<i>text</i>^b
+            *<i>text</i>*
           </span>
         </li>
         <li>
           <i>italic</i>
           <span class="float-right">
-            ^i<i>text</i>^i
-          </span>
-        </li>
-        <li>
-          <u>underline</u>
-          <span class="float-right">
-            ^u<i>text</i>^u
-          </span>
-        </li>
-        <li>
-          <strike>strike</strike>
-          <span class="float-right">
-            ^str<i>text</i>^str
+            **<i>text</i>**
           </span>
         </li>
         <li>
           <a href="#">link</a>
           <span class="float-right">
-            [a link_location, link_text]
+            [link text](/posts)
           </span>
         </li>
         <li>
           image
           <span class="float-right">
-            [img src, alt]
+            ![alt text](/images/test.jpg)
           </span>
         </li>
 
       </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <% images = Dir.glob("public/images/*") %>
+      <% images.each do |image| %>
+        <div style="float: left; width: 150px; margin: 10px;">
+          <%= image_tag "/images/#{image.split('/').last}", class: "clickable", style: 'width: 150px', "onclick" => "copyImage(this);" %><br />
+          <input type="text" style="width: 150px;" value="![<%= image.split('/').last.split('.').first %>](<%= "/images/#{image.split('/').last}" %>)">
+        </div>
+
+      <% end %>
     </div>
   </div>
 
@@ -86,3 +87,12 @@
       <%= form.submit %>
     </div>
 <% end %>
+
+<script>
+  function copyImage(obj) {
+    var copyText = $(obj).parent().find("input");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+  }
+</script>

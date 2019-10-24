@@ -18,13 +18,13 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    render "errors/not_found", status: :not_found unless current_user.is_admin
+    redirect_to posts_path unless current_user.is_admin
     @post = Post.new
   end
 
   # GET /posts/1/edit
   def edit
-    render "errors/not_found", status: :not_found unless current_user.is_admin
+    redirect_to posts_path(@post) unless current_user.is_admin
   end
 
   # POST /posts

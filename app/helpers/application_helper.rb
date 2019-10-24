@@ -1,4 +1,11 @@
 module ApplicationHelper
+  
+  def markdown(text)
+    require 'redcarpet'
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    return markdown.render(text).html_safe
+  end
+
   def balance(b, currency, span_class="", id="")
     if currency.class == String
       currency = Money::Currency.new(currency)
