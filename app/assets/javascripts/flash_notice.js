@@ -1,6 +1,13 @@
 function hideTimeout(id) {
   var hov = 0;
   var $parent = $(id).parent().closest("div");
+
+  setTimeout(function(){
+    if(hov === 0) {
+      $parent.fadeOut(2000);
+    }
+  }, 1000);
+
   $parent.hover(function(){
     clearTimeout();
     $parent.stop(true, true).fadeOut();
@@ -12,21 +19,21 @@ function hideTimeout(id) {
       if(hov === 0) {
         $parent.fadeOut(2000);
       }
-    }, 1000);
+    }, 100);
   });
 }
 
 $(document).on("turbolinks:load", () => {
-  if ($("#flash_notice").length) {
+  if ($("#flash_notice").length > 0) {
     hideTimeout("#flash_notice");
   }
 
-  if ($("#flash_alert").length) {
+  if ($("#flash_alert").length > 0) {
     hideTimeout("#flash_alert");
   }
 
   $("#flash_notice").hover(function(){
-    hideTimeout("#flash_alert");
+    hideTimeout("#flash_notice");
   });
 
 });
