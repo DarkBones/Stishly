@@ -153,3 +153,5 @@ gem 'split', require: 'split/dashboard'
 
 gem 'breadcrumbs_on_rails'
 gem 'redcarpet'
+
+gem 'sitemap_generator'
