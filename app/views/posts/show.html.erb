@@ -25,7 +25,7 @@
 
 	<div class="row">
 		<div class="col-12">
-			<% if current_user.is_admin == true %>
+			<% if current_user && current_user.is_admin %>
 				<%= link_to 'Edit', edit_post_path(@post) %>
 			<% end %>
 			<%= link_to 'Back', posts_path %>

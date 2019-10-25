@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  skip_before_action :authenticate_user!
   add_breadcrumb "Posts", :posts_path
 
   before_action :set_post, only: [:show, :edit, :update, :destroy]
@@ -18,13 +19,13 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    redirect_to posts_path unless current_user.is_admin
+    redirect_to posts_path unless current_user && current_user.is_admin
     @post = Post.new
   end
 
   # GET /posts/1/edit
   def edit
-    redirect_to posts_path(@post) unless current_user.is_admin
+    redirect_to posts_path(@post) unless current_user && current_user.is_admin
   end
 
   # POST /posts
