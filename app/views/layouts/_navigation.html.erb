@@ -9,12 +9,12 @@
 
   <% if user_signed_in? %>
     <% unless current_user.subscription == 'free' %>
-      <%= link_to image_tag("logo/logo_std_blue_premium.svg", :class => "navbar__logo", 'height' => '35'), root_path %>
+      <%= link_to image_tag("logo/logo_std_blue_premium.svg", :class => "navbar__logo", 'height' => '35', 'alt' => 'Stishly Premium'), root_path %>
     <% else %>
-      <%= link_to image_tag("logo/logo_std_blue.svg", :class => "navbar__logo", 'height' => '35'), root_path %>
+      <%= link_to image_tag("logo/logo_std_blue.svg", :class => "navbar__logo", 'height' => '35', 'alt' => 'Stishly'), root_path %>
     <% end %>
   <% else %>
-    <%= link_to image_tag("logo/logo_std_blue.svg", :class => "navbar__logo", 'height' => '35'), root_path %>
+    <%= link_to image_tag("logo/logo_std_blue.svg", :class => "navbar__logo", 'height' => '35', 'alt' => 'Stishly'), root_path %>
   <% end %>
   
 
