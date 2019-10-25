@@ -17,7 +17,9 @@
 
 	<div class="row">
 		<div class="col-12">
-			<%= markdown(@post.body) %>
+			<div id="post-body">
+				<%= markdown(@post.body) %>
+			</div>
 		</div>
 	</div>
 
