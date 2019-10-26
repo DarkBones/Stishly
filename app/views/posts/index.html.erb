@@ -84,7 +84,8 @@
         <h3>
           <%= post.title.html_safe %>
         </h3>
-        <%= truncate(post.body.html_safe, :length => 500, :omission => "" , :escape => false) %>
+        <%#= truncate(post.body.html_safe, :length => 500, :omission => "" , :escape => false) %>
+        <%= strip_tags(markdown(post.body)).truncate(500) %>
       </div>
     </div>
 
