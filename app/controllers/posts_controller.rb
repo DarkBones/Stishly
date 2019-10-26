@@ -8,7 +8,8 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     #@posts = Post.where("published_on >= ?", Time.now.utc.to_date)
-    @posts = Post.all.decorate
+    @featured_posts = Post.where(is_featured: true).order(:published_on).reverse
+    @posts = Post.where(is_featured: false).order(:published_on).reverse
   end
 
   # GET /posts/1
