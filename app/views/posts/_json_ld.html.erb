@@ -11,6 +11,7 @@
       "https://stishly.com/images/<%= @post.thumbnail %>"
      ],
     "datePublished": "<%= @post.published_on.strftime("%Y-%m-%dT00:00:00+00:00") %>",
+    "dateModified": "<%= @post.updated_at.strftime("%Y-%m-%dT%H:%M:%S+00:00") %>",
     "author": {
       "@type": "Person",
       "name": "Bas Donker"
