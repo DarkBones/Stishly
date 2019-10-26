@@ -2,6 +2,7 @@
 <%= content_for :meta_robots, "index, follow" %>
 <%= content_for :meta_description, strip_tags(markdown(@post.body)).truncate(160) %>
 <%= content_for :meta_keywords, @post.tags %>
+<%= content_for :meta_image, "https://stishly.com/images/#{@post.thumbnail}" %>
 <% content_for :meta_json_ld do %>
 	<%= render partial: "posts/json_ld" %>
 <% end %>
