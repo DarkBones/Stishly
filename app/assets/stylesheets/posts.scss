@@ -18,18 +18,24 @@
 		background-color: blue;
 		overflow: hidden;
 		position: relative;
-		img {
-			width: 100%;
-			min-height: 100%;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+		padding: 10px;
+
+		h2 {
+			color: white;
 			position: absolute;
-			top: 0;
 			bottom: 0;
-			margin: auto;
-			vertical-align: middle;
+			text-shadow: 2px 2px #ff0000;
+			text-align: right;
+			float: right;
+			width: calc(100% - 20px);
+			font-weight: bold;
 		}
 	}
 	.featured-post-main {
-		height: calc((170px * 3) + 17px);
+		height: calc((170px * 3) + 16px);
 	}
 	.featured-post-sub {
 		height: 170px;

@@ -23,33 +23,49 @@
 
   <% @featured_posts.each_with_index do |post, idx| %>
     <%= content_for "post_#{idx}" do %>
-      <%= image_tag "/images/#{post.thumbnail}" %>
+      <h2>
+        <%= post.title %>
+      </h2>
+    <% end %>
+    <%= content_for "post_style_#{idx}" do %>
+      background-image: url(<%= asset_path "/images/#{post.thumbnail}" %>);
+    <% end %>
+    <%= content_for "post_link_#{idx}" do %>
+      <%= post_path(post) %>
     <% end %>
   <% end %>
 
   <div id="featured-posts">
     <div class="row">
       <div class="col-12 col-lg-6 col-xl-8 py-1 px-1">
-        <div class="featured-post featured-post-main" style="<%= yield "post_style_0" %>">
-          <%= yield "post_0" %>
-        </div>
+        <a href="<%= yield "post_link_0" %>">
+          <div class="featured-post featured-post-main" style="<%= yield "post_style_0" %>">
+            <%= yield "post_0" %>
+          </div>
+        </a>
       </div>
       <div class="col-12 col-lg-6 col-xl-4">
         <div class="row">
           <div class="col-12 py-1 px-1">
-            <div class="featured-post featured-post-sub" style="<%= yield 'post_style_1' %>">
-              <%= yield "post_1" %>
-            </div>
+            <a href="<%= yield "post_link_1" %>">
+              <div class="featured-post featured-post-sub" style="<%= yield 'post_style_1' %>">
+                <%= yield "post_1" %>
+              </div>
+            </a>
           </div>
           <div class="col-12 py-1 px-1">
-            <div class="featured-post featured-post-sub" style="<%= yield 'post_style_2' %>">
-              <%= yield "post_2" %>
-            </div>
+            <a href="<%= yield "post_link_2" %>">
+              <div class="featured-post featured-post-sub" style="<%= yield 'post_style_2' %>">
+                <%= yield "post_2" %>
+              </div>
+            </a>
           </div>
           <div class="col-12 py-1 px-1">
-            <div class="featured-post featured-post-sub" style="<%= yield 'post_style_3' %>">
-              <%= yield "post_3" %>
-            </div>
+            <a href="<%= yield "post_link_3" %>">
+              <div class="featured-post featured-post-sub" style="<%= yield 'post_style_3' %>">
+                <%= yield "post_3" %>
+              </div>
+            </a>
           </div>
         </div>
       </div>
