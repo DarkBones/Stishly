@@ -98,9 +98,13 @@
   </div>
 
   <div class="row">
-    <div class="col-12">
+    <div class="col-6">
       <%= form.label :is_featured %>
       <%= form.check_box :is_featured %>
+    </div>
+    <div class="col-6">
+      <%= form.label :position %>
+      <%= form.number_field :position %>
     </div>
   </div>
 
