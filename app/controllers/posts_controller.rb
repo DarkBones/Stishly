@@ -41,6 +41,19 @@ class PostsController < ApplicationController
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
+
+        if @post.is_featured
+          featured_posts = Post.where(is_featured: true).order(:published_on)
+          
+          if featured_posts.length > 4
+            featured_posts[4..].each do |fp|
+              fp.is_featured = false
+              fp.save
+            end
+          end
+
+        end
+
       else
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
