@@ -24,6 +24,6 @@
         "url": "https://stishly.com/images/logo.png"
       }
     },
-    "description": "<%= @post.description %>"
+    "description": "<%= strip_tags(markdown(@post.body)).truncate(160) %>"
   }
 </script>
