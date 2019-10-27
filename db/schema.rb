@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_24_142554) do
+ActiveRecord::Schema.define(version: 2019_10_27_162831) do
 
   create_table "account_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "account_id"
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 2019_10_24_142554) do
     t.string "slug"
     t.string "tags"
     t.boolean "is_featured"
-    t.string "description"
+    t.integer "position"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
   end
 
