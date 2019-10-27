@@ -46,7 +46,7 @@ class PostsController < ApplicationController
           featured_posts = Post.where(is_featured: true).order(:published_on)
           
           if featured_posts.length > 4
-            featured_posts[4..].each do |fp|
+            featured_posts[4..-1].each do |fp|
               fp.is_featured = false
               fp.save
             end
