@@ -16,6 +16,7 @@
       Schedules
     </a>
 
+    <% unless Rails.env.production? %>
     <a class="text-secondary nav-link float-right" href="<%= posts_path %>" title="Upcoming Transactions">
       <span style="font-size: 25px;">
         <%= fa_icon "blog" %>
@@ -23,6 +24,8 @@
       <br />
       Blog
     </a>
+    <% end %>
+    
   </div>
 <% end %>
 
@@ -70,9 +73,11 @@
       <% end %>
     </li>
 
+    <% unless Rails.env.production? %>
     <a class="text-secondary nav-link float-right" href="<%= posts_path %>" title="Upcoming Transactions">
       Blog
     </a>
+    <% end %>
     
     <li class="nav-item d-none d-sm-block">
       <%= link_to t('buttons.sign_in.text'), new_user_session_path, { :class=>"nav-link" } %>

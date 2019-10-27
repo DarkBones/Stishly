@@ -23,7 +23,9 @@ end
     <%= li_pref.html_safe %><%= link_to t('buttons.categories.text'), categories_path, { :class => cl } %><%= li_suff.html_safe %>
 		<%= divider.html_safe %>
 	<% end %>
+  <% unless Rails.env.production? %>
   <%= li_pref.html_safe %><%= link_to "Blog", posts_path, { :class => cl } %><%= li_suff.html_safe %>
+  <% end %>
   <%= li_pref.html_safe %><%= link_to t('buttons.manage_subscription.text'), plans_path, { :class => cl } %><%= li_suff.html_safe %>
 	<%= li_pref.html_safe %><%= link_to t('buttons.sign_out.text'), destroy_user_session_path, { :class=> cl } %><%= li_suff.html_safe %>
 </ul>
