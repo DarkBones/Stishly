@@ -13,6 +13,15 @@
 			<h1>
 				<%= @post.title %>
 			</h1>
+			<p>
+				<span class="float-right text-right mb-3 font-italic" style="color: #c9c9c9;">
+					Bas Donker<br />
+					Published on <%= @post.published_on.strftime("%d %b %Y") %>
+					<% if @post.published_on != @post.updated_at.to_date %>
+						| updated on <%= @post.updated_at.strftime("%d %b %Y") %>
+					<% end %>
+				</span>
+			</p>
 		</div>
 	</div>
 

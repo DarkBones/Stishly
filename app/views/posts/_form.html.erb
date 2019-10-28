@@ -1,3 +1,9 @@
+<%
+  published_on = post.published_on
+  published_on ||= Time.now.utc.to_date
+  published_on = published_on.strftime("%d-%b-%Y")
+%>
+
 <%= form_with(model: post, local: true) do |form| %>
   <% if post.errors.any? %>
     <div class="row">
@@ -21,7 +27,7 @@
 
     <div class="col-6">
       <%= form.label :publish_on %>
-      <%= form.text_field :published_on, class: 'datepicker form-control' %>
+      <%= form.text_field :published_on, class: 'datepicker form-control', value: published_on %>
     </div>
   </div>
 
@@ -73,13 +79,6 @@
         </div>
 
       <% end %>
-    </div>
-  </div>
-
-  <div class="row py-2">
-    <div class="col-12">
-      <%= form.label :description %>
-      <%= form.text_area :description, class: "form-control", "rows" => "5" %>
     </div>
   </div>
 
