@@ -31,3 +31,6 @@
 /config/database.yml
 database.yml
 config/database.yml
+
+# Ignore images waiting to be processed
+/public/images/waiting/*
