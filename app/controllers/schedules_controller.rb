@@ -60,8 +60,8 @@ class SchedulesController < ApplicationController
       schedule = current_user.schedules.friendly.find(@schedule_id)
       
       SchedulesTransaction.where(schedule_id: schedule.id).each do |sch_t|
-        txn = current_user.transactions.find(sch_t.transaction_id)
-        Transaction.delete(txn, current_user)
+        txn = current_user.transactions.find_by_id(sch_t.transaction_id)
+        Transaction.delete(txn, current_user) unless txn.nil?
         
         sch_t.destroy
       end

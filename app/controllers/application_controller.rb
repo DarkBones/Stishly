@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  protect_from_forgery
+  
   before_action :authenticate_user!, :except => [:country_currency, :privacy_policy, :api]
   before_action :set_current_user, :setup_wizzard, :check_subscription, :update_sign_in_at
   before_action :daily_budget
