@@ -54,6 +54,8 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
       current_user.current_sign_in_at = Time.now.utc
       current_user.save
+
+      SendgridMailer.send("donkerbc@gmail.com", {firstName: current_user.first_name, confirmationUrl: "https://google.com"}, "d-46d71cf815ac42a1897b6353684fa831")
     end
   end
 
