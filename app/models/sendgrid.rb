@@ -1,4 +1,4 @@
-class SendgridMailer
+class Sendgrid
 
   def self.send(to, subsitutions, template_id)
     data = {
@@ -13,7 +13,7 @@ class SendgridMailer
         }
       ],
       "from": {
-        "email": 'noreply@example.com'
+        "email": 'noreply@stishly.com'
       },
       "template_id": template_id
     }
