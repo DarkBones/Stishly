@@ -3,7 +3,7 @@ class SendgridMailer < Devise::Mailer
   include Devise::Controllers::UrlHelpers
   default template_path: 'devise/mailer'
 
-  def confirmation_instructions(record, token, opts={})
+  def confirmation_instructions(record, token, _opts={})
   	subs = {
   		title: "Welcome to Stishly",
   		greeting: "Hi #{record.first_name},",
