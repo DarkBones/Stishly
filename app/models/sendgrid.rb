@@ -1,6 +1,8 @@
 class Sendgrid
 
   def self.send(to, subsitutions, template_id)
+    subsitutions[:sign_off] ||= "Thanks"
+
     data = {
       "personalizations": [
         {

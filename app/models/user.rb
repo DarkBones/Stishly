@@ -56,7 +56,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :confirmable
+         :confirmable, :lockable
   has_many :accounts, dependent: :destroy
   has_many :setting_values, :as => :entity
   has_many :settings, through: :setting_values
