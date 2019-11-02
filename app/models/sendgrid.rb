@@ -13,7 +13,8 @@ class Sendgrid
         }
       ],
       "from": {
-        "email": 'noreply@stishly.com'
+        "email": 'noreply@stishly.com',
+        "name": 'Stishly'
       },
       "template_id": template_id
     }

@@ -13,7 +13,7 @@ class SendgridMailer < Devise::Mailer
   		confirmationUrl: "#{root_url}users/confirmation?confirmation_token=#{token}",
   	}
 	  #Sendgrid.send(record.email, subs, "d-46d71cf815ac42a1897b6353684fa831")
-	  Sendgrid.send("donkerbc@gmail.com", subs, "d-46d71cf815ac42a1897b6353684fa831")
+	  Sendgrid.send(record.email, subs, "d-46d71cf815ac42a1897b6353684fa831")
 	end
 
 end
