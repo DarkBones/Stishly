@@ -1,27 +1,50 @@
 <%= content_for :meta_title, "Change Password" %>
 
-<h2>Change your password</h2>
-
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-12 py-2">
+        <%= devise_error_messages! %>
+        <%= f.hidden_field :reset_password_token %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 py-2">
+        <h1>Change your password</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 py-2">
+        <%= f.label :password %>
+        <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-control" %>
+      </div>
+    </div>
+
+    <%= render partial: "shared/password_strength" %>
+
+    <div class="row">
+      <div class="col-12 py-2">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 py-2">
+        <%= f.button "Set Password", :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " Processing ..."} %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 py-2">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
 <% end %>
-
-<%= render "devise/shared/links" %>
