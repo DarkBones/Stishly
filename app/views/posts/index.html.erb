@@ -21,7 +21,7 @@
     </div>
   <% end %>
 
-  <% @featured_posts.each_with_index do |post, idx| %>
+  <% @posts.each_with_index do |post, idx| %>
     <%= content_for "post_#{idx}" do %>
       <h2>
         <%= post.title %>
