@@ -95,7 +95,7 @@ class Account < ApplicationRecord
 
     params[:slug] = GenerateSlug.new(account.user, params[:name]).perform
 
-    account.update(params)
+    return account.update(params)
 
   end
 

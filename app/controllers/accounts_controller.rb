@@ -42,9 +42,13 @@ class AccountsController < ApplicationController
 
   def update
     account = current_user.accounts.friendly.find(params[:id])
-    Account.update_account(account, update_params)
-    @active_account = current_user.accounts.friendly.find(params[:id])
-    redirect_to "/accounts", notice: "Account saved" if params[:account].include?("name")
+
+    if Account.update_account(account, update_params)
+      @active_account = current_user.accounts.friendly.find(params[:id])
+      redirect_to "/accounts", notice: "Account saved" if params[:account].include?("name")
+    else
+      redirect_back(fallback_location: root_path, notice: "Failed to update account")
+    end
   end
 
   def show
