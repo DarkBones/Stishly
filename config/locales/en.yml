@@ -364,14 +364,6 @@ en:
 
   helpers:
     label:
-      user:
-        email: Email
-        password: Password
-        password_confirmation: Password confirmation
-        first_name: First name
-        last_name: Last name
-        country: Country
-        current_password: Current password
       schedules_transaction:
         schedule: Schedule
       filterrific:
@@ -383,12 +375,6 @@ en:
         amount: Amount
         granularity: Granularity
         sort_by: Sort by
-      account:
-        name: Name
-        type: Type
-        balance: Balance
-        currency: Currency
-        description: Description
       schedule:
         name: Name
         schedule: Schedule
