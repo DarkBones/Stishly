@@ -38,8 +38,8 @@ class UsersController < ApplicationController
 
   def submit_setup
     User.setup_user(current_user, params)
-    current_user.finished_setup = true
-    current_user.save!
+    #current_user.finished_setup = true
+    #current_user.save!
     redirect_to root_path, :notice => "You're all set up now"
   end
 

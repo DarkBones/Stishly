@@ -46,6 +46,7 @@ private
   		@current_user.currency = currency.iso_code
   		@current_user.country_code = country.country_code
   		@current_user.country_id = country.id
+  		@current_user.finished_setup = true
   		@current_user.save!
 		end
 

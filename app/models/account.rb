@@ -107,7 +107,11 @@ class Account < ApplicationRecord
     end
   end
 
-  def self.get_from_name(name, current_user)
+  def self.get_from_name(name, current_user, legacy=false)
+    if legacy
+      return current_user.accounts.where(name: name).take
+    end
+
     if name
       account = current_user.accounts.where(slug: name).take
     else

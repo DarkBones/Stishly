@@ -35,7 +35,7 @@ private
 			amount = get_amount(params)
 			direction = 1
 			direction = -1 if amount < 0
-			account = Account.get_from_name(params[:account], @current_user)
+			account = Account.get_from_name(params[:account], @current_user, true)
 			queue = 0
 			queue = 1 unless params[:fixed_amount] == "fixed"
 
