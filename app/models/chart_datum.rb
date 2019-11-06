@@ -158,21 +158,21 @@ private
     uncategorized_transactions.each do |transaction|
       unless transaction.transfer_transaction.nil?
         if type == "account" && transaction.account.hash_id != transaction.transfer_transaction.account.hash_id
-          unless root.keys.include? I18n.t('categories.transferred')
-            root[I18n.t('categories.transferred')] = 0
+          unless root.keys.include? I18n.t('models.category.transferred.name')
+            root[I18n.t('models.category.transferred.name')] = 0
             root_colors.push("#FFC107")
           end
 
           amount = transaction.account_currency_amount.to_f
           total += amount
           amount /= currency.subunit_to_unit
-          root[I18n.t('categories.transferred')] += amount
+          root[I18n.t('models.category.transferred.name')] += amount
         end
 
       else
 
-        unless root.keys.include? I18n.t('categories.uncategorized')
-          root[I18n.t('categories.uncategorized')] = 0
+        unless root.keys.include? I18n.t('models.category.uncategorised.name')
+          root[I18n.t('models.category.uncategorised.name')] = 0
           root_colors.push("#808080")
         end
 
@@ -185,7 +185,7 @@ private
 
         amount /= currency.subunit_to_unit
 
-        root[I18n.t('categories.uncategorized')] += amount
+        root[I18n.t('models.category.uncategorised.name')] += amount
 
       end
     end

@@ -1,4 +1,12 @@
 en:
   models:
     account:
-      title: Account
+      errors:
+        name:
+          blank: can't be blank
+          duplicate: already exists
+        plan:
+          accounts: Upgrade to premium for more accounts
+          spending_accounts: Upgrade to premium for more spending accounts
+      summary:
+        name: All

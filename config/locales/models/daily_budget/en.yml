@@ -1,0 +1,28 @@
+en:
+  models:
+    daily_budget:
+      statuses:
+        infinite:
+          messages:
+            main: On average, you are earning @average_abs@ per day.
+            sub: :defaults.daily_budget.statuses.messages.invest
+        excellent:
+          messages:
+            main: Your average daily expense is @average@, which is only @percent@% of tomorrow's budget of @tomorrow@
+            sub: :defaults.daily_budget.statuses.messages.invest
+        good:
+          messages:
+            main: :defaults.daily_budget.statuses.messages.main
+            sub: Keep it up!
+        fair:
+          messages:
+            main: :defaults.daily_budget.statuses.messages.main
+            sub: Try to cut down some expenses to be on the safe side.
+        caution:
+          messages:
+            main: :defaults.daily_budget.statuses.messages.main
+            sub: Consider going over your transactions to see where you are over-spending.
+        bad:
+          messages:
+            main: Tomorrow's daily budget is @tomorrow@, which is lower than your average daily expenses of @average@
+            sub: You are in danger of going into debt. Go over your transactions to see what you can cut.

@@ -35,7 +35,7 @@ class Schedule < ApplicationRecord
   #validates :name, format: { without: /[-\._~:\/\?#\[\]@!\$&'\(\)\*\+,;={}"]/, message: "Special characters -._~:/?#[]@!$&\'()*+,;={}\" not allowed" }
   validates :period_num, numericality: true
   validates :period_num, numericality: { only_integer: true }
-  validates :period_num, numericality: { greater_than: 0, message: "'Run every' must be greater than zero" }
+  validates :period_num, numericality: { greater_than: 0, message: I18n.t('models.schedule.errors.period_num.negative') }
   validate :plan, :on => :create
   validate :schedule_type, :on => :create
 
@@ -218,7 +218,7 @@ private
       schedules = user.schedules.where("type_of != 'main' AND id IS NOT NULL")
 
       if schedules.length >= plan['max_schedules']
-        errors.add(:Plan, I18n.t('schedule.failure.upgrade_for_schedules')) unless plan['max_schedules'] < 0
+        errors.add(:Plan, I18n.t('models.schedule.errors.plan.schedule')) unless plan['max_schedules'] < 0
       end
     end
 
@@ -229,7 +229,7 @@ private
       main_schedule = user.schedules.where(type_of: 'main').take
 
       unless main_schedule.nil?
-        errors.add(:schedule, "<a href='/plans'>" + I18n.t('schedule.failure.multiple_main_schedules') + "</a>")
+        errors.add(:schedule, "<a href='/plans'>" + I18n.t('models.schedule.errors.main.duplicate') + "</a>")
       end
     end
   end

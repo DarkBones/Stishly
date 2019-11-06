@@ -25,7 +25,7 @@ class AccountDecorator < Draper::Decorator
         model.name
       end
     else
-      I18n.t('account.all')
+      I18n.t('models.account.summary.name')
     end
   end
 

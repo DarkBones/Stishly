@@ -160,7 +160,7 @@ private
 			if average_spending[:amount] < 0
 				status = 'excellent'
 				status_icon = 'grin-alt'
-				status_message = I18n.t("pages.daily_budget.status_messages.infinite.main")
+				status_message = I18n.t("models.daily_budget.statuses.infinite.messages.main")
 			else
 				case spend_percentage
 				when 0...62.5
@@ -183,7 +183,7 @@ private
 				end
 			end
 
-			status_message ||= I18n.t("pages.daily_budget.status_messages.#{status}.main")
+			status_message ||= I18n.t("models.daily_budget.statuses.#{status}.messages.main")
 			status_message = status_message.sub("@tomorrow@",
 				Money.new(budget_tomorrow, user.currency).format)
 			status_message = status_message.sub("@percent@",

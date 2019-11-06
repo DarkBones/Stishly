@@ -84,11 +84,11 @@ class Category < ApplicationRecord
 
       if include_uncategorised
         tree[idx][:id] = 0
-        tree[idx][:name] = "Uncategorised"
+        tree[idx][:name] = I18n.t('models.category.uncategorised.name')
         tree[idx][:color] = "#808080"
         tree[idx][:symbol] = nil
         tree[idx][:parent_id] = nil
-        tree[idx][:children_paths] = "uncategorised"
+        tree[idx][:children_paths] = I18n.t('models.category.uncategorised.name').downcase
         tree[idx][:color_inherited] = false
 
         tree[nil][:children].push(tree[idx])
@@ -125,7 +125,7 @@ class Category < ApplicationRecord
   def self.get_uncategorised
     cat = Category.new
     cat.id = 0
-    cat.name = 'Uncategorised'
+    cat.name = I18n.t('models.category.uncategorised.name')
     cat.color = '#808080'
     cat.symbol = 'uncategorised'
     return cat

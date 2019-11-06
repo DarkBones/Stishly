@@ -22,8 +22,8 @@ class Account < ApplicationRecord
   extend FriendlyId
 
   
-  validates :name, presence: { message: I18n.t('account.failure.no_name') }
-  validates :name, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('account.failure.already_exists') }
+  validates :name, presence: { message: I18n.t('models.account.errors.name.blank') }
+  validates :name, uniqueness: { scope: :user_id, case_sensitive: false, message: I18n.t('models.account.errors.name.duplicate') }
   validates :currency, presence: true
   validate :plan, :on => :create
   validate :plan_update, :on => :update
@@ -166,7 +166,7 @@ class Account < ApplicationRecord
   def self.create_summary_account(current_user, include_balance = false)
     account = Account.new
     account.id = 0
-    account.name = 'All'
+    account.name = I18n.t('models.account.summary.name')
     account.user_id = current_user.id
     account.currency = User.get_currency(current_user).iso_code
 
@@ -352,10 +352,10 @@ private
     accounts = user.accounts.where("id IS NOT NULL AND is_disabled = false")
 
     if accounts.length >= plan['max_accounts']
-      errors.add(:Plan, "<a href='/plans'>" + I18n.t('account.failure.upgrade_for_accounts') + "</a>") unless plan['max_accounts'] < 0
+      errors.add(:Plan, "<a href='/plans'>" + I18n.t('models.account.errors.plan.accounts') + "</a>") unless plan['max_accounts'] < 0
     elsif account_type == 'spend'
       if accounts.where(account_type: 'spend').length >= plan['max_spending_accounts']
-        errors.add(:Plan, "<a href='/plans'>" + I18n.t('account.failure.upgrade_for_spending') + "</a>") unless plan['max_spending_accounts'] < 0
+        errors.add(:Plan, "<a href='/plans'>" + I18n.t('models.account.errors.plan.spending_accounts') + "</a>") unless plan['max_spending_accounts'] < 0
       end
     end
 
@@ -368,10 +368,10 @@ private
     accounts = user.accounts.where("id IS NOT NULL AND is_disabled = false")
 
     if accounts.length > plan['max_accounts']
-      errors.add(:Plan, "<a href='/plans'>" + I18n.t('account.failure.upgrade_for_accounts') + "</a>") unless plan['max_accounts'] < 0
+      errors.add(:Plan, "<a href='/plans'>" + I18n.t('models.account.errors.plan.accounts') + "</a>") unless plan['max_accounts'] < 0
     elsif account_type == 'spend'
       if accounts.where(account_type: 'spend').length > plan['max_spending_accounts']
-        errors.add(:Plan, "<a href='/plans'>" + I18n.t('account.failure.upgrade_for_spending') + "</a>") unless plan['max_spending_accounts'] < 0
+        errors.add(:Plan, "<a href='/plans'>" + I18n.t('models.account.errors.plan.spending_accounts') + "</a>") unless plan['max_spending_accounts'] < 0
       end
     end
 

@@ -1,0 +1,7 @@
+en:
+  defaults:
+    daily_budget:
+      statuses:
+        messages:
+          main: Your average daily expense is @average@, which is @percent@% of tomorrow's budget of @tomorrow@
+          invest: Consider transferring some money to a savings account or investing.

@@ -362,44 +362,6 @@ en:
     amount: Amount
     average_amount: Average amount
 
-  helpers:
-    label:
-      schedules_transaction:
-        schedule: Schedule
-      filterrific:
-        period: Period
-        from_date: From date
-        to_date: To date
-        account: Account
-        category: Category
-        amount: Amount
-        granularity: Granularity
-        sort_by: Sort by
-      schedule:
-        name: Name
-        schedule: Schedule
-        start_date: Start date
-        run_every: Run every
-        days: Days
-        end_date: End date
-        exclude: Exclude
-        if_exclusion_met: If exclusion met
-      transaction:
-        description: Description
-        account: Account
-        from_account: From account
-        to_account: To account
-        category: Category
-        amount: Amount
-        transactions: Transactions
-        currency: Currency
-        rate: Rate
-        amount_in: Amount in
-        rate_from_to: Rate %from% to %to%
-        date: Date
-        time: Time
-        schedule_type: Schedule type
-
 
   modal_titles:
     transactions_to_schedule: Add Transactions to Schedule

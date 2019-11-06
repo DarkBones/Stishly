@@ -1,0 +1,10 @@
+en:
+  models:
+    schedule:
+      errors:
+        period_num:
+          negative: 'Run Every' must be greater than zero
+        plan:
+          schedule: Upgrade to premium for more Schedules
+        main:
+          duplicate: You can only have one main income schedule
