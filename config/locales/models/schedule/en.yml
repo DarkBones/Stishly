@@ -3,7 +3,7 @@ en:
     schedule:
       errors:
         period_num:
-          negative: 'Run Every' must be greater than zero
+          negative: "'Run Every' must be greater than zero"
         plan:
           schedule: Upgrade to premium for more Schedules
         main:
