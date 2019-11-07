@@ -29,7 +29,6 @@ class SchedulesTableTest < ApplicationSystemTestCase
     user = users(:schedules)
     password = "SomePassword123^!"
     login_user(user, password)
-    page.find(".navbar-gear").click
     click_on "Schedules"
   end
 
