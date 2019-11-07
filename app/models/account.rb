@@ -93,7 +93,7 @@ class Account < ApplicationRecord
       self.add(transaction.account, transaction.amount, transaction.local_datetime)
     end
 
-    params[:slug] = GenerateSlug.new(account.user, params[:name]).perform
+    params[:slug] = GenerateSlug.new(account.user, params[:name]).perform unless params[:name].nil?
 
     return account.update(params)
 

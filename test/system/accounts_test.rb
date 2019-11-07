@@ -22,7 +22,6 @@ class AccountsTest < ApplicationSystemTestCase
 		assert_selector '#accountform', visible: :visible
 
 	end
-
 	test 'Reset filters button hidden' do
 
 		login_user(users(:endless_page), 'SomePassword123^!')
@@ -112,23 +111,6 @@ class AccountsTest < ApplicationSystemTestCase
 		assert find('#accountform #account_description').value == '', 'Account description did not reset'
 		assert find('#accountform #account_currency').value == 'EUR', 'Account currency did not reset'
 		assert find('#accountform #account_account_type').value == 'spend', 'Account type did not reset'
-
-	end
-
-	test 'Special characters in account name' do
-
-		login_as_blank
-
-		find('#new-account-button').click
-
-		# special characters
-		chars = ['-', '.', '~', ':', '/', '?', '#', '[', ']', '@', '!', '$', '&', '\'', '(', ')', '*', '+', ',', ';', '=', '{', '}', '\\']
-		chars.each do |c|
-			fill_in 'account[name]', with: "test #{c}"
-			click_on I18n.t('buttons.create_account.text')
-
-			assert_selector '#flash_alert', text: I18n.t('account.failure.special_characters')
-		end
 
 	end
 
@@ -293,6 +275,7 @@ class AccountsTest < ApplicationSystemTestCase
 		# verify the balancer transaction isn't visible
 		visit '/accounts/Balance'
 		assert_no_text 'balancer_transaction'
+
 
 		# verify that a new account history was recorded
 		account = Account.where(user_id: 3, name: 'Balance').take

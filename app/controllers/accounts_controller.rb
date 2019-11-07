@@ -41,7 +41,7 @@ class AccountsController < ApplicationController
   end
 
   def update
-    account = current_user.accounts.friendly.find(params[:id])
+    account = current_user.accounts.where(hash_id: params[:id]).take
 
     if Account.update_account(account, update_params)
       @active_account = current_user.accounts.friendly.find(params[:id])

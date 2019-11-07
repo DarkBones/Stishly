@@ -38,7 +38,7 @@ class DailyBudget < ApplicationRecord
 
 	def self.invalidate_cache(user)
 		cache = Rails.cache
-		cache_name = user.hash_id + '_daily_budget'
+		cache_name = user.hash_id.to_s + '_daily_budget'
 
 		if cache.exist?(cache_name)
 			cache.delete(cache_name)
@@ -87,7 +87,7 @@ private
 	def self.get_from_cache(user)
 		cache = Rails.cache
 
-		cache_name = user.hash_id + '_daily_budget'
+		cache_name = user.hash_id.to_s + '_daily_budget'
 
 		if cache.exist?(cache_name)
 			return cache.fetch(cache_name)
@@ -100,7 +100,7 @@ private
 		self.invalidate_cache(user)
 
 		cache = Rails.cache
-		cache_name = user.hash_id + '_daily_budget'
+		cache_name = user.hash_id.to_s + '_daily_budget'
 		cache.write(cache_name, budget)
 	end
 
