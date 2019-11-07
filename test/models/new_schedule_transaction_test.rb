@@ -31,9 +31,9 @@ class NewScheduleTransactionTest < ActiveSupport::TestCase
     account ||= accounts(:bas_1)
 
     params = {
-      :account => account.name,
-      :from_account => account.name,
-      :to_account => account.name,
+      :account => account.slug,
+      :from_account => account.slug,
+      :to_account => account.slug,
       :multiple => "single",
       :timezone => "Europe/London",
       :category_id => "0",
@@ -46,7 +46,7 @@ class NewScheduleTransactionTest < ActiveSupport::TestCase
       :description => "test",
       :amount => "10",
       :transactions => "",
-      :active_account => account.name,
+      :active_account => account.slug,
       :account_currency => "EUR",
       :to_account_currency => "EUR",
       :schedule_id => "101"

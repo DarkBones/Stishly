@@ -103,8 +103,8 @@ class TransactionTest < ActiveSupport::TestCase
     params = {
       type: "transfer",
       amount: "1000",
-      from_account: from_account.name,
-      to_account: to_account.name
+      from_account: from_account.slug,
+      to_account: to_account.slug
     }
     params = create_params(params)
 
@@ -129,8 +129,8 @@ class TransactionTest < ActiveSupport::TestCase
     params = {
       type: "transfer",
       amount: "1000",
-      from_account: from_account.name,
-      to_account: to_account.name,
+      from_account: from_account.slug,
+      to_account: to_account.slug,
       multiple: "multiple",
       transactions: "one 100\ntwo 200\nthree 300\nfour 400"
     }
@@ -150,8 +150,8 @@ class TransactionTest < ActiveSupport::TestCase
       type: "transfer",
       amount: "100",
       description: "transfer between accounts with different currencies",
-      from_account: from_account.name,
-      to_account: to_account.name,
+      from_account: from_account.slug,
+      to_account: to_account.slug,
       rate_from_to: "0.008",
       account_currency: "JPY"
     }
@@ -173,9 +173,9 @@ class TransactionTest < ActiveSupport::TestCase
     account ||= accounts(:bas_1)
 
     params = {
-      :account => account.name,
-      :from_account => account.name,
-      :to_account => account.name,
+      :account => account.slug,
+      :from_account => account.slug,
+      :to_account => account.slug,
       :multiple => "single",
       :timezone => "Europe/London",
       :category_id => "0",
@@ -188,7 +188,7 @@ class TransactionTest < ActiveSupport::TestCase
       :description => "test",
       :amount => "10",
       :transactions => "",
-      :active_account => account.name,
+      :active_account => account.slug,
       :account_currency => "EUR",
       :to_account_currency => "EUR"
     }
