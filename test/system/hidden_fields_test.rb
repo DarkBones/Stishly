@@ -16,8 +16,7 @@ class HiddenFieldsTest < ApplicationSystemTestCase
   test 'upcoming transaction menu' do
     login_user(users(:upcoming_transactions_run), 'SomePassword123^!')
 
-    page.find('.navbar-gear').click
-    click_on I18n.t('buttons.upcoming_transactions.text')
+    visit '/upcoming_transactions'
     page.find_all('.upcoming_context_menu')[0].click
     click_on I18n.t('transaction.upcoming_actions.edit_occ')
     sleep 1
