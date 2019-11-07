@@ -1,6 +1,7 @@
 require "application_system_test_case"
 
 class SchTransactionsTest < ApplicationSystemTestCase
+
   test "attach transactions to schedule" do 
     # login as schedules user
     login_user(users(:schedules), 'SomePassword123^!')
@@ -26,7 +27,6 @@ class SchTransactionsTest < ApplicationSystemTestCase
   test "toggle edit scheduled transactions menu" do
     login_user(users(:schedules), 'SomePassword123^!')
 
-    page.find(".navbar-gear").click
     click_on "Schedules"
 
     page.find("#schedule-transactions-button_GFl1hng-oIiK", visible: :all).click
@@ -65,7 +65,6 @@ class SchTransactionsTest < ApplicationSystemTestCase
   test "edit scheduled transactions" do
     login_user(users(:schedules), 'SomePassword123^!')
 
-    page.find(".navbar-gear").click
     click_on "Schedules"
 
     page.find("#schedule-transactions-button_GFl1hng-oIiK", visible: :all).click
@@ -80,4 +79,5 @@ class SchTransactionsTest < ApplicationSystemTestCase
 
     assert_selector "#sch_transactions_list", text: "New description"
   end
+
 end
