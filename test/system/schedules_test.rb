@@ -13,7 +13,6 @@ class SchedulesTest < ApplicationSystemTestCase
     """
 
     login_as_blank
-    page.find('.navbar-gear').click
     click_on 'Schedules'
 
     assert_selector 'h2', text: 'Schedules'
