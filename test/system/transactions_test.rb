@@ -96,7 +96,7 @@ class TransactionsTest < ApplicationSystemTestCase
 		create_transaction(params)
 
 		assert_selector '#transactions_list', text: '~ ¥-10,000'
-		assert_selector '#transactions_list', text: '€-80.00'
+		assert_selector '#transactions_list', text: '€-82.80'
 
 	end
 
@@ -114,7 +114,7 @@ class TransactionsTest < ApplicationSystemTestCase
 		create_transaction(params)
 
 		assert_selector '#transactions_list', text: '~ ¥10,000'
-		assert_selector '#transactions_list', text: '€80.00'
+		assert_selector '#transactions_list', text: '€82.80'
 
 	end
 	
@@ -172,7 +172,7 @@ class TransactionsTest < ApplicationSystemTestCase
 		assert_selector '#accounts_list', text: '€9,000.00'
 		assert_selector '#accounts_list', text: '¥124,460'
 
-		visit '/accounts/JPY Account'
+		visit '/accounts/jpy-account'
 
 		assert_selector '#transactions_list', text: 'Transferred from Current Account'
 		assert_selector '#transactions_list', text: '~ €1,000.00'
@@ -195,6 +195,8 @@ class TransactionsTest < ApplicationSystemTestCase
 
 		create_transaction(params)
 
+		sleep 1
+
 		all('.show-child-transactions')[1].click
 		all('.show-child-transactions')[0].click
 
@@ -212,7 +214,7 @@ class TransactionsTest < ApplicationSystemTestCase
 		assert_selector '#transactions_list', text: '€300.00'
 		assert_selector '#transactions_list', text: '€400.00'
 
-		visit '/accounts/JPY Account'
+		visit '/accounts/jpy-account'
 
 		find('.show-child-transactions').click
 
