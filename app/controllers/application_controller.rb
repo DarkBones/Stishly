@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   # check if a user's subscription is still valid
   def check_subscription
     return if Rails.env.test?
-    return if current_user.nil?
+    return if current_user.nil? || current_user.is_admin
     
     last_check = current_user.last_plan_check
     return if last_check > 1.days.ago unless last_check.nil?

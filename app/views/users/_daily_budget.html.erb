@@ -1,4 +1,4 @@
-<% if user_signed_in? && !@daily_budget.nil? %>
+<% if user_signed_in? && !@budget.nil? %>
 	<% if current_user.finished_setup %>
 	<% type ||= 'dropdown' %>
 	<% 
