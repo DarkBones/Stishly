@@ -17,7 +17,7 @@ private
 			cache = ActiveSupport::Cache::MemoryStore.new
 			cache = Rails.cache
 
-			cache_name = user.hash_id + '_daily_budget'
+			cache_name = user.hash_id.to_s + '_daily_budget'
 			if cache.exist?(cache_name)
 				return cache.fetch(cache_name)
 			end

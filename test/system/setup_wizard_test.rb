@@ -1,7 +1,6 @@
 require "application_system_test_case"
 
 class SetupWizardTest < ApplicationSystemTestCase
-
   test "visit welcome wizard" do
     login_user(users(:setup_wizard), 'SomePassword123^!')
 
@@ -13,6 +12,7 @@ class SetupWizardTest < ApplicationSystemTestCase
     assert_selector '#userwizzard fieldset:not(:first-of-type)', visible: :hidden
 
   end
+
   test "country and currency" do
     login_user(users(:setup_wizard), 'SomePassword123^!')
 
@@ -166,5 +166,4 @@ class SetupWizardTest < ApplicationSystemTestCase
             end
         end
     end
-
 end
