@@ -36,7 +36,6 @@
                 <div class="col-12 col-sm-3 col-lg-6 py-2">
                   <label><%= t('pages.setup.country.currency') %></label>
                   <%= select_tag "user_currency", options_for_select(all_currencies(Money::Currency.table)), {:class => "form-control currency", :include_blank => true} %>
-                  <%= hidden_field_tag :timezone, id: 'timezone_input', value: '' %>
                 </div>
               </div>
 
