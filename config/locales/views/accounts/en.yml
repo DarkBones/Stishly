@@ -1,10 +1,29 @@
 en:
   views:
     accounts:
+      notices:
+        created: Account created successfully
+      summary:
+        name: :defaults.account.summary.name
       tabs:
-        transactions: Transactions
-        settings: Settings
-        overview: Insights
+        transactions: :defaults.account.tabs.transactions
+        settings: :defaults.account.tabs.settings
+        overview: :defaults.account.tabs.overview
       types:
         spending: Spending
         saving: Saving
+      settings:
+        titles:
+          main: Settings
+      overview:
+        titles:
+          main: :defaults.account.tabs.overview
+          expenses: Expenses
+          income: Income
+        form:
+          date_range:
+            to: to
+        charts:
+          titles:
+            balance_history: Balance History
+            categories: :defaults.category.name_plural

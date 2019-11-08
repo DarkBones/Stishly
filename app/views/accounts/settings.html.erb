@@ -1,4 +1,4 @@
-<%= content_for :meta_title, "#{@active_account.name} - Settings" %>
+<%= content_for :meta_title, "#{@active_account.name} - #{t('views.accounts.settings.titles.main')}" %>
 
 <%= content_for :account_content do %>
   <%= form_for @active_account do |f| %>
@@ -30,8 +30,8 @@
     </div>
     <div class="row py-2">
       <div class="col-12">
-        <%= f.button t('buttons.edit_account_save.text'), :class => 'float-right btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('buttons.edit_account_save.action')} ..."} %>
-        <button type="button" class="btn btn-danger delete-confirm" confirm-message="<%= t('account.delete_warning') %>" data-link="<%= delete_account_path(@active_account) %>"><%= t('buttons.delete_account.text') %></button>
+        <%= f.button t('views.buttons.accounts.edit.text'), :class => 'float-right btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('views.buttons.accounts.edit.action')} ..."} %>
+        <button type="button" class="btn btn-danger delete-confirm" confirm-message="<%= t('views.delete_warnings.accounts.delete_account') %>" data-link="<%= delete_account_path(@active_account) %>"><%= t('views.buttons.accounts.delete.text') %></button>
       </div>
     </div>
   <% end %>

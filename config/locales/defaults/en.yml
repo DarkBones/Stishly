@@ -1,5 +1,12 @@
 en:
   defaults:
+    account:
+      summary:
+        name: All
+      tabs:
+        transactions: Transactions
+        settings: Settings
+        overview: Insights
     daily_budget:
       statuses:
         messages:
@@ -12,6 +19,9 @@ en:
           caution: Try to cut down some expenses to be on the safe side.
           warning: Consider going over your transactions to see where you are over-spending.
           danger: You are in danger of going into debt. Go over your transactions to see what you can cut.
+    category:
+      name: Category
+      name_plural: Categories
     schedule:
       periods:
         days: Days

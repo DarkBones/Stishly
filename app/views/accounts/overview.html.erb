@@ -1,4 +1,4 @@
-<%= content_for :meta_title, "#{@active_account.name} - Overview" %>
+<%= content_for :meta_title, "#{@active_account.name} - #{t('views.accounts.overview.titles.main')}" %>
 
 <% prefix = Money::Currency.new(@active_account.currency).symbol %>
 <%= content_for :account_content do %>
@@ -8,7 +8,7 @@
       <div class="input-group">
           <input type="text" class="datepicker datepicker-null form-control" id="from_date" value="<%= 30.days.ago.strftime("%d-%b-%Y") %>" onchange="overviewDaterangeChange();">
           <div class="input-group-addon">
-            <span class="input-group-text"><%= t('pages.overview.date_from_to_to') %></span>
+            <span class="input-group-text"><%= t('views.accounts.overview.form.date_range.to') %></span>
           </div>
           <input type="text" class="datepicker datepicker-null form-control" id="to_date" value="<%= Time.now.strftime("%d-%b-%Y") %>" onchange="overviewDaterangeChange();">
       </div>

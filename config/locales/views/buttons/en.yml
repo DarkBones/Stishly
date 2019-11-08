@@ -5,6 +5,12 @@ en:
         create:
           text: Create Account
           action: Creating Account
+        edit:
+          text: Save Changes
+          action: Saving Changes
+        delete:
+          text: Delete Account
+          action: Deleting Account
       filterrific:
         advanced:
           text: advanced
