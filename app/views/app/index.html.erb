@@ -7,14 +7,14 @@
     </div>
     <div class="col-12 col-xl-6 py-2">
       <%#= @category_data %>
-      <%= pie_chart(@category_data[:root], title: t('categories.spend_name'), colors: @category_data[:root_colors], donut: true, prefix: prefix) %>
+      <%= pie_chart(@category_data[:root], title: t('views.accounts.overview.charts.titles.spending_categories'), colors: @category_data[:root_colors], donut: true, prefix: prefix) %>
     </div>
   </div>
 
   <div class="row py-2">
 
     <div class="col-12 col-xl-6 py-2">
-      <h3>Upcoming Transactions</h3>
+      <h3><%= t('views.index.upcoming_transactions.title') %></h3>
       <% if @upcoming_transactions.length > 0 %>
         <ul class="list-unstyled">
           <% @upcoming_transactions[0...10].each do |ut| %>
@@ -31,13 +31,13 @@
         </ul>
       <% else %>
         <p class="py-2">
-          <%= link_to "No upcoming transactions", schedules_path, class: "text-dark" %>
+          <%= link_to t('views.index.upcoming_transactions.none'), schedules_path, class: "text-dark" %>
         </p>
       <% end %>
     </div>
 
     <div class="col-12 col-xl-6 py-2">
-      <h3>Recent Transactions</h3>
+      <h3><%= t('views.index.recent_transactions.title') %></h3>
       <% if current_user.transactions.where(is_main: true, is_scheduled: false, is_queued: false, is_cancelled: false).length > 0 %>
         <ul class="list-unstyled">
           <% current_user.transactions.where(is_main: true, is_scheduled: false, is_queued: false, is_cancelled: false).order(:local_datetime).reverse_order[0...10].each do |t| %>
@@ -51,7 +51,9 @@
           <% end %>
         </ul>
       <% else %>
-
+        <p class="py-2">
+          <%= t('views.index.recent_transactions.none') %>
+        </p>
       <% end %>
     </div>
 
