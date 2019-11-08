@@ -136,15 +136,15 @@ class User < ApplicationRecord
       tomorrow = tz.utc_to_local(Time.now.utc).to_date + 1.day
 
       if d == today
-        return I18n.t('dates.today')
+        return I18n.t('default.shared.dates.today')
       end
 
       if d == yesterday
-        return I18n.t('dates.yesterday')
+        return I18n.t('default.shared.dates.yesterday')
       end
 
       if d == tomorrow
-        return I18n.t('dates.tomorrow')
+        return I18n.t('default.shared.dates.tomorrow')
       end
     end
 

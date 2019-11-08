@@ -186,12 +186,7 @@ private
 				status_color = 'danger'
 			end
 
-			if spend_percentage < 100
-				status_message = I18n.t('pages.daily_budget.under')
-			else
-				status_message = I18n.t('pages.daily_budget.over')
-			end
-			status_message = I18n.t("pages.daily_budget.status_messages.#{status}.main")
+			status_message = I18n.t("models.daily_budget.statuses.#{status}.messages.main")
 			status_message = status_message.sub("@tomorrow@", Money.new(budget_tomorrow, user_currency.iso_code).format)
 			status_message = status_message.sub("@percent@", spend_percentage.to_s)
 			status_message = status_message.sub("@average@", Money.new((average_spend[:amount] * -1), user_currency.iso_code).format)

@@ -106,7 +106,8 @@
 								<%= budget[:average_spending][:status][:message] %>
 							</h5>
 							<p class="text-dark">
-								<%= t("pages.daily_budget.status_messages.#{budget[:average_spending][:status][:name]}.sub") %>
+								<%#= t("pages.daily_budget.status_messages.#{budget[:average_spending][:status][:name]}.sub") %>
+								<%= t('models.daily_budget.statuses.infinite.messages.main') %>
 							</p>
 							<% if budget[:average_spending][:accuracy] < 100 %>
 								<p class="text-dark rounded px-2 py-2 bg-warning">

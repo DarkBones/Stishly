@@ -8,3 +8,8 @@ en:
           schedule: Upgrade to premium for more Schedules
         main:
           duplicate: You can only have one main income schedule
+      periods:
+        days: :defaults.schedule.periods.days
+        weeks: :defaults.schedule.periods.weeks
+        months: :defaults.schedule.periods.months
+        years: :defaults.schedule.periods.years

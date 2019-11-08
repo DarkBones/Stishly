@@ -3,5 +3,23 @@ en:
     daily_budget:
       statuses:
         messages:
+          infinite: On average, you are earning @average_abs@ per day.
+          excellent: Your average daily expense is @average@, which is only @percent@% of tomorrow's budget of @tomorrow@
           main: Your average daily expense is @average@, which is @percent@% of tomorrow's budget of @tomorrow@
+          bad: Tomorrow's daily budget is @tomorrow@, which is lower than your average daily expenses of @average@
           invest: Consider transferring some money to a savings account or investing.
+          keep_it_up: Keep it up!
+          caution: Try to cut down some expenses to be on the safe side.
+          warning: Consider going over your transactions to see where you are over-spending.
+          danger: You are in danger of going into debt. Go over your transactions to see what you can cut.
+    schedule:
+      periods:
+        days: Days
+        weeks: Weeks
+        months: Month
+        years: Years
+    shared:
+      dates:
+        yesterday: Yesterday
+        today: Today
+        tomorrow: Tomorrow
