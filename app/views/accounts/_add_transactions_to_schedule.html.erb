@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="transactionsToScheduleLabel"><%= t('modal_titles.transactions_to_schedule') %></h5>
+        <h5 class="modal-title" id="transactionsToScheduleLabel"><%= t('views.transactions.modal_titles.add_to_schedule') %></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -31,8 +31,8 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('buttons.close.text') %></button>
-          <%= f.button t('buttons.transactions_to_schedule.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('buttons.transactions_to_schedule.action')} ..."} %>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('views.buttons.modals.close.text') %></button>
+          <%= f.button t('views.buttons.transactions.add_to_schedule.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('views.buttons.transactions.add_to_schedule.action')} ..."} %>
         </div>
       <% end %>
     </div>

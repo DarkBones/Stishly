@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-12">
-  	<button class="btn btn-link mass_transaction_action_button disabled delete-confirm float-right" id="mass_delete" data-link="<%= mass_delete_transactions_path %>" ids-target="#selected-transactions" confirm-message="<%= t('delete_warnings.mass_transactions') %>" title="<%= t('title_hints.delete') %>"><i class="fa fa-trash fa-lg"></i></button>
-		<button type="button" class="btn btn-link mass_transaction_action_button disabled float-right" id="mass_assign_to_schedule" onclick="resetTransactionsToScheduleForm();" data-toggle="modal" data-target="#transactions_to_schedule"><i class="fa fa-calendar fa-lg" title="<%= t('title_hints.add_to_schedule') %>"></i></button>
+  	<button class="btn btn-link mass_transaction_action_button disabled delete-confirm float-right" id="mass_delete" data-link="<%= mass_delete_transactions_path %>" ids-target="#selected-transactions" confirm-message="<%= t('views.delete_warnings.transactions.mass_delete') %>" title="<%= t('views.title_hints.transactions.delete') %>"><i class="fa fa-trash fa-lg"></i></button>
+		<button type="button" class="btn btn-link mass_transaction_action_button disabled float-right" id="mass_assign_to_schedule" onclick="resetTransactionsToScheduleForm();" data-toggle="modal" data-target="#transactions_to_schedule"><i class="fa fa-calendar fa-lg" title="<%= t('views.title_hints.transactions.add_to_schedule') %>"></i></button>
 	</div>
 </div>
