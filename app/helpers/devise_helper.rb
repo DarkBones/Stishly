@@ -15,7 +15,7 @@ module DeviseHelper
 
     html = <<-HTML
     <div id="error_explanation">
-      <h2>#{I18n.t('errors.form')}</h2>
+      <h2>#{I18n.t('views.shared.errors.form')}</h2>
       <ul>#{messages}</ul>
     </div>
     HTML

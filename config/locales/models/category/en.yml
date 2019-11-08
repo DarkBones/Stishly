@@ -5,3 +5,96 @@ en:
         name: Uncategorised
       transferred:
         name: Transferred
+      categories:
+        entertainment:
+          main: Entertainment
+          cinema: Cinema
+          date: Date
+          hobbies: Hobbies
+          holiday: Holiday
+          lottery: Lottery / Gambling
+          social: Social
+          software: Software
+          sport_events: Sport Events
+          subscriptions: Subscriptions
+          tv: TV
+          video_games: Video Games
+        food_drinks:
+          main: Food & Drinks
+          bars_pubs: Bars / Pubs
+          fast_food: Fast Food
+          groceries: Groceries
+          order_takeout: Order / Take-out
+          restaurant: Restaurant
+        health:
+          main: Health
+          dentist: Dentist
+          doctor: Doctor
+          insurance: Insurance
+          pharmacy: Pharmacy
+          psychiatrist: Psychiatrist
+          sport_fitness: Sport & Fitness
+          wellness_beauty: Welness & Beauty
+        household:
+          main: Household
+          electricity: Electricity
+          insurance: Insurance
+          internet: Internet
+          maintenance: Maintenance
+          mortgage: Mortgage
+          phone: Phone
+          rent: Rent
+          services: Services
+          water: Water
+        income:
+          main: Income
+          child_support: Child Support
+          gifts: Gifts
+          interest: Interest / Dividends
+          lending: Lending
+          lottery: Lottery / Gambling
+          refunds: Refunds
+          rent: Rent
+          salary: Salary
+          sale: Sale
+        investments:
+          main: Investments
+          financial_investments: Financial Investments
+          realty: Realty
+          savings: Savings
+        other:
+          main: Other
+          alcohol: Alcohol
+          charges_fees: Charges & Fees
+          e_cigarette: E-cigarette
+          fines: Fines
+          insurance: Insurance
+          loans_interest: Loans, Interest
+          postal: Postal Services
+          tobacco: Tobacco
+        shopping:
+          main: Shopping
+          books: Books
+          clothes: Clothes & Shoes
+          electronics: Electronics
+          gifts: Gifts
+          hobbies: Hobbies
+          home_garden: Home & Garden
+          jewellery: Jewellery & Accessories
+          kids: Kids
+          pets: Pets
+          tools: Tools
+          video_games: Video Games
+        transport:
+          main: Transport
+          flights: Flights
+          public_transport: Public Transport
+          taxy: Taxi
+        vehicle:
+          main: Vehicle
+          fuel: Fuel
+          insurance: Insurance
+          lease: Lease
+          maintenance: Maintenance
+          parking: Parking
+          rental: Rental

@@ -104,9 +104,9 @@ class TransactionDecorator < ApplicationDecorator
     unless model.transfer_account_id.nil?
       account_name = Account.find(model.transfer_account_id).name
       if model.direction == -1
-        message = I18n.t('transaction.transfer_message_to').sub("?to?", account_name)
+        message = I18n.t('decorators.transaction.transfer_messages.to').sub("?to?", account_name)
       else
-        message = I18n.t('transaction.transfer_message_from').sub("?from?", account_name)
+        message = I18n.t('decorators.transaction.transfer_messages.from').sub("?from?", account_name)
       end
 
       return message
