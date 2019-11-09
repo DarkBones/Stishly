@@ -8,6 +8,6 @@ if ($("table#" + remove_from + " tr").length == 1) {
 	<% if schedule.type_of == 'main' %>
 		$("button#new-income-schedule-button").show();
 	<% else %>
-		$("#" + parent).append("<p><%= t('schedules.no_' + remove_from + '_schedules') %></p>");
+		$("#" + parent).append("<p><%= t('views.schedules.nones.' + remove_from) %></p>");
 	<% end %>
 }

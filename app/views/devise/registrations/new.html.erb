@@ -1,10 +1,10 @@
-<%= content_for :meta_title, "Sign Up" %>
+<%= content_for :meta_title, t('views.devise.registrations.new.title') %>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form'}) do |f| %>
   <div class="container">
     <div class="row">
       <div class="col-12 py-2">
-        <h1><%= t('pages.sign_up.title') %></h1>
+        <h1><%= t('views.devise.registrations.new.title') %></h1>
       </div>
     </div>
 
@@ -57,7 +57,7 @@
 
           <div class="row">
             <div class="col-12 py-2">
-              <%= f.button t('buttons.sign_up.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('buttons.sign_up.action')} ..."} %>
+              <%= f.button t('views.buttons.devise.sign_up.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('views.buttons.devise.sign_up.action')} ..."} %>
             </div>
           </div>
         </div>

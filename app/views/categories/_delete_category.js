@@ -17,9 +17,9 @@ function prepareDeleteCategory(id) {
 			if (data === "0") {
 				deleteCategory(id);
 			} else if (data === "1") {
-				triggerNotice("Cannot delete this category as there is 1 transaction associated with it.", true);
+				triggerNotice("<%= t('views.categories.errors.delete_single') %>", true);
 			} else {
-				triggerNotice("Cannot delete this category as there are " + data + " transactions associated with it.", true);
+				triggerNotice("<%= t('views.categories.errors.delete_plural') %>".replace("@amount@", data.toString()), true);
 			}
 		}
 	});

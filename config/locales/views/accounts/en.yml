@@ -1,6 +1,9 @@
 en:
   views:
     accounts:
+      title: :defaults.account.name_plural
+      modal_titles:
+        new: New Account
       notices:
         created: Account created successfully
       summary:

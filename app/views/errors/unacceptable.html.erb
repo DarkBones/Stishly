@@ -1,27 +1,27 @@
-<%= content_for :meta_title, "422 - Rejected" %>
+<%= content_for :meta_title, t('views.errors.unacceptable.title') %>
 
 <div class="container">
 	<div class="row">
 		<div class="col-12">
 			<h2>
-				Error #422
+				<%= t('views.errors.unacceptable.title') %>
 			</h2>
 			<h3>
-				Your change has been rejected.
+				<%= t('views.errors.unacceptable.sub_title') %>
 			</h3>
 		</div>
 	</div>
 	<div class="row py-2">
 		<div class="col-12">
 			<p>
-				Perhaps you are here because:
+				<%= t('views.errors.reason') %>
 			</p>
 			<ul>
 				<li>
-					You don't have access to the thing you are trying to change
+					<%= t('views.errors.unacceptable.reasons.one') %>
 				</li>
 				<li>
-					The server has become sentient and dislikes you and/or your change
+					<%= t('views.errors.unacceptable.reasons.two') %>
 				</li>
 			</ul>
 		</div>
@@ -30,7 +30,7 @@
 	<div class="row py-2">
 		<div class="col-12">
 			<a href="/" role="button" class="btn btn-primary">
-				Return to home
+				<%= t('views.errors.return') %>
 			</a>
 		</div>
 	</div>

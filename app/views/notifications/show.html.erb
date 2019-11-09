@@ -3,12 +3,12 @@
 <div class="container">
   <div class="row">
   	<div class="col-12">
-  		<h2><%= t('notifications.name') %></h2>
+  		<h2><%= t('views.notifications.name') %></h2>
 	  	<ul class="notifications list-unstyled">
 	  		<% if @notifications.length > 0 %>
 	  			<%= render @notifications, :locals => {:truncate => false} %>
 	  		<% else %>
-	  			<p><%= t('notifications.no_notifications_2') %></p>
+	  			<p><%= t('views.notifications.none') %></p>
 	  		<% end %>
 	  	</div>
 	  </ul>

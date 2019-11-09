@@ -1,12 +1,19 @@
 en:
   defaults:
     account:
+      name: Account
+      name_plural: Accounts
       summary:
         name: All
       tabs:
         transactions: Transactions
         settings: Settings
         overview: Insights
+    blog:
+      name: Blog
+    budget:
+      name: Budget
+      name_plural: Budgets
     daily_budget:
       statuses:
         messages:
@@ -22,7 +29,20 @@ en:
     category:
       name: Category
       name_plural: Categories
+      any_category: any
+      select: Select a category
+    devise:
+      sign_in: Sign In
+      sign_up: Sign Up
+      sign_out: Sign Out
+    notification:
+      name: Notification
+      name_plural: Notifications
+      none: You have no notifications.
+      show_all: Show all notifications
     transaction:
+      name: Transaction
+      name_plural: Transactions
       upcoming:
         title: Upcoming Transactions
         none: No upcoming transactions
@@ -30,6 +50,8 @@ en:
         title: Recent Transactions
         none: No recent transactions
     schedule:
+      name: Schedule
+      name_plural: Schedules
       periods:
         days: Days
         weeks: Weeks
@@ -40,3 +62,28 @@ en:
         yesterday: Yesterday
         today: Today
         tomorrow: Tomorrow
+        from: from
+        to: to
+      weekdays:
+        day: day
+        monday: Monday
+        tuesday: Tuesday
+        wednesday: Wednesday
+        thursday: Thursday
+        friday: Friday
+        saturday: Saturday
+        sunday: Sunday
+        mon: Mon
+        tue: Tue
+        wed: Wed
+        thu: Thu
+        fri: Fri
+        sat: Sat
+        sun: Sun
+        mon_short: M
+        tue_short: T
+        wed_short: W
+        thu_short: T
+        fri_short: F
+        sat_short: S
+        sun_short: S

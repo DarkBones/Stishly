@@ -1,0 +1,34 @@
+en:
+  views:
+    layouts:
+      modals:
+        delete_confirmation:
+          title: Are you sure?
+      dropdown_links:
+        edit_account: Edit Account
+        budgets: Budgets
+        schedules: Schedules
+        notifications: Notifications
+        upcoming: Upcoming Transactions
+        categories: Categories
+        blog: Blog
+        subscription: Manage Subscription
+        sign_out: :defaults.devise.sign_out
+      left_menu:
+        accounts:
+          title: :defaults.account.name_plural
+        schedules:
+          title: Upcoming Schedules
+        budgets:
+          title: :defaults.budget.name_plural
+      navigation:
+        buttons:
+          budgets: :defaults.budget.name_plural
+          schedules: :defaults.schedule.name_plural
+          blog: :defaults.blog.name
+          sign_in: :defaults.devise.sign_in
+          sign_up: :defaults.devise.sign_up
+      notifications:
+        title: :defaults.notification.name_plural
+        none: :defaults.notification.none
+        show_all: :defaults.notification.show_all

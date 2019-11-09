@@ -1,0 +1,32 @@
+en:
+  views:
+    devise:
+      confirmations:
+        new:
+          title: Resend Confirmation Instructions
+      passwords:
+        edit:
+          title: Change your password
+        new:
+          title: Forgot your password?
+      registrations:
+        edit:
+          title: Edit your account
+          password_fields: Leave these fields blank if you don't want to change your password.
+          current_password: You must enter your current password to make changes.
+          delete_account: Delete Account
+        new:
+          title: :defaults.devise.sign_up
+      sessions:
+        new:
+          title: :defaults.devise.sign_in
+      shared:
+        links:
+          login: Log in
+          sign_up: Sign up
+          forgot_password: Forgot your password?
+          no_confirmation: Didn't receive confirmation instructions?
+          no_unlock: Didn't receive unlock instructions?
+      unlocks:
+        new:
+          title: Resend Unlock Instructions

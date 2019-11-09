@@ -38,10 +38,10 @@
 
         <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
           <label class="btn btn-outline-light <%= 'active' if form_params[:type] == 'simple' %> py-3" onclick="changeScheduleType('simple', this)" id="type-simple">
-            <%= f.radio_button :type, 'simple', :checked => (form_params[:type] == 'simple') %><%= t('schedule.types.simple') %>
+            <%= f.radio_button :type, 'simple', :checked => (form_params[:type] == 'simple') %><%= t('views.schedules.form_fields.types.simple') %>
           </label>
           <label class="btn btn-outline-light <%= 'active' if form_params[:type] == 'advanced' %> py-3" onclick="changeScheduleType('advanced', this)" id="type-advanced">
-            <%= f.radio_button :type, 'advanced', :checked => (form_params[:type] == 'advanced') %><%= t('schedule.types.advanced') %>
+            <%= f.radio_button :type, 'advanced', :checked => (form_params[:type] == 'advanced') %><%= t('views.schedules.form_fields.types.advanced') %>
           </label>
         </div>
 
@@ -53,7 +53,7 @@
       <div class="col-12">
 
         <%= f.label :name %>
-        <%= f.text_field :name, class: 'form-control', placeholder: t('placeholders.payday'), value: form_params[:name] %>
+        <%= f.text_field :name, class: 'form-control', placeholder: t('views.shared.placeholders.payday'), value: form_params[:name] %>
 
       </div>
     </div>
@@ -62,10 +62,10 @@
       <div class="col-12 col-sm-6">
         <%= f.label :schedule %>
         <%= f.select(:schedule, [
-          [t('schedule.periods.daily'), "daily"], 
-          [t('schedule.periods.weekly'), "weekly"], 
-          [t('schedule.periods.monthly'), "monthly"], 
-          [t('schedule.periods.annually'), "annually"]
+          [t('views.schedule.form_fields.periods.daily'), "daily"], 
+          [t('views.schedule.form_fields.periods.weekly'), "weekly"], 
+          [t('views.schedule.form_fields.periods.monthly'), "monthly"], 
+          [t('views.schedule.form_fields.periods.annually'), "annually"]
           ], { :selected => form_params[:schedule] }, { :class => 'form-control', 'onchange' => 'changeSchedulePeriod(this.value, this)' }) %>
       </div>
       <div class="col-12 col-sm-6">
@@ -98,24 +98,24 @@
           <div class="row">
             <div class="col-6">
               <%= f.select(:days, [
-                [t('schedule.day_types.specific'), "specific"], 
-                [t('schedule.day_types.first'), "first"], 
-                [t('schedule.day_types.last'), "last"], 
-                [t('schedule.day_types.second'), "second"], 
-                [t('schedule.day_types.third'), "third"], 
-                [t('schedule.day_types.fourth'), "fourth"]
+                [t('views.schedules.form_fields.days.specific'), "specific"], 
+                [t('views.schedules.form_fields.days.first'), "first"], 
+                [t('views.schedules.form_fields.days.last'), "last"], 
+                [t('views.schedules.form_fields.days.second'), "second"], 
+                [t('views.schedules.form_fields.days.third'), "third"], 
+                [t('views.schedules.form_fields.days.fourth'), "fourth"]
                 ], { :selected => form_params[:days] }, { :class => 'form-control', 'onchange' => 'changeScheduleDays(this.value, this)' }) %>
             </div>
             <div class="col-6" style="<%#= 'display: none;' if form_params[:hidden_fields].include?('days2') %>">
               <%= f.select(:days2, [
-                [t('schedule.weekdays.day'), "day"], 
-                [t('schedule.weekdays.monday'), "mon"], 
-                [t('schedule.weekdays.tuesday'), "tue"], 
-                [t('schedule.weekdays.wednesday'), "wed"], 
-                [t('schedule.weekdays.thursday'), "thu"], 
-                [t('schedule.weekdays.friday'), "fri"], 
-                [t('schedule.weekdays.saturday'), "sat"], 
-                [t('schedule.weekdays.sunday'), "sun"]
+                [t('views.schedules.form_fields.weekdays.day'), "day"], 
+                [t('views.schedules.form_fields.weekdays.monday'), "mon"], 
+                [t('views.schedules.form_fields.weekdays.tuesday'), "tue"], 
+                [t('views.schedules.form_fields.weekdays.wednesday'), "wed"], 
+                [t('views.schedules.form_fields.weekdays.thursday'), "thu"], 
+                [t('views.schedules.form_fields.weekdays.friday'), "fri"], 
+                [t('views.schedules.form_fields.weekdays.saturday'), "sat"], 
+                [t('views.schedules.form_fields.weekdays.sunday'), "sun"]
                 ], { :selected => form_params[:days2] }, { :class => 'form-control', 'onchange' => 'changeScheduleDays(this.value, this)', 'style' => days2_style }) %>
             </div>
           </div>
@@ -142,7 +142,13 @@
     <div class="schedule-advanced" style="<%= advanced_style %>">
       <div class="row py-2">
         <div class="col-12">
-          <button type="button" class="btn btn-link" id="schedule_advanced_toggle" onclick="advancedScheduleOptions(this);"><%= form_params[:advanced2] ? "hide" : "show" %> advanced options</button>
+          <button type="button" class="btn btn-link" id="schedule_advanced_toggle" onclick="advancedScheduleOptions(this);">
+            <% if form_params[:advanced2] %>
+              <%= t('views.schedules.form_fields.advanced_button.hide') %>
+            <% else %>
+              <%= t('views.schedules.form_fields.advanced_button.show') %>
+            <% end %>
+          </button>
         </div>
       </div>
 
@@ -185,20 +191,20 @@
         <div class="row monthly" style="<%= monthly_style %>">
           <div class="col-6">
             <%= f.select(:exclusion_met1, [
-              [t('schedule.exclusion_met.cancel'), "cancel"], 
-              [t('schedule.exclusion_met.previous'), "previous"], 
-              [t('schedule.exclusion_met.next'), "next"]
+              [t('views.schedule.form_fields.exclusion_met1.cancel'), "cancel"], 
+              [t('views.schedule.form_fields.exclusion_met1.previous'), "previous"], 
+              [t('views.schedule.form_fields.exclusion_met1.next'), "next"]
               ], { :selected => form_params[:exclusion_met1] }, { :class => 'form-control', 'onchange' => 'changeScheduleExclusionMet(this.value, this)' }) %>
           </div>
           <div class="col-6">
             <%= f.select(:exclusion_met2, [
-              [t('schedule.weekdays.monday'), "mon"], 
-              [t('schedule.weekdays.tuesday'), "tue"], 
-              [t('schedule.weekdays.wednesday'), "wed"], 
-              [t('schedule.weekdays.thursday'), "thu"], 
-              [t('schedule.weekdays.friday'), "fri"], 
-              [t('schedule.weekdays.saturday'), "sat"], 
-              [t('schedule.weekdays.sunday'), "sun"]
+              [t('views.schedules.form_fields.weekdays.monday'), "mon"], 
+              [t('views.schedules.form_fields.weekdays.tuesday'), "tue"], 
+              [t('views.schedules.form_fields.weekdays.wednesday'), "wed"], 
+              [t('views.schedules.form_fields.weekdays.thursday'), "thu"], 
+              [t('views.schedules.form_fields.weekdays.friday'), "fri"], 
+              [t('views.schedules.form_fields.weekdays.saturday'), "sat"], 
+              [t('views.schedules.form_fields.weekdays.sunday'), "sun"]
               ], { :selected => form_params[:exclusion_met2] }, { :class => 'form-control', :style => exclusion_met_day_style }) %>
           </div>
         </div>
@@ -210,14 +216,14 @@
   <div class="col-12 col-lg-5 col-xl-5 px-2 px-sm-5 border-right">
     <div class="row py2">
       <div class="col-12 d-none d-lg-block" style="position: fixed; margin-bottom: 0; pointer-events: none;">
-        <p><%= t('schedule.next_occurrences') %></p>
+        <p><%= t('views.schedules.form_fields.next_occurrences') %></p>
         <div id="next_occurrences" class="bottom-align-text">
           
         </div>
       </div>
 
       <div class="col-12 d-block d-lg-none">
-        <p><%= t('schedule.next_occurrences') %></p>
+        <p><%= t('views.schedules.form_fields.next_occurrences') %></p>
         <div id="next_occurrences" class="bottom-align-text">
           
         </div>

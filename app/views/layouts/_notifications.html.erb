@@ -1,14 +1,14 @@
 <% notifications = current_user.notifications.reverse_order.limit(APP_CONFIG['ui']['notifications']['page_length']).decorate	%>
-<h5>Notifications</h5>
+<h5><%= t('views.layouts.notifications.title') %></h5>
 <ul class="list-unstyled">
 	<% if notifications.length > 0 %>
 		<%= render notifications %>
 	<% else %>
-		<p class="px-2"><%= t('notifications.no_notifications') %></p>
+		<p class="px-2"><%= t('views.layouts.notifications.none') %></p>
 	<% end %>
 	<% if current_user.notifications.length > APP_CONFIG['ui']['notifications']['page_length'] %>
 		<li class="nav-item">
-			<%= link_to t('notifications.view_all'), notifications_path %>
+			<%= link_to t('views.layouts.notifications.show_all'), notifications_path %>
 		</li>
 	<% end %>
 </ul>

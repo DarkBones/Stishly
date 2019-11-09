@@ -13,19 +13,19 @@ end
 %>
 
 <ul class="list-unstyled">
-	<%= li_pref.html_safe %><%= link_to t('buttons.edit_user_account.text'), edit_user_registration_path, { :class=> cl } %><%= li_suff.html_safe %>
+	<%= li_pref.html_safe %><%= link_to t('views.layouts.dropdown_links.edit_account'), edit_user_registration_path, { :class=> cl } %><%= li_suff.html_safe %>
 	<% if current_user.finished_setup %>
 		<%#= li_pref.html_safe %><%#= link_to 'Settings', user_settings_path, { :class=> cl } %><%#= li_suff.html_safe %>
-    <%= li_pref.html_safe %><%= link_to "Budgets", budgets_path, { :class => cl } %><%= li_suff.html_safe %>
-		<%= li_pref.html_safe %><%= link_to t('buttons.schedules.text'), schedules_url, { :class => cl } %><%= li_suff.html_safe %>
-    <%= li_pref.html_safe %><%= link_to t('buttons.notifications.text'), notifications_path, { :class => cl } %><%= li_suff.html_safe %>
-    <%= li_pref.html_safe %><%= link_to t('buttons.upcoming_transactions.text'), upcoming_transactions_path, { :class => cl } %><%= li_suff.html_safe %>
-    <%= li_pref.html_safe %><%= link_to t('buttons.categories.text'), categories_path, { :class => cl } %><%= li_suff.html_safe %>
+    <%= li_pref.html_safe %><%= link_to t('views.layouts.dropdown_links.budgets'), budgets_path, { :class => cl } %><%= li_suff.html_safe %>
+		<%= li_pref.html_safe %><%= link_to t('views.layouts.dropdown_links.schedules'), schedules_url, { :class => cl } %><%= li_suff.html_safe %>
+    <%= li_pref.html_safe %><%= link_to t('views.layouts.dropdown_links.notifications'), notifications_path, { :class => cl } %><%= li_suff.html_safe %>
+    <%= li_pref.html_safe %><%= link_to t('views.layouts.dropdown_links.upcoming'), upcoming_transactions_path, { :class => cl } %><%= li_suff.html_safe %>
+    <%= li_pref.html_safe %><%= link_to t('views.layouts.dropdown_links.categories'), categories_path, { :class => cl } %><%= li_suff.html_safe %>
 		<%= divider.html_safe %>
 	<% end %>
   <% unless Rails.env.production? %>
-  <%= li_pref.html_safe %><%= link_to "Blog", posts_path, { :class => cl } %><%= li_suff.html_safe %>
+  <%= li_pref.html_safe %><%= link_to t('views.layouts.dropdown_links.blog'), posts_path, { :class => cl } %><%= li_suff.html_safe %>
   <% end %>
-  <%= li_pref.html_safe %><%= link_to t('buttons.manage_subscription.text'), plans_path, { :class => cl } %><%= li_suff.html_safe %>
-	<%= li_pref.html_safe %><%= link_to t('buttons.sign_out.text'), destroy_user_session_path, { :class=> cl } %><%= li_suff.html_safe %>
+  <%= li_pref.html_safe %><%= link_to t('views.layouts.dropdown_links.subscription'), plans_path, { :class => cl } %><%= li_suff.html_safe %>
+	<%= li_pref.html_safe %><%= link_to t('views.layouts.dropdown_links.sign_out'), destroy_user_session_path, { :class=> cl } %><%= li_suff.html_safe %>
 </ul>

@@ -4,3 +4,13 @@ en:
       transactions:
         delete: Delete
         add_to_schedule: Add to Schedule
+      categories:
+        create: Create a new category
+      schedules:
+        transactions: :defaults.transaction.name_plural
+        edit: Edit Schedule
+        pause: Pause Schedule
+        unpause: Unpause Schedule
+        stop: Deactivate Schedule
+        reactivate: Reactivate Schedule
+        delete: Delete Schedule

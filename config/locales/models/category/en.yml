@@ -1,6 +1,10 @@
 en:
   models:
     category:
+      any:
+        name: :defaults.category.any_category
+      select:
+        name: :defaults.category.select
       uncategorised:
         name: Uncategorised
       transferred:

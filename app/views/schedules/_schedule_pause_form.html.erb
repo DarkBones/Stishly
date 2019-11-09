@@ -6,7 +6,7 @@
       <div class="row">
         <%#= f.text_field :id %>
         <div class="col-12 col-sm-3 py-2">
-          <%= t('schedules.pause_until') %>
+          <%= t('views.schedules.pause_menu.pause_until') %>
         </div>
         <div class="col-6 col-sm-9 py-2">
           <%= f.text_field :pause_until, class: 'datepicker-future datepicker-null form-control', id: "schedule_pause_input", autocomplete: "off" %>
@@ -19,8 +19,8 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="schedule_close_form"><%= t('buttons.close.text') %></button>
-    <%= f.button t('buttons.pause_schedule.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('buttons.pause_schedule.action')} ..."} %>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="schedule_close_form"><%= t('views.buttons.modals.close.text') %></button>
+    <%= f.button t('views.buttons.schedules.pause.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('views.buttons.schedules.pause.action')} ..."} %>
   </div>
 
 <% end %>

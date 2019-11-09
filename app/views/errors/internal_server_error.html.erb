@@ -1,33 +1,33 @@
-<%= content_for :meta_title, "500 - Internal Server Error" %>
+<%= content_for :meta_title, t('views.errors.server.title') %>
 
 <div class="container">
 	<div class="row">
 		<div class="col-12">
-			<h2>
-				Error #500
-			</h2>
+			<h1>
+				<%= t('views.errors.server.title') %>
+			</h1>
 			<h3>
-				Our servers couldn't figure this out.
+				<%= t('views.errors.server.sub_title') %>
 			</h3>
 		</div>
 	</div>
 	<div class="row py-2">
 		<div class="col-12">
 			<p>
-				Perhaps you are here because:
+				<%= t('views.errors.reason') %>
 			</p>
 			<ul>
 				<li>
-					We accidentally broke something
+					<%= t('views.errors.server.reasons.one') %>
 				</li>
 				<li>
-					Someone else accidentally broke something
+					<%= t('views.errors.server.reasons.two') %>
 				</li>
 				<li>
-					You accidentally something
+					<%= t('views.errors.server.reasons.three') %>
 				</li>
 				<li>
-					You broke something on purpose
+					<%= t('views.errors.server.reasons.four') %>
 				</li>
 			</ul>
 		</div>
@@ -36,7 +36,7 @@
 	<div class="row py-2">
 		<div class="col-12">
 			<a href="/" role="button" class="btn btn-primary">
-				Return to home
+				<%= t('views.errors.return') %>
 			</a>
 		</div>
 	</div>

@@ -12,7 +12,7 @@
 			</div>
 			<%= f.text_field :name, class: "form-control" %>
 			<div class="input-group-append">
-				<%= f.button 'Save', :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " Saving ..."} %>
+				<%= f.button t('views.buttons.categories.create.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('views.buttons.categories.create.action')} ..."} %>
 			</div>
 		</div>
 	</div>

@@ -1,33 +1,33 @@
-<%= content_for :meta_title, "404 - Not Found" %>
+<%= content_for :meta_title, t('views.errors.not_found.title') %>
 
 <div class="container">
 	<div class="row">
 		<div class="col-12">
-			<h2>
-				Error #404
-			</h2>
+			<h1>
+				<%= t('views.errors.not_found.title') %>
+			</h1>
 			<h3>
-				We couldn't find the page you requested.
+				<%= t('views.errors.server.sub_title') %>
 			</h3>
 		</div>
 	</div>
 	<div class="row py-2">
 		<div class="col-12">
 			<p>
-				Perhaps you are here because:
+				<%= t('views.errors.reason') %>
 			</p>
 			<ul>
 				<li>
-					The page has moved
+					<%= t('views.errors.not_found.reasons.one') %>
 				</li>
 				<li>
-					The page no longer exists
+					<%= t('views.errors.not_found.reasons.two') %>
 				</li>
 				<li>
-					There is a typo in the url
+					<%= t('views.errors.not_found.reasons.three') %>
 				</li>
 				<li>
-					You like 404 pages and came here intentionally
+					<%= t('views.errors.not_found.reasons.four') %>
 				</li>
 			</ul>
 		</div>
@@ -36,7 +36,7 @@
 	<div class="row py-2">
 		<div class="col-12">
 			<a href="/" role="button" class="btn btn-primary">
-				Return to home
+				<%= t('views.errors.return') %>
 			</a>
 		</div>
 	</div>

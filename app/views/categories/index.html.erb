@@ -1,11 +1,11 @@
-<%= content_for :meta_title, "Categories" %>
+<%= content_for :meta_title, t('views.categories.title') %>
 
 <div class="container">
 	<div class="row">
 		<div class="col-12">
 			<h2>
-				<%= t('pages.categories.title') %>
-    	<button type="button" class="float-right btn btn-link" data-toggle="tooltip" data-placement="top" title="<%= t('title_hints.create_category') %>" onclick="insertNewCategoryForm(); return false;"><%= t('buttons.new_category.text') %></button>
+				<%= t('views.categories.title') %>
+    	<button type="button" class="float-right btn btn-link" data-toggle="tooltip" data-placement="top" title="<%= t('views.title_hints.categories.create') %>" onclick="insertNewCategoryForm(); return false;"><%= t('views.buttons.categories.new') %></button>
     	</h2>
 		</div>
 	</div>

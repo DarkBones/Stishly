@@ -63,7 +63,7 @@ class Category < ApplicationRecord
     category.destroy
   end
 
-  def self.get_user_categories(current_user, as_array=false, include_blank=false, include_uncategorised = true, blank_string = "- any -")
+  def self.get_user_categories(current_user, as_array=false, include_blank=false, include_uncategorised = true, blank_string = "- #{I18n.t('models.categories.any.name')} -")
     if as_array
       tree = Hash.new { |h,k| h[k] = { :name => nil, :children => [ ], :children_paths => "", :parent_id => nil } }
 

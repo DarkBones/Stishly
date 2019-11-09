@@ -33,7 +33,7 @@
 						        input_target: "#category_id_budget_#{budget.hash_id}",
 						        button_type: "btn-light",
 						        id_suff: "_budget_#{budget.hash_id}",
-						        blank_string: "Select a category",
+						        blank_string: t('views.categories.select'),
 						      } %>
 						      <%= f.hidden_field :category_id, :id => "category_id_budget_#{budget.hash_id}_budget_#{budget.hash_id}", value: budget.category.hash_id %>
 								</div>
@@ -47,10 +47,10 @@
 
 							<div class="row py-2">
 								<div class="col-6">
-									<%= f.button "Save", :class => 'btn float-right btn-primary', name: "update", data: {disable_with: "Save"} %>
+									<%= f.button t('views.buttons.categories.update.text'), :class => 'btn float-right btn-primary', name: "update", data: {disable_with: t('views.buttons.categories.update.action')} %>
 								</div>
 								<div class="col-6">
-									<%= f.button "Delete", :class => 'btn btn-danger', name: "delete", data: {disable_with: "Delete"} %>
+									<%= f.button t('views.buttons.categories.delete.text'), :class => 'btn btn-danger', name: "delete", data: {disable_with: t('views.buttons.categories.delete.text')} %>
 								</div>
 							</div>
 						<% end %>

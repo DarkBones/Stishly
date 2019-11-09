@@ -6,3 +6,58 @@ en:
         weeks: :defaults.schedule.periods.weeks
         months: :defaults.schedule.periods.months
         years: :defaults.schedule.periods.years
+      nones:
+        active: There are no active schedules
+        inactive: There are no inactive schedules
+        paused: There are no paused schedules
+        main: You don't have a main income schedule. Click here to create one.
+      edit_menu:
+        title: Edit
+      form_fields:
+        types:
+          simple: Simple
+          advanced: Advanced
+        periods:
+          daily: Daily
+          weekly: Weekly
+          monthly: Monthly
+          annually: Annually
+        days:
+          specific: Specific dates
+          fist: Every first ...
+          last: Every last ...
+          second: Every second ...
+          third: Every third ...
+          fourth: Every fourth ...
+        weekdays:
+          day: :defaults.shared.weekdays.day
+          monday: :defaults.shared.weekdays.monday
+          tuesday: :defaults.shared.weekdays.tuesday
+          wednesday: :defaults.shared.weekdays.wednesday
+          thursday: :defaults.shared.weekdays.thursday
+          friday: :defaults.shared.weekdays.friday
+          saturday: :defaults.shared.weekdays.saturday
+          sunday: :defaults.shared.weekdays.sunday
+        advanced_button:
+          show: show advanced options
+          hide: hide advanced options
+        exclusion_met1:
+          cancel: Don't run
+          previous: Run on the previous ...
+          next: Run on the next ...
+        next_occurrences: Next Occurrences
+      main_income_menu:
+        modal_title: Main Income Schedule
+      schedule_menu:
+        modal_title: New Schedule
+      pause_menu:
+        modal_title: Pause # renders as Pause [schedule_name]
+        pause_until: Pause until
+        name: :defaults.schedules.name
+      transactions_menu:
+        modal_title: Transactions
+      table:
+        paused_until: Paused Until
+        next_run_date: Next Run Date
+        last_run_date: Last Run Date
+        name: :defaults.schedule.name

@@ -2,7 +2,7 @@
 
 <% if schedules.length == 0 %>
 	<a href="<%= schedules_path %>" class="text-dark">
-		You don't have any upcoming schedules. Click here to create some.
+		<%= t('views.left_menu.upcoming_schedules.none') %>
 	</a>
 <% else %>
 	<ul class="list-unstyled">

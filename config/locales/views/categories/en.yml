@@ -1,0 +1,9 @@
+en:
+  views:
+    categories:
+      title: :defaults.category.name_plural
+      any: :defaults.category.any_category
+      select: :defaults.category.select
+      errors:
+        delete_single: Cannot delete this category as there is 1 transaction associated with it.
+        delete_plural: Cannot delete this category as there are @amount@ associated with it.

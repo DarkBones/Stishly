@@ -1,7 +1,7 @@
 <% if @budget.invalid? %>
 	triggerNotice("<%= format_form_errors("budget", @budget.errors) %>", true);
 <% else %>
-	$("#categories-dropdown").html("Select a category")
+	$("#categories-dropdown").html("<%= t('views.categories.select') %>")
 	$("#category_id_budget_budget").val("");
 	$("#category_id_budget_budget").val("");
 	UpdateLeftMenu();

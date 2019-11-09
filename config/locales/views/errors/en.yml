@@ -1,0 +1,27 @@
+en:
+  views:
+    errors:
+      return: Return to home
+      reason: "Perhaps you are here because:"
+      server:
+        title: "Error #500 - Internal Server Error"
+        sub_title: Our servers couldn't figure this out.
+        reasons:
+          one: We accidentally broke something
+          two: Someone else accidentally broke something
+          three: You accidentally broke something
+          four: You broke something on purpose
+      not_found:
+        title: "Error #404 - Not Found"
+        sub_title: We couldn't find the page you requested
+        reasons:
+          one: The page has moved
+          two: The page no longer exists
+          three: There is a typo in the URL
+          four: You like 404 pages
+      unacceptable:
+        title: "Error #422 - Rejected"
+        sub_title: Your change has been rejected
+        reasons:
+          one: You don't have access to the thing you are trying to change
+          two: The server dislikes you and / or your change        
