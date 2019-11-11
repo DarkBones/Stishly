@@ -1,61 +1,6 @@
 en:
   views:
     buttons:
-      devise:
-        resend_confirmation:
-          text: Resend Confirmation Instructions
-          action: Sending Confirmation Instructions
-        set_password:
-          text: Set Password
-          action: Updating Password
-        forgot_password:
-          text: Send me reset password instructions
-          action: Sending reset password instructions
-        update_account:
-          text: Update Account
-          action: Updating Your Account
-        delete_account:
-          text: Delete My Account
-          action: Deleting Your Account
-          warning: Are you sure? This cannot be undone.
-        sign_up:
-          text: :defaults.devise.sign_up
-          action: Signing you up
-        sign_in:
-          text: :defaults.devise.sign_in
-          action: Signing you in
-        sign_in_google:
-          text: Continue with Google
-        sign_in_facebook:
-          text: Continue with Facebook
-        remember_me:
-          text: Remember me
-        forgot_pwd:
-          text: Forgot password?
-        resend_unlock:
-          text: Resend Unlock Instructions
-          action: Sending Unlock Instructions
-      layouts:
-        delete_confirm:
-          text: "Yes"
-        delete_deny:
-          text: "No"
       modals:
         close:
           text: Close
-      schedules:
-        edit:
-          text: Save
-          action: Saving
-        create:
-          text: Save
-          action: Saving
-        pause:
-          text: Pause Schedule
-          action: Pausing Schedule
-      transactions:
-        add_to_schedule:
-          text: Add
-          action: Adding transactions
-        new:
-          text: New Transaction
