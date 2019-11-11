@@ -1,6 +1,27 @@
 en:
   views:
     schedules:
+      index:
+        title: :defaults.schedule.name_plural
+        new: New Schedule
+        failures:
+          upgrade: :defaults.schedule.failures.upgrade
+        sections:
+          main:
+            title: Main Income Schedule
+            none: You don't have an income schedule. Click here to set it up.
+            hint:
+              title: Income Schedule
+              body: Your main income schedule is used to calculate your daily budget
+          active:
+            title: Active Schedules
+            none: There are no active schedules
+          paused:
+            title: Paused Schedules
+            none: There are no paused schedules
+          inactive:
+            title: Inactive Schedules
+            none: There are no inactive schedules
       periods:
         days: :defaults.schedule.periods.days
         weeks: :defaults.schedule.periods.weeks
@@ -13,6 +34,13 @@ en:
         main: You don't have a main income schedule. Click here to create one.
       edit_menu:
         title: Edit
+        update:
+          text: Save
+          action: Saving
+      new:
+        create:
+          text: Create Schedule
+          action: Creating Schedule
       form_fields:
         types:
           simple: Simple
@@ -54,10 +82,117 @@ en:
         modal_title: Pause # renders as Pause [schedule_name]
         pause_until: Pause until
         name: :defaults.schedules.name
+        pause:
+          text: Pause Schedule
+          action: Pausing Schedule
       transactions_menu:
         modal_title: Transactions
+        update:
+          text: Update Transaction
+          action: Updating Transaction
+        delete:
+          text: Delete
+          warning: This action will remove this scheduled transaction. This cannot be undone. Continue?
+        new:
+          title: New Scheduled Transaction
       table:
         paused_until: Paused Until
         next_run_date: Next Run Date
         last_run_date: Last Run Date
         name: :defaults.schedule.name
+      title_hints:
+        transactions: :defaults.transaction.name_plural
+        edit: Edit Schedule
+        pause: Pause Schedule
+        unpause: Unpause Schedule
+        stop: Deactivate Schedule
+        reactivate: Reactivate Schedule
+        delete: Delete Schedule
+      weekday_picker:
+        weekdays:
+          mon: :defaults.shared.weekdays.mon
+          tue: :defaults.shared.weekdays.tue
+          wed: :defaults.shared.weekdays.wed
+          thu: :defaults.shared.weekdays.thu
+          fri: :defaults.shared.weekdays.fri
+          sat: :defaults.shared.weekdays.sat
+          sun: :defaults.shared.weekdays.sun
+        weekdays_short:
+          mon: :defaults.shared.weekdays.mon_short
+          tue: :defaults.shared.weekdays.tue_short
+          wed: :defaults.shared.weekdays.wed_short
+          thu: :defaults.shared.weekdays.thu_short
+          fri: :defaults.shared.weekdays.fri_short
+          sat: :defaults.shared.weekdays.sat_short
+          sun: :defaults.shared.weekdays.sun_short
+      simple_form:
+        every: every
+        periods:
+          months: :defaults.shared.periods.months
+          weeks: :defaults.shared.periods.weeks
+          days: :defaults.shared.periods.days
+        starting_on: starting on
+        months:
+          on_the: on the
+          nth:
+            first: first
+            last: last
+            2nd: 2nd
+            3rd: 3rd
+            4th: 4th
+            5th: 5th
+            6th: 6th
+            7th: 7th
+            8th: 8th
+            9th: 9th
+            10th: 10th
+            11th: 11th
+            12th: 12th
+            13th: 13th
+            14th: 14th
+            15th: 15th
+            16th: 16th
+            17th: 17th
+            18th: 18th
+            19th: 19th
+            20th: 20th
+            21st: 21st
+            22nd: 22nd
+            23rd: 23rd
+            24th: 24th
+            25th: 25th
+            26th: 26th
+            27th: 27th
+            28th: 28th
+        weeks:
+          days:
+            day: day
+            monday: :defaults.shared.weekdays.monday
+            tuesday: :defaults.shared.weekdays.tuesday
+            wednesday: :defaults.shared.weekdays.wednesday
+            thursday: :defaults.shared.weekdays.thursday
+            friday: :defaults.shared.weekdays.friday
+            saturday: :defaults.shared.weekdays.saturday
+            sunday: :defaults.shared.weekdays.sunday
+        exceptions:
+          none: without exceptions
+          weekends: except on weekends
+          mondays: except on Mondays
+          tuesdays: except on Tuesdays
+          wednesdays: except on Wednesdays
+          thursdays: except on Thursdays
+          fridays: except on Fridays
+          saturdays: except on Saturdays
+          sundays: except on Sundays
+        then: ", then I get paid"
+        exception_met:
+          next: on the next
+          previous: on the previous
+        fixed: Fixed amount
+        varies: The amount varies
+      hints:
+        fixed_amount:
+          title: Fixed / Varied amounts
+          body: Transactions with fixed amounts get logged immidiately. For transactions with varying amounts, you will be asked to review them before they are logged.
+
+

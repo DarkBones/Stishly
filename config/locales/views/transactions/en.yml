@@ -1,7 +1,26 @@
 en:
   views:
     transactions:
-      modal_titles:
-        add_to_schedule: Add Transactions to Schedule
-        edit: Edit Transaction
-        new: New Transaction
+      edit_upcoming:
+        title: Edit Upcoming Transaction
+        update:
+          text: Update Occurrence
+          action: Updating Occurrence
+      edit_series:
+        update:
+          text: Update Series
+          action: Updating Series
+      new:
+        create:
+          text: Save Transaction
+          action: Saving Transaction
+      reschedule:
+        title: Reschedule Transaction
+      form:
+        types:
+          expense: Expense
+          income: Income
+          transfer: Transfer
+        quantity:
+          single: Single
+          multiple: Multiple

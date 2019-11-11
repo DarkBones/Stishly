@@ -9,7 +9,7 @@
         </div>
         <div class="col-12 col-sm-5">
           <%= f.label :type %><br />
-          <%= f.select(:account_type, [[t('views.accounts.types.spending'), "spend"], [t('views.accounts.types.saving'), "save"]], {selected: "spend"}, {:class => "form-control"}) %>
+          <%= f.select(:account_type, [[t('views.accounts.new_account_form.types.spend'), "spend"], [t('views.accounts.new_account_form.types.save'), "save"]], {selected: "spend"}, {:class => "form-control"}) %>
         </div>
       </div>
 
@@ -36,6 +36,6 @@
 
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('views.buttons.modals.close.text') %></button>
-    <%= f.button t('views.buttons.accounts.create.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('views.buttons.accounts.create.action')} ..."} %>
+    <%= f.button t('views.accounts.new_account_form.create.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('views.accounts.new_account_form.create.action')} ..."} %>
   </div>
 <% end %>

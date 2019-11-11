@@ -23,7 +23,7 @@
     }
   });
 
-  triggerNotice('<%= t("views.accounts.notices.created") %>', false);
+  triggerNotice('<%= t("views.accounts.create.confirmation") %>', false);
 
   // add the new account in the transaction accounts options
   var o = new Option("<%= @account.name %> (<%= @account.currency %>)", "<%= @account.slug %>");

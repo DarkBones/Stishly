@@ -57,7 +57,7 @@
 
           <div class="row">
             <div class="col-12 py-2">
-              <%= f.button t('views.buttons.devise.sign_up.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('views.buttons.devise.sign_up.action')} ..."} %>
+              <%= f.button t('views.devise.shared.buttons.sign_up.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('views.devise.shared.buttons.sign_up.action')} ..."} %>
             </div>
           </div>
         </div>
@@ -67,10 +67,10 @@
             <div class="col-12 py-2">
               <label>&#8203</label>
               <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-block btn-social btn-facebook", method: :post do %>
-                 <span class="fab fa-facebook-f"></span> Continue with Facebook
+                 <span class="fab fa-facebook-f"></span> <%= t('views.devise.shared.buttons.sign_in_facebook.text') %>
               <% end %>
               <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-block btn-social btn-google", method: :post do %>
-                 <span class="fab fa-google"></span> Continue with Google
+                 <span class="fab fa-google"></span> <%= t('views.devise.shared.buttons.sign_in_google.text') %>
               <% end %>
             </div>
           </div>

@@ -5,7 +5,7 @@ en:
         period_num:
           negative: "'Run Every' must be greater than zero"
         plan:
-          schedule: Upgrade to premium for more Schedules
+          schedule: :defaults.schedule.failures.upgrade
         main:
           duplicate: You can only have one main income schedule
       periods:

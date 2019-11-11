@@ -79,7 +79,7 @@
 
       <div class="row">
         <div class="col-12 py-2">
-          <%= f.button t('views.buttons.devise.update_account.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " " + t('views.buttons.devise.update_account.action') + " ..."} %>
+          <%= f.button t('views.devise.shared.buttons.update_account.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " " + t('views.devise.shared.buttons.update_account.action') + " ..."} %>
         </div>
       </div>
     <% end %>
@@ -92,7 +92,7 @@
 
     <div class="row">
       <div class="col-12">
-        <%= button_to t('views.buttons.devise.delete_account.text'), registration_path(resource_name), :data => { :confirm => t('views.buttons.devise.delete_account.warning') }, :method => :delete, :class => 'button right btn btn-danger' %>
+        <%= button_to t('views.devise.shared.buttons.delete_account.text'), registration_path(resource_name), :data => { :confirm => t('views.devise.shared.buttons.delete_account.warning') }, :method => :delete, :class => 'button right btn btn-danger' %>
       </div>
     </div>
           

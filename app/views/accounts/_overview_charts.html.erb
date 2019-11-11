@@ -9,7 +9,7 @@
 	<% unless category_data[:root].length == 0 %>
 		<div class="row">
 			<div class="col-12 py-2">
-				<h2><%= t('views.account.overview.titles.expenses') %>: <%= balance(category_data[:total], category_data[:currency], "cents") %></h2>
+				<h2><%= t('views.accounts.overview.titles.expenses') %>: <%= balance(category_data[:total], category_data[:currency], "cents") %></h2>
 			</div>
 		</div>
 		<div class="row">
@@ -28,7 +28,7 @@
 	<% unless category_data_income[:root].length == 0 %>
 		<div class="row">
 			<div class="col-12 py-2">
-				<h2><%= t('views.account.overview.titles.income') %>: <%= balance(category_data_income[:total], category_data_income[:currency], "cents") %></h2>
+				<h2><%= t('views.accounts.overview.titles.income') %>: <%= balance(category_data_income[:total], category_data_income[:currency], "cents") %></h2>
 			</div>
 		</div>
 		<div class="row">

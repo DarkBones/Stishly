@@ -3,37 +3,37 @@
 
 		<div class="card-body">
 			<h5 class="text-uppercase">
-				<%= t("pages.plans.plans.#{plan}.title") %>
+				<%= t("views.subscriptions.plan_card.plans.#{plan}.title") %>
 			</h5>
 			<h3 style="font-size: 70px;">
 				<%= balance(price, currency, "cents") %>
 			</h3>
 			<p class="mt-4">
-				<%= "#{currency} #{t('pages.plans.per_month')}" %>
+				<%= "#{currency} #{t('views.subscriptions.plan_card.per_month')}" %>
 			</p>
 			<p>
-				<%= t("pages.plans.billed_#{plan}").html_safe %>
+				<%= t("views.subscriptions.plan_card.billed_#{plan}.title").html_safe %>
 			</p>
 
 			<% if current_user.subscription == plan %>
 				<% if plan == 'free' %>
-					<%= link_to t('pages.plans.continue'), root_path, class: "btn btn-rounded btn-primary" %>
+					<%= link_to t('views.subscriptions.plan_card.continue'), root_path, class: "btn btn-rounded btn-primary" %>
 				<% else %>
 					<%= form_tag unsubscribe_path do %>
-						<%= submit_tag t('pages.plans.unsubscribe'), :data => { :confirm => t('pages.plans.delete_warning') }, class: "cancel_premium btn btn-rounded btn-danger" %>
+						<%= submit_tag t('views.subscriptions.plan_card.unsubscribe'), :data => { :confirm => t('views.subscriptions.plan_card.delete_warning') }, class: "cancel_premium btn btn-rounded btn-danger" %>
 					<% end %>
 				<% end %>
 			<% else %>
 				<% if plan == 'free' && current_user.subscription != 'free' %>
 					<%= form_tag unsubscribe_path do %>
-						<%= submit_tag t('pages.plans.continue'), :data => { :confirm => t('pages.plans.delete_warning') }, class: "cancel_premium btn btn-rounded btn-danger" %>
+						<%= submit_tag t('views.subscriptions.plan_card.continue'), :data => { :confirm => t('views.subscriptions.plan_card.delete_warning') }, class: "cancel_premium btn btn-rounded btn-danger" %>
 					<% end %>
 				<% else %>
 					<%= form_tag create_subscription_path(plan) do %>
 						<% if current_user.free_trial_eligable %>
-							<%= submit_tag t('pages.plans.start_free_trial'), class: "order_premium btn btn-rounded btn-primary" %>
+							<%= submit_tag t('views.subscriptions.plan_card.start_free_trial'), class: "order_premium btn btn-rounded btn-primary" %>
 						<% else %>
-							<%= submit_tag t('pages.plans.register_now'), class: "order_premium btn btn-rounded btn-primary" %>
+							<%= submit_tag t('views.subscriptions.plan_card.register_now'), class: "order_premium btn btn-rounded btn-primary" %>
 						<% end %>
 
 						<% price_now = price %>
@@ -43,10 +43,10 @@
 							src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 							data-key="<%= ENV['STRIPE_PUBLIC_KEY'] %>"
 							data-currency="<%= currency %>"
-							data-name="<%= t('pages.plans.plans.' + plan + '.title') %>"
-							data-description="Premium Subscription"
+							data-name="<%= t('views.subscriptions.plan_card.plans.' + plan + '.title') %>"
+							data-description="<%= t('views.subscriptions.plan_card.premium_subscription') %>"
 							data-amount="<%= price_now %>"
-							data-label="Sign Me Up!">
+							data-label="<%= t('views.subscriptions.plan_card.sign_up') %>">
 						</script>
 					<% end %>
 				<% end %>
@@ -55,7 +55,7 @@
 
 		<div class="card-footer">
 			<h4>
-				<%= t('pages.plans.footer_title') %>
+				<%= t('views.subscriptions.plan_card.footer.title') %>
 			</h4>
 			<ul class="list-unstyled">
 				<%
@@ -65,15 +65,15 @@
 						type = 'free'
 					end
 				%>
-				<li class="py-2"><%= t("pages.plans.#{type}_included.accounts") %></li>
-				<li class="py-2"><%= t("pages.plans.#{type}_included.spending_accounts") %></li>
-				<li class="py-2"><%= t("pages.plans.#{type}_included.schedules") %></li>
-				<li class="py-2"><%= t("pages.plans.#{type}_included.transactions") %></li>
+				<li class="py-2"><%= t("views.subscriptions.plan_card.plans.#{type}.included.accounts") %></li>
+				<li class="py-2"><%= t("views.subscriptions.plan_card.plans.#{type}.included.spending_accounts") %></li>
+				<li class="py-2"><%= t("views.subscriptions.plan_card.plans.#{type}.included.schedules") %></li>
+				<li class="py-2"><%= t("views.subscriptions.plan_card.plans.#{type}.included.transactions") %></li>
 				<% if type == 'paid' %>
-					<li class="py-2"><%= t("pages.plans.paid_included.insights") %></li>
+					<li class="py-2"><%= t("views.subscriptions.plan_card.plans.paid.included.insights") %></li>
 				<% end %>
 				<% if current_user.free_trial_eligable && type != 'free' %>
-					<li class="py-2"><%= t("pages.plans.free_trial_included") %></li>
+					<li class="py-2"><%= t("views.subscriptions.plan_card.plans.paid.included.trial") %></li>
 				<% end %>
 			</ul>
 		</div>

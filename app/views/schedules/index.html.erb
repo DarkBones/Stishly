@@ -1,4 +1,4 @@
-<%= content_for :meta_title, "Schedules" %>
+<%= content_for :meta_title, t('views.schedules.index.title') %>
 
 <%
   if @main_schedule.length > 0
@@ -19,9 +19,9 @@
     <div class="col-12">
 
       <h2>
-        <%= t('pages.schedule.title') %>
+        <%= t('views.schedules.index.title') %>
         <button type="button" class="float-right btn btn-primary" data-toggle="modal" data-target="#scheduleform" id="new-schedule-button" onclick="renderScheduleMenu();">
-          <%= t('buttons.new_schedule.text') %>
+          <%= t('views.schedules.index.new') %>
         </button>
       </h2>
 
@@ -31,10 +31,10 @@
   <div class="row py-2">
     <div class="col-12">
 
-      <h3 style="display: inline;"><%= t('schedule.main') %></h3> <span><%= hint(t('hints.income_schedule.title'), t('hints.income_schedule.body')) %></span><br />
+      <h3 style="display: inline;"><%= t('views.schedules.index.sections.main.title') %></h3> <span><%= hint(t('views.schedules.index.sections.main.hint.title'), t('views.schedules.index.sections.main.hint.body')) %></span><br />
       <div id="main-schedules" class="mt-2 schedules-table-parent">
         <button type="button" class="btn btn-link" data-toggle="modal" data-target="#scheduleincomeform" id="new-income-schedule-button" onclick="renderIncomeScheduleMenu();" style="<%= main_button_style %>">
-          <%= t('schedules.no_main_schedule') %>
+          <%= t('views.schedules.index.sections.main.none') %>
         </button>
         <% if @main_schedule.length > 0 %>
           <%= render 'schedules_table', :active => true, :main => true %>
@@ -46,11 +46,11 @@
   <div class="row py-2">
     <div class="col-12">
 
-      <h3><%= t('schedule.active') %></h3>
+      <h3><%= t('views.schedules.index.sections.active.title') %></h3>
       <div class="schedules-table-parent" id="active-schedules">
         <% if @schedules.length == 0 %>
           <p>
-            <%= t('schedules.no_active_schedules') %>
+            <%= t('views.schedules.index.sections.active.none') %>
           </p>
         <% else %>
           <%= render 'schedules_table', :active => true %>
@@ -63,11 +63,11 @@
   <div class="row py-2">
     <div class="col-12">
 
-      <h3><%= t('schedule.paused') %></h3>
+      <h3><%= t('views.schedules.index.sections.paused.title') %></h3>
       <div id="paused-schedules" class="schedules-table-parent">
         <% if @paused_schedules.length == 0 %>
           <p>
-            <%= t('schedules.no_paused_schedules') %>
+            <%= t('views.schedules.index.sections.paused.none') %>
           </p>
         <% else %>
           <%= render 'schedules_table', :active => true, :paused => true %>
@@ -80,11 +80,11 @@
   <div class="row py-2">
     <div class="col-12">
 
-      <h3><%= t('schedule.inactive') %></h3>
+      <h3><%= t('views.schedules.index.sections.inactive.title') %></h3>
       <div id="inactive-schedules" class="schedules-table-parent">
         <% if @inactive_schedules.length == 0 %>
           <p>
-            <%= t('schedules.no_inactive_schedules') %>
+            <%= t('views.schedules.index.sections.inactive.none') %>
           </p>
         <% else %>
           <%= render 'schedules_table', :active => false %>
@@ -118,7 +118,7 @@
       url: "/api/v1/users/subscription",
       success(data){
         if(schedules >= data.max_schedules && data.max_schedules >= 0) {
-          triggerNotice("<%= t('schedule.failure.upgrade_for_schedules') %>", true);
+          triggerNotice("<%= t('views.schedules.index.failures.upgrade') %>", true);
         } else {
           $.ajax({
             type: "PATCH",

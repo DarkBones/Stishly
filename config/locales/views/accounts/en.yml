@@ -1,23 +1,46 @@
 en:
   views:
     accounts:
-      title: :defaults.account.name_plural
-      modal_titles:
-        new: New Account
-      notices:
-        created: Account created successfully
-      summary:
-        name: :defaults.account.summary.name
-      tabs:
-        transactions: :defaults.account.tabs.transactions
-        settings: :defaults.account.tabs.settings
-        overview: :defaults.account.tabs.overview
-      types:
-        spending: Spending
-        saving: Saving
-      settings:
-        titles:
-          main: Settings
+      add_transactions_to_schedule:
+        title: Add Transactions to Schedule
+        buttons:
+          add:
+            text: Add to Schedule
+            action: Adding to Schedule
+      filterrific:
+        advanced: advanced
+        reset_filters: Reset filters
+        fields:
+          periods:
+            any: Any
+            today: Today
+            week: Past week
+            month: Pas 30 days
+            custom: Custom range
+          granularity:
+            parent: Parent
+            child: Child
+            all: All
+          sort:
+            created_desc: Created (new to old)
+            created_asc: Created (old to new)
+            description_desc: Description (Z to A)
+            description_asc: Description (A to Z)
+            amount_desc: Amount (large to small)
+            amount_asc: Amount (small to large)
+        mass_transaction_actions:
+          delete:
+            warning: This action deletes all selected transactions. This cannot be undone. Continue?
+            hint: Delete
+          add_to_schedule:
+            hint: Add to Schedule
+        new_account_form:
+          types:
+            spend: :defaults.account.types.spend
+            save: :defaults.account.types.save
+          create:
+            text: Create Account
+            action: Creating Account
       overview:
         titles:
           main: :defaults.account.tabs.overview
@@ -31,3 +54,19 @@ en:
             balance_history: Balance History
             categories: :defaults.category.name_plural
             spending_categories: Spending Categories
+      tabs:
+        transactions: :defaults.account.tabs.transactions
+        settings: :defaults.account.tabs.settings
+        overview: :defaults.account.tabs.overview
+      template:
+        summary_name: :defaults.account.summary.name
+      create:
+        confirmation: Account created successfully
+      settings:
+        title: :defaults.account.tabs.settings
+        update:
+          text: Update Account
+          action: Updating Account
+        delete:
+          warning: This action will delete this account and all its transactions. This cannot be undone. Continue?
+          text: Delete Account

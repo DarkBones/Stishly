@@ -1,0 +1,40 @@
+en:
+  views:
+    subscriptions:
+      index:
+        title: Subscription Plans
+        currency_message: All prices are shown in @currency_name@ (@currency@) and include taxes
+      plan_card:
+        per_month: per month
+        billed_monthly: billed monthly
+        billed_yearly: billed annually
+        billed_free: "&#8203"
+        continue: Continue
+        unsubscribe: Unsubscribe
+        delete_warning: Are you sure you want to unsubscribe from Premium?
+        start_free_trial: Start Your Free Trial
+        register_now: Register Now
+        premium_subscription: Premium Subscription
+        sign_up: Sign Me Up!
+        footer:
+          title: "What's included:"
+        plans:
+          yearly:
+            title: Year
+          monthly:
+            title: Month
+          free:
+            title: Free
+            included:
+              accounts: 3 Accounts
+              spending_accounts: 1 Spending Account
+              schedules: 3 Schedules
+              transactions: 500 Transactions
+          paid:
+            included:
+              accounts: Unlimited Accounts
+              spending_accounts: Unlimited Spending Accounts
+              schedules: Unlimited Schedules
+              transactions: Unlimited Transactions
+              insights: Insights
+              trial: 7 Day Free Trial

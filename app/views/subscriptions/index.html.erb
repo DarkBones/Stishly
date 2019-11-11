@@ -1,11 +1,11 @@
-<%= content_for :meta_title, "Plans" %>
+<%= content_for :meta_title, t('views.subscriptions.index.title') %>
 <%= content_for :meta_robots, "index, follow" %>
 
 <div class="container">
 	<div class="row">
 		<div class="col-12">
 			<h2>
-				<%= t('pages.plans.title') %>
+				<%= t('views.subscriptions.index.title') %>
 			</h2>
 		</div>
 	</div>
@@ -34,7 +34,7 @@
 
 	<div class="row mt-5">
 		<div class="col-12">
-			<%= t('pages.plans.currency_message').sub('@currency@', @plan.currency).sub('@currency_name@', Money::Currency.new(@plan.currency).name) %>
+			<%= t('views.subscriptions.index.currency_message').sub('@currency@', @plan.currency).sub('@currency_name@', Money::Currency.new(@plan.currency).name) %>
 		</div>
 	</div>
 

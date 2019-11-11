@@ -1,32 +1,6 @@
 en:
   views:
     buttons:
-      accounts:
-        create:
-          text: Create Account
-          action: Creating Account
-        edit:
-          text: Save Changes
-          action: Saving Changes
-        delete:
-          text: Delete Account
-          action: Deleting Account
-      categories:
-        new:
-          text: New Category
-        create:
-          text: Save
-          action: Saving
-        delete:
-          text: Delete
-          action: Delete
-        update:
-          text: Save
-          action: Save
-      budgets:
-        create:
-          text: Save
-          action: Saving
       devise:
         resend_confirmation:
           text: Resend Confirmation Instructions
@@ -61,11 +35,6 @@ en:
         resend_unlock:
           text: Resend Unlock Instructions
           action: Sending Unlock Instructions
-      filterrific:
-        advanced:
-          text: advanced
-        reset:
-          text: Reset filters
       layouts:
         delete_confirm:
           text: "Yes"

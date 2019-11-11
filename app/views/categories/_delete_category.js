@@ -17,9 +17,9 @@ function prepareDeleteCategory(id) {
 			if (data === "0") {
 				deleteCategory(id);
 			} else if (data === "1") {
-				triggerNotice("<%= t('views.categories.errors.delete_single') %>", true);
+				triggerNotice("<%= t('views.categories.delete.errors.single') %>", true);
 			} else {
-				triggerNotice("<%= t('views.categories.errors.delete_plural') %>".replace("@amount@", data.toString()), true);
+				triggerNotice("<%= t('views.categories.delete.errors.plural') %>".replace("@amount@", data.toString()), true);
 			}
 		}
 	});

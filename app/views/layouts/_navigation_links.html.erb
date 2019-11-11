@@ -5,7 +5,7 @@
         <%= fa_icon "chart-bar" %>
       </span>
       <br />
-      <%= t('views.layouts.navigation.buttons.budgets') %>
+      <%= t('views.layouts.navigation_links.budgets') %>
     </a>
 
     <a class="text-secondary nav-link float-right" href="<%= schedules_path %>" title="Schedules">
@@ -13,7 +13,7 @@
         <%= fa_icon "calendar-alt" %>
       </span>
       <br />
-      <%= t('views.layouts.navigation.buttons.schedules') %>
+      <%= t('views.layouts.navigation_links.schedules') %>
     </a>
 
     <% unless Rails.env.production? %>
@@ -22,7 +22,7 @@
         <%= fa_icon "blog" %>
       </span>
       <br />
-      <%= t('views.layouts.navigation.buttons.blog') %>
+      <%= t('views.layouts.navigation_links.blog') %>
     </a>
     <% end %>
     
@@ -80,10 +80,10 @@
     <% end %>
     
     <li class="nav-item d-none d-sm-block">
-      <%= link_to t('views.layouts.navigation.buttons.sign_in'), new_user_session_path, { :class=>"nav-link" } %>
+      <%= link_to t('views.layouts.navigation_links.sign_in'), new_user_session_path, { :class=>"nav-link" } %>
     </li>
     <li class="nav-item d-none d-sm-block">
-      <%= link_to t('views.layouts.navigation.buttons.sign_up'), new_user_registration_path, { :class=>"nav-link" } %>
+      <%= link_to t('views.layouts.navigation_links.sign_up'), new_user_registration_path, { :class=>"nav-link" } %>
     </li>
 
   <% end %>

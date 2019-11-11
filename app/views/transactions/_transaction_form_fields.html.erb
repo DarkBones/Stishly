@@ -36,15 +36,15 @@ end
       <div class=" col-12 py-5 rounded <%= params[:type_bg_color] %>" id="type">
         <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
           <label class="btn btn-outline-light py-3 <%= params[:type_expense_class] %>" id="type-expense" onclick="changeTransactionType('expense', this)">
-            <%= f.radio_button :type, "expense", :checked => (params[:type] == "expense") %><%= t('transaction.types.expense') %>
+            <%= f.radio_button :type, "expense", :checked => (params[:type] == "expense") %><%= t('views.transactions.form.types.expense') %>
           </label>
 
           <label class="btn btn-outline-light py-3 <%= params[:type_income_class] %>" id="type-income" onclick="changeTransactionType('income', this)">
-            <%= f.radio_button :type, "income", :checked => (params[:type] == "income") %><%= t('transaction.types.income') %>
+            <%= f.radio_button :type, "income", :checked => (params[:type] == "income") %><%= t('views.transactions.form.types.income') %>
           </label>
 
           <label class="btn btn-outline-light py-3 <%= params[:type_transfer_class] %>" id="type-transfer" onclick="changeTransactionType('transfer', this)">
-            <%= f.radio_button :type, "transfer", :checked => (params[:type] == "transfer") %><%= t('transaction.types.transfer') %>
+            <%= f.radio_button :type, "transfer", :checked => (params[:type] == "transfer") %><%= t('views.transactions.form.types.transfer') %>
           </label>
         </div>
       </div>
@@ -111,10 +111,10 @@ end
 
         <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group">
           <label class="btn btn-secondary py-3 <%= params[:single_transaction_class] %>" onclick="changeTransactionMultiple('single', this);" id="multiple-single">
-            <%= f.radio_button :multiple, "single", :checked => params[:single_transaction_selected] %><%= t('transaction.single') %>
+            <%= f.radio_button :multiple, "single", :checked => params[:single_transaction_selected] %><%= t('views.transactions.form.quantity.single') %>
           </label>
           <label class="btn btn-secondary py-3 <%= params[:multiple_transaction_class] %>" onclick="changeTransactionMultiple('multiple', this);" id="multiple-multiple">
-            <%= f.radio_button :multiple, "multiple", :checked => params[:multiple_transaction_selected] %><%= t('transaction.multiple') %>
+            <%= f.radio_button :multiple, "multiple", :checked => params[:multiple_transaction_selected] %><%= t('views.transactions.form.quantity.multiple') %>
           </label>
         </div>
 

@@ -1,5 +1,23 @@
 en:
   views:
     budgets:
-      title: :defaults.budget.name_plural
-      new: New Budget
+      list:
+        select_category: :defaults.category.select
+        update:
+          text: Update
+          action: Updating
+        delete:
+          text: Delete
+          action: Deleting
+      create:
+        select_category: :defaults.category.select
+      index:
+        title: :defaults.budget.name_plural
+        new: New Budget
+        dates:
+          from: :defaults.shared.dates.from
+          to: :defaults.shared.dates.to
+        select_category: :defaults.category.select
+        create:
+          text: Save
+          action: Saving

@@ -20,6 +20,9 @@ en:
       sessions:
         new:
           title: :defaults.devise.sign_in
+      unlocks:
+        new:
+          title: Resend Unlock Instructions
       shared:
         links:
           login: Log in
@@ -27,6 +30,37 @@ en:
           forgot_password: Forgot your password?
           no_confirmation: Didn't receive confirmation instructions?
           no_unlock: Didn't receive unlock instructions?
-      unlocks:
-        new:
-          title: Resend Unlock Instructions
+        buttons:
+          resend_confirmation:
+            text: Resend Confirmation Instructions
+            action: Sending Confirmation Instructions
+          set_password:
+            text: Set Password
+            action: Updating Password
+          forgot_password:
+            text: Send me reset password instructions
+            action: Sending reset password instructions
+          update_account:
+            text: Update Account
+            action: Updating Your Account
+          delete_account:
+            text: Delete My Account
+            action: Deleting Your Account
+            warning: Are you sure? This cannot be undone.
+          sign_up:
+            text: :defaults.devise.sign_up
+            action: Signing you up
+          sign_in:
+            text: :defaults.devise.sign_in
+            action: Signing you in
+          sign_in_google:
+            text: Continue with Google
+          sign_in_facebook:
+            text: Continue with Facebook
+          remember_me:
+            text: Remember me
+          forgot_pwd:
+            text: Forgot password?
+          resend_unlock:
+            text: Resend Unlock Instructions
+            action: Sending Unlock Instructions

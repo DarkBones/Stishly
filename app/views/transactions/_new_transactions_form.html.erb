@@ -9,7 +9,7 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('buttons.close.text') %></button>
-    <%= f.button t('buttons.create_transaction.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('buttons.create_transaction.action')} ..."} %>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('views.buttons.modals.close.text') %></button>
+    <%= f.button t('views.transactions.new.create.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('views.transactions.new.create.action')} ..."} %>
   </div>
 <% end %>

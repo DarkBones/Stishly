@@ -9,6 +9,9 @@ en:
         transactions: Transactions
         settings: Settings
         overview: Insights
+      types:
+        spend: Spending
+        save: Saving
     blog:
       name: Blog
     budget:
@@ -57,6 +60,8 @@ en:
         weeks: Weeks
         months: Month
         years: Years
+      failures:
+        upgrade: Upgrade to premium for more Schedules
     shared:
       dates:
         yesterday: Yesterday
@@ -87,3 +92,8 @@ en:
         fri_short: F
         sat_short: S
         sun_short: S
+      periods:
+        days: days
+        months: months
+        weeks: weeks
+        years: years

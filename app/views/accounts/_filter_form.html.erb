@@ -21,7 +21,7 @@
 
       <div class="row">
         <div class="col-12">
-          <button type="button" class="btn btn-link float-right" id="advanced_search_toggle" onclick="advancedFilterOptions();"><%= t('views.buttons.filterrific.advanced.text') %></button>
+          <button type="button" class="btn btn-link float-right" id="advanced_search_toggle" onclick="advancedFilterOptions();"><%= t('views.accounts.filterrific.advanced') %></button>
         </div>
       </div>
 
@@ -31,12 +31,12 @@
           <div class="col-12 py-2">
             <%= f.label :period %>
             <%= f.select(:period, [
-              [t('views.filterrific.periods.any'), "any"],
-              [t('views.filterrific.periods.today'), "today"],
-              [t('views.filterrific.periods.week'), "7days"],
-              [t('views.filterrific.periods.month'), "30days"],
+              [t('views.accounts.filterrific.fields.periods.any'), "any"],
+              [t('views.accounts.filterrific.fields.periods.today'), "today"],
+              [t('views.accounts.filterrific.fields.periods.week'), "7days"],
+              [t('views.accounts.filterrific.fields.periods.month'), "30days"],
               #["Current period", "period"],
-              [t('views.filterrific.periods.custom'), "custom"]
+              [t('views.accounts.filterrific.fields.periods.custom'), "custom"]
               ], {}, { :class => "form-control", "onchange" => "changeFilterPeriod(this.value)" }) %>
           </div>
         </div>
@@ -143,7 +143,7 @@
               <%= f.text_field(:include_children,
               "data-provide" => "slider",
               "data-slider-ticks" => "[1, 2, 3]",
-              "data-slider-ticks-labels" => '["' + t('views.filterrific.granularity.parent') + '", "' + t('views.filterrific.granularity.child') + '", "' + t('views.filterrific.granularity.all') + '"]',
+              "data-slider-ticks-labels" => '["' + t('views.accounts.filterrific.fields.granularity.parent') + '", "' + t('views.accounts.filterrific.fields.granularity.child') + '", "' + t('views.accounts.filterrific.fields.granularity.all') + '"]',
               "data-slider-ticks-snap-bounds" => "30",
               "data-slider-tooltip" => "hide",
               "data-slider-value" => include_children_slider_value
@@ -156,12 +156,12 @@
           <div class="col-12">
             <%= f.label :sort_by %>
             <%= f.select(:sorted_by, [
-              [t('views.filterrific.sort.created_desc'), "created_at_desc"], 
-              [t('views.filterrific.sort.created_asc'), "created_at_asc"], 
-              [t('views.filterrific.sort.description_desc'), "description_desc"], 
-              [t('views.filterrific.sort.description_asc'), "description_asc"], 
-              [t('views.filterrific.sort.amount_desc'), "amount_desc"],
-              [t('views.filterrific.sort.amount_asc'), "amount_asc"],
+              [t('views.accounts.filterrific.fields.sort.created_desc'), "created_at_desc"], 
+              [t('views.accounts.filterrific.fields.sort.created_asc'), "created_at_asc"], 
+              [t('views.accounts.filterrific.fields.sort.description_desc'), "description_desc"], 
+              [t('views.accounts.filterrific.fields.sort.description_asc'), "description_asc"], 
+              [t('views.accounts.filterrific.fields.sort.amount_desc'), "amount_desc"],
+              [t('views.accounts.filterrific.fields.sort.amount_asc'), "amount_asc"],
               #[t('filterrific.sort_by.category_desc'), "category_desc"],
               #[t('filterrific.sort_by.category_asc'), "category_asc"]
               ], {}, { :class => 'form-control' }) %>
@@ -173,7 +173,7 @@
         <div class="row">
           <div class="col-12">
             <%= link_to(
-              t('views.buttons.filterrific.reset.text'),
+              t('views.accounts.filterrific.reset_filters'),
               reset_filterrific_url,
               "onclick" => "reloadPageAfterClearFilters();", id: "reset_filters_link"
             ) %>

@@ -1,5 +1,5 @@
 <% selected = selected.decorate unless selected.nil? %>
-<% blank_string ||= "- any -" %>
+<% blank_string ||= t('views.shared.categories_dropdown.blank_string') %>
 <div class="dropdown">
   <button class="btn <%= button_type %> dropdown-toggle text-left" type="button" id="categories-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" input-target="<%= input_target + id_suff %>">
     <% if selected.nil? %>
@@ -9,7 +9,7 @@
     <% end %>
   </button>
   <div class="dropdown-menu" aria-labelledby="categories-dropdown" id="categoriesDropdownOptions<%= id_suff %>">
-    <input id="search-categories<%= id_suff %>" placeholder="<%= t('placeholders.search') %>" class="form-control" onkeyup="searchCategories('#categoriesDropdownOptions<%= id_suff %>', '#search-categories<%= id_suff %>', this)"></input>
+    <input id="search-categories<%= id_suff %>" placeholder="<%= t('views.shared.placeholders.search') %>" class="form-control" onkeyup="searchCategories('#categoriesDropdownOptions<%= id_suff %>', '#search-categories<%= id_suff %>', this)"></input>
     <%= draw_tree(options, id_suff) %>
   </div>
 </div>

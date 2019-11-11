@@ -1,5 +1,5 @@
 <% 
-message = t("sch_transactions.confirmations.confirmed") 
+message = t("views.schedules_transactions.confirmation") 
 message.sub! "{num}", @number.to_s
 message.sub! "{transactions}", @transaction
 message.sub! "{schedule}", @schedule

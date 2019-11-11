@@ -6,7 +6,7 @@
         <% if @active_account.persisted? %>
           <%= @active_account.name %> -
         <% else %>
-          <%= t('views.accounts.summary.name') %>
+          <%= t('views.accounts.template.summary_name') %>
         <% end %>
         <span id="account-title-balance" onclick="toggleAccountBalanceEdit(this);" balance_float="<%= @active_account.balance_float %>" balance=<%= @active_account.balance%>>
           <%= balance(@active_account.balance.to_f, Account.get_currency(@active_account)) %>

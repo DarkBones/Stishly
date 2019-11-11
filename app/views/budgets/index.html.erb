@@ -1,12 +1,12 @@
-<%= content_for :meta_title, t('views.budgets.title') %>
+<%= content_for :meta_title, t('views.budgets.index.title') %>
 
 <div class="container">
 	<div class="row">
 		<div class="col-12">
 			<h2>
-				<%= t('views.budgets.title') %>
+				<%= t('views.budgets.index.title') %>
 				<button type="button" class="float-right btn btn-primary" id="new-budget">
-          <%= t('views.budgets.new') %>
+          <%= t('views.budgets.index.new') %>
         </button>
 			</h2>
 		</div>
@@ -14,7 +14,7 @@
 	<div class="row">
 		<div class="col-12">
 			<h5>
-				<%= t('defaults.shared.dates.from').capitalize %> <%= User.format_date(@start_date) %> <%= t('defaults.shared.dates.to') %> <%= User.format_date(@end_date) %>
+				<%= t('views.budgets.index.dates.from').capitalize %> <%= User.format_date(@start_date) %> <%= t('views.budgets.index.dates.to') %> <%= User.format_date(@end_date) %>
 			</h5>
 		</div>
 	</div>
@@ -31,7 +31,7 @@
 		        input_target: '#category_id_budget',
 		        button_type: "btn-light",
 		        id_suff: "_budget",
-		        blank_string: t('views.categories.select'),
+		        blank_string: t('views.budgets.index.select_category'),
 		      } %>
 		      <%= f.hidden_field :category_id, :id => "category_id_budget_budget" %>
 		    </div>
@@ -43,7 +43,7 @@
 
 		    <div class="col-12 col-lg-3 py-2">
 		    	<%= f.label :submit, "&nbsp;".html_safe %><br />
-		    	<%= f.button t('views.buttons.budgets.create.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('views.buttons.budgets.create.action')} ..."} %>
+		    	<%= f.button t('views.budgets.index.create.text'), :class => 'btn btn-primary', data: {disable_with: image_tag("ajax_spinner_white.svg", height: "20") + " #{t('views.budgets.index.create.action')} ..."} %>
 		    </div>
 
 			</div>

@@ -3,37 +3,37 @@
 <div class="btn-group btn-group-toggle" data-toggle="buttons" id="button-group-weekdays">
   <label class="btn btn-secondary <%= 'active' if @dates.include?("mon") %> py-3" id="<%= id_prefix %>-mon">
     <%= f.check_box (id_prefix + "_mon").to_sym, {checked: @dates.include?("mon")} %>
-    <span class="d-none d-sm-block"><%= t('schedule.weekdays.mon') %></span>
-    <span class="d-block d-sm-none"><%= t('schedule.weekdays.mon_short') %></span>
+    <span class="d-none d-sm-block"><%= t('views.schedules.weekday_picker.weekdays.mon') %></span>
+    <span class="d-block d-sm-none"><%= t('views.schedules.weekday_picker.weekdays_short.mon') %></span>
   </label>
   <label class="btn btn-secondary <%= 'active' if @dates.include?("tue") %> py-3" id="<%= id_prefix %>-tue">
     <%= f.check_box (id_prefix + "_tue").to_sym, {checked: @dates.include?("tue")} %>
-    <span class="d-none d-sm-block"><%= t('schedule.weekdays.tue') %></span>
-    <span class="d-block d-sm-none"><%= t('schedule.weekdays.tue_short') %></span>
+    <span class="d-none d-sm-block"><%= t('views.schedules.weekday_picker.weekdays.tue') %></span>
+    <span class="d-block d-sm-none"><%= t('views.schedules.weekday_picker.weekdays_short.tue') %></span>
   </label>
   <label class="btn btn-secondary <%= 'active' if @dates.include?("wed") %> py-3" id="<%= id_prefix %>-wed">
     <%= f.check_box (id_prefix + "_wed").to_sym, {checked: @dates.include?("wed")} %>
-    <span class="d-none d-sm-block"><%= t('schedule.weekdays.wed') %></span>
-    <span class="d-block d-sm-none"><%= t('schedule.weekdays.wed_short') %></span>
+    <span class="d-none d-sm-block"><%= t('views.schedules.weekday_picker.weekdays.wed') %></span>
+    <span class="d-block d-sm-none"><%= t('views.schedules.weekday_picker.weekdays_short.wed') %></span>
   </label>
   <label class="btn btn-secondary <%= 'active' if @dates.include?("thu") %> py-3" id="<%= id_prefix %>-thu">
     <%= f.check_box (id_prefix + "_thu").to_sym, {checked: @dates.include?("thu")} %>
-    <span class="d-none d-sm-block"><%= t('schedule.weekdays.thu') %></span>
-    <span class="d-block d-sm-none"><%= t('schedule.weekdays.thu_short') %></span>
+    <span class="d-none d-sm-block"><%= t('views.schedules.weekday_picker.weekdays.thu') %></span>
+    <span class="d-block d-sm-none"><%= t('views.schedules.weekday_picker.weekdays_short.thu') %></span>
   </label>
   <label class="btn btn-secondary <%= 'active' if @dates.include?("fri") %> py-3" id="<%= id_prefix %>-fri">
     <%= f.check_box (id_prefix + "_fri").to_sym, {checked: @dates.include?("fri")} %>
-    <span class="d-none d-sm-block"><%= t('schedule.weekdays.fri') %></span>
-    <span class="d-block d-sm-none"><%= t('schedule.weekdays.fri_short') %></span>
+    <span class="d-none d-sm-block"><%= t('views.schedules.weekday_picker.weekdays.fri') %></span>
+    <span class="d-block d-sm-none"><%= t('views.schedules.weekday_picker.weekdays_short.fri') %></span>
   </label>
   <label class="btn btn-secondary <%= 'active' if @dates.include?("sat") %> py-3" id="<%= id_prefix %>-sat">
     <%= f.check_box (id_prefix + "_sat").to_sym, {checked: @dates.include?("sat")} %>
-    <span class="d-none d-sm-block"><%= t('schedule.weekdays.sat') %></span>
-    <span class="d-block d-sm-none"><%= t('schedule.weekdays.sat_short') %></span>
+    <span class="d-none d-sm-block"><%= t('views.schedules.weekday_picker.weekdays.sat') %></span>
+    <span class="d-block d-sm-none"><%= t('views.schedules.weekday_picker.weekdays_short.sat') %></span>
   </label>
   <label class="btn btn-secondary <%= 'active' if @dates.include?("sun") %> py-3" id="<%= id_prefix %>-sun">
     <%= f.check_box (id_prefix + "_sun").to_sym, {checked: @dates.include?("sun")} %>
-    <span class="d-none d-sm-block"><%= t('schedule.weekdays.sun') %></span>
-    <span class="d-block d-sm-none"><%= t('schedule.weekdays.sun_short') %></span>
+    <span class="d-none d-sm-block"><%= t('views.schedules.weekday_picker.weekdays.sun') %></span>
+    <span class="d-block d-sm-none"><%= t('views.schedules.weekday_picker.weekdays_short.sun') %></span>
   </label>
 </div>
