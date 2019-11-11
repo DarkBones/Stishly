@@ -1,27 +1,29 @@
+<%= content_for :meta_title, t('views.transactions.queued.title') %>
+
 <div class="container">
   <div class="row">
     <div class="col-12">
 
-			<h2><%= t('pages.queued.title') %></h2>
+			<h1><%= t('views.transactions.queued.title') %></h1>
 			<% if @transactions.length == 0 %>
-				<p><%= t('pages.queued.no_queued') %></p>
+				<p><%= t('views.transactions.none') %></p>
 			<% else %>
 				<table>
 					<tr>
 						<th>
-							<%= t('pages.queued.date') %>
+							<%= t('views.transactions.queued.date') %>
 						</th>
 						<th>
-							<%= t('pages.queued.description') %>
+							<%= t('views.transactions.queued.description') %>
 						</th>
 						<th>
-							<%= t('pages.queued.account') %>
+							<%= t('views.transactions.queued.account') %>
 						</th>
 						<th>
-							<%= t('pages.queued.currency') %>
+							<%= t('views.transactions.queued.currency') %>
 						</th>
 						<th>
-							<%= t('pages.queued.amount') %>
+							<%= t('views.transactions.queued.amount') %>
 						</th>
 						<th>
 						</th>

@@ -14,10 +14,10 @@ var max_transactions = <%= APP_CONFIG['plans'][current_user.subscription]['max_t
 
 if (max_transactions > 0) {
 	if (user_transactions >= max_transactions) {
-		triggerNotice("<%= t('transaction.limit_warning') %>", true);
+		triggerNotice("<%= t('views.transactions.create.limit_warning') %>", true);
 	} else {
-		triggerNotice("<%= t('transaction.confirmations.confirmed') %>", false);
+		triggerNotice("<%= t('views.transactions.create.confirmed') %>", false);
 	}
 } else {
-	triggerNotice("<%= t('transaction.confirmations.confirmed') %>", false);
+	triggerNotice("<%= t('views.transactions.create.confirmed') %>", false);
 }

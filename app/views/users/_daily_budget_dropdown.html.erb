@@ -4,14 +4,14 @@
 
 					<div class="row">
 						<div class="col-12 text-center text-light">
-							<h1><%= t('pages.daily_budget.title') %></h1>
+							<h1><%= t('views.users.daily_budget.title') %></h1>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-12">
 							<h4 class="text-light">
-								<%= t('pages.daily_budget.balance') %>
+								<%= t('views.users.daily_budget.balance') %>
 								<span class="float-right">
 									<%= balance(budget[:balance][:start], current_user.currency, "cents") %>
 								</span>
@@ -30,7 +30,7 @@
 					<div class="row">
 						<div class="col-12">
 							<h4 class="text-light">
-								<%= link_to t('pages.daily_budget.transactions'), schedules_path, class: "text-light" %>
+								<%= link_to t('views.users.daily_budget.transactions'), schedules_path, class: "text-light" %>
 								<span class="float-right">
 									<%= balance(budget[:upcoming_transactions], current_user.currency, "cents") %>
 								</span>
@@ -50,7 +50,7 @@
 					<div class="row">
 						<div class="col-12">
 							<h4 class="text-light font-weight-bold">
-								<%= t('pages.daily_budget.total') %>
+								<%= t('views.users.daily_budget.total') %>
 								<span class="float-right">
 									<%= balance(budget[:balance][:start] + budget[:upcoming_transactions], current_user.currency, "cents") %>
 								</span>
@@ -63,7 +63,7 @@
 				<div class="row py-2">
 					<div class="col-12">
 						<h4 class="text-light">
-							<%= t('pages.daily_budget.days') %>
+							<%= t('views.users.daily_budget.until_payday') %>
 							<span class="float-right">
 								<%= budget[:days_until_payday] %>
 							</span>
@@ -88,7 +88,7 @@
 				<div class="row py-2">
 					<div class="col-12">
 						<h2 class="text-light text-center">
-							<%= t('pages.daily_budget.status') %>
+							<%= t('views.users.daily_budget.status') %>
 						</h2>
 					</div>
 				</div>
@@ -100,18 +100,18 @@
 								<%= fa_icon(budget[:average_spending][:status][:icon]) %>
 							</span>
 							<h2 class="font-weight-bold">
-								<%= t("pages.daily_budget.statuses.#{budget[:average_spending][:status][:name]}") %>
+								<%= t("views.users.daily_budget.statuses.#{budget[:average_spending][:status][:name]}.name") %>
 							</h2>
 							<h5>
 								<%= budget[:average_spending][:status][:message] %>
 							</h5>
 							<p class="text-dark">
-								<%#= t("pages.daily_budget.status_messages.#{budget[:average_spending][:status][:name]}.sub") %>
-								<%= t('models.daily_budget.statuses.infinite.messages.main') %>
+								<%= t("views.users.daily_budget.statuses.#{budget[:average_spending][:status][:name]}.messages.sub") %>
+								<%#= t('models.daily_budget.statuses.infinite.messages.main') %>
 							</p>
 							<% if budget[:average_spending][:accuracy] < 100 %>
 								<p class="text-dark rounded px-2 py-2 bg-warning">
-									<%= t('pages.daily_budget.inaccurate').sub('@percent@', budget[:average_spending][:accuracy].to_s) %>
+									<%= t('views.users.daily_budget.inaccurate').sub('@percent@', budget[:average_spending][:accuracy].to_s) %>
 								</p>
 							<% end %>
 						</div>

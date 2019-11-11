@@ -4,17 +4,17 @@
 
 <div class="dropdown-menu dropdown-menu-right dropshadow-light" aria-labelledby="contextMenuLink_<%= transaction_id %>" style="width: 180px;">
 	<ul class="list-unstyled">
-		<li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#edit_upcoming_transaction_form" onclick="editUpcomingTransactionOccurrence(this);"><%= t('transaction.upcoming_actions.edit_occ') %></a></li>
+		<li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#edit_upcoming_transaction_form" onclick="editUpcomingTransactionOccurrence(this);"><%= t('views.transactions.upcoming_dropdown.edit_occ') %></a></li>
 		<% if transaction.scheduled_date.nil? %>
-			<li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#edit_upcoming_transaction_form" onclick="editUpcomingTransactionSeries(this);"><%= t('transaction.upcoming_actions.edit_series') %></a></li>
+			<li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#edit_upcoming_transaction_form" onclick="editUpcomingTransactionSeries(this);"><%= t('views.transactions.upcoming_dropdown.edit_series') %></a></li>
 		<% end %>
 		<% unless transaction.is_cancelled %>
-			<li class="nav-item"><a href="#" class="nav-link" onclick="cancelUpcomingTransaction(this)"><%= t('transaction.upcoming_actions.cancel') %></a></li>
+			<li class="nav-item"><a href="#" class="nav-link" onclick="cancelUpcomingTransaction(this)"><%= t('views.transactions.upcoming_dropdown.cancel') %></a></li>
 			<% if transaction.scheduled_date.nil? %>
-				<li class="nav-item"><a href="#" class="nav-link" onclick="triggerUpcomingTransaction(this)"><%= t('transaction.upcoming_actions.trigger') %></a></li>
+				<li class="nav-item"><a href="#" class="nav-link" onclick="triggerUpcomingTransaction(this)"><%= t('views.transactions.upcoming_dropdown.trigger') %></a></li>
 			<% end %>
 		<% else %>
-			<li class="nav-item"><a href="#" class="nav-link" onclick="uncancelUpcomingTransaction(this)"><%= t('transaction.upcoming_actions.uncancel') %></a></li>
+			<li class="nav-item"><a href="#" class="nav-link" onclick="uncancelUpcomingTransaction(this)"><%= t('views.transactions.upcoming_dropdown.uncancel') %></a></li>
 		<% end %>
 	</ul>
 </div>

@@ -1,0 +1,85 @@
+en:
+  views:
+    users:
+      setup:
+        buttons:
+          next: Next
+          previous: Previous
+          submit: Submit
+        title: Welcome
+        country:
+          title: Country
+          hint: Select your country and preferred currency
+          currency: :defaults.currency.name
+          errors:
+            none: No country selected
+            no_currency: No currency selected
+        accounts:
+          title: :defaults.account.name_plural
+          hint: Set up your accounts (you can change these later)
+          name: :defaults.account.fields.name
+          balance: :defaults.account.fields.balance
+          currency: :defaults.account.fields.currency
+          type: :defaults.account.fields.type
+          add_account: Add another account
+          remove_account: Delete bottom account
+          errors:
+            none: Create at least one account
+            name:
+              none: Fill in a name for each account
+              duplicate: No duplicate account names allowed
+            plan:
+              accounts: :defaults.account.errors.plan.accounts
+              spending_accounts: :defaults.account.errors.plan.accounts
+        income:
+          title: Income
+          hint: Describe your main income (you can change this later)
+          none: I don't have an income
+          sporadic: I get paid sporadically
+          regular: I get paid on regular intervals
+        account_row:
+          name: :defaults.account.fields.name
+          balance: :defaults.account.fields.balance
+          currency: :defaults.account.fields.currency
+          type: :defaults.account.fields.type
+          types:
+            spend: :defaults.account.types.spend
+            save: :defaults.account.types.save
+      daily_budget:
+        title: Daily Budget
+        average_spending: Average daily spending
+        balance: Spending Balance
+        days: Days
+        days_depleted: Days until balance runs out
+        status: Status
+        total: TOTAL
+        transactions: Upcoming Transactions
+        until_payday: Days until payday
+        statuses:
+          infinite:
+            name: Excellent
+            messages:
+              sub: :defaults.daily_budget.statuses.messages.invest
+          excellent:
+            name: Excellent
+            messages:
+              sub: :defaults.daily_budget.statuses.messages.invest
+          good:
+            name: Good
+            messages:
+              sub: :defaults.daily_budget.statuses.messages.keep_it_up
+          fair:
+            name: Fair
+            messages:
+              sub: :defaults.daily_budget.statuses.messages.caution
+          caution:
+            name: Caution
+            messages:
+              sub: :defaults.daily_budget.statuses.messages.warning
+          bad:
+            name: Bad
+            messages:
+              sub: :defaults.daily_budget.statuses.messages.danger
+        inaccurate: The accuracy of this status is @percent@% as there isn't enough data yet. Continued use of this application will improve the accuracy.
+      settings:
+        title: Settings

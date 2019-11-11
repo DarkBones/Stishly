@@ -6,7 +6,7 @@ en:
           blank: can't be blank
           duplicate: already exists
         plan:
-          accounts: Upgrade to premium for more accounts
-          spending_accounts: Upgrade to premium for more spending accounts
+          accounts: :defaults.account.errors.plan.accounts
+          spending_accounts: :defaults.account.errors.plan.spending_accounts
       summary:
         name: :defaults.account.summary.name

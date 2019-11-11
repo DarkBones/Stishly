@@ -12,11 +12,23 @@ en:
       types:
         spend: Spending
         save: Saving
+      fields:
+        name: Name
+        balance: Balance
+        currency: :defaults.currency.name
+        type: Type
+      errors:
+        plan:
+          accounts: Upgrade to premium for more accounts
+          spending_accounts: Upgrade to premium for more spending accounts
     blog:
       name: Blog
     budget:
       name: Budget
       name_plural: Budgets
+    currency:
+      name: Currency
+      name_plural: Currencies
     daily_budget:
       statuses:
         messages:
@@ -44,6 +56,8 @@ en:
       none: You have no notifications.
       show_all: Show all notifications
     transaction:
+      amount: Amount
+      description: Description
       name: Transaction
       name_plural: Transactions
       upcoming:
@@ -64,6 +78,7 @@ en:
         upgrade: Upgrade to premium for more Schedules
     shared:
       dates:
+        name: Date
         yesterday: Yesterday
         today: Today
         tomorrow: Tomorrow

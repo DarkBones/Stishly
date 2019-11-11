@@ -24,3 +24,28 @@ en:
         quantity:
           single: Single
           multiple: Multiple
+      upcoming_dropdown:
+        edit_occ: Edit Occurrence
+        edit_series: Edit Series
+        cancel: Cancel
+        trigger: Trigger Now
+        uncancel: Uncancel
+      create:
+        limit_warning: You have reached the transaction limit. Older transactions have been removed.
+        confirmed: Transaction created successfully
+      queued:
+        title: Queued Transactions
+        none: No queued transactions
+        date: :defaults.shared.dates.name
+        description: :defaults.transaction.description
+        account: :defaults.account.name
+        currency: :defaults.currency.name
+        amount: :defaults.transaction.amount
+      upcoming:
+        title: Upcoming Transactions
+        hint: Transactions scheduled between now and
+        none: There are no schedules transactions for now
+        date: :defaults.shared.dates.name
+        schedule: :defaults.schedule.name
+        description: :defaults.transaction.description
+        amount: :defaults.transaction.amount
