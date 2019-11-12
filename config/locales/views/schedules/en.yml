@@ -52,7 +52,7 @@ en:
           annually: Annually
         days:
           specific: Specific dates
-          fist: Every first ...
+          first: Every first ...
           last: Every last ...
           second: Every second ...
           third: Every third ...
@@ -79,7 +79,7 @@ en:
       schedule_menu:
         modal_title: New Schedule
       pause_menu:
-        modal_title: Pause # renders as Pause [schedule_name]
+        modal_title: Pause Schedule
         pause_until: Pause until
         name: :defaults.schedules.name
         pause:

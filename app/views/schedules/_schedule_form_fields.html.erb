@@ -62,10 +62,10 @@
       <div class="col-12 col-sm-6">
         <%= f.label :schedule %>
         <%= f.select(:schedule, [
-          [t('views.schedule.form_fields.periods.daily'), "daily"], 
-          [t('views.schedule.form_fields.periods.weekly'), "weekly"], 
-          [t('views.schedule.form_fields.periods.monthly'), "monthly"], 
-          [t('views.schedule.form_fields.periods.annually'), "annually"]
+          [t('views.schedules.form_fields.periods.daily'), "daily"], 
+          [t('views.schedules.form_fields.periods.weekly'), "weekly"], 
+          [t('views.schedules.form_fields.periods.monthly'), "monthly"], 
+          [t('views.schedules.form_fields.periods.annually'), "annually"]
           ], { :selected => form_params[:schedule] }, { :class => 'form-control', 'onchange' => 'changeSchedulePeriod(this.value, this)' }) %>
       </div>
       <div class="col-12 col-sm-6">
@@ -191,9 +191,9 @@
         <div class="row monthly" style="<%= monthly_style %>">
           <div class="col-6">
             <%= f.select(:exclusion_met1, [
-              [t('views.schedule.form_fields.exclusion_met1.cancel'), "cancel"], 
-              [t('views.schedule.form_fields.exclusion_met1.previous'), "previous"], 
-              [t('views.schedule.form_fields.exclusion_met1.next'), "next"]
+              [t('views.schedules.form_fields.exclusion_met1.cancel'), "cancel"], 
+              [t('views.schedules.form_fields.exclusion_met1.previous'), "previous"], 
+              [t('views.schedules.form_fields.exclusion_met1.next'), "next"]
               ], { :selected => form_params[:exclusion_met1] }, { :class => 'form-control', 'onchange' => 'changeScheduleExclusionMet(this.value, this)' }) %>
           </div>
           <div class="col-6">

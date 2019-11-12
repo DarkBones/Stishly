@@ -34,13 +34,13 @@ en:
             hint: Delete
           add_to_schedule:
             hint: Add to Schedule
-        new_account_form:
-          types:
-            spend: :defaults.account.types.spend
-            save: :defaults.account.types.save
-          create:
-            text: Create Account
-            action: Creating Account
+      new_account_form:
+        types:
+          spend: :defaults.account.types.spend
+          save: :defaults.account.types.save
+        create:
+          text: Create Account
+          action: Creating Account
       overview:
         titles:
           main: :defaults.account.tabs.overview
