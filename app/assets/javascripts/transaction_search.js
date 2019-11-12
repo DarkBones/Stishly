@@ -104,7 +104,7 @@ function fillTransactionDetails(obj) {
 				if(data.transfer_account) {
 					$root.find("#transaction_amount").val(data.amount_f * -1);
 				} else {
-					$root.find("#transaction_amount").val(data.amount_f);
+					$root.find("#transaction_amount").val(data.amount_f * data.direction);
 				}
 			}
 
