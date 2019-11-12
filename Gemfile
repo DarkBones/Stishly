@@ -155,3 +155,6 @@ gem 'breadcrumbs_on_rails'
 gem 'redcarpet'
 
 gem 'sitemap_generator'
+
+gem 'webpacker'
+gem 'react-rails'

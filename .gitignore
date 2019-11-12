@@ -34,3 +34,9 @@ config/database.yml
 
 # Ignore images waiting to be processed
 /public/images/waiting/*
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
