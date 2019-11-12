@@ -85,14 +85,6 @@ class SetupWizardTest < ApplicationSystemTestCase
     # Fill in the first account
     find("#account_name_0").set("First account")
     find("#account_balance_0").set("111.11")
-
-    # Set the type to saving and click next. There should be an error saying at least one account needs to be a spending account
-    find("#account_type_0").find(:option, "Saving").select_option
-    click_on "Next"
-    assert_selector '#flash_alert', text: "Create at least one spending account"
-    #sleep 2
-    #find("#account_type_0").click
-    #find("#account_type_0 option:first-of-type").click
     find("select[name='account_type_0']").set("spend")
 
     # Create a second account
@@ -125,10 +117,6 @@ class SetupWizardTest < ApplicationSystemTestCase
     # Click on next, it should raise an error
     click_on "Next"
     assert_selector '#flash_alert', text: "Fill in a name for each account"
-    # Fill in a name with special characters
-    find("#account_name_2").set("./?&*^%^")
-    click_on "Next"
-    assert_selector '#flash_alert', text: "Special characters are not allowed in account names"
     # Fill in a duplicate name
     find("#account_name_2").set("Second Account")
     click_on "Next"

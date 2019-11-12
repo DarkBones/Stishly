@@ -5,6 +5,7 @@ class Schedule
       @datetime = datetime
       @datetime ||= Time.now.utc
       schedules ||= Schedule.where("next_occurrence_utc <= ?", @datetime)
+      puts "select * from schedules where next_occurrence_utc <= '#{@datetime}'"
 
       @schedules = schedules
       
@@ -113,6 +114,8 @@ private
       next_occurrence = Schedule.next_occurrence(schedule, date: @datetime.to_date + 1, return_datetime: true)
       schedule.next_occurrence = tz.utc_to_local(next_occurrence).to_date unless next_occurrence.nil?
       schedule.next_occurrence_utc = next_occurrence
+
+      puts next_occurrence
 
       schedule.save!
     end

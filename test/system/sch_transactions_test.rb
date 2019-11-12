@@ -74,7 +74,7 @@ class SchTransactionsTest < ApplicationSystemTestCase
     sleep 0.3
 
     fill_in "Description", with: "New description"
-    click_on "Save"
+    click_on "Update Transaction"
     wait_for_ajax
 
     assert_selector "#sch_transactions_list", text: "New description"

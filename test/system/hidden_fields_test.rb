@@ -5,26 +5,12 @@ class HiddenFieldsTest < ApplicationSystemTestCase
   test 'transaction menu' do
     login_user(users(:upcoming_transactions_run), 'SomePassword123^!')
 
-    click_on I18n.t('buttons.new_transaction.text')
+    click_on I18n.t('views.layouts.left_menu.new_transaction')
     sleep 1
     
     assert_selector '#active_account_field', visible: :hidden
     assert_selector '#edit_transaction__category_id_', visible: :hidden
     assert_selector '#timezone_input', visible: :hidden
-  end
-
-  test 'upcoming transaction menu' do
-    login_user(users(:upcoming_transactions_run), 'SomePassword123^!')
-
-    visit '/upcoming_transactions'
-    page.find_all('.upcoming_context_menu')[0].click
-    click_on I18n.t('transaction.upcoming_actions.edit_occ')
-    sleep 1
-    
-    assert_selector '#transaction_schedule_period_id', visible: :hidden
-    assert_selector '#transaction_scheduled_transaction_id', visible: :hidden
-    assert_selector '#transaction_schedule_id', visible: :hidden
-
   end
 
   test 'add transactions to schedule' do
@@ -50,24 +36,23 @@ class HiddenFieldsTest < ApplicationSystemTestCase
 
   test 'sign up form' do
     visit root_path
-    all('a', :text => I18n.t('buttons.sign_up.text'))[0].click
+    all('a', :text => I18n.t('views.devise.shared.buttons.sign_up.text'))[0].click
     assert_selector '#timezone_input', visible: :hidden
   end
 
   test 'sign in form' do
     visit root_path
-    all('a', :text => I18n.t('buttons.sign_in.text'))[0].click
+    all('a', :text => I18n.t('views.devise.shared.buttons.sign_in.text'))[0].click
     assert_selector '#timezone_input', visible: :hidden
   end
 
   test 'schedule form' do
     login_as_blank
     visit '/schedules'
-    click_on I18n.t('buttons.new_schedule.text')
+    click_on I18n.t('views.schedules.index.new')
 
     assert_selector '#timezone_input', visible: :hidden
     assert_selector '#schedule_dates_picked', visible: :hidden
     assert_selector '#schedule_dates_picked_exclude', visible: :hidden
   end
-
 end

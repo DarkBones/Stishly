@@ -28,12 +28,12 @@ en:
             description_asc: Description (A to Z)
             amount_desc: Amount (large to small)
             amount_asc: Amount (small to large)
-        mass_transaction_actions:
-          delete:
-            warning: This action deletes all selected transactions. This cannot be undone. Continue?
-            hint: Delete
-          add_to_schedule:
-            hint: Add to Schedule
+      mass_transaction_actions:
+        delete:
+          warning: This action deletes all selected transactions. This cannot be undone. Continue?
+          hint: Delete
+        add_to_schedule:
+          hint: Add to Schedule
       new_account_form:
         types:
           spend: :defaults.account.types.spend

@@ -13,3 +13,8 @@ en:
         weeks: :defaults.schedule.periods.weeks
         months: :defaults.schedule.periods.months
         years: :defaults.schedule.periods.years
+      periods_text:
+        days: days
+        weeks: weeks
+        months: months
+        years: years

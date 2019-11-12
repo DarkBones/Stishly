@@ -74,7 +74,7 @@ class TransactionsTest < ApplicationSystemTestCase
 		fill_form_transaction(params)
 		# verify that the date field is blank
 		assert find('#transactionform #transaction_date').value == ''
-		click_on I18n.t('buttons.create_transaction.text')
+		click_on I18n.t('views.transactions.new.create.text')
 		sleep 1
 
 		# verify that it defaulted to today's date

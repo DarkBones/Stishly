@@ -19,8 +19,8 @@ class SchedulesTest < ApplicationSystemTestCase
     assert_selector 'h3', text: 'Active Schedules'
     assert_selector 'h3', text: 'Inactive Schedules'
 
-    assert_selector '#active-schedules', text: I18n.t('schedules.no_active_schedules')
-    assert_selector '#inactive-schedules', text: I18n.t('schedules.no_inactive_schedules')
+    assert_selector '#active-schedules', text: I18n.t('views.schedules.nones.active')
+    assert_selector '#inactive-schedules', text: I18n.t('views.schedules.nones.inactive')
 
     assert_selector 'button#new-schedule-button', text: "New Schedule"
   end
@@ -67,7 +67,7 @@ class SchedulesTest < ApplicationSystemTestCase
   test "change simple period" do
     login_as_blank
     visit "/schedules"
-    click_on "New Schedule"
+    click_on I18n.t('views.schedules.index.new')
     
     select 'Daily', from: "schedule[schedule]"
     period_indicator = page.find('#scheduleform #period').text
@@ -90,7 +90,7 @@ class SchedulesTest < ApplicationSystemTestCase
   test "change schedule period number" do
     login_as_blank
     visit "/schedules"
-    click_on "New Schedule"
+    click_on I18n.t('views.schedules.index.new')
 
     fill_in 'schedule[run_every]', with: '60'
     run_every = page.find('#scheduleform #schedule_run_every').value
@@ -100,7 +100,7 @@ class SchedulesTest < ApplicationSystemTestCase
   test "advanced options" do
     login_as_blank
     visit "/schedules"
-    click_on "New Schedule"
+    click_on I18n.t('views.schedules.index.new')
 
     page.find('#scheduleform #type-advanced').click
 
@@ -148,7 +148,7 @@ class SchedulesTest < ApplicationSystemTestCase
   test "very advanced options" do
     login_as_blank
     visit "/schedules"
-    click_on "New Schedule"
+    click_on I18n.t('views.schedules.index.new')
 
     page.find('#scheduleform #type-advanced').click
     sleep 1

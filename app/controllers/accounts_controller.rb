@@ -52,7 +52,6 @@ class AccountsController < ApplicationController
   end
 
   def show
-    puts params.to_yaml
     @active_account = Account.get_from_name(params[:id], current_user) or not_found
 
     not_found if @active_account.nil?

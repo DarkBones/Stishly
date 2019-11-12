@@ -12,10 +12,10 @@ class UsersTest < ApplicationSystemTestCase
 
 		visit root_path
 
-		assert_selector 'h1', text: I18n.t('homepage.welcome_h1')
+		assert_selector 'h1', text: "Sign Up"
 
-		assert_selector '.navbar-nav', text: I18n.t('buttons.sign_up.text')
-		assert_selector '.navbar-nav', text: I18n.t('buttons.sign_in.text')
+		assert_selector '.navbar-nav', text: I18n.t('views.devise.shared.buttons.sign_up.text')
+		assert_selector '.navbar-nav', text: I18n.t('views.devise.shared.buttons.sign_in.text')
 	end
 
 	test 'create user account' do
@@ -59,7 +59,7 @@ class UsersTest < ApplicationSystemTestCase
     for i in 0..form_fields.length do
       visit root_path
 
-      all('a', :text => I18n.t('buttons.sign_up.text'))[0].click
+      all('a', :text => I18n.t('views.devise.shared.buttons.sign_up.text'))[0].click
 
       form_fields.each_with_index do |f, idx|
         if idx != i
@@ -74,7 +74,7 @@ class UsersTest < ApplicationSystemTestCase
       find('button[type="submit"]').click
 
       if i < form_fields.length
-        assert_selector 'h2', text: I18n.t('errors.form')
+        assert_selector 'h2', text: I18n.t('views.shared.errors.form')
       else
         assert_selector '#flash_notice', text: I18n.t('devise.registrations.signed_up')
       end
@@ -95,17 +95,16 @@ class UsersTest < ApplicationSystemTestCase
 
 		assert_selector '#flash_notice', text: I18n.t('devise.sessions.signed_in')
 
-		assert_selector '.navbar-nav', text: I18n.t('buttons.sign_up.text') == false
-		assert_selector '.navbar-nav', text: I18n.t('buttons.sign_in.text') == false
+		assert_selector '.navbar-nav', text: I18n.t('views.devise.shared.buttons.sign_up.text') == false
+		assert_selector '.navbar-nav', text: I18n.t('views.devise.shared.buttons.sign_in.text') == false
 
 		page.find('.navbar-gear').click
-		click_on 'Sign out'
+		click_on 'Sign Out'
 
 		assert_selector '#flash_notice', text: I18n.t('devise.sessions.signed_out')
-		assert_selector 'h1', text: I18n.t('homepage.welcome_h1')
 
-		assert_selector '.navbar-nav', text: I18n.t('buttons.sign_up.text')
-		assert_selector '.navbar-nav', text: I18n.t('buttons.sign_in.text')
+		assert_selector '.navbar-nav', text: I18n.t('views.devise.shared.buttons.sign_up.text')
+		assert_selector '.navbar-nav', text: I18n.t('views.devise.shared.buttons.sign_in.text')
 	end
 
 	test 'destroy account' do
@@ -122,14 +121,13 @@ class UsersTest < ApplicationSystemTestCase
     login_user(users(:destroy), 'SomePassword123^!')
     page.find('.navbar-gear').click
 
-    click_on I18n.t('buttons.edit_user_account.text')
+    click_on "Edit Account"
 
-    click_on I18n.t('buttons.destroy_user_account.text')
+    click_on "Delete My Account"
 
     page.driver.browser.switch_to.alert.accept
 
     assert_selector '#flash_notice', text: I18n.t('devise.registrations.destroyed')
-    assert_selector 'h1', text: I18n.t('homepage.welcome_h1')
 
     login_user(users(:destroy), 'SomePassword123^!')
     assert_selector '#flash_alert', text: I18n.t('devise.failure.not_found_in_database')

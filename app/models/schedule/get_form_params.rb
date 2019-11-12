@@ -18,9 +18,9 @@ private
       period = period(schedule) # monthly / weekly / etc
 
       unless schedule.period.nil?
-        period_txt = I18n.t('models.schedule.periods.' + schedule.period)
+        period_txt = I18n.t('models.schedule.periods_text.' + schedule.period)
       else
-        period_txt = I18n.t('models.schedule.periods.months')
+        period_txt = I18n.t('models.schedule.periods_text.months')
       end
 
       start_date = start_date(schedule)

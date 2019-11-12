@@ -7,7 +7,7 @@ class AccountsTest < ApplicationSystemTestCase
 		login_as_blank
 
 		# there are no existing accounts, so the create account instruction should be visible
-		assert_selector '#accounts_list', text: I18n.t('account.instructions.create')
+		assert_selector '#accounts_list', text: I18n.t('views.left_menu.accounts.none')
 
 		# click on the instruction and verify the new account window is visible
 		find('#create-account-instruction').click
@@ -44,7 +44,7 @@ class AccountsTest < ApplicationSystemTestCase
 		fill_in 'account[balance]', with: '50000'
 		
 		# save the account
-		click_on I18n.t('buttons.create_account.text')
+		click_on I18n.t('views.accounts.new_account_form.create.text')
 
 		# verify the account is listed
 		assert_selector '#accounts_list', text: 'test account one'
@@ -63,16 +63,16 @@ class AccountsTest < ApplicationSystemTestCase
 		find('#new-account-button').click
 		fill_in 'account[name]', with: 'test account one'
 		fill_in 'account[balance]', with: '50000'
-		click_on I18n.t('buttons.create_account.text')
+		click_on I18n.t('views.accounts.new_account_form.create.text')
 
 		# create an account with the same name
 		find('#new-account-button').click
 		fill_in 'account[name]', with: 'test account one'
 		fill_in 'account[balance]', with: '10'
-		click_on I18n.t('buttons.create_account.text')
+		click_on I18n.t('views.accounts.new_account_form.create.text')
 
 		# verify that the notification saying an account with the same name already exists comes up
-		assert_selector '#flash_alert', text: I18n.t('account.failure.already_exists')
+		assert_selector '#flash_alert', text: I18n.t('models.account.errors.name.duplicate')
 
 	end
 
@@ -81,10 +81,10 @@ class AccountsTest < ApplicationSystemTestCase
 		login_as_blank
 
 		find('#new-account-button').click
-		click_on I18n.t('buttons.create_account.text')
+		click_on I18n.t('views.accounts.new_account_form.create.text')
 
 		# verify that the notification saying a name is required comes up
-		assert_selector '#flash_alert', text: I18n.t('account.failure.no_name')
+		assert_selector '#flash_alert', text: I18n.t('models.account.errors.name.blank')
 
 	end
 
@@ -98,7 +98,7 @@ class AccountsTest < ApplicationSystemTestCase
 		fill_in 'account[balance]', with: '50000'
 		fill_in 'account[description]', with: 'test account description'
 		find('#accountform #account_currency').find(:option, 'JPY').select_option
-		find('#accountform #account_account_type').find(:option, I18n.t('account.types.saving')).select_option
+		find('#accountform #account_account_type').find(:option, I18n.t('views.accounts.new_account_form.types.save')).select_option
 
 		# close the menu
 		find('#accountform button.close').click
@@ -122,7 +122,7 @@ class AccountsTest < ApplicationSystemTestCase
 		find('#new-account-button').click
 		fill_in 'account[name]', with: 'test EUR'
 		fill_in 'account[balance]', with: '0.01'
-		click_on I18n.t('buttons.create_account.text')
+		click_on I18n.t('views.accounts.new_account_form.create.text')
 		assert_selector '#accounts_list', text: '€0.01'
 
 		# create an account with 1.51 JPY
@@ -130,7 +130,7 @@ class AccountsTest < ApplicationSystemTestCase
 		fill_in 'account[name]', with: 'test JPY'
 		find('#accountform #account_currency').find(:option, 'JPY').select_option
 		fill_in 'account[balance]', with: '1.51'
-		click_on I18n.t('buttons.create_account.text')
+		click_on I18n.t('views.accounts.new_account_form.create.text')
 		assert_selector '#accounts_list', text: '¥2'
 
 	end
@@ -142,7 +142,7 @@ class AccountsTest < ApplicationSystemTestCase
 		# create an account with name = 'new'. It should convert to 'New'
 		find('#new-account-button').click
 		fill_in 'account[name]', with: 'new'
-		click_on I18n.t('buttons.create_account.text')
+		click_on I18n.t('views.accounts.new_account_form.create.text')
 
 		assert_selector '#accounts_list', text: 'New'
 
@@ -159,22 +159,22 @@ class AccountsTest < ApplicationSystemTestCase
 			page.driver.browser.navigate.refresh
 			find('#new-account-button').click
 			fill_in 'account[name]', with: "Account #{n}"
-			click_on I18n.t('buttons.create_account.text')
+			click_on I18n.t('views.accounts.new_account_form.create.text')
 		end
 
-		assert_selector '#flash_alert', text: I18n.t('account.failure.upgrade_for_spending')
+		assert_selector '#flash_alert', text: I18n.t('models.account.errors.plan.spending_accounts')
 
 		find('#accountform button.close').click
 		(max_spending..max).each do |n|
 			page.driver.browser.navigate.refresh
 			find('#new-account-button').click
 			fill_in 'account[name]', with: "Account #{n}"
-			find('#accountform #account_account_type').find(:option, I18n.t('account.types.saving')).select_option
+			find('#accountform #account_account_type').find(:option, I18n.t('views.accounts.new_account_form.types.save')).select_option
 
-			click_on I18n.t('buttons.create_account.text')
+			click_on I18n.t('views.accounts.new_account_form.create.text')
 		end
 
-		assert_selector '#flash_alert', text: I18n.t('account.failure.upgrade_for_accounts')
+		assert_selector '#flash_alert', text: I18n.t('models.account.errors.plan.accounts')
 
 	end
 
@@ -185,7 +185,7 @@ class AccountsTest < ApplicationSystemTestCase
 		# create an account
 		find('#new-account-button').click
 		fill_in 'account[name]', with: 'Edit'
-		click_on I18n.t('buttons.create_account.text')
+		click_on I18n.t('views.accounts.new_account_form.create.text')
 
 		page.driver.browser.navigate.refresh
 
@@ -195,9 +195,9 @@ class AccountsTest < ApplicationSystemTestCase
 		fill_in 'account[name]', with: 'EditNewName'
 		fill_in 'account[balance]', with: '500.51'
 		fill_in 'account[description]', with: 'test description'
-		find('#account_account_type').find(:option, I18n.t('account.types.saving')).select_option
+		find('#account_account_type').find(:option, I18n.t('views.accounts.new_account_form.types.save')).select_option
 
-		click_on I18n.t('buttons.edit_account_save.text')
+		click_on I18n.t('views.accounts.settings.update.text')
 
 		visit '/accounts/EditNewName/settings'
 		assert find('#account_name').value == 'EditNewName', 'Account name not saved'
@@ -214,14 +214,14 @@ class AccountsTest < ApplicationSystemTestCase
 		# create an account
 		find('#new-account-button').click
 		fill_in 'account[name]', with: 'TestAccount'
-		click_on I18n.t('buttons.create_account.text')
+		click_on I18n.t('views.accounts.new_account_form.create.text')
 
 		page.driver.browser.navigate.refresh
 
 		# edit the account and change the name to 'new'
 		visit '/accounts/TestAccount/settings'
 		fill_in 'account[name]', with: 'new'
-		click_on I18n.t('buttons.edit_account_save.text')
+		click_on I18n.t('views.accounts.settings.update.text')
 
 		# verify the name was saved as 'New'
 		assert_selector '#accounts_list', text: 'New'
@@ -234,7 +234,7 @@ class AccountsTest < ApplicationSystemTestCase
 
 		find('#new-account-button').click
 		fill_in 'account[name]', with: 'Balance'
-		click_on I18n.t('buttons.create_account.text')
+		click_on I18n.t('views.accounts.new_account_form.create.text')
 
 		page.driver.browser.navigate.refresh
 
@@ -290,30 +290,30 @@ class AccountsTest < ApplicationSystemTestCase
 
 		find('#new-account-button').click
 		fill_in 'account[name]', with: 'Destroy'
-		click_on I18n.t('buttons.create_account.text')
+		click_on I18n.t('views.accounts.new_account_form.create.text')
 
 		page.driver.browser.navigate.refresh
 
 		visit '/accounts/Destroy/settings'
 
-		click_on I18n.t('buttons.delete_account.text')
+		click_on I18n.t('views.accounts.settings.delete.text')
 
 		# assert the warning text is showing
-		assert_selector '#confirmation_modal', text: I18n.t('account.delete_warning')
+		assert_selector '#confirmation_modal', text: I18n.t('views.accounts.settings.delete.warning')
 
 		# deny the confirmation and check that the account wasn't deleted
-		click_on I18n.t('buttons.deny.text')
+		click_on I18n.t('views.layouts.confirmation.deny')
 		page.driver.browser.navigate.refresh
 		assert_selector '#accounts_list', text: 'Destroy'
 
 		# delete the account for real
-		click_on I18n.t('buttons.delete_account.text')
-		click_on I18n.t('buttons.confirm.text')
+		click_on I18n.t('views.accounts.settings.delete.text')
+		click_on I18n.t('views.layouts.confirmation.confirm')
 
 		visit root_path
 
 		# verify the account was deleted
-		assert_no_text 'Destroy'
+		assert_no_text I18n.t('views.accounts.settings.delete.text')
 
 	end
 
@@ -334,10 +334,10 @@ class AccountsTest < ApplicationSystemTestCase
     # Fill in an account name
     fill_in "account[name]", with: account_name
     # Save the account
-    click_on "Create Account"
+    click_on I18n.t('views.accounts.new_account_form.create.text')
     
     sleep 1
-    click_on "New Transaction"
+    click_on I18n.t('views.layouts.left_menu.new_transaction')
     sleep 1
 
     # select the new account from the account selector. If it's not available, it will throw an error

@@ -8,7 +8,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def login_user(user, password)
     visit root_path
 
-    all('a', :text => 'Sign in')[0].click
+    all('a', :text => 'Sign In')[0].click
 
     fill_in "Email", with: user.unconfirmed_email
     fill_in "Password", with: password
@@ -40,13 +40,13 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   def create_transaction(params)
     fill_form_transaction(params)
-    click_on I18n.t('buttons.create_transaction.text')
+    click_on I18n.t('views.transactions.new.create.text')
     sleep 1
   end
 
   def fill_form_transaction(params)
     # click on new transaction
-    click_on I18n.t('buttons.new_transaction.text')
+    click_on I18n.t('views.layouts.left_menu.new_transaction')
 
     # select the transaction type
     find("#transactionform #type-#{params[:type]}").click unless params[:type].nil?

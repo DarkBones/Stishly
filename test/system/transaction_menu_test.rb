@@ -9,13 +9,13 @@ class TransactionMenuTest < ApplicationSystemTestCase
 		assert_selector '#transactionform', visible: :hidden
 
 		# click on new transaction
-		click_on I18n.t('buttons.new_transaction.text')
+		click_on I18n.t('views.layouts.left_menu.new_transaction')
 
 		# verify the form is visible
 		assert_selector '#transactionform', visible: :visible
 
 		# click on close
-		click_on I18n.t('buttons.close.text')
+		click_on I18n.t('views.buttons.modals.close.text')
 
 		# verify the form is hidden again
 		assert_selector '#transactionform', visible: :hidden
@@ -125,19 +125,19 @@ class TransactionMenuTest < ApplicationSystemTestCase
 		assert find('#transactionform #transaction_account').value == 'current-account'
 
 		# close the form and go to another account
-		click_on I18n.t('buttons.close.text')
+		click_on I18n.t('views.buttons.modals.close.text')
 		find('#account_Ac0zFCDl8ApZ').click
 
 		# open the transaction form and veryfy that 'current account' is selected
-		click_on I18n.t('buttons.new_transaction.text')
+		click_on I18n.t('views.layouts.left_menu.new_transaction')
 		assert find('#transactionform #transaction_account').value == 'current-account'
 
 		# close the form and go to another account
-		click_on I18n.t('buttons.close.text')
+		click_on I18n.t('views.buttons.modals.close.text')
 		find('#account_sVRZ_GLdEeoA').click
 
 		# open the menu and verify that 'savings account' is selected
-		click_on I18n.t('buttons.new_transaction.text')
+		click_on I18n.t('views.layouts.left_menu.new_transaction')
 		assert find('#transactionform #transaction_account').value == 'savings-account'
 
 	end
@@ -425,7 +425,7 @@ class TransactionMenuTest < ApplicationSystemTestCase
 		login_user(users(:transactions), 'SomePassword123^!')
 
 		# click on new transaction
-		click_on I18n.t('buttons.new_transaction.text')
+		click_on I18n.t('views.layouts.left_menu.new_transaction')
 	end
 
 end
