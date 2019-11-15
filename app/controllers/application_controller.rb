@@ -7,6 +7,27 @@ class ApplicationController < ActionController::Base
 
   helper_method :user_accounts, :user_accounts_array, :user_categories_array, :user_schedules_array
 
+  def render_resource(resource)
+    if resource.errors.empty?
+      render json: resource
+    else
+      validation_error(resource)
+    end
+  end
+
+  def validation_error(resource)
+    render json: {
+      errors: [
+        {
+          status: '400',
+          title: 'Bad Request',
+          detail: resource.errors,
+          code: '100'
+        }
+      ]
+    }, status: :bad_request
+  end
+
   # check if a user's subscription is still valid
   def check_subscription
     return if Rails.env.test?
@@ -139,7 +160,20 @@ class ApplicationController < ActionController::Base
 
   def valid_timezone(tz)
     return !tz.nil? && ActiveSupport::TimeZone[tz].present?
+  end
 
+  def authenticate_user!
+    if request.headers['Authorization'].present?
+      authenticate_or_request_with_http_token do |token|
+        begin
+          jwt_payload = JWT.decode(token, Rails.application.secrets.secret_key_base).first
+
+          @current_user_id = jwt_payload['id']
+        rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
+          head :unauthorized
+        end
+      end
+    end
   end
 
 

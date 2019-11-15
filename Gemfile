@@ -75,6 +75,7 @@ gem 'bootstrap-sass', '~> 3.4.1'
 
 # Adds user authentication
 gem 'devise', '>= 4.7.1'
+gem 'devise-jwt'
 gem 'devise_roles'
 gem 'pundit'
 gem 'rails_layout'
@@ -158,3 +159,4 @@ gem 'sitemap_generator'
 
 gem 'webpacker'
 gem 'react-rails'
+gem 'rack-cors', require: 'rack/cors'

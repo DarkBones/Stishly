@@ -479,7 +479,12 @@ Rails.application.routes.draw do
   resource :schedules_transactions
   resource :notifications
 
-  devise_for :users, :controllers => { registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
+  #devise_for :users, :controllers => { registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users,
+             controllers: {
+               sessions: 'sessions',
+               registrations: 'registrations'
+             }
   resources :users, :only => [:create, :destroy, :edit]
 
   get '/privacy', to: 'application#privacy_policy', as: :privacy_policy
